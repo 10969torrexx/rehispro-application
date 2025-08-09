@@ -33,8 +33,8 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center w-[90vw] h-[90vh]">
-      <div className="bg-white shadow-lg p-6 rounded-xl w-[80vw] h-[80vh]">
+    <div className="flex items-center justify-center w-[90vw] h-[90vh]  max-w-[600px] max-h-[600px]">
+      <div className="bg-white shadow-lg p-6 rounded-xl w-[80vw] h-[80vh]  max-w-[500px] max-h-[500px]">
         <div className='card-content'>
           <div className="flex items-center justify-center">
             <h1 className="text-lg font-semibold text-left">Account Login</h1>

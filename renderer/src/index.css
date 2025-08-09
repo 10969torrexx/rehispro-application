@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-    --color-primary: #1d4ed8;   
-    --color-secondary: #9333ea; 
-    --color-accent: #f59e0b;
-    --color-danger: #FF6692;    
-    --color-bg: #EDF2F9;        
-    --color-text: #111827;      
+  --color-primary: #1d4ed8;   
+  --color-secondary: #9333ea; 
+  --color-accent: #f59e0b;
+  --color-danger: #FF6692;    
+  --color-bg: #EDF2F9;        
+  --color-text: #111827;      
 }
 
 :root {
@@ -64,4 +64,21 @@ input {
   justify-content: center;    
   align-items: center; 
   height: 100%;
+}
+
+/* Make toast smaller */
+.Toastify__toast {
+  font-size: 0.8rem;       /* smaller font */
+  padding: 4px 6px;       /* less padding */
+}
+
+/* Optionally adjust icon size */
+.Toastify__toast-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Reduce progress bar height */
+.Toastify__progress-bar {
+  height: 3px !important;
 }
