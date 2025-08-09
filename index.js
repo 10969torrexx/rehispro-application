@@ -3,6 +3,9 @@ const path = require('path');
 
 const isDev = !app.isPackaged;
 
+//TODO: require database
+require('./main/main.js');
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1000,

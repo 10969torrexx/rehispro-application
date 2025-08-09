@@ -4,7 +4,7 @@ const sqlite3 = require("sqlite3").verbose();
 
 // DB file stored inside userData path so each machine has its own DB
 const { app } = require("electron");
-const dbPath = path.join(app.getPath("userData"), "app_database.sqlite");
+const dbPath = path.join(__dirname, "app_database.sqlite");
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
