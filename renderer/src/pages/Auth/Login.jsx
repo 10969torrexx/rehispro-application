@@ -8,14 +8,16 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loginIdErrors, setLoginIdErrors] = useState({});
   const [passwordErrors, setPasswordErrors] = useState({});
-  const hasLoginErrors = loginIdErrors && Object.keys(loginIdErrors).length > 0;
-  const hasPasswordErrors = passwordErrors && Object.keys(passwordErrors).length > 0;
-
+  const [hasLoginErrors, setHasLoginErrors] = useState(false);
+  const [hasPasswordErrors, setHasPasswordErrors] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const loginIdErrors = validateLoginId(loginId);
     const passwordErrors = validatePassword(password);
+
+    setHasLoginErrors(!loginIdErrors.isValid);
+    setHasPasswordErrors(!passwordErrors.isValid);
 
     if (loginIdErrors.isValid && passwordErrors.isValid) {
       // Call login function from services

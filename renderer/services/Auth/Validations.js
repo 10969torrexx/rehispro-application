@@ -29,7 +29,6 @@ export function validateLoginId(loginId) {
     };
 }
 
-
 /**
  * TODO: Implement login ID validation
  *  @param {*} loginId 
