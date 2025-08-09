@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { validateLoginId, validatePassword } from '../../../services/Auth/Validations';
 import { ErrorMessages } from '@components';
+import React from "react";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,8 +22,10 @@ export default function Login() {
     setHasPasswordErrors(!passwordErrors.isValid);
 
     if (loginIdErrors.isValid && passwordErrors.isValid) {
-      // Call login function from services
+      setLoginId("");
+      setPassword("");
     } else {
+      toast.error("Login unsuccessful!");
       setLoginIdErrors(loginIdErrors.errors);
       setPasswordErrors(passwordErrors.errors);
       return;
