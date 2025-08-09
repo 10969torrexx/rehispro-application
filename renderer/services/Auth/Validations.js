@@ -50,15 +50,6 @@ export function validatePassword(password) {
         hasNoSpaces: !hasNoSpaces ? "Password must not contain spaces." : null
     };
 
-    console.log({
-        minLength,
-        hasSymbol,
-        hasUppercase,
-        hasNoSpaces,
-        password,
-    });
-
-
     const filteredErrors = Object.fromEntries(
         Object.entries(errors).filter(([_, value]) => value !== null)
     );
