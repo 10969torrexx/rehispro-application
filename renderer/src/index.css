@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 :root {
+    --color-primary: #1d4ed8;   /* Tailwind blue-700 */
+    --color-secondary: #9333ea; /* Tailwind purple-600 */
+    --color-accent: #f59e0b;    /* Tailwind amber-500 */
+    --color-bg: #EDF2F9;        /* Tailwind gray-50 */
+    --color-text: #111827;      /* Tailwind gray-900 */
+}
+
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
+  color: var(--color-text);
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--color-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
