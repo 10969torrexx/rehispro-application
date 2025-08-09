@@ -4,7 +4,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-lg p-6 rounded-xl w-80">
         <div className="flex items-center justify-center mb-4">
           <h1 className="text-lg font-semibold text-left">Account Login</h1>
