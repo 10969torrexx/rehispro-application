@@ -61,21 +61,21 @@ export default function Login() {
                 Password
                 </label>
                 <div className='relative'>
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Enter your password"
-                      className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none pr-10 
-                        ${hasPasswordErrors ? 'border-2 border-red-500'  : 'border border-gray-300' }`}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Enter your password"
+                    className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none pr-10 
+                      ${hasPasswordErrors ? 'border-2 border-red-500'  : 'border border-gray-300' }`}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                   <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
-                    >
-                      <i className={`bi ${showPassword ? 'bi-eye-slash-fill' : 'bi-eye'}`}></i>
-                    </button>
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
+                  >
+                    <i className={`bi ${showPassword ? 'bi-eye-slash-fill' : 'bi-eye'}`}></i>
+                  </button>
                 </div>
                 {hasPasswordErrors ? <ErrorMessages errors={passwordErrors} /> : null}
               </div>
