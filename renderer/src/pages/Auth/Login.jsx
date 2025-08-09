@@ -1,4 +1,8 @@
+import { useState } from 'react';
+
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white shadow-lg p-6 rounded-xl w-80">
@@ -22,11 +26,20 @@ export default function Login() {
               <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
                Password
               </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-              />
+              <div className='relative'>
+                   <input
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Enter your password"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200 pr-10"
+                  />
+                 <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
+                  >
+                    <i className={`bi ${showPassword ? 'bi-eye-slash-fill' : 'bi-eye'}`}></i>
+                  </button>
+              </div>
             </div>
 
             <button
