@@ -1,8 +1,17 @@
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 
-const { app } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const dbPath = path.join(__dirname, "database.sqlite");
+
+/**
+ * TODO: import controllers
+ */
+const usersController = require('./controllers/usersController');
+
+ipcMain.handle('login', async (event, credentials) => {
+  return await usersController.verifyLogin(credentials.username, credentials.password);
+});
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
