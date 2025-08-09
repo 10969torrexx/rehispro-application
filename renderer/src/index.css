@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 :root {
-    --color-primary: #1d4ed8;   /* Tailwind blue-700 */
-    --color-secondary: #9333ea; /* Tailwind purple-600 */
-    --color-accent: #f59e0b;    /* Tailwind amber-500 */
-    --color-bg: #EDF2F9;        /* Tailwind gray-50 */
-    --color-text: #111827;      /* Tailwind gray-900 */
+    --color-primary: #1d4ed8;   
+    --color-secondary: #9333ea; 
+    --color-accent: #f59e0b;
+    --color-danger: #FF6692;    
+    --color-bg: #EDF2F9;        
+    --color-text: #111827;      
 }
 
 :root {
@@ -77,4 +78,10 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+input {
+  background-color: white;
+  font-size: small;
+  margin: 4px;
 }

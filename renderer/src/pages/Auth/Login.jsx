@@ -8,32 +8,32 @@ export default function Login() {
 
         <form className="space-y-4">
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
                 Login ID
-                </label>
-                <input
+              </label>
+              <input
                 type="text"
                 placeholder="Enter your login ID"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                />
+              />
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                Password
-                </label>
-                <input
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
+               Password
+              </label>
+              <input
                 type="password"
                 placeholder="Enter your password"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                />
+              />
             </div>
 
             <button
-                type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition duration-200"
+              type="submit"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition duration-200"
             >
-                Login
+              Login
             </button>
         </form>
       </div>
