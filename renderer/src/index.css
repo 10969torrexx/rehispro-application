@@ -68,6 +68,14 @@ input {
   margin: 4px;
 }
 
-.test-border {
+.test-element {
   border: 2px red solid;
+}
+
+.card-content {
+  display: flex;             
+  flex-direction: column;     
+  justify-content: center;    
+  align-items: center; 
+  height: 100%;
 }
