@@ -13,7 +13,7 @@ export default function Login() {
   const [hasLoginErrors, setHasLoginErrors] = useState(false);
   const [hasPasswordErrors, setHasPasswordErrors] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const loginIdErrors = validateLoginId(loginId);
     const passwordErrors = validatePassword(password);
@@ -21,14 +21,25 @@ export default function Login() {
     setHasLoginErrors(!loginIdErrors.isValid);
     setHasPasswordErrors(!passwordErrors.isValid);
 
-    if (loginIdErrors.isValid && passwordErrors.isValid) {
-      setLoginId("");
-      setPassword("");
-    } else {
+    if (!loginIdErrors.isValid && passwordErrors.isValid) {
       toast.error("Login unsuccessful!");
       setLoginIdErrors(loginIdErrors.errors);
       setPasswordErrors(passwordErrors.errors);
       return;
+    } 
+
+    try {
+      const response = await window.electronAPI.login({loginId, password});
+      if (response.success) {
+        
+      } else {
+        toast.error(response.message);
+        setLoginIdErrors({ loginId: response.message });
+        setPasswordErrors({});
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Login failed");
     }
   };
 
