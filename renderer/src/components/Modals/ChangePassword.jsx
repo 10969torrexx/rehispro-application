@@ -3,7 +3,7 @@ import { validateLoginId, validatePassword, validateConfirmPassword } from "../.
 import { ErrorMessages } from '@components';
 import { toast } from "react-toastify";
 
-export default function ChangePassword({ onSave }) {
+export default function ChangePassword({ onSave, onCancel }) {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -94,12 +94,22 @@ export default function ChangePassword({ onSave }) {
             )}
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition"
-          >
-            Save Changes
-          </button>
+          <div className="mb-4 space-y-4">
+            <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition"
+            >
+                Save Changes
+            </button>
+            
+             <button
+                type="button"
+                onClick={onCancel}
+                className="w-full bg-red-600 text-white py-2 rounded-full hover:bg-red-700 transition"
+            >
+                Never Mind
+            </button>
+          </div>
         </form>
       </div>
     </div>

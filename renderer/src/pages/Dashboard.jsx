@@ -3,6 +3,7 @@ import { UserRoles } from '../enums/userRoles';
 import { ChangePassword, SideBar } from '@components';
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
+  const [showChangePassword, setShowChangePassword] = useState(true);
   useEffect(() => {
     const storedUserData = localStorage.getItem('user');
     if (storedUserData) {
@@ -11,10 +12,14 @@ export default function Dashboard() {
   }, []);
   return (
     <>
-      {(userData?.is_firsttime_flg && userData?.role == UserRoles.SUPERVISOR) && (
-        <ChangePassword onSave={(data) => {
-          console.log("Save credentials", data);
-        }} />
+      {(userData?.is_firsttime_flg && userData?.role == UserRoles.SUPERVISOR) && showChangePassword && (
+        <ChangePassword 
+          onSave={(data) => {
+            console.log("Save credentials", data);
+            setShowChangePassword(false);
+          }} 
+          onCancel={() => setShowChangePassword(false)}
+        />
       )}
 
       <div className="flex w-screen h-screen">
