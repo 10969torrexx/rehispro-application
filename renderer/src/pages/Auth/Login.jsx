@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { validateLoginId, validatePassword } from '../../../services/Auth/Validations';
+import { Login as LoginRequest } from '../../../services/Auth/Services';
 import { ErrorMessages } from '@components';
 import React from "react";
 import { toast } from "react-toastify";
 
-export default function Login() {
+export default function Login({ onLoginSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
@@ -17,30 +18,27 @@ export default function Login() {
     e.preventDefault();
     const loginIdErrors = validateLoginId(loginId);
     const passwordErrors = validatePassword(password);
-
     setHasLoginErrors(!loginIdErrors.isValid);
     setHasPasswordErrors(!passwordErrors.isValid);
 
-    if (!loginIdErrors.isValid && passwordErrors.isValid) {
-      toast.error("Login unsuccessful!");
+    //TODO: handle the input validation rules
+    if (!loginIdErrors.isValid || !passwordErrors.isValid) {
+      toast.warning("Please make sure all fields are filled out correctly.");
       setLoginIdErrors(loginIdErrors.errors);
       setPasswordErrors(passwordErrors.errors);
+      setHasLoginErrors(!loginIdErrors.isValid);
+      setHasPasswordErrors(!passwordErrors.isValid);
       return;
     } 
 
-    try {
-      const response = await window.electronAPI.login({loginId, password});
-      if (response.success) {
-        
-      } else {
-        toast.error(response.message);
-        setLoginIdErrors({ loginId: response.message });
-        setPasswordErrors({});
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error("Login failed");
+    const result = await LoginRequest(loginId, password);
+    if (!result.success) {
+      toast.error(result.message);
+      return;
     }
+
+    toast.success("Login successful!");
+    onLoginSuccess();
   };
 
   return (

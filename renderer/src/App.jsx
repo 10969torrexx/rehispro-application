@@ -3,15 +3,20 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Login from './pages/Auth/Login'
+import Dashboard from './pages/Dashboard'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
-      <Login />
+      {isLoggedIn ? (
+        <Dashboard />
+      ) : (
+        <Login onLoginSuccess={() => setIsLoggedIn(true)} />
+      )}
       <ToastContainer
         position="top-right"
         autoClose={5000}

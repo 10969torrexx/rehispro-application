@@ -1,0 +1,26 @@
+{
+  "supervisor": [
+    {
+      "icon": "bi-speedometer2",
+      "name": "Dashboard"
+    },
+    {
+      "icon": "bi-user-file",
+      "name": "Users"
+    },
+    {
+      "icon": "bi-file-earmark-text",
+      "name": "Documents"
+    }
+  ],
+  "staff" : [
+    {
+      "icon": "bi-speedometer2",
+      "name": "Dashboard"
+    },
+    {
+      "icon": "bi-file-earmark-text",
+      "name": "Documents"
+    }
+  ]
+}
