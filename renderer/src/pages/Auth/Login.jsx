@@ -5,7 +5,7 @@ import { ErrorMessages } from '@components';
 import React from "react";
 import { toast } from "react-toastify";
 
-export default function Login() {
+export default function Login({ onLoginSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
@@ -38,6 +38,7 @@ export default function Login() {
     }
 
     toast.success("Login successful!");
+    onLoginSuccess();
   };
 
   return (
