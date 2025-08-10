@@ -60,3 +60,27 @@ export function validatePassword(password) {
     };
 }
 
+/**
+ * TODO: implement validate confirm password
+ * @param {*} password
+ * @param {*} confirmPassword
+ * @returns
+ */
+export function validateConfirmPassword(password, confirmPassword) {
+    const isEmpty = !confirmPassword;
+    const isMatch = password === confirmPassword;
+
+    const errors = {
+        empty: isEmpty ? "Confirm Password is required." : null,
+        mismatch: !isMatch ? "Passwords do not match." : null,
+    };
+
+    const filteredErrors = Object.fromEntries(
+        Object.entries(errors).filter(([_, value]) => value !== null)
+    );
+
+    return {
+        isValid: Object.keys(filteredErrors).length === 0,
+        errors: Object.keys(filteredErrors).length === 0 ? null : filteredErrors,
+    };
+}

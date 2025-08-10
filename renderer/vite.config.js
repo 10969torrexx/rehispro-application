@@ -10,6 +10,8 @@ export default defineConfig({
       '@components': '/src/components',
       '@pages': '/src/pages',
       '@pages/auth': '/src/pages/auth',
+      '@enums': '/src/enums',
+      '@services': '/services',
     },
   },
 })
