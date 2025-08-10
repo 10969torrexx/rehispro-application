@@ -28,19 +28,6 @@ export default function Login() {
       return;
     } 
 
-    try {
-      const response = await window.electronAPI.login({loginId, password});
-      if (response.success) {
-        
-      } else {
-        toast.error(response.message);
-        setLoginIdErrors({ loginId: response.message });
-        setPasswordErrors({});
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error("Login failed");
-    }
   };
 
   return (
