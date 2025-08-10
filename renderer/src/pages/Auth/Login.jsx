@@ -57,7 +57,7 @@ export default function Login({ onLoginSuccess }) {
                 <input
                   type="text"
                   placeholder="Enter your login ID"
-                  className={`w-full px-3 py-2 rounded-md focus:outline-none ${
+                  className={`w-full px-3 py-2 rounded-full focus:outline-none ${
                    hasLoginErrors
                       ? 'border-2 border-red-500'
                       : 'border border-gray-300'
@@ -77,7 +77,7 @@ export default function Login({ onLoginSuccess }) {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter your password"
-                    className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none pr-10 
+                    className={`w-full px-3 py-2 border border-gray-300 rounded-full focus:outline-none pr-10 
                       ${hasPasswordErrors ? 'border-2 border-red-500'  : 'border border-gray-300' }`}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -95,7 +95,7 @@ export default function Login({ onLoginSuccess }) {
 
               <button
                 type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition duration-200"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-full transition duration-200"
               >
                 Login
               </button>
