@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import { UserRoles } from '../enums/userRoles';
 import { ChangePassword, SideBar } from '@components';
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
@@ -10,7 +11,7 @@ export default function Dashboard() {
   }, []);
   return (
     <>
-      {userData?.is_firsttime_flg && (
+      {(userData?.is_firsttime_flg && userData?.role == UserRoles.SUPERVISOR) && (
         <ChangePassword onSave={(data) => {
           console.log("Save credentials", data);
         }} />
