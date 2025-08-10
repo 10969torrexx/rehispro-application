@@ -3,13 +3,17 @@ const path = require('path');
 
 const isDev = !app.isPackaged;
 
+//TODO: require database
+require('./main/main.js');
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1000,
     height: 800,
     webPreferences: {
       nodeIntegration: false,
-      contextIsolation: true
+      contextIsolation: true,
+      preload: path.join(__dirname, 'main', 'preload.js')
     }
   });
 
