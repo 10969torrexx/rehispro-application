@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { validateLoginId, validatePassword } from '../../../services/Auth/Validations';
 import { Login as LoginRequest } from '../../../services/Auth/Services';
-import { ErrorMessages } from '@components';
+import { ErrorMessages, Divider } from '@components';
 import React from "react";
 import { toast } from "react-toastify";
 
