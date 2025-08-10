@@ -21,11 +21,11 @@ db.serialize(() => {
   db.get(`SELECT * FROM users WHERE login_id = ?`, ['admin'], (err, row) => {
     if (!row) {
       const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync('admin123', salt);
+      const hashedPassword = bcrypt.hashSync('Admin123!', salt);
 
       db.run(
         `INSERT INTO users (login_id, password, role) VALUES (?, ?, ?)`,
-        ['admin', hashedPassword, 'supervisor'],
+        ['Supervisor123!', hashedPassword, 'supervisor'],
         (insertErr) => {
           if (insertErr) {
             console.error('❌ Error seeding admin:', insertErr.message);

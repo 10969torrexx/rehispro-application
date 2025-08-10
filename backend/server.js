@@ -5,11 +5,9 @@ const usersController = require('./controllers/usersController');
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Login endpoint
 app.post('/login', (req, res) => {
   const { login_id, password } = req.body;
 
@@ -26,7 +24,6 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Test endpoint
 app.get('/', (req, res) => {
   res.send('Backend API is running 🚀');
 });

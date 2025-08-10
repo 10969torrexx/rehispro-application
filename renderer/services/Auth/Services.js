@@ -1,19 +1,32 @@
-export async function login(username, password) {
-  if (!username || !password) {
-    return { success: false, message: "Username and password are required" };
+/**
+ * TODO: handle the login process sending post request to expresss js
+ * @param {*} loginId 
+ * @param {*} password 
+ * @returns 
+ */
+export async function Login (loginId, password) {
+  if (!loginId || !password) {
+    return { success: false, message: "Login ID and password are required" };
   }
+  
+  try {
+    const response = await fetch("http://localhost:3001/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login_id: loginId,
+        password: password,
+      }),
+    });
 
-  // Call Electron main process via preload API
-  const result = await window.api.login(username, password);
+    return await response.json();
 
-  if (!result.success) {
-    return { success: false, message: result.message };
+  } catch (error) {
+    console.error("Login request failed, error:", error);
+    return { success: false, message: "Unable to connect to the server" };
   }
-
-  // Example: save user data in localStorage
-  localStorage.setItem("user", JSON.stringify(result.user));
-
-  return { success: true, user: result.user };
 }
 
 export function logout() {
