@@ -2,22 +2,19 @@ import {useEffect, useState} from 'react'
 import { ChangePassword, SideBar } from '@components';
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
-  const [isFFirstTimeLogin, setIsFirstTimeUser] = useState(false);
   useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("user")));
-    setIsFirstTimeUser(userData?.is_firsttime_flg);
-    console.log("User data:", {
-      isFFirstTimeLogin,
-      userData: userData
-    });
+    const storedUserData = localStorage.getItem('user');
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    }
   }, []);
   return (
     <>
-    {isFFirstTimeLogin && (
-      <ChangePassword onSave={(data) => {
-        console.log("Save credentials", data);
-      }} />
-    )}
+      {userData?.is_firsttime_flg && (
+        <ChangePassword onSave={(data) => {
+          console.log("Save credentials", data);
+        }} />
+      )}
 
       <div className="flex w-screen h-screen">
         <SideBar role={userData?.role} />

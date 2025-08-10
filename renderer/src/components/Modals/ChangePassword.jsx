@@ -25,13 +25,14 @@ export default function ChangePassword({ onSave }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg w-96 p-6">
-        <h2 className="text-xl font-semibold mb-4">Update Login Credentials</h2>
-        <p className="mb-4 text-gray-600">
+      <div className="bg-white rounded-lg shadow-lg w-100 p-10">
+        <i className="bi bi-exclamation-circle-fill text-6xl mb-4 text-red-500"></i>
+        <h2 className="text-xl font-semibold mb-4 text-left">Update Credentials</h2>
+        <p className="mb-4 text-gray-600 text-left">
           For security reasons, please update your login ID and password.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 text-left">
           <div>
             <label className="block mb-1 font-medium" htmlFor="loginId">Login ID</label>
             <input
@@ -39,7 +40,7 @@ export default function ChangePassword({ onSave }) {
               type="text"
               value={loginId}
               onChange={(e) => setLoginId(e.target.value)}
-              className="w-full border border-gray-300 rounded-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
               required
             />
           </div>
@@ -51,7 +52,7 @@ export default function ChangePassword({ onSave }) {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 rounded-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
               required
             />
           </div>
@@ -63,7 +64,7 @@ export default function ChangePassword({ onSave }) {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full border border-gray-300 rounded-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
               required
             />
           </div>
