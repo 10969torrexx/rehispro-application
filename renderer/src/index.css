@@ -82,3 +82,7 @@ input {
 .Toastify__progress-bar {
   height: 3px !important;
 }
+
+.bg-primary {
+  background-color: var(--color-primary);
+}

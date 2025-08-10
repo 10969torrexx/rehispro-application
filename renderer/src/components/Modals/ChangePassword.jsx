@@ -38,7 +38,7 @@ export default function ChangePassword({ onSave }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg w-100 p-10 max-w-md">
+      <div className="bg-white rounded-lg shadow-lg w-xl p-10 max-w-xl">
         <i className="bi bi-exclamation-circle-fill text-6xl mb- text-red-500"></i>
         <h2 className="text-xl font-semibold mb-4 text-left">Update Credentials</h2>
         <p className="mb-4 text-gray-600 text-left">
@@ -54,10 +54,10 @@ export default function ChangePassword({ onSave }) {
               value={loginId}
               onChange={(e) => setLoginId(e.target.value)}
               className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500
-                ${Object.keys(loginIdErrors).length ? 'border-red-500' : 'border-gray-300'}`}
+                ${ loginIdErrors !== null && Object.keys(loginIdErrors).length ? 'border-red-500' : 'border-gray-300'}`}
               
             />
-            {Object.keys(loginIdErrors).length > 0 && (
+            { loginIdErrors !== null && Object.keys(loginIdErrors).length > 0 && (
               <ErrorMessages errors={loginIdErrors} />
             )}
           </div>
@@ -70,10 +70,10 @@ export default function ChangePassword({ onSave }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500
-                ${Object.keys(passwordErrors).length ? 'border-red-500' : 'border-gray-300'}`}
+                ${passwordErrors !== null && Object.keys(passwordErrors).length ? 'border-red-500' : 'border-gray-300'}`}
               
             />
-            {Object.keys(passwordErrors).length > 0 && (
+            {passwordErrors !== null && Object.keys(passwordErrors).length > 0 && (
               <ErrorMessages errors={passwordErrors} />
             )}
           </div>
@@ -86,10 +86,10 @@ export default function ChangePassword({ onSave }) {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500
-                ${Object.keys(confirmPasswordErrors || {}).length ? 'border-red-500' : 'border-gray-300'}`}
+                ${confirmPasswordErrors !== null && Object.keys(confirmPasswordErrors || {}).length ? 'border-red-500' : 'border-gray-300'}`}
               
             />
-            {Object.keys(confirmPasswordErrors).length > 0 && (
+            {confirmPasswordErrors !== null && Object.keys(confirmPasswordErrors).length > 0 && (
               <ErrorMessages errors={confirmPasswordErrors} />
             )}
           </div>
