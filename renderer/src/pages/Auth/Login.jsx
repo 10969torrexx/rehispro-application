@@ -21,10 +21,12 @@ export default function Login() {
     setHasLoginErrors(!loginIdErrors.isValid);
     setHasPasswordErrors(!passwordErrors.isValid);
 
-    if (!loginIdErrors.isValid && passwordErrors.isValid) {
+    if (!loginIdErrors.isValid || passwordErrors.isValid) {
       toast.error("Login unsuccessful!");
       setLoginIdErrors(loginIdErrors.errors);
       setPasswordErrors(passwordErrors.errors);
+      setHasLoginErrors(!loginIdErrors.isValid);
+      setHasPasswordErrors(!passwordErrors.isValid);
       return;
     } 
 
