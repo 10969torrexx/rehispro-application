@@ -21,8 +21,18 @@ export async function Login (loginId, password) {
       }),
     });
 
-    return await response.json();
+    let parseResponse = await response.json();
 
+    let loggedInUser = {
+      id: parseResponse.user.id,
+      login_id: parseResponse.user.login_id,
+      role: parseResponse.user.role,
+      is_firsttime_flg: parseResponse.user.is_firsttime_flg
+    };
+
+    localStorage.setItem("user", JSON.stringify(loggedInUser));
+
+    return parseResponse;
   } catch (error) {
     console.error("Login request failed, error:", error);
     return { success: false, message: "Unable to connect to the server" };
