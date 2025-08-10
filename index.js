@@ -3,8 +3,7 @@ const path = require('path');
 
 const isDev = !app.isPackaged;
 
-//TODO: require database
-require('./main/main.js');
+require('./backend/server');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -12,15 +11,14 @@ function createWindow() {
     height: 800,
     webPreferences: {
       nodeIntegration: false,
-      contextIsolation: true,
-      preload: path.join(__dirname, 'main', 'preload.js')
+      contextIsolation: true
     }
   });
 
   if (isDev) {
-    win.loadURL('http://localhost:5173'); // Vite dev server
+    win.loadURL('http://localhost:5173');
   } else {
-    win.loadFile(path.join(__dirname, 'renderer/dist/index.html'));
+    win.loadFile(path.join(__dirname, 'renderer', 'dist', 'index.html'));
   }
 }
 
