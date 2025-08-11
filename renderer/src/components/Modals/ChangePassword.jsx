@@ -97,7 +97,7 @@ export default function ChangePassword({ onSave, onCancel }) {
           <div className="mb-4 space-y-4">
             <button
                 type="submit"
-                className="w-full bg-primary text-white py-2 rounded-full hover:bg-orange-700 transition"
+                className="w-full bg-primary text-white py-2 rounded-full hover:bg-secondary transition"
             >
                 Save Changes
             </button>

@@ -4,9 +4,9 @@
 
 :root {
   --color-primary: #6B1B9A;   
-  --color-secondary: #4A148D; 
+  --color-secondary: #d582ff; 
   --color-accent: #6B1B9A;
-  --color-danger: #FF6692;    
+  --color-danger: #FF6B92;    
   --color-bg: #f9edf7;        
   --color-text: #111827;      
 }
@@ -41,16 +41,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  color: var(--color-text)
 }
 
-h1 {
+h1, h2 {
   font-size: 3.2em;
   line-height: 1.1;
-  color: var(--color-primary);
-}
-
-label {
-  color: var(--color-secondary)
 }
 
 input {
@@ -90,6 +86,10 @@ input {
 
 .bg-primary {
   background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
 }
 
 .bg-danger {
