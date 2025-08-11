@@ -22,7 +22,7 @@ export default function SideBar({ role = "supervisor" }) {
             <div className="flex items-center space-x-4 mb-8">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="p-2 rounded-md focus:outline-none hover:bg-orange-100"
+                    className="p-2 rounded-md focus:outline-none hover:bg-purple-100"
                     aria-label="Toggle Sidebar"
                 >
                     {isOpen ? (
@@ -43,7 +43,7 @@ export default function SideBar({ role = "supervisor" }) {
                 {menuItems.map(({ icon, name }) => (
                     <li
                         key={name}
-                        className="flex items-center space-x-4 hover:bg-orange-100 rounded px-2 py-2 cursor-pointer"
+                        className="flex items-center space-x-4 hover:bg-purple-100 rounded px-2 py-2 cursor-pointer"
                     >
                         <i className={`bi ${icon} text-lg`}></i>
                         {isOpen && <span className="whitespace-nowrap">{name}</span>}
