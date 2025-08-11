@@ -49,6 +49,8 @@ app.post('/update-firsttime-login', (req, res) => {
 
 // Start server
 const PORT = 3001;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`✅ Backend running at http://localhost:${PORT}`);
 });
+
+module.exports = server;

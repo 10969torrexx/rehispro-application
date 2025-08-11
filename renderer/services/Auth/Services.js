@@ -87,7 +87,6 @@ export function updateUserLocalStorageData(login_id, role, is_firsttime_flg) {
     return;
   }
 
-  // Keep the existing ID, update other fields
   const updatedUser = {
     ...user,
     login_id,
