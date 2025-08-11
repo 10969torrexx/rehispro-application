@@ -8,6 +8,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+//TODO: handle user login
 app.post('/login', (req, res) => {
   const { login_id, password } = req.body;
 
@@ -28,8 +29,28 @@ app.get('/', (req, res) => {
   res.send('Backend API is running 🚀');
 });
 
+//TODO: handle update user credentials
+app.post('/update-firsttime-login', (req, res) => {
+  const { id, newIsFirstTimeFlag } = req.body;
+
+  if (!id || newIsFirstTimeFlag === undefined) {
+    return res.status(400).json({ success: false, message: 'Missing credentials' });
+  }
+
+  usersController.updateIsFirstTimeFlg(id, newIsFirstTimeFlag, (err, result) => {
+    if (err) {
+      console.error('Update error:', err);
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json(result);
+  });
+});
+
+
 // Start server
 const PORT = 3001;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`✅ Backend running at http://localhost:${PORT}`);
 });
+
+module.exports = server;

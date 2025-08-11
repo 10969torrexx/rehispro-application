@@ -3,12 +3,13 @@ const path = require('path');
 
 const isDev = !app.isPackaged;
 
-require('./backend/server');
+let backendServer; // store server instance
 
 function createWindow() {
   const win = new BrowserWindow({
     width: 1000,
     height: 800,
+    autoHideMenuBar: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true
@@ -23,6 +24,8 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  backendServer = require('./backend/server');
+
   createWindow();
 
   app.on('activate', () => {
@@ -31,5 +34,13 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+  localStorage.clear();
+  if (backendServer) {
+    backendServer.close(() => {
+      console.log('Backend server stopped');
+      if (process.platform !== 'darwin') app.quit();
+    });
+  } else {
+    if (process.platform !== 'darwin') app.quit();
+  }
 });

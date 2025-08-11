@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #1d4ed8;   
-  --color-secondary: #9333ea; 
-  --color-accent: #f59e0b;
-  --color-danger: #FF6692;    
-  --color-bg: #EDF2F9;        
+  --color-primary: #6B1B9A;   
+  --color-secondary: #d582ff; 
+  --color-accent: #6B1B9A;
+  --color-danger: #FF6B92;    
+  --color-bg: #f9edf7;        
   --color-text: #111827;      
 }
 
@@ -41,9 +41,10 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  color: var(--color-text)
 }
 
-h1 {
+h1, h2 {
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -81,4 +82,16 @@ input {
 /* Reduce progress bar height */
 .Toastify__progress-bar {
   height: 3px !important;
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-danger {
+  background-color: var(--color-danger);
 }

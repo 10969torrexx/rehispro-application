@@ -5,8 +5,8 @@
       "name": "Dashboard"
     },
     {
-      "icon": "bi-user-file",
-      "name": "Users"
+      "icon": "bi-person",
+    "name": "Users"
     },
     {
       "icon": "bi-file-earmark-text",
