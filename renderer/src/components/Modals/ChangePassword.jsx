@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { validateLoginId, validatePassword, validateConfirmPassword } from "../../../services/Auth/Validations";
 import { ErrorMessages } from '@components';
 import { toast } from "react-toastify";
+import { updateIsFirstTimeFlg, updateUserLocalStorageData } from '../../../services/Auth/Services'
 
-export default function ChangePassword({ onSave, onCancel }) {
+export function ChangePassword({ onSave, onCancel }) {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,10 +35,17 @@ export default function ChangePassword({ onSave, onCancel }) {
 
     // Call onSave with new credentials
     onSave({ loginId, password });
+  };
 
-    const handleNeverMind = (e) => {
-      e.preventDefault();
+  const handleNeverMind = async () => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const result = await updateIsFirstTimeFlg(userData.id, false);
+    if (result.success) {
+      toast.success("Successfully updated.");
+      updateUserLocalStorageData(userData.login_id, userData.role, false);
       onCancel();
+    } else {
+      toast.error(result.message);
     }
   };
 
@@ -99,20 +107,20 @@ export default function ChangePassword({ onSave, onCancel }) {
             )}
           </div>
 
-          <div className="mb-4 space-y-4">
-            <button
-                type="submit"
-                className="w-full bg-primary text-white py-2 rounded-full hover:bg-secondary transition"
-            >
-                Save Changes
-            </button>
-             <button
+            <div className="mb-4 space-y-4">
+              <button
+                  type="submit"
+                  className="w-full bg-primary text-white py-2 rounded-full hover:bg-secondary transition"
+              >
+                  Save Changes
+              </button>
+              <button
                 type="button"
-                onClick={onCancel}
+                onClick={handleNeverMind}
                 className="w-full bg-danger text-white py-2 rounded-full hover:bg-red-700 transition"
-            >
+              >
                 Never Mind
-            </button>
+              </button>
           </div>
         </form>
       </div>

@@ -31,13 +31,13 @@ app.get('/', (req, res) => {
 
 //TODO: handle update user credentials
 app.post('/update-firsttime-login', (req, res) => {
-  const { login_id, value } = req.body;
+  const { id, newIsFirstTimeFlag } = req.body;
 
-  if (!login_id || value === undefined) {
+  if (!id || newIsFirstTimeFlag === undefined) {
     return res.status(400).json({ success: false, message: 'Missing credentials' });
   }
 
-  usersController.updateIsFirstTimeFlg(login_id, value, (err, result) => {
+  usersController.updateIsFirstTimeFlg(id, newIsFirstTimeFlag, (err, result) => {
     if (err) {
       console.error('Update error:', err);
       return res.status(500).json({ success: false, message: 'Database error' });
