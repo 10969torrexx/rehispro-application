@@ -15,4 +15,18 @@ function verifyLogin(loginId, password, callback) {
   });
 }
 
-module.exports = { verifyLogin };
+function updateIsFirstTimeFlg(loginId, value, callback ) {
+  const normalizedValue = value ? 1 : 0;
+  db.run(`UPDATE users SET is_firsttime_flg = ? WHERE login_id = ?`, [normalizedValue, loginId], function(err) {
+    if (err) return callback(err);
+    if (this.changes === 0) {
+      return callback(null, { success: false, message: 'No matching user found' });
+    }
+    callback(null, { success: true });
+  });
+}
+
+module.exports = { 
+  verifyLogin, 
+  updateIsFirstTimeFlg 
+};

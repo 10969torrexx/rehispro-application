@@ -34,6 +34,11 @@ export default function ChangePassword({ onSave, onCancel }) {
 
     // Call onSave with new credentials
     onSave({ loginId, password });
+
+    const handleNeverMind = (e) => {
+      e.preventDefault();
+      onCancel();
+    }
   };
 
   return (
