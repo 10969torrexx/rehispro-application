@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { validateLoginId, validatePassword, validateConfirmPassword } from "../../../services/Auth/Validations";
 import { ErrorMessages } from '@components';
 import { toast } from "react-toastify";
-import { updateIsFirstTimeFlg, updateUserLocalStorageData } from '../../../services/Auth/Services'
+import { updateIsFirstTimeFlg, updateUserLocalStorageData, updateCredentials } from '../../../services/Auth/Services'
 
-export function ChangePassword({ onSave, onCancel }) {
+export function ChangeCredentials({ onSave, onCancel }) {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -13,7 +13,7 @@ export function ChangePassword({ onSave, onCancel }) {
   const [passwordErrors, setPasswordErrors] = useState({});
   const [confirmPasswordErrors, setConfirmPasswordErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const loginIdValidation = validateLoginId(loginId);
     const passwordValidation = validatePassword(password);
@@ -28,13 +28,19 @@ export function ChangePassword({ onSave, onCancel }) {
       return;
     }
 
-    // Clear errors on successful validation
-    setLoginIdErrors({});
-    setPasswordErrors({});
-    setConfirmPasswordErrors({});
+    const response = await updateCredentials(loginId, password, JSON.parse(localStorage.getItem('user')).id);
+    if (response.success) {
+      // Clear errors on successful validation
+      setLoginIdErrors({});
+      setPasswordErrors({});
+      setConfirmPasswordErrors({});
+      
+      // Call onSave with new credentials
+      onSave({ loginId, password });
+    } else {
+      toast.error(response.message);
+    }
 
-    // Call onSave with new credentials
-    onSave({ loginId, password });
   };
 
   const handleNeverMind = async () => {

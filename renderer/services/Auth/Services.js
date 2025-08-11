@@ -96,3 +96,33 @@ export function updateUserLocalStorageData(login_id, role, is_firsttime_flg) {
 
   localStorage.setItem("user", JSON.stringify(updatedUser));
 }
+
+/**
+ * TODO: handle update credentials
+ * @param {string} loginId
+ * @param {string} newPassword
+ */
+export async function updateCredentials(loginId, newPassword, id) { 
+  if (!loginId || !newPassword || !id) {
+    return { success: false, message: "Login ID, new password, and user ID are required" };
+  }
+
+  try {
+    const response = await fetch("http://localhost:3001/update-credentials", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login_id: loginId,
+        new_password: newPassword,
+        id: id
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Update credentials request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}

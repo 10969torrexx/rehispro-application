@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { UserRoles } from '../enums/userRoles';
-import { ChangePassword, SideBar, HorizontalBar } from '@components';
+import { ChangeCredentials, SideBar, HorizontalBar } from '@components';
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
   const [showChangePassword, setShowChangePassword] = useState(true);
@@ -13,7 +13,7 @@ export default function Dashboard() {
   return (
     <>
       {(userData?.is_firsttime_flg && userData?.role == UserRoles.SUPERVISOR) && showChangePassword && (
-        <ChangePassword 
+        <ChangeCredentials 
           onSave={(data) => {
             console.log("Save credentials", data);
             setShowChangePassword(false);

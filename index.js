@@ -34,7 +34,7 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  localStorage.clear();
+  // localStorage.clear();
   if (backendServer) {
     backendServer.close(() => {
       console.log('Backend server stopped');
