@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { UserRoles } from '../enums/userRoles';
-import { ChangePassword, SideBar } from '@components';
+import { ChangePassword, SideBar, HorizontalBar } from '@components';
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
   const [showChangePassword, setShowChangePassword] = useState(true);
@@ -23,11 +23,16 @@ export default function Dashboard() {
       )}
 
       <div className="flex w-screen h-screen">
-        <SideBar role={userData?.role} />
-        <div className="flex-1 p-6 content">
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-        </div>
+    <div className="h-full">
+      <SideBar role={userData?.role} />
+    </div>
+    <div className="flex-1 flex flex-col">
+      <div className="p-6">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
       </div>
+    </div>
+  </div>
+
     </>
   );
 }
