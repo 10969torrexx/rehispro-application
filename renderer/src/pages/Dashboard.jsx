@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react'
 import { UserRoles } from '../enums/userRoles';
 import { ChangeCredentials, SideBar, HorizontalBar } from '@components';
+import { UsersManagement } from '@pages';
+
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
   const [showChangePassword, setShowChangePassword] = useState(true);
