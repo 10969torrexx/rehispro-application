@@ -1,3 +1,4 @@
+const { data } = require('autoprefixer');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
 
@@ -39,13 +40,25 @@ function updateCredentials(loginId, newPassword, id, callback) {
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(newPassword, salt);
 
-  db.run(`UPDATE users SET login_id = ?, password = ? WHERE id = ?`, [loginId, hashedPassword, id], function(err) {
-    if (err) return callback(err);
-    if (this.changes === 0) {
-      return callback(null, { success: false, message: 'No matching user found' });
+  db.run(
+    `UPDATE users SET login_id = ?, password = ?, is_firsttime_flg = ? WHERE id = ?`,
+    [loginId, hashedPassword, 0, id],
+    function (err) {
+      if (err) return callback(err);
+      if (this.changes === 0) {
+        return callback(null, { success: false, message: 'No matching user found' });
+      }
+
+      db.get(`SELECT * FROM users WHERE id = ?`, [id], (err, row) => {
+        if (err) return callback(err);
+        callback(null, {
+          success: true,
+          message: 'Credentials updated successfully',
+          data: row
+        });
+      });
     }
-    callback(null, { success: true, message: 'Credentials updated successfully' });
-  });
+  );
 }
 
 module.exports = { 

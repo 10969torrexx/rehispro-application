@@ -54,16 +54,12 @@ app.post('/update-firsttime-login', (req, res) => {
  */
 app.post('/update-credentials', (req, res) => {
   const { loginId, new_password, id } = req.body;
-
-  console.log('Update credentials request:', { loginId, new_password, id });
-
   if (!loginId || !new_password || !id) {
     return res.status(400).json({ success: false, message: 'Missing credentials' });
   }
 
   usersController.updateCredentials(loginId, new_password, id, (err, result) => {
     if (err) {
-      console.error('Update error:', err);
       return res.status(500).json({ success: false, message: 'Database error' });
     }
     return res.json(result);

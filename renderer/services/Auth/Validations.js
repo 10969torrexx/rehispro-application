@@ -38,7 +38,7 @@ export function validateLoginId(loginId) {
  * @returns 
  */
 export function validatePassword(password) {
-    const minLength = password.length >= 8;
+    const minLength = password.length >= 5;
     const hasSymbol = /[^A-Za-z0-9]/.test(password);
     const hasUppercase = /[A-Z]/.test(password);
     const hasNoSpaces = !/\s/.test(password);

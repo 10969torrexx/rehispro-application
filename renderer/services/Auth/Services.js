@@ -121,7 +121,19 @@ export async function updateCredentials(loginId, newPassword, id) {
       }),
     });
 
-    return await response.json();
+    let parseResponse = await response.json();
+
+    if (parseResponse.success) {
+      let loggedInUser = {
+        id: parseResponse.data.id,
+        login_id: parseResponse.data.login_id,
+        role: parseResponse.data.role,
+        is_firsttime_flg: parseInt(parseResponse.data.is_firsttime_flg) ? true : false
+      };
+      localStorage.setItem("user", JSON.stringify(loggedInUser));
+    }
+
+    return parseResponse;
   } catch (error) {
     console.error("Update credentials request failed, error:", error);
     return { success: false, message: "Internal Server Error" };
