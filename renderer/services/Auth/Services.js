@@ -23,14 +23,15 @@ export async function Login (loginId, password) {
 
     let parseResponse = await response.json();
 
-    let loggedInUser = {
-      id: parseResponse.user.id,
-      login_id: parseResponse.user.login_id,
-      role: parseResponse.user.role,
-      is_firsttime_flg: parseInt(parseResponse.user.is_firsttime_flg) ? true : false
-    };
-
-    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    if (parseResponse.success) {
+      let loggedInUser = {
+        id: parseResponse.user.id,
+        login_id: parseResponse.user.login_id,
+        role: parseResponse.user.role,
+        is_firsttime_flg: parseInt(parseResponse.user.is_firsttime_flg) ? true : false
+      };
+      localStorage.setItem("user", JSON.stringify(loggedInUser));
+    }
 
     return parseResponse;
   } catch (error) {
@@ -114,7 +115,7 @@ export async function updateCredentials(loginId, newPassword, id) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        login_id: loginId,
+        loginId: loginId,
         new_password: newPassword,
         id: id
       }),

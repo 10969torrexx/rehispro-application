@@ -24,18 +24,16 @@ export function ChangeCredentials({ onSave, onCancel }) {
       setLoginIdErrors(loginIdValidation.errors);
       setPasswordErrors(passwordValidation.errors);
       setConfirmPasswordErrors(confirmPasswordValidation.errors);
-      console.log('confirmPasswordValidation', confirmPasswordValidation.errors)
       return;
     }
 
+    setLoginIdErrors({});
+    setPasswordErrors({});
+    setConfirmPasswordErrors({});
+
     const response = await updateCredentials(loginId, password, JSON.parse(localStorage.getItem('user')).id);
-    if (response.success) {
-      // Clear errors on successful validation
-      setLoginIdErrors({});
-      setPasswordErrors({});
-      setConfirmPasswordErrors({});
-      
-      // Call onSave with new credentials
+    if (response.success) {      
+      toast.success(response.message);
       onSave({ loginId, password });
     } else {
       toast.error(response.message);

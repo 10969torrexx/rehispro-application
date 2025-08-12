@@ -55,6 +55,8 @@ app.post('/update-firsttime-login', (req, res) => {
 app.post('/update-credentials', (req, res) => {
   const { loginId, new_password, id } = req.body;
 
+  console.log('Update credentials request:', { loginId, new_password, id });
+
   if (!loginId || !new_password || !id) {
     return res.status(400).json({ success: false, message: 'Missing credentials' });
   }

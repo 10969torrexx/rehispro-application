@@ -44,7 +44,7 @@ function updateCredentials(loginId, newPassword, id, callback) {
     if (this.changes === 0) {
       return callback(null, { success: false, message: 'No matching user found' });
     }
-    callback(null, { success: true });
+    callback(null, { success: true, message: 'Credentials updated successfully' });
   });
 }
 
