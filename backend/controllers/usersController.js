@@ -1,3 +1,4 @@
+const { data } = require('autoprefixer');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
 
@@ -26,7 +27,42 @@ function updateIsFirstTimeFlg(id, newIsFirstTimeFlag, callback ) {
   });
 }
 
+/**
+ * TODO: update user credentials
+ * @param {string} loginId
+ * @param {string} newPassword
+ */
+function updateCredentials(loginId, newPassword, id, callback) {
+  if (!loginId || !newPassword || !id) {
+    return callback(new Error('Login ID, new password, and user ID are required'));
+  }
+
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+  db.run(
+    `UPDATE users SET login_id = ?, password = ?, is_firsttime_flg = ? WHERE id = ?`,
+    [loginId, hashedPassword, 0, id],
+    function (err) {
+      if (err) return callback(err);
+      if (this.changes === 0) {
+        return callback(null, { success: false, message: 'No matching user found' });
+      }
+
+      db.get(`SELECT * FROM users WHERE id = ?`, [id], (err, row) => {
+        if (err) return callback(err);
+        callback(null, {
+          success: true,
+          message: 'Credentials updated successfully',
+          data: row
+        });
+      });
+    }
+  );
+}
+
 module.exports = { 
   verifyLogin, 
-  updateIsFirstTimeFlg 
+  updateIsFirstTimeFlg,
+  updateCredentials
 };

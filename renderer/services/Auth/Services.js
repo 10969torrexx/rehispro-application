@@ -23,14 +23,15 @@ export async function Login (loginId, password) {
 
     let parseResponse = await response.json();
 
-    let loggedInUser = {
-      id: parseResponse.user.id,
-      login_id: parseResponse.user.login_id,
-      role: parseResponse.user.role,
-      is_firsttime_flg: parseInt(parseResponse.user.is_firsttime_flg) ? true : false
-    };
-
-    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    if (parseResponse.success) {
+      let loggedInUser = {
+        id: parseResponse.user.id,
+        login_id: parseResponse.user.login_id,
+        role: parseResponse.user.role,
+        is_firsttime_flg: parseInt(parseResponse.user.is_firsttime_flg) ? true : false
+      };
+      localStorage.setItem("user", JSON.stringify(loggedInUser));
+    }
 
     return parseResponse;
   } catch (error) {
@@ -95,4 +96,46 @@ export function updateUserLocalStorageData(login_id, role, is_firsttime_flg) {
   };
 
   localStorage.setItem("user", JSON.stringify(updatedUser));
+}
+
+/**
+ * TODO: handle update credentials
+ * @param {string} loginId
+ * @param {string} newPassword
+ */
+export async function updateCredentials(loginId, newPassword, id) { 
+  if (!loginId || !newPassword || !id) {
+    return { success: false, message: "Login ID, new password, and user ID are required" };
+  }
+
+  try {
+    const response = await fetch("http://localhost:3001/update-credentials", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        loginId: loginId,
+        new_password: newPassword,
+        id: id
+      }),
+    });
+
+    let parseResponse = await response.json();
+
+    if (parseResponse.success) {
+      let loggedInUser = {
+        id: parseResponse.data.id,
+        login_id: parseResponse.data.login_id,
+        role: parseResponse.data.role,
+        is_firsttime_flg: parseInt(parseResponse.data.is_firsttime_flg) ? true : false
+      };
+      localStorage.setItem("user", JSON.stringify(loggedInUser));
+    }
+
+    return parseResponse;
+  } catch (error) {
+    console.error("Update credentials request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
 }

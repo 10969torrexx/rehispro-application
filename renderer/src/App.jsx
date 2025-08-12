@@ -8,10 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from './pages/Auth/Login'
 import Dashboard from './pages/Dashboard'
 
-import {
-  ChangePassword
-} from '@components'
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isFirstTimeUser, setIsFirstTimeUser] = useState(true);

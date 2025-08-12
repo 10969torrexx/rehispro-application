@@ -47,7 +47,26 @@ app.post('/update-firsttime-login', (req, res) => {
 });
 
 
-// Start server
+/**
+ * TODO: update user credentials
+ * @param {string} loginId
+ * @param {string} newPassword
+ */
+app.post('/update-credentials', (req, res) => {
+  const { loginId, new_password, id } = req.body;
+  if (!loginId || !new_password || !id) {
+    return res.status(400).json({ success: false, message: 'Missing credentials' });
+  }
+
+  usersController.updateCredentials(loginId, new_password, id, (err, result) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json(result);
+  });
+});
+
+//TODO: Start server
 const PORT = 3001;
 const server = app.listen(PORT, () => {
   console.log(`✅ Backend running at http://localhost:${PORT}`);

@@ -18,7 +18,7 @@ db.serialize(() => {
     )
   `);
 
-  db.get(`SELECT * FROM users WHERE login_id = ?`, ['admin'], (err, row) => {
+  db.get(`SELECT * FROM users WHERE role = ?`, ['supervisor'], (err, row) => {
     if (!row) {
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync('Admin123!', salt);
