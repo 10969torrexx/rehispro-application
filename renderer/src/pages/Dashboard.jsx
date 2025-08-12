@@ -23,15 +23,15 @@ export default function Dashboard() {
       )}
 
       <div className="flex w-screen h-screen">
-    <div className="h-full">
-      <SideBar role={userData?.role} />
-    </div>
-    <div className="flex-1 flex flex-col">
-      <div className="p-6">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <div className="h-full">
+          <SideBar role={userData?.role} />
+        </div>
+        <div className="flex-1 flex flex-col">
+          <div className="p-6">
+            <h1 className="text-3xl font-bold">Dashboard</h1>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
     </>
   );
