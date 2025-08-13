@@ -34,11 +34,11 @@ export default function Dashboard() {
           setIsOpen={setSidebarOpen}
         />
         <div
-          className={`flex-1 flex flex-col transition-all duration-300`}
-          style={{ marginLeft: sidebarOpen ? "8rem" : "2rem" }}
+          className={`flex-1 flex flex-col w-screen transition-all duration-300`}
         >
-          <HorizontalBar />
-          <UsersManagement />
+          <div className='content'>
+            <UsersManagement />
+          </div>
         </div>
       </div>
 

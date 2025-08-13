@@ -95,7 +95,7 @@ export default function Login({ onLoginSuccess }) {
 
               <button
                 type="submit"
-                className="w-full bg-primary hover:bg-purple-600 text-white font-semibold py-2 rounded-full transition duration-200"
+                className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 rounded-full transition duration-200"
               >
                 Login
               </button>
