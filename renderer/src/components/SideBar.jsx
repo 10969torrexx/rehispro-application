@@ -1,9 +1,8 @@
 import { useState } from "react";
 import menuData from '../data/sideBar.json';
 
-export default function SideBar({ role = "supervisor" }) {
+export default function SideBar({ role = "supervisor", isOpen, setIsOpen }) {
     const menuItems = menuData[role] || [];
-    const [isOpen, setIsOpen] = useState(true);
 
     const handleLogout = () => {
         localStorage.removeItem("user");
@@ -13,7 +12,7 @@ export default function SideBar({ role = "supervisor" }) {
     return (
         <div
             className={`
-                fixed top-0 left-0 h-full bg-white text-gray-800 flex flex-col p-4 shadow-xl
+                h-full bg-white text-gray-800 flex flex-col p-4 shadow-xl
                 transition-all duration-300 ease-in-out overflow-hidden
                 ${isOpen ? "w-64" : "w-16"}
             `}
