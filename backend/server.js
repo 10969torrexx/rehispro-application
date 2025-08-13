@@ -66,6 +66,25 @@ app.post('/update-credentials', (req, res) => {
   });
 });
 
+/**
+ * TODO: create user
+ * @param {string} loginId
+ * @param {string} password
+ */
+app.post('/create-user', (req, res) => {
+  const { loginId, password, role } = req.body;
+  if (!loginId || !password || !role) {
+    return res.status(400).json({ success: false, message: 'Missing credentials' });
+  }
+
+  usersController.createUser(loginId, password, role, (err, result) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json(result);
+  });
+});
+
 //TODO: Start server
 const PORT = 3001;
 const server = app.listen(PORT, () => {

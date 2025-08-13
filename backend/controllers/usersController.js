@@ -61,8 +61,32 @@ function updateCredentials(loginId, newPassword, id, callback) {
   );
 }
 
+/**
+ * TODO: create users
+ * @param {string} loginId
+ * @param {string} password
+ */
+function createUser(loginId, password, role, callback) {
+  if (!loginId || !password) {
+    return callback(new Error('Login ID and password are required'));
+  }
+
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(password, salt);
+
+  db.run(
+    `INSERT INTO users (login_id, password, is_firsttime_flg, role) VALUES (?, ?, ?, ?)`,
+    [loginId, hashedPassword, 1, role],
+    function (err) {
+      if (err) return callback(err);
+      callback(null, { success: true, id: this.lastID });
+    }
+  );
+}
+
 module.exports = { 
   verifyLogin, 
   updateIsFirstTimeFlg,
-  updateCredentials
+  updateCredentials,
+  createUser,
 };
