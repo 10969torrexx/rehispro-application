@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
 
 export default function UsersManagement() {
   const [userLoginId, setUserLoginId] = useState();
@@ -9,6 +10,20 @@ export default function UsersManagement() {
     setUserLoginId("");
     setUserPassword("Admin123!");
   }
+
+  //TODO: handle user data on table
+  const columns = [
+    { name: "Id", selector: row => row.id, sortable: true },
+    { name: "Name", selector: row => row.name, sortable: true },
+    { name: "Email", selector: row => row.email },
+    { name: "Role", selector: row => row.role }
+  ];
+
+  const data = [
+    { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
+    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" }
+  ];
+
 
   return (
     <div className="space-y-4">
@@ -39,8 +54,15 @@ export default function UsersManagement() {
       </div>
 
 
-      <div className="w-full bg-white rounded-full p-4 shadow-lg">
-        
+      <div className="w-full bg-white rounded-xl p-4 shadow-lg">
+        <DataTable
+          title="List of Users"
+          columns={columns}
+          data={data}
+          pagination
+          highlightOnHover
+          striped 
+        />
       </div>
 
     </div>
