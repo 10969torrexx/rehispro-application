@@ -12,7 +12,7 @@ export default function SideBar({ role = "supervisor", isOpen, setIsOpen }) {
     return (
         <div
             className={`
-                h-full bg-white text-gray-800 flex flex-col p-4 shadow-xl
+                h-full bg-white text-gray-800 flex flex-col p-4 shadow-lg
                 transition-all duration-300 ease-in-out overflow-hidden
                 ${isOpen ? "w-64" : "w-16"}
             `}

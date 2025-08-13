@@ -35,7 +35,7 @@ export default function Dashboard() {
         />
         <div
           className={`flex-1 flex flex-col transition-all duration-300`}
-          style={{ marginLeft: sidebarOpen ? "16rem" : "4rem" }}
+          style={{ marginLeft: sidebarOpen ? "8rem" : "2rem" }}
         >
           <HorizontalBar />
           <UsersManagement />

@@ -95,3 +95,8 @@ input {
 .bg-danger {
   background-color: var(--color-danger);
 }
+
+.content {
+  padding: 2rem;
+  text-align: left;
+}
