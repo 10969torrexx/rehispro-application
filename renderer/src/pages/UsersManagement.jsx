@@ -13,28 +13,6 @@ export default function UsersManagement() {
       { name: "Name", selector: row => row.name, sortable: true },
       { name: "Email", selector: row => row.email },
       { name: "Role", selector: row => row.role },
-      {
-        name: 'Actions',
-          cell: row => (
-            <div className="flex space-x-2">
-              <button
-                className="bg-blue-500 text-white px-3 py-1 rounded"
-                onClick={() => handleView(row)}
-              >
-                View
-              </button>
-              <button
-                className="bg-red-500 text-white px-3 py-1 rounded"
-                onClick={() => handleDelete(row)}
-              >
-                Delete
-              </button>
-            </div>
-          ),
-        ignoreRowClick: true,   
-        allowOverflow: true,    
-        button: true,           
-      },
     ];
 
     const data = [
