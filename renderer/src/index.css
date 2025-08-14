@@ -84,8 +84,12 @@ input {
   height: 3px !important;
 }
 
-.bg-primary {
-  background-color: var(--color-primary);
+.btn-primary {
+  background-color: #a855f7; /* purple-500 */
+
+  &:hover {
+    background-color: #9333ea; /* purple-600 */
+  }
 }
 
 .bg-secondary {
