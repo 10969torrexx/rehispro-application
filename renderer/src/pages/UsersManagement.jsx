@@ -29,7 +29,6 @@ return (
       {showCreateUserModal && (
         <CreateUsers
           onSave={(data) => {
-            // Handle save logic
             setShowCreateUserModal(false);
           }}
           onCancel={() => setShowCreateUserModal(false)}
