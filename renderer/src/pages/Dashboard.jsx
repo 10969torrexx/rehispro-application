@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import { UserRoles } from '../enums/userRoles';
 import { ChangeCredentials, SideBar, HorizontalBar } from '@components';
 import { UsersManagement } from '@pages';
+import { toast } from 'react-toastify';
 
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
@@ -20,7 +21,7 @@ export default function Dashboard() {
       {(userData?.is_firsttime_flg && userData?.role == UserRoles.SUPERVISOR) && showChangePassword && (
         <ChangeCredentials 
           onSave={(data) => {
-            console.log("Save credentials", data);
+            toast.success(data.message);
             setShowChangePassword(false);
           }} 
           onCancel={() => setShowChangePassword(false)}

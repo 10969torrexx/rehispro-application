@@ -156,7 +156,7 @@ export async function createUser(loginId, password, userRole) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        login_id: loginId,
+        loginId: loginId,
         password: password,
         role: userRole,
       }),

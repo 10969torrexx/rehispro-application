@@ -34,8 +34,16 @@ export default function CreateUsers({ onSave, onCancel }) {
             }
 
             const createUserResponse = await createUser(loginId, password, userRole);
-            // onSave({ loginId, password, userRole });
-            console.log(createUserResponse);
+            if (createUserResponse.success) {
+                onSave({ 
+                    response: createUserResponse.success,
+                    message: createUserResponse.message,
+                });
+                toast.success(createUserResponse.message);
+            } else {
+                console.log('Create user error:', createUserResponse.message);
+                toast.error(createUserResponse.message);
+            }
         }
 
     return(
