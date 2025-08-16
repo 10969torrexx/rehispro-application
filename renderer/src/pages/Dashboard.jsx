@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react'
 import { UserRoles } from '../enums/userRoles';
 import { ChangeCredentials, SideBar, HorizontalBar } from '@components';
+import { UsersManagement } from '@pages';
+
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
   const [showChangePassword, setShowChangePassword] = useState(true);
@@ -10,6 +12,9 @@ export default function Dashboard() {
       setUserData(JSON.parse(storedUserData));
     }
   }, []);
+
+  //TODO: handling side bar open / close state
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   return (
     <>
       {(userData?.is_firsttime_flg && userData?.role == UserRoles.SUPERVISOR) && showChangePassword && (
@@ -23,15 +28,19 @@ export default function Dashboard() {
       )}
 
       <div className="flex w-screen h-screen">
-    <div className="h-full">
-      <SideBar role={userData?.role} />
-    </div>
-    <div className="flex-1 flex flex-col">
-      <div className="p-6">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <SideBar
+          role={userData?.role}
+          isOpen={sidebarOpen}
+          setIsOpen={setSidebarOpen}
+        />
+        <div
+          className={`flex-1 flex flex-col w-screen transition-all duration-300`}
+        >
+          <div className='content'>
+            <UsersManagement />
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
     </>
   );

@@ -139,3 +139,32 @@ export async function updateCredentials(loginId, newPassword, id) {
     return { success: false, message: "Internal Server Error" };
   }
 }
+
+/**
+ * TODO: create user
+ * 
+ */
+export async function createUser(loginId, password, userRole) {
+  if (!loginId || !password || !userRole) {
+    return { success: false, message: "Login ID, password, and user role are required" };
+  }
+
+  try {
+    const response = await fetch("http://localhost:3001/create-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login_id: loginId,
+        password: password,
+        role: userRole,
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Create user request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}

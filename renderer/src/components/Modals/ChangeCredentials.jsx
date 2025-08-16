@@ -70,8 +70,8 @@ export function ChangeCredentials({ onSave, onCancel }) {
               type="text"
               value={loginId}
               onChange={(e) => setLoginId(e.target.value)}
-              className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500
-                ${ loginIdErrors !== null && Object.keys(loginIdErrors).length ? 'border-red-500' : 'border-gray-300'}`}
+              className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
+              ${ loginIdErrors !== null && Object.keys(loginIdErrors).length ? 'border-red-500' : 'border-gray-300'}`}
               
             />
             { loginIdErrors !== null && Object.keys(loginIdErrors).length > 0 && (
@@ -102,7 +102,7 @@ export function ChangeCredentials({ onSave, onCancel }) {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500
+              className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
                 ${confirmPasswordErrors !== null && Object.keys(confirmPasswordErrors || {}).length ? 'border-red-500' : 'border-gray-300'}`}
               
             />
