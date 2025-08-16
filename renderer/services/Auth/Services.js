@@ -142,7 +142,9 @@ export async function updateCredentials(loginId, newPassword, id) {
 
 /**
  * TODO: create user
- * 
+ * @param {string} loginId
+ * @param {string} password
+ * @param {string} userRole
  */
 export async function createUser(loginId, password, userRole) {
   if (!loginId || !password || !userRole) {
