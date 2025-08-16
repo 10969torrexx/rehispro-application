@@ -21,7 +21,6 @@ export default function UsersManagement() {
       }), width: "300px" }
     ];
     const [users, setUsers] = useState([]);
-
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -47,6 +46,8 @@ return (
       {showCreateUserModal && (
         <CreateUsers
           onSave={(data) => {
+            console.log('User created:', data);
+            setUsers(prevUsers => [...prevUsers, data.data]);
             setShowCreateUserModal(false);
           }}
           onCancel={() => setShowCreateUserModal(false)}

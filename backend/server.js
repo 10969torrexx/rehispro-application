@@ -82,7 +82,11 @@ app.post('/create-user', (req, res) => {
       if (err.message.includes("SQLITE_CONSTRAINT")) {
         return res.status(400).json({ success: false, message: "Duplicate user found" });
       }
-      return res.status(500).json({ success: false, message: err.message || 'Database error' });
+      return res.status(500).json({ 
+        success: false, 
+        message: err.message || 'Database error',
+        data: null
+      });
     }
     return res.json(result);
   });

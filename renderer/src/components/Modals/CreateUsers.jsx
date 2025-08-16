@@ -38,6 +38,12 @@ export default function CreateUsers({ onSave, onCancel }) {
                 onSave({ 
                     response: createUserResponse.success,
                     message: createUserResponse.message,
+                    data: {
+                        id: createUserResponse.data.id,
+                        login_id: createUserResponse.data.login_id,
+                        role: createUserResponse.data.role,
+                        created_at: createUserResponse.data.created_at
+                    }
                 });
                 toast.success(createUserResponse.message);
             } else {
