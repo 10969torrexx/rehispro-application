@@ -4,21 +4,39 @@ import { UserRoles } from '../enums/userRoles';
 import { validateLoginId, validatePassword } from "../../services/Auth/Validations";
 import { toast } from "react-toastify";
 import { CreateUsers } from '@modals';
+import { getAllUsers } from '../../services/Auth/Services';
 
 export default function UsersManagement() {
 
   //TODO: data tables data
     const columns = [
-      { name: "Id", selector: row => row.id, sortable: true },
-      { name: "Name", selector: row => row.name, sortable: true },
-      { name: "Email", selector: row => row.email },
-      { name: "Role", selector: row => row.role },
+      { name: "Id", selector: row => row.id, sortable: true, width: "80px" },
+      { name: "Login ID", selector: row => row.login_id, sortable: true, width: "200px" },
+      { name: "Role", selector: row => row.role.charAt(0).toUpperCase() + row.role.slice(1), width: "150px" },
+      { name: "Created At", selector: row => new Date(row.created_at).toLocaleString(
+        "en-US", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+      }), width: "300px" }
     ];
+    const [users, setUsers] = useState([]);
 
-    const users = [
-      { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
-      { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" }
-    ];
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await getAllUsers();
+          console.log(response);
+          if (response.success) {
+            setUsers(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching users:", error);
+        }
+      };
+
+      fetchData();
+    }, []);
 
   //TODO: handle showing create user modal
     const [showCreateUserModal, setShowCreateUserModal] = useState(false);

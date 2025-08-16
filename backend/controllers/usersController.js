@@ -84,9 +84,20 @@ function createUser(loginId, password, role, callback) {
   );
 }
 
+/**
+ * TODO: fetch all users
+ */
+function getAllUsers(callback) {
+  db.all(`SELECT * FROM users`, [], (err, rows) => {
+    if (err) return callback(err);
+    callback(null, rows);
+  });
+}
+
 module.exports = { 
   verifyLogin, 
   updateIsFirstTimeFlg,
   updateCredentials,
+  getAllUsers,
   createUser,
 };

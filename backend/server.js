@@ -88,6 +88,19 @@ app.post('/create-user', (req, res) => {
   });
 });
 
+/**
+ * TODO: fetch all users
+ */
+app.get('/users', (req, res) => {
+  usersController.getAllUsers((err, result) => {
+    if (err) {
+      console.error('Fetch users error:', err);
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json({ success: true, data: result });
+  });
+});
+
 //TODO: Start server
 const PORT = 3001;
 const server = app.listen(PORT, () => {

@@ -170,3 +170,16 @@ export async function createUser(loginId, password, userRole) {
     return { success: false, message: "Internal Server Error" };
   }
 }
+
+/**
+ * TODO: fetch all users
+ */
+export async function getAllUsers() {
+  try {
+    const response = await fetch("http://localhost:3001/users");
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+}
