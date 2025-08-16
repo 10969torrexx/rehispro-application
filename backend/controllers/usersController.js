@@ -79,7 +79,7 @@ function createUser(loginId, password, role, callback) {
     [loginId, hashedPassword, 1, role],
     function (err) {
       if (err) return callback(err);
-      callback(null, { success: true, id: this.lastID });
+      callback(null, { success: true, message: 'User created successfully', id: this.lastID });
     }
   );
 }

@@ -15,7 +15,7 @@ export default function UsersManagement() {
       { name: "Role", selector: row => row.role },
     ];
 
-    const data = [
+    const users = [
       { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
       { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" }
     ];
@@ -47,7 +47,7 @@ return (
         <DataTable
           title="List of Users"
           columns={columns}
-          data={data}
+          data={users}
           pagination
           highlightOnHover
           striped 

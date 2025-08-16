@@ -142,7 +142,9 @@ export async function updateCredentials(loginId, newPassword, id) {
 
 /**
  * TODO: create user
- * 
+ * @param {string} loginId
+ * @param {string} password
+ * @param {string} userRole
  */
 export async function createUser(loginId, password, userRole) {
   if (!loginId || !password || !userRole) {
@@ -156,7 +158,7 @@ export async function createUser(loginId, password, userRole) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        login_id: loginId,
+        loginId: loginId,
         password: password,
         role: userRole,
       }),
