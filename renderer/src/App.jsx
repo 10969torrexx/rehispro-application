@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+
 
 import Login from './pages/Auth/Login'
 import Dashboard from './pages/Dashboard'
@@ -34,11 +36,11 @@ function App() {
 
   return (
     <>
-      {isLoggedIn ? (
-        <Dashboard />
-      ) : (
-        <Login onLoginSuccess={() => setIsLoggedIn(true)} />
-      )}
+      <Router>
+        <Routes>
+          <Route path="/" element={isLoggedIn ? <Dashboard /> : <Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
+        </Routes>
+      </Router>
 
       <ToastContainer
         position="top-right"
