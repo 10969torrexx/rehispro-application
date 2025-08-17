@@ -3,12 +3,24 @@ import DataTable from "react-data-table-component";
 import { UserRoles } from '../enums/userRoles';
 import { validateLoginId, validatePassword } from "../../services/Auth/Validations";
 import { toast } from "react-toastify";
-import { CreateUsers } from '@modals';
+import { CreateUsers, ConfirmAction } from '@modals';
 import { getAllUsers } from '../../services/Auth/Services';
 import { SideBar } from '@components';
 
 export default function UsersManagement() {
-  const [userData, setUserData] = useState(null); 
+  //TODO: handle showing prompts / modal
+    const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+    const [showConfirmActionModal, setShowConfirmActionModal] = useState(false);
+
+  //TODO: handle table actions events
+    const handleEditUser = (userId) => {
+      console.log("Edit user:", userId);
+    };
+
+    const handleDeleteUser = (userId) => {
+      setShowConfirmActionModal(true);
+    };
+
   //TODO: data tables data
     const columns = [
       { name: "Id", selector: row => row.id, sortable: true, width: "80px" },
@@ -40,7 +52,7 @@ export default function UsersManagement() {
               <i className="bi bi-pencil"></i>
             </button>
             <button
-              onClick={() => console.log("Delete", row.id)}
+              onClick={() => handleDeleteUser(row.id)}
               className="px-1 py-1 text-sm text-red-500 rounded hover:bg-red-200"
             >
               <i className="bi bi-trash-fill"></i>
@@ -52,6 +64,7 @@ export default function UsersManagement() {
       }
     ];
     const [users, setUsers] = useState([]);
+    const [userData, setUserData] = useState(null); 
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -72,8 +85,6 @@ export default function UsersManagement() {
       fetchData();
     }, []);
 
-  //TODO: handle showing create user modal
-    const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   //TODO: handling side bar open / close state
     const [sidebarOpen, setSidebarOpen] = useState(true);
   
@@ -87,6 +98,18 @@ export default function UsersManagement() {
               setShowCreateUserModal(false);
             }}
             onCancel={() => setShowCreateUserModal(false)}
+          />
+        )}
+
+        {showConfirmActionModal && (
+          <ConfirmAction
+            title="Confirm Action"
+            message="Are you sure you want to proceed with this action?"
+            onConfirm={() => {
+              console.log('Action confirmed');
+              setShowConfirmActionModal(false);
+            }}
+            onCancel={() => setShowConfirmActionModal(false)}
           />
         )}
 
