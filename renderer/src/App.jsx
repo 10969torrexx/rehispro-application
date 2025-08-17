@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Login, Dashboard, UsersManagement } from '@pages';
+import { Login, Dashboard, UsersManagement, NotFound } from '@pages';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,8 +36,9 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={isLoggedIn ? <UsersManagement /> : <Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
+          <Route path="/" element={isLoggedIn ? <Dashboard /> : <Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
           <Route path="/user-management" element={isLoggedIn ? <UsersManagement /> : <Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import menuData from '../data/sideBar.json';
+import { Link } from "react-router-dom";
 
 export default function SideBar({ role = "supervisor", isOpen, setIsOpen }) {
     const menuItems = menuData[role] || [];
@@ -42,10 +43,10 @@ export default function SideBar({ role = "supervisor", isOpen, setIsOpen }) {
                     <li
                         key={name}
                     >
-                        <a href={url} className="flex items-center space-x-4 hover:bg-purple-100 rounded px-2 py-2 cursor-pointer">
+                        <Link to={url} className="flex items-center space-x-4 hover:bg-purple-100 rounded px-2 py-2 cursor-pointer">
                             <i className={`bi ${icon} text-lg`}></i>
                             {isOpen && <span className="whitespace-nowrap">{name}</span>}
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>
