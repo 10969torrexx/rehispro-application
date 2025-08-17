@@ -183,3 +183,25 @@ export async function getAllUsers() {
     throw error;
   }
 }
+
+/**
+ * TODO: delete user
+ */
+export async function deleteUser(userId) { 
+  try {
+    const response = await fetch("http://localhost:3001/user-delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Delete user request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}

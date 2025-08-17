@@ -4,7 +4,7 @@ import { UserRoles } from '../enums/userRoles';
 import { validateLoginId, validatePassword } from "../../services/Auth/Validations";
 import { toast } from "react-toastify";
 import { CreateUsers, ConfirmAction } from '@modals';
-import { getAllUsers } from '../../services/Auth/Services';
+import { getAllUsers, deleteUser } from '../../services/Auth/Services';
 import { SideBar } from '@components';
 
 export default function UsersManagement() {
@@ -13,12 +13,14 @@ export default function UsersManagement() {
     const [showConfirmActionModal, setShowConfirmActionModal] = useState(false);
 
   //TODO: handle table actions events
+    const [userToAlter, setUserToAlter] = useState(null);
     const handleEditUser = (userId) => {
       console.log("Edit user:", userId);
     };
 
     const handleDeleteUser = (userId) => {
       setShowConfirmActionModal(true);
+      setUserToAlter(userId);
     };
 
   //TODO: data tables data
@@ -106,10 +108,11 @@ export default function UsersManagement() {
             title="Confirm Action"
             message="Are you sure you want to proceed with this action?"
             onConfirm={() => {
-              console.log('Action confirmed');
               setShowConfirmActionModal(false);
             }}
-            onCancel={() => setShowConfirmActionModal(false)}
+            onCancel={() => 
+              setShowConfirmActionModal(false)
+            }
           />
         )}
 

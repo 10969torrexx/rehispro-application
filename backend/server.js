@@ -105,6 +105,25 @@ app.get('/users', (req, res) => {
   });
 });
 
+/**
+ * TODO: delete the user
+ * @param {string} userId
+ */
+app.post('/user-delete', (req, res) => {
+  const { userId } = req.body;
+  if (!userId) {
+    return res.status(400).json({ success: false, message: 'Missing user ID' });
+  }
+
+  usersController.deleteUser(userId, (err, result) => {
+    if (err) {
+      console.error('Delete user error:', err);
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json(result);
+  });
+});
+
 //TODO: Start server
 const PORT = 3001;
 const server = app.listen(PORT, () => {

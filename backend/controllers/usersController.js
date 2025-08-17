@@ -101,10 +101,25 @@ function getAllUsers(callback) {
   });
 }
 
+/**
+ * TODO: delete user
+ * @param {string} userId
+ */
+function deleteUser(userId, callback) {
+  db.run(`DELETE FROM users WHERE id = ?`, [userId], function(err) {
+    if (err) return callback(err);
+    if (this.changes === 0) {
+      return callback(null, { success: false, message: 'No matching user found' });
+    }
+    callback(null, { success: true, message: 'User deleted successfully' });
+  });
+}
+
 module.exports = { 
   verifyLogin, 
   updateIsFirstTimeFlg,
   updateCredentials,
   getAllUsers,
   createUser,
+  deleteUser,
 };
