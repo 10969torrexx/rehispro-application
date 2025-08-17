@@ -14,12 +14,43 @@ export default function UsersManagement() {
       { name: "Id", selector: row => row.id, sortable: true, width: "80px" },
       { name: "Login ID", selector: row => row.login_id, sortable: true, width: "200px" },
       { name: "Role", selector: row => row.role.charAt(0).toUpperCase() + row.role.slice(1), width: "150px" },
-      { name: "Created At", selector: row => new Date(row.created_at).toLocaleString(
-        "en-US", {
-        year: "numeric",
-        month: "long",
-        day: "2-digit",
-      }), width: "300px" }
+      { 
+        name: "Created At", 
+        selector: row => new Date(row.created_at).toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "2-digit",
+        }), 
+        width: "200px" 
+      },
+      {
+        name: "Actions",
+        cell: (row) => (
+          <div className="flex space-x-2">
+            <button
+              onClick={() => console.log("View", row.id)}
+              className="px-1 py-1 text-sm rounded text-primary hover:bg-purple-200"
+            >
+              <i class="bi bi-eye-fill"></i>
+            </button>
+            <button
+              onClick={() => console.log("Edit", row.id)}
+              className="px-1 py-1 text-sm rounded text-yellow-500 hover:bg-yellow-200"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button
+              onClick={() => console.log("Delete", row.id)}
+              className="px-1 py-1 text-sm text-red-500 rounded hover:bg-red-200"
+            >
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
+        ),
+        ignoreRowClick: true, 
+        allowOverflow: true,  
+        button: true,         
+      }
     ];
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -73,7 +104,7 @@ export default function UsersManagement() {
               Add User
             </button>
           </div>
-          <div className="w-full bg-white rounded-xl p-4 shadow-lg">
+          <div className="w-full bg-white rounded-xl p-4 shadow-lg text-left">
             <DataTable
               title="List of Users"
               columns={columns}

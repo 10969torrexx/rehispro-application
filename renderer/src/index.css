@@ -104,3 +104,7 @@ input {
   margin: 16px;
   height: 100%;
 }
+
+.text-primary {
+  color: #a855f7;
+}
