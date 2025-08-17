@@ -31,25 +31,24 @@ export default function UsersManagement() {
               onClick={() => console.log("View", row.id)}
               className="px-1 py-1 text-sm rounded text-primary hover:bg-purple-200"
             >
-              <i class="bi bi-eye-fill"></i>
+              <i className="bi bi-eye-fill"></i>
             </button>
             <button
               onClick={() => console.log("Edit", row.id)}
               className="px-1 py-1 text-sm rounded text-yellow-500 hover:bg-yellow-200"
             >
-              <i class="bi bi-pencil"></i>
+              <i className="bi bi-pencil"></i>
             </button>
             <button
               onClick={() => console.log("Delete", row.id)}
               className="px-1 py-1 text-sm text-red-500 rounded hover:bg-red-200"
             >
-              <i class="bi bi-trash-fill"></i>
+              <i className="bi bi-trash-fill"></i>
             </button>
           </div>
         ),
         ignoreRowClick: true, 
-        allowOverflow: true,  
-        button: true,         
+        allowoverflow: true,  
       }
     ];
     const [users, setUsers] = useState([]);
@@ -77,6 +76,7 @@ export default function UsersManagement() {
     const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   //TODO: handling side bar open / close state
     const [sidebarOpen, setSidebarOpen] = useState(true);
+  
   return (
     <div className="flex w-screen h-screen">
         {showCreateUserModal && (
