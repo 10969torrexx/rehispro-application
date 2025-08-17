@@ -5,9 +5,10 @@ import { validateLoginId, validatePassword } from "../../services/Auth/Validatio
 import { toast } from "react-toastify";
 import { CreateUsers } from '@modals';
 import { getAllUsers } from '../../services/Auth/Services';
+import { SideBar } from '@components';
 
 export default function UsersManagement() {
-
+  const [userData, setUserData] = useState(null); 
   //TODO: data tables data
     const columns = [
       { name: "Id", selector: row => row.id, sortable: true, width: "80px" },
@@ -34,44 +35,55 @@ export default function UsersManagement() {
         }
       };
 
+      if(localStorage.getItem('user')) {
+        setUserData(JSON.parse(localStorage.getItem('user')));
+      }
+
       fetchData();
     }, []);
 
   //TODO: handle showing create user modal
     const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+  //TODO: handling side bar open / close state
+    const [sidebarOpen, setSidebarOpen] = useState(true);
+  return (
+    <div className="flex w-screen h-screen">
+        {showCreateUserModal && (
+          <CreateUsers
+            onSave={(data) => {
+              console.log('User created:', data);
+              setUsers(prevUsers => [...prevUsers, data.data]);
+              setShowCreateUserModal(false);
+            }}
+            onCancel={() => setShowCreateUserModal(false)}
+          />
+        )}
 
-return (
-    <div className="space-y-4">
-
-      {showCreateUserModal && (
-        <CreateUsers
-          onSave={(data) => {
-            console.log('User created:', data);
-            setUsers(prevUsers => [...prevUsers, data.data]);
-            setShowCreateUserModal(false);
-          }}
-          onCancel={() => setShowCreateUserModal(false)}
+        <SideBar
+          role={userData?.role}
+          isOpen={sidebarOpen}
+          setIsOpen={setSidebarOpen}
         />
-      )}
-
-      <div className="flex justify-end ">
-        <button 
-          className="btn-primary shadow-lg text-white px-4 py-2 rounded-full"
-          onClick={() => setShowCreateUserModal(true)}
-        >
-          Add User
-        </button>
-      </div>
-      <div className="w-full h-[100%] bg-white rounded-xl p-4 shadow-lg">
-        <DataTable
-          title="List of Users"
-          columns={columns}
-          data={users}
-          pagination
-          highlightOnHover
-          striped 
-        />
-      </div>
+        <div className="p-4 flex-1 flex flex-col w-screen transition-all duration-300">
+          <div className="flex justify-end mb-4">
+            <button 
+              className="btn-primary shadow-lg text-white px-4 py-2 rounded-full"
+              onClick={() => setShowCreateUserModal(true)}
+            >
+              Add User
+            </button>
+          </div>
+          <div className="w-full bg-white rounded-xl p-4 shadow-lg">
+            <DataTable
+              title="List of Users"
+              columns={columns}
+              data={users}
+              pagination
+              highlightOnHover
+              striped 
+            />
+          </div>
+        </div>
     </div>
   );
 }

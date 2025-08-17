@@ -38,7 +38,7 @@ export default function Dashboard() {
           className={`flex-1 flex flex-col w-screen transition-all duration-300`}
         >
           <div className='content'>
-            <UsersManagement />
+            <h1 className='text-2xl font-semibold mb-4'>Dashboard</h1>
           </div>
         </div>
       </div>

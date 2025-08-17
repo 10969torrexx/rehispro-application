@@ -2,15 +2,18 @@
   "supervisor": [
     {
       "icon": "bi-speedometer2",
-      "name": "Dashboard"
+      "name": "Dashboard",
+      "url": "/"
     },
     {
       "icon": "bi-person",
-    "name": "Users"
+      "name": "Users",
+      "url": "/user-management"
     },
     {
       "icon": "bi-file-earmark-text",
-      "name": "Documents"
+      "name": "Documents",
+      "url": "/documents"
     }
   ],
   "staff" : [

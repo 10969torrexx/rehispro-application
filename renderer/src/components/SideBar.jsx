@@ -3,7 +3,6 @@ import menuData from '../data/sideBar.json';
 
 export default function SideBar({ role = "supervisor", isOpen, setIsOpen }) {
     const menuItems = menuData[role] || [];
-
     const handleLogout = () => {
         localStorage.removeItem("user");
         window.location.reload();
@@ -39,13 +38,14 @@ export default function SideBar({ role = "supervisor", isOpen, setIsOpen }) {
 
             {/* Menu items */}
             <ul className="space-y-2 flex-1">
-                {menuItems.map(({ icon, name }) => (
+                {menuItems.map(({ icon, name, url }) => (
                     <li
                         key={name}
-                        className="flex items-center space-x-4 hover:bg-purple-100 rounded px-2 py-2 cursor-pointer"
                     >
-                        <i className={`bi ${icon} text-lg`}></i>
-                        {isOpen && <span className="whitespace-nowrap">{name}</span>}
+                        <a href={url} className="flex items-center space-x-4 hover:bg-purple-100 rounded px-2 py-2 cursor-pointer">
+                            <i className={`bi ${icon} text-lg`}></i>
+                            {isOpen && <span className="whitespace-nowrap">{name}</span>}
+                        </a>
                     </li>
                 ))}
             </ul>
