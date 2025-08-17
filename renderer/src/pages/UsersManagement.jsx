@@ -18,9 +18,11 @@ export default function UsersManagement() {
       console.log("Edit user:", userId);
     };
 
-    const handleDeleteUser = (userId) => {
+    const handleDeleteUser = async (userId) => {
       setShowConfirmActionModal(true);
       setUserToAlter(userId);
+      const response = await deleteUser(userId);
+      console.log("Delete user response:", response);
     };
 
   //TODO: data tables data
@@ -70,8 +72,8 @@ export default function UsersManagement() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await getAllUsers();
-          console.log(response);
+          const userData = JSON.parse(localStorage.getItem('user'));
+          const response = await getAllUsers(userData.id);
           if (response.success) {
             setUsers(response.data);
           }

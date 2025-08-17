@@ -174,9 +174,17 @@ export async function createUser(loginId, password, userRole) {
 /**
  * TODO: fetch all users
  */
-export async function getAllUsers() {
+export async function getAllUsers(currentUserId) {
   try {
-    const response = await fetch("http://localhost:3001/users");
+    const response = await fetch("http://localhost:3001/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        currentUserId: currentUserId
+      }),
+    });
     return await response.json();
   } catch (error) {
     console.error("Error fetching users:", error);

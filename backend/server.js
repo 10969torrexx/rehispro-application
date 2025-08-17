@@ -95,8 +95,9 @@ app.post('/create-user', (req, res) => {
 /**
  * TODO: fetch all users
  */
-app.get('/users', (req, res) => {
-  usersController.getAllUsers((err, result) => {
+app.post('/users', (req, res) => {
+  const { currentUserId } = req.body;
+  usersController.getAllUsers(currentUserId, (err, result) => {
     if (err) {
       console.error('Fetch users error:', err);
       return res.status(500).json({ success: false, message: 'Database error' });
