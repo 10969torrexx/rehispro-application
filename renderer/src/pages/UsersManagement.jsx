@@ -21,8 +21,6 @@ export default function UsersManagement() {
     const handleDeleteUser = async (userId) => {
       setShowConfirmActionModal(true);
       setUserToAlter(userId);
-      const response = await deleteUser(userId);
-      console.log("Delete user response:", response);
     };
 
   //TODO: data tables data
@@ -109,8 +107,15 @@ export default function UsersManagement() {
           <ConfirmAction
             title="Confirm Action"
             message="Are you sure you want to proceed with this action?"
-            onConfirm={() => {
+            onConfirm={async () => {
               setShowConfirmActionModal(false);
+              const response = await deleteUser(userToAlter);
+              if (response.success) {
+                toast.success(response.message);
+                setUsers(prevUsers => prevUsers.filter(user => user.id !== userToAlter));
+              } else {
+                toast.error(response.message);
+              }
             }}
             onCancel={() => 
               setShowConfirmActionModal(false)
