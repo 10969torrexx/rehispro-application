@@ -96,7 +96,7 @@ function createUser(loginId, password, role, callback) {
  */
 function getAllUsers(currentUserId, callback) {
   db.all(
-    `SELECT * FROM users WHERE id != ?  AND deleted_at IS NULL`, 
+    `SELECT * FROM users WHERE id != ?`, 
     [currentUserId], 
     (err, rows) => {
       if (err) return callback(err);
@@ -110,13 +110,17 @@ function getAllUsers(currentUserId, callback) {
  * @param {string} userId
  */
 function deleteUser(userId, callback) {
-  db.run(`DELETE FROM users WHERE id = ?`, [userId], function(err) {
-    if (err) return callback(err);
-    if (this.changes === 0) {
-      return callback(null, { success: false, message: 'No matching user found' });
+  db.run(
+    `UPDATE users SET deleted_at = CURRENT_TIMESTAMP WHERE id = ? AND deleted_at IS NULL`,
+    [userId],
+    function (err) {
+      if (err) return callback(err);
+      if (this.changes === 0) {
+        return callback(null, { success: false, message: 'No matching user found or already deleted' });
+      }
+      callback(null, { success: true, message: 'User deleted successfully (soft delete)' });
     }
-    callback(null, { success: true, message: 'User deleted successfully' });
-  });
+  );
 }
 
 module.exports = { 
