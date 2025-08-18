@@ -96,7 +96,7 @@ function createUser(loginId, password, role, callback) {
  */
 function getAllUsers(currentUserId, callback) {
   db.all(
-    `SELECT * FROM users WHERE id != ?`, 
+    `SELECT * FROM users WHERE id != ? AND deleted_at IS NULL`, 
     [currentUserId], 
     (err, rows) => {
       if (err) return callback(err);
