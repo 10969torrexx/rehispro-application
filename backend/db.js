@@ -14,7 +14,8 @@ db.serialize(() => {
       role VARCHAR(255) NOT NULL DEFAULT 'supervisor',
       is_firsttime_flg BOOLEAN NOT NULL DEFAULT 1,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      deleted_at TIMESTAMP DEFAULT NULL
     )
   `);
 
