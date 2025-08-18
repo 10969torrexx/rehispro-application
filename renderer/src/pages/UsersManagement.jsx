@@ -37,6 +37,12 @@ export default function UsersManagement() {
         }), 
         width: "200px" 
       },
+      { name: "Status", 
+        cell: row => (
+          <span className={`status status-${row.status}`}>
+            {row.status.charAt(0).toUpperCase() + row.status.slice(1)}
+          </span>
+        ), width: "150px" },
       {
         name: "Actions",
         cell: (row) => (
