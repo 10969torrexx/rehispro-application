@@ -18,7 +18,7 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   return (
     <>
-      {(userData?.is_firsttime_flg && userData?.role == UserRoles.SUPERVISOR) && showChangePassword && (
+      {(userData?.is_firsttime_flg ) && showChangePassword && (
         <ChangeCredentials 
           onSave={(data) => {
             toast.success(data.message);

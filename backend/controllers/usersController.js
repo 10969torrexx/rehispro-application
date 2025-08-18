@@ -9,7 +9,16 @@ function verifyLogin(loginId, password, callback) {
 
     const passwordMatch = bcrypt.compareSync(password, user.password);
     if (passwordMatch) {
-      callback(null, { success: true, user });
+      //TODO: handle user roles and permissions based on user status
+      if (user.status === 'active') {
+        callback(null, { success: true, user });
+      }  else if (user.status === 'inactive') { 
+        callback(null, { success: false, message: 'Your account is inactive' });
+      } else if (user.status === 'suspended') { 
+        callback(null, { success: false, message: 'Your account is suspended' });
+      } else {
+        callback(null, { success: false, message: 'You\'re not allowed to log in' });
+      }
     } else {
       callback(null, { success: false, message: 'Invalid password' });
     }
