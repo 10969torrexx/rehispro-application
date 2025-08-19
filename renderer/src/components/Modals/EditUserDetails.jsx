@@ -3,7 +3,16 @@ import { UserRoles } from '../../enums/userRoles';
 import { validateLoginId, validatePassword} from '../../../services/Auth/Validations';
 import { ErrorMessages, Divider } from '@components';
 import { toast } from 'react-toastify';
+import { getUserDetails } from '../../../services/Auth/Services';
+
 export default function EditUserDetails({ user, onSave, onCancel }) { 
+    //TODO: handle the user inputs
+    const [loginId, setLoginId] = useState(user.login_id || '');
+    const [password, setPassword] = useState('');
+    const [userRole, setUserRole] = useState(user.role || UserRoles.STAFF);
+    //TODO: handle cancel button
+    //TODO: handle data on component build
+    
     return(
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center text-left">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-xl p-10">

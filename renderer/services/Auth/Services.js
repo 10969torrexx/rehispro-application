@@ -213,3 +213,30 @@ export async function deleteUser(userId) {
     return { success: false, message: "Internal Server Error" };
   }
 }
+
+/**
+ * TODO: get user details by id
+ * @param {number} userId
+ */
+export async function getUserDetails(userId) {
+  if (!userId) {
+    return { success: false, message: "User ID is required" };
+  }
+
+  try {
+    const response = await fetch("http://localhost:3001/get-user-details", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Get user details request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}

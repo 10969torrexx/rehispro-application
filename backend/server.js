@@ -125,6 +125,25 @@ app.post('/user-delete', (req, res) => {
   });
 });
 
+/**
+ * TODO: get user details by id
+ * @param {number} userId
+ */
+app.post('/get-user-details', (req, res) => {
+  const { userId } = req.body;
+  if (!userId) {
+    return res.status(400).json({ success: false, message: 'Missing user ID' });
+  }
+
+  usersController.getUserDetails(userId, (err, result) => {
+    if (err) {
+      console.error('Get user details error:', err);
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json(result);
+  });
+});
+
 //TODO: Start server
 const PORT = 3001;
 const server = app.listen(PORT, () => {

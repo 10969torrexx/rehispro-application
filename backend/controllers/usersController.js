@@ -132,6 +132,24 @@ function deleteUser(userId, callback) {
   );
 }
 
+/**
+ * TODO: get user details by id
+ * @param {number} userId
+ */
+function getUserDetails(userId, callback) {
+  if (!userId) {
+    return callback(new Error('User ID is required'));
+  }
+
+  db.get(`SELECT * FROM users WHERE id = ? AND deleted_at IS NULL`, [userId], (err, row) => {
+    if (err) return callback(err);
+    if (!row) {
+      return callback(null, { success: false, message: 'User not found' });
+    }
+    callback(null, { success: true, data: row });
+  });
+}
+
 module.exports = { 
   verifyLogin, 
   updateIsFirstTimeFlg,
