@@ -3,21 +3,15 @@ import DataTable from "react-data-table-component";
 import { UserRoles } from '../enums/userRoles';
 import { validateLoginId, validatePassword } from "../../services/Auth/Validations";
 import { toast } from "react-toastify";
-import { CreateUsers, ConfirmAction } from '@modals';
+import { CreateUsers, ConfirmAction, EditUserDetails } from '@modals';
 import { getAllUsers, deleteUser } from '../../services/Auth/Services';
 import { SideBar } from '@components';
 
 export default function UsersManagement() {
   //TODO: handle showing prompts / modal
     const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+
     const [showConfirmActionModal, setShowConfirmActionModal] = useState(false);
-
-  //TODO: handle table actions events
-    const [userToAlter, setUserToAlter] = useState(null);
-    const handleEditUser = (userId) => {
-      console.log("Edit user:", userId);
-    };
-
     const handleDeleteUser = async (userId) => {
       setShowConfirmActionModal(true);
       setUserToAlter(userId);
@@ -58,7 +52,7 @@ export default function UsersManagement() {
               <i className="bi bi-eye-fill"></i>
             </button>
             <button
-              onClick={() => console.log("Edit", row.id)}
+              onClick={() => handleEditUser(row.id)}
               className="px-1 py-1 text-sm rounded text-yellow-500 hover:bg-yellow-200"
             >
               <i className="bi bi-pencil"></i>
@@ -99,7 +93,11 @@ export default function UsersManagement() {
 
   //TODO: handling side bar open / close state
     const [sidebarOpen, setSidebarOpen] = useState(true);
-  
+  //TODO handle edit user
+    const [ showEditUserModal, setShowEditUserModal ] = useState(false);
+    const handleEditUser = (userId) => { 
+      setShowEditUserModal(true);
+    }
   return (
     <div className="flex w-screen h-screen">
         {showCreateUserModal && (
@@ -130,6 +128,18 @@ export default function UsersManagement() {
             onCancel={() => 
               setShowConfirmActionModal(false)
             }
+          />
+        )}
+
+        {showEditUserModal && (
+          <EditUserDetails
+            user={userData}
+            onSave={(data) => {
+              console.log('User updated:', data);
+              setUsers(prevUsers => prevUsers.map(user => user.id === data.id ? data : user));
+              setShowEditUserModal(false);
+            }}
+            onCancel={() => setShowEditUserModal(false)}
           />
         )}
 
