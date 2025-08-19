@@ -57,7 +57,7 @@ export default function CreateUsers({ onSave, onCancel }) {
             <div className="bg-white rounded-lg shadow-lg w-full max-w-xl p-10">
                 <h2 className="text-2xl font-semibold mb-6">Create User</h2>
                 <div className='w-full p-2 bg-purple-200 border rounded-lg mb-4'>
-                    <p className='text-purple-800'><i class="bi bi-info-circle-fill mr-2"></i>By default, users are assigned the "<strong>Staff</strong>" role.</p>
+                    <p className='text-purple-800'><i className="bi bi-info-circle-fill mr-2"></i>By default, users are assigned the "<strong>Staff</strong>" role.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">

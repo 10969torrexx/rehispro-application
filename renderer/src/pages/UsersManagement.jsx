@@ -38,11 +38,15 @@ export default function UsersManagement() {
         width: "200px" 
       },
       { name: "Status", 
-        cell: row => (
-          <span className={`status status-${row.status}`}>
-            {row.status.charAt(0).toUpperCase() + row.status.slice(1)}
-          </span>
-        ), width: "150px" },
+        cell: row => {
+          const status = row.status || "active";
+          return (
+            <span className={`status status-${status}`}>
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </span>
+          );
+        },
+      },
       {
         name: "Actions",
         cell: (row) => (
