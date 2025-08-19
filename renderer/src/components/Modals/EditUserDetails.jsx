@@ -12,6 +12,12 @@ export default function EditUserDetails({ user, onSave, onCancel }) {
     const [password, setPassword] = useState('');
     const [userRole, setUserRole] = useState(user.role || UserRoles.STAFF);
     //TODO: handle cancel button
+    const handleCancel = () => {
+        setLoginId('');
+        setPassword('');
+        setUserRole(UserRoles.STAFF);
+        onCancel();
+    }
     //TODO: handle data on component build
     
     return(
@@ -44,6 +50,16 @@ export default function EditUserDetails({ user, onSave, onCancel }) {
                         className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500`}
                         placeholder="Enter password"
                         />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">
+                         Role
+                        </label>
+                        <select className='w-full border rounded-full px-3 py-3 focus:outline-none focus:ring-1 focus:ring-purple-500'>
+                            <option value={UserRoles.SUPERVISOR}>{ capitalizeFirst(UserRoles.SUPERVISOR) }</option>
+                            <option value={UserRoles.STAFF}>{ capitalizeFirst(UserRoles.STAFF) }</option>
+                        </select>
                     </div>
 
                     <div>

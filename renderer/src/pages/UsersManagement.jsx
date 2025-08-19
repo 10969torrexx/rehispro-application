@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { CreateUsers, ConfirmAction, EditUserDetails } from '@modals';
 import { getAllUsers, deleteUser } from '../../services/Auth/Services';
 import { SideBar } from '@components';
+import { capitalizeFirst } from "../myTools/myTools";
 
 export default function UsersManagement() {
   //TODO: handle showing prompts / modal
@@ -36,7 +37,7 @@ export default function UsersManagement() {
           const status = row.status || "active";
           return (
             <span className={`status status-${status}`}>
-              {status.charAt(0).toUpperCase() + status.slice(1)}
+              {capitalizeFirst(status)}
             </span>
           );
         },
