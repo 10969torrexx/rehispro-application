@@ -54,6 +54,12 @@ input {
   margin: 4px;
 }
 
+select {
+  background-color: white;
+  font-size: small;
+  margin: 4px;
+}
+
 .test-element {
   border: 2px red solid;
 }

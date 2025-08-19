@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { UserRoles } from '../../enums/userRoles';
+import { UserRoles, UserStatus } from '@enums';
 import { validateLoginId, validatePassword} from '../../../services/Auth/Validations';
 import { ErrorMessages, Divider } from '@components';
 import { toast } from 'react-toastify';
 import { getUserDetails } from '../../../services/Auth/Services';
+import { capitalizeFirst } from './../../myTools/myTools';
 
 export default function EditUserDetails({ user, onSave, onCancel }) { 
     //TODO: handle the user inputs
@@ -40,9 +41,19 @@ export default function EditUserDetails({ user, onSave, onCancel }) {
                         type="password"
                         id="password"
                         name="password"
-                        className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-red-500 border-gray-300`}
+                        className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500`}
                         placeholder="Enter password"
                         />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1" htmlFor="password">
+                        Status
+                        </label>
+                        <select className='w-full border rounded-full px-3 py-3 focus:outline-none focus:ring-1 focus:ring-purple-500'>
+                            <option value={UserStatus.ACTIVE}>{ capitalizeFirst(UserStatus.ACTIVE) }</option>
+                            <option value={UserStatus.INACTIVE}>{ capitalizeFirst(UserStatus.INACTIVE) }</option>
+                        </select>
                     </div>
 
                     <div className="flex justify-end space-x-3 pt-4">
