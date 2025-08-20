@@ -157,4 +157,5 @@ module.exports = {
   getAllUsers,
   createUser,
   deleteUser,
+  getUserDetails,
 };

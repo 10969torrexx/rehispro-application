@@ -3,20 +3,50 @@ import DataTable from "react-data-table-component";
 import { UserRoles } from '../enums/userRoles';
 import { validateLoginId, validatePassword } from "../../services/Auth/Validations";
 import { toast } from "react-toastify";
-import { CreateUsers, ConfirmAction, EditUserDetails } from '@modals';
+import { CreateUsers, ConfirmAction, EditUserDetails, ViewUserDetails } from '@modals';
 import { getAllUsers, deleteUser } from '../../services/Auth/Services';
 import { SideBar } from '@components';
 import { capitalizeFirst } from "../myTools/myTools";
 
 export default function UsersManagement() {
+  const [selectedUserId, setSelectedUserId] = useState(null); //* this is the user id of the selected user
+  const [users, setUsers] = useState([]);
+  const [userData, setUserData] = useState(null); 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = JSON.parse(localStorage.getItem('user'));
+        const response = await getAllUsers(userData.id);
+        if (response.success) {
+          setUsers(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    if(localStorage.getItem('user')) {
+      setUserData(JSON.parse(localStorage.getItem('user')));
+    }
+
+    fetchData();
+  }, []);
+
   //TODO: handle showing prompts / modal
     const [showCreateUserModal, setShowCreateUserModal] = useState(false);
 
     const [showConfirmActionModal, setShowConfirmActionModal] = useState(false);
     const handleDeleteUser = async (userId) => {
       setShowConfirmActionModal(true);
-      setUserToAlter(userId);
+      setSelectedUserId(userId);
     };
+
+    const [showViewUserDetailsModal, setShowViewUserDetailsModal] = useState(false);
+    const handeShowViewUserDetails = (userId) => { 
+      setShowViewUserDetailsModal(true);
+      setSelectedUserId(userId);
+    }
 
   //TODO: data tables data
     const columns = [
@@ -47,7 +77,7 @@ export default function UsersManagement() {
         cell: (row) => (
           <div className="flex space-x-2">
             <button
-              onClick={() => console.log("View", row.id)}
+              onClick={() => handeShowViewUserDetails(row.id)}
               className="px-1 py-1 text-sm rounded text-primary hover:bg-purple-200"
             >
               <i className="bi bi-eye-fill"></i>
@@ -70,27 +100,6 @@ export default function UsersManagement() {
         allowoverflow: true,  
       }
     ];
-    const [users, setUsers] = useState([]);
-    const [userData, setUserData] = useState(null); 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const userData = JSON.parse(localStorage.getItem('user'));
-          const response = await getAllUsers(userData.id);
-          if (response.success) {
-            setUsers(response.data);
-          }
-        } catch (error) {
-          console.error("Error fetching users:", error);
-        }
-      };
-
-      if(localStorage.getItem('user')) {
-        setUserData(JSON.parse(localStorage.getItem('user')));
-      }
-
-      fetchData();
-    }, []);
 
   //TODO: handling side bar open / close state
     const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -118,10 +127,10 @@ export default function UsersManagement() {
             message="Are you sure you want to proceed with this action?"
             onConfirm={async () => {
               setShowConfirmActionModal(false);
-              const response = await deleteUser(userToAlter);
+              const response = await deleteUser(selectedUserId);
               if (response.success) {
                 toast.success(response.message);
-                setUsers(prevUsers => prevUsers.filter(user => user.id !== userToAlter));
+                setUsers(prevUsers => prevUsers.filter(user => user.id !== selectedUserId));
               } else {
                 toast.error(response.message);
               }
@@ -141,6 +150,13 @@ export default function UsersManagement() {
               setShowEditUserModal(false);
             }}
             onCancel={() => setShowEditUserModal(false)}
+          />
+        )}
+
+        {showViewUserDetailsModal && (
+          <ViewUserDetails
+            userId={selectedUserId}
+            onClose={() => setShowViewUserDetailsModal(false)}
           />
         )}
 
