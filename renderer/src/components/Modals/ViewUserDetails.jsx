@@ -10,7 +10,6 @@ export default function ViewUserDetails({ userId, onClose }) {
         const fetchUserDetails = async () => { 
             try {
                 const response = await getUserDetailsById(userId);
-                console.log('User details response:', response);
                 if (response.success) {
                     setUserData(response.data);
                 } else {
