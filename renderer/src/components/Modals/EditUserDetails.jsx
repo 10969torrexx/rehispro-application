@@ -5,6 +5,7 @@ import { ErrorMessages, Divider } from '@components';
 import { toast } from 'react-toastify';
 import { getUserDetails } from '../../../services/Auth/Services';
 import { capitalizeFirst } from './../../myTools/myTools';
+import { AuthServices } from '@services';
 
 export default function EditUserDetails({ userId, onSave, onCancel }) { 
     //TODO: handle the user inputs
