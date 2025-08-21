@@ -144,6 +144,25 @@ app.post('/get-user-details', (req, res) => {
   });
 });
 
+/**
+ * TODO: update user details
+ * @param {Object} userDetails
+ */
+app.post('/update-user-details', (req, res) => {
+  const { userDetails } = req.body;
+  if (!userDetails || !userDetails.id) {
+    return res.status(400).json({ success: false, message: 'Missing user details' });
+  }
+
+  usersController.updateUserDetails(userDetails, (err, result) => {
+    if (err) {
+      console.error('Update user details error:', err);
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json(result);
+  });
+});
+
 //TODO: Start server
 const PORT = 3001;
 const server = app.listen(PORT, () => {

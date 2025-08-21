@@ -267,3 +267,30 @@ export async function getUserDetailsById(userId) {
     return { success: false, message: "Internal Server Error" };
   }
 }
+
+/**
+ * TODO: update user details
+ * @param {Object} userDetails
+ */
+export async function updateUserDetails(userDetails) { 
+  if (!userDetails || !userDetails.id) {
+    return { success: false, message: "User details and ID are required" };
+  }
+
+  try {
+    const response = await fetch("http://localhost:3001/update-user-details", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userDetails: userDetails
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Update user details request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}
