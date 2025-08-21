@@ -26,7 +26,6 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
     const [passwordErrorMessages, setPasswordErrorMessages] = useState({});
     const handleSubmit = () => {
         
-        
         if (!loginIdErrors.isValid && !passwordErrors.isValid) {
             setLoginIdErrorMessages(loginIdErrors.errors);
             setPasswordErrorMessages(passwordErrors.errors);

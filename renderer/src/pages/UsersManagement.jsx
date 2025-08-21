@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { UserRoles } from '../enums/userRoles';
+// import { UserRoles } from '../enums/userRoles';
+import { UserStatus } from "@enums";
 import { validateLoginId, validatePassword } from "../../services/Auth/Validations";
 import { toast } from "react-toastify";
 import { CreateUsers, ConfirmAction, EditUserDetails, ViewUserDetails } from '@modals';
@@ -130,7 +131,7 @@ export default function UsersManagement() {
               const response = await deleteUser(selectedUserId);
               if (response.success) {
                 toast.success(response.message);
-                setUsers(prevUsers => prevUsers.filter(user => user.id !== selectedUserId));
+                setUsers(prevUsers => prevUsers.map(user => user.id === selectedUserId ? { ...user, status: UserStatus.DELETED } : user));
               } else {
                 toast.error(response.message);
               }

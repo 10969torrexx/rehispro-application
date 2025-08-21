@@ -105,7 +105,7 @@ function createUser(loginId, password, role, callback) {
  */
 function getAllUsers(currentUserId, callback) {
   db.all(
-    `SELECT * FROM users WHERE id != ? AND deleted_at IS NULL`, 
+    `SELECT * FROM users WHERE id != ?`, 
     [currentUserId], 
     (err, rows) => {
       if (err) return callback(err);
@@ -120,7 +120,10 @@ function getAllUsers(currentUserId, callback) {
  */
 function deleteUser(userId, callback) {
   db.run(
-    `UPDATE users SET deleted_at = CURRENT_TIMESTAMP WHERE id = ? AND deleted_at IS NULL`,
+    `UPDATE users 
+     SET deleted_at = CURRENT_TIMESTAMP, 
+         status = 'deleted' 
+     WHERE id = ? AND deleted_at IS NULL`,
     [userId],
     function (err) {
       if (err) return callback(err);

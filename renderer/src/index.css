@@ -135,7 +135,7 @@ select {
   color: #854d0e; /* yellow-700 */
 }
 
-.status-suspended {
+.status-deleted {
   background-color: #fee2e2; /* red-100 */
-  color: #991b1b; /* red-700 */
+  color: #ff5c5c; /* red-700 */
 }
