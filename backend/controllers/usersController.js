@@ -3,13 +3,22 @@ const db = require('../db');
 const bcrypt = require('bcryptjs');
 
 function verifyLogin(loginId, password, callback) {
-  db.get(`SELECT * FROM users WHERE login_id = ?`, [loginId], (err, user) => {
+  db.get(`SELECT * FROM users WHERE login_id = ? AND deleted_at IS NULL`, [loginId], (err, user) => {
     if (err) return callback(err, null);
     if (!user) return callback(null, { success: false, message: 'User not found' });
 
     const passwordMatch = bcrypt.compareSync(password, user.password);
     if (passwordMatch) {
-      callback(null, { success: true, user });
+      //TODO: handle user roles and permissions based on user status
+      if (user.status === 'active') {
+        callback(null, { success: true, user });
+      }  else if (user.status === 'inactive') { 
+        callback(null, { success: false, message: 'Your account is inactive' });
+      } else if (user.status === 'suspended') { 
+        callback(null, { success: false, message: 'Your account is suspended' });
+      } else {
+        callback(null, { success: false, message: 'You\'re not allowed to log in' });
+      }
     } else {
       callback(null, { success: false, message: 'Invalid password' });
     }
@@ -79,14 +88,77 @@ function createUser(loginId, password, role, callback) {
     [loginId, hashedPassword, 1, role],
     function (err) {
       if (err) return callback(err);
-      callback(null, { success: true, id: this.lastID });
+      callback(null, { success: true, message: 'User created successfully', 
+        data: {
+          id: this.lastID,
+          login_id: loginId,
+          role: role,
+          created_at: new Date().toISOString()
+        }
+      });
     }
   );
+}
+
+/**
+ * TODO: fetch all users
+ */
+function getAllUsers(currentUserId, callback) {
+  db.all(
+    `SELECT * FROM users WHERE id != ?`, 
+    [currentUserId], 
+    (err, rows) => {
+      if (err) return callback(err);
+      callback(null, rows);
+    }
+  );
+}
+
+/**
+ * TODO: delete user
+ * @param {string} userId
+ */
+function deleteUser(userId, callback) {
+  db.run(
+    `UPDATE users 
+     SET deleted_at = CURRENT_TIMESTAMP, 
+         status = 'deleted' 
+     WHERE id = ? AND deleted_at IS NULL`,
+    [userId],
+    function (err) {
+      if (err) return callback(err);
+      if (this.changes === 0) {
+        return callback(null, { success: false, message: 'No matching user found or already deleted' });
+      }
+      callback(null, { success: true, message: 'User deleted successfully (soft delete)' });
+    }
+  );
+}
+
+/**
+ * TODO: get user details by id
+ * @param {number} userId
+ */
+function getUserDetails(userId, callback) {
+  if (!userId) {
+    return callback(new Error('User ID is required'));
+  }
+
+  db.get(`SELECT * FROM users WHERE id = ?`, [userId], (err, row) => {
+    if (err) return callback(err);
+    if (!row) {
+      return callback(null, { success: false, message: 'User not found' });
+    }
+    callback(null, { success: true, data: row });
+  });
 }
 
 module.exports = { 
   verifyLogin, 
   updateIsFirstTimeFlg,
   updateCredentials,
+  getAllUsers,
   createUser,
+  deleteUser,
+  getUserDetails,
 };

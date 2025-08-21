@@ -34,14 +34,31 @@ export default function CreateUsers({ onSave, onCancel }) {
             }
 
             const createUserResponse = await createUser(loginId, password, userRole);
-            // onSave({ loginId, password, userRole });
-            console.log(createUserResponse);
+            if (createUserResponse.success) {
+                onSave({ 
+                    response: createUserResponse.success,
+                    message: createUserResponse.message,
+                    data: {
+                        id: createUserResponse.data.id,
+                        login_id: createUserResponse.data.login_id,
+                        role: createUserResponse.data.role,
+                        created_at: createUserResponse.data.created_at
+                    }
+                });
+                toast.success(createUserResponse.message);
+            } else {
+                console.log('Create user error:', createUserResponse.message);
+                toast.error(createUserResponse.message);
+            }
         }
 
     return(
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center text-left">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-xl p-10">
-                <h2 className="text-2xl font-semibold mb-6">Add User</h2>
+                <h2 className="text-2xl font-semibold mb-6">Create User</h2>
+                <div className='w-full p-2 bg-purple-200 border rounded-lg mb-4'>
+                    <p className='text-purple-800'><i className="bi bi-info-circle-fill mr-2"></i>By default, users are assigned the "<strong>Staff</strong>" role.</p>
+                </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>

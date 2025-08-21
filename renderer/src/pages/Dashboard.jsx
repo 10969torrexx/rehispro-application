@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import { UserRoles } from '../enums/userRoles';
 import { ChangeCredentials, SideBar, HorizontalBar } from '@components';
 import { UsersManagement } from '@pages';
+import { toast } from 'react-toastify';
 
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
@@ -17,10 +18,10 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   return (
     <>
-      {(userData?.is_firsttime_flg && userData?.role == UserRoles.SUPERVISOR) && showChangePassword && (
+      {(userData?.is_firsttime_flg ) && showChangePassword && (
         <ChangeCredentials 
           onSave={(data) => {
-            console.log("Save credentials", data);
+            toast.success(data.message);
             setShowChangePassword(false);
           }} 
           onCancel={() => setShowChangePassword(false)}
@@ -37,7 +38,7 @@ export default function Dashboard() {
           className={`flex-1 flex flex-col w-screen transition-all duration-300`}
         >
           <div className='content'>
-            <UsersManagement />
+            <h1 className='text-2xl font-semibold mb-4'>Dashboard</h1>
           </div>
         </div>
       </div>

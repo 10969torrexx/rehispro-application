@@ -142,7 +142,9 @@ export async function updateCredentials(loginId, newPassword, id) {
 
 /**
  * TODO: create user
- * 
+ * @param {string} loginId
+ * @param {string} password
+ * @param {string} userRole
  */
 export async function createUser(loginId, password, userRole) {
   if (!loginId || !password || !userRole) {
@@ -156,7 +158,7 @@ export async function createUser(loginId, password, userRole) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        login_id: loginId,
+        loginId: loginId,
         password: password,
         role: userRole,
       }),
@@ -165,6 +167,103 @@ export async function createUser(loginId, password, userRole) {
     return await response.json();
   } catch (error) {
     console.error("Create user request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}
+
+/**
+ * TODO: fetch all users
+ */
+export async function getAllUsers(currentUserId) {
+  try {
+    const response = await fetch("http://localhost:3001/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        currentUserId: currentUserId
+      }),
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+}
+
+/**
+ * TODO: delete user
+ */
+export async function deleteUser(userId) { 
+  try {
+    const response = await fetch("http://localhost:3001/user-delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Delete user request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}
+
+/**
+ * TODO: get user details by id
+ * @param {number} userId
+ */
+export async function getUserDetails(userId) {
+  if (!userId) {
+    return { success: false, message: "User ID is required" };
+  }
+
+  try {
+    const response = await fetch("http://localhost:3001/get-user-details", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Get user details request failed, error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}
+
+/**
+ * TODO: get user detais by user id
+ * @param {number} userId
+ */
+export async function getUserDetailsById(userId) { 
+  if (!userId) {
+    return { success: false, message: "User ID is required" };
+  }
+
+  try {
+    const response = await fetch("http://localhost:3001/get-user-details", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Get user details by ID request failed, error:", error);
     return { success: false, message: "Internal Server Error" };
   }
 }

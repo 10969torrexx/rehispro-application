@@ -79,6 +79,65 @@ app.post('/create-user', (req, res) => {
 
   usersController.createUser(loginId, password, role, (err, result) => {
     if (err) {
+      if (err.message.includes("SQLITE_CONSTRAINT")) {
+        return res.status(400).json({ success: false, message: "Duplicate user found" });
+      }
+      return res.status(500).json({ 
+        success: false, 
+        message: err.message || 'Database error',
+        data: null
+      });
+    }
+    return res.json(result);
+  });
+});
+
+/**
+ * TODO: fetch all users
+ */
+app.post('/users', (req, res) => {
+  const { currentUserId } = req.body;
+  usersController.getAllUsers(currentUserId, (err, result) => {
+    if (err) {
+      console.error('Fetch users error:', err);
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json({ success: true, data: result });
+  });
+});
+
+/**
+ * TODO: delete the user
+ * @param {string} userId
+ */
+app.post('/user-delete', (req, res) => {
+  const { userId } = req.body;
+  if (!userId) {
+    return res.status(400).json({ success: false, message: 'Missing user ID' });
+  }
+
+  usersController.deleteUser(userId, (err, result) => {
+    if (err) {
+      console.error('Delete user error:', err);
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    return res.json(result);
+  });
+});
+
+/**
+ * TODO: get user details by id
+ * @param {number} userId
+ */
+app.post('/get-user-details', (req, res) => {
+  const { userId } = req.body;
+  if (!userId) {
+    return res.status(400).json({ success: false, message: 'Missing user ID' });
+  }
+
+  usersController.getUserDetails(userId, (err, result) => {
+    if (err) {
+      console.error('Get user details error:', err);
       return res.status(500).json({ success: false, message: 'Database error' });
     }
     return res.json(result);
