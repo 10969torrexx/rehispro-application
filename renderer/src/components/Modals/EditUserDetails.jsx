@@ -1,38 +1,56 @@
 import { useState, useEffect } from 'react';
 import { UserRoles, UserStatus } from '@enums';
-import { validateLoginId, validatePassword} from '../../../services/Auth/Validations';
+import { validateLoginId } from '../../../services/Auth/Validations';
 import { ErrorMessages, Divider } from '@components';
 import { toast } from 'react-toastify';
-import { getUserDetails } from '../../../services/Auth/Services';
 import { capitalizeFirst } from './../../myTools/myTools';
 import { AuthServices } from '@services';
 
 export default function EditUserDetails({ userId, onSave, onCancel }) { 
     //TODO: handle the user inputs
     const [loginId, setLoginId] = useState('');
-    const [password, setPassword] = useState('');
     const [userRole, setUserRole] = useState(UserRoles.STAFF);
     const [userStatus, setUserStatus] = useState(UserStatus.ACTIVE);
     //TODO: handle cancel button
     const handleCancel = () => {
         setLoginId('');
-        setPassword('');
         setUserRole(UserRoles.STAFF);
         onCancel();
     }
+    //TODO: handle fetch user on mount
+    useEffect(() => { 
+        const fetchUserDetails = async () => { 
+            try {
+                const response = await AuthServices.getUserDetails(userId);
+                if (response.success) {
+                    setLoginId(response.data.login_id);
+                    setUserRole(response.data.role);
+                    setUserStatus(response.data.status);
+                } else {
+                    console.error('Error fetching user details:', response.message);
+                }
+            } catch (error) {
+                console.error('Error fetching user details:', error);
+            }
+        }
+        fetchUserDetails();
+    })
     //TODO: handle submit button
     const loginIdErrors = validateLoginId(loginId);
-    const passwordErrors = validatePassword(password);
     const [loginIdErrorMessages, setLoginIdErrorMessages] = useState({});
-    const [passwordErrorMessages, setPasswordErrorMessages] = useState({});
-    const handleSubmit = () => {
-        
-        if (!loginIdErrors.isValid && !passwordErrors.isValid) {
+    const handleSubmit = async () => {
+        if (!loginIdErrors.isValid) {
             setLoginIdErrorMessages(loginIdErrors.errors);
-            setPasswordErrorMessages(passwordErrors.errors);
             toast.error("Please fix the errors before submitting.");
             return;
         }
+        let formatData = {
+            loginId: loginId,
+            role: userRole,
+            status: userStatus
+        }
+
+        console.log('formatData:', formatData);
     }
     
     return(
@@ -57,25 +75,6 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
                         />
                         { loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length > 0 && (
                             <ErrorMessages errors={loginIdErrorMessages} />
-                        )}
-                    </div>
-
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-1" htmlFor="password">
-                        Password
-                        </label>
-                        <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                        className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
-                        ${ passwordErrorMessages !== null && Object.keys(passwordErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}
-                        placeholder="Enter password"
-                        />
-                        { passwordErrorMessages !== null && Object.keys(passwordErrorMessages).length > 0 && (
-                            <ErrorMessages errors={passwordErrorMessages} />
                         )}
                     </div>
 
