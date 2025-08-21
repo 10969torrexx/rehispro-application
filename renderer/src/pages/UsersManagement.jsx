@@ -108,6 +108,7 @@ export default function UsersManagement() {
     const [ showEditUserModal, setShowEditUserModal ] = useState(false);
     const handleEditUser = (userId) => { 
       setShowEditUserModal(true);
+      setSelectedUserId(userId);
     }
   return (
     <div className="flex w-screen h-screen">
@@ -144,7 +145,7 @@ export default function UsersManagement() {
 
         {showEditUserModal && (
           <EditUserDetails
-            user={userData}
+            userId={selectedUserId}
             onSave={(data) => {
               console.log('User updated:', data);
               setUsers(prevUsers => prevUsers.map(user => user.id === data.id ? data : user));
