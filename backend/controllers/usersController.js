@@ -144,7 +144,7 @@ function getUserDetails(userId, callback) {
     return callback(new Error('User ID is required'));
   }
 
-  db.get(`SELECT * FROM users WHERE id = ? AND deleted_at IS NULL`, [userId], (err, row) => {
+  db.get(`SELECT * FROM users WHERE id = ?`, [userId], (err, row) => {
     if (err) return callback(err);
     if (!row) {
       return callback(null, { success: false, message: 'User not found' });
