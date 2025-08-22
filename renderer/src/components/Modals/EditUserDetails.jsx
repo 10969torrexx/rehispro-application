@@ -50,18 +50,16 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
         
         let formatData = {
             id: userId,
-            loginId: loginId,
+            login_id: loginId,
             role: userRole,
             status: userStatus
         }
        
         try {
             const response = await AuthServices.updateUserDetails(formatData);
-            console.log('formatData:', formatData);
-            console.log('response:', response);
             if (response.success) {
                 toast.success("User details updated successfully!");
-                onSave();
+                onSave(formatData);
             } else {
                 toast.error(response.message || "Failed to update user details.");
             }
