@@ -40,19 +40,35 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
     //TODO: handle submit button
     const loginIdErrors = validateLoginId(loginId);
     const [loginIdErrorMessages, setLoginIdErrorMessages] = useState({});
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         if (!loginIdErrors.isValid) {
             setLoginIdErrorMessages(loginIdErrors.errors);
             toast.error("Please fix the errors before submitting.");
             return;
         }
+        
         let formatData = {
+            id: userId,
             loginId: loginId,
             role: userRole,
             status: userStatus
         }
-
-        console.log('formatData:', formatData);
+       
+        try {
+            const response = await AuthServices.updateUserDetails(formatData);
+            console.log('formatData:', formatData);
+            console.log('response:', response);
+            if (response.success) {
+                toast.success("User details updated successfully!");
+                onSave();
+            } else {
+                toast.error(response.message || "Failed to update user details.");
+            }
+        } catch(error) {
+            console.error("Error updating user details:", error);
+            toast.error("An error occurred while updating user details.");
+        }
     }
 
     return(
@@ -110,6 +126,7 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
                                 >
                                     <option value={UserStatus.ACTIVE}>{ capitalizeFirst(UserStatus.ACTIVE) }</option>
                                     <option value={UserStatus.INACTIVE}>{ capitalizeFirst(UserStatus.INACTIVE) }</option>
+                                    <option value={UserStatus.DELETED}>{ capitalizeFirst(UserStatus.DELETED) }</option>
                                 </select>
                             </div>
 
@@ -125,7 +142,7 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
                                     type="submit"
                                     className="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600"
                                 >
-                                Add User
+                                Update
                                 </button>
                             </div>
                         </form>
