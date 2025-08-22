@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 // import { UserRoles } from '../enums/userRoles';
-import { UserStatus } from "@enums";
+import { UserStatus, UserRoles } from "@enums";
 import { validateLoginId, validatePassword } from "../../services/Auth/Validations";
 import { toast } from "react-toastify";
 import { CreateUsers, ConfirmAction, EditUserDetails, ViewUserDetails } from '@modals';
@@ -15,9 +15,15 @@ export default function UsersManagement() {
   const [userData, setUserData] = useState(null); 
 
   useEffect(() => {
+    //TODO: validate if current login user is a supervisor
+    const userData = JSON.parse(localStorage.getItem('user'));
+    console.log('userdata', userData);
+    if (userData && userData.role !== UserRoles.SUPERVISOR) {
+      window.location.href = '/';
+      return;
+    }
     const fetchData = async () => {
       try {
-        const userData = JSON.parse(localStorage.getItem('user'));
         const response = await getAllUsers(userData.id);
         if (response.success) {
           setUsers(response.data);
