@@ -35,8 +35,9 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={isLoggedIn ? <Dashboard /> : <Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
-          <Route path="/user-management" element={isLoggedIn ? <UsersManagement /> : <Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
+          <Route path="/" element={<Login onLoginSuccess={() => {setIsLoggedIn(true);}} />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user-management" element={<UsersManagement />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

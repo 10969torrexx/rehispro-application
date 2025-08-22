@@ -17,11 +17,6 @@ export default function UsersManagement() {
   useEffect(() => {
     //TODO: validate if current login user is a supervisor
     const userData = JSON.parse(localStorage.getItem('user'));
-    console.log('userdata', userData);
-    if (userData && userData.role !== UserRoles.SUPERVISOR) {
-      window.location.href = '/';
-      return;
-    }
     const fetchData = async () => {
       try {
         const response = await getAllUsers(userData.id);
