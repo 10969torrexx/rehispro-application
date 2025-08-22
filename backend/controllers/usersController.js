@@ -123,7 +123,7 @@ function deleteUser(userId, callback) {
     `UPDATE users 
      SET deleted_at = CURRENT_TIMESTAMP, 
          status = 'deleted' 
-     WHERE id = ? AND deleted_at IS NULL`,
+     WHERE id = ?`,
     [userId],
     function (err) {
       if (err) return callback(err);

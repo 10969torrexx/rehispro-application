@@ -27,7 +27,7 @@ export default function CreateUsers({ onSave, onCancel }) {
         const handleSubmit = async (e) => {
             e.preventDefault();
            
-            if (!loginIdErrors.isValid && !passwordErrors.isValid) {
+            if (!loginIdErrors.isValid || !passwordErrors.isValid) {
                 setLoginIdErrorMessages(loginIdErrors.errors);
                 setPasswordErrorMessages(passwordErrors.errors);
                 return;

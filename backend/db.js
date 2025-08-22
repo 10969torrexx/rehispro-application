@@ -9,7 +9,7 @@ db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      login_id TEXT UNIQUE,
+      login_id TEXT,
       password TEXT,
       role VARCHAR(255) NOT NULL DEFAULT 'supervisor',
       is_firsttime_flg BOOLEAN NOT NULL DEFAULT 1,
@@ -23,11 +23,11 @@ db.serialize(() => {
   db.get(`SELECT * FROM users WHERE role = ?`, ['supervisor'], (err, row) => {
     if (!row) {
       const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync('Admin123!', salt);
+      const hashedPassword = bcrypt.hashSync('admin123', salt);
 
       db.run(
         `INSERT INTO users (login_id, password, role) VALUES (?, ?, ?)`,
-        ['Supervisor123!', hashedPassword, 'supervisor'],
+        ['supervisor', hashedPassword, 'supervisor'],
         (insertErr) => {
           if (insertErr) {
             console.error('❌ Error seeding admin:', insertErr.message);
