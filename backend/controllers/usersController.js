@@ -153,6 +153,29 @@ function getUserDetails(userId, callback) {
   });
 }
 
+/**
+ * TODO: update user details
+ * @param {object}  userDetails
+ */
+function updateUserDetails(userDetails, callback) {
+  const { id, login_id, role, status } = userDetails;
+  if (!id || !login_id || !role || !status) {
+    return callback(new Error('Missing required user details'));
+  }
+
+  db.run(
+    `UPDATE users SET login_id = ?, role = ?, status = ? WHERE id = ?`,
+    [login_id, role, status, id],
+    function (err) {
+      if (err) return callback(err);
+      if (this.changes === 0) {
+        return callback(null, { success: false, message: 'No matching user found' });
+      }
+      callback(null, { success: true, message: 'User details updated successfully' });
+    }
+  );
+}
+
 module.exports = { 
   verifyLogin, 
   updateIsFirstTimeFlg,
@@ -161,4 +184,5 @@ module.exports = {
   createUser,
   deleteUser,
   getUserDetails,
+  updateUserDetails,
 };

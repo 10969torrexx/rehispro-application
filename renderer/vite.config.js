@@ -10,8 +10,8 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@pages/auth': '/src/pages/auth',
       '@enums': '/src/enums',
+      '@modals': '/src/components/Modals',
       '@services': '/services',
-      '@modals': '/src/components/Modals'
     },
   },
 })
