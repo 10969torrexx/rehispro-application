@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { UserRoles } from '../enums/userRoles';
+import { UserRoles, UserStatus } from '@enums';
 import { ChangeCredentials, SideBar, HorizontalBar, UserCounts } from '@components';
 import { UsersManagement } from '@pages';
 import { toast } from 'react-toastify';
@@ -10,6 +10,9 @@ export default function Dashboard() {
   const [showChangePassword, setShowChangePassword] = useState(true);
   const [staffCount, setStaffCount] = useState(0);
   const [supervisorCount, setSupervisorCount] = useState(0);
+  const [activeCount, setActiveCount] = useState(0);
+  const [inactiveCount, setInactiveCount] = useState(0);
+  const [deletedCount, setDeletedCount] = useState(0);
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('user');
@@ -26,6 +29,9 @@ export default function Dashboard() {
           console.log('Fetched users:', users);
           setStaffCount(users.filter(user => user.role === UserRoles.STAFF).length);
           setSupervisorCount(users.filter(user => user.role === UserRoles.SUPERVISOR).length);
+          setActiveCount(users.filter(user => user.status === 'active').length);
+          setInactiveCount(users.filter(user => user.status === 'inactive').length);
+          setDeletedCount(users.filter(user => user.status === 'deleted').length);
         } else {
           toast.error(response.message || "Failed to fetch user counts");
         }
@@ -61,11 +67,20 @@ export default function Dashboard() {
         >
           <div className='content'>
             <h1 className='text-2xl font-semibold mb-4'>Dashboard</h1>
-            <section className='w-full border-b border-gray-200 p-4'>
+            <section className='w-full border-b border-gray-200 p-4 mb-1'>
               <h6 className='mb-2'>User Counts</h6>
               <div className="flex flex-row flex-wrap gap-4">
-                <UserCounts role={UserRoles.SUPERVISOR} userCounts={supervisorCount} status="active"/>
-                <UserCounts role={UserRoles.STAFF} userCounts={staffCount} status="inactive"/>
+                <UserCounts role={UserRoles.SUPERVISOR} iconClass="bi bi-person-fill" userCounts={supervisorCount} status="active"/>
+                <UserCounts role={UserRoles.STAFF} iconClass="bi bi-person" userCounts={staffCount} status="inactive"/>
+              </div>
+            </section>
+
+            <section className='w-full border-b border-gray-200 p-4 mb-1'>
+              <h6 className='mb-2'>User Status</h6>
+              <div className="flex flex-row flex-wrap gap-4">
+                <UserCounts role={UserStatus.ACTIVE} iconClass="bi bi-check-circle" userCounts={activeCount} status="active"/>
+                <UserCounts role={UserStatus.INACTIVE} iconClass="bi bi-circle" userCounts={inactiveCount} status="inactive"/>
+                <UserCounts role={UserStatus.DELETED} iconClass="bi bi-x-circle" userCounts={deletedCount} status="deleted"/>
               </div>
             </section>
           </div>
