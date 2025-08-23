@@ -61,10 +61,13 @@ export default function Dashboard() {
         >
           <div className='content'>
             <h1 className='text-2xl font-semibold mb-4'>Dashboard</h1>
-            <div className="flex flex-row flex-wrap gap-4">
-              <UserCounts role={UserRoles.SUPERVISOR} userCounts={supervisorCount} status="active"/>
-              <UserCounts role={UserRoles.STAFF} userCounts={staffCount} status="inactive"/>
-            </div>
+            <section className='w-full border-b border-gray-200 p-4'>
+              <h6 className='mb-2'>User Counts</h6>
+              <div className="flex flex-row flex-wrap gap-4">
+                <UserCounts role={UserRoles.SUPERVISOR} userCounts={supervisorCount} status="active"/>
+                <UserCounts role={UserRoles.STAFF} userCounts={staffCount} status="inactive"/>
+              </div>
+            </section>
           </div>
         </div>
       </div>
