@@ -22,19 +22,19 @@ export default function Document() {
                 <div className="p-4 flex-1 flex flex-col w-screen transition-all duration-300">
                     <h2 className="text-lg font-semibold text-left mb-4">Document Title</h2>
                     <div className="flex justify-left space-x-6 p-6">
-                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px]">
-                            <i className="bi bi-house text-3xl text-gray-700"></i>
-                            <p className="text-sm text-gray-600 mt-2">{ capitalizeWords(DocumentType.BIRTH) }</p>
+                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px] hover:bg-purple-500 hover:text-white transition duration-300">
+                            <i className="bi bi-house text-3xl"></i>
+                            <p className="text-sm mt-2">{ capitalizeWords(DocumentType.BIRTH) }</p>
                         </div>
 
-                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px]">
-                            <i className="bi bi-gear text-3xl text-gray-700"></i>
-                            <p className="text-sm text-gray-600 mt-2">{ capitalizeWords(DocumentType.MARRIAGE) }</p>
+                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px] hover:bg-purple-500 hover:text-white transition duration-300">
+                            <i className="bi bi-gear text-3xl"></i>
+                            <p className="text-sm mt-2">{ capitalizeWords(DocumentType.MARRIAGE) }</p>
                         </div>
 
-                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px]">
-                            <i className="bi bi-person text-3xl text-gray-700"></i>
-                            <p className="text-sm text-gray-600 mt-2">{ capitalizeWords(DocumentType.DEATH) }</p>
+                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px] hover:bg-purple-500 hover:text-white transition duration-300">
+                            <i className="bi bi-person text-3xl"></i>
+                            <p className="text-sm mt-2">{ capitalizeWords(DocumentType.DEATH) }</p>
                         </div>
                     </div>
                 </div>
