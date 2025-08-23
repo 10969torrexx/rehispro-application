@@ -66,7 +66,7 @@ export default function Dashboard() {
           className={`flex-1 flex flex-col w-screen transition-all duration-300`}
         >
           <div className='content'>
-            <h1 className='text-2xl font-semibold mb-4'>Dashboard</h1>
+            <h2 className="text-lg font-semibold">Dashboard</h2>
             <section className='w-full border-b border-gray-200 p-4 mb-1'>
               <h6 className='mb-2'>User Counts</h6>
               <div className="flex flex-row flex-wrap gap-4">

@@ -1,5 +1,7 @@
-import { useState, useState } from "react";
+import { useState, useEffect } from "react";
 import { SideBar } from '@components';
+import { DocumentType } from '@enums';
+import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
 
 export default function Document() {
     const [userData, setUserData] = useState(null);
@@ -18,9 +20,22 @@ export default function Document() {
                     setIsOpen={setSidebarOpen}
                 />
                 <div className="p-4 flex-1 flex flex-col w-screen transition-all duration-300">
-                    <div className="w-full bg-white rounded-xl p-4 shadow-lg text-left">
-                        <h2 className="text-lg font-semibold">Document Title</h2>
-                        <p className="mt-2 text-gray-600">Document content goes here...</p>
+                    <h2 className="text-lg font-semibold text-left mb-4">Document Title</h2>
+                    <div className="flex justify-left space-x-6 p-6">
+                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px]">
+                            <i className="bi bi-house text-3xl text-gray-700"></i>
+                            <p className="text-sm text-gray-600 mt-2">{ capitalizeWords(DocumentType.BIRTH) }</p>
+                        </div>
+
+                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px]">
+                            <i className="bi bi-gear text-3xl text-gray-700"></i>
+                            <p className="text-sm text-gray-600 mt-2">{ capitalizeWords(DocumentType.MARRIAGE) }</p>
+                        </div>
+
+                        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-[200px]">
+                            <i className="bi bi-person text-3xl text-gray-700"></i>
+                            <p className="text-sm text-gray-600 mt-2">{ capitalizeWords(DocumentType.DEATH) }</p>
+                        </div>
                     </div>
                 </div>
             </div>
