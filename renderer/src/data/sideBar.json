@@ -3,7 +3,7 @@
     {
       "icon": "bi-speedometer2",
       "name": "Dashboard",
-      "url": "/"
+      "url": "/dashboard"
     },
     {
       "icon": "bi-person",
@@ -19,11 +19,13 @@
   "staff" : [
     {
       "icon": "bi-speedometer2",
-      "name": "Dashboard"
+      "name": "Dashboard",
+      "url": "/dashboard"
     },
     {
       "icon": "bi-file-earmark-text",
-      "name": "Documents"
+      "name": "Documents",
+      "url": "/documents"
     }
   ]
 }

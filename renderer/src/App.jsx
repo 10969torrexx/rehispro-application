@@ -15,11 +15,10 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")));
       setIsLoggedIn(true);
-      setIsFirstTimeUser(storedUser.is_firsttime_flg);
+      setIsFirstTimeUser(JSON.parse(localStorage.getItem("user")).is_firsttime_flg);
     }
     setLoading(false);
   }, []);
@@ -36,14 +35,15 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={isLoggedIn ? <Dashboard /> : <Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
-          <Route path="/user-management" element={isLoggedIn ? <UsersManagement /> : <Login onLoginSuccess={() => setIsLoggedIn(true)} />} />
+          <Route path="/" element={<Login onLoginSuccess={() => {setIsLoggedIn(true);}} />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user-management" element={<UsersManagement />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
 
       <ToastContainer
-        position="top-right"
+        position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}

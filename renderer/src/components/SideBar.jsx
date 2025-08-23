@@ -1,12 +1,16 @@
 import { useState } from "react";
 import menuData from '../data/sideBar.json';
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function SideBar({ role = "supervisor", isOpen, setIsOpen }) {
     const menuItems = menuData[role] || [];
+    const navigate = useNavigate();
+    
     const handleLogout = () => {
         localStorage.removeItem("user");
-        window.location.reload();
+        navigate('/');
     };
 
     return (

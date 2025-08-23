@@ -4,6 +4,7 @@ import { Login as LoginRequest } from '../../../services/Auth/Services';
 import { ErrorMessages, Divider } from '@components';
 import React from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 export default function Login({ onLoginSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +14,7 @@ export default function Login({ onLoginSuccess }) {
   const [passwordErrors, setPasswordErrors] = useState({});
   const [hasLoginErrors, setHasLoginErrors] = useState(false);
   const [hasPasswordErrors, setHasPasswordErrors] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +41,7 @@ export default function Login({ onLoginSuccess }) {
 
     toast.success("Login successful!");
     onLoginSuccess();
+    navigate('/dashboard');
   };
 
   return (
