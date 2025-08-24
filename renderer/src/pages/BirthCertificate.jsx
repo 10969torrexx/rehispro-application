@@ -21,6 +21,17 @@ export default function BirthCertificate() {
                 />
                 <div className="p-4 flex-1 flex flex-col w-screen transition-all duration-300">
                     <h2 className="text-lg font-semibold text-left mb-4">Birth Certificate</h2>
+                    <div className="flex justify-end mb-4 gap-2">
+                        <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full">
+                           <i class="bi bi-house-door"></i>
+                        </button>
+                        <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full">
+                           Upload
+                        </button>
+                       <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full">
+                           Create
+                       </button>
+                    </div>
                 </div>
             </div>
         </>
