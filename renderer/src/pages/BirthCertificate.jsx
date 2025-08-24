@@ -11,6 +11,8 @@ export default function BirthCertificate() {
             setUserData(JSON.parse(localStorage.getItem('user')));
         }
     }, []);
+    //TODO: handle the tab
+    const [activeTab, setActiveTab] = useState("home");
     return (
         <>
             <div className="flex w-screen h-screen">
@@ -20,17 +22,28 @@ export default function BirthCertificate() {
                     setIsOpen={setSidebarOpen}
                 />
                 <div className="p-4 flex-1 flex flex-col w-screen transition-all duration-300">
-                    <h2 className="text-lg font-semibold text-left mb-4">Birth Certificate</h2>
+                    <h2 className="text-lg font-semibold text-left">Birth Certificate</h2>
                     <div className="flex justify-end mb-4 gap-2">
-                        <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full">
-                           <i class="bi bi-house-door"></i>
+                        <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full"
+                            onClick={() => setActiveTab("home")}
+                        >
+                           <i class="bi-house-door-fill"></i>
                         </button>
-                        <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full">
+                        <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full"
+                            onClick={() => setActiveTab("upload")}
+                        >
                            Upload
                         </button>
-                       <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full">
+                       <button className="btn-primary shadow-lg text-white px-3 py-1 rounded-full"
+                           onClick={() => setActiveTab("create")}
+                       >
                            Create
                        </button>
+                    </div>
+                    <div id="managementContent" className="p-4 bg-white w-full shadow-lg rounded-lg">
+                        {activeTab === "home" && <div>Home Content</div>}
+                        {activeTab === "upload" && <div>Upload Content</div>}
+                        {activeTab === "create" && <div>Create Content</div>}
                     </div>
                 </div>
             </div>

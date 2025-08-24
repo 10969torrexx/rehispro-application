@@ -172,7 +172,7 @@ export default function UsersManagement() {
           <h2 className="text-lg font-semibold text-left">User Management</h2>
           <div className="flex justify-end mb-4">
             <button 
-              className="btn-primary shadow-lg text-white px-4 py-2 rounded-full"
+              className="btn-primary shadow-lg text-white px-3 py-1 rounded-full"
               onClick={() => setShowCreateUserModal(true)}
             >
               Add User

@@ -114,7 +114,7 @@ export function ChangeCredentials({ onSave, onCancel }) {
             <div className="mb-4 space-y-4">
               <button
                   type="submit"
-                  className="w-full bg-primary text-white py-2 rounded-full hover:bg-secondary transition"
+                  className="w-full btn-primary text-white py-2 rounded-full"
               >
                   Save Changes
               </button>
