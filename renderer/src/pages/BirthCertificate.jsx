@@ -42,7 +42,104 @@ export default function BirthCertificate() {
                     <div id="managementContent" className="p-4 bg-white w-full shadow-lg rounded-lg">
                         {activeTab === "home" && <div>Home Content</div>}
                         {activeTab === "upload" && <div>Upload Content</div>}
-                        {activeTab === "create" && <div>Create Content</div>}
+                        {activeTab === "create" && 
+                            <form className="max-w-2xl mx-auto p-6 bg-white rounded-lg space-y-4 text-left">
+                                <h2 className="text-xl font-bold text-left">Certificate of Live Birth</h2>
+                                <div>
+                                    <label className="block text-sm font-medium">Child’s Name</label>
+                                    <div className="grid grid-cols-3 gap-2">
+                                    <input
+                                        type="text"
+                                        name="childFirstName"
+                                        placeholder="First"
+                                        className="common-input"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="childMiddleName"
+                                        placeholder="Middle"
+                                        className="common-input"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="childLastName"
+                                        placeholder="Last"
+                                        className="common-input"
+                                    />
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-2">
+                                    <div>
+                                    <label className="block text-sm font-medium">Sex</label>
+                                    <select
+                                        name="sex"
+                                        className="common-input w-full"
+                                    >
+                                        <option value="">Select</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                    </div>
+                                    <div>
+                                    <label className="block text-sm font-medium">Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        name="dateOfBirth"
+                                        className="common-input w-full"
+                                    />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Place of Birth</label>
+                                    <input
+                                    type="text"
+                                    name="placeOfBirth"
+                                    className="common-input w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Mother’s Name</label>
+                                    <input
+                                    type="text"
+                                    name="motherName"
+                                    className="common-input w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Father’s Name</label>
+                                    <input
+                                    type="text"
+                                    name="fatherName"
+                                    className="common-input w-full"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <div>
+                                    <label className="block text-sm font-medium">Marriage Date</label>
+                                    <input
+                                        type="date"
+                                        name="parentsMarriageDate"
+                                        className="common-input w-full"
+                                    />
+                                    </div>
+                                    <div>
+                                    <label className="block text-sm font-medium">Marriage Place</label>
+                                    <input
+                                        type="text"
+                                        name="parentsMarriagePlace"
+                                        className="common-input w-full"
+                                    />
+                                    </div>
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                >
+                                    Save
+                                </button>
+                            </form>
+                        }
                     </div>
                 </div>
             </div>
