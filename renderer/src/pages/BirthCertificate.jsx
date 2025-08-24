@@ -11,8 +11,7 @@ export default function BirthCertificate() {
             setUserData(JSON.parse(localStorage.getItem('user')));
         }
     }, []);
-    //TODO: handle the tab
-    const [activeTab, setActiveTab] = useState("home");
+    const [activeTab, setActiveTab] = useState("home"); //TODO: handle the active tab
     return (
         <>
             <div className="flex w-screen h-screen">
