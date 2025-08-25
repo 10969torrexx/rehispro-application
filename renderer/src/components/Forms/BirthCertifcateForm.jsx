@@ -388,18 +388,18 @@ export default function BirthCertifcateForm() {
                 
                         {/* Date of Marriage */}
                         <div>
-                            <label className="block text-sm font-medium mb-1">Date of Marriage</label>
+                            <label className="block w-full text-sm font-medium mb-1">Date of Marriage</label>
                             <input
                                 type="date"
                                 name="dateOfMarriage"
-                                className="common-input"
+                                className="common-input w-full"
                             />
                         </div>
                 
                         {/* Place of Marriage */}
                         <div>
                         <label className="block text-sm font-medium mb-1">Place of Marriage</label>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <input
                                 type="text"
                                 name="marriageCity"
