@@ -314,6 +314,7 @@ export default function BirthCertifcateForm() {
             <Divider text={pageTitles[(currentPage) - 1]}/>
             <div className="flex justify-center items-center space-x-4 my-4">
                 <button 
+                    type='button'
                     className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
                     disabled={currentPage === 1}
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
@@ -325,7 +326,8 @@ export default function BirthCertifcateForm() {
                     {currentPage} / {totalPages}
                 </span>
 
-                <button 
+                <button
+                    type='button'
                     className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
                     disabled={currentPage === totalPages}
                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
