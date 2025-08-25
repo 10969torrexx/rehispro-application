@@ -16,7 +16,8 @@ export default function BirthCertifcateForm() {
         <form className="p-4">
             <div className='mb-4'>
                 {currentPage === 1 && 
-                    <div className="mb-4 text-left space-y-4">
+                    <div className="mb-4 text-left space-y-6">
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                         {/* Province & City / Municipality */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="flex flex-col">
@@ -137,6 +138,7 @@ export default function BirthCertifcateForm() {
 
                 {currentPage === 2 && 
                     <div className="mb-6 text-left space-y-6">
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                         {/* Maiden Name */}
                         <div>
                             <label className="block text-sm font-medium mb-1">Maiden Name</label>
@@ -277,6 +279,7 @@ export default function BirthCertifcateForm() {
 
                 {currentPage === 3 && 
                     <div className="mb-6 text-left space-y-6">
+                       <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                         {/* Father’s Name */}
                         <div>
                             <label className="block text-sm font-medium mb-1">Father’s Name</label>
@@ -380,8 +383,43 @@ export default function BirthCertifcateForm() {
                 }
 
                 {currentPage === 4 && 
-                    <div className="mb-4 text-center">
-                        <p className="text-lg font-semibold">Page 4</p>
+                    <div className="mb-6 text-left space-y-6">
+                        <h2 className="text-lg text-center font-semibold">Marriage of Parents</h2>
+                
+                        {/* Date of Marriage */}
+                        <div>
+                            <label className="block text-sm font-medium mb-1">Date of Marriage</label>
+                            <input
+                                type="date"
+                                name="dateOfMarriage"
+                                className="common-input"
+                            />
+                        </div>
+                
+                        {/* Place of Marriage */}
+                        <div>
+                        <label className="block text-sm font-medium mb-1">Place of Marriage</label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input
+                                type="text"
+                                name="marriageCity"
+                                placeholder="City / Municipality"
+                                className="common-input"
+                            />
+                            <input
+                                type="text"
+                                name="marriageProvince"
+                                placeholder="Province"
+                                className="common-input"
+                            />
+                            <input
+                                type="text"
+                                name="marriageCountry"
+                                placeholder="Country"
+                                className="common-input"
+                            />
+                        </div>
+                        </div>
                     </div>
                 }
 
