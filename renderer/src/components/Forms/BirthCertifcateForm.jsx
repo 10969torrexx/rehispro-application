@@ -1,8 +1,8 @@
 import React from 'react';
 import { Divider } from '@components';
+import { InfoCard } from '@components';
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
-    const totalPages = 8;
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -11,11 +11,12 @@ export default function BirthCertifcateForm() {
         "Attendant Details", 
         "Certification of Attendant at Birth", 
         "Certification and Registration Details",
-        "Certification and Registration Details (Cont.)"
+        "Certification and Registration Details (Cont.)",
+        "For LCRO / Civil Registrar Use Only"
     ];
     return (
         <form className="p-4">
-            <div className='mb-4'>
+            <div className='mb-4 h-full'>
                 {currentPage === 1 && 
                     <div className="mb-4 text-left space-y-6">
                         <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
@@ -674,6 +675,33 @@ export default function BirthCertifcateForm() {
                         </div>
                     </div>
                 }
+
+                {currentPage === 9 && 
+                    <div className="mb-6 text-left space-y-2">
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                        <div>
+                            <label className="block text-sm font-medium mb-1">
+                                REMARKS / ANNOTATIONS (For LCRO/OCRG Use Only)
+                            </label>
+                            <textarea
+                                name="remarks"
+                                placeholder="Enter remarks or annotations here..."
+                                className="common-input w-full h-32 resize-none"
+                                style={{borderRadius: '8px'}}
+                            />
+                        </div>
+                        <div>
+                            <InfoCard title="TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR" message="">
+                                <div className="grid grid-cols-10 gap-1 mt-2">
+                                    {Array.from({ length: 30 }).map((_, idx) => (
+                                        <div key={idx} className="w-6 h-6 border border-gray-400 rounded-sm"></div>
+                                    ))}
+                                </div>
+                            </InfoCard>
+                        </div>
+                    </div>
+                  
+                }
             </div>
             <Divider text={pageTitles[(currentPage) - 1]}/>
             <div className="flex justify-center items-center space-x-4 my-4">
@@ -687,14 +715,14 @@ export default function BirthCertifcateForm() {
                 </button>
 
                 <span className="text-gray-700 font-medium">
-                    {currentPage} / {totalPages}
+                    {currentPage} / {pageTitles.length}
                 </span>
 
                 <button
                     type='button'
                     className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === pageTitles.length}
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, pageTitles.length))}
                 >
                     <i className="fa-solid fa-angles-right"></i>
                 </button>
