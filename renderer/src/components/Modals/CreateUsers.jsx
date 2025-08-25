@@ -56,8 +56,8 @@ export default function CreateUsers({ onSave, onCancel }) {
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center text-left">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-xl p-10">
                 <h2 className="text-2xl font-semibold mb-6">Create User</h2>
-                <div className='w-full p-2 bg-purple-200 border rounded-lg mb-4'>
-                    <p className='text-purple-800'><i className="bi bi-info-circle-fill mr-2"></i>By default, users are assigned the "<strong>Staff</strong>" role.</p>
+                <div className='w-full p-2 bg-blue-200 border rounded-lg mb-4'>
+                    <p className='text-blue-500'><i className="bi bi-info-circle-fill mr-2"></i>By default, users are assigned the "<strong>Staff</strong>" role.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -69,7 +69,7 @@ export default function CreateUsers({ onSave, onCancel }) {
                         type="text"
                         id="loginId"
                         name="loginId"
-                        value={loginId}
+                    value={loginId}
                         onChange={(e) => setLoginId(e.target.value)}
                         className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
                         ${ loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}

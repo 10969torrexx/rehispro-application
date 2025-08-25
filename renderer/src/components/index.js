@@ -4,3 +4,4 @@ export { default as SideBar } from './SideBar';
 export { default as HorizontalBar } from './HorizontalBar';
 export { ChangeCredentials } from './Modals/ChangeCredentials';
 export { default as UserCounts } from './UserCounts';
+export { default as InfoCard } from './InfoCard';

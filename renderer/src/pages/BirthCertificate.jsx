@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { DocumentType } from '@enums';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
+import { InfoCard } from '@components';
 
 export default function BirthCertificate() {
     const [userData, setUserData] = useState(null);
@@ -39,106 +40,67 @@ export default function BirthCertificate() {
                            Create
                        </button>
                     </div>
-                    <div id="managementContent" className="p-4 bg-white w-full shadow-lg rounded-lg">
+                    <div id="managementContent" className="p-4 bg-white w-full flex justify-center shadow-lg rounded-lg">
                         {activeTab === "home" && <div>Home Content</div>}
                         {activeTab === "upload" && <div>Upload Content</div>}
                         {activeTab === "create" && 
-                            <form className="max-w-2xl mx-auto p-6 bg-white rounded-lg space-y-4 text-left">
-                                <h2 className="text-xl font-bold text-left">Certificate of Live Birth</h2>
-                                <div>
-                                    <label className="block text-sm font-medium">Child’s Name</label>
-                                    <div className="grid grid-cols-3 gap-2">
-                                    <input
-                                        type="text"
-                                        name="childFirstName"
-                                        placeholder="First"
-                                        className="common-input"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="childMiddleName"
-                                        placeholder="Middle"
-                                        className="common-input"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="childLastName"
-                                        placeholder="Last"
-                                        className="common-input"
-                                    />
+                            <div className="p-2 h-full text-left test-element w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <form className="w-full h-full">
+                                    <div className="mb-4">
+                                        <InfoCard 
+                                            title="Creating Birth Certificates"
+                                            message="To create a birth certificate, please fill out the form below with accurate information about the birth event. Ensure all mandatory fields are completed before submitting the form."
+                                        />
                                     </div>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-2">
-                                    <div>
-                                    <label className="block text-sm font-medium">Sex</label>
-                                    <select
-                                        name="sex"
-                                        className="common-input w-full"
-                                    >
-                                        <option value="">Select</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    </select>
+                                    <div className="mb-4">
+                                        <label className="block text-gray-700 font-medium mb-1" htmlFor="fullName">
+                                            Full Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="fullName"
+                                            name="fullName"
+                                            className="w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-gray-300"
+                                            placeholder="Enter full name"
+                                        />
                                     </div>
-                                    <div>
-                                    <label className="block text-sm font-medium">Date of Birth</label>
-                                    <input
-                                        type="date"
-                                        name="dateOfBirth"
-                                        className="common-input w-full"
-                                    />
+                                    <div className="mb-4">
+                                        <label className="block text-gray-700 font-medium mb-1" htmlFor="dateOfBirth">
+                                            Date of Birth
+                                        </label>
+                                        <input
+                                            type="date"
+                                            id="dateOfBirth"
+                                            name="dateOfBirth"
+                                            className="w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-gray-300"
+                                        />
                                     </div>
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium">Place of Birth</label>
-                                    <input
-                                    type="text"
-                                    name="placeOfBirth"
-                                    className="common-input w-full"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium">Mother’s Name</label>
-                                    <input
-                                    type="text"
-                                    name="motherName"
-                                    className="common-input w-full"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium">Father’s Name</label>
-                                    <input
-                                    type="text"
-                                    name="fatherName"
-                                    className="common-input w-full"
-                                    />
-                                </div>
-                                <div className="grid grid-cols-2 gap-2">
-                                    <div>
-                                    <label className="block text-sm font-medium">Marriage Date</label>
-                                    <input
-                                        type="date"
-                                        name="parentsMarriageDate"
-                                        className="common-input w-full"
-                                    />
+                                    <div className="mb-4">
+                                        <label className="block text-gray-700 font-medium mb-1" htmlFor="placeOfBirth">
+                                            Place of Birth
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="placeOfBirth"
+                                            name="placeOfBirth"
+                                            className="w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-gray-300"
+                                            placeholder="Enter place of birth"
+                                        />
                                     </div>
-                                    <div>
-                                    <label className="block text-sm font-medium">Marriage Place</label>
-                                    <input
-                                        type="text"
-                                        name="parentsMarriagePlace"
-                                        className="common-input w-full"
-                                    />
+                                    <div className="mb-4">
+                                        <label className="block text-gray-700 font-medium mb-1" htmlFor="parentNames">
+                                            Parent Names
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="parentNames"
+                                            name="parentNames"
+                                            className="w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-gray-300"
+                                            placeholder="Enter parent names"
+                                        />
                                     </div>
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                                >
-                                    Save
-                                </button>
-                            </form>
+                                </form>
+                            </div>
                         }
                     </div>
                 </div>
