@@ -26,7 +26,6 @@ export default function Dashboard() {
         const response = await AuthServices.getAllUsers(JSON.parse(storedUserData).id);
         if (response.success) {
           const users = response.data;
-          console.log('Fetched users:', users);
           setStaffCount(users.filter(user => user.role === UserRoles.STAFF).length);
           setSupervisorCount(users.filter(user => user.role === UserRoles.SUPERVISOR).length);
           setActiveCount(users.filter(user => user.status === 'active').length);

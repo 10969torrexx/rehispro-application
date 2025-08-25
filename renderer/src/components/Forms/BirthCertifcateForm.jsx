@@ -5,7 +5,7 @@ export default function BirthCertifcateForm() {
     const totalPages = 8;
     return (
         <form className="p-4">
-            <div className='w-full'>
+            <div className=''>
                 {currentPage === 1 && 
                     <div className="mb-4 text-center">
                         <p className="text-lg font-semibold">Page 1</p>
