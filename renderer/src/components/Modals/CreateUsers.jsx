@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import { UserRoles } from '../../enums/userRoles';
 import { validateLoginId, validatePassword } from '../../../services/Auth/Validations';
-import { ErrorMessages, Divider } from '@components';
+import { ErrorMessages, Divider, InfoCard } from '@components';
 import { toast } from "react-toastify";
 import { createUser } from '../../../services/Auth/Services';
 
@@ -56,8 +56,11 @@ export default function CreateUsers({ onSave, onCancel }) {
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center text-left">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-xl p-10">
                 <h2 className="text-2xl font-semibold mb-6">Create User</h2>
-                <div className='w-full p-2 bg-blue-200 border rounded-lg mb-4'>
-                    <p className='text-blue-500'><i className="bi bi-info-circle-fill mr-2"></i>By default, users are assigned the "<strong>Staff</strong>" role.</p>
+                <div className='mb-4'>
+                    <InfoCard 
+                        title="Disclaimer"
+                        message="By default, users are assigned the 'Staff' role. Please ensure to update their roles as necessary after creation."
+                    />
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
