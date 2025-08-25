@@ -13,6 +13,7 @@ export default function BirthCertificate() {
         }
     }, []);
     const [activeTab, setActiveTab] = useState("home"); //TODO: handle the active tab
+    const [currentPage, setCurrentPage] = useState(1); //TODO: handle the current page for pagination
     return (
         <>
             <div className="flex w-screen h-screen">
@@ -44,7 +45,7 @@ export default function BirthCertificate() {
                         {activeTab === "home" && <div>Home Content</div>}
                         {activeTab === "upload" && <div>Upload Content</div>}
                         {activeTab === "create" && 
-                            <div className="p-2 h-full text-left test-element w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                            <div className="p-2 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <form className="w-full h-full">
                                     <div className="mb-4">
                                         <InfoCard 
@@ -52,53 +53,56 @@ export default function BirthCertificate() {
                                             message="To create a birth certificate, please fill out the form below with accurate information about the birth event. Ensure all mandatory fields are completed before submitting the form."
                                         />
                                     </div>
-                                    <div className="mb-4">
-                                        <label className="block text-gray-700 font-medium mb-1" htmlFor="fullName">
-                                            Full Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="fullName"
-                                            name="fullName"
-                                            className="w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-gray-300"
-                                            placeholder="Enter full name"
-                                        />
+                                    <div class="form-content mb-4">
+                                        {currentPage === 1 && 
+                                            <div className="mb-4 text-center">
+                                                <p>Page 1</p>
+                                            </div>
+                                        }
+
+                                        {currentPage === 2 && 
+                                            <div className="mb-4 text-center">
+                                                <p>Page 2</p>
+                                            </div>
+                                        }
+
+                                        {currentPage === 3 && 
+                                            <div className="mb-4 text-center">
+                                                <p>Page 3</p>
+                                            </div>
+                                        }
+
+                                        {currentPage === 4 && 
+                                            <div className="mb-4 text-center">
+                                                <p>Page 4</p>
+                                            </div>
+                                        }
+
+                                        {currentPage === 5 && 
+                                            <div className="mb-4 text-center">
+                                                <p>Page 5</p>
+                                            </div>
+                                        }
+
+                                        {currentPage === 6 && 
+                                            <div className="mb-4 text-center">
+                                                <p>Page 6</p>
+                                            </div>
+                                        }
+
+                                        {currentPage === 7 && 
+                                            <div className="mb-4 text-center">
+                                                <p>Page 7</p>
+                                            </div>
+                                        }
+
+                                        {currentPage === 8 && 
+                                            <div className="mb-4 text-center">
+                                                <p>Page 8</p>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="mb-4">
-                                        <label className="block text-gray-700 font-medium mb-1" htmlFor="dateOfBirth">
-                                            Date of Birth
-                                        </label>
-                                        <input
-                                            type="date"
-                                            id="dateOfBirth"
-                                            name="dateOfBirth"
-                                            className="w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-gray-300"
-                                        />
-                                    </div>
-                                    <div className="mb-4">
-                                        <label className="block text-gray-700 font-medium mb-1" htmlFor="placeOfBirth">
-                                            Place of Birth
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="placeOfBirth"
-                                            name="placeOfBirth"
-                                            className="w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-gray-300"
-                                            placeholder="Enter place of birth"
-                                        />
-                                    </div>
-                                    <div className="mb-4">
-                                        <label className="block text-gray-700 font-medium mb-1" htmlFor="parentNames">
-                                            Parent Names
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="parentNames"
-                                            name="parentNames"
-                                            className="w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500 border-gray-300"
-                                            placeholder="Enter parent names"
-                                        />
-                                    </div>
+                                    <div className="flex justify-center"></div>
                                 </form>
                             </div>
                         }
