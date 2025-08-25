@@ -8,7 +8,7 @@ export default function BirthCertifcateForm() {
         "Mother's Information", 
         "Fathers's Information", 
         "Marriage of Parents", 
-        "Certification", 
+        "Attendant Details", 
         "Amendment (if applicable)", 
         "Review & Submit"
     ];
@@ -424,9 +424,68 @@ export default function BirthCertifcateForm() {
                 }
 
                 {currentPage === 5 && 
-                    <div className="mb-4 text-center">
-                        <p className="text-lg font-semibold">Page 5</p>
+                    <div className="mb-6 text-left space-y-6">
+                    <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                  
+                    {/* Type of Attendant */}
+                    <div>
+                      <label className="block w-full text-sm font-medium mb-1">Type of Attendant</label>
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <label className="flex items-center space-x-2">
+                          <input type="checkbox" name="attendantPhysician" />
+                          <span>Physician</span>
+                        </label>
+                        <label className="flex items-center space-x-2">
+                          <input type="checkbox" name="attendantNurse" />
+                          <span>Nurse</span>
+                        </label>
+                        <label className="flex items-center space-x-2">
+                          <input type="checkbox" name="attendantMidwife" />
+                          <span>Midwife</span>
+                        </label>
+                        <label className="flex items-center space-x-2">
+                          <input type="checkbox" name="attendantHilot" />
+                          <span>Hilot</span>
+                        </label>
+                      </div>
+                  
+                      {/* Others */}
+                      <div className="flex flex-col md:flex-row md:items-center md:space-x-2 mt-3">
+                        <label className="flex items-center space-x-2">
+                          <input type="checkbox" name="attendantOthers" />
+                          <span>Others (Specify)</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="attendantOthersSpecify"
+                          placeholder="Specify"
+                          className="common-input mt-2 md:mt-0"
+                        />
+                      </div>
                     </div>
+                  
+                    {/* Date of Attendance */}
+                    <div>
+                      <label className="block w-full text-sm font-medium mb-1">Date of Attendance</label>
+                      <input
+                        type="date"
+                        name="dateOfAttendance"
+                        className="common-input w-full"
+                      />
+                    </div>
+                  
+                    {/* Name and Title of Attendant */}
+                    <div>
+                      <label className="block w-full text-sm font-medium mb-1">Name and Title of Attendant</label>
+                      <input
+                        type="text"
+                        name="attendantNameTitle"
+                        placeholder="Enter name and title"
+                        className="common-input w-full"
+                      />
+                    </div>
+                  </div>
+                  
                 }
 
                 {currentPage === 6 && 
