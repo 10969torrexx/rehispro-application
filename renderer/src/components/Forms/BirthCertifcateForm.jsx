@@ -9,8 +9,9 @@ export default function BirthCertifcateForm() {
         "Fathers's Information", 
         "Marriage of Parents", 
         "Attendant Details", 
-        " Certification of Attendant at Birth", 
-        "Review & Submit"
+        "Certification of Attendant at Birth", 
+        "Certification and Registration Details",
+        "Certification and Registration Details (Cont.)"
     ];
     return (
         <form className="p-4">
@@ -570,14 +571,107 @@ export default function BirthCertifcateForm() {
                 }
 
                 {currentPage === 7 && 
-                    <div className="mb-4 text-center">
-                        <p className="text-lg font-semibold">Page 7</p>
+                    <div className="mb-6 text-left space-y-6">
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                        {/* Certification of Informant */}
+                        <div className="space-y-4">
+                            <h3 className="text-md">Certification of Informant</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Signature</label>
+                                    <input type="text" name="informantSignature" placeholder="Signature" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Name in Print</label>
+                                    <input type="text" name="informantName" placeholder="Full Name" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Relationship to the Child</label>
+                                    <input type="text" name="informantRelationship" placeholder="Relationship" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Address</label>
+                                    <input type="text" name="informantAddress" placeholder="Full Address" className="common-input w-full" />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Date</label>
+                                <input type="date" name="informantDate" className="common-input w-full" />
+                            </div>
+                        </div>
+
+                        {/* Prepared By */}
+                        <div className="space-y-4">
+                            <h3 className="text-md">Prepared By</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Signature</label>
+                                <input type="text" name="preparedSignature" placeholder="Signature" className="common-input w-full" />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Name in Print</label>
+                                <input type="text" name="preparedName" placeholder="Full Name" className="common-input w-full" />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Title or Position</label>
+                                <input type="text" name="preparedTitle" placeholder="Title or Position" className="common-input w-full" />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Date</label>
+                                <input type="date" name="preparedDate" className="common-input w-full" />
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 }
 
                 {currentPage === 8 && 
-                    <div className="mb-4 text-center">
-                        <p className="text-lg font-semibold">Page 8</p>
+                    <div className="mb-4 text-left">
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                        {/* Received By */}
+                        <div className="space-y-4 mb-4">
+                            <h3 className="text-md">Received By</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Signature</label>
+                                    <input type="text" name="receivedSignature" placeholder="Signature" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Name in Print</label>
+                                    <input type="text" name="receivedName" placeholder="Full Name" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Title or Position</label>
+                                    <input type="text" name="receivedTitle" placeholder="Title or Position" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Date</label>
+                                    <input type="date" name="receivedDate" className="common-input w-full" />
+                                </div>
+                            </div>
+                        </div>
+                        {/* Registered by the Civil Registrar */}
+                        <div className="space-y-4">
+                            <h3 className="text-md">Registered by the Civil Registrar</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Signature</label>
+                                    <input type="text" name="registrarSignature" placeholder="Signature" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Name in Print</label>
+                                    <input type="text" name="registrarName" placeholder="Full Name" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Title or Position</label>
+                                    <input type="text" name="registrarTitle" placeholder="Title or Position" className="common-input w-full" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Date</label>
+                                    <input type="date" name="registrarDate" className="common-input w-full" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
