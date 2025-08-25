@@ -5,8 +5,8 @@ export default function BirthCertifcateForm() {
     const totalPages = 8;
     const pageTitles = [ 
         "Province & Child's Information", 
-        "Parents' Information", 
-        "Informant's Information", 
+        "Mother's Information", 
+        "Fathers's Information", 
         "Attendant's Information", 
         "Certification", 
         "Amendment (if applicable)", 
@@ -276,8 +276,106 @@ export default function BirthCertifcateForm() {
                 }
 
                 {currentPage === 3 && 
-                    <div className="mb-4 text-center">
-                        <p className="text-lg font-semibold">Page 3</p>
+                    <div className="mb-6 text-left space-y-6">
+                        {/* Father’s Name */}
+                        <div>
+                            <label className="block text-sm font-medium mb-1">Father’s Name</label>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                <input
+                                    type="text"
+                                    name="fatherFirstName"
+                                    placeholder="First Name"
+                                    className="common-input"
+                                />
+                                <input
+                                    type="text"
+                                    name="fatherMiddleName"
+                                    placeholder="Middle Name"
+                                    className="common-input"
+                                />
+                                <input
+                                    type="text"
+                                    name="fatherLastName"
+                                    placeholder="Last Name"
+                                    className="common-input"
+                                />
+                            </div>
+                        </div>
+                    
+                        {/* Citizenship & Religion */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="flex flex-col">
+                                <label className="block text-sm font-medium mb-1">Citizenship</label>
+                                <input
+                                    type="text"
+                                    name="fatherCitizenship"
+                                    placeholder="Citizenship"
+                                    className="common-input"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <label className="block text-sm font-medium mb-1">Religion / Religious Sect</label>
+                                <input
+                                    type="text"
+                                    name="fatherReligion"
+                                    placeholder="Religion"
+                                    className="common-input"
+                                />
+                            </div>
+                        </div>
+                    
+                        {/* Occupation & Age */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="flex flex-col">
+                                <label className="block text-sm font-medium mb-1">Occupation</label>
+                                <input
+                                type="text"
+                                name="fatherOccupation"
+                                placeholder="Occupation"
+                                className="common-input"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <label className="block text-sm font-medium mb-1">Age at the time of this birth</label>
+                                <input
+                                type="number"
+                                name="fatherAgeAtBirth"
+                                placeholder="Age"
+                                className="common-input"
+                                />
+                            </div>
+                        </div>
+                    
+                        {/* Residence */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2">Residence</label>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input
+                                    type="text"
+                                    name="fatherResidenceStreet"
+                                    placeholder="House No., St., Barangay"
+                                    className="common-input"
+                                />
+                                <input
+                                    type="text"
+                                    name="fatherResidenceCity"
+                                    placeholder="City / Municipality"
+                                    className="common-input"
+                                />
+                                <input
+                                    type="text"
+                                    name="fatherResidenceProvince"
+                                    placeholder="Province"
+                                    className="common-input"
+                                />
+                                <input
+                                    type="text"
+                                    name="fatherResidenceCountry"
+                                    placeholder="Country"
+                                    className="common-input"
+                                />
+                            </div>
+                        </div>
                     </div>
                 }
 
