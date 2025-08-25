@@ -61,7 +61,7 @@ export default function BirthCertifcateForm() {
                     disabled={currentPage === 1}
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 >
-                    Previous
+                   <i class="fa-solid fa-angles-left"></i>
                 </button>
 
                 <span className="text-gray-700 font-medium">
@@ -73,7 +73,7 @@ export default function BirthCertifcateForm() {
                     disabled={currentPage === totalPages}
                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 >
-                    Next
+                    <i className="fa-solid fa-angles-right"></i>
                 </button>
             </div>
         </form>

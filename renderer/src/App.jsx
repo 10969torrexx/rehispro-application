@@ -5,6 +5,7 @@ import './App.css'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import { Login, Dashboard, UsersManagement, NotFound, BirthCertificate, DeathCertificate, MarriageCertificate  } from '@pages';
 
