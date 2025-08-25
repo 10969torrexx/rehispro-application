@@ -432,19 +432,19 @@ export default function BirthCertifcateForm() {
                       <label className="block w-full text-sm font-medium mb-1">Type of Attendant</label>
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <label className="flex items-center space-x-2">
-                          <input type="checkbox" name="attendantPhysician" />
+                          <input type="checkbox" className='custom-checkbox' name="attendantPhysician" />
                           <span>Physician</span>
                         </label>
                         <label className="flex items-center space-x-2">
-                          <input type="checkbox" name="attendantNurse" />
+                          <input type="checkbox" className='custom-checkbox' name="attendantNurse" />
                           <span>Nurse</span>
                         </label>
                         <label className="flex items-center space-x-2">
-                          <input type="checkbox" name="attendantMidwife" />
+                          <input type="checkbox" className='custom-checkbox' name="attendantMidwife" />
                           <span>Midwife</span>
                         </label>
                         <label className="flex items-center space-x-2">
-                          <input type="checkbox" name="attendantHilot" />
+                          <input type="checkbox" className='custom-checkbox' name="attendantHilot" />
                           <span>Hilot</span>
                         </label>
                       </div>
@@ -452,14 +452,14 @@ export default function BirthCertifcateForm() {
                       {/* Others */}
                       <div className="flex flex-col md:flex-row md:items-center md:space-x-2 mt-3">
                         <label className="flex items-center space-x-2">
-                          <input type="checkbox" name="attendantOthers" />
+                          <input type="checkbox" className='custom-checkbox' name="attendantOthers" />
                           <span>Others (Specify)</span>
                         </label>
                         <input
                           type="text"
                           name="attendantOthersSpecify"
                           placeholder="Specify"
-                          className="common-input mt-2 md:mt-0"
+                          className="common-input mt-2 md:mt-0 w-[80%]"
                         />
                       </div>
                     </div>

@@ -166,3 +166,15 @@ select {
     box-shadow: 0 0 0 1px #a855f7;
   }
 }
+
+/* custom-checkbox.css */
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #a855f7; /* modern browsers support this */
+  &:checked {
+    background-color: #a855f7;
+    border-color: #a855f7;
+  }
+}
