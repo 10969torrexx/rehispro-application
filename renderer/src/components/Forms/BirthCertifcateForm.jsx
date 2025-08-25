@@ -1,59 +1,80 @@
 import React from 'react';
+import { Divider } from '@components';
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(1);
+    const totalPages = 8;
     return (
-        <form>
+        <form className="p-4">
             <div className='w-full'>
                 {currentPage === 1 && 
                     <div className="mb-4 text-center">
-                        <p>Page 1</p>
+                        <p className="text-lg font-semibold">Page 1</p>
                     </div>
                 }
 
                 {currentPage === 2 && 
                     <div className="mb-4 text-center">
-                        <p>Page 2</p>
+                        <p className="text-lg font-semibold">Page 2</p>
                     </div>
                 }
 
                 {currentPage === 3 && 
                     <div className="mb-4 text-center">
-                        <p>Page 3</p>
+                        <p className="text-lg font-semibold">Page 3</p>
                     </div>
                 }
 
                 {currentPage === 4 && 
                     <div className="mb-4 text-center">
-                        <p>Page 4</p>
+                        <p className="text-lg font-semibold">Page 4</p>
                     </div>
                 }
 
                 {currentPage === 5 && 
                     <div className="mb-4 text-center">
-                        <p>Page 5</p>
+                        <p className="text-lg font-semibold">Page 5</p>
                     </div>
                 }
 
                 {currentPage === 6 && 
                     <div className="mb-4 text-center">
-                        <p>Page 6</p>
+                        <p className="text-lg font-semibold">Page 6</p>
                     </div>
                 }
 
                 {currentPage === 7 && 
                     <div className="mb-4 text-center">
-                        <p>Page 7</p>
+                        <p className="text-lg font-semibold">Page 7</p>
                     </div>
                 }
 
                 {currentPage === 8 && 
                     <div className="mb-4 text-center">
-                        <p>Page 8</p>
+                        <p className="text-lg font-semibold">Page 8</p>
                     </div>
                 }
             </div>
-            <div className='flex justify-center'>
-                
+            <Divider />
+            <div className="flex justify-center items-center space-x-4 my-4">
+                <button 
+                    className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                >
+                    Previous
+                </button>
+
+                <span className="text-gray-700 font-medium">
+                    {currentPage} / {totalPages}
+                </span>
+
+                <button 
+                    className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                >
+                    Next
+                </button>
             </div>
         </form>
     )

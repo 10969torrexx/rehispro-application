@@ -27,7 +27,7 @@ export default function BirthCertificate() {
                         <button className={`btn-${activeTab == 'home' ? 'primary' : 'secondary'} shadow-lg px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("home")}
                         >
-                           <i class="bi-house-door-fill"></i>
+                           <i className="bi-house-door-fill"></i>
                         </button>
                         <button className={`btn-${activeTab == 'upload' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("upload")}
@@ -51,7 +51,7 @@ export default function BirthCertificate() {
                                         message="To create a birth certificate, please fill out the form below with accurate information about the birth event. Ensure all mandatory fields are completed before submitting the form."
                                     />
                                 </div>
-                                <div class="form-content mb-4">
+                                <div className="form-content mb-4">
                                     <BirthCertifcateForm />
                                 </div>
                             </div>
