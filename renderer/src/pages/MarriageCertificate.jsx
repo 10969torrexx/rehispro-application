@@ -26,7 +26,7 @@ export default function MarriageCertificate() {
                         <button className={`btn-${activeTab == 'home' ? 'primary' : 'secondary'} shadow-lg px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("home")}
                         >
-                           <i class="bi-house-door-fill"></i>
+                           <i className="bi-house-door-fill"></i>
                         </button>
                         <button className={`btn-${activeTab == 'upload' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("upload")}
