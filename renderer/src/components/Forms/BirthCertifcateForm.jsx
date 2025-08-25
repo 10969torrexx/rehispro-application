@@ -15,8 +15,8 @@ export default function BirthCertifcateForm() {
         "For LCRO / Civil Registrar Use Only"
     ];
     return (
-        <form className="p-4">
-            <div className='mb-4 h-full'>
+        <form className="p-4 h-full overflow-auto">
+            <div className='mb-4 h-[100%]'>
                 {currentPage === 1 && 
                     <div className="mb-4 text-left space-y-6">
                         <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
@@ -691,7 +691,7 @@ export default function BirthCertifcateForm() {
                             />
                         </div>
                         <div>
-                            <InfoCard title="TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR" message="">
+                            <InfoCard title="TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR" message="" isClosable={false}>
                                 <div className="grid grid-cols-10 gap-1 mt-2">
                                     {Array.from({ length: 30 }).map((_, idx) => (
                                         <div key={idx} className="w-6 h-6 border border-gray-400 rounded-sm"></div>
