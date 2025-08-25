@@ -9,7 +9,7 @@ export default function BirthCertifcateForm() {
         "Fathers's Information", 
         "Marriage of Parents", 
         "Attendant Details", 
-        "Amendment (if applicable)", 
+        " Certification of Attendant at Birth", 
         "Review & Submit"
     ];
     return (
@@ -425,72 +425,147 @@ export default function BirthCertifcateForm() {
 
                 {currentPage === 5 && 
                     <div className="mb-6 text-left space-y-6">
-                    <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
-                  
-                    {/* Type of Attendant */}
-                    <div>
-                      <label className="block w-full text-sm font-medium mb-1">Type of Attendant</label>
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <label className="flex items-center space-x-2">
-                          <input type="checkbox" className='custom-checkbox' name="attendantPhysician" />
-                          <span>Physician</span>
-                        </label>
-                        <label className="flex items-center space-x-2">
-                          <input type="checkbox" className='custom-checkbox' name="attendantNurse" />
-                          <span>Nurse</span>
-                        </label>
-                        <label className="flex items-center space-x-2">
-                          <input type="checkbox" className='custom-checkbox' name="attendantMidwife" />
-                          <span>Midwife</span>
-                        </label>
-                        <label className="flex items-center space-x-2">
-                          <input type="checkbox" className='custom-checkbox' name="attendantHilot" />
-                          <span>Hilot</span>
-                        </label>
-                      </div>
-                  
-                      {/* Others */}
-                      <div className="flex flex-col md:flex-row md:items-center md:space-x-2 mt-3">
-                        <label className="flex items-center space-x-2">
-                          <input type="checkbox" className='custom-checkbox' name="attendantOthers" />
-                          <span>Others (Specify)</span>
-                        </label>
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                    
+                        {/* Type of Attendant */}
+                        <div>
+                        <label className="block w-full text-sm font-medium mb-1">Type of Attendant</label>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <label className="flex items-center space-x-2">
+                            <input type="checkbox" className='custom-checkbox' name="attendantPhysician" />
+                            <span>Physician</span>
+                            </label>
+                            <label className="flex items-center space-x-2">
+                            <input type="checkbox" className='custom-checkbox' name="attendantNurse" />
+                            <span>Nurse</span>
+                            </label>
+                            <label className="flex items-center space-x-2">
+                            <input type="checkbox" className='custom-checkbox' name="attendantMidwife" />
+                            <span>Midwife</span>
+                            </label>
+                            <label className="flex items-center space-x-2">
+                            <input type="checkbox" className='custom-checkbox' name="attendantHilot" />
+                            <span>Hilot</span>
+                            </label>
+                        </div>
+                    
+                        {/* Others */}
+                        <div className="flex flex-col md:flex-row md:items-center md:space-x-2 mt-3">
+                            <label className="flex items-center space-x-2">
+                            <input type="checkbox" className='custom-checkbox' name="attendantOthers" />
+                            <span>Others (Specify)</span>
+                            </label>
+                            <input
+                            type="text"
+                            name="attendantOthersSpecify"
+                            placeholder="Specify"
+                            className="common-input mt-2 md:mt-0 w-[80%]"
+                            />
+                        </div>
+                        </div>
+                    
+                        {/* Date of Attendance */}
+                        <div>
+                        <label className="block w-full text-sm font-medium mb-1">Date of Attendance</label>
                         <input
-                          type="text"
-                          name="attendantOthersSpecify"
-                          placeholder="Specify"
-                          className="common-input mt-2 md:mt-0 w-[80%]"
+                            type="date"
+                            name="dateOfAttendance"
+                            className="common-input w-full"
                         />
-                      </div>
-                    </div>
-                  
-                    {/* Date of Attendance */}
-                    <div>
-                      <label className="block w-full text-sm font-medium mb-1">Date of Attendance</label>
-                      <input
-                        type="date"
-                        name="dateOfAttendance"
-                        className="common-input w-full"
-                      />
-                    </div>
-                  
-                    {/* Name and Title of Attendant */}
-                    <div>
-                      <label className="block w-full text-sm font-medium mb-1">Name and Title of Attendant</label>
-                      <input
-                        type="text"
-                        name="attendantNameTitle"
-                        placeholder="Enter name and title"
-                        className="common-input w-full"
-                      />
-                    </div>
+                        </div>
+                    
+                        {/* Name and Title of Attendant */}
+                        <div>
+                        <label className="block w-full text-sm font-medium mb-1">Name and Title of Attendant</label>
+                        <input
+                            type="text"
+                            name="attendantNameTitle"
+                            placeholder="Enter name and title"
+                            className="common-input w-full"
+                        />
+                        </div>
                   </div>
                   
                 }
 
                 {currentPage === 6 && 
-                    <div className="mb-4 text-center">
-                        <p className="text-lg font-semibold">Page 6</p>
+                    <div className="mb-6 text-left space-y-6">
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                  
+                        {/* Birth Details */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Time of Birth</label>
+                                <input
+                                type="time"
+                                name="birthTime"
+                                className="common-input w-full"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Date of Birth</label>
+                                <input
+                                type="date"
+                                name="birthDate"
+                                className="common-input w-full"
+                                />
+                            </div>
+                        </div>
+                  
+                    
+                        {/* Attendant Details */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Name in Print</label>
+                                <input
+                                type="text"
+                                name="attendantName"
+                                placeholder="Full Name"
+                                className="common-input w-full"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Title or Position</label>
+                                <input
+                                type="text"
+                                name="attendantTitle"
+                                placeholder="Physician / Nurse / Midwife"
+                                className="common-input w-full"
+                                />
+                            </div>
+                        </div>
+                    
+                        {/* Address */}
+                        <div>
+                            <label className="block text-sm font-medium mb-1">Address</label>
+                            <input
+                                type="text"
+                                name="attendantAddress"
+                                placeholder="House No., Street, Barangay, City/Municipality, Province"
+                                className="common-input w-full"
+                            />
+                        </div>
+                    
+                        {/* Signature and Date */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Date Signed</label>
+                                <input
+                                type="date"
+                                name="attendantDateSigned"
+                                className="common-input w-full"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Signature</label>
+                                <input
+                                type="text"
+                                name="attendantSignature"
+                                placeholder="Signature"
+                                className="common-input w-full"
+                                />
+                            </div>
+                        </div>
                     </div>
                 }
 
