@@ -7,7 +7,7 @@ export default function BirthCertifcateForm() {
         "Province & Child's Information", 
         "Mother's Information", 
         "Fathers's Information", 
-        "Attendant's Information", 
+        "Marriage of Parents", 
         "Certification", 
         "Amendment (if applicable)", 
         "Review & Submit"
@@ -279,7 +279,7 @@ export default function BirthCertifcateForm() {
 
                 {currentPage === 3 && 
                     <div className="mb-6 text-left space-y-6">
-                       <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                         {/* Father’s Name */}
                         <div>
                             <label className="block text-sm font-medium mb-1">Father’s Name</label>
@@ -384,7 +384,7 @@ export default function BirthCertifcateForm() {
 
                 {currentPage === 4 && 
                     <div className="mb-6 text-left space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Marriage of Parents</h2>
+                        <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                 
                         {/* Date of Marriage */}
                         <div>
