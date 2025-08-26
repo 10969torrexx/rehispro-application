@@ -335,5 +335,103 @@
       "required": "Father's residence country is required.",
       "maxLength": "Country must not exceed 100 characters."
     }
+  },
+  "dateOfMarriage": {
+    "required": true,
+    "type": "date",
+    "message": "Please provide the date of marriage."
+  },
+  "marriageCity": {
+    "required": true,
+    "type": "string",
+    "message": "Marriage city/municipality is required."
+  },
+  "marriageProvince": {
+    "required": true,
+    "type": "string",
+    "message": "Marriage province is required."
+  },
+  "marriageCountry": {
+    "required": true,
+    "type": "string",
+    "message": "Marriage country is required."
+  },
+  "attendantPhysician": {
+    "required": false,
+    "type": "boolean",
+    "message": "Check if the attendant was a physician."
+  },
+  "attendantNurse": {
+    "required": false,
+    "type": "boolean",
+    "message": "Check if the attendant was a nurse."
+  },
+  "attendantMidwife": {
+    "required": false,
+    "type": "boolean",
+    "message": "Check if the attendant was a midwife."
+  },
+  "attendantHilot": {
+    "required": false,
+    "type": "boolean",
+    "message": "Check if the attendant was a hilot (traditional birth attendant)."
+  },
+  "attendantOthers": {
+    "required": false,
+    "type": "boolean",
+    "message": "Check if the attendant was someone else."
+  },
+  "attendantOthersSpecify": {
+    "required": false,
+    "type": "string",
+    "message": "If 'Others' is checked, please specify the attendant."
+  },
+  "dateOfAttendance": {
+    "required": true,
+    "type": "date",
+    "message": "Please provide the date of attendance."
+  },
+  "attendantNameTitle": {
+    "required": true,
+    "type": "string",
+    "minLength": 3,
+    "message": "Name and title of attendant is required and must be at least 3 characters."
+  },
+  "birthTime": {
+    "required": true,
+    "type": "time",
+    "message": "Please provide the time of birth."
+  },
+  "birthDate": {
+    "required": true,
+    "type": "date",
+    "message": "Please provide the date of birth."
+  },
+  "attendantName": {
+    "required": true,
+    "type": "string",
+    "minLength": 3,
+    "message": "Attendant's full name is required (at least 3 characters)."
+  },
+  "attendantTitle": {
+    "required": true,
+    "type": "string",
+    "message": "Attendant’s title or position is required."
+  },
+  "attendantAddress": {
+    "required": true,
+    "type": "string",
+    "minLength": 10,
+    "message": "Please enter a complete address (at least 10 characters)."
+  },
+  "attendantDateSigned": {
+    "required": true,
+    "type": "date",
+    "message": "Please provide the date the form was signed."
+  },
+  "attendantSignature": {
+    "required": true,
+    "type": "string",
+    "message": "Signature is required."
   }
 }
