@@ -13,7 +13,8 @@ export default function BirthCertifcateForm() {
         "Certification and Registration Details",
         "Certification and Registration Details (Cont.)",
         "For LCRO / Civil Registrar Use Only",
-        "Affidavit of Acknowledgment / Admission of Paternity"
+        "Affidavit of Acknowledgment / Admission of Paternity",
+        "Affidavit of Acknowledgment / Admission of Paternity (Cont.)",
     ];
     return (
        <>
@@ -787,6 +788,134 @@ export default function BirthCertifcateForm() {
                                 </div>
                             </div>
                         </div>
+                    }
+
+                    {currentPage === 11 && 
+                        <div className="mb-6 text-left space-y-6">
+                            <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                      
+                            {/* Jurat Text */}
+                            <p className="text-sm italic">
+                            <strong>SUBSCRIBED AND SWORN</strong> to before me this ______ day of _______________ by
+                            __________________ and __________________, who exhibited to me (his/her) Community
+                            Tax Cert. No. __________________ issued on _______________ at ___________________.
+                            </p>
+                      
+                            {/* Date and Names */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Date (Day)</label>
+                                    <input
+                                        type="number"
+                                        name="juratDay"
+                                        placeholder="e.g. 15"
+                                        className="common-input w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Month & Year</label>
+                                    <input
+                                        type="text"
+                                        name="juratMonthYear"
+                                        placeholder="e.g. August 2025"
+                                        className="common-input w-full"
+                                    />
+                                </div>
+                            </div>
+                      
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Affiant 1 (Name)</label>
+                                    <input
+                                        type="text"
+                                        name="juratAffiant1"
+                                        placeholder="First Affiant's Full Name"
+                                        className="common-input w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Affiant 2 (Name)</label>
+                                    <input
+                                        type="text"
+                                        name="juratAffiant2"
+                                        placeholder="Second Affiant's Full Name"
+                                        className="common-input w-full"
+                                    />
+                                </div>
+                            </div>
+                      
+                            {/* Community Tax Certificate Info */}
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Community Tax Certificate No.</label>
+                                <input
+                                    type="text"
+                                    name="ctcNumber"
+                                    placeholder="Enter CTC No."
+                                    className="common-input w-full"
+                                />
+                            </div>
+                      
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Date Issued</label>
+                                    <input
+                                    type="date"
+                                    name="ctcDateIssued"
+                                    className="common-input w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Place Issued</label>
+                                    <input
+                                        type="text"
+                                        name="ctcPlaceIssued"
+                                        placeholder="City / Municipality, Province"
+                                        className="common-input w-full"
+                                    />
+                                </div>
+                            </div>
+                      
+                            {/* Administering Officer */}
+                            <div className="mt-6 space-y-4">
+                                <div className="text-center">
+                                    <label className="block text-sm font-medium mb-2">Signature of the Administering Officer</label>
+                                    <div className="border-t border-gray-400 pt-2 text-gray-600">
+                                    Signature over printed name
+                                    </div>
+                                </div>
+                        
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Name in Print</label>
+                                    <input
+                                    type="text"
+                                    name="adminName"
+                                    placeholder="Enter officer's name"
+                                    className="common-input w-full"
+                                    />
+                                </div>
+                        
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Position / Title / Designation</label>
+                                    <input
+                                    type="text"
+                                    name="adminPosition"
+                                    placeholder="Enter position/title"
+                                    className="common-input w-full"
+                                    />
+                                </div>
+                        
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Address</label>
+                                    <input
+                                    type="text"
+                                    name="adminAddress"
+                                    placeholder="Enter office address"
+                                    className="common-input w-full"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                      
                     }
 
                 </div>
