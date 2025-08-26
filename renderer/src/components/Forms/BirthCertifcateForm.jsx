@@ -15,6 +15,7 @@ export default function BirthCertifcateForm() {
         "For LCRO / Civil Registrar Use Only",
         "Affidavit of Acknowledgment / Admission of Paternity",
         "Affidavit of Acknowledgment / Admission of Paternity (Cont.)",
+        "Affidavit for Delayed Registration of Birth",
     ];
     return (
        <>
@@ -915,7 +916,127 @@ export default function BirthCertifcateForm() {
                                 </div>
                             </div>
                         </div>
+                    }
+
+                    {currentPage === 12 && 
+                        <div className="mb-6 text-left space-y-6">
+                            <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                            <p className="text-sm italic text-center">
+                            (To be accomplished by the hospital/clinic administrator, father, mother, guardian, 
+                            or the person himself/herself if 18 years old or over.)
+                            </p>
                       
+                            {/* Affiant Information */}
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Name of Affiant</label>
+                                <input type="text" name="affiantName" className="common-input w-full" />
+                            </div>
+                        
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Civil Status</label>
+                                    <select name="civilStatus" className="common-input w-full">
+                                        <option value="">Select</option>
+                                        <option>Single</option>
+                                        <option>Married</option>
+                                        <option>Divorced</option>
+                                        <option>Widow/Widower</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Residence / Postal Address</label>
+                                    <input type="text" name="address" className="common-input w-full" />
+                                </div>
+                            </div>
+                      
+                            {/* Statement 1 - Applicant */}
+                            <div>
+                                <p className="text-sm font-medium mb-1">1. That I am the applicant for the delayed registration of:</p>
+                                <label className="flex items-center space-x-2">
+                                    <input type="checkbox" name="applicantType" value="self" />
+                                    <span>My birth in <input type="text" name="selfPob" className="border rounded px-2 py-1 ml-2" /> 
+                                    on <input type="date" name="selfDob" className="border rounded px-2 py-1 ml-2" /></span>
+                                </label>
+                                <label className="flex items-center space-x-2 mt-2">
+                                    <input type="checkbox" name="applicantType" value="child" />
+                                    <span>The birth of <input type="text" name="childName" className="border rounded px-2 py-1 ml-2" /> 
+                                    who was born in <input type="text" name="childPob" className="border rounded px-2 py-1 ml-2" /> 
+                                    on <input type="date" name="childDob" className="border rounded px-2 py-1 ml-2" /></span>
+                                </label>
+                            </div>
+                      
+                            {/* Statement 2 */}
+                            <div>
+                                <p className="text-sm font-medium mb-1">
+                                    2. That I/he/she was attended at birth by:
+                                </p>
+                                <input type="text" name="attendantName" placeholder="Name of Attendant" className="common-input w-full" />
+                                <input type="text" name="attendantAddress" placeholder="Address of Attendant" className="common-input w-full mt-2" />
+                            </div>
+                      
+                            {/* Statement 3 */}
+                            <div>
+                                <p className="text-sm font-medium mb-1">
+                                    3. That I am/he/she is a citizen of:
+                                </p>
+                                <input typ  e="text" name="citizenship" className="common-input w-full" />
+                            </div>
+                      
+                            {/* Statement 4 */}
+                            <div>
+                                <p className="text-sm font-medium mb-1">
+                                    4. That my/his/her parents were:
+                                </p>
+                                <label className="flex items-center space-x-2">
+                                    <input type="checkbox" name="parentsStatus" value="married" />
+                                    <span>Married on <input type="date" name="marriageDate" className="border rounded px-2 py-1 ml-2" /> 
+                                    at <input type="text" name="marriagePlace" className="border rounded px-2 py-1 ml-2" /></span>
+                                </label>
+                                <label className="flex items-center space-x-2 mt-2">
+                                    <input type="checkbox" name="parentsStatus" value="notMarried" />
+                                    <span>Not married but acknowledged/not acknowledged by father whose name is 
+                                    <input type="text" name="fatherName" className="border rounded px-2 py-1 ml-2" /></span>
+                                </label>
+                            </div>
+                        
+                            {/* Statement 5 */}
+                            <div>
+                            <p className="text-sm font-medium mb-1">
+                                5. That the reason for the delay in registering my/his/her birth was:
+                            </p>
+                            <textarea name="reasonDelay" className="common-input w-full" />
+                            </div>
+                        
+                            {/* Statement 6 */}
+                            <div>
+                                <p className="text-sm font-medium mb-1">
+                                    6. (For the applicant only) That I am married to:
+                                </p>
+                                <input type="text" name="spouseApplicant" placeholder="Spouse of Applicant" className="common-input w-full" />
+                                <p className="text-sm font-medium mt-4">
+                                    (If the applicant is other than the document owner) That I am married to:
+                                </p>
+                                <input type="text" name="spouseOwner" placeholder="Spouse of Document Owner" className="common-input w-full" />
+                            </div>
+                      
+                            {/* Statement 7 */}
+                            <div>
+                                <p className="text-sm font-medium mb-1">
+                                    7. That I am executing this affidavit to attest to the truthfulness of the foregoing statements for all legal intents and purposes.
+                                </p>
+                            </div>
+                      
+                            {/* Jurat Section */}
+                            <div className="pt-6 border-t">
+                                <p className="text-sm italic">
+                                    In truth whereof, I have affixed my signature below this ____ day of _____________ at __________________, Philippines.
+                                </p>
+                                <div className="mt-6">
+                                    <label className="block text-sm font-medium mb-1">Signature Over Printed Name of Affiant</label>
+                                    <input type="text" name="affiantSignature" placeholder="__________________________" className="common-input w-full" />
+                                </div>
+                            </div>
+                        </div>
                     }
 
                 </div>
