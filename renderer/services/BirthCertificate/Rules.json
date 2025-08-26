@@ -490,39 +490,47 @@
   "receivedSignature": {
     "required": true,
     "type": "string",
-    "maxLength": 100
+    "maxLength": 100,
+    "message": "Signature is required and must not exceed 100 characters."
   },
   "receivedName": {
     "required": true,
     "type": "string",
-    "maxLength": 150
+    "maxLength": 150,
+    "message": "Full Name is required and must not exceed 150 characters."
   },
   "receivedTitle": {
     "required": true,
     "type": "string",
-    "maxLength": 100
+    "maxLength": 100,
+    "message": "Title or Position is required and must not exceed 100 characters."
   },
   "receivedDate": {
     "required": true,
-    "type": "date"
+    "type": "date",
+    "message": "Date is required and must be a valid date."
   },
   "registrarSignature": {
     "required": true,
     "type": "string",
-    "maxLength": 100
+    "maxLength": 100,
+    "message": "Registrar’s Signature is required and must not exceed 100 characters."
   },
   "registrarName": {
     "required": true,
     "type": "string",
-    "maxLength": 150
+    "maxLength": 150,
+    "message": "Registrar’s Full Name is required and must not exceed 150 characters."
   },
   "registrarTitle": {
     "required": true,
     "type": "string",
-    "maxLength": 100
+    "maxLength": 100,
+    "message": "Registrar’s Title or Position is required and must not exceed 100 characters."
   },
   "registrarDate": {
     "required": true,
-    "type": "date"
+    "type": "date",
+    "message": "Registrar’s Date is required and must be a valid date."
   }
 }
