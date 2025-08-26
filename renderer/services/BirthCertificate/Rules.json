@@ -234,5 +234,106 @@
       "required": "Country is required.",
       "maxLength": "Country must not exceed 50 characters."
     }
+  },
+  "fatherFirstName": {
+    "required": true,
+    "minLength": 2,
+    "maxLength": 50,
+    "message": {
+      "required": "Father's first name is required.",
+      "minLength": "Father's first name must be at least 2 characters.",
+      "maxLength": "Father's first name must not exceed 50 characters."
+    }
+  },
+  "fatherMiddleName": {
+    "required": false,
+    "maxLength": 50,
+    "message": {
+      "maxLength": "Father's middle name must not exceed 50 characters."
+    }
+  },
+  "fatherLastName": {
+    "required": true,
+    "minLength": 2,
+    "maxLength": 50,
+    "message": {
+      "required": "Father's last name is required.",
+      "minLength": "Father's last name must be at least 2 characters.",
+      "maxLength": "Father's last name must not exceed 50 characters."
+    }
+  },
+  "fatherCitizenship": {
+    "required": true,
+    "minLength": 2,
+    "maxLength": 50,
+    "message": {
+      "required": "Father's citizenship is required.",
+      "minLength": "Citizenship must be at least 2 characters.",
+      "maxLength": "Citizenship must not exceed 50 characters."
+    }
+  },
+  "fatherReligion": {
+    "required": true,
+    "minLength": 2,
+    "maxLength": 50,
+    "message": {
+      "required": "Father's religion is required.",
+      "minLength": "Religion must be at least 2 characters.",
+      "maxLength": "Religion must not exceed 50 characters."
+    }
+  },
+  "fatherOccupation": {
+    "required": true,
+    "minLength": 2,
+    "maxLength": 100,
+    "message": {
+      "required": "Father's occupation is required.",
+      "minLength": "Occupation must be at least 2 characters.",
+      "maxLength": "Occupation must not exceed 100 characters."
+    }
+  },
+  "fatherAgeAtBirth": {
+    "required": true,
+    "type": "number",
+    "min": 10,
+    "max": 80,
+    "message": {
+      "required": "Father's age at the time of birth is required.",
+      "number": "Age must be a valid number.",
+      "min": "Age must be at least 10 years.",
+      "max": "Age must not exceed 80 years."
+    }
+  },
+  "fatherResidenceStreet": {
+    "required": true,
+    "maxLength": 150,
+    "message": {
+      "required": "Father's residence street address is required.",
+      "maxLength": "Street address must not exceed 150 characters."
+    }
+  },
+  "fatherResidenceCity": {
+    "required": true,
+    "maxLength": 100,
+    "message": {
+      "required": "Father's residence city is required.",
+      "maxLength": "City must not exceed 100 characters."
+    }
+  },
+  "fatherResidenceProvince": {
+    "required": true,
+    "maxLength": 100,
+    "message": {
+      "required": "Father's residence province is required.",
+      "maxLength": "Province must not exceed 100 characters."
+    }
+  },
+  "fatherResidenceCountry": {
+    "required": true,
+    "maxLength": 100,
+    "message": {
+      "required": "Father's residence country is required.",
+      "maxLength": "Country must not exceed 100 characters."
+    }
   }
 }
