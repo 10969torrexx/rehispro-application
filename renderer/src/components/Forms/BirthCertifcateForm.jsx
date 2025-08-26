@@ -12,7 +12,8 @@ export default function BirthCertifcateForm() {
         "Certification of Attendant at Birth", 
         "Certification and Registration Details",
         "Certification and Registration Details (Cont.)",
-        "For LCRO / Civil Registrar Use Only"
+        "For LCRO / Civil Registrar Use Only",
+        "Affidavit of Acknowledgment / Admission of Paternity"
     ];
     return (
        <>
@@ -487,8 +488,7 @@ export default function BirthCertifcateForm() {
                                 className="common-input w-full"
                             />
                             </div>
-                    </div>
-                    
+                        </div>
                     }
 
                     {currentPage === 6 && 
@@ -701,8 +701,94 @@ export default function BirthCertifcateForm() {
                                 </InfoCard>
                             </div>
                         </div>
-                    
                     }
+
+                    {currentPage === 10 && 
+                        <div className="mb-6 text-left space-y-6">
+                            <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                    
+                            {/* Intro Statement */}
+                            <p className="text-sm italic">
+                                I/We, __________________ and __________________ of legal age, am/are the natural mother
+                                and/or father of _____________________ born on _______________ at ______________.
+                            </p>
+                    
+                            {/* Parent Names */}
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Mother&apos;s Full Name</label>
+                                <input
+                                    type="text"
+                                    name="motherName"
+                                    placeholder="Enter mother's full name"
+                                    className="common-input w-full"
+                                />
+                            </div>
+                    
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Father&apos;s Full Name</label>
+                                <input
+                                    type="text"
+                                    name="fatherName"
+                                    placeholder="Enter father's full name"
+                                    className="common-input w-full"
+                                />
+                            </div>
+                    
+                            {/* Child Info */}
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Child&apos;s Full Name</label>
+                                <input
+                                    type="text"
+                                    name="childName"
+                                    placeholder="Enter child's full name"
+                                    className="common-input w-full"
+                                />
+                            </div>
+                    
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        name="childBirthDate"
+                                        className="common-input w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Place of Birth</label>
+                                    <input
+                                        type="text"
+                                        name="childBirthPlace"
+                                        placeholder="City / Municipality, Province"
+                                        className="common-input w-full"
+                                    />
+                                </div>
+                            </div>
+                    
+                            {/* Affidavit Declaration */}
+                            <p className="text-sm italic">
+                                I am / We are executing this affidavit to attest to the truthfulness of the
+                                foregoing statements and for purposes of acknowledging my/our child.
+                            </p>
+                    
+                            {/* Signature Fields */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                                <div className="text-center">
+                                    <label className="block text-sm font-medium mb-2">Mother&apos;s Signature</label>
+                                    <div className="border-t border-gray-400 pt-2 text-gray-600">
+                                        Signature over printed name
+                                    </div>
+                                </div>
+                                <div className="text-center">
+                                    <label className="block text-sm font-medium mb-2">Father&apos;s Signature</label>
+                                    <div className="border-t border-gray-400 pt-2 text-gray-600">
+                                    Signature over printed name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                 </div>
                 <Divider text={pageTitles[(currentPage) - 1]}/>
             </form>
