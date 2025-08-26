@@ -433,5 +433,96 @@
     "required": true,
     "type": "string",
     "message": "Signature is required."
+  },
+  "informantSignature": {
+    "required": true,
+    "type": "string",
+    "minLength": 2,
+    "message": "Informant's signature is required."
+  },
+  "informantName": {
+    "required": true,
+    "type": "string",
+    "minLength": 3,
+    "message": "Informant's full name is required (at least 3 characters)."
+  },
+  "informantRelationship": {
+    "required": true,
+    "type": "string",
+    "minLength": 3,
+    "message": "Please provide the relationship to the child (at least 3 characters)."
+  },
+  "informantAddress": {
+    "required": true,
+    "type": "string",
+    "minLength": 10,
+    "message": "Please provide the full address (at least 10 characters)."
+  },
+  "informantDate": {
+    "required": true,
+    "type": "date",
+    "message": "Date of informant’s certification is required."
+  },
+
+  "preparedSignature": {
+    "required": true,
+    "type": "string",
+    "minLength": 2,
+    "message": "Prepared by signature is required."
+  },
+  "preparedName": {
+    "required": true,
+    "type": "string",
+    "minLength": 3,
+    "message": "Prepared by full name is required (at least 3 characters)."
+  },
+  "preparedTitle": {
+    "required": true,
+    "type": "string",
+    "minLength": 2,
+    "message": "Title or position is required."
+  },
+  "preparedDate": {
+    "required": true,
+    "type": "date",
+    "message": "Date of preparation is required."
+  },
+  "receivedSignature": {
+    "required": true,
+    "type": "string",
+    "maxLength": 100
+  },
+  "receivedName": {
+    "required": true,
+    "type": "string",
+    "maxLength": 150
+  },
+  "receivedTitle": {
+    "required": true,
+    "type": "string",
+    "maxLength": 100
+  },
+  "receivedDate": {
+    "required": true,
+    "type": "date"
+  },
+  "registrarSignature": {
+    "required": true,
+    "type": "string",
+    "maxLength": 100
+  },
+  "registrarName": {
+    "required": true,
+    "type": "string",
+    "maxLength": 150
+  },
+  "registrarTitle": {
+    "required": true,
+    "type": "string",
+    "maxLength": 100
+  },
+  "registrarDate": {
+    "required": true,
+    "type": "date"
   }
 }
