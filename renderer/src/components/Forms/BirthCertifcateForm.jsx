@@ -16,7 +16,7 @@ export default function BirthCertifcateForm() {
     ];
     return (
        <>
-            <form className="p-4 h-full overflow-auto">
+            <form className="p-4 h-full mb-4">
                 <div className='mb-4'>
                     {currentPage === 1 && 
                         <div className="mb-4 text-left space-y-6">
@@ -706,7 +706,7 @@ export default function BirthCertifcateForm() {
                 </div>
                 <Divider text={pageTitles[(currentPage) - 1]}/>
             </form>
-            <div className="flex justify-center items-center space-x-4 my-4 mb-4">
+            <div className="flex justify-center items-center space-x-4 pb-8">
                 <button 
                     type='button'
                     className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
