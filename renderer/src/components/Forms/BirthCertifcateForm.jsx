@@ -16,9 +16,10 @@ export default function BirthCertifcateForm() {
         "Affidavit of Acknowledgment / Admission of Paternity",
         "Affidavit of Acknowledgment / Admission of Paternity (Cont.)",
         "Affidavit for Delayed Registration of Birth",
+        "Affidavit for Delayed Registration of Birth (Cont.)"
     ];
     return (
-       <>
+        <>
             <form className="p-4 h-full mb-4">
                 <div className='mb-4'>
                     {currentPage === 1 && 
@@ -1039,6 +1040,131 @@ export default function BirthCertifcateForm() {
                         </div>
                     }
 
+                    {currentPage === 13 &&
+                        <div className="mb-6 text-left space-y-6">
+                           <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
+                      
+                            {/* Date & Place */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1"> Day of</label>
+                                    <input
+                                        type="text"
+                                        name="juratDay"
+                                        placeholder="Day"
+                                        className="common-input"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1"> Month / Year</label>
+                                    <input
+                                        type="text"
+                                        name="juratMonthYear"
+                                        placeholder="Month / Year"
+                                        className="common-input"
+                                    />
+                                </div>
+                            </div>
+                      
+                            <div className="flex flex-col">
+                                <label className="block text-sm font-medium mb-1">
+                                    Place (City / Municipality, Province)
+                                </label>
+                                <input
+                                    type="text"
+                                    name="juratPlace"
+                                    placeholder="e.g., Cebu City, Cebu"
+                                    className="common-input"
+                                />
+                            </div>
+                      
+                            {/* Community Tax Certificate */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                        CTC Number
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="ctcNumber"
+                                        placeholder="Community Tax Cert. No."
+                                        className="common-input"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                        Issued On
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="ctcIssuedOn"
+                                        placeholder="Date Issued"
+                                        className="common-input"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                    Issued At
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="ctcIssuedAt"
+                                        placeholder="Place Issued"
+                                        className="common-input"
+                                    />
+                                </div>
+                            </div>
+                      
+                            {/* Administering Officer */}
+                            <div className="space-y-4">
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                    Signature of the Administering Officer
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="adminOfficerSignature"
+                                        placeholder="Signature"
+                                        className="common-input"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                    Name in Print
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="adminOfficerName"
+                                        placeholder="Full Name"
+                                        className="common-input"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                    Position / Title / Designation
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="adminOfficerPosition"
+                                        placeholder="Position / Title / Designation"
+                                        className="common-input"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                    Address
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="adminOfficerAddress"
+                                        placeholder="Office Address"
+                                        className="common-input"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                 </div>
                 <Divider text={pageTitles[(currentPage) - 1]}/>
             </form>
@@ -1065,6 +1191,6 @@ export default function BirthCertifcateForm() {
                     <i className="fa-solid fa-angles-right"></i>
                 </button>
             </div>
-       </>
+        </>
     )
 }
