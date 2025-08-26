@@ -953,12 +953,12 @@ export default function BirthCertifcateForm() {
                             <div>
                                 <p className="text-sm font-medium mb-1">1. That I am the applicant for the delayed registration of:</p>
                                 <label className="flex items-center space-x-2">
-                                    <input type="checkbox" name="applicantType" value="self" />
+                                    <input type="checkbox" className="custom-checkbox" name="applicantType" value="self" />
                                     <span>My birth in <input type="text" name="selfPob" className="border rounded px-2 py-1 ml-2" /> 
                                     on <input type="date" name="selfDob" className="border rounded px-2 py-1 ml-2" /></span>
                                 </label>
                                 <label className="flex items-center space-x-2 mt-2">
-                                    <input type="checkbox" name="applicantType" value="child" />
+                                    <input type="checkbox" className="custom-checkbox" name="applicantType" value="child" />
                                     <span>The birth of <input type="text" name="childName" className="border rounded px-2 py-1 ml-2" /> 
                                     who was born in <input type="text" name="childPob" className="border rounded px-2 py-1 ml-2" /> 
                                     on <input type="date" name="childDob" className="border rounded px-2 py-1 ml-2" /></span>
@@ -988,12 +988,12 @@ export default function BirthCertifcateForm() {
                                     4. That my/his/her parents were:
                                 </p>
                                 <label className="flex items-center space-x-2">
-                                    <input type="checkbox" name="parentsStatus" value="married" />
+                                    <input type="checkbox" className="custom-checkbox" name="parentsStatus" value="married" />
                                     <span>Married on <input type="date" name="marriageDate" className="border rounded px-2 py-1 ml-2" /> 
                                     at <input type="text" name="marriagePlace" className="border rounded px-2 py-1 ml-2" /></span>
                                 </label>
                                 <label className="flex items-center space-x-2 mt-2">
-                                    <input type="checkbox" name="parentsStatus" value="notMarried" />
+                                    <input type="checkbox" className="custom-checkbox"  name="parentsStatus" value="notMarried" />
                                     <span>Not married but acknowledged/not acknowledged by father whose name is 
                                     <input type="text" name="fatherName" className="border rounded px-2 py-1 ml-2" /></span>
                                 </label>
