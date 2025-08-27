@@ -36,118 +36,118 @@ export default function BirthCertifcateForm() {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Province & City / Municipality */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="flex flex-col">
-                                <label className="block text-sm font-medium mb-1">Province</label>
-                                <input
-                                type="text"
-                                name="province"
-                                placeholder="Province"
-                                className="common-input"
-                                />
-                            </div>
-                        
-                            <div className="flex flex-col">
-                                <label className="block text-sm font-medium mb-1">City / Municipality</label>
-                                <input
-                                type="text"
-                                name="city"
-                                placeholder="City / Municipality"
-                                className="common-input"
-                                />
-                            </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">Province</label>
+                                    <input
+                                    type="text"
+                                    name="province"
+                                    placeholder="Province"
+                                    className="common-input"
+                                    />
+                                </div>
+                            
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">City / Municipality</label>
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        placeholder="City / Municipality"
+                                        className="common-input"
+                                    />
+                                </div>
                             </div>
                     
                             {/* Child’s Name */}
                             <div>
-                            <label className="block text-sm font-medium">Child’s Name</label>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                <input
-                                type="text"
-                                name="childFirstName"
-                                placeholder="First"
-                                className="common-input"
-                                />
-                                <input
-                                type="text"
-                                name="childMiddleName"
-                                placeholder="Middle"
-                                className="common-input"
-                                />
-                                <input
-                                type="text"
-                                name="childLastName"
-                                placeholder="Last"
-                                className="common-input"
-                                />
-                            </div>
+                                <label className="block text-sm font-medium">Child’s Name</label>
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                    <input
+                                        type="text"
+                                        name="childFirstName"
+                                        placeholder="First"
+                                        className="common-input"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="childMiddleName"
+                                        placeholder="Middle"
+                                        className="common-input"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="childLastName"
+                                        placeholder="Last"
+                                        className="common-input"
+                                    />
+                                </div>
                             </div>
                     
                             {/* Sex & Date of Birth */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            <div>
-                                <label className="block text-sm font-medium">Sex</label>
-                                <select name="sex" className="common-input w-full">
-                                <option value="">Select</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium">Date of Birth</label>
-                                <input type="date" name="dateOfBirth" className="common-input w-full" />
-                            </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Sex</label>
+                                    <select name="sex" className="common-input w-full">
+                                        <option value="">Select</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Date of Birth</label>
+                                    <input type="date" name="dateOfBirth" className="common-input w-full" />
+                                </div>
                             </div>
                     
                             {/* Type of Birth & Multiple Birth */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="flex flex-col">
-                                <label className="block text-sm font-medium mb-1">
-                                Type of Birth (Single, Twin, Triplet, etc)
-                                </label>
-                                <input
-                                type="text"
-                                name="typeOfBirth"
-                                placeholder="Type of Birth"
-                                className="common-input"
-                                />
-                            </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                        Type of Birth (Single, Twin, Triplet, etc)
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="typeOfBirth"
+                                        placeholder="Type of Birth"
+                                        className="common-input"
+                                    />
+                                </div>
                         
-                            <div className="flex flex-col">
-                                <label className="block text-sm font-medium mb-1">
-                                If Multiple Birth, Child was (First, Second, Third, etc)
-                                </label>
-                                <input
-                                type="text"
-                                name="multipleBirthOrder"
-                                placeholder="Order"
-                                className="common-input"
-                                />
-                            </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                    If Multiple Birth, Child was (First, Second, Third, etc)
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="multipleBirthOrder"
+                                        placeholder="Order"
+                                        className="common-input"
+                                    />
+                                </div>
                             </div>
                     
                             {/* Birth Order & Weight at Birth */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="flex flex-col">
-                                <label className="block text-sm font-medium mb-1">
-                                Birth Order (First, Second, Third, etc)
-                                </label>
-                                <input
-                                type="text"
-                                name="birthOrder"
-                                placeholder="Birth Order"
-                                className="common-input"
-                                />
-                            </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">
+                                    Birth Order (First, Second, Third, etc)
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="birthOrder"
+                                        placeholder="Birth Order"
+                                        className="common-input"
+                                    />
+                                </div>
                         
-                            <div className="flex flex-col">
-                                <label className="block text-sm font-medium mb-1">Weight at Birth</label>
-                                <input
-                                type="text"
-                                name="birthWeight"
-                                placeholder="Weight"
-                                className="common-input"
-                                />
-                            </div>
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">Weight at Birth</label>
+                                    <input
+                                        type="text"
+                                        name="birthWeight"
+                                        placeholder="Weight"
+                                        className="common-input"
+                                    />
+                                </div>
                             </div>
                         </div>
                     }
