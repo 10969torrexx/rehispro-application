@@ -18,6 +18,15 @@ export default function BirthCertifcateForm() {
         "Affidavit for Delayed Registration of Birth",
         "Affidavit for Delayed Registration of Birth (Cont.)"
     ];
+    
+    const handlePageChange = (direction) => {
+        if (direction === 'next') {
+            setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
+        } else if (direction === 'prev') {
+            setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+        }
+    }
+
     return (
         <>
             <form className="p-4 h-full mb-4">
@@ -1173,7 +1182,7 @@ export default function BirthCertifcateForm() {
                     type='button'
                     className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
                     disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    onClick={() => handlePageChange('prev')}
                 >
                 <i className="fa-solid fa-angles-left"></i>
                 </button>
@@ -1186,7 +1195,7 @@ export default function BirthCertifcateForm() {
                     type='button'
                     className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
                     disabled={currentPage === pageTitles.length}
-                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, pageTitles.length))}
+                    onClick={() => handlePageChange('next')}
                 >
                     <i className="fa-solid fa-angles-right"></i>
                 </button>
