@@ -407,486 +407,535 @@
       "message": "Name and title of attendant is required and must be at least 3 characters."
     }
   },
-  "birthTime": {
-    "required": true,
-    "type": "time",
-    "message": "Please provide the time of birth."
+  "page6": {
+    "birthTime": {
+      "required": true,
+      "type": "time",
+      "message": "Please provide the time of birth."
+    },
+    "birthDate": {
+      "required": true,
+      "type": "date",
+      "message": "Please provide the date of birth."
+    },
+    "attendantName": {
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "message": "Attendant's full name is required (at least 3 characters)."
+    },
+    "attendantTitle": {
+      "required": true,
+      "type": "string",
+      "message": "Attendant’s title or position is required."
+    },
+    "attendantAddress": {
+      "required": true,
+      "type": "string",
+      "minLength": 10,
+      "message": "Please enter a complete address (at least 10 characters)."
+    },
+    "attendantDateSigned": {
+      "required": true,
+      "type": "date",
+      "message": "Please provide the date the form was signed."
+    },
+    "attendantSignature": {
+      "required": true,
+      "type": "string",
+      "message": "Signature is required."
+    }
   },
-  "birthDate": {
-    "required": true,
-    "type": "date",
-    "message": "Please provide the date of birth."
-  },
-  "attendantName": {
-    "required": true,
-    "type": "string",
-    "minLength": 3,
-    "message": "Attendant's full name is required (at least 3 characters)."
-  },
-  "attendantTitle": {
-    "required": true,
-    "type": "string",
-    "message": "Attendant’s title or position is required."
-  },
-  "attendantAddress": {
-    "required": true,
-    "type": "string",
-    "minLength": 10,
-    "message": "Please enter a complete address (at least 10 characters)."
-  },
-  "attendantDateSigned": {
-    "required": true,
-    "type": "date",
-    "message": "Please provide the date the form was signed."
-  },
-  "attendantSignature": {
-    "required": true,
-    "type": "string",
-    "message": "Signature is required."
-  },
-  "informantSignature": {
-    "required": true,
-    "type": "string",
-    "minLength": 2,
-    "message": "Informant's signature is required."
-  },
-  "informantName": {
-    "required": true,
-    "type": "string",
-    "minLength": 3,
-    "message": "Informant's full name is required (at least 3 characters)."
-  },
-  "informantRelationship": {
-    "required": true,
-    "type": "string",
-    "minLength": 3,
-    "message": "Please provide the relationship to the child (at least 3 characters)."
-  },
-  "informantAddress": {
-    "required": true,
-    "type": "string",
-    "minLength": 10,
-    "message": "Please provide the full address (at least 10 characters)."
-  },
-  "informantDate": {
-    "required": true,
-    "type": "date",
-    "message": "Date of informant’s certification is required."
-  },
+ "page7": {
+    "informantSignature": {
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "message": "Informant's signature is required."
+    },
+    "informantName": {
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "message": "Informant's full name is required (at least 3 characters)."
+    },
+    "informantRelationship": {
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "message": "Please provide the relationship to the child (at least 3 characters)."
+    },
+    "informantAddress": {
+      "required": true,
+      "type": "string",
+      "minLength": 10,
+      "message": "Please provide the full address (at least 10 characters)."
+    },
+    "informantDate": {
+      "required": true,
+      "type": "date",
+      "message": "Date of informant’s certification is required."
+    },
 
-  "preparedSignature": {
-    "required": true,
-    "type": "string",
-    "minLength": 2,
-    "message": "Prepared by signature is required."
-  },
-  "preparedName": {
-    "required": true,
-    "type": "string",
-    "minLength": 3,
-    "message": "Prepared by full name is required (at least 3 characters)."
-  },
-  "preparedTitle": {
-    "required": true,
-    "type": "string",
-    "minLength": 2,
-    "message": "Title or position is required."
-  },
-  "preparedDate": {
-    "required": true,
-    "type": "date",
-    "message": "Date of preparation is required."
-  },
-  "receivedSignature": {
-    "required": true,
-    "type": "string",
-    "maxLength": 100,
-    "message": "Signature is required and must not exceed 100 characters."
-  },
-  "receivedName": {
-    "required": true,
-    "type": "string",
-    "maxLength": 150,
-    "message": "Full Name is required and must not exceed 150 characters."
-  },
-  "receivedTitle": {
-    "required": true,
-    "type": "string",
-    "maxLength": 100,
-    "message": "Title or Position is required and must not exceed 100 characters."
-  },
-  "receivedDate": {
-    "required": true,
-    "type": "date",
-    "message": "Date is required and must be a valid date."
-  },
-  "registrarSignature": {
-    "required": true,
-    "type": "string",
-    "maxLength": 100,
-    "message": "Registrar’s Signature is required and must not exceed 100 characters."
-  },
-  "registrarName": {
-    "required": true,
-    "type": "string",
-    "maxLength": 150,
-    "message": "Registrar’s Full Name is required and must not exceed 150 characters."
-  },
-  "registrarTitle": {
-    "required": true,
-    "type": "string",
-    "maxLength": 100,
-    "message": "Registrar’s Title or Position is required and must not exceed 100 characters."
-  },
-  "registrarDate": {
-    "required": true,
-    "type": "date",
-    "message": "Registrar’s Date is required and must be a valid date."
-  },
-  "remarks": {
-    "required": false,
-    "maxLength": 500,
-    "message": {
-      "maxLength": "Remarks must not exceed 500 characters."
+    "preparedSignature": {
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "message": "Prepared by signature is required."
+    },
+    "preparedName": {
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "message": "Prepared by full name is required (at least 3 characters)."
+    },
+    "preparedTitle": {
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "message": "Title or position is required."
+    },
+    "preparedDate": {
+      "required": true,
+      "type": "date",
+      "message": "Date of preparation is required."
     }
   },
-  "motherName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Mother's full name is required.",
-      "minLength": "Mother's name must be at least 2 characters.",
-      "maxLength": "Mother's name must not exceed 100 characters."
+  "page8": {
+    "receivedSignature": {
+      "required": true,
+      "type": "string",
+      "maxLength": 100,
+      "message": "Signature is required and must not exceed 100 characters."
+    },
+    "receivedName": {
+      "required": true,
+      "type": "string",
+      "maxLength": 150,
+      "message": "Full Name is required and must not exceed 150 characters."
+    },
+    "receivedTitle": {
+      "required": true,
+      "type": "string",
+      "maxLength": 100,
+      "message": "Title or Position is required and must not exceed 100 characters."
+    },
+    "receivedDate": {
+      "required": true,
+      "type": "date",
+      "message": "Date is required and must be a valid date."
+    },
+    "registrarSignature": {
+      "required": true,
+      "type": "string",
+      "maxLength": 100,
+      "message": "Registrar’s Signature is required and must not exceed 100 characters."
+    },
+    "registrarName": {
+      "required": true,
+      "type": "string",
+      "maxLength": 150,
+      "message": "Registrar’s Full Name is required and must not exceed 150 characters."
+    },
+    "registrarTitle": {
+      "required": true,
+      "type": "string",
+      "maxLength": 100,
+      "message": "Registrar’s Title or Position is required and must not exceed 100 characters."
+    },
+    "registrarDate": {
+      "required": true,
+      "type": "date",
+      "message": "Registrar’s Date is required and must be a valid date."
     }
   },
-  "fatherName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Father's full name is required.",
-      "minLength": "Father's name must be at least 2 characters.",
-      "maxLength": "Father's name must not exceed 100 characters."
+  "page9": {
+    "remarks": {
+      "required": false,
+      "maxLength": 500,
+      "message": {
+        "maxLength": "Remarks must not exceed 500 characters."
+      }
     }
   },
-  "childName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Child's full name is required.",
-      "minLength": "Child's name must be at least 2 characters.",
-      "maxLength": "Child's name must not exceed 100 characters."
+  "page10": {
+    "motherName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Mother's full name is required.",
+        "minLength": "Mother's name must be at least 2 characters.",
+        "maxLength": "Mother's name must not exceed 100 characters."
+      }
+    },
+    "fatherName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Father's full name is required.",
+        "minLength": "Father's name must be at least 2 characters.",
+        "maxLength": "Father's name must not exceed 100 characters."
+      }
+    },
+    "childName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Child's full name is required.",
+        "minLength": "Child's name must be at least 2 characters.",
+        "maxLength": "Child's name must not exceed 100 characters."
+      }
+    },
+    "childBirthDate": {
+      "required": true,
+      "type": "date",
+      "message": {
+        "required": "Child's date of birth is required.",
+        "date": "Invalid date format."
+      }
+    },
+    "childBirthPlace": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Child's place of birth is required.",
+        "minLength": "Place of birth must be at least 2 characters.",
+        "maxLength": "Place of birth must not exceed 100 characters."
+      }
     }
   },
-  "childBirthDate": {
-    "required": true,
-    "type": "date",
-    "message": {
-      "required": "Child's date of birth is required.",
-      "date": "Invalid date format."
+  "page11": {
+    "juratDay": {
+      "required": true,
+      "type": "string",
+      "maxLength": 10,
+      "message": {
+        "required": "Day is required.",
+        "maxLength": "Day must not exceed 10 characters."
+      }
+    },
+    "juratMonthYear": {
+      "required": true,
+      "type": "string",
+      "maxLength": 20,
+      "message": {
+        "required": "Month and year are required.",
+        "maxLength": "Month/Year must not exceed 20 characters."
+      }
+    },
+    "juratAffiant1": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Affiant 1 name is required.",
+        "minLength": "Affiant 1 name must be at least 2 characters.",
+        "maxLength": "Affiant 1 name must not exceed 100 characters."
+      }
+    },
+    "juratAffiant2": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Affiant 2 name is required.",
+        "minLength": "Affiant 2 name must be at least 2 characters.",
+        "maxLength": "Affiant 2 name must not exceed 100 characters."
+      }
+    },
+    "ctcNumber": {
+      "required": true,
+      "minLength": 3,
+      "maxLength": 30,
+      "message": {
+        "required": "Community Tax Certificate No. is required.",
+        "minLength": "CTC No. must be at least 3 characters.",
+        "maxLength": "CTC No. must not exceed 30 characters."
+      }
+    },
+    "ctcDateIssued": {
+      "required": true,
+      "type": "date",
+      "message": {
+        "required": "Date issued is required.",
+        "date": "Invalid date format."
+      }
+    },
+    "ctcPlaceIssued": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Place issued is required.",
+        "minLength": "Place issued must be at least 2 characters.",
+        "maxLength": "Place issued must not exceed 100 characters."
+      }
+    },
+    "adminName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Administering officer's name is required.",
+        "minLength": "Name must be at least 2 characters.",
+        "maxLength": "Name must not exceed 100 characters."
+      }
+    },
+    "adminPosition": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Position/Title is required.",
+        "minLength": "Position/Title must be at least 2 characters.",
+        "maxLength": "Position/Title must not exceed 100 characters."
+      }
+    },
+    "adminAddress": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 150,
+      "message": {
+        "required": "Administering officer's address is required.",
+        "minLength": "Address must be at least 2 characters.",
+        "maxLength": "Address must not exceed 150 characters."
+      }
     }
   },
-  "childBirthPlace": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Child's place of birth is required.",
-      "minLength": "Place of birth must be at least 2 characters.",
-      "maxLength": "Place of birth must not exceed 100 characters."
+  "page12": {
+    "affiantName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Affiant name is required.",
+        "minLength": "Affiant name must be at least 2 characters.",
+        "maxLength": "Affiant name must not exceed 100 characters."
+      }
+    },
+    "civilStatus": {
+      "required": true,
+      "type": "enum",
+      "options": ["Single", "Married", "Divorced", "Widow/Widower"],
+      "message": {
+        "required": "Civil status is required.",
+        "enum": "Invalid civil status."
+      }
+    },
+    "address": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 150,
+      "message": {
+        "required": "Address is required.",
+        "minLength": "Address must be at least 2 characters.",
+        "maxLength": "Address must not exceed 150 characters."
+      }
+    },
+    "selfPob": {
+      "required": false,
+      "maxLength": 100,
+      "message": {
+        "maxLength": "Place of birth must not exceed 100 characters."
+      }
+    },
+    "selfDob": {
+      "required": false,
+      "type": "date",
+      "message": {
+        "date": "Invalid date format."
+      }
+    },
+    "childPob": {
+      "required": false,
+      "maxLength": 100,
+      "message": {
+        "maxLength": "Place of birth must not exceed 100 characters."
+      }
+    },
+    "childDob": {
+      "required": false,
+      "type": "date",
+      "message": {
+        "date": "Invalid date format."
+      }
+    },
+    "attendantName": {
+      "required": false,
+      "maxLength": 100,
+      "message": {
+        "maxLength": "Attendant name must not exceed 100 characters."
+      }
+    },
+    "attendantAddress": {
+      "required": false,
+      "maxLength": 150,
+      "message": {
+        "maxLength": "Attendant address must not exceed 150 characters."
+      }
+    },
+    "citizenship": {
+      "required": false,
+      "maxLength": 50,
+      "message": {
+        "maxLength": "Citizenship must not exceed 50 characters."
+      }
+    },
+    "parentsStatus": {
+      "required": false,
+      "type": "enum",
+      "options": ["married", "notMarried"],
+      "message": {
+        "enum": "Invalid parents status."
+      }
+    },
+    "marriageDate": {
+      "required": false,
+      "type": "date",
+      "message": {
+        "date": "Invalid date format."
+      }
+    },
+    "marriagePlace": {
+      "required": false,
+      "maxLength": 100,
+      "message": {
+        "maxLength": "Marriage place must not exceed 100 characters."
+      }
+    },
+    "reasonDelay": {
+      "required": false,
+      "maxLength": 300,
+      "message": {
+        "maxLength": "Reason for delay must not exceed 300 characters."
+      }
+    },
+    "spouseApplicant": {
+      "required": false,
+      "maxLength": 100,
+      "message": {
+        "maxLength": "Spouse name must not exceed 100 characters."
+      }
+    },
+    "spouseOwner": {
+      "required": false,
+      "maxLength": 100,
+      "message": {
+        "maxLength": "Spouse name must not exceed 100 characters."
+      }
+    },
+    "affiantSignature": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Affiant signature is required.",
+        "minLength": "Signature must be at least 2 characters.",
+        "maxLength": "Signature must not exceed 100 characters."
+      }
     }
   },
-  "juratDay": {
-    "required": true,
-    "type": "string",
-    "maxLength": 10,
-    "message": {
-      "required": "Day is required.",
-      "maxLength": "Day must not exceed 10 characters."
+  "page13": {
+    "juratDay": {
+      "required": true,
+      "type": "number",
+      "min": 1,
+      "max": 31,
+      "message": {
+        "required": "Day is required.",
+        "number": "Day must be a number.",
+        "min": "Day must be at least 1.",
+        "max": "Day must not exceed 31."
+      }
+    },
+    "juratMonthYear": {
+      "required": true,
+      "type": "string",
+      "pattern": "^(0[1-9]|1[0-2])\\/\\d{4}$",
+      "message": {
+        "required": "Month/Year is required.",
+        "pattern": "Month/Year must be in MM/YYYY format."
+      }
+    },
+    "juratPlace": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 150,
+      "message": {
+        "required": "Place is required.",
+        "minLength": "Place must be at least 2 characters.",
+        "maxLength": "Place must not exceed 150 characters."
+      }
+    },
+    "ctcNumber": {
+      "required": true,
+      "minLength": 5,
+      "maxLength": 50,
+      "message": {
+        "required": "CTC Number is required.",
+        "minLength": "CTC Number must be at least 5 characters.",
+        "maxLength": "CTC Number must not exceed 50 characters."
+      }
+    },
+    "ctcIssuedOn": {
+      "required": true,
+      "type": "date",
+      "message": {
+        "required": "CTC issued date is required.",
+        "date": "Invalid date format."
+      }
+    },
+    "ctcIssuedAt": {
+      "required": true,
+      "maxLength": 100,
+      "message": {
+        "required": "CTC issued place is required.",
+        "maxLength": "Issued place must not exceed 100 characters."
+      }
+    },
+    "adminOfficerSignature": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Administering officer's signature is required.",
+        "minLength": "Signature must be at least 2 characters.",
+        "maxLength": "Signature must not exceed 100 characters."
+      }
+    },
+    "adminOfficerName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Administering officer's name is required.",
+        "minLength": "Name must be at least 2 characters.",
+        "maxLength": "Name must not exceed 100 characters."
+      }
+    },
+    "adminOfficerPosition": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Administering officer's position is required.",
+        "minLength": "Position must be at least 2 characters.",
+        "maxLength": "Position must not exceed 100 characters."
+      }
+    },
+    "adminOfficerAddress": {
+      "required": true,
+      "minLength": 5,
+      "maxLength": 150,
+      "message": {
+        "required": "Administering officer's address is required.",
+        "minLength": "Address must be at least 5 characters.",
+        "maxLength": "Address must not exceed 150 characters."
+      }
     }
-  },
-  "juratMonthYear": {
-    "required": true,
-    "type": "string",
-    "maxLength": 20,
-    "message": {
-      "required": "Month and year are required.",
-      "maxLength": "Month/Year must not exceed 20 characters."
-    }
-  },
-  "juratAffiant1": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Affiant 1 name is required.",
-      "minLength": "Affiant 1 name must be at least 2 characters.",
-      "maxLength": "Affiant 1 name must not exceed 100 characters."
-    }
-  },
-  "juratAffiant2": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Affiant 2 name is required.",
-      "minLength": "Affiant 2 name must be at least 2 characters.",
-      "maxLength": "Affiant 2 name must not exceed 100 characters."
-    }
-  },
-  "ctcNumber": {
-    "required": true,
-    "minLength": 3,
-    "maxLength": 30,
-    "message": {
-      "required": "Community Tax Certificate No. is required.",
-      "minLength": "CTC No. must be at least 3 characters.",
-      "maxLength": "CTC No. must not exceed 30 characters."
-    }
-  },
-  "ctcDateIssued": {
-    "required": true,
-    "type": "date",
-    "message": {
-      "required": "Date issued is required.",
-      "date": "Invalid date format."
-    }
-  },
-  "ctcPlaceIssued": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Place issued is required.",
-      "minLength": "Place issued must be at least 2 characters.",
-      "maxLength": "Place issued must not exceed 100 characters."
-    }
-  },
-  "adminName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Administering officer's name is required.",
-      "minLength": "Name must be at least 2 characters.",
-      "maxLength": "Name must not exceed 100 characters."
-    }
-  },
-  "adminPosition": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Position/Title is required.",
-      "minLength": "Position/Title must be at least 2 characters.",
-      "maxLength": "Position/Title must not exceed 100 characters."
-    }
-  },
-  "adminAddress": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 150,
-    "message": {
-      "required": "Administering officer's address is required.",
-      "minLength": "Address must be at least 2 characters.",
-      "maxLength": "Address must not exceed 150 characters."
-    }
-  },
-  "affiantName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Affiant name is required.",
-      "minLength": "Affiant name must be at least 2 characters.",
-      "maxLength": "Affiant name must not exceed 100 characters."
-    }
-  },
-  "civilStatus": {
-    "required": true,
-    "type": "enum",
-    "options": ["Single", "Married", "Divorced", "Widow/Widower"],
-    "message": {
-      "required": "Civil status is required.",
-      "enum": "Invalid civil status."
-    }
-  },
-  "address": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 150,
-    "message": {
-      "required": "Address is required.",
-      "minLength": "Address must be at least 2 characters.",
-      "maxLength": "Address must not exceed 150 characters."
-    }
-  },
-  "selfPob": {
-    "required": false,
-    "maxLength": 100,
-    "message": {
-      "maxLength": "Place of birth must not exceed 100 characters."
-    }
-  },
-  "selfDob": {
-    "required": false,
-    "type": "date",
-    "message": {
-      "date": "Invalid date format."
-    }
-  },
-  "childPob": {
-    "required": false,
-    "maxLength": 100,
-    "message": {
-      "maxLength": "Place of birth must not exceed 100 characters."
-    }
-  },
-  "childDob": {
-    "required": false,
-    "type": "date",
-    "message": {
-      "date": "Invalid date format."
-    }
-  },
-  "attendantName": {
-    "required": false,
-    "maxLength": 100,
-    "message": {
-      "maxLength": "Attendant name must not exceed 100 characters."
-    }
-  },
-  "attendantAddress": {
-    "required": false,
-    "maxLength": 150,
-    "message": {
-      "maxLength": "Attendant address must not exceed 150 characters."
-    }
-  },
-  "citizenship": {
-    "required": false,
-    "maxLength": 50,
-    "message": {
-      "maxLength": "Citizenship must not exceed 50 characters."
-    }
-  },
-  "parentsStatus": {
-    "required": false,
-    "type": "enum",
-    "options": ["married", "notMarried"],
-    "message": {
-      "enum": "Invalid parents status."
-    }
-  },
-  "marriageDate": {
-    "required": false,
-    "type": "date",
-    "message": {
-      "date": "Invalid date format."
-    }
-  },
-  "marriagePlace": {
-    "required": false,
-    "maxLength": 100,
-    "message": {
-      "maxLength": "Marriage place must not exceed 100 characters."
-    }
-  },
-  "reasonDelay": {
-    "required": false,
-    "maxLength": 300,
-    "message": {
-      "maxLength": "Reason for delay must not exceed 300 characters."
-    }
-  },
-  "spouseApplicant": {
-    "required": false,
-    "maxLength": 100,
-    "message": {
-      "maxLength": "Spouse name must not exceed 100 characters."
-    }
-  },
-  "spouseOwner": {
-    "required": false,
-    "maxLength": 100,
-    "message": {
-      "maxLength": "Spouse name must not exceed 100 characters."
-    }
-  },
-  "affiantSignature": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Affiant signature is required.",
-      "minLength": "Signature must be at least 2 characters.",
-      "maxLength": "Signature must not exceed 100 characters."
-    }
-  },
-  "juratPlace": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Place is required.",
-      "minLength": "Place must be at least 2 characters.",
-      "maxLength": "Place must not exceed 100 characters."
-    }
-  },
-  "ctcIssuedOn": {
-    "required": false,
-    "maxLength": 20,
-    "message": {
-      "maxLength": "Issued on must not exceed 20 characters."
-    }
-  },
-  "ctcIssuedAt": {
-    "required": false,
-    "maxLength": 100,
-    "message": {
-      "maxLength": "Issued at must not exceed 100 characters."
-    }
-  },
-  "adminOfficerSignature": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Signature is required.",
-      "minLength": "Signature must be at least 2 characters.",
-      "maxLength": "Signature must not exceed 100 characters."
-    }
-  },
-  "adminOfficerName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Name is required.",
-      "minLength": "Name must be at least 2 characters.",
-      "maxLength": "Name must not exceed 100 characters."
-    }
-  },
-  "adminOfficerPosition": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Position/Title is required.",
-      "minLength": "Position/Title must be at least 2 characters.",
-      "maxLength": "Position/Title must not exceed 100 characters."
-    }
-  },
-  "adminOfficerAddress": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 150,
-    "message": {
-      "required": "Address is required.",
-      "minLength": "Address must be at least 2 characters.",
-      "maxLength": "Address must not exceed 150 characters."
-    }
-  }
+  }  
 }
