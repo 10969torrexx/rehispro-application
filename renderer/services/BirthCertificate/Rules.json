@@ -1,401 +1,411 @@
 {
-  "province": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Province is required.",
-      "minLength": "Province must be at least 2 characters.",
-      "maxLength": "Province must not exceed 100 characters."
+  "page1": {
+    "province": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Province is required.",
+        "minLength": "Province must be at least 2 characters.",
+        "maxLength": "Province must not exceed 100 characters."
+      }
+    },
+    "city": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "City / Municipality is required.",
+        "minLength": "City must be at least 2 characters.",
+        "maxLength": "City must not exceed 100 characters."
+      }
+    },
+    "childFirstName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "First name is required.",
+        "minLength": "First name must be at least 2 characters.",
+        "maxLength": "First name must not exceed 50 characters."
+      }
+    },
+    "childMiddleName": {
+      "required": false,
+      "maxLength": 50,
+      "message": {
+        "maxLength": "Middle name must not exceed 50 characters."
+      }
+    },
+    "childLastName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "Last name is required.",
+        "minLength": "Last name must be at least 2 characters.",
+        "maxLength": "Last name must not exceed 50 characters."
+      }
+    },
+    "sex": {
+      "required": true,
+      "type": "enum",
+      "options": ["Male", "Female"],
+      "message": {
+        "required": "Sex is required.",
+        "enum": "Sex must be either Male or Female."
+      }
+    },
+    "dateOfBirth": {
+      "required": true,
+      "type": "date",
+      "message": {
+        "required": "Date of Birth is required.",
+        "date": "Invalid Date of Birth."
+      }
+    },
+    "typeOfBirth": {
+      "required": true,
+      "maxLength": 50,
+      "message": {
+        "required": "Type of Birth is required.",
+        "maxLength": "Type of Birth must not exceed 50 characters."
+      }
+    },
+    "multipleBirthOrder": {
+      "required": false,
+      "maxLength": 20,
+      "message": {
+        "maxLength": "Order must not exceed 20 characters."
+      }
+    },
+    "birthOrder": {
+      "required": true,
+      "maxLength": 20,
+      "message": {
+        "required": "Birth Order is required.",
+        "maxLength": "Birth Order must not exceed 20 characters."
+      }
+    },
+    "birthWeight": {
+      "required": true,
+      "type": "number",
+      "min": 0.1,
+      "max": 20,
+      "message": {
+        "required": "Weight at Birth is required.",
+        "number": "Weight must be a valid number.",
+        "min": "Weight must be at least 0.1 kg.",
+        "max": "Weight must not exceed 20 kg."
+      }
     }
   },
-  "city": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "City / Municipality is required.",
-      "minLength": "City must be at least 2 characters.",
-      "maxLength": "City must not exceed 100 characters."
+  "page2": {
+    "maidenFirstName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "Mother's first name is required.",
+        "minLength": "First name must be at least 2 characters.",
+        "maxLength": "First name must not exceed 50 characters."
+      }
+    },
+    "maidenMiddleName": {
+      "required": false,
+      "maxLength": 50,
+      "message": {
+        "maxLength": "Middle name must not exceed 50 characters."
+      }
+    },
+    "maidenLastName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "Mother's last name is required.",
+        "minLength": "Last name must be at least 2 characters.",
+        "maxLength": "Last name must not exceed 50 characters."
+      }
+    },
+    "citizenship": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "Citizenship is required.",
+        "minLength": "Citizenship must be at least 2 characters.",
+        "maxLength": "Citizenship must not exceed 50 characters."
+      }
+    },
+    "religion": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Religion is required.",
+        "minLength": "Religion must be at least 2 characters.",
+        "maxLength": "Religion must not exceed 100 characters."
+      }
+    },
+    "childrenBornAlive": {
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 50,
+      "message": {
+        "required": "Total number of children born alive is required.",
+        "number": "Must be a valid number.",
+        "min": "Children born alive cannot be less than 0.",
+        "max": "Children born alive cannot exceed 50."
+      }
+    },
+    "childrenStillLiving": {
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 50,
+      "message": {
+        "required": "Number of children still living is required.",
+        "number": "Must be a valid number.",
+        "min": "Children still living cannot be less than 0.",
+        "max": "Children still living cannot exceed 50."
+      }
+    },
+    "childrenDeceased": {
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 50,
+      "message": {
+        "required": "Number of deceased children is required.",
+        "number": "Must be a valid number.",
+        "min": "Children deceased cannot be less than 0.",
+        "max": "Children deceased cannot exceed 50."
+      }
+    },
+    "occupation": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Occupation is required.",
+        "minLength": "Occupation must be at least 2 characters.",
+        "maxLength": "Occupation must not exceed 100 characters."
+      }
+    },
+    "ageAtBirth": {
+      "required": true,
+      "type": "number",
+      "min": 12,
+      "max": 60,
+      "message": {
+        "required": "Mother's age at birth is required.",
+        "number": "Age must be a valid number.",
+        "min": "Age must be at least 12.",
+        "max": "Age must not exceed 60."
+      }
+    },
+    "residenceHouse": {
+      "required": true,
+      "maxLength": 100,
+      "message": {
+        "required": "House/Street/Barangay is required.",
+        "maxLength": "Address must not exceed 100 characters."
+      }
+    },
+    "residenceCity": {
+      "required": true,
+      "maxLength": 50,
+      "message": {
+        "required": "City/Municipality is required.",
+        "maxLength": "City must not exceed 50 characters."
+      }
+    },
+    "residenceProvince": {
+      "required": true,
+      "maxLength": 50,
+      "message": {
+        "required": "Province is required.",
+        "maxLength": "Province must not exceed 50 characters."
+      }
+    },
+    "residenceCountry": {
+      "required": true,
+      "maxLength": 50,
+      "message": {
+        "required": "Country is required.",
+        "maxLength": "Country must not exceed 50 characters."
+      }
     }
   },
-  "childFirstName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "First name is required.",
-      "minLength": "First name must be at least 2 characters.",
-      "maxLength": "First name must not exceed 50 characters."
+  "page3": {
+    "fatherFirstName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "Father's first name is required.",
+        "minLength": "Father's first name must be at least 2 characters.",
+        "maxLength": "Father's first name must not exceed 50 characters."
+      }
+    },
+    "fatherMiddleName": {
+      "required": false,
+      "maxLength": 50,
+      "message": {
+        "maxLength": "Father's middle name must not exceed 50 characters."
+      }
+    },
+    "fatherLastName": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "Father's last name is required.",
+        "minLength": "Father's last name must be at least 2 characters.",
+        "maxLength": "Father's last name must not exceed 50 characters."
+      }
+    },
+    "fatherCitizenship": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "Father's citizenship is required.",
+        "minLength": "Citizenship must be at least 2 characters.",
+        "maxLength": "Citizenship must not exceed 50 characters."
+      }
+    },
+    "fatherReligion": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 50,
+      "message": {
+        "required": "Father's religion is required.",
+        "minLength": "Religion must be at least 2 characters.",
+        "maxLength": "Religion must not exceed 50 characters."
+      }
+    },
+    "fatherOccupation": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Father's occupation is required.",
+        "minLength": "Occupation must be at least 2 characters.",
+        "maxLength": "Occupation must not exceed 100 characters."
+      }
+    },
+    "fatherAgeAtBirth": {
+      "required": true,
+      "type": "number",
+      "min": 10,
+      "max": 80,
+      "message": {
+        "required": "Father's age at the time of birth is required.",
+        "number": "Age must be a valid number.",
+        "min": "Age must be at least 10 years.",
+        "max": "Age must not exceed 80 years."
+      }
+    },
+    "fatherResidenceStreet": {
+      "required": true,
+      "maxLength": 150,
+      "message": {
+        "required": "Father's residence street address is required.",
+        "maxLength": "Street address must not exceed 150 characters."
+      }
+    },
+    "fatherResidenceCity": {
+      "required": true,
+      "maxLength": 100,
+      "message": {
+        "required": "Father's residence city is required.",
+        "maxLength": "City must not exceed 100 characters."
+      }
+    },
+    "fatherResidenceProvince": {
+      "required": true,
+      "maxLength": 100,
+      "message": {
+        "required": "Father's residence province is required.",
+        "maxLength": "Province must not exceed 100 characters."
+      }
+    },
+    "fatherResidenceCountry": {
+      "required": true,
+      "maxLength": 100,
+      "message": {
+        "required": "Father's residence country is required.",
+        "maxLength": "Country must not exceed 100 characters."
+      }
     }
   },
-  "childMiddleName": {
-    "required": false,
-    "maxLength": 50,
-    "message": {
-      "maxLength": "Middle name must not exceed 50 characters."
+  "page4": {
+    "dateOfMarriage": {
+      "required": true,
+      "type": "date",
+      "message": "Please provide the date of marriage."
+    },
+    "marriageCity": {
+      "required": true,
+      "type": "string",
+      "message": "Marriage city/municipality is required."
+    },
+    "marriageProvince": {
+      "required": true,
+      "type": "string",
+      "message": "Marriage province is required."
+    },
+    "marriageCountry": {
+      "required": true,
+      "type": "string",
+      "message": "Marriage country is required."
     }
   },
-  "childLastName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "Last name is required.",
-      "minLength": "Last name must be at least 2 characters.",
-      "maxLength": "Last name must not exceed 50 characters."
+  "page5": {
+    "attendantPhysician": {
+      "required": false,
+      "type": "boolean",
+      "message": "Check if the attendant was a physician."
+    },
+    "attendantNurse": {
+      "required": false,
+      "type": "boolean",
+      "message": "Check if the attendant was a nurse."
+    },
+    "attendantMidwife": {
+      "required": false,
+      "type": "boolean",
+      "message": "Check if the attendant was a midwife."
+    },
+    "attendantHilot": {
+      "required": false,
+      "type": "boolean",
+      "message": "Check if the attendant was a hilot (traditional birth attendant)."
+    },
+    "attendantOthers": {
+      "required": false,
+      "type": "boolean",
+      "message": "Check if the attendant was someone else."
+    },
+    "attendantOthersSpecify": {
+      "required": false,
+      "type": "string",
+      "message": "If 'Others' is checked, please specify the attendant."
+    },
+    "dateOfAttendance": {
+      "required": true,
+      "type": "date",
+      "message": "Please provide the date of attendance."
+    },
+    "attendantNameTitle": {
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "message": "Name and title of attendant is required and must be at least 3 characters."
     }
-  },
-  "sex": {
-    "required": true,
-    "type": "enum",
-    "options": ["Male", "Female"],
-    "message": {
-      "required": "Sex is required.",
-      "enum": "Sex must be either Male or Female."
-    }
-  },
-  "dateOfBirth": {
-    "required": true,
-    "type": "date",
-    "message": {
-      "required": "Date of Birth is required.",
-      "date": "Invalid Date of Birth."
-    }
-  },
-  "typeOfBirth": {
-    "required": true,
-    "maxLength": 50,
-    "message": {
-      "required": "Type of Birth is required.",
-      "maxLength": "Type of Birth must not exceed 50 characters."
-    }
-  },
-  "multipleBirthOrder": {
-    "required": false,
-    "maxLength": 20,
-    "message": {
-      "maxLength": "Order must not exceed 20 characters."
-    }
-  },
-  "birthOrder": {
-    "required": true,
-    "maxLength": 20,
-    "message": {
-      "required": "Birth Order is required.",
-      "maxLength": "Birth Order must not exceed 20 characters."
-    }
-  },
-  "birthWeight": {
-    "required": true,
-    "type": "number",
-    "min": 0.1,
-    "max": 20,
-    "message": {
-      "required": "Weight at Birth is required.",
-      "number": "Weight must be a valid number.",
-      "min": "Weight must be at least 0.1 kg.",
-      "max": "Weight must not exceed 20 kg."
-    }
-  },
-  "maidenFirstName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "Mother's first name is required.",
-      "minLength": "First name must be at least 2 characters.",
-      "maxLength": "First name must not exceed 50 characters."
-    }
-  },
-  "maidenMiddleName": {
-    "required": false,
-    "maxLength": 50,
-    "message": {
-      "maxLength": "Middle name must not exceed 50 characters."
-    }
-  },
-  "maidenLastName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "Mother's last name is required.",
-      "minLength": "Last name must be at least 2 characters.",
-      "maxLength": "Last name must not exceed 50 characters."
-    }
-  },
-  "citizenship": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "Citizenship is required.",
-      "minLength": "Citizenship must be at least 2 characters.",
-      "maxLength": "Citizenship must not exceed 50 characters."
-    }
-  },
-  "religion": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Religion is required.",
-      "minLength": "Religion must be at least 2 characters.",
-      "maxLength": "Religion must not exceed 100 characters."
-    }
-  },
-  "childrenBornAlive": {
-    "required": true,
-    "type": "number",
-    "min": 0,
-    "max": 50,
-    "message": {
-      "required": "Total number of children born alive is required.",
-      "number": "Must be a valid number.",
-      "min": "Children born alive cannot be less than 0.",
-      "max": "Children born alive cannot exceed 50."
-    }
-  },
-  "childrenStillLiving": {
-    "required": true,
-    "type": "number",
-    "min": 0,
-    "max": 50,
-    "message": {
-      "required": "Number of children still living is required.",
-      "number": "Must be a valid number.",
-      "min": "Children still living cannot be less than 0.",
-      "max": "Children still living cannot exceed 50."
-    }
-  },
-  "childrenDeceased": {
-    "required": true,
-    "type": "number",
-    "min": 0,
-    "max": 50,
-    "message": {
-      "required": "Number of deceased children is required.",
-      "number": "Must be a valid number.",
-      "min": "Children deceased cannot be less than 0.",
-      "max": "Children deceased cannot exceed 50."
-    }
-  },
-  "occupation": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Occupation is required.",
-      "minLength": "Occupation must be at least 2 characters.",
-      "maxLength": "Occupation must not exceed 100 characters."
-    }
-  },
-  "ageAtBirth": {
-    "required": true,
-    "type": "number",
-    "min": 12,
-    "max": 60,
-    "message": {
-      "required": "Mother's age at birth is required.",
-      "number": "Age must be a valid number.",
-      "min": "Age must be at least 12.",
-      "max": "Age must not exceed 60."
-    }
-  },
-  "residenceHouse": {
-    "required": true,
-    "maxLength": 100,
-    "message": {
-      "required": "House/Street/Barangay is required.",
-      "maxLength": "Address must not exceed 100 characters."
-    }
-  },
-  "residenceCity": {
-    "required": true,
-    "maxLength": 50,
-    "message": {
-      "required": "City/Municipality is required.",
-      "maxLength": "City must not exceed 50 characters."
-    }
-  },
-  "residenceProvince": {
-    "required": true,
-    "maxLength": 50,
-    "message": {
-      "required": "Province is required.",
-      "maxLength": "Province must not exceed 50 characters."
-    }
-  },
-  "residenceCountry": {
-    "required": true,
-    "maxLength": 50,
-    "message": {
-      "required": "Country is required.",
-      "maxLength": "Country must not exceed 50 characters."
-    }
-  },
-  "fatherFirstName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "Father's first name is required.",
-      "minLength": "Father's first name must be at least 2 characters.",
-      "maxLength": "Father's first name must not exceed 50 characters."
-    }
-  },
-  "fatherMiddleName": {
-    "required": false,
-    "maxLength": 50,
-    "message": {
-      "maxLength": "Father's middle name must not exceed 50 characters."
-    }
-  },
-  "fatherLastName": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "Father's last name is required.",
-      "minLength": "Father's last name must be at least 2 characters.",
-      "maxLength": "Father's last name must not exceed 50 characters."
-    }
-  },
-  "fatherCitizenship": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "Father's citizenship is required.",
-      "minLength": "Citizenship must be at least 2 characters.",
-      "maxLength": "Citizenship must not exceed 50 characters."
-    }
-  },
-  "fatherReligion": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 50,
-    "message": {
-      "required": "Father's religion is required.",
-      "minLength": "Religion must be at least 2 characters.",
-      "maxLength": "Religion must not exceed 50 characters."
-    }
-  },
-  "fatherOccupation": {
-    "required": true,
-    "minLength": 2,
-    "maxLength": 100,
-    "message": {
-      "required": "Father's occupation is required.",
-      "minLength": "Occupation must be at least 2 characters.",
-      "maxLength": "Occupation must not exceed 100 characters."
-    }
-  },
-  "fatherAgeAtBirth": {
-    "required": true,
-    "type": "number",
-    "min": 10,
-    "max": 80,
-    "message": {
-      "required": "Father's age at the time of birth is required.",
-      "number": "Age must be a valid number.",
-      "min": "Age must be at least 10 years.",
-      "max": "Age must not exceed 80 years."
-    }
-  },
-  "fatherResidenceStreet": {
-    "required": true,
-    "maxLength": 150,
-    "message": {
-      "required": "Father's residence street address is required.",
-      "maxLength": "Street address must not exceed 150 characters."
-    }
-  },
-  "fatherResidenceCity": {
-    "required": true,
-    "maxLength": 100,
-    "message": {
-      "required": "Father's residence city is required.",
-      "maxLength": "City must not exceed 100 characters."
-    }
-  },
-  "fatherResidenceProvince": {
-    "required": true,
-    "maxLength": 100,
-    "message": {
-      "required": "Father's residence province is required.",
-      "maxLength": "Province must not exceed 100 characters."
-    }
-  },
-  "fatherResidenceCountry": {
-    "required": true,
-    "maxLength": 100,
-    "message": {
-      "required": "Father's residence country is required.",
-      "maxLength": "Country must not exceed 100 characters."
-    }
-  },
-  "dateOfMarriage": {
-    "required": true,
-    "type": "date",
-    "message": "Please provide the date of marriage."
-  },
-  "marriageCity": {
-    "required": true,
-    "type": "string",
-    "message": "Marriage city/municipality is required."
-  },
-  "marriageProvince": {
-    "required": true,
-    "type": "string",
-    "message": "Marriage province is required."
-  },
-  "marriageCountry": {
-    "required": true,
-    "type": "string",
-    "message": "Marriage country is required."
-  },
-  "attendantPhysician": {
-    "required": false,
-    "type": "boolean",
-    "message": "Check if the attendant was a physician."
-  },
-  "attendantNurse": {
-    "required": false,
-    "type": "boolean",
-    "message": "Check if the attendant was a nurse."
-  },
-  "attendantMidwife": {
-    "required": false,
-    "type": "boolean",
-    "message": "Check if the attendant was a midwife."
-  },
-  "attendantHilot": {
-    "required": false,
-    "type": "boolean",
-    "message": "Check if the attendant was a hilot (traditional birth attendant)."
-  },
-  "attendantOthers": {
-    "required": false,
-    "type": "boolean",
-    "message": "Check if the attendant was someone else."
-  },
-  "attendantOthersSpecify": {
-    "required": false,
-    "type": "string",
-    "message": "If 'Others' is checked, please specify the attendant."
-  },
-  "dateOfAttendance": {
-    "required": true,
-    "type": "date",
-    "message": "Please provide the date of attendance."
-  },
-  "attendantNameTitle": {
-    "required": true,
-    "type": "string",
-    "minLength": 3,
-    "message": "Name and title of attendant is required and must be at least 3 characters."
   },
   "birthTime": {
     "required": true,
