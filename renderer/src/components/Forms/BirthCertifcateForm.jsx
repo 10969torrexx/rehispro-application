@@ -1,6 +1,8 @@
 import React from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
+import { BirthCertificationValidation } from '@services';
+
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
     const pageTitles = [ 
@@ -18,6 +20,30 @@ export default function BirthCertifcateForm() {
         "Affidavit for Delayed Registration of Birth",
         "Affidavit for Delayed Registration of Birth (Cont.)"
     ];
+
+    //TODO: handle form data
+    const [formData, setFormData] = React.useState({
+        province: '',
+        city: '',
+        childFirstName: '',
+        childMiddleName: '',
+        childLastName: '',
+        sex: '',
+        dateOfBirth: '',
+        typeOfBirth: '',
+        multipleBirthOrder: '',
+        birthOrder: '',
+        birthWeight: '',
+        maidenFirstName: '',
+        maidenMiddleName: '',
+        maidenLastName: '',
+        citizenship: '',
+        religion: '',
+        childrenBornAlive: '',
+        childrenStillLiving: '',
+        childrenDeceased: '',
+        occupation: '',
+    });
     
     const handlePageChange = (direction) => {
         if (direction === 'next') {
