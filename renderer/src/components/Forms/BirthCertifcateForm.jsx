@@ -26,7 +26,7 @@ export default function BirthCertifcateForm() {
     //TODO: handle form data
     const [formData, setFormData] = React.useState({
         // Page 1 - Child Information
-        child: {
+        page1: {
             province: "",
             city: "",
             childFirstName: "",
@@ -41,7 +41,7 @@ export default function BirthCertifcateForm() {
         },
       
         // Page 2 - Mother Information
-        mother: {
+        page2: {
             maidenFirstName: "",
             maidenMiddleName: "",
             maidenLastName: "",
@@ -59,7 +59,7 @@ export default function BirthCertifcateForm() {
         },
       
         // Page 3 - Father Information
-        father: {
+        page3: {
             firstName: "",
             middleName: "",
             lastName: "",
@@ -74,7 +74,7 @@ export default function BirthCertifcateForm() {
         },
       
         // Page 4 - Marriage Information
-        marriage: {
+        page4: {
             dateOfMarriage: "",
             marriageCity: "",
             marriageProvince: "",
@@ -82,7 +82,7 @@ export default function BirthCertifcateForm() {
         },
       
         // Page 5 - Attendant Information
-        attendant: {
+        page5: {
             physician: false,
             nurse: false,
             midwife: false,
@@ -94,7 +94,7 @@ export default function BirthCertifcateForm() {
         },
 
         // Page 6 - Attendant Certification
-        attendantCertification: {
+        page6: {
             birthTime: "",
             birthDate: "",
             name: "",
@@ -105,52 +105,45 @@ export default function BirthCertifcateForm() {
         },
 
         // Page 7 - Informant & Prepared By
-        informant: {
-            signature: "",
-            name: "",
-            relationship: "",
-            address: "",
-            date: ""
-        },
-
-        preparedBy: {
-            signature: "",
-            name: "",
-            title: "",
-            date: ""
+        page7: {
+            informantSignature: "",
+            informantName: "",
+            informantRelationship: "",
+            informantAddress: "",
+            informantDate: "",
+            preparedBySignature: "",
+            preparedByName: "",
+            preparedByTitle: "",
+            preparedByDate: ""
         },
 
         // Page 8 - Civil Registrar Section
-        receivedBy: {
-            signature: "",
-            name: "",
-            title: "",
-            date: ""
+        page8: {
+            receivedSignature: "",
+            receivedName: "",
+            receivedTitle: "",
+            receivedDate: "",
+            registrarSignature: "",
+            registrarName: "",
+            registrarTitle: "",
+            registrarDate: ""
         },
 
-        registrar: {
-            signature: "",
-            name: "",
-            title: "",
-            date: ""
-        },
         // Page 9 - Remarks / Annotations
-        remarks: {
-            text: "",       // for <textarea name="remarks">
-            officeBoxes: [] // if you want to capture the 30 boxes later (e.g., array of boolean,s or strings)
+        page9: {
+            remarks: "",      
+            officeBoxes: [] 
         },
         // Page 10 - Affidavit of Acknowledgment
-        affidavit: {
+        page10: {
             motherName: "",
             fatherName: "",
             childName: "",
             childBirthDate: "",
             childBirthPlace: "",
-            motherSignature: "", // optional if you want digital input
-            fatherSignature: ""  // optional if you want digital input
         },
         // Page 11 - Jurat
-        jurat: {
+        page11: {
             juratDay: "",
             juratMonthYear: "",
             juratAffiant1: "",
@@ -164,12 +157,11 @@ export default function BirthCertifcateForm() {
             adminSignature: "" // optional if you want a text input for digital signature
         },
         // --- Page 12: Affidavit ---
-        affidavitApplicant: {
+        page12: {
             affiantName: "",
             civilStatus: "",
             address: "",
 
-            // applicant (self or child)
             applicantType: "", // "self" or "child"
             selfPob: "",
             selfDob: "",
@@ -192,7 +184,7 @@ export default function BirthCertifcateForm() {
             affiantSignature: "",
         },
         // --- Page 13: Final Jurat / Affidavit ---
-        finalJurat: {
+        page13: {
             juratDay13: "",
             juratMonthYear13: "",
             juratPlace13: "",
