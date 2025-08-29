@@ -24,14 +24,14 @@ export default function BirthCertifcateForm() {
     ];
 
     //TODO: handle form data
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = React.useState({
         // Page 1 - Child Information
         child: {
             province: "",
             city: "",
-            firstName: "",
-            middleName: "",
-            lastName: "",
+            childFirstName: "",
+            childMiddleName: "",
+            childLastName: "",
             sex: "",
             dateOfBirth: "",
             typeOfBirth: "",
@@ -205,7 +205,18 @@ export default function BirthCertifcateForm() {
             adminOfficerAddress13: "",
         }
     });
-    
+
+    const handleInputChange = (event, section) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [section]: {
+                ...prevData[section],
+                [name]: value
+            }
+        }));
+    };
+
     const handlePageChange = (direction) => {
         if (direction === 'next') {
             setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
@@ -226,10 +237,12 @@ export default function BirthCertifcateForm() {
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">Province</label>
                                     <input
-                                    type="text"
-                                    name="province"
-                                    placeholder="Province"
-                                    className="common-input"
+                                        type="text"
+                                        name="province"
+                                        placeholder="Province"
+                                        className="common-input"
+                                        value={formData.child.province}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
                             
@@ -240,6 +253,8 @@ export default function BirthCertifcateForm() {
                                         name="city"
                                         placeholder="City / Municipality"
                                         className="common-input"
+                                        value={formData.child.city}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
                             </div>
@@ -253,18 +268,24 @@ export default function BirthCertifcateForm() {
                                         name="childFirstName"
                                         placeholder="First"
                                         className="common-input"
+                                        value={formData.child.childFirstName}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                     <input
                                         type="text"
                                         name="childMiddleName"
                                         placeholder="Middle"
                                         className="common-input"
+                                        value={formData.child.childMiddleName}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                     <input
                                         type="text"
                                         name="childLastName"
                                         placeholder="Last"
                                         className="common-input"
+                                        value={formData.child.childLastName}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
                             </div>
@@ -273,7 +294,10 @@ export default function BirthCertifcateForm() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                 <div>
                                     <label className="block text-sm font-medium">Sex</label>
-                                    <select name="sex" className="common-input w-full">
+                                    <select name="sex" className="common-input w-full"
+                                        value={formData.child.sex}
+                                        onChange={(e) => handleInputChange(e, 'child')}
+                                    >
                                         <option value="">Select</option>
                                         <option value={capitalizeFirst(BirthCertificate.SexTypes.MALE)}>{ capitalizeFirst(BirthCertificate.SexTypes.MALE) }</option>
                                         <option value={capitalizeFirst(BirthCertificate.SexTypes.FEMALE)}>{ capitalizeFirst(BirthCertificate.SexTypes.FEMALE) }</option>
@@ -281,7 +305,10 @@ export default function BirthCertifcateForm() {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Date of Birth</label>
-                                    <input type="date" name="dateOfBirth" className="common-input w-full" />
+                                    <input type="date" name="dateOfBirth" className="common-input w-full"
+                                        value={formData.child.dateOfBirth}
+                                        onChange={(e) => handleInputChange(e, 'child')}
+                                    />
                                 </div>
                             </div>
                     
@@ -296,6 +323,8 @@ export default function BirthCertifcateForm() {
                                         name="typeOfBirth"
                                         placeholder="Type of Birth"
                                         className="common-input"
+                                        value={formData.child.typeOfBirth}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
                         
@@ -308,6 +337,8 @@ export default function BirthCertifcateForm() {
                                         name="multipleBirthOrder"
                                         placeholder="Order"
                                         className="common-input"
+                                        value={formData.child.multipleBirthOrder}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
                             </div>
@@ -323,6 +354,8 @@ export default function BirthCertifcateForm() {
                                         name="birthOrder"
                                         placeholder="Birth Order"
                                         className="common-input"
+                                        value={formData.child.birthOrder}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
                         
@@ -333,6 +366,8 @@ export default function BirthCertifcateForm() {
                                         name="birthWeight"
                                         placeholder="Weight"
                                         className="common-input"
+                                        value={formData.child.birthWeight}
+                                        onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
                             </div>
