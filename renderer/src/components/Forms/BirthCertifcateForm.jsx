@@ -2,7 +2,8 @@ import React from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertificationValidation } from '@services';
-import { UserSex } from '@enums';
+import { BirthCertificate } from '@enums';
+import { capitalizeFirst } from '../../myTools/myTools';
 
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
@@ -115,8 +116,8 @@ export default function BirthCertifcateForm() {
                                     <label className="block text-sm font-medium">Sex</label>
                                     <select name="sex" className="common-input w-full">
                                         <option value="">Select</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        <option value={capitalizeFirst(BirthCertificate.SexTypes.MALE)}>{ capitalizeFirst(BirthCertificate.SexTypes.MALE) }</option>
+                                        <option value={capitalizeFirst(BirthCertificate.SexTypes.FEMALE)}>{ capitalizeFirst(BirthCertificate.SexTypes.FEMALE) }</option>
                                     </select>
                                 </div>
                                 <div>
