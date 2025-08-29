@@ -2,6 +2,7 @@ import React from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertificationValidation } from '@services';
+import { UserSex } from '@enums';
 
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
