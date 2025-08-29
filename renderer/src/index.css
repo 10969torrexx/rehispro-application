@@ -178,3 +178,8 @@ select {
     border-color: #a855f7;
   }
 }
+
+.input-error {
+  border: 2px solid #ef4444 !important; /* Tailwind red-500 */
+  box-sizing: border-box !important;
+}

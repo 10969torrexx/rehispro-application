@@ -9,7 +9,6 @@ import Rules from './Rules.json';
 export function validateForm(data, page) {
   const errors = {};
   const rules = Rules[`page${page}`];
-  console.log('Validating form data against rules:', rules);
   for (const field in rules) {
     const value = data[field];
     const rule = rules[field];

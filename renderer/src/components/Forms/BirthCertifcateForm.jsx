@@ -5,7 +5,8 @@ import { BirthCertValidation } from '@services';
 import { BirthCertificate } from '@enums';
 import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
-
+import { ErrorMessages } from '@components';
+ 
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
     const pageTitles = [ 
@@ -199,6 +200,7 @@ export default function BirthCertifcateForm() {
         }
     });
 
+    //TODO: handle change inputs on pages
     const handleInputChange = (event, section) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
@@ -210,10 +212,13 @@ export default function BirthCertifcateForm() {
         }));
     };
 
+    //TODO: handle changes pages & validations
+    const [errors, setErrors] = React.useState({});
     const handlePageChange = (direction) => {
         if (direction === 'next') {
-            const errors = BirthCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
-            if (errors) {
+            const response = BirthCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
+            if (response) {
+                setErrors(response);
                 toast.error("Please fix the errors in the form.");
             } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
@@ -221,7 +226,7 @@ export default function BirthCertifcateForm() {
         } else if (direction === 'prev') {
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
         }
-    }
+    };
 
     return (
         <>
@@ -238,10 +243,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="province"
                                         placeholder="Province"
-                                        className="common-input"
+                                        className={`common-input ${errors.province ? 'input-error' : ''}`}
                                         value={formData.page1.province}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.province && <ErrorMessages errors={errors.province} />}
                                 </div>
                             
                                 <div className="flex flex-col">
@@ -250,10 +256,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="city"
                                         placeholder="City / Municipality"
-                                        className="common-input"
+                                        className={`common-input ${errors.city ? 'input-error' : ''}`}
                                         value={formData.page1.city}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.city && <ErrorMessages errors={errors.city} />}
                                 </div>
                             </div>
                     
@@ -261,30 +268,39 @@ export default function BirthCertifcateForm() {
                             <div>
                                 <label className="block text-sm font-medium">Child’s Name</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                    <input
-                                        type="text"
-                                        name="childFirstName"
-                                        placeholder="First"
-                                        className="common-input"
-                                        value={formData.page1.childFirstName}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="childMiddleName"
-                                        placeholder="Middle"
-                                        className="common-input"
-                                        value={formData.page1.childMiddleName}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="childLastName"
-                                        placeholder="Last"
-                                        className="common-input"
-                                        value={formData.page1.childLastName}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="childFirstName"
+                                            placeholder="First"
+                                            className={`common-input ${errors.childFirstName ? 'input-error' : ''}`}
+                                            value={formData.page1.childFirstName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.childFirstName && <ErrorMessages errors={errors.childFirstName} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="childMiddleName"
+                                            placeholder="Middle"
+                                            className={`common-input ${errors.childMiddleName ? 'input-error' : ''}`}
+                                            value={formData.page1.childMiddleName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.childMiddleName && <ErrorMessages errors={errors.childMiddleName} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="childLastName"
+                                            placeholder="Last"
+                                            className={`common-input ${errors.childLastName ? 'input-error' : ''}`}
+                                            value={formData.page1.childLastName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.childLastName && <ErrorMessages errors={errors.childLastName} />}
+                                    </div>
                                 </div>
                             </div>
                     
@@ -292,7 +308,7 @@ export default function BirthCertifcateForm() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                 <div>
                                     <label className="block text-sm font-medium">Sex</label>
-                                    <select name="sex" className="common-input w-full"
+                                    <select name="sex" className={`common-input w-full ${errors.sex ? 'input-error' : ''}`}
                                         value={formData.page1.sex}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     >
@@ -300,13 +316,15 @@ export default function BirthCertifcateForm() {
                                         <option value={capitalizeFirst(BirthCertificate.SexTypes.MALE)}>{ capitalizeFirst(BirthCertificate.SexTypes.MALE) }</option>
                                         <option value={capitalizeFirst(BirthCertificate.SexTypes.FEMALE)}>{ capitalizeFirst(BirthCertificate.SexTypes.FEMALE) }</option>
                                     </select>
+                                    {errors.sex && <ErrorMessages errors={errors.sex} />}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Date of Birth</label>
-                                    <input type="date" name="dateOfBirth" className="common-input w-full"
+                                    <input type="date" name="dateOfBirth" className={`common-input w-full ${errors.dateOfBirth ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfBirth}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.dateOfBirth && <ErrorMessages errors={errors.dateOfBirth} />}
                                 </div>
                             </div>
                     
@@ -320,10 +338,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="typeOfBirth"
                                         placeholder="Type of Birth"
-                                        className="common-input"
+                                        className={`common-input ${errors.typeOfBirth ? 'input-error' : ''}`}
                                         value={formData.page1.typeOfBirth}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.typeOfBirth && <ErrorMessages errors={errors.typeOfBirth} />}
                                 </div>
                         
                                 <div className="flex flex-col">
@@ -334,10 +353,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="multipleBirthOrder"
                                         placeholder="Order"
-                                        className="common-input"
+                                        className={`common-input ${errors.multipleBirthOrder ? 'input-error' : ''}`}
                                         value={formData.page1.multipleBirthOrder}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.multipleBirthOrder && <ErrorMessages errors={errors.multipleBirthOrder} />}
                                 </div>
                             </div>
                     
@@ -351,10 +371,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="birthOrder"
                                         placeholder="Birth Order"
-                                        className="common-input"
+                                        className={`common-input ${errors.birthOrder ? 'input-error' : ''}`}
                                         value={formData.page1.birthOrder}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.birthOrder && <ErrorMessages errors={errors.birthOrder} />}
                                 </div>
                         
                                 <div className="flex flex-col">
@@ -363,10 +384,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="birthWeight"
                                         placeholder="Weight"
-                                        className="common-input"
+                                        className={`common-input ${errors.birthWeight ? 'input-error' : ''}`}
                                         value={formData.page1.birthWeight}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.birthWeight && <ErrorMessages errors={errors.birthWeight} />}
                                 </div>
                             </div>
                         </div>
