@@ -24,27 +24,186 @@ export default function BirthCertifcateForm() {
     ];
 
     //TODO: handle form data
-    const [formData, setFormData] = React.useState({
-        province: '',
-        city: '',
-        childFirstName: '',
-        childMiddleName: '',
-        childLastName: '',
-        sex: '',
-        dateOfBirth: '',
-        typeOfBirth: '',
-        multipleBirthOrder: '',
-        birthOrder: '',
-        birthWeight: '',
-        maidenFirstName: '',
-        maidenMiddleName: '',
-        maidenLastName: '',
-        citizenship: '',
-        religion: '',
-        childrenBornAlive: '',
-        childrenStillLiving: '',
-        childrenDeceased: '',
-        occupation: '',
+    const [formData, setFormData] = useState({
+        // Page 1 - Child Information
+        child: {
+            province: "",
+            city: "",
+            firstName: "",
+            middleName: "",
+            lastName: "",
+            sex: "",
+            dateOfBirth: "",
+            typeOfBirth: "",
+            multipleBirthOrder: "",
+            birthOrder: "",
+            birthWeight: ""
+        },
+      
+        // Page 2 - Mother Information
+        mother: {
+            maidenFirstName: "",
+            maidenMiddleName: "",
+            maidenLastName: "",
+            citizenship: "",
+            religion: "",
+            childrenBornAlive: "",
+            childrenStillLiving: "",
+            childrenDeceased: "",
+            occupation: "",
+            ageAtBirth: "",
+            residenceHouse: "",
+            residenceCity: "",
+            residenceProvince: "",
+            residenceCountry: ""
+        },
+      
+        // Page 3 - Father Information
+        father: {
+            firstName: "",
+            middleName: "",
+            lastName: "",
+            citizenship: "",
+            religion: "",
+            occupation: "",
+            ageAtBirth: "",
+            residenceStreet: "",
+            residenceCity: "",
+            residenceProvince: "",
+            residenceCountry: ""
+        },
+      
+        // Page 4 - Marriage Information
+        marriage: {
+            dateOfMarriage: "",
+            marriageCity: "",
+            marriageProvince: "",
+            marriageCountry: ""
+        },
+      
+        // Page 5 - Attendant Information
+        attendant: {
+            physician: false,
+            nurse: false,
+            midwife: false,
+            hilot: false,
+            others: false,
+            othersSpecify: "",
+            dateOfAttendance: "",
+            nameTitle: ""
+        },
+
+        // Page 6 - Attendant Certification
+        attendantCertification: {
+            birthTime: "",
+            birthDate: "",
+            name: "",
+            title: "",
+            address: "",
+            dateSigned: "",
+            signature: ""
+        },
+
+        // Page 7 - Informant & Prepared By
+        informant: {
+            signature: "",
+            name: "",
+            relationship: "",
+            address: "",
+            date: ""
+        },
+
+        preparedBy: {
+            signature: "",
+            name: "",
+            title: "",
+            date: ""
+        },
+
+        // Page 8 - Civil Registrar Section
+        receivedBy: {
+            signature: "",
+            name: "",
+            title: "",
+            date: ""
+        },
+
+        registrar: {
+            signature: "",
+            name: "",
+            title: "",
+            date: ""
+        },
+        // Page 9 - Remarks / Annotations
+        remarks: {
+            text: "",       // for <textarea name="remarks">
+            officeBoxes: [] // if you want to capture the 30 boxes later (e.g., array of boolean,s or strings)
+        },
+        // Page 10 - Affidavit of Acknowledgment
+        affidavit: {
+            motherName: "",
+            fatherName: "",
+            childName: "",
+            childBirthDate: "",
+            childBirthPlace: "",
+            motherSignature: "", // optional if you want digital input
+            fatherSignature: ""  // optional if you want digital input
+        },
+        // Page 11 - Jurat
+        jurat: {
+            juratDay: "",
+            juratMonthYear: "",
+            juratAffiant1: "",
+            juratAffiant2: "",
+            ctcNumber: "",
+            ctcDateIssued: "",
+            ctcPlaceIssued: "",
+            adminName: "",
+            adminPosition: "",
+            adminAddress: "",
+            adminSignature: "" // optional if you want a text input for digital signature
+        },
+        // --- Page 12: Affidavit ---
+        affidavitApplicant: {
+            affiantName: "",
+            civilStatus: "",
+            address: "",
+
+            // applicant (self or child)
+            applicantType: "", // "self" or "child"
+            selfPob: "",
+            selfDob: "",
+            childName: "",
+            childPob: "",
+            childDob: "",
+
+            attendantName: "",
+            attendantAddress: "",
+            citizenship: "",
+
+            parentsStatus: "", // "married" or "notMarried"
+            marriageDate: "",
+            marriagePlace: "",
+            fatherName: "",
+
+            reasonDelay: "",
+            spouseApplicant: "",
+            spouseOwner: "",
+            affiantSignature: "",
+        },
+        // --- Page 13: Final Jurat / Affidavit ---
+        finalJurat: {
+            juratDay13: "",
+            juratMonthYear13: "",
+            juratPlace13: "",
+            ctcNumber13: "",
+            ctcIssuedOn13: "",
+            ctcIssuedAt13: "",
+            adminOfficerSignature13: "",
+            adminOfficerName13: "",
+            adminOfficerPosition13: "",
+            adminOfficerAddress13: "",
+        }
     });
     
     const handlePageChange = (direction) => {
