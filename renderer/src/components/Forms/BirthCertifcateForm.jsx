@@ -1,9 +1,10 @@
 import React from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
-import { BirthCertificationValidation } from '@services';
+import { BirthCertValidation } from '@services';
 import { BirthCertificate } from '@enums';
 import { capitalizeFirst } from '../../myTools/myTools';
+import { toast } from "react-toastify";
 
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
@@ -211,7 +212,12 @@ export default function BirthCertifcateForm() {
 
     const handlePageChange = (direction) => {
         if (direction === 'next') {
-            setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
+            const errors = BirthCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
+            if (errors) {
+                toast.error("Please fix the errors in the form.");
+            } else {
+                setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
+            }
         } else if (direction === 'prev') {
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
         }
@@ -234,7 +240,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Province"
                                         className="common-input"
                                         value={formData.page1.province}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                             
@@ -246,7 +252,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="City / Municipality"
                                         className="common-input"
                                         value={formData.page1.city}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                             </div>
@@ -261,7 +267,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="First"
                                         className="common-input"
                                         value={formData.page1.childFirstName}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                     <input
                                         type="text"
@@ -269,7 +275,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Middle"
                                         className="common-input"
                                         value={formData.page1.childMiddleName}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                     <input
                                         type="text"
@@ -277,7 +283,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Last"
                                         className="common-input"
                                         value={formData.page1.childLastName}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                             </div>
@@ -288,7 +294,7 @@ export default function BirthCertifcateForm() {
                                     <label className="block text-sm font-medium">Sex</label>
                                     <select name="sex" className="common-input w-full"
                                         value={formData.page1.sex}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     >
                                         <option value="">Select</option>
                                         <option value={capitalizeFirst(BirthCertificate.SexTypes.MALE)}>{ capitalizeFirst(BirthCertificate.SexTypes.MALE) }</option>
@@ -299,7 +305,7 @@ export default function BirthCertifcateForm() {
                                     <label className="block text-sm font-medium">Date of Birth</label>
                                     <input type="date" name="dateOfBirth" className="common-input w-full"
                                         value={formData.page1.dateOfBirth}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                             </div>
@@ -316,7 +322,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Type of Birth"
                                         className="common-input"
                                         value={formData.page1.typeOfBirth}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                         
@@ -330,7 +336,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Order"
                                         className="common-input"
                                         value={formData.page1.multipleBirthOrder}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                             </div>
@@ -347,7 +353,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Birth Order"
                                         className="common-input"
                                         value={formData.page1.birthOrder}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                         
@@ -359,7 +365,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Weight"
                                         className="common-input"
                                         value={formData.page1.birthWeight}
-                                        onChange={(e) => handleInputChange(e, 'child')}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                             </div>
