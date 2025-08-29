@@ -233,7 +233,7 @@ export default function BirthCertifcateForm() {
                                         name="province"
                                         placeholder="Province"
                                         className="common-input"
-                                        value={formData.child.province}
+                                        value={formData.page1.province}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
@@ -245,7 +245,7 @@ export default function BirthCertifcateForm() {
                                         name="city"
                                         placeholder="City / Municipality"
                                         className="common-input"
-                                        value={formData.child.city}
+                                        value={formData.page1.city}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
@@ -260,7 +260,7 @@ export default function BirthCertifcateForm() {
                                         name="childFirstName"
                                         placeholder="First"
                                         className="common-input"
-                                        value={formData.child.childFirstName}
+                                        value={formData.page1.childFirstName}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                     <input
@@ -268,7 +268,7 @@ export default function BirthCertifcateForm() {
                                         name="childMiddleName"
                                         placeholder="Middle"
                                         className="common-input"
-                                        value={formData.child.childMiddleName}
+                                        value={formData.page1.childMiddleName}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                     <input
@@ -276,7 +276,7 @@ export default function BirthCertifcateForm() {
                                         name="childLastName"
                                         placeholder="Last"
                                         className="common-input"
-                                        value={formData.child.childLastName}
+                                        value={formData.page1.childLastName}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
@@ -287,7 +287,7 @@ export default function BirthCertifcateForm() {
                                 <div>
                                     <label className="block text-sm font-medium">Sex</label>
                                     <select name="sex" className="common-input w-full"
-                                        value={formData.child.sex}
+                                        value={formData.page1.sex}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     >
                                         <option value="">Select</option>
@@ -298,7 +298,7 @@ export default function BirthCertifcateForm() {
                                 <div>
                                     <label className="block text-sm font-medium">Date of Birth</label>
                                     <input type="date" name="dateOfBirth" className="common-input w-full"
-                                        value={formData.child.dateOfBirth}
+                                        value={formData.page1.dateOfBirth}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
@@ -315,7 +315,7 @@ export default function BirthCertifcateForm() {
                                         name="typeOfBirth"
                                         placeholder="Type of Birth"
                                         className="common-input"
-                                        value={formData.child.typeOfBirth}
+                                        value={formData.page1.typeOfBirth}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
@@ -329,7 +329,7 @@ export default function BirthCertifcateForm() {
                                         name="multipleBirthOrder"
                                         placeholder="Order"
                                         className="common-input"
-                                        value={formData.child.multipleBirthOrder}
+                                        value={formData.page1.multipleBirthOrder}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
@@ -346,7 +346,7 @@ export default function BirthCertifcateForm() {
                                         name="birthOrder"
                                         placeholder="Birth Order"
                                         className="common-input"
-                                        value={formData.child.birthOrder}
+                                        value={formData.page1.birthOrder}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
@@ -358,7 +358,7 @@ export default function BirthCertifcateForm() {
                                         name="birthWeight"
                                         placeholder="Weight"
                                         className="common-input"
-                                        value={formData.child.birthWeight}
+                                        value={formData.page1.birthWeight}
                                         onChange={(e) => handleInputChange(e, 'child')}
                                     />
                                 </div>
