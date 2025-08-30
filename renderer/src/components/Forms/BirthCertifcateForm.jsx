@@ -598,24 +598,39 @@ export default function BirthCertifcateForm() {
                             <div>
                                 <label className="block text-sm font-medium mb-1">Father’s Name</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                    <input
-                                        type="text"
-                                        name="fatherFirstName"
-                                        placeholder="First Name"
-                                        className="common-input"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="fatherMiddleName"
-                                        placeholder="Middle Name"
-                                        className="common-input"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="fatherLastName"
-                                        placeholder="Last Name"
-                                        className="common-input"
-                                    />
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="fatherFirstName"
+                                            placeholder="First Name"
+                                            className={`common-input w-full ${errors.fatherFirstName ? 'input-error' : ''}`}
+                                            value={formData.page3.fatherFirstName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.fatherFirstName && <ErrorMessages errors={errors.fatherFirstName} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="fatherMiddleName"
+                                            placeholder="Middle Name"
+                                             className={`common-input w-full ${errors.fatherMiddleName ? 'input-error' : ''}`}
+                                            value={formData.page3.fatherMiddleName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.fatherMiddleName && <ErrorMessages errors={errors.fatherMiddleName} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="fatherLastName"
+                                            placeholder="Last Name"
+                                            className={`common-input w-full ${errors.fatherLastName ? 'input-error' : ''}`}
+                                            value={formData.page3.fatherLastName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.fatherLastName && <ErrorMessages errors={errors.fatherLastName} />}
+                                    </div>
                                 </div>
                             </div>
                         
@@ -627,8 +642,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="fatherCitizenship"
                                         placeholder="Citizenship"
-                                        className="common-input"
+                                        className={`common-input w-full ${errors.fatherCitizenship ? 'input-error' : ''}`}
+                                        value={formData.page3.fatherCitizenship}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.fatherCitizenship && <ErrorMessages errors={errors.fatherCitizenship} />}
                                 </div>
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">Religion / Religious Sect</label>
@@ -636,8 +654,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="fatherReligion"
                                         placeholder="Religion"
-                                        className="common-input"
+                                        className={`common-input w-full ${errors.fatherReligion ? 'input-error' : ''}`}
+                                        value={formData.page3.fatherReligion}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.fatherReligion && <ErrorMessages errors={errors.fatherReligion} />}
                                 </div>
                             </div>
                         
@@ -649,17 +670,23 @@ export default function BirthCertifcateForm() {
                                     type="text"
                                     name="fatherOccupation"
                                     placeholder="Occupation"
-                                    className="common-input"
+                                    className={`common-input w-full ${errors.fatherOccupation ? 'input-error' : ''}`}
+                                    value={formData.page3.fatherOccupation}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.fatherOccupation && <ErrorMessages errors={errors.fatherOccupation} />}
                                 </div>
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">Age at the time of this birth</label>
                                     <input
-                                    type="number"
-                                    name="fatherAgeAtBirth"
-                                    placeholder="Age"
-                                    className="common-input"
+                                        type="number"
+                                        name="fatherAgeAtBirth"
+                                        placeholder="Age"
+                                        className={`common-input w-full ${errors.fatherAgeAtBirth ? 'input-error' : ''}`}
+                                        value={formData.page3.fatherAgeAtBirth}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.fatherAgeAtBirth && <ErrorMessages errors={errors.fatherAgeAtBirth} />}
                                 </div>
                             </div>
                         
@@ -667,30 +694,50 @@ export default function BirthCertifcateForm() {
                             <div>
                                 <label className="block text-sm font-medium mb-2">Residence</label>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <input
-                                        type="text"
-                                        name="fatherResidenceStreet"
-                                        placeholder="House No., St., Barangay"
-                                        className="common-input"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="fatherResidenceCity"
-                                        placeholder="City / Municipality"
-                                        className="common-input"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="fatherResidenceProvince"
-                                        placeholder="Province"
-                                        className="common-input"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="fatherResidenceCountry"
-                                        placeholder="Country"
-                                        className="common-input"
-                                    />
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="fatherResidenceStreet"
+                                            placeholder="House No., St., Barangay"
+                                            className={`common-input w-full ${errors.fatherResidenceStreet ? 'input-error' : ''}`}
+                                            value={formData.page3.fatherResidenceStreet}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.fatherResidenceStreet && <ErrorMessages errors={errors.fatherResidenceStreet} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="fatherResidenceCity"
+                                            placeholder="City / Municipality"
+                                            className={`common-input w-full ${errors.fatherResidenceCity ? 'input-error' : ''}`}
+                                            value={formData.page3.fatherResidenceCity}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.fatherResidenceCity && <ErrorMessages errors={errors.fatherResidenceCity} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="fatherResidenceProvince"
+                                            placeholder="Province"
+                                            className={`common-input w-full ${errors.fatherResidenceProvince ? 'input-error' : ''}`}
+                                            value={formData.page3.fatherResidenceProvince}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.fatherResidenceProvince && <ErrorMessages errors={errors.fatherResidenceProvince} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="fatherResidenceCountry"
+                                            placeholder="Country"
+                                            className={`common-input w-full ${errors.fatherResidenceCountry ? 'input-error' : ''}`}
+                                            value={formData.page3.fatherResidenceCountry}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.fatherResidenceCountry && <ErrorMessages errors={errors.fatherResidenceCountry} />}
+                                    </div>
                                 </div>
                             </div>
                         </div>
