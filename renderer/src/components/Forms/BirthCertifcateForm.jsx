@@ -553,30 +553,39 @@ export default function BirthCertifcateForm() {
                                         />
                                         {errors.residenceHouse && <ErrorMessages errors={errors.residenceHouse} />}
                                     </div>
-                                    <input
-                                        type="text"
-                                        name="residenceCity"
-                                        placeholder="City / Municipality"
-                                        className={`common-input ${errors.residenceCity ? 'input-error' : ''}`}
-                                        value={formData.page2.residenceCity}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="residenceProvince"
-                                        placeholder="Province"
-                                        className={`common-input ${errors.residenceProvince ? 'input-error' : ''}`}
-                                        value={formData.page2.residenceProvince}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="residenceCountry"
-                                        placeholder="Country"
-                                        className={`common-input ${errors.residenceCountry ? 'input-error' : ''}`}
-                                        value={formData.page2.residenceCountry}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="residenceCity"
+                                            placeholder="City / Municipality"
+                                            className={`common-input ${errors.residenceCity ? 'input-error' : ''}`}
+                                            value={formData.page2.residenceCity}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.residenceCity && <ErrorMessages errors={errors.residenceCity} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="residenceProvince"
+                                            placeholder="Province"
+                                            className={`common-input ${errors.residenceProvince ? 'input-error' : ''}`}
+                                            value={formData.page2.residenceProvince}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.residenceProvince && <ErrorMessages errors={errors.residenceProvince} />}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="residenceCountry"
+                                            placeholder="Country"
+                                            className={`common-input ${errors.residenceCountry ? 'input-error' : ''}`}
+                                            value={formData.page2.residenceCountry}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.residenceCountry && <ErrorMessages errors={errors.residenceCountry} />}
+                                    </div>
                                 </div>
                             </div>
                         </div>
