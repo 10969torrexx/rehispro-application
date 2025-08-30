@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(7); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(8); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -122,7 +122,7 @@ export default function BirthCertifcateForm() {
 
         // Page 8 - Civil Registrar Section
         page8: {
-            receivedSignature: "",
+            // receivedSignature: "",
             receivedName: "",
             receivedTitle: "",
             receivedDate: "",
@@ -1103,19 +1103,34 @@ export default function BirthCertifcateForm() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Signature</label>
-                                        <input type="text" name="receivedSignature" placeholder="Signature" className="common-input w-full" />
+                                        <SignaturePlaceholder />
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Name in Print</label>
-                                        <input type="text" name="receivedName" placeholder="Full Name" className="common-input w-full" />
+                                        <input type="text" name="receivedName" placeholder="Full Name" 
+                                            className={`common-input w-full ${errors.receivedName ? 'input-error' : ''}`} 
+                                            value={formData.page8.receivedName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.receivedName && <ErrorMessages errors={errors.receivedName} />}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Title or Position</label>
-                                        <input type="text" name="receivedTitle" placeholder="Title or Position" className="common-input w-full" />
+                                        <input type="text" name="receivedTitle" placeholder="Title or Position" 
+                                            className={`common-input w-full ${errors.receivedTitle ? 'input-error' : ''}`} 
+                                            value={formData.page8.receivedTitle}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.receivedTitle && <ErrorMessages errors={errors.receivedTitle} />}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Date</label>
-                                        <input type="date" name="receivedDate" className="common-input w-full" />
+                                        <input type="date" name="receivedDate" 
+                                            className={`common-input w-full ${errors.receivedDate ? 'input-error' : ''}`} 
+                                            value={formData.page8.receivedDate}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.receivedDate && <ErrorMessages errors={errors.receivedDate} />}
                                     </div>
                                 </div>
                             </div>
@@ -1125,19 +1140,34 @@ export default function BirthCertifcateForm() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Signature</label>
-                                        <input type="text" name="registrarSignature" placeholder="Signature" className="common-input w-full" />
+                                        <SignaturePlaceholder />
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Name in Print</label>
-                                        <input type="text" name="registrarName" placeholder="Full Name" className="common-input w-full" />
+                                        <input type="text" name="registrarName" placeholder="Full Name" 
+                                            className={`common-input w-full ${errors.registrarName ? 'input-error' : ''}`}
+                                            value={formData.page8.registrarName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.registrarName && <ErrorMessages errors={errors.registrarName} />}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Title or Position</label>
-                                        <input type="text" name="registrarTitle" placeholder="Title or Position" className="common-input w-full" />
+                                        <input type="text" name="registrarTitle" placeholder="Title or Position" 
+                                            className={`common-input w-full ${errors.registrarTitle ? 'input-error' : ''}`}
+                                            value={formData.page8.registrarTitle}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.registrarTitle && <ErrorMessages errors={errors.registrarTitle} />}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Date</label>
-                                        <input type="date" name="registrarDate" className="common-input w-full" />
+                                        <input type="date" name="registrarDate" 
+                                            className={`common-input w-full ${errors.registrarDate ? 'input-error' : ''}`}
+                                            value={formData.page8.registrarDate}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.registrarDate && <ErrorMessages errors={errors.registrarDate} />}
                                     </div>
                                 </div>
                             </div>
