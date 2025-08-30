@@ -18,6 +18,20 @@ export function validateForm(data, page) {
       continue;
     }
 
+    if (rule.requiredOneOf) {
+      const hasOne = rule.requiredOneOf.some(f => !!data[f]);
+      if (!hasOne) {
+        errors[field] = rule.message;
+      }
+    }
+
+    if (rule.requiredIf) {
+      const conditionField = rule.requiredIf;
+      if (data[conditionField] && (!value || value.toString().trim() === "")) {
+        errors[field] = rule.message;
+      }
+    }
+
     if (rule.minLength && value && value.length < rule.minLength) {
       errors[field] = rule.message.minLength;
     }
