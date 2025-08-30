@@ -62,17 +62,17 @@ export default function BirthCertifcateForm() {
       
         // Page 3 - Father Information
         page3: {
-            firstName: "",
-            middleName: "",
-            lastName: "",
-            citizenship: "",
-            religion: "",
-            occupation: "",
-            ageAtBirth: "",
-            residenceStreet: "",
-            residenceCity: "",
-            residenceProvince: "",
-            residenceCountry: ""
+            fatherFirstName: "",
+            fatherMiddleName: "",
+            fatherLastName: "",
+            fatherCitizenship: "",
+            fatherReligion: "",
+            fatherOccupation: "",
+            fatherAgeAtBirth: "",
+            fatherResidenceStreet: "",
+            fatherResidenceCity: "",
+            fatherResidenceProvince: "",
+            fatherResidenceCountry: ""
         },
       
         // Page 4 - Marriage Information
