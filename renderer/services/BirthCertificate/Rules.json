@@ -469,7 +469,8 @@
       "type": "string",
       "minLength": 10,
       "message": {
-        "required": "Please enter a complete address (at least 10 characters)."
+        "required": "Please enter a complete address (at least 10 characters).",
+        "minLength": "Address must be at least 10 characters."
       }
     },
     "attendantDateSigned": {
