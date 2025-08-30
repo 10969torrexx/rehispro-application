@@ -217,7 +217,8 @@ export default function BirthCertifcateForm() {
     const handlePageChange = (direction) => {
         if (direction === 'next') {
             const response = BirthCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
-            if (response) {
+            if (Object.keys(response).length > 0) {
+                console.log(`validation error ${JSON.stringify(response)}`)
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
             } else {
@@ -273,7 +274,7 @@ export default function BirthCertifcateForm() {
                                             type="text"
                                             name="childFirstName"
                                             placeholder="First"
-                                            className={`common-input ${errors.childFirstName ? 'input-error' : ''}`}
+                                            className={`w-full common-input ${errors.childFirstName ? 'input-error' : ''}`}
                                             value={formData.page1.childFirstName}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
@@ -283,8 +284,8 @@ export default function BirthCertifcateForm() {
                                         <input
                                             type="text"
                                             name="childMiddleName"
-                                            placeholder="Middle"
-                                            className={`common-input ${errors.childMiddleName ? 'input-error' : ''}`}
+                                            placeholder="Middle (Optional)"
+                                            className={`w-full common-input ${errors.childMiddleName ? 'input-error' : ''}`}
                                             value={formData.page1.childMiddleName}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
@@ -295,7 +296,7 @@ export default function BirthCertifcateForm() {
                                             type="text"
                                             name="childLastName"
                                             placeholder="Last"
-                                            className={`common-input ${errors.childLastName ? 'input-error' : ''}`}
+                                            className={`w-full common-input ${errors.childLastName ? 'input-error' : ''}`}
                                             value={formData.page1.childLastName}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
