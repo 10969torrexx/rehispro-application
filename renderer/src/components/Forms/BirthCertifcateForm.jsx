@@ -418,7 +418,7 @@ export default function BirthCertifcateForm() {
                                             type="text"
                                             name="maidenMiddleName"
                                             placeholder="Middle Name"
-                                            className={`w-full ${errors.maidenMiddleName ? 'input-error' : ''}`}
+                                            className={`w-full common-input ${errors.maidenMiddleName ? 'input-error' : ''}`}
                                             value={formData.page2.maidenMiddleName}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
@@ -558,7 +558,7 @@ export default function BirthCertifcateForm() {
                                             type="text"
                                             name="residenceCity"
                                             placeholder="City / Municipality"
-                                            className={`common-input ${errors.residenceCity ? 'input-error' : ''}`}
+                                            className={`common-input w-full ${errors.residenceCity ? 'input-error' : ''}`}
                                             value={formData.page2.residenceCity}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
@@ -569,7 +569,7 @@ export default function BirthCertifcateForm() {
                                             type="text"
                                             name="residenceProvince"
                                             placeholder="Province"
-                                            className={`common-input ${errors.residenceProvince ? 'input-error' : ''}`}
+                                            className={`common-input w-full ${errors.residenceProvince ? 'input-error' : ''}`}
                                             value={formData.page2.residenceProvince}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
@@ -580,7 +580,7 @@ export default function BirthCertifcateForm() {
                                             type="text"
                                             name="residenceCountry"
                                             placeholder="Country"
-                                            className={`common-input ${errors.residenceCountry ? 'input-error' : ''}`}
+                                            className={`common-input w-full ${errors.residenceCountry ? 'input-error' : ''}`}
                                             value={formData.page2.residenceCountry}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
