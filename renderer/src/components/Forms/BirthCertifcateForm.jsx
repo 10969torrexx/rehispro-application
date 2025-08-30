@@ -753,32 +753,50 @@ export default function BirthCertifcateForm() {
                                 <input
                                     type="date"
                                     name="dateOfMarriage"
-                                    className="common-input w-full"
+                                    className={`common-input w-full ${errors.dateOfMarriage ? 'input-error' : ''}`}
+                                    value={formData.page4.dateOfMarriage}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                                {errors.dateOfMarriage && <ErrorMessages errors={errors.dateOfMarriage} />}
                             </div>
                     
                             {/* Place of Marriage */}
                             <div>
                             <label className="block text-sm font-medium mb-1">Place of Marriage</label>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <input
-                                    type="text"
-                                    name="marriageCity"
-                                    placeholder="City / Municipality"
-                                    className="common-input"
-                                />
-                                <input
-                                    type="text"
-                                    name="marriageProvince"
-                                    placeholder="Province"
-                                    className="common-input"
-                                />
-                                <input
-                                    type="text"
-                                    name="marriageCountry"
-                                    placeholder="Country"
-                                    className="common-input"
-                                />
+                                <div>
+                                    <input
+                                        type="text"
+                                        name="marriageCity"
+                                        placeholder="City / Municipality"
+                                        className={`common-input w-full ${errors.marriageCity ? 'input-error' : ''}`}
+                                        value={formData.page4.marriageCity}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.marriageCity && <ErrorMessages errors={errors.marriageCity} />}
+                                </div>
+                                <div>
+                                    <input
+                                        type="text"
+                                        name="marriageProvince"
+                                        placeholder="Province"
+                                        className={`common-input w-full ${errors.marriageProvince ? 'input-error' : ''}`}
+                                        value={formData.page4.marriageProvince}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.marriageProvince && <ErrorMessages errors={errors.marriageProvince} />}
+                                </div>
+                                <div>
+                                    <input
+                                        type="text"
+                                        name="marriageCountry"
+                                        placeholder="Country"
+                                        className={`common-input w-full ${errors.marriageCountry ? 'input-error' : ''}`}
+                                        value={formData.page4.marriageCountry}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.marriageCountry && <ErrorMessages errors={errors.marriageCountry} />}
+                                </div>
                             </div>
                             </div>
                         </div>
