@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { ErrorMessages } from '@components';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(4); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(5); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -817,7 +817,7 @@ export default function BirthCertifcateForm() {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                         
                             {/* Type of Attendant */}
-                            <div>
+                            <div className={`p-2 ${errors.attendantGroup ? 'input-error' : ''}`}>
                                 <label className="block w-full text-sm font-medium mb-1">Type of Attendant</label>
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                                     <label className="flex items-center space-x-2">
@@ -868,6 +868,9 @@ export default function BirthCertifcateForm() {
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
+                                {errors.attendantGroup && (
+                                    <p className="text-red-500 text-sm mt-1">{errors.attendantGroup}</p>
+                                )}
                             </div>
                         
                             {/* Date of Attendance */}

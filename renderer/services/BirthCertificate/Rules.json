@@ -382,7 +382,7 @@
         "attendantHilot",
         "attendantOthers"
       ],
-      "message": "Please select at least one attendant."
+      "message": "Please select at least one birth attendant."
     },
     "attendantPhysician": {
       "required": false,
