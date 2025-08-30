@@ -5,10 +5,10 @@ import { BirthCertValidation } from '@services';
 import { BirthCertificate } from '@enums';
 import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
-import { ErrorMessages } from '@components';
+import { ErrorMessages, SignaturePlaceholder } from '@components';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(6); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(7); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -1013,7 +1013,7 @@ export default function BirthCertifcateForm() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Signature</label>
-                                        <input type="text" name="informantSignature" placeholder="Signature" className="common-input w-full" />
+                                        <SignaturePlaceholder />
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Name in Print</label>
@@ -1040,7 +1040,7 @@ export default function BirthCertifcateForm() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Signature</label>
-                                    <input type="text" name="preparedSignature" placeholder="Signature" className="common-input w-full" />
+                                    <SignaturePlaceholder />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Name in Print</label>
