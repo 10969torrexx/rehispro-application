@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { ErrorMessages } from '@components';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(4); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -218,7 +218,6 @@ export default function BirthCertifcateForm() {
         if (direction === 'next') {
             const response = BirthCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
             if (Object.keys(response).length > 0) {
-                console.log(`validation error ${JSON.stringify(response)}`)
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
             } else {
@@ -824,28 +823,28 @@ export default function BirthCertifcateForm() {
                                     <label className="flex items-center space-x-2">
                                         <input type="checkbox" className='custom-checkbox' name="attendantPhysician" 
                                             checked={formData.page5.attendantPhysician}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                         />
                                         <span>Physician</span>
                                     </label>
                                     <label className="flex items-center space-x-2">
                                         <input type="checkbox" className='custom-checkbox' name="attendantNurse" 
                                             checked={formData.page5.attendantNurse}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                         />
                                         <span>Nurse</span>
                                     </label>
                                     <label className="flex items-center space-x-2">
                                         <input type="checkbox" className='custom-checkbox' name="attendantMidwife"
                                             checked={formData.page5.attendantMidwife}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                         />
                                         <span>Midwife</span>
                                     </label>
                                     <label className="flex items-center space-x-2">
                                         <input type="checkbox" className='custom-checkbox' name="attendantHilot" 
                                             checked={formData.page5.attendantHilot}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                         />
                                         <span>Hilot</span>
                                     </label>
@@ -854,14 +853,19 @@ export default function BirthCertifcateForm() {
                                 {/* Others */}
                                 <div className="flex flex-col md:flex-row md:items-center md:space-x-2 mt-3">
                                     <label className="flex items-center space-x-2">
-                                    <input type="checkbox" className='custom-checkbox' name="attendantOthers" />
-                                    <span>Others (Specify)</span>
+                                        <input type="checkbox" className='custom-checkbox' name="attendantOthers"
+                                            checked={formData.page5.attendantOthers}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
+                                        />
+                                        <span>Others (Specify)</span>
                                     </label>
                                     <input
                                         type="text"
                                         name="attendantOthersSpecify"
                                         placeholder="Specify"
                                         className="common-input mt-2 md:mt-0 w-[80%]"
+                                        value={formData.page5.attendantOthersSpecify}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                             </div>
@@ -873,6 +877,8 @@ export default function BirthCertifcateForm() {
                                     type="date"
                                     name="dateOfAttendance"
                                     className="common-input w-full"
+                                    value={formData.page5.dateOfAttendance}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                             </div>
                         
@@ -884,6 +890,8 @@ export default function BirthCertifcateForm() {
                                     name="attendantNameTitle"
                                     placeholder="Enter name and title"
                                     className="common-input w-full"
+                                    value={formData.page5.attendantNameTitle}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                             </div>
                         </div>

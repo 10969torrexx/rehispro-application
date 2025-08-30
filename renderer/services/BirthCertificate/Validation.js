@@ -64,6 +64,7 @@ export function validateForm(data, page) {
         }
       }
     }
+
   }
 
   return errors;

@@ -346,22 +346,31 @@
     "dateOfMarriage": {
       "required": true,
       "type": "date",
-      "message": "Please provide the date of marriage."
+      "message": {
+        "required": "Date of marriage is required.",
+        "date": "Date of marriage must be a valid date."
+      }
     },
     "marriageCity": {
       "required": true,
       "type": "string",
-      "message": "Marriage city/municipality is required."
+      "message": {
+        "required": "Marriage city/municipality is required."
+      }
     },
     "marriageProvince": {
       "required": true,
       "type": "string",
-      "message": "Marriage province is required."
+      "message": {
+        "required": "Marriage province is required."
+      }
     },
     "marriageCountry": {
       "required": true,
       "type": "string",
-      "message": "Marriage country is required."
+      "message": {
+        "required": "Marriage country is required."
+      }
     }
   },
   "page5": {
