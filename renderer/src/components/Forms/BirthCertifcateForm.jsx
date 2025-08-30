@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(8); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(9); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -1184,9 +1184,12 @@ export default function BirthCertifcateForm() {
                                 <textarea
                                     name="remarks"
                                     placeholder="Enter remarks or annotations here..."
-                                    className="common-input w-full h-32 resize-none"
+                                    className={`common-input w-full h-32 resize-none ${errors.remarks ? 'input-error' : ''}`}
+                                    value={formData.page9.remarks}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     style={{borderRadius: '8px'}}
                                 />
+                                {errors.remarks && <ErrorMessages errors={errors.remarks} />}
                             </div>
                             <div>
                                 <InfoCard title="TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR" message="" isClosable={false}>
