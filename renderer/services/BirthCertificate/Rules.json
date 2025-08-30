@@ -489,58 +489,65 @@
     }
   },
  "page7": {
-    "informantSignature": {
-      "required": true,
-      "type": "string",
-      "minLength": 2,
-      "message": "Informant's signature is required."
-    },
     "informantName": {
       "required": true,
       "type": "string",
       "minLength": 3,
-      "message": "Informant's full name is required (at least 3 characters)."
+      "message": {
+        "required": "Informant's full name is required (at least 3 characters).",
+        "minLength": "Informant's full name must be at least 3 characters."
+      }
     },
     "informantRelationship": {
       "required": true,
       "type": "string",
       "minLength": 3,
-      "message": "Please provide the relationship to the child (at least 3 characters)."
+      "message": {
+        "required": "Please provide the relationship to the child (at least 3 characters).",
+        "minLength": "Relationship must be at least 3 characters."
+      }
     },
     "informantAddress": {
       "required": true,
       "type": "string",
       "minLength": 10,
-      "message": "Please provide the full address (at least 10 characters)."
+      "message": {
+        "required": "Please provide the full address (at least 10 characters).",
+        "minLength": "Address must be at least 10 characters."
+      }
     },
     "informantDate": {
       "required": true,
       "type": "date",
-      "message": "Date of informant’s certification is required."
+      "message": {
+        "required": "Date of informant’s certification is required."
+      }
     },
 
-    "preparedSignature": {
-      "required": true,
-      "type": "string",
-      "minLength": 2,
-      "message": "Prepared by signature is required."
-    },
     "preparedName": {
       "required": true,
       "type": "string",
       "minLength": 3,
-      "message": "Prepared by full name is required (at least 3 characters)."
+      "message": {
+        "required": "Prepared by full name is required (at least 3 characters).",
+        "minLength": "Prepared by full name must be at least 3 characters."
+      }
     },
     "preparedTitle": {
       "required": true,
       "type": "string",
       "minLength": 2,
-      "message": "Title or position is required."
+      "message": {
+        "required": "Title or position is required.",
+        "minLength": "Title or position must be at least 2 characters."
+      }
     },
     "preparedDate": {
       "required": true,
       "type": "date",
-      "message": "Date of preparation is required."
+      "message": {
+        "required": "Date of preparation is required."
+      }
     }
   },
   "page8": {
