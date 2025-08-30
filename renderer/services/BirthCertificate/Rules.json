@@ -417,13 +417,19 @@
     "dateOfAttendance": {
       "required": true,
       "type": "date",
-      "message": "Please provide the date of attendance."
+      "message": {
+        "required": "Date of attendance is required.",
+        "date": "Date of attendance must be a valid date."
+      }
     },
     "attendantNameTitle": {
       "required": true,
       "type": "string",
       "minLength": 3,
-      "message": "Name and title of attendant is required and must be at least 3 characters."
+      "message": {
+        "required": "Name and title of attendant is required.",
+        "minLength": "Name and title must be at least 3 characters."
+      }
     }
   },
   "page6": {

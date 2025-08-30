@@ -220,6 +220,7 @@ export default function BirthCertifcateForm() {
             if (Object.keys(response).length > 0) {
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
+                console.log("Validation Errors:", response);
             } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
             }
@@ -868,9 +869,7 @@ export default function BirthCertifcateForm() {
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
-                                {errors.attendantGroup && (
-                                    <p className="text-red-500 text-sm mt-1">{errors.attendantGroup}</p>
-                                )}
+                                {   errors.attendantGroup && <ErrorMessages errors={errors.attendantGroup} />}
                             </div>
                         
                             {/* Date of Attendance */}
@@ -879,10 +878,11 @@ export default function BirthCertifcateForm() {
                                 <input
                                     type="date"
                                     name="dateOfAttendance"
-                                    className="common-input w-full"
+                                    className={`common-input w-full ${errors.dateOfAttendance ? 'input-error' : ''}`}
                                     value={formData.page5.dateOfAttendance}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                               {    errors.dateOfAttendance && <ErrorMessages errors={errors.dateOfAttendance} />}
                             </div>
                         
                             {/* Name and Title of Attendant */}
@@ -892,10 +892,11 @@ export default function BirthCertifcateForm() {
                                     type="text"
                                     name="attendantNameTitle"
                                     placeholder="Enter name and title"
-                                    className="common-input w-full"
+                                    className={`common-input w-full ${errors.attendantNameTitle ? 'input-error' : ''}`}
                                     value={formData.page5.attendantNameTitle}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                                {   errors.attendantNameTitle && <ErrorMessages errors={errors.attendantNameTitle} /> }
                             </div>
                         </div>
                     }
