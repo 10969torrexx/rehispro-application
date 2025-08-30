@@ -365,6 +365,16 @@
     }
   },
   "page5": {
+    "attendantGroup": {
+      "requiredOneOf": [
+        "attendantPhysician",
+        "attendantNurse",
+        "attendantMidwife",
+        "attendantHilot",
+        "attendantOthers"
+      ],
+      "message": "Please select at least one attendant."
+    },
     "attendantPhysician": {
       "required": false,
       "type": "boolean",
@@ -391,7 +401,7 @@
       "message": "Check if the attendant was someone else."
     },
     "attendantOthersSpecify": {
-      "required": false,
+      "requiredIf": "attendantOthers",
       "type": "string",
       "message": "If 'Others' is checked, please specify the attendant."
     },

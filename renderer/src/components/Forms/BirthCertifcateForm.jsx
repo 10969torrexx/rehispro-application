@@ -85,11 +85,11 @@ export default function BirthCertifcateForm() {
       
         // Page 5 - Attendant Information
         page5: {
-            physician: false,
-            nurse: false,
-            midwife: false,
-            hilot: false,
-            others: false,
+            attendantPhysician: false,
+            attendantNurse: false,
+            attendantMidwife: false,
+            attendantHilot: false,
+            attendantHilot: false,
             othersSpecify: "",
             dateOfAttendance: "",
             nameTitle: ""
@@ -227,6 +227,17 @@ export default function BirthCertifcateForm() {
         } else if (direction === 'prev') {
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
         }
+    };
+
+    const handleCheckboxChange = (event, section) => {
+        const { name, checked } = event.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [section]: {
+                ...prevData[section],
+                [name]: checked
+            }
+        }));
     };
 
     return (
@@ -808,60 +819,72 @@ export default function BirthCertifcateForm() {
                         
                             {/* Type of Attendant */}
                             <div>
-                            <label className="block w-full text-sm font-medium mb-1">Type of Attendant</label>
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                <label className="flex items-center space-x-2">
-                                <input type="checkbox" className='custom-checkbox' name="attendantPhysician" />
-                                <span>Physician</span>
-                                </label>
-                                <label className="flex items-center space-x-2">
-                                <input type="checkbox" className='custom-checkbox' name="attendantNurse" />
-                                <span>Nurse</span>
-                                </label>
-                                <label className="flex items-center space-x-2">
-                                <input type="checkbox" className='custom-checkbox' name="attendantMidwife" />
-                                <span>Midwife</span>
-                                </label>
-                                <label className="flex items-center space-x-2">
-                                <input type="checkbox" className='custom-checkbox' name="attendantHilot" />
-                                <span>Hilot</span>
-                                </label>
-                            </div>
-                        
-                            {/* Others */}
-                            <div className="flex flex-col md:flex-row md:items-center md:space-x-2 mt-3">
-                                <label className="flex items-center space-x-2">
-                                <input type="checkbox" className='custom-checkbox' name="attendantOthers" />
-                                <span>Others (Specify)</span>
-                                </label>
-                                <input
-                                type="text"
-                                name="attendantOthersSpecify"
-                                placeholder="Specify"
-                                className="common-input mt-2 md:mt-0 w-[80%]"
-                                />
-                            </div>
+                                <label className="block w-full text-sm font-medium mb-1">Type of Attendant</label>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <label className="flex items-center space-x-2">
+                                        <input type="checkbox" className='custom-checkbox' name="attendantPhysician" 
+                                            checked={formData.page5.attendantPhysician}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        <span>Physician</span>
+                                    </label>
+                                    <label className="flex items-center space-x-2">
+                                        <input type="checkbox" className='custom-checkbox' name="attendantNurse" 
+                                            checked={formData.page5.attendantNurse}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        <span>Nurse</span>
+                                    </label>
+                                    <label className="flex items-center space-x-2">
+                                        <input type="checkbox" className='custom-checkbox' name="attendantMidwife"
+                                            checked={formData.page5.attendantMidwife}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        <span>Midwife</span>
+                                    </label>
+                                    <label className="flex items-center space-x-2">
+                                        <input type="checkbox" className='custom-checkbox' name="attendantHilot" 
+                                            checked={formData.page5.attendantHilot}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        <span>Hilot</span>
+                                    </label>
+                                </div>
+                            
+                                {/* Others */}
+                                <div className="flex flex-col md:flex-row md:items-center md:space-x-2 mt-3">
+                                    <label className="flex items-center space-x-2">
+                                    <input type="checkbox" className='custom-checkbox' name="attendantOthers" />
+                                    <span>Others (Specify)</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="attendantOthersSpecify"
+                                        placeholder="Specify"
+                                        className="common-input mt-2 md:mt-0 w-[80%]"
+                                    />
+                                </div>
                             </div>
                         
                             {/* Date of Attendance */}
                             <div>
-                            <label className="block w-full text-sm font-medium mb-1">Date of Attendance</label>
-                            <input
-                                type="date"
-                                name="dateOfAttendance"
-                                className="common-input w-full"
-                            />
+                                <label className="block w-full text-sm font-medium mb-1">Date of Attendance</label>
+                                <input
+                                    type="date"
+                                    name="dateOfAttendance"
+                                    className="common-input w-full"
+                                />
                             </div>
                         
                             {/* Name and Title of Attendant */}
                             <div>
-                            <label className="block w-full text-sm font-medium mb-1">Name and Title of Attendant</label>
-                            <input
-                                type="text"
-                                name="attendantNameTitle"
-                                placeholder="Enter name and title"
-                                className="common-input w-full"
-                            />
+                                <label className="block w-full text-sm font-medium mb-1">Name and Title of Attendant</label>
+                                <input
+                                    type="text"
+                                    name="attendantNameTitle"
+                                    placeholder="Enter name and title"
+                                    className="common-input w-full"
+                                />
                             </div>
                         </div>
                     }
