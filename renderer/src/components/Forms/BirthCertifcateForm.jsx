@@ -9,7 +9,7 @@ import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(10); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(11); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -1335,8 +1335,11 @@ export default function BirthCertifcateForm() {
                                         type="number"
                                         name="juratDay"
                                         placeholder="e.g. 15"
-                                        className="common-input w-full"
+                                        className={`common-input w-full ${errors.juratDay ? 'input-error' : ''}`}
+                                        value={formData.page11.juratDay}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.juratDay && <p className="text-red-500 text-sm">{errors.juratDay}</p>}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Month & Year</label>
@@ -1344,8 +1347,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="juratMonthYear"
                                         placeholder="e.g. August 2025"
-                                        className="common-input w-full"
+                                        className={`common-input w-full ${errors.juratMonthYear ? 'input-error' : ''}`}
+                                        value={formData.page11.juratMonthYear}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.juratMonthYear && <p className="text-red-500 text-sm">{errors.juratMonthYear}</p>}
                                 </div>
                             </div>
                       
@@ -1356,8 +1362,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="juratAffiant1"
                                         placeholder="First Affiant's Full Name"
-                                        className="common-input w-full"
+                                        className={`common-input w-full ${errors.juratAffiant1 ? 'input-error' : ''}`}
+                                        value={formData.page11.juratAffiant1}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.juratAffiant1 && <p className="text-red-500 text-sm">{errors.juratAffiant1}</p>}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Affiant 2 (Name)</label>
@@ -1365,8 +1374,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="juratAffiant2"
                                         placeholder="Second Affiant's Full Name"
-                                        className="common-input w-full"
+                                        className={`common-input w-full ${errors.juratAffiant2 ? 'input-error' : ''}`}
+                                        value={formData.page11.juratAffiant2}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.juratAffiant2 && <p className="text-red-500 text-sm">{errors.juratAffiant2}</p>}
                                 </div>
                             </div>
                       
@@ -1377,18 +1389,24 @@ export default function BirthCertifcateForm() {
                                     type="text"
                                     name="ctcNumber"
                                     placeholder="Enter CTC No."
-                                    className="common-input w-full"
+                                    className={`common-input w-full ${errors.ctcNumber ? 'input-error' : ''}`}
+                                    value={formData.page11.ctcNumber}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                                {errors.ctcNumber && <p className="text-red-500 text-sm">{errors.ctcNumber}</p>}
                             </div>
                       
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Date Issued</label>
                                     <input
-                                    type="date"
-                                    name="ctcDateIssued"
-                                    className="common-input w-full"
+                                        type="date"
+                                        name="ctcDateIssued"
+                                        className={`common-input w-full ${errors.ctcDateIssued ? 'input-error' : ''}`}
+                                        value={formData.page11.ctcDateIssued}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.ctcDateIssued && <p className="text-red-500 text-sm">{errors.ctcDateIssued}</p>}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Place Issued</label>
@@ -1396,8 +1414,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="ctcPlaceIssued"
                                         placeholder="City / Municipality, Province"
-                                        className="common-input w-full"
+                                        className={`common-input w-full ${errors.ctcPlaceIssued ? 'input-error' : ''}`}
+                                        value={formData.page11.ctcPlaceIssued}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.ctcPlaceIssued && <p className="text-red-500 text-sm">{errors.ctcPlaceIssued}</p>}
                                 </div>
                             </div>
                       
@@ -1413,31 +1434,39 @@ export default function BirthCertifcateForm() {
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Name in Print</label>
                                     <input
-                                    type="text"
-                                    name="adminName"
-                                    placeholder="Enter officer's name"
-                                    className="common-input w-full"
+                                        type="text"
+                                        name="adminName"
+                                        placeholder="Enter officer's name"
+                                        className={`common-input w-full ${errors.adminName ? 'input-error' : ''}`}
+                                        value={formData.page11.adminName}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.adminName && <p className="text-red-500 text-sm">{errors.adminName}</p>}
                                 </div>
                         
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Position / Title / Designation</label>
                                     <input
-                                    type="text"
-                                    name="adminPosition"
-                                    placeholder="Enter position/title"
-                                    className="common-input w-full"
+                                        type="text"
+                                        name="adminPosition"
+                                        placeholder="Enter position/title"
+                                        className={`common-input w-full ${errors.adminPosition ? 'input-error' : ''}`}
+                                        value={formData.page11.adminPosition}
                                     />
+                                    {errors.adminPosition && <p className="text-red-500 text-sm">{errors.adminPosition}</p>}
                                 </div>
                         
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Address</label>
                                     <input
-                                    type="text"
-                                    name="adminAddress"
-                                    placeholder="Enter office address"
-                                    className="common-input w-full"
+                                        type="text"
+                                        name="adminAddress"
+                                        placeholder="Enter office address"
+                                        className={`common-input w-full ${errors.adminAddress ? 'input-error' : ''}`}
+                                        value={formData.page11.adminAddress}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.adminAddress && <p className="text-red-500 text-sm">{errors.adminAddress}</p>}
                                 </div>
                             </div>
                         </div>
