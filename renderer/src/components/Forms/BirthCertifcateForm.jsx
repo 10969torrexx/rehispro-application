@@ -90,7 +90,8 @@ export default function BirthCertifcateForm() {
             attendantMidwife: false,
             attendantHilot: false,
             attendantHilot: false,
-            othersSpecify: "",
+            attendantOthers: false,
+            attendantOthersSpecify: "",
             dateOfAttendance: "",
             nameTitle: ""
         },
@@ -860,14 +861,17 @@ export default function BirthCertifcateForm() {
                                         />
                                         <span>Others (Specify)</span>
                                     </label>
-                                    <input
-                                        type="text"
-                                        name="attendantOthersSpecify"
-                                        placeholder="Specify"
-                                        className="common-input mt-2 md:mt-0 w-[80%]"
-                                        value={formData.page5.attendantOthersSpecify}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
+                                    <div className='mt-2 md:mt-0 w-full'>
+                                        <input
+                                            type="text"
+                                            name="attendantOthersSpecify"
+                                            placeholder="Specify"
+                                            className={`common-input w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
+                                            value={formData.page5.attendantOthersSpecify}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {   errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} /> }
+                                    </div>
                                 </div>
                                 {   errors.attendantGroup && <ErrorMessages errors={errors.attendantGroup} />}
                             </div>
