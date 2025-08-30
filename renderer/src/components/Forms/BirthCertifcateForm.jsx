@@ -6,9 +6,10 @@ import { BirthCertificate } from '@enums';
 import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
+import { AllCaps } from '../../myTools/myTools';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(9); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(10); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -1208,10 +1209,22 @@ export default function BirthCertifcateForm() {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                     
                             {/* Intro Statement */}
-                            <p className="text-sm italic">
-                                I/We, __________________ and __________________ of legal age, am/are the natural mother
-                                and/or father of _____________________ born on _______________ at ______________.
+                            <p className="text-sm italic w-full">
+                                I/We, {formData.page10.motherName 
+                                    ? <u className="font-semibold"> {formData.page10.motherName} </u> 
+                                    : " __________________ "} 
+                                and {formData.page10.fatherName 
+                                    ? <u className="font-semibold"> {formData.page10.fatherName} </u> 
+                                    : " __________________ "} 
+                                of legal age, am/are the natural mother and/or father of {formData.page10.childName 
+                                    ? <u className="font-semibold"> {formData.page10.childName} </u> 
+                                    : " __________________ "} born on {formData.page10.childBirthDate 
+                                    ? <u className="font-semibold"> {formData.page10.childBirthDate} </u> 
+                                    : " __________________ "} at {formData.page10.childBirthPlace 
+                                    ? <u className="font-semibold"> {formData.page10.childBirthPlace} </u> 
+                                    : " __________________ "} .
                             </p>
+
                     
                             {/* Parent Names */}
                             <div>
@@ -1220,8 +1233,11 @@ export default function BirthCertifcateForm() {
                                     type="text"
                                     name="motherName"
                                     placeholder="Enter mother's full name"
-                                    className="common-input w-full"
+                                    className={`common-input w-full ${errors.motherName ? 'input-error' : ''}`}
+                                    value={formData.page10.motherName}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                                {errors.motherName && <ErrorMessages errors={errors.motherName} />}
                             </div>
                     
                             <div>
@@ -1230,8 +1246,11 @@ export default function BirthCertifcateForm() {
                                     type="text"
                                     name="fatherName"
                                     placeholder="Enter father's full name"
-                                    className="common-input w-full"
+                                    className={`common-input w-full ${errors.fatherName ? 'input-error' : ''}`}
+                                    value={formData.page10.fatherName}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                                {errors.fatherName && <ErrorMessages errors={errors.fatherName} />}
                             </div>
                     
                             {/* Child Info */}
@@ -1241,8 +1260,11 @@ export default function BirthCertifcateForm() {
                                     type="text"
                                     name="childName"
                                     placeholder="Enter child's full name"
-                                    className="common-input w-full"
+                                    className={`common-input w-full ${errors.childName ? 'input-error' : ''}`}
+                                    value={formData.page10.childName}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                                {errors.childName && <ErrorMessages errors={errors.childName} />}
                             </div>
                     
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1251,7 +1273,9 @@ export default function BirthCertifcateForm() {
                                     <input
                                         type="date"
                                         name="childBirthDate"
-                                        className="common-input w-full"
+                                        className={`common-input w-full ${errors.childBirthDate ? 'input-error' : ''}`}
+                                        value={formData.page10.childBirthDate}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                 </div>
                                 <div>
@@ -1260,8 +1284,11 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="childBirthPlace"
                                         placeholder="City / Municipality, Province"
-                                        className="common-input w-full"
+                                        className={`common-input w-full ${errors.childBirthPlace ? 'input-error' : ''}`}
+                                        value={formData.page10.childBirthPlace}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.childBirthPlace && <ErrorMessages errors={errors.childBirthPlace} />}
                                 </div>
                             </div>
                     
@@ -1274,13 +1301,13 @@ export default function BirthCertifcateForm() {
                             {/* Signature Fields */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                                 <div className="text-center">
-                                    <label className="block text-sm font-medium mb-2">Mother&apos;s Signature</label>
+                                    <label className="block text-sm font-medium mb-2">{ AllCaps(formData.page10.motherName) }</label>
                                     <div className="border-t border-gray-400 pt-2 text-gray-600">
                                         Signature over printed name
                                     </div>
                                 </div>
                                 <div className="text-center">
-                                    <label className="block text-sm font-medium mb-2">Father&apos;s Signature</label>
+                                    <label className="block text-sm font-medium mb-2">{ AllCaps(formData.page10.fatherName) }</label>
                                     <div className="border-t border-gray-400 pt-2 text-gray-600">
                                     Signature over printed name
                                     </div>
