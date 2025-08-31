@@ -220,7 +220,6 @@ export default function BirthCertifcateForm() {
     const [errors, setErrors] = React.useState({});
     const handlePageChange = (direction) => {
         if (direction === 'next') {
-            console.log(`formData ${JSON.stringify(formData[`page${currentPage}`])}`)
             const response = BirthCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
             if (Object.keys(response).length > 0) {
                 setErrors(response);
