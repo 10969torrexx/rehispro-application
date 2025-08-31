@@ -164,6 +164,24 @@ select {
   }
 }
 
+.common-textarea {
+  border: 1px solid #d1d5db;   
+  padding: 0.5rem 0.5rem;            
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  resize: vertical;            
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  min-height: 4rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  border-radius: 1rem;
+
+  &:focus {
+    border-color: #a855f7;      
+    box-shadow: 0 0 0 1px #a855f7;
+  }
+}
+
 /* custom-checkbox.css */
 .custom-checkbox {
   width: 20px;

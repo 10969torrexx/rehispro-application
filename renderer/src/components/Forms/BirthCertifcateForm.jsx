@@ -1185,10 +1185,9 @@ export default function BirthCertifcateForm() {
                                 <textarea
                                     name="remarks"
                                     placeholder="Enter remarks or annotations here..."
-                                    className={`common-input w-full h-32 resize-none ${errors.remarks ? 'input-error' : ''}`}
+                                    className={`common-textarea w-full h-32 resize-none ${errors.remarks ? 'input-error' : ''}`}
                                     value={formData.page9.remarks}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    style={{borderRadius: '8px'}}
                                 />
                                 {errors.remarks && <ErrorMessages errors={errors.remarks} />}
                             </div>
@@ -1529,34 +1528,17 @@ export default function BirthCertifcateForm() {
                             {/* Statement 1 - Applicant */}
                             <div>
                                 <p className="text-sm font-medium mb-1">1. That I am the applicant for the delayed registration of:</p>
-                                <div className="grid grid-cols-2 gap-4">
-                                    {/* Column 1 */}
-                                    <label className="flex flex-col">
-                                        <span className="mb-1">My birth in</span>
-                                        <input type="text" name="selfPob" className="common-input" />
-                                    </label>
-
-                                    <label className="flex flex-col">
-                                        <span className="mb-1">On</span>
-                                        <input type="date" name="selfDob" className="common-input" />
-                                    </label>
-
-                                    {/* Column 2 */}
-                                    <label className="flex flex-col mt-2">
-                                        <span className="mb-1">The birth of</span>
-                                        <input type="text" name="childName" className="common-input" />
-                                    </label>
-
-                                    <label className="flex flex-col mt-2">
-                                        <span className="mb-1">Who was born in</span>
-                                        <input type="text" name="childPob" className="common-input" />
-                                    </label>
-
-                                    <label className="flex flex-col mt-2 col-span-2">
-                                        <span className="mb-1">On</span>
-                                        <input type="date" name="childDob" className="common-input" />
-                                    </label>
-                                </div>
+                                 <label className="flex items-center space-x-2">
+                                    <input type="checkbox" className="custom-checkbox" name="applicantType" value="self" />
+                                    <span>My birth in <input type="text" name="selfPob" className="border rounded px-2 py-1 ml-2" /> 
+                                    on <input type="date" name="selfDob" className="border rounded px-2 py-1 ml-2" /></span>
+                                </label>
+                                <label className="flex items-center space-x-2 mt-2">
+                                    <input type="checkbox" className="custom-checkbox" name="applicantType" value="child" />
+                                    <span>The birth of <input type="text" name="childName" className="border rounded px-2 py-1 ml-2" /> 
+                                    who was born in <input type="text" name="childPob" className="border rounded px-2 py-1 ml-2" /> 
+                                    on <input type="date" name="childDob" className="border rounded px-2 py-1 ml-2" /></span>
+                                </label>
                             </div>
                       
                             {/* Statement 2 */}
@@ -1598,7 +1580,10 @@ export default function BirthCertifcateForm() {
                             <p className="text-sm font-medium mb-1">
                                 5. That the reason for the delay in registering my/his/her birth was:
                             </p>
-                            <textarea name="reasonDelay" className="common-input w-full" />
+                            <textarea 
+                                name="reasonDelay" 
+                                className="common-textarea w-full" 
+                            />
                             </div>
                         
                             {/* Statement 6 */}
