@@ -162,6 +162,12 @@ select {
     border-color: #a855f7;      
     box-shadow: 0 0 0 1px #a855f7;
   }
+
+  &:disabled {
+    background-color: #eaeaea;
+    color: #6b7280;
+    cursor: not-allowed;
+  }
 }
 
 .common-textarea {

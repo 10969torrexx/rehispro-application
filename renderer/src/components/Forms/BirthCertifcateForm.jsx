@@ -1543,13 +1543,15 @@ export default function BirthCertifcateForm() {
                                     <input 
                                         type="text" 
                                         name="selfPob" 
-                                        className="common-input flex-1" 
+                                        className="common-input flex-1"
+                                        disabled
                                     /> 
                                     on 
                                     <input 
                                         type="date" 
                                         name="selfDob" 
-                                        className="common-input flex-1" 
+                                        className="common-input flex-1"
+                                        disabled
                                     />
                                     </span>
                                 </label>
@@ -1566,19 +1568,22 @@ export default function BirthCertifcateForm() {
                                     <input 
                                         type="text" 
                                         name="childName" 
-                                        className="common-input flex-1" 
+                                        className="common-input flex-1"
+                                        disabled
                                     /> 
                                     who was born in 
                                     <input 
                                         type="text" 
                                         name="childPob" 
-                                        className="common-input flex-1" 
+                                        className="common-input flex-1"
+                                        disabled
                                     /> 
                                     on 
                                     <input 
                                         type="date" 
                                         name="childDob" 
-                                        className="common-input flex-1" 
+                                        className="common-input flex-1"
+                                        disabled
                                     />
                                     </span>
                                 </label>
