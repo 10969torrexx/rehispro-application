@@ -1528,10 +1528,22 @@ export default function BirthCertifcateForm() {
                             {/* Statement 1 - Applicant */}
                             <div>
                                 <p className="text-sm font-medium mb-1">1. That I am the applicant for the delayed registration of:</p>
-                                 <label className="flex items-center space-x-2">
+                                 <label className="flex items-center space-x-2 w-full">
                                     <input type="checkbox" className="custom-checkbox" name="applicantType" value="self" />
-                                    <span>My birth in <input type="text" name="selfPob" className="border rounded px-2 py-1 ml-2" /> 
-                                    on <input type="date" name="selfDob" className="border rounded px-2 py-1 ml-2" /></span>
+                                    <span className='flex-1 flex items-center gap-2'>
+                                        My birth in 
+                                        <input 
+                                            type="text" 
+                                            name="selfPob" 
+                                            className="common-input flex-1" 
+                                        /> 
+                                        on 
+                                        <input 
+                                            type="date" 
+                                            name="selfDob" 
+                                            className="common-input flex-1" 
+                                        />
+                                    </span>
                                 </label>
                                 <label className="flex items-center space-x-2 mt-2">
                                     <input type="checkbox" className="custom-checkbox" name="applicantType" value="child" />
