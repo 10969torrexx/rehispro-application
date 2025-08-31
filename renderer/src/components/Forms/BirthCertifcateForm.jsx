@@ -9,7 +9,7 @@ import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(5); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(12); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -1578,42 +1578,62 @@ export default function BirthCertifcateForm() {
                                     </span>
                                 </label>
 
-                                <label className="flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center sm:space-x-2 w-full">
-                                    <input 
-                                        type="checkbox" 
-                                        className="custom-checkbox mb-2 sm:mb-0" 
-                                        name="childCheckbox"
-                                        checked={formData.page12.childCheckbox}
-                                        onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
-                                    />
-                                    <span className="flex-1 flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center gap-2">
-                                        The birth of 
+                                <label className="flex flex-col sm:flex-row sm:items-center sm:space-x-2 w-full mb-2">
+                                    <div>
                                         <input 
-                                            type="text" 
-                                            name="childName" 
-                                            className="common-input flex-1"
-                                            disabled = {!formData.page12.childCheckbox}
-                                            value={formData.page12.childName}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        /> 
-                                        who was born in 
-                                        <input 
-                                            type="text" 
-                                            name="childPob" 
-                                            className="common-input flex-1"
-                                            disabled={!formData.page12.childCheckbox}
-                                            value={formData.page12.childPob}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        /> 
-                                        on 
-                                        <input 
-                                            type="date" 
-                                            name="childDob" 
-                                            className="common-input flex-1"
-                                            disabled={!formData.page12.childCheckbox}
-                                            value={formData.page12.childDob}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            type="checkbox" 
+                                            className="custom-checkbox mb-2 sm:mb-0" 
+                                            name="childCheckbox"
+                                            checked={formData.page12.childCheckbox}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                         />
+                                    </div>
+
+                                    <span className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                        <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                            <span className="whitespace-nowrap">The birth of</span>
+                                            <div className="flex flex-col flex-1">
+                                                <input 
+                                                    type="text" 
+                                                    name="childName" 
+                                                    className={`common-input w-full sm:flex-1 ${errors.childName ? 'input-error' : ''}`}
+                                                    disabled={!formData.page12.childCheckbox}
+                                                    value={formData.page12.childName}
+                                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                                />
+                                                {errors.childName && <ErrorMessages errors={errors.childName} />}
+                                            </div>
+                                        </div>
+
+                                        <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                            <span className="whitespace-nowrap">who was born in</span>
+                                            <div className="flex flex-col flex-1">
+                                                <input 
+                                                    type="text" 
+                                                    name="childPob" 
+                                                    className={`common-input w-full sm:flex-1 ${errors.childPob ? 'input-error' : ''}`}
+                                                    disabled={!formData.page12.childCheckbox}
+                                                    value={formData.page12.childPob}
+                                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                                />
+                                                {errors.childPob && <ErrorMessages errors={errors.childPob} />}
+                                            </div>
+                                        </div>
+
+                                        <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                            <span className="whitespace-nowrap">on</span>
+                                            <div className="flex flex-col flex-1">
+                                                <input 
+                                                    type="date" 
+                                                    name="childDob" 
+                                                    className={`common-input w-full sm:flex-1 ${errors.childDob ? 'input-error' : ''}`}
+                                                    disabled={!formData.page12.childCheckbox}
+                                                    value={formData.page12.childDob}
+                                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                                />
+                                                {errors.childDob && <ErrorMessages errors={errors.childDob} />}
+                                            </div>
+                                        </div>
                                     </span>
                                 </label>
                             </div>

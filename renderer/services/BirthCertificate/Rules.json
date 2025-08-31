@@ -822,11 +822,29 @@
         "date": "Invalid date format."
       }
     },
+    "childCheckbox": {
+      "required": false,
+      "type": "boolean",
+      "message": "Check if affiant is the mother or father of the child."
+    },
+    "childName": {
+      "required": false,
+      "minLength": 2,
+      "maxLength": 100,
+      "requiredIf": "childCheckbox",
+      "message": {
+        "requiredIf": "Child's name is required if affiant is the mother or father.",
+        "minLength": "Child's name must be at least 2 characters.",
+        "maxLength": "Child's name must not exceed 100 characters."
+      }
+    },
     "childPob": {
       "required": false,
       "maxLength": 100,
       "minLength": 2,
+      "requiredIf": "childCheckbox",
       "message": {
+        "requiredIf": "Place of birth is required if affiant is the mother or father.",
         "maxLength": "Place of birth must not exceed 100 characters.",
         "minLength": "Place of birth must be at least 2 characters."
       }
@@ -834,7 +852,9 @@
     "childDob": {
       "required": false,
       "type": "date",
+      "requiredIf": "childCheckbox",
       "message": {
+        "requiredIf": "Date of birth is required if affiant is the mother or father.",
         "date": "Invalid date format."
       }
     },
