@@ -5,7 +5,7 @@ export default function ErrorMessages({ errors }) {
     : Object.values(errors).filter(Boolean);
 
   return (
-    <div className="w-full p-2 rounded">
+    <div className="w-full pl-2 rounded">
       {errorList.map((error, i) => (
         <p key={i} className="text-red-500 text-xs mt-1 text-left">
           {error}

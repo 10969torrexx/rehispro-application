@@ -1585,7 +1585,7 @@ export default function BirthCertifcateForm() {
                                         className="custom-checkbox mb-2 sm:mb-0" 
                                         name="childCheckbox"
                                         checked={formData.page12.childCheckbox}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                     />
                                     <span className="flex-1 flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center gap-2">
                                         The birth of 
