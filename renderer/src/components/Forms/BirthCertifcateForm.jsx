@@ -166,9 +166,11 @@ export default function BirthCertifcateForm() {
             civilStatus: "",
             address: "",
 
-            applicantType: "", // "self" or "child"
+            selfCheckbox: false, // "self" or "child"
             selfPob: "",
             selfDob: "",
+
+            childCheckbox: false,
             childName: "",
             childPob: "",
             childDob: "",
@@ -218,6 +220,7 @@ export default function BirthCertifcateForm() {
     const [errors, setErrors] = React.useState({});
     const handlePageChange = (direction) => {
         if (direction === 'next') {
+            console.log(`formData ${JSON.stringify(formData[`page${currentPage}`])}`)
             const response = BirthCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
             if (Object.keys(response).length > 0) {
                 setErrors(response);
@@ -1531,28 +1534,48 @@ export default function BirthCertifcateForm() {
                                     1. That I am the applicant for the delayed registration of:
                                 </p>
 
-                                <label className="flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center sm:space-x-2 w-full mb-2">
-                                    <input 
-                                        type="checkbox" 
-                                        className="custom-checkbox mb-2 sm:mb-0" 
-                                        name="applicantType" 
-                                        value="self" 
-                                    />
-                                    <span className="flex-1 flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center gap-2">
-                                    My birth in 
-                                    <input 
-                                        type="text" 
-                                        name="selfPob" 
-                                        className="common-input flex-1"
-                                        disabled
-                                    /> 
-                                    on 
-                                    <input 
-                                        type="date" 
-                                        name="selfDob" 
-                                        className="common-input flex-1"
-                                        disabled
-                                    />
+                                <label className="flex flex-col sm:flex-row sm:items-center sm:space-x-2 w-full mb-2">
+                                    <div>
+                                        <input 
+                                            type="checkbox" 
+                                            className="custom-checkbox mb-2 sm:mb-0"
+                                            name="selfCheckbox" 
+                                            checked={formData.page12.selfCheckbox}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
+                                        />
+                                    </div>
+
+                                    <span className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                        <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                            <span className="whitespace-nowrap">My birth in</span>
+                                            <div className="flex flex-col flex-1">
+                                                <input 
+                                                    type="text" 
+                                                    name="selfPob" 
+                                                    className={`common-input w-full sm:flex-1 ${errors.selfPob ? 'input-error' : ''}`} 
+                                                    disabled={!formData.page12.selfCheckbox}
+                                                    value={formData.page12.selfPob}
+                                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                                />
+                                                {errors.selfPob && ( <ErrorMessages errors={errors.selfPob} /> )}
+                                            </div>
+                                        </div>
+
+
+                                        <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                            <span className="whitespace-nowrap">on</span>
+                                            <div className="flex flex-col flex-1">
+                                                <input 
+                                                    type="date" 
+                                                    name="selfDob" 
+                                                    className={`common-input w-full sm:flex-1 ${errors.selfDob ? 'input-error' : ''}`} 
+                                                    disabled={!formData.page12.selfCheckbox}
+                                                    value={formData.page12.selfDob}
+                                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                                />
+                                                {errors.selfDob && <ErrorMessages errors={errors.selfDob} />}
+                                            </div>
+                                        </div>
                                     </span>
                                 </label>
 
@@ -1560,31 +1583,38 @@ export default function BirthCertifcateForm() {
                                     <input 
                                         type="checkbox" 
                                         className="custom-checkbox mb-2 sm:mb-0" 
-                                        name="applicantType" 
-                                        value="child" 
+                                        name="childCheckbox"
+                                        checked={formData.page12.childCheckbox}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                     <span className="flex-1 flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center gap-2">
-                                    The birth of 
-                                    <input 
-                                        type="text" 
-                                        name="childName" 
-                                        className="common-input flex-1"
-                                        disabled
-                                    /> 
-                                    who was born in 
-                                    <input 
-                                        type="text" 
-                                        name="childPob" 
-                                        className="common-input flex-1"
-                                        disabled
-                                    /> 
-                                    on 
-                                    <input 
-                                        type="date" 
-                                        name="childDob" 
-                                        className="common-input flex-1"
-                                        disabled
-                                    />
+                                        The birth of 
+                                        <input 
+                                            type="text" 
+                                            name="childName" 
+                                            className="common-input flex-1"
+                                            disabled = {!formData.page12.childCheckbox}
+                                            value={formData.page12.childName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        /> 
+                                        who was born in 
+                                        <input 
+                                            type="text" 
+                                            name="childPob" 
+                                            className="common-input flex-1"
+                                            disabled={!formData.page12.childCheckbox}
+                                            value={formData.page12.childPob}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        /> 
+                                        on 
+                                        <input 
+                                            type="date" 
+                                            name="childDob" 
+                                            className="common-input flex-1"
+                                            disabled={!formData.page12.childCheckbox}
+                                            value={formData.page12.childDob}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
                                     </span>
                                 </label>
                             </div>
@@ -1594,8 +1624,22 @@ export default function BirthCertifcateForm() {
                                 <p className="text-sm font-medium mb-1">
                                     2. That I/he/she was attended at birth by:
                                 </p>
-                                <input type="text" name="attendantName" placeholder="Name of Attendant" className="common-input w-full" />
-                                <input type="text" name="attendantAddress" placeholder="Address of Attendant" className="common-input w-full mt-2" />
+                                <input 
+                                    type="text" 
+                                    name="attendantName" 
+                                    placeholder="Name of Attendant" 
+                                    className={`common-input w-full ${errors.attendantName ? 'input-error' : ''}`}
+                                    value={formData.page12.attendantName} 
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                <input 
+                                    type="text" 
+                                    name="attendantAddress" 
+                                    placeholder="Address of Attendant" 
+                                    className={`common-input w-full mt-2 ${errors.attendantAddress ? 'input-error' : ''}`}
+                                    value={formData.page12.attendantAddress}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                 />
                             </div>
                       
                             {/* Statement 3 */}
@@ -1603,7 +1647,11 @@ export default function BirthCertifcateForm() {
                                 <p className="text-sm font-medium mb-1">
                                     3. That I am/he/she is a citizen of:
                                 </p>
-                                <input typ  e="text" name="citizenship" className="common-input w-full" />
+                                <input 
+                                    type="text" 
+                                    name="citizenship" 
+                                    className="common-input w-full" 
+                                />
                             </div>
                       
                             {/* Statement 4 */}

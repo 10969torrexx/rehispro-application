@@ -802,8 +802,10 @@
     "selfPob": {
       "required": false,
       "maxLength": 100,
+      "minLength": 2,
       "message": {
-        "maxLength": "Place of birth must not exceed 100 characters."
+        "maxLength": "Place of birth must not exceed 100 characters.",
+        "minLength": "Place of birth must be at least 2 characters."
       }
     },
     "selfDob": {
@@ -816,8 +818,10 @@
     "childPob": {
       "required": false,
       "maxLength": 100,
+      "minLength": 2,
       "message": {
-        "maxLength": "Place of birth must not exceed 100 characters."
+        "maxLength": "Place of birth must not exceed 100 characters.",
+        "minLength": "Place of birth must be at least 2 characters."
       }
     },
     "childDob": {
