@@ -1527,29 +1527,60 @@ export default function BirthCertifcateForm() {
                       
                             {/* Statement 1 - Applicant */}
                             <div>
-                                <p className="text-sm font-medium mb-1">1. That I am the applicant for the delayed registration of:</p>
-                                 <label className="flex items-center space-x-2 w-full">
-                                    <input type="checkbox" className="custom-checkbox" name="applicantType" value="self" />
-                                    <span className='flex-1 flex items-center gap-2'>
-                                        My birth in 
-                                        <input 
-                                            type="text" 
-                                            name="selfPob" 
-                                            className="common-input flex-1" 
-                                        /> 
-                                        on 
-                                        <input 
-                                            type="date" 
-                                            name="selfDob" 
-                                            className="common-input flex-1" 
-                                        />
+                                <p className="text-sm font-medium mb-1">
+                                    1. That I am the applicant for the delayed registration of:
+                                </p>
+
+                                <label className="flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center sm:space-x-2 w-full mb-2">
+                                    <input 
+                                        type="checkbox" 
+                                        className="custom-checkbox mb-2 sm:mb-0" 
+                                        name="applicantType" 
+                                        value="self" 
+                                    />
+                                    <span className="flex-1 flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center gap-2">
+                                    My birth in 
+                                    <input 
+                                        type="text" 
+                                        name="selfPob" 
+                                        className="common-input flex-1" 
+                                    /> 
+                                    on 
+                                    <input 
+                                        type="date" 
+                                        name="selfDob" 
+                                        className="common-input flex-1" 
+                                    />
                                     </span>
                                 </label>
-                                <label className="flex items-center space-x-2 mt-2">
-                                    <input type="checkbox" className="custom-checkbox" name="applicantType" value="child" />
-                                    <span>The birth of <input type="text" name="childName" className="border rounded px-2 py-1 ml-2" /> 
-                                    who was born in <input type="text" name="childPob" className="border rounded px-2 py-1 ml-2" /> 
-                                    on <input type="date" name="childDob" className="border rounded px-2 py-1 ml-2" /></span>
+
+                                <label className="flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center sm:space-x-2 w-full">
+                                    <input 
+                                        type="checkbox" 
+                                        className="custom-checkbox mb-2 sm:mb-0" 
+                                        name="applicantType" 
+                                        value="child" 
+                                    />
+                                    <span className="flex-1 flex flex-col sm:flex-row md:flex-row lg:flex-row sm:items-center gap-2">
+                                    The birth of 
+                                    <input 
+                                        type="text" 
+                                        name="childName" 
+                                        className="common-input flex-1" 
+                                    /> 
+                                    who was born in 
+                                    <input 
+                                        type="text" 
+                                        name="childPob" 
+                                        className="common-input flex-1" 
+                                    /> 
+                                    on 
+                                    <input 
+                                        type="date" 
+                                        name="childDob" 
+                                        className="common-input flex-1" 
+                                    />
+                                    </span>
                                 </label>
                             </div>
                       
