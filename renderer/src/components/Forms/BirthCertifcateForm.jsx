@@ -1643,22 +1643,28 @@ export default function BirthCertifcateForm() {
                                 <p className="text-sm font-medium mb-1">
                                     2. That I/he/she was attended at birth by:
                                 </p>
-                                <input 
-                                    type="text" 
-                                    name="attendantName" 
-                                    placeholder="Name of Attendant" 
-                                    className={`common-input w-full ${errors.attendantName ? 'input-error' : ''}`}
-                                    value={formData.page12.attendantName} 
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                <input 
-                                    type="text" 
-                                    name="attendantAddress" 
-                                    placeholder="Address of Attendant" 
-                                    className={`common-input w-full mt-2 ${errors.attendantAddress ? 'input-error' : ''}`}
-                                    value={formData.page12.attendantAddress}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                 />
+                                <div>
+                                    <input 
+                                        type="text" 
+                                        name="attendantName" 
+                                        placeholder="Name of Attendant" 
+                                        className={`common-input w-full ${errors.attendantName ? 'input-error' : ''}`}
+                                        value={formData.page12.attendantName} 
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.attendantName && <ErrorMessages errors={errors.attendantName} />}
+                                </div>
+                                <div>
+                                    <input 
+                                        type="text" 
+                                        name="attendantAddress" 
+                                        placeholder="Address of Attendant" 
+                                        className={`common-input w-full mt-2 ${errors.attendantAddress ? 'input-error' : ''}`}
+                                        value={formData.page12.attendantAddress}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.attendantAddress && <ErrorMessages errors={errors.attendantAddress} />}
+                                </div>
                             </div>
                       
                             {/* Statement 3 */}
@@ -1666,11 +1672,16 @@ export default function BirthCertifcateForm() {
                                 <p className="text-sm font-medium mb-1">
                                     3. That I am/he/she is a citizen of:
                                 </p>
-                                <input 
-                                    type="text" 
-                                    name="citizenship" 
-                                    className="common-input w-full" 
-                                />
+                                <div>
+                                    <input 
+                                        type="text" 
+                                        name="citizenship" 
+                                        className={`common-input w-full ${errors.citizenship ? 'input-error' : ''}`} 
+                                        value={formData.page12.citizenship}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.citizenship && <ErrorMessages errors={errors.citizenship} />}
+                                </div>
                             </div>
                       
                             {/* Statement 4 */}
@@ -1706,11 +1717,30 @@ export default function BirthCertifcateForm() {
                                 <p className="text-sm font-medium mb-1">
                                     6. (For the applicant only) That I am married to:
                                 </p>
-                                <input type="text" name="spouseApplicant" placeholder="Spouse of Applicant" className="common-input w-full" />
+                                <div>
+                                    <input 
+                                        type="text" 
+                                        name="spouseApplicant" 
+                                        placeholder="Spouse of Applicant" 
+                                        className={`common-input w-full ${errors.spouseApplicant ? 'border-red-500' : ''}`} 
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.spouseApplicant && <ErrorMessages errors={errors.spouseApplicant} />}
+                                </div>
                                 <p className="text-sm font-medium mt-4">
                                     (If the applicant is other than the document owner) That I am married to:
                                 </p>
-                                <input type="text" name="spouseOwner" placeholder="Spouse of Document Owner" className="common-input w-full" />
+                                <div>
+                                    <input 
+                                        type="text" 
+                                        name="spouseOwner" 
+                                        placeholder="Spouse of Document Owner" 
+                                        className={`common-input w-full ${errors.spouseOwner ? 'border-red-500' : ''}`}
+                                        value={formData.page12.spouseOwner} 
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.spouseOwner && <ErrorMessages errors={errors.spouseOwner} />}
+                                </div>
                             </div>
                       
                             {/* Statement 7 */}

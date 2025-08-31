@@ -861,15 +861,19 @@
     "attendantName": {
       "required": false,
       "maxLength": 100,
+      "minLength": 2,
       "message": {
-        "maxLength": "Attendant name must not exceed 100 characters."
+        "maxLength": "Attendant name must not exceed 100 characters.",
+        "minLength": "Attendant name must be at least 2 characters."
       }
     },
     "attendantAddress": {
       "required": false,
       "maxLength": 150,
+      "minLength": 2,
       "message": {
-        "maxLength": "Attendant address must not exceed 150 characters."
+        "maxLength": "Attendant address must not exceed 150 characters.",
+        "minLength": "Attendant address must be at least 2 characters."
       }
     },
     "citizenship": {
