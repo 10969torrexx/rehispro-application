@@ -805,23 +805,21 @@
       "message": "Check if affiant is the mother or father of the child."
     },
     "selfPob": {
-      "required": true,
+      "requiredIf": "selfCheckbox",
       "maxLength": 100,
       "minLength": 2,
-      "requiredIf": "selfCheckbox",
       "message": {
+        "requiredIf": "Place of birth is required if affiant is the mother or father.",
         "maxLength": "Place of birth must not exceed 100 characters.",
-        "minLength": "Place of birth must be at least 2 characters.",
-        "requiredIf": "Place of birth is required if affiant is the mother or father."
+        "minLength": "Place of birth must be at least 2 characters."
       }
     },
     "selfDob": {
-      "required": true,
-      "type": "date",
       "requiredIf": "selfCheckbox",
+      "type": "date",
       "message": {
-        "date": "Invalid date format.",
-        "requiredIf": "Date of birth is required if affiant is the mother or father."
+        "requiredIf": "Date of birth is required if affiant is the mother or father.",
+        "date": "Invalid date format."
       }
     },
     "childPob": {

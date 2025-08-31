@@ -27,8 +27,10 @@ export function validateForm(data, page) {
 
     if (rule.requiredIf) {
       const conditionField = rule.requiredIf;
-      if (data[conditionField] && (!value || value.toString().trim() === "")) {
-        errors[field] = rule.message;
+      if (data[conditionField]) {
+        if (!value || value.toString().trim() === "") {
+          errors[field] = rule.message?.requiredIf || rule.message;
+        }
       }
     }
 
