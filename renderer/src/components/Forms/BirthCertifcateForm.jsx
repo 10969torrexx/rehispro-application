@@ -2,14 +2,14 @@ import React from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertValidation } from '@services';
-import { BirthCertificate } from '@enums';
+import { BirthCertificate, CivilStatus } from '@enums';
 import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(11); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(12); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -1339,7 +1339,7 @@ export default function BirthCertifcateForm() {
                                         value={formData.page11.juratDay}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.juratDay && <p className="text-red-500 text-sm">{errors.juratDay}</p>}
+                                    {errors.juratDay && <ErrorMessages errors={errors.juratDay} />}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Month & Year</label>
@@ -1351,7 +1351,7 @@ export default function BirthCertifcateForm() {
                                         value={formData.page11.juratMonthYear}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.juratMonthYear && <p className="text-red-500 text-sm">{errors.juratMonthYear}</p>}
+                                    {errors.juratMonthYear && <ErrorMessages errors={errors.juratMonthYear} />}
                                 </div>
                             </div>
                       
@@ -1366,7 +1366,7 @@ export default function BirthCertifcateForm() {
                                         value={formData.page11.juratAffiant1}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.juratAffiant1 && <p className="text-red-500 text-sm">{errors.juratAffiant1}</p>}
+                                    {errors.juratAffiant1 && <ErrorMessages errors={errors.juratAffiant1} />}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Affiant 2 (Name)</label>
@@ -1378,7 +1378,7 @@ export default function BirthCertifcateForm() {
                                         value={formData.page11.juratAffiant2}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.juratAffiant2 && <p className="text-red-500 text-sm">{errors.juratAffiant2}</p>}
+                                    {errors.juratAffiant2 && <ErrorMessages errors={errors.juratAffiant2} />}
                                 </div>
                             </div>
                       
@@ -1393,7 +1393,7 @@ export default function BirthCertifcateForm() {
                                     value={formData.page11.ctcNumber}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
-                                {errors.ctcNumber && <p className="text-red-500 text-sm">{errors.ctcNumber}</p>}
+                                {errors.ctcNumber && <ErrorMessages errors={errors.ctcNumber} />}
                             </div>
                       
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1406,7 +1406,7 @@ export default function BirthCertifcateForm() {
                                         value={formData.page11.ctcDateIssued}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.ctcDateIssued && <p className="text-red-500 text-sm">{errors.ctcDateIssued}</p>}
+                                    {errors.ctcDateIssued && <ErrorMessages errors={errors.ctcDateIssued} />}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Place Issued</label>
@@ -1418,7 +1418,7 @@ export default function BirthCertifcateForm() {
                                         value={formData.page11.ctcPlaceIssued}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.ctcPlaceIssued && <p className="text-red-500 text-sm">{errors.ctcPlaceIssued}</p>}
+                                    {errors.ctcPlaceIssued && <ErrorMessages errors={errors.ctcPlaceIssued} />}
                                 </div>
                             </div>
                       
@@ -1441,7 +1441,7 @@ export default function BirthCertifcateForm() {
                                         value={formData.page11.adminName}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.adminName && <p className="text-red-500 text-sm">{errors.adminName}</p>}
+                                    {errors.adminName && <ErrorMessages errors={errors.adminName} />}
                                 </div>
                         
                                 <div>
@@ -1453,7 +1453,7 @@ export default function BirthCertifcateForm() {
                                         className={`common-input w-full ${errors.adminPosition ? 'input-error' : ''}`}
                                         value={formData.page11.adminPosition}
                                     />
-                                    {errors.adminPosition && <p className="text-red-500 text-sm">{errors.adminPosition}</p>}
+                                    {errors.adminPosition && <ErrorMessages errors={errors.adminPosition} />}
                                 </div>
                         
                                 <div>
@@ -1466,7 +1466,7 @@ export default function BirthCertifcateForm() {
                                         value={formData.page11.adminAddress}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.adminAddress && <p className="text-red-500 text-sm">{errors.adminAddress}</p>}
+                                    {errors.adminAddress && <ErrorMessages errors={errors.adminAddress} />}
                                 </div>
                             </div>
                         </div>
@@ -1476,47 +1476,87 @@ export default function BirthCertifcateForm() {
                         <div className="mb-6 text-left space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             <p className="text-sm italic text-center">
-                            (To be accomplished by the hospital/clinic administrator, father, mother, guardian, 
-                            or the person himself/herself if 18 years old or over.)
+                                (To be accomplished by the hospital/clinic administrator, father, mother, guardian, 
+                                or the person himself/herself if 18 years old or over.)
+                            </p>
+
+                            <p className='text-sm italic'>
+                                I _____________________________ , of legal age, single / married / divorced / widow / widower, with residence and postal address at ______________________________________________________ after having been duly sworn in accordance with law, do hereby depose and say:
                             </p>
                       
                             {/* Affiant Information */}
                             <div>
                                 <label className="block text-sm font-medium mb-1">Name of Affiant</label>
-                                <input type="text" name="affiantName" className="common-input w-full" />
+                                <input 
+                                    type="text" 
+                                    name="affiantName" 
+                                    className={`common-input w-full ${errors.affiantName ? 'input-error' : ''}`} 
+                                    value={formData.page12.affiantName}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.affiantName && <ErrorMessages errors={errors.affiantName} />}
                             </div>
                         
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Civil Status</label>
-                                    <select name="civilStatus" className="common-input w-full">
+                                    <select name="civilStatus" 
+                                        className={`common-input w-full ${errors.civilStatus ? 'input-error' : ''}`}
+                                        value={formData.page12.civilStatus}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    >
                                         <option value="">Select</option>
-                                        <option>Single</option>
-                                        <option>Married</option>
-                                        <option>Divorced</option>
-                                        <option>Widow/Widower</option>
+                                        <option value={CivilStatus.SINGLE}>{capitalizeFirst(CivilStatus.SINGLE)}</option>
+                                        <option value={CivilStatus.MARRIED}>{capitalizeFirst(CivilStatus.MARRIED)}</option>
+                                        <option value={CivilStatus.DIVORCED}>{capitalizeFirst(CivilStatus.DIVORCED)}</option>
+                                        <option value={CivilStatus.WIDOW}>{capitalizeFirst(CivilStatus.WIDOW)}</option>
                                     </select>
+                                    {errors.civilStatus && <ErrorMessages errors={errors.civilStatus} />}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Residence / Postal Address</label>
-                                    <input type="text" name="address" className="common-input w-full" />
+                                    <input 
+                                        type="text" 
+                                        name="address" 
+                                        className={`common-input w-full ${errors.address ? 'input-error' : ''}`}
+                                        value={formData.page12.address}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.address && <ErrorMessages errors={errors.address} />}
                                 </div>
                             </div>
                       
                             {/* Statement 1 - Applicant */}
                             <div>
                                 <p className="text-sm font-medium mb-1">1. That I am the applicant for the delayed registration of:</p>
-                                <label className="flex items-center space-x-2">
-                                    <input type="checkbox" className="custom-checkbox" name="applicantType" value="self" />
-                                    <span>My birth in <input type="text" name="selfPob" className="border rounded px-2 py-1 ml-2" /> 
-                                    on <input type="date" name="selfDob" className="border rounded px-2 py-1 ml-2" /></span>
-                                </label>
-                                <label className="flex items-center space-x-2 mt-2">
-                                    <input type="checkbox" className="custom-checkbox" name="applicantType" value="child" />
-                                    <span>The birth of <input type="text" name="childName" className="border rounded px-2 py-1 ml-2" /> 
-                                    who was born in <input type="text" name="childPob" className="border rounded px-2 py-1 ml-2" /> 
-                                    on <input type="date" name="childDob" className="border rounded px-2 py-1 ml-2" /></span>
-                                </label>
+                                <div className="grid grid-cols-2 gap-4">
+                                    {/* Column 1 */}
+                                    <label className="flex flex-col">
+                                        <span className="mb-1">My birth in</span>
+                                        <input type="text" name="selfPob" className="common-input" />
+                                    </label>
+
+                                    <label className="flex flex-col">
+                                        <span className="mb-1">On</span>
+                                        <input type="date" name="selfDob" className="common-input" />
+                                    </label>
+
+                                    {/* Column 2 */}
+                                    <label className="flex flex-col mt-2">
+                                        <span className="mb-1">The birth of</span>
+                                        <input type="text" name="childName" className="common-input" />
+                                    </label>
+
+                                    <label className="flex flex-col mt-2">
+                                        <span className="mb-1">Who was born in</span>
+                                        <input type="text" name="childPob" className="common-input" />
+                                    </label>
+
+                                    <label className="flex flex-col mt-2 col-span-2">
+                                        <span className="mb-1">On</span>
+                                        <input type="date" name="childDob" className="common-input" />
+                                    </label>
+                                </div>
                             </div>
                       
                             {/* Statement 2 */}
