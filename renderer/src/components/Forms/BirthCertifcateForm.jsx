@@ -1689,15 +1689,76 @@ export default function BirthCertifcateForm() {
                                 <p className="text-sm font-medium mb-1">
                                     4. That my/his/her parents were:
                                 </p>
-                                <label className="flex items-center space-x-2">
-                                    <input type="checkbox" className="custom-checkbox" name="parentsStatus" value="married" />
-                                    <span>Married on <input type="date" name="marriageDate" className="border rounded px-2 py-1 ml-2" /> 
-                                    at <input type="text" name="marriagePlace" className="border rounded px-2 py-1 ml-2" /></span>
+
+                                {/* Married option */}
+                                <label className="flex flex-col sm:flex-row sm:items-center sm:space-x-2 w-full mb-2">
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            className="custom-checkbox"
+                                            name="parentsStatusMarried"
+                                            checked={formData.page12.parentsStatusMarried}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
+                                        />
+                                        </div>
+
+                                    <span className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                        <span className="whitespace-nowrap">Married on</span>
+
+                                        <div className="flex flex-col flex-1">
+                                            <input
+                                                type="date"
+                                                name="marriageDate"
+                                                className={`common-input w-full sm:flex-1 ${errors.marriageDate ? 'input-error' : ''}`}
+                                                disabled={!formData.page12.parentsStatusMarried}
+                                                value={formData.page12.marriageDate}
+                                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            />
+                                            {errors.marriageDate && <ErrorMessages errors={errors.marriageDate} />}
+                                        </div>
+
+                                        <span className="whitespace-nowrap">at</span>
+                                        <div className="flex flex-col flex-1">
+                                            <input
+                                                type="text"
+                                                name="marriagePlace"
+                                                className={`common-input w-full sm:flex-1 ${errors.marriagePlace ? 'input-error' : ''}`}
+                                                disabled={!formData.page12.parentsStatusMarried}
+                                                value={formData.page12.marriagePlace}
+                                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            />
+                                            {errors.marriagePlace && <ErrorMessages errors={errors.marriagePlace} />}
+                                        </div>
+                                    </span>
                                 </label>
-                                <label className="flex items-center space-x-2 mt-2">
-                                    <input type="checkbox" className="custom-checkbox"  name="parentsStatus" value="notMarried" />
-                                    <span>Not married but acknowledged/not acknowledged by father whose name is 
-                                    <input type="text" name="fatherName" className="border rounded px-2 py-1 ml-2" /></span>
+
+                                {/* Not Married option */}
+                                <label className="flex flex-col sm:flex-row sm:items-center sm:space-x-2 w-full mb-2">
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            className="custom-checkbox"
+                                            name="parentsStatusNotMarried"
+                                            checked={formData.page12.parentsStatusNotMarried}
+                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
+                                        />
+                                    </div>
+
+                                    <span className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
+                                        <span className="whitespace-nowrap">Not married but acknowledged/not acknowledged by father whose name is</span>
+
+                                        <div className="flex flex-col flex-1">
+                                            <input
+                                                type="text"
+                                                name="fatherName"
+                                                className={`common-input w-full sm:flex-1 ${errors.fatherName ? 'input-error' : ''}`}
+                                                disabled={!formData.page12.parentsStatusNotMarried}
+                                                value={formData.page12.fatherName}
+                                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            />
+                                            {errors.fatherName && <ErrorMessages errors={errors.fatherName} />}
+                                        </div>
+                                    </span>
                                 </label>
                             </div>
                         
