@@ -965,7 +965,7 @@
   },
   "page13": {
     "juratDay": {
-      "required": true,
+      "required": false,
       "type": "number",
       "minLength": 1,
       "maxLength": 31,
@@ -977,8 +977,8 @@
       }
     },
     "juratMonthYear": {
-      "required": true,
-      "type": "string",
+      "required": false,
+      "type": "date",
       "pattern": "^(0[1-9]|1[0-2])\\/\\d{4}$",
       "message": {
         "required": "Month/Year is required.",
@@ -986,7 +986,7 @@
       }
     },
     "juratPlace": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 150,
       "message": {
@@ -996,7 +996,7 @@
       }
     },
     "ctcNumber": {
-      "required": true,
+      "required": false,
       "minLength": 5,
       "maxLength": 50,
       "message": {
@@ -1006,7 +1006,7 @@
       }
     },
     "ctcIssuedOn": {
-      "required": true,
+      "required": false,
       "type": "date",
       "message": {
         "required": "CTC issued date is required.",
@@ -1022,7 +1022,7 @@
       }
     },
     "adminOfficerSignature": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -1032,7 +1032,7 @@
       }
     },
     "adminOfficerName": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -1042,7 +1042,7 @@
       }
     },
     "adminOfficerPosition": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -1052,7 +1052,7 @@
       }
     },
     "adminOfficerAddress": {
-      "required": true,
+      "required": false,
       "minLength": 5,
       "maxLength": 150,
       "message": {

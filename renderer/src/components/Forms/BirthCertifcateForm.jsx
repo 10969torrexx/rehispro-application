@@ -1854,13 +1854,16 @@ export default function BirthCertifcateForm() {
                                         type="text"
                                         name="juratDay"
                                         placeholder="Day"
-                                        className="common-input"
+                                        className={`common-input ${errors.juratDay ? 'input-error' : ''}`}
+                                        value={formData.page13.juratDay}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.juratDay && <ErrorMessages errors={errors.juratDay} />}
                                 </div>
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1"> Month / Year</label>
                                     <input
-                                        type="text"
+                                        type="date"
                                         name="juratMonthYear"
                                         placeholder="Month / Year"
                                         className="common-input"
