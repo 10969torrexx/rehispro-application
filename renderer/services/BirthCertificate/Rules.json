@@ -1014,7 +1014,7 @@
       }
     },
     "ctcIssuedAt": {
-      "required": true,
+      "required": false,
       "maxLength": 100,
       "message": {
         "required": "CTC issued place is required.",
