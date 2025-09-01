@@ -928,21 +928,27 @@
     "reasonDelay": {
       "required": false,
       "maxLength": 300,
+      "minLength": 2,
       "message": {
+        "minLength": "Reason for delay must be at least 2 characters.",
         "maxLength": "Reason for delay must not exceed 300 characters."
       }
     },
     "spouseApplicant": {
       "required": false,
       "maxLength": 100,
+      "minLength": 2,
       "message": {
+        "minLength": "Spouse name must be at least 2 characters.",
         "maxLength": "Spouse name must not exceed 100 characters."
       }
     },
     "spouseOwner": {
       "required": false,
       "maxLength": 100,
+      "minLength": 2,
       "message": {
+        "minLength": "Spouse name must be at least 2 characters.",
         "maxLength": "Spouse name must not exceed 100 characters."
       }
     },

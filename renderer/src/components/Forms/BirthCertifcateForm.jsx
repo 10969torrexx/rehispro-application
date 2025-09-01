@@ -1783,13 +1783,16 @@ export default function BirthCertifcateForm() {
                         
                             {/* Statement 5 */}
                             <div>
-                            <p className="text-sm font-medium mb-1">
-                                5. That the reason for the delay in registering my/his/her birth was:
-                            </p>
-                            <textarea 
-                                name="reasonDelay" 
-                                className="common-textarea w-full" 
-                            />
+                                <p className="text-sm font-medium mb-1">
+                                    5. That the reason for the delay in registering my/his/her birth was:
+                                </p>
+                                <textarea 
+                                    name="reasonDelay" 
+                                    className={`common-textarea w-full h-24 resize-none ${errors.reasonDelay ? 'input-error' : ''}`}
+                                    value={formData.page12.reasonDelay}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.reasonDelay && <ErrorMessages errors={errors.reasonDelay} />}
                             </div>
                         
                             {/* Statement 6 */}
@@ -1802,7 +1805,7 @@ export default function BirthCertifcateForm() {
                                         type="text" 
                                         name="spouseApplicant" 
                                         placeholder="Spouse of Applicant" 
-                                        className={`common-input w-full ${errors.spouseApplicant ? 'border-red-500' : ''}`} 
+                                        className={`common-input w-full ${errors.spouseApplicant ? 'input-error' : ''}`} 
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                     {errors.spouseApplicant && <ErrorMessages errors={errors.spouseApplicant} />}
@@ -1815,7 +1818,7 @@ export default function BirthCertifcateForm() {
                                         type="text" 
                                         name="spouseOwner" 
                                         placeholder="Spouse of Document Owner" 
-                                        className={`common-input w-full ${errors.spouseOwner ? 'border-red-500' : ''}`}
+                                        className={`common-input w-full ${errors.spouseOwner ? 'input-error' : ''}`}
                                         value={formData.page12.spouseOwner} 
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
@@ -1837,7 +1840,7 @@ export default function BirthCertifcateForm() {
                                 </p>
                                 <div className="mt-6">
                                     <label className="block text-sm font-medium mb-1">Signature Over Printed Name of Affiant</label>
-                                    <input type="text" name="affiantSignature" placeholder="__________________________" className="common-input w-full" />
+                                    <SignaturePlaceholder />
                                 </div>
                             </div>
                         </div>
