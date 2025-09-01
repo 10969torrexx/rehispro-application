@@ -2,7 +2,7 @@ import React from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertValidation } from '@services';
-import { BirthCertificate, CivilStatus } from '@enums';
+import { BirthCertificate, CivilStatus, MarriageStatus } from '@enums';
 import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
@@ -225,6 +225,10 @@ export default function BirthCertifcateForm() {
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
                 console.log("Validation Errors:", response);
+                console.log(
+                    `form Data ${currentPage}:`,
+                    JSON.stringify(formData[`page${currentPage}`], null, 2)
+                );
             } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
             }
@@ -234,14 +238,25 @@ export default function BirthCertifcateForm() {
     };
 
     const handleCheckboxChange = (event, section) => {
-        const { name, checked } = event.target;
-        setFormData((prevData) => ({
+        const { name, value, checked } = event.target;
+        setFormData((prevData) => {
+          const prevSection = prevData[section] || {};
+          let newValue;
+      
+          if (value) {
+            newValue = checked ? value : "";
+          } else {
+            newValue = checked;
+          }
+      
+          return {
             ...prevData,
             [section]: {
-                ...prevData[section],
-                [name]: checked
-            }
-        }));
+              ...prevSection,
+              [name]: newValue,
+            },
+          };
+        });
     };
 
     return (
@@ -1696,8 +1711,9 @@ export default function BirthCertifcateForm() {
                                         <input
                                             type="checkbox"
                                             className="custom-checkbox"
-                                            name="parentsStatusMarried"
-                                            checked={formData.page12.parentsStatusMarried}
+                                            name="parentsStatus"
+                                            value={MarriageStatus.MARRIED}
+                                            checked={formData.page12.parentsStatus == MarriageStatus.MARRIED}
                                             onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                         />
                                         </div>
@@ -1710,7 +1726,7 @@ export default function BirthCertifcateForm() {
                                                 type="date"
                                                 name="marriageDate"
                                                 className={`common-input w-full sm:flex-1 ${errors.marriageDate ? 'input-error' : ''}`}
-                                                disabled={!formData.page12.parentsStatusMarried}
+                                                disabled={!formData.page12.parentsStatus}
                                                 value={formData.page12.marriageDate}
                                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                             />
@@ -1723,7 +1739,7 @@ export default function BirthCertifcateForm() {
                                                 type="text"
                                                 name="marriagePlace"
                                                 className={`common-input w-full sm:flex-1 ${errors.marriagePlace ? 'input-error' : ''}`}
-                                                disabled={!formData.page12.parentsStatusMarried}
+                                                disabled={!formData.page12.parentsStatus}
                                                 value={formData.page12.marriagePlace}
                                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                             />
@@ -1738,20 +1754,23 @@ export default function BirthCertifcateForm() {
                                         <input
                                             type="checkbox"
                                             className="custom-checkbox"
-                                            name="parentsStatusNotMarried"
-                                            checked={formData.page12.parentsStatusNotMarried}
+                                            name="parentsStatus"
+                                            value={MarriageStatus.NOT_MARRIED}
+                                            checked={formData.page12.parentsStatus == MarriageStatus.NOT_MARRIED}
                                             onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                         />
                                     </div>
 
-                                    <span className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
-                                        <span className="whitespace-nowrap">Not married but acknowledged/not acknowledged by father whose name is</span>
+                                    <span className="flex-1 flex flex-col gap-2">
+                                        <span className="whitespace-wrap">
+                                            Not married but acknowledged/not acknowledged by father whose name is
+                                        </span>
 
                                         <div className="flex flex-col flex-1">
                                             <input
                                                 type="text"
                                                 name="fatherName"
-                                                className={`common-input w-full sm:flex-1 ${errors.fatherName ? 'input-error' : ''}`}
+                                                className={`common-input w-full ${errors.fatherName ? 'input-error' : ''}`}
                                                 disabled={!formData.page12.parentsStatusNotMarried}
                                                 value={formData.page12.fatherName}
                                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}

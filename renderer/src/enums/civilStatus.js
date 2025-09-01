@@ -4,3 +4,8 @@ export const CivilStatus = {
   DIVORCED: 'divorced',
   WIDOW: 'widow / widower',
 };
+
+export const MarriageStatus = { 
+  MARRIED: 'married',
+  NOT_MARRIED: 'not married',
+}

@@ -879,7 +879,9 @@
     "citizenship": {
       "required": false,
       "maxLength": 50,
+      "minLength": 2,
       "message": {
+        "minLength": "Citizenship must be at least 2 characters.",
         "maxLength": "Citizenship must not exceed 50 characters."
       }
     },
