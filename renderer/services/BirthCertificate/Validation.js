@@ -26,10 +26,20 @@ export function validateForm(data, page) {
     }
 
     if (rule.requiredIf) {
-      const conditionField = rule.requiredIf;
-      if (data[conditionField]) {
-        if (!value || value.toString().trim() === "") {
-          errors[field] = rule.message?.requiredIf || rule.message;
+      if (typeof rule.requiredIf === "object") {
+        const { field: conditionField, value: conditionValue } = rule.requiredIf;
+        if (data[conditionField] === conditionValue) {
+          if (!value || value.toString().trim() === "") {
+            errors[field] = rule.message?.requiredIf || rule.message;
+          }
+        }
+      } 
+      else if (typeof rule.requiredIf === "string") {
+        const conditionField = rule.requiredIf;
+        if (data[conditionField]) {
+          if (!value || value.toString().trim() === "") {
+            errors[field] = rule.message?.requiredIf || rule.message;
+          }
         }
       }
     }

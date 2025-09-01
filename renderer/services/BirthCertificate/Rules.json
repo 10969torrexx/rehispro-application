@@ -888,23 +888,41 @@
     "parentsStatus": {
       "required": false,
       "type": "enum",
-      "options": ["married", "notMarried"],
+      "options": ["married", "not married"],
       "message": {
         "enum": "Invalid parents status."
       }
     },
     "marriageDate": {
-      "required": false,
+      "requiredIf": {
+        "field": "parentsStatus",
+        "value": "married"
+      },
       "type": "date",
       "message": {
         "date": "Invalid date format."
       }
     },
     "marriagePlace": {
-      "required": false,
+      "requiredIf": {
+        "field": "parentsStatus",
+        "value": "married"
+      },
       "maxLength": 100,
       "message": {
         "maxLength": "Marriage place must not exceed 100 characters."
+      }
+    },
+    "fatherName": {
+      "requiredIf": {
+        "field": "parentsStatus",
+        "value": "not married"
+      },
+      "maxLength": 100,
+      "minLength": 2,
+      "message": {
+        "minLength": "Father's name must be at least 2 characters.",
+        "maxLength": "Father's name must not exceed 100 characters."
       }
     },
     "reasonDelay": {
