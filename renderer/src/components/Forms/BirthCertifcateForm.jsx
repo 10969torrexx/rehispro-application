@@ -1726,7 +1726,7 @@ export default function BirthCertifcateForm() {
                                                 type="date"
                                                 name="marriageDate"
                                                 className={`common-input w-full sm:flex-1 ${errors.marriageDate ? 'input-error' : ''}`}
-                                                disabled={!formData.page12.parentsStatus}
+                                                disabled={formData.page12.parentsStatus != MarriageStatus.MARRIED}
                                                 value={formData.page12.marriageDate}
                                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                             />
@@ -1739,7 +1739,7 @@ export default function BirthCertifcateForm() {
                                                 type="text"
                                                 name="marriagePlace"
                                                 className={`common-input w-full sm:flex-1 ${errors.marriagePlace ? 'input-error' : ''}`}
-                                                disabled={!formData.page12.parentsStatus}
+                                                disabled={formData.page12.parentsStatus != MarriageStatus.MARRIED}
                                                 value={formData.page12.marriagePlace}
                                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                             />
@@ -1771,7 +1771,7 @@ export default function BirthCertifcateForm() {
                                                 type="text"
                                                 name="fatherName"
                                                 className={`common-input w-full ${errors.fatherName ? 'input-error' : ''}`}
-                                                disabled={!formData.page12.parentsStatusNotMarried}
+                                                disabled={formData.page12.parentsStatus != MarriageStatus.NOT_MARRIED}
                                                 value={formData.page12.fatherName}
                                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                             />
