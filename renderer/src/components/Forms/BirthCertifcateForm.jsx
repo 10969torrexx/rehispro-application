@@ -191,16 +191,16 @@ export default function BirthCertifcateForm() {
         },
         // --- Page 13: Final Jurat / Affidavit ---
         page13: {
-            juratDay13: "",
-            juratMonthYear13: "",
-            juratPlace13: "",
-            ctcNumber13: "",
-            ctcIssuedOn13: "",
-            ctcIssuedAt13: "",
-            adminOfficerSignature13: "",
-            adminOfficerName13: "",
-            adminOfficerPosition13: "",
-            adminOfficerAddress13: "",
+            juratDay: "",
+            juratMonthYear: "",
+            juratPlace: "",
+            ctcNumber: "",
+            ctcIssuedOn: "",
+            ctcIssuedAt: "",
+            adminOfficerSignature: "",
+            adminOfficerName: "",
+            adminOfficerPosition: "",
+            adminOfficerAddress: "",
         }
     });
 
