@@ -9,7 +9,7 @@ import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(12); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(13); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -1825,31 +1825,27 @@ export default function BirthCertifcateForm() {
                                     {errors.spouseOwner && <ErrorMessages errors={errors.spouseOwner} />}
                                 </div>
                             </div>
-                      
-                            {/* Statement 7 */}
-                            <div>
-                                <p className="text-sm font-medium mb-1">
-                                    7. That I am executing this affidavit to attest to the truthfulness of the foregoing statements for all legal intents and purposes.
-                                </p>
-                            </div>
-                      
-                            {/* Jurat Section */}
-                            <div className="pt-6 border-t">
-                                <p className="text-sm italic">
-                                    In truth whereof, I have affixed my signature below this ____ day of _____________ at __________________, Philippines.
-                                </p>
-                                <div className="mt-6">
-                                    <label className="block text-sm font-medium mb-1">Signature Over Printed Name of Affiant</label>
-                                    <SignaturePlaceholder />
-                                </div>
-                            </div>
                         </div>
                     }
 
                     {currentPage === 13 &&
                         <div className="mb-6 text-left space-y-6">
                            <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
-                      
+                            <div className=''>
+                                {/* Statement 7 */}
+                                <div>
+                                    <p className="text-sm font-medium mb-1">
+                                        7. That I am executing this affidavit to attest to the truthfulness of the foregoing statements for all legal intents and purposes.
+                                    </p>
+                                </div>
+                        
+                                {/* Jurat Section */}
+                                <div className="pt-6">
+                                    <p className="text-sm italic">
+                                        In truth whereof, I have affixed my signature below this ____ day of _____________ at __________________, Philippines.
+                                    </p>
+                                </div>
+                            </div>                       
                             {/* Date & Place */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col">

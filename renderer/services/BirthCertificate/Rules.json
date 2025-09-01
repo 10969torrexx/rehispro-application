@@ -967,13 +967,13 @@
     "juratDay": {
       "required": true,
       "type": "number",
-      "min": 1,
-      "max": 31,
+      "minLength": 1,
+      "maxLength": 31,
       "message": {
         "required": "Day is required.",
         "number": "Day must be a number.",
-        "min": "Day must be at least 1.",
-        "max": "Day must not exceed 31."
+        "minLength": "Day must be at least 1.",
+        "maxLength": "Day must not exceed 31."
       }
     },
     "juratMonthYear": {
