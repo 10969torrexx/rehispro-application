@@ -7,6 +7,7 @@ import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
+import e from 'express';
  
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(13); //TODO: handle current page
@@ -264,9 +265,14 @@ export default function BirthCertifcateForm() {
         });
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Final Form Data:", JSON.stringify(formData, null, 2));
+    }
+
     return (
         <>
-            <form className="p-4 h-full mb-4">
+            <form className="p-4 h-full mb-4" onSubmit={handleSubmit}>
                 <div className='mb-4'>
                     {currentPage === 1 && 
                         <div className="mb-4 text-left space-y-6">
