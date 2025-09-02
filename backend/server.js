@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const usersController = require('./controllers/usersController');
+const BirthCertificateController = require('./controllers/BirthCertificateController');
 
 const app = express();
 

@@ -6,6 +6,18 @@ function create() {
 
 }
 
+function read() {
+
+}
+
+function update() {
+
+}
+
+function remove() {
+
+}
+
 module.exports = {
     create
 };
