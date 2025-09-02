@@ -202,6 +202,10 @@ export default function BirthCertifcateForm() {
             adminOfficerName: "",
             adminOfficerPosition: "",
             adminOfficerAddress: "",
+        },
+
+        page14: {
+            confirmation: false
         }
     });
 
@@ -2000,17 +2004,25 @@ export default function BirthCertifcateForm() {
                           ⚠️ Please double-check that all the information you have provided is accurate and complete before proceeding.
                         </p>
                       
-                        <div className="flex justify-center">
-                          <label className="flex items-center space-x-2">
-                            <input
-                              type="checkbox"
-                              className="custom-checkbox"
-                              name="confirmation"
-                              checked={formData[`page${currentPage}`]?.confirmation || false}
-                              onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
-                            />
-                            <span className="text-sm font-medium">Yes, I confirm.</span>
-                          </label>
+                        <div className="flex flex-col items-center space-y-3">
+                            <label className="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    className="custom-checkbox"
+                                    name="confirmation"
+                                    checked={formData[`page${currentPage}`]?.confirmation || false}
+                                    onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
+                                />
+                                <span className="text-sm font-medium">Yes, I confirm.</span>
+                            </label>
+
+                            <button 
+                                type="button"
+                                className="btn-primary px-4 py-2 rounded-full disabled:opacity-50"
+                                disabled={!formData[`page${currentPage}`]?.confirmation}
+                            >
+                                Submit
+                            </button>
                         </div>
                       </div>
                       
