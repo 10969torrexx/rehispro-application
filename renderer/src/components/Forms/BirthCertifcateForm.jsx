@@ -7,7 +7,6 @@ import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
-import e from 'express';
  
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(13); //TODO: handle current page
