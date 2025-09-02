@@ -26,7 +26,6 @@ export default function Dashboard() {
         const response = await AuthServices.getAllUsers(JSON.parse(storedUserData).id);
         if (response.success) {
           const users = response.data;
-          console.log('Fetched users:', users);
           setStaffCount(users.filter(user => user.role === UserRoles.STAFF).length);
           setSupervisorCount(users.filter(user => user.role === UserRoles.SUPERVISOR).length);
           setActiveCount(users.filter(user => user.status === 'active').length);
@@ -66,8 +65,8 @@ export default function Dashboard() {
           className={`flex-1 flex flex-col w-screen transition-all duration-300`}
         >
           <div className='content'>
-            <h1 className='text-2xl font-semibold mb-4'>Dashboard</h1>
-            <section className='w-full border-b border-gray-200 p-4 mb-1'>
+            <h2 className="text-lg font-semibold mb-4">Dashboard</h2>
+            <section className='w-full border-b border-gray-200 pb-5 mb-4'>
               <h6 className='mb-2'>User Counts</h6>
               <div className="flex flex-row flex-wrap gap-4">
                 <UserCounts role={UserRoles.SUPERVISOR} iconClass="bi bi-person-fill" userCounts={supervisorCount} status="active"/>
@@ -75,7 +74,7 @@ export default function Dashboard() {
               </div>
             </section>
 
-            <section className='w-full border-b border-gray-200 p-4 mb-1'>
+            <section className='w-full border-b border-gray-200 pb-5 mb-4'>
               <h6 className='mb-2'>User Status</h6>
               <div className="flex flex-row flex-wrap gap-4">
                 <UserCounts role={UserStatus.ACTIVE} iconClass="bi bi-check-circle" userCounts={activeCount} status="active"/>

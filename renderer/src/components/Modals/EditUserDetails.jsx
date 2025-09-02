@@ -63,7 +63,7 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
             } else {
                 toast.error(response.message || "Failed to update user details.");
             }
-        } catch(error) {
+    } catch(error) {
             console.error("Error updating user details:", error);
             toast.error("An error occurred while updating user details.");
         }
