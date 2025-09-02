@@ -91,7 +91,6 @@ export default function BirthCertifcateForm() {
             attendantNurse: false,
             attendantMidwife: false,
             attendantHilot: false,
-            attendantHilot: false,
             attendantOthers: false,
             attendantOthersSpecify: "",
             dateOfAttendance: "",
