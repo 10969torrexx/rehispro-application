@@ -8,3 +8,8 @@ export const BirthCertificateStatus = {
     APPROVED: 'approved',
     REJECTED: 'rejected'
 }
+
+export const BirthCertificateCreationType = {
+    MANUAL: 'manual',
+    SCANNED: 'scanned'
+}
