@@ -18,6 +18,14 @@ function remove() {
 
 }
 
+function find() {
+
+}
+
 module.exports = {
-    create
+    create,
+    read,
+    update,
+    remove,
+    find
 };

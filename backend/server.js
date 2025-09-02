@@ -2,10 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const usersController = require('./controllers/usersController');
-const BirthCertificateController = require('./controllers/BirthCertificateController');
 
 const app = express();
 
+//TODO: importing /routes birthCertificate
+  const birthCertificateRoutes = require('./routes/birthCertificate');
+  app.use('/birth-certificate', birthCertificateRoutes);
+  
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -24,10 +27,6 @@ app.post('/login', (req, res) => {
     }
     res.json(result);
   });
-});
-
-app.get('/', (req, res) => {
-  res.send('Backend API is running 🚀');
 });
 
 //TODO: handle update user credentials
