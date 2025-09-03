@@ -5,10 +5,6 @@ const usersController = require('./controllers/usersController');
 
 const app = express();
 
-//TODO: importing /routes birthCertificate
-  const birthCertificateRoutes = require('./routes/birthCertificate');
-  app.use('/birth/', birthCertificateRoutes);
-
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -161,6 +157,10 @@ app.post('/update-user-details', (req, res) => {
     return res.json(result);
   });
 });
+
+//TODO: importing /routes birthCertificate
+  const birthCertificateRoutes = require('./routes/birthCertificate');
+  app.use('/birth/', birthCertificateRoutes);
 
 //TODO: Start server
 const PORT = 3001;

@@ -2,7 +2,7 @@ export const CivilStatus = {
   SINGLE: 'single',
   MARRIED: 'married',
   DIVORCED: 'divorced',
-  WIDOW: 'widow / widower',
+  WIDOW: 'widow/widower',
 };
 
 export const MarriageStatus = { 

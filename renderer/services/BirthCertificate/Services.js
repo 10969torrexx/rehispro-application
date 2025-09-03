@@ -4,7 +4,7 @@
  */
 export async function insertBirthCertificate (formData) {
     try {
-        const response = await fetch('/birth/create', {
+        const response = await fetch('http://localhost:3001/birth/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
