@@ -7,7 +7,7 @@ const app = express();
 
 //TODO: importing /routes birthCertificate
   const birthCertificateRoutes = require('./routes/birthCertificate');
-  app.use('/birth-certificate', birthCertificateRoutes);
+  app.use('/birth/', birthCertificateRoutes);
 
 app.use(cors());
 app.use(bodyParser.json());

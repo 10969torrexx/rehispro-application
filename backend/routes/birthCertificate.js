@@ -5,7 +5,7 @@ const BirthCertificateController = require('../controllers/BirthCertificateContr
 /**
  * TODO: implementing CRUD operations for birth certificates
  */
-    router.post('/', BirthCertificateController.create);
+    router.post('/create', BirthCertificateController.create);
     router.get('/:id', BirthCertificateController.read);
     router.put('/:id', BirthCertificateController.update);
     router.delete('/:id', BirthCertificateController.remove);

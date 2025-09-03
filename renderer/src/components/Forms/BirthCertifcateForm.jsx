@@ -7,6 +7,7 @@ import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
+import { BirthCertServices } from '@services';
  
 export default function BirthCertifcateForm() {
     const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
@@ -228,9 +229,9 @@ export default function BirthCertifcateForm() {
             if (Object.keys(response).length > 0) {
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
-                console.log("Validation Errors:", response);
+                console.log("[birth form] Validation Errors:", response);
                 console.log(
-                    `form Data ${currentPage}:`,
+                    `[birth form] form Data ${currentPage}:`,
                     JSON.stringify(formData[`page${currentPage}`], null, 2)
                 );
             } else {
@@ -266,6 +267,13 @@ export default function BirthCertifcateForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Final Form Data:", JSON.stringify(formData, null, 2));
+        BirthCertServices.insertBirthCertificate(formData)
+        .then(response => {
+            console.log("[Birth Form]", response);
+        })
+        .catch(error => {
+            console.error("[Birth Form]:", error);
+        });
     }
 
     return (
@@ -1921,7 +1929,7 @@ export default function BirthCertifcateForm() {
                                         Issued On
                                     </label>
                                     <input
-                                        type="text"
+                                        type="date"
                                         name="ctcIssuedOn"
                                         placeholder="Date Issued"
                                         className={`common-input ${errors.ctcIssuedOn ? 'input-error' : ''}`}

@@ -6,6 +6,12 @@ function create(formData = []) {
     if (!formData || formData.length === 0) {
         return res.status(400).json({ success: false, message: 'No Data' });
     }
+
+    return res.status(200).json({
+        success: true,
+        message: 'Birth certificate created successfully',
+        data: formData
+    });
     
 }
 
