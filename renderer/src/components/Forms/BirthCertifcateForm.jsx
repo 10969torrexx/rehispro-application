@@ -1477,6 +1477,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Enter position/title"
                                         className={`common-input w-full ${errors.adminPosition ? 'input-error' : ''}`}
                                         value={formData.page11.adminPosition}
+                                        nChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                     {errors.adminPosition && <ErrorMessages errors={errors.adminPosition} />}
                                 </div>
