@@ -2,8 +2,11 @@ const { data } = require('autoprefixer');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
 
-function create() {
-
+function create(formData = []) {
+    if (!formData || formData.length === 0) {
+        return res.status(400).json({ success: false, message: 'No Data' });
+    }
+    
 }
 
 function read() {
