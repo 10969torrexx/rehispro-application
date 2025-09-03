@@ -951,16 +951,6 @@
         "minLength": "Spouse name must be at least 2 characters.",
         "maxLength": "Spouse name must not exceed 100 characters."
       }
-    },
-    "affiantSignature": {
-      "required": true,
-      "minLength": 2,
-      "maxLength": 100,
-      "message": {
-        "required": "Affiant signature is required.",
-        "minLength": "Signature must be at least 2 characters.",
-        "maxLength": "Signature must not exceed 100 characters."
-      }
     }
   },
   "page13": {

@@ -421,9 +421,9 @@ export default function BirthCertifcateForm() {
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">Weight at Birth</label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="birthWeight"
-                                        placeholder="Weight"
+                                        placeholder="Weight in Kilograms (kg)"
                                         className={`common-input ${errors.birthWeight ? 'input-error' : ''}`}
                                         value={formData.page1.birthWeight}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -896,6 +896,7 @@ export default function BirthCertifcateForm() {
                                             className={`common-input w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
                                             value={formData.page5.attendantOthersSpecify}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            disabled={ !formData.page5.attendantOthers }
                                         />
                                         {   errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} /> }
                                     </div>
@@ -1532,10 +1533,10 @@ export default function BirthCertifcateForm() {
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     >
                                         <option value="">Select</option>
-                                        <option value={CivilStatus.SINGLE}>{capitalizeFirst(CivilStatus.SINGLE)}</option>
-                                        <option value={CivilStatus.MARRIED}>{capitalizeFirst(CivilStatus.MARRIED)}</option>
-                                        <option value={CivilStatus.DIVORCED}>{capitalizeFirst(CivilStatus.DIVORCED)}</option>
-                                        <option value={CivilStatus.WIDOW}>{capitalizeFirst(CivilStatus.WIDOW)}</option>
+                                        <option value={capitalizeFirst(CivilStatus.SINGLE)}>{capitalizeFirst(CivilStatus.SINGLE)}</option>
+                                        <option value={capitalizeFirst(CivilStatus.MARRIED)}>{capitalizeFirst(CivilStatus.MARRIED)}</option>
+                                        <option value={capitalizeFirst(CivilStatus.DIVORCED)}>{capitalizeFirst(CivilStatus.DIVORCED)}</option>
+                                        <option value={capitalizeFirst(CivilStatus.WIDOW)}>{capitalizeFirst(CivilStatus.WIDOW)}</option>
                                     </select>
                                     {errors.civilStatus && <ErrorMessages errors={errors.civilStatus} />}
                                 </div>
