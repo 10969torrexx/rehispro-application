@@ -2023,7 +2023,7 @@ export default function BirthCertifcateForm() {
                                 </label>
 
                                 <button 
-                                    type="button"
+                                    type="submit"
                                     className="btn-primary px-4 py-2 rounded-full disabled:opacity-50"
                                     disabled={!formData[`page${currentPage}`]?.confirmation}
                                 >
