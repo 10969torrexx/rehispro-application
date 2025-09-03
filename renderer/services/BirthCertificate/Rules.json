@@ -783,7 +783,7 @@
     "civilStatus": {
       "required": true,
       "type": "enum",
-      "options": ["Single", "Married", "Divorced", "Widow/Widower"],
+      "options": ["Single", "Married", "Divorced", "Widow / Widower"],
       "message": {
         "required": "Civil status is required.",
         "enum": "Invalid civil status."
