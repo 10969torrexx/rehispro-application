@@ -9,7 +9,7 @@ import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(13); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
