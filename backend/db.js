@@ -201,9 +201,9 @@ db.serialize(() => {
       confirmation INTEGER DEFAULT 0,
 
       -- Add timestamps
-      created_at TEXT DEFAULT (datetime('now')),
-      updated_at TEXT DEFAULT (datetime('now')),
-      deleted_at TEXT
+      created_at TIMESTAMP DEFAULT (datetime('now')),
+      updated_at TIMESTAMP DEFAULT (datetime('now')),
+      deleted_at TIMESTAMP
     );
   `);
 
