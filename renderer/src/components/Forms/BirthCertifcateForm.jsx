@@ -32,6 +32,7 @@ export default function BirthCertifcateForm() {
     const [formData, setFormData] = React.useState({
         // Page 1 - Child Information
         page1: {
+            creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
             province: "",
             city: "",
             childFirstName: "",

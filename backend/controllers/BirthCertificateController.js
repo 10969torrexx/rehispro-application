@@ -153,7 +153,7 @@ function create(req, res) {
         //TODO: map the formData to the values array in the correct order
         const values = [
             // creator_id and creation_type
-            formData.creator_id || 1,                  // fallback if you have session/user
+            formData.creatorId || 1,                  // fallback if you have session/user
             formData.creation_type || 'manual',
 
             // Page 1 - Child Information
