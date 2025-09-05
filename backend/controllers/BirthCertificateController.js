@@ -327,7 +327,11 @@ function create(req, res) {
         //TODO: running the insert query
         db.run(query, values, function (err) {
             if (err) {
-                writeLog(`[birth controller] error: ${JSON.stringify(err, null, 2)}`);
+                writeLog(`[birth controller] error: ${JSON.stringify(
+                    { message: err.message, code: err.code, errno: err.errno, stack: err.stack },
+                    null,
+                    2
+                )}`);
                 console.error('Insert error:', err);
                 return res.status(500).json({ 
                     success: false, 
