@@ -3,6 +3,7 @@ const db = require('../db');
 const bcrypt = require('bcryptjs');
 const { writeLog } = require('../utils/logger');
 const { write } = require('original-fs');
+const { json } = require('body-parser');
 
 function create(req, res) {
     try {
@@ -344,6 +345,7 @@ function create(req, res) {
         });
     
     } catch (error) {
+        writeLog(`[birth controller] error: ${JSON.stringify(error)}`);
         return res.status(500).json({
             success: false, 
             message: 'Server Error', 
