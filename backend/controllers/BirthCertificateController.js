@@ -148,7 +148,6 @@ function create(req, res) {
             admin_officer_position,
             admin_officer_address,
 
-            confirmation
         )
         VALUES (
             ?, ?,
@@ -165,7 +164,6 @@ function create(req, res) {
             ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-            ?
         );
 
         `; 
