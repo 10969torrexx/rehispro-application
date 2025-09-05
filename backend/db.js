@@ -45,8 +45,8 @@ db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS birthcertificates (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      creation_type TEXT DEFAULT 'manual',
       creator_id INTEGER NOT NULL,
+      creation_type TEXT DEFAULT 'manual',
 
       -- Page 1 - Child Information
       province TEXT,

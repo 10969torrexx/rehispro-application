@@ -14,6 +14,7 @@ function create(req, res) {
         const query = `INSERT INTO birthcertificates (
             creator_id,
             creation_type,
+
             province,
             city,
             child_first_name,
@@ -25,6 +26,7 @@ function create(req, res) {
             multiple_birth_order,
             birth_order,
             birth_weight,
+
             maiden_first_name,
             maiden_middle_name,
             maiden_last_name,
@@ -39,6 +41,7 @@ function create(req, res) {
             residence_city,
             residence_province,
             residence_country,
+
             father_first_name,
             father_middle_name,
             father_last_name,
@@ -50,10 +53,12 @@ function create(req, res) {
             father_residence_city,
             father_residence_province,
             father_residence_country,
+
             date_of_marriage,
             marriage_city,
             marriage_province,
             marriage_country,
+
             attendant_physician,
             attendant_nurse,
             attendant_midwife,
@@ -62,6 +67,7 @@ function create(req, res) {
             attendant_others_specify,
             date_of_attendance,
             attendant_name_title,
+
             birth_time,
             birth_date,
             attendant_name,
@@ -69,6 +75,7 @@ function create(req, res) {
             attendant_address,
             attendant_date_signed,
             attendant_signature,
+
             informant_name,
             informant_relationship,
             informant_address,
@@ -76,6 +83,7 @@ function create(req, res) {
             prepared_name,
             prepared_title,
             prepared_date,
+
             received_name,
             received_title,
             received_date,
@@ -83,13 +91,16 @@ function create(req, res) {
             registrar_name,
             registrar_title,
             registrar_date,
+
             remarks,
             office_boxes,
+
             mother_name,
             father_name,
             child_name,
             child_birth_date,
             child_birth_place,
+
             jurat_day,
             jurat_month_year,
             jurat_affiant1,
@@ -101,6 +112,7 @@ function create(req, res) {
             admin_position,
             admin_address,
             admin_signature,
+
             affiant_name,
             civil_status,
             address,
@@ -122,6 +134,7 @@ function create(req, res) {
             spouse_applicant,
             spouse_owner,
             affiant_signature,
+
             final_jurat_day,
             final_jurat_month_year,
             final_jurat_place,
@@ -132,22 +145,27 @@ function create(req, res) {
             admin_officer_name,
             admin_officer_position,
             admin_officer_address,
+
             confirmation
         )
         VALUES (
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- child
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- mother
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- father
-            ?, ?, ?, ?,                          -- marriage
-            ?, ?, ?, ?, ?, ?, ?, ?,              -- attendants
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- certification
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- informant + registrar
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- remarks, affidavit
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- jurat
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- affidavit
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  -- final jurat
-            ?                                    -- confirmation
+            ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?,
+            ?, ?,
+            ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+            ?
         );
+
         `; 
         
         //TODO: map the formData to the values array in the correct order
