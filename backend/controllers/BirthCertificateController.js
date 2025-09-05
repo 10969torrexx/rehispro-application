@@ -2,11 +2,11 @@ const { data } = require('autoprefixer');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
 const { writeLog } = require('../utils/logger');
+const { write } = require('original-fs');
 
 function create(req, res) {
     try {
         const formData = req.body;
-
         if (!formData || formData.length === 0) {
             return res.status(400).json({ success: false, message: 'No Data' });
         }
@@ -322,6 +322,9 @@ function create(req, res) {
             // Page 14 - Confirmation
             formData.page14?.confirmation ? 1 : 0,
         ];
+
+        writeLog(`[birth controller] create formData: ${JSON.stringify(values)}`);
+        writeLog(`[birth controller] query: ${JSON.stringify([query])}`);
 
         //TODO: running the insert query
         db.run(query, values, function (err) {
