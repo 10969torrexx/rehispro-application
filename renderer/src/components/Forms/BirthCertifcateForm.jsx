@@ -33,6 +33,7 @@ export default function BirthCertifcateForm() {
         // Page 1 - Child Information
         page1: {
             creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
+            creationType: BirthCertificate.CreationType.MANUAL,
             province: "",
             city: "",
             childFirstName: "",
@@ -232,8 +233,7 @@ export default function BirthCertifcateForm() {
                 toast.error("Please fix the errors in the form.");
                 console.log("[birth form] Validation Errors:", response);
                 console.log(
-                    `[birth form] form Data ${currentPage}:`,
-                    JSON.stringify(formData[`page${currentPage}`], null, 2)
+                    `[birth form] form Data ${currentPage}:`, formData[`page${currentPage}`]
                 );
             } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
@@ -267,7 +267,7 @@ export default function BirthCertifcateForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Final Form Data:", JSON.stringify(formData, null, 2));
+        console.log("Final Form Data:", formData);
         BirthCertServices.insertBirthCertificate(formData)
         .then(response => {
             console.log("[Birth Form]", response);

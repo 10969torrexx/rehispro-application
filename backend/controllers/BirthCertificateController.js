@@ -153,8 +153,8 @@ function create(req, res) {
         //TODO: map the formData to the values array in the correct order
         const values = [
             // creator_id and creation_type
-            formData.creatorId || 1,                  // fallback if you have session/user
-            formData.creation_type || 'manual',
+            formData.creatorId || null,                  // fallback if you have session/user
+            formData.creationType || null,
 
             // Page 1 - Child Information
             formData.page1?.province || null,
@@ -303,6 +303,8 @@ function create(req, res) {
             // Page 14 - Confirmation
             formData.page14?.confirmation ? 1 : 0,
         ];
+
+        console.log('[birth controller] values:', values);
 
         //TODO: running the insert query
         db.run(query, values, function (err) {

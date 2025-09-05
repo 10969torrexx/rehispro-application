@@ -3,13 +3,13 @@ export const SexTypes = {
     FEMALE: 'female'
 }
 
-export const BirthCertificateStatus = {
+export const Status = {
     PENDING: 'pending',
     APPROVED: 'approved',
     REJECTED: 'rejected'
 }
 
-export const BirthCertificateCreationType = {
+export const CreationType = {
     MANUAL: 'manual',
     SCANNED: 'scanned'
 }
