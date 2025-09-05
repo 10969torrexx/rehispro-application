@@ -24,6 +24,9 @@ export default function MarriageCertificateCreateForm() {
         return age;
     };
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = 14;
+
     const handleHusbandBirthDate = (e) => {
         const value = e.target.value;
         setHusbandBirthDate(value);
