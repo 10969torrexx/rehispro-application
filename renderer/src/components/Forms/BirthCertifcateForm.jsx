@@ -266,6 +266,7 @@ export default function BirthCertifcateForm() {
     };
 
     const handleSubmit = (e) => {
+        //TODOL this is to submit form
         e.preventDefault();
         console.log("Final Form Data:", JSON.stringify(formData, null, 2));
         BirthCertServices.insertBirthCertificate(formData)
