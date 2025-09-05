@@ -18,6 +18,9 @@ export default function MarriageCertificateCreateForm() {
         return age;
     };
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = 14;
+
     const handleHusbandBirthDate = (e) => {
         const value = e.target.value;
         setHusbandBirthDate(value);
@@ -30,151 +33,596 @@ export default function MarriageCertificateCreateForm() {
         setWifeAge(calculateAge(value));
     };
 
-    const [page, setPage] = useState(1);
-
     return (
-        <form className="mt-5">
-            {/* Province / City / Registry */}
-            <div className="w-full flex items-center gap-2 mb-3">
-                <div className="w-full">
-                    <label>Province</label>
-                    <input type="text" name="province" className="w-full common-input" placeholder="Province" />
-                </div>
-                <div className="w-full">
-                    <label>City</label>
-                    <input type="text" name="city" className="w-full common-input" placeholder="City/Municipality" />
-                </div>
-                <div className="w-full">
-                    <label>Registry No.</label>
-                    <input type="text" name="registry" className="w-full common-input" placeholder="Registry No." />
-                </div>
+        <>
+            <form className="mt-5">
+
+                {currentPage === 1 && (
+                    <>
+                        <div div className="w-full flex items-center gap-2 mb-3">
+                            <div className="w-full">
+                                <label>Province</label>
+                                <input type="text" name="province" className="w-full common-input" placeholder="Province" />
+                            </div>
+                            <div className="w-full">
+                                <label>City</label>
+                                <input type="text" name="city" className="w-full common-input" placeholder="City/Municipality" />
+                            </div>
+                            <div className="w-full">
+                                <label>Registry No.</label>
+                                <input type="text" name="registry" className="w-full common-input" placeholder="Registry No." />
+                            </div>
+                        </div>
+
+                        <div className="w-full flex items-stretch gap-1 mb-3">
+                            {/* Husband Column */}
+                            <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
+                                <h3 className="text-center font-semibold mb-3">Husband</h3>
+
+                                <span>1. Name of contracting parties</span>
+
+                                {/* Name inputs */}
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>First</label>
+                                        <input type="text" name="husbandFirstName" className="w-full common-input" placeholder="First" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Middle</label>
+                                        <input type="text" name="husbandMiddleName" className="w-full common-input" placeholder="Middle" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Last</label>
+                                        <input type="text" name="husbandLastName" className="w-full common-input" placeholder="Last" />
+                                    </div>
+                                </div>
+
+                                {/* DOB + Age labels */}
+                                <span>
+                                    <p>2. Date of birth and Age</p>
+                                </span>
+
+                                {/* DOB + Age inputs */}
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>Date of Birth</label>
+                                        <input type="date" name="husbandBirthDate" value={husbandBirthDate} onChange={handleHusbandBirthDate} className="w-full common-input" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Age</label>
+                                        <input type="text" name="husbandAge" value={husbandAge} className="w-full common-input" placeholder="Age" readOnly />
+                                    </div>
+                                </div>
+
+                                {/* Place of Birth */}
+                                <span>
+                                    <p>3. Place of Birth</p>
+                                </span>
+
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>City/Municipality</label>
+                                        <input type="text" name="husbandBirthCity" className="w-full common-input" placeholder="City/Municipality" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Province</label>
+                                        <input type="text" name="husbandBirthProvince" className="w-full common-input" placeholder="Province" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Country</label>
+                                        <input type="text" name="husbandBirthCountry" className="w-full common-input" placeholder="Country" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Wife Column */}
+                            <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
+                                <h3 className="text-center font-semibold mb-3">Wife</h3>
+
+                                {/* Name label (empty but keeps alignment) */}
+                                <span className="invisible">1. Name of contracting parties</span>
+
+                                {/* Name inputs */}
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>First</label>
+                                        <input type="text" name="wifeFirstName" className="w-full common-input" placeholder="First" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Middle</label>
+                                        <input type="text" name="wifeMiddleName" className="w-full common-input" placeholder="Middle" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Last</label>
+                                        <input type="text" name="wifeLastName" className="w-full common-input" placeholder="Last" />
+                                    </div>
+                                </div>
+
+                                {/* DOB + Age labels (empty but aligned) */}
+                                <span className="invisible">
+                                    <p>2. Date of birth and Age</p>
+                                </span>
+
+                                {/* DOB + Age inputs */}
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>Date of Birth</label>
+                                        <input type="date" name="wifeBirthDate" value={wifeBirthDate} onChange={handleWifeBirthDate} className="w-full common-input" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Age</label>
+                                        <input type="text" name="wifeAge" value={wifeAge} className="w-full common-input" placeholder="Age" readOnly />
+                                    </div>
+                                </div>
+
+                                {/* Place of Birth */}
+                                <span className="invisible">
+                                    <p>3. Place of Birth</p>
+                                </span>
+
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>City/Municipality</label>
+                                        <input type="text" name="wifeBirthCity" className="w-full common-input" placeholder="City/Municipality" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Province</label>
+                                        <input type="text" name="wifeBirthProvince" className="w-full common-input" placeholder="Province" />
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Country</label>
+                                        <input type="text" name="wifeBirthCountry" className="w-full common-input" placeholder="Country" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {currentPage === 2 && (
+                    <>
+                        <div className="w-full flex items-stretch gap-1 mb-3">
+                            {/* Husband Column */}
+                            <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
+
+                                {/* Sex and Citizenship */}
+                                <span>
+                                    <p>4. Sex and Citizenship</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>Sex</label>
+                                        <select name="husbandSex" className="w-full common-input" >
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Citizenship</label>
+                                        <input name="husbandCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                    </div>
+                                </div>
+
+                                {/* Residence */}
+                                <span>
+                                    <p>5. Residence</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="husbandBarangay" className="w-full common-input" placeholder="House No., St., Barangay"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandCity" className="w-full common-input" placeholder="City/Municipality"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandProvince" className="w-full common-input" placeholder="Province"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandCountry" className="w-full common-input" placeholder="Country"/>
+                                    </div>
+                                </div>
+
+                                {/* Religion/Religious sect */}
+                                <span>
+                                    <p>6. Religion/Religous sect</p>
+                                </span>
+                                <div className="w-full mt-1 mb-3">
+                                    <input type="text" name="husbandReligion" className="w-full common-input" placeholder="Religion/Religious sect"/>
+                                </div>
+
+                                {/* Civil Status */}
+                                <span>
+                                    <p>7. Civil Status</p>
+                                </span>
+                                <div className="w-full mt-1 mb-3">
+                                    <input type="text" name="husbandCivilStatus" className="w-full common-input" placeholder="Civil Status"/>
+                                </div>
+
+                                {/* Name of Father */}
+                                <span>
+                                    <p>8. Name of Father</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="husbandFatherNameFirst" className="w-full common-input" placeholder="First"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandFatherNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandFatherNameLast" className="w-full common-input" placeholder="Last"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Wife Column */}
+                            <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
+
+                                {/* Sex and Citizenship */}
+                                <span className="invisible">
+                                    <p>4. Sex and Citizenship</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>Sex</label>
+                                        <select name="wifeSex" className="w-full common-input" >
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div className="w-full">
+                                        <label>Citizenship</label>
+                                        <input name="wifeCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                    </div>
+                                </div>
+
+                                {/* Residence */}
+                                <span className="invisible">
+                                    <p>5. Residence</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="wifeBarangay" className="w-full common-input" placeholder="House No., St., Barangay"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeCity" className="w-full common-input" placeholder="City/Municipality"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeProvince" className="w-full common-input" placeholder="Province"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeCountry" className="w-full common-input" placeholder="Country"/>
+                                    </div>
+                                </div>
+
+                                {/* Religion/Religious sect */}
+                                <span className="invisible">
+                                    <p>6. Religion/Religous sect</p>
+                                </span>
+                                <div className="w-full mt-1 mb-3">
+                                    <input type="text" name="wifeReligion" className="w-full common-input" placeholder="Religion/Religious sect"/>
+                                </div>
+
+                                {/* Civil Status */}
+                                <span className="invisible">
+                                    <p>7. Civil Status</p>
+                                </span>
+                                <div className="w-full mt-1 mb-3">
+                                    <input type="text" name="wifeCivilStatus" className="w-full common-input" placeholder="Civil Status"/>
+                                </div>
+
+                                {/* Name of Father */}
+                                <span className="invisible">
+                                    <p>8. Name of Father</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="wifeFatherNameFirst" className="w-full common-input" placeholder="First"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeFatherNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeFatherNameLast" className="w-full common-input" placeholder="Last"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {currentPage === 3 && (
+                    <>
+                        <div className="w-full flex items-stretch gap-1 mb-3">
+                            {/* Husband Column */}
+                            <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
+
+                                {/* Father Citizenship */}
+                                <span>
+                                    <p>9. Father Citizenship</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>Citizenship</label>
+                                        <input name="husbandFatherCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                    </div>
+                                </div>
+
+                                {/* Maiden Name of Mother */}
+                                <span>
+                                    <p>10. Maiden Name of Mother</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="husbandMotherNameFirst" className="w-full common-input" placeholder="First"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandMotherNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandMotherNameLast" className="w-full common-input" placeholder="Last"/>
+                                    </div>
+                                </div>
+
+                                {/* Mother Citizenship */}
+                                <span>
+                                    <p>11. Mother Citizenship</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>Citizenship</label>
+                                        <input name="husbandMotherCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                    </div>
+                                </div>
+
+                                {/* Name of Person/Wall Who Gave Consent or Advice */}
+                                <span>
+                                    <p>12. Name of Person/Wall Who Gave Consent or Advice</p>
+                                </span>
+                                <div className="flex items-center mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="husbandConsentNameFirst" className="w-full common-input" placeholder="First"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandConsentNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandConsentNameLast" className="w-full common-input" placeholder="Last"/>
+                                    </div>
+                                </div>
+
+                                {/* Relationship */}
+                                <span>
+                                    <p>13. Relationship</p>
+                                </span>
+                                <div className="w-full flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="husbandRelationship" className="w-full common-input" placeholder="Relationship"/>
+                                    </div>
+                                </div>
+
+                                {/* Residence */}
+                                <span>
+                                    <p>14. Residence</p>
+                                </span>
+                                <div className="w-full flex items-center gap-1 mt-1">
+                                    <div className="w-full">
+                                        <input type="text" name="husbandConsentPersonBarangay" className="w-full common-input" placeholder="House No., St., Barangay"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandConsentPersonCity" className="w-full common-input" placeholder="City/Municipality"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandConsentPersonProvince" className="w-full common-input" placeholder="Province"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="husbandConsentPersonCountry" className="w-full common-input" placeholder="Country"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Wife Column */}
+                            <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
+
+                                {/* Father Citizenship */}
+                                <span className="invisible">
+                                    <p>9. Citizenship</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>Citizenship</label>
+                                        <input name="wifeFatherCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                    </div>
+                                </div>
+
+                                {/* Maiden Name of Mother */}
+                                <span className="invisible">
+                                    <p>10. Maiden Name of Mother</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="wifeMotherNameFirst" className="w-full common-input" placeholder="First"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeMotherNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeMotherNameLast" className="w-full common-input" placeholder="Last"/>
+                                    </div>
+                                </div>
+
+                                {/* Mother Citizenship */}
+                                <span className="invisible">
+                                    <p>11. Mother Citizenship</p>
+                                </span>
+                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <label>Citizenship</label>
+                                        <input name="wifeMotherCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                    </div>
+                                </div>
+
+
+                                 {/* Name of Person/Wall Who Gave Consent or Advice */}
+                                <span className="invisible">
+                                    <p>12. Name of Person/Wall Who Gave Consent or Advice</p>
+                                </span>
+                                <div className="flex items-center mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="wifeConsentNameFirst" className="w-full common-input" placeholder="First"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeConsentNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeConsentNameLast" className="w-full common-input" placeholder="Last"/>
+                                    </div>
+                                </div>
+
+                                {/* Relationship */}
+                                <span className="invisible">
+                                    <p>13. Relationship</p>
+                                </span>
+                                <div className="w-full flex items-center gap-1 mt-1 mb-3">
+                                    <div className="w-full">
+                                        <input type="text" name="wifeRelationship" className="w-full common-input" placeholder="Relationship"/>
+                                    </div>
+                                </div>
+
+                                {/* Residence */}
+                                <span className="invisible">
+                                    <p>14. Residence</p>
+                                </span>
+                                <div className="w-full flex items-center gap-1 mt-1">
+                                    <div className="w-full">
+                                        <input type="text" name="wifeConsentPersonBarangay" className="w-full common-input" placeholder="House No., St., Barangay"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeConsentPersonCity" className="w-full common-input" placeholder="City/Municipality"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeConsentPersonProvince" className="w-full common-input" placeholder="Province"/>
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="text" name="wifeConsentPersonCountry" className="w-full common-input" placeholder="Country"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {currentPage === 4 && (
+                    <>
+                        {/* Place of Marriage */}
+                        <span>
+                            <p>15. Place of Marriage</p>
+                        </span>
+                        <div className="flex items-center gap-1 mt-1 mb-3">
+                            <div className="w-full">
+                                <label>Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province) </label>
+                                <input type="text" name="placeOfMarriage" className="w-full common-input" placeholder="Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province)"/>
+                            </div>
+                        </div>
+
+                        {/* Date and Time of Marriage */}
+                        <div className="flex items-center gap-1 mt-1 mb-3">
+                            <div className="w-full">
+                                <label>16. Date of Marriage</label>
+                                <input
+                                    type="date"
+                                    name="dateOfMarriage"
+                                    className="w-full common-input"
+                                />
+                            </div>
+                            <div className="w-full">
+                                <label>17. Time of Marriage</label>
+                                <input
+                                    type="time"
+                                    name="timeOfMarriage"
+                                    className="w-full common-input"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Certification of the contracting parties */}
+                        <span>
+                            <p>18. Certification of the Contracting Parties</p>
+                        </span>
+                        <div className="text-sm leading-relaxed border border-pink-300 p-3 rounded mt-1 mb-3">
+                            <p>
+                                THIS IS TO CERTIFY: That I, 
+                                <input type="text" name="certHusbandName" className="border-b border-gray-500 mx-2 w-40 text-center" /> 
+                                and I, 
+                                <input type="text" name="certWifeName" className="border-b border-gray-500 mx-2 w-40 text-center" />, 
+                                both of legal age, of our own free will and accord, and in the presence of the person solemnizing this marriage and of the witnesses named below, take each other as husband and wife and certifying further that we:
+                            </p>
+
+                            <p className="mt-2">
+                                <label className="mx-2">
+                                    <input type="radio" name="marriageSettlement" value="entered" className="mr-1" />
+                                    have entered, a copy of which is hereto attached
+                                </label>
+                                /
+                                <label className="mx-2">
+                                    <input type="radio" name="marriageSettlement" value="notEntered" className="mr-1" />
+                                    have not entered into a marriage settlement.
+                                </label>
+                            </p>
+
+                            <p className="mt-2">
+                                IN WITNESS WHEREOF, we have signed/marked with our fingerprint this certificate in quadruplicate this 
+                                <input type="text" name="certDay" className="border-b border-gray-500 mx-2 w-12 text-center" /> 
+                                day of 
+                                <input type="text" name="certMonth" className="border-b border-gray-500 mx-2 w-28 text-center" /> 
+                                <input type="text" name="certYear" className="border-b border-gray-500 mx-2 w-16 text-center" />.
+                            </p>
+
+
+                            <div className="flex justify-evenly items-center mt-4">
+                                <div className="flex flex-col justify-center">
+                                    <input type="text" name="signatureHusband" className="w-full border-b border-gray-500 mx-2 text-center"/>
+                                    <label className="text-center">(Signature of Husband)</label>
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    <input type="text" name="signatureWife" className="w-full border-b border-gray-500 mx-2 text-center"/>
+                                    <label className="text-center">(Signature of Wife)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+
+            </form >
+
+            <div className="flex justify-center items-center gap-4">
+                {/* Previous Button */}
+                <button
+                    type="button"
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                >
+                    <i className="fa-solid fa-angles-left"></i>
+                </button>
+
+                {/* Page Number Display */}
+                <span className="font-semibold">
+                    {currentPage} / {totalPages}
+                </span>
+
+                {/* Next Button */}
+                <button
+                    type="button"
+                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                >
+                    <i className="fa-solid fa-angles-right"></i>
+                </button>
             </div>
+        </>
 
-            <hr className="mb-3" />
-
-            {/* Husband & Wife Columns */}
-            <div className="w-full flex items-stretch gap-1 mb-3">
-                {/* Husband Column */}
-                <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
-                    <h3 className="text-center font-semibold mb-3">Husband</h3>
-
-                    <span>1. Name of contracting parties</span>
-
-                    {/* Name inputs */}
-                    <div className="flex items-center gap-1 mt-1 mb-3">
-                        <div className="w-full">
-                            <label>First</label>
-                            <input type="text" name="husbandFirstName" className="w-full common-input" placeholder="First" />
-                        </div>
-                        <div className="w-full">
-                            <label>Middle</label>
-                            <input type="text" name="husbandMiddleName" className="w-full common-input" placeholder="Middle" />
-                        </div>
-                        <div className="w-full">
-                            <label>Last</label>
-                            <input type="text" name="husbandLastName" className="w-full common-input" placeholder="Last" />
-                        </div>
-                    </div>
-
-                    {/* DOB + Age labels */}
-                    <span>
-                        <p>2. Date of birth and Age</p>
-                    </span>
-
-                    {/* DOB + Age inputs */}
-                    <div className="flex items-center gap-1 mt-1 mb-3">
-                        <div className="w-full">
-                            <label>Date of Birth</label>
-                            <input type="date" name="husbandBirthDate" value={husbandBirthDate} onChange={handleHusbandBirthDate} className="w-full common-input" />
-                        </div>
-                        <div className="w-full">
-                            <label>Age</label>
-                            <input type="text" name="husbandAge" value={husbandAge} className="w-full common-input" placeholder="Age" readOnly />
-                        </div>
-                    </div>
-
-                    {/* Place of Birth */}
-                    <span>
-                        <p>3. Place of Birth</p>
-                    </span>
-
-                    <div className="flex items-center gap-1 mt-1 mb-3">
-                        <div className="w-full">
-                            <label>City/Municipality</label>
-                            <input type="text" name="husbandBirthCity" className="w-full common-input" placeholder="City/Municipality" />
-                        </div>
-                        <div className="w-full">
-                            <label>Province</label>
-                            <input type="text" name="husbandBirthProvince" className="w-full common-input" placeholder="Province" />
-                        </div>
-                        <div className="w-full">
-                            <label>Country</label>
-                            <input type="text" name="husbandBirthCountry" className="w-full common-input" placeholder="Country" />
-                        </div>
-                    </div>
-                </div>
-
-                {/* Wife Column */}
-                <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
-                    <h3 className="text-center font-semibold mb-3">Wife</h3>
-
-                    {/* Name label (empty but keeps alignment) */}
-                    <span className="invisible">1. Name of contracting parties</span>
-
-                    {/* Name inputs */}
-                    <div className="flex items-center gap-1 mt-1 mb-3">
-                        <div className="w-full">
-                            <label>First</label>
-                            <input type="text" name="wifeFirstName" className="w-full common-input" placeholder="First" />
-                        </div>
-                        <div className="w-full">
-                            <label>Middle</label>
-                            <input type="text" name="wifeMiddleName" className="w-full common-input" placeholder="Middle" />
-                        </div>
-                        <div className="w-full">
-                            <label>Last</label>
-                            <input type="text" name="wifeLastName" className="w-full common-input" placeholder="Last" />
-                        </div>
-                    </div>
-
-                    {/* DOB + Age labels (empty but aligned) */}
-                    <span className="invisible">
-                        <p>2. Date of birth and Age</p>
-                    </span>
-
-                    {/* DOB + Age inputs */}
-                    <div className="flex items-center gap-1 mt-1 mb-3">
-                        <div className="w-full">
-                            <label>Date of Birth</label>
-                            <input type="date" name="wifeBirthDate" value={wifeBirthDate} onChange={handleWifeBirthDate} className="w-full common-input" />
-                        </div>
-                        <div className="w-full">
-                            <label>Age</label>
-                            <input type="text" name="wifeAge" value={wifeAge} className="w-full common-input" placeholder="Age" readOnly />
-                        </div>
-                    </div>
-
-                    {/* Place of Birth */}
-                    <span className="invisible">
-                        <p>3. Place of Birth</p>
-                    </span>
-
-                    <div className="flex items-center gap-1 mt-1 mb-3">
-                        <div className="w-full">
-                            <label>City/Municipality</label>
-                            <input type="text" name="wifeBirthCity" className="w-full common-input" placeholder="City/Municipality" />
-                        </div>
-                        <div className="w-full">
-                            <label>Province</label>
-                            <input type="text" name="wifeBirthProvince" className="w-full common-input" placeholder="Province" />
-                        </div>
-                        <div className="w-full">
-                            <label>Country</label>
-                            <input type="text" name="wifeBirthCountry" className="w-full common-input" placeholder="Country" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
     );
 }
