@@ -1,6 +1,7 @@
 const { data } = require('autoprefixer');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
+const { writeLog } = require('../utils/logger');
 
 function create(req, res) {
     try {
@@ -322,8 +323,6 @@ function create(req, res) {
             formData.page14?.confirmation ? 1 : 0,
         ];
 
-        console.log('[birth controller] values:', values);
-
         //TODO: running the insert query
         db.run(query, values, function (err) {
             if (err) {
@@ -345,7 +344,7 @@ function create(req, res) {
         return res.status(500).json({
             success: false, 
             message: 'Server Error', 
-            error: err.message 
+            error: error.message 
         });
     }
 }
