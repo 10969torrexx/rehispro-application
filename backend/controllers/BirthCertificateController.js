@@ -2,8 +2,7 @@ const { data } = require('autoprefixer');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
 const { writeLog } = require('../utils/logger');
-const { write } = require('original-fs');
-const { json } = require('body-parser');
+const { logQuery, interpolateQuery } = require('../utils/querytrace');
 
 function create(req, res) {
     try {
@@ -332,7 +331,7 @@ function create(req, res) {
                     null,
                     2
                 )}`);
-                console.error('Insert error:', err);
+                logQuery(interpolateQuery(query, values));
                 return res.status(500).json({ 
                     success: false, 
                     message: 'Failed to create birth certificate', 
