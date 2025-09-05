@@ -146,8 +146,7 @@ function create(req, res) {
             admin_officer_signature,
             admin_officer_name,
             admin_officer_position,
-            admin_officer_address,
-
+            admin_officer_address
         )
         VALUES (
             ?, ?,
