@@ -7,9 +7,10 @@ import { capitalizeFirst } from '../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../myTools/myTools';
+import { BirthCertServices } from '@services';
  
 export default function BirthCertifcateForm() {
-    const [currentPage, setCurrentPage] = React.useState(13); //TODO: handle current page
+    const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
     const pageTitles = [ 
         "Province & Child's Information", 
         "Mother's Information", 
@@ -31,6 +32,8 @@ export default function BirthCertifcateForm() {
     const [formData, setFormData] = React.useState({
         // Page 1 - Child Information
         page1: {
+            creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
+            creationType: BirthCertificate.CreationType.MANUAL,
             province: "",
             city: "",
             childFirstName: "",
@@ -90,7 +93,6 @@ export default function BirthCertifcateForm() {
             attendantPhysician: false,
             attendantNurse: false,
             attendantMidwife: false,
-            attendantHilot: false,
             attendantHilot: false,
             attendantOthers: false,
             attendantOthersSpecify: "",
@@ -229,10 +231,9 @@ export default function BirthCertifcateForm() {
             if (Object.keys(response).length > 0) {
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
-                console.log("Validation Errors:", response);
+                console.log("[birth form] Validation Errors:", response);
                 console.log(
-                    `form Data ${currentPage}:`,
-                    JSON.stringify(formData[`page${currentPage}`], null, 2)
+                    `[birth form] form Data ${currentPage}:`, formData[`page${currentPage}`]
                 );
             } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
@@ -264,9 +265,21 @@ export default function BirthCertifcateForm() {
         });
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Final Form Data:", formData);
+        BirthCertServices.insertBirthCertificate(formData)
+        .then(response => {
+            console.log("[Birth Form]", response);
+        })
+        .catch(error => {
+            console.error("[Birth Form]:", error);
+        });
+    }
+
     return (
         <>
-            <form className="p-4 h-full mb-4">
+            <form className="p-4 h-full mb-4" onSubmit={handleSubmit}>
                 <div className='mb-4'>
                     {currentPage === 1 && 
                         <div className="mb-4 text-left space-y-6">
@@ -417,9 +430,9 @@ export default function BirthCertifcateForm() {
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">Weight at Birth</label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="birthWeight"
-                                        placeholder="Weight"
+                                        placeholder="Weight in Kilograms (kg)"
                                         className={`common-input ${errors.birthWeight ? 'input-error' : ''}`}
                                         value={formData.page1.birthWeight}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -892,6 +905,7 @@ export default function BirthCertifcateForm() {
                                             className={`common-input w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
                                             value={formData.page5.attendantOthersSpecify}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            disabled={ !formData.page5.attendantOthers }
                                         />
                                         {   errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} /> }
                                     </div>
@@ -1473,6 +1487,7 @@ export default function BirthCertifcateForm() {
                                         placeholder="Enter position/title"
                                         className={`common-input w-full ${errors.adminPosition ? 'input-error' : ''}`}
                                         value={formData.page11.adminPosition}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                     {errors.adminPosition && <ErrorMessages errors={errors.adminPosition} />}
                                 </div>
@@ -1527,10 +1542,10 @@ export default function BirthCertifcateForm() {
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     >
                                         <option value="">Select</option>
-                                        <option value={CivilStatus.SINGLE}>{capitalizeFirst(CivilStatus.SINGLE)}</option>
-                                        <option value={CivilStatus.MARRIED}>{capitalizeFirst(CivilStatus.MARRIED)}</option>
-                                        <option value={CivilStatus.DIVORCED}>{capitalizeFirst(CivilStatus.DIVORCED)}</option>
-                                        <option value={CivilStatus.WIDOW}>{capitalizeFirst(CivilStatus.WIDOW)}</option>
+                                        <option value={capitalizeFirst(CivilStatus.SINGLE)}>{capitalizeFirst(CivilStatus.SINGLE)}</option>
+                                        <option value={capitalizeFirst(CivilStatus.MARRIED)}>{capitalizeFirst(CivilStatus.MARRIED)}</option>
+                                        <option value={capitalizeFirst(CivilStatus.DIVORCED)}>{capitalizeFirst(CivilStatus.DIVORCED)}</option>
+                                        <option value={capitalizeFirst(CivilStatus.WIDOW)}>{capitalizeFirst(CivilStatus.WIDOW)}</option>
                                     </select>
                                     {errors.civilStatus && <ErrorMessages errors={errors.civilStatus} />}
                                 </div>
@@ -1915,7 +1930,7 @@ export default function BirthCertifcateForm() {
                                         Issued On
                                     </label>
                                     <input
-                                        type="text"
+                                        type="date"
                                         name="ctcIssuedOn"
                                         placeholder="Date Issued"
                                         className={`common-input ${errors.ctcIssuedOn ? 'input-error' : ''}`}
@@ -2017,7 +2032,7 @@ export default function BirthCertifcateForm() {
                                 </label>
 
                                 <button 
-                                    type="button"
+                                    type="submit"
                                     className="btn-primary px-4 py-2 rounded-full disabled:opacity-50"
                                     disabled={!formData[`page${currentPage}`]?.confirmation}
                                 >

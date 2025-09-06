@@ -25,10 +25,6 @@ app.post('/login', (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.send('Backend API is running 🚀');
-});
-
 //TODO: handle update user credentials
 app.post('/update-firsttime-login', (req, res) => {
   const { id, newIsFirstTimeFlag } = req.body;
@@ -45,7 +41,6 @@ app.post('/update-firsttime-login', (req, res) => {
     return res.json(result);
   });
 });
-
 
 /**
  * TODO: update user credentials
@@ -162,6 +157,10 @@ app.post('/update-user-details', (req, res) => {
     return res.json(result);
   });
 });
+
+//TODO: importing /routes birthCertificate
+  const birthCertificateRoutes = require('./routes/birthCertificate');
+  app.use('/birth/', birthCertificateRoutes);
 
 //TODO: Start server
 const PORT = 3001;
