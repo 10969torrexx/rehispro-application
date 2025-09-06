@@ -12,3 +12,5 @@ export { default as SignaturePlaceholder } from './SignaturePlaceholder';
  * ? The following are the form components to be exported
  */
 export { default as BirthCertifcateForm } from './Forms/BirthCertifcateForm';
+
+export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
