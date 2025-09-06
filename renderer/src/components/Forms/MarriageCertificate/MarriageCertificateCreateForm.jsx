@@ -9,7 +9,7 @@ export default function MarriageCertificateCreateForm() {
 
     // Handles the Pagination 
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 14;
+    const totalPages = 10;
 
 
     const calculateAge = (birthDate) => {
@@ -45,8 +45,7 @@ export default function MarriageCertificateCreateForm() {
 
     return (
         <>
-            <form className="mt-5">
-
+            <form className="p-4 h-full">
                 {currentPage === 1 && (
                     <>
                         <div div className="w-full flex items-center gap-2 mb-3">
@@ -194,7 +193,7 @@ export default function MarriageCertificateCreateForm() {
                         <div className="w-full flex items-stretch gap-1 mb-3">
                             {/* Husband Column */}
                             <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
-
+                                <h3 className="text-center font-semibold mb-3">Husband</h3>
                                 {/* Sex and Citizenship */}
                                 <span>
                                     <p>4. Sex and Citizenship</p>
@@ -267,7 +266,7 @@ export default function MarriageCertificateCreateForm() {
 
                             {/* Wife Column */}
                             <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
-
+                                <h3 className="text-center font-semibold mb-3">Wife</h3>
                                 {/* Sex and Citizenship */}
                                 <span className="invisible">
                                     <p>4. Sex and Citizenship</p>
@@ -346,7 +345,7 @@ export default function MarriageCertificateCreateForm() {
                         <div className="w-full flex items-stretch gap-1 mb-3">
                             {/* Husband Column */}
                             <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
-
+                                <h3 className="text-center font-semibold mb-3">Husband</h3>
                                 {/* Father Citizenship */}
                                 <span>
                                     <p>9. Father Citizenship</p>
@@ -433,7 +432,7 @@ export default function MarriageCertificateCreateForm() {
 
                             {/* Wife Column */}
                             <div className="flex-1 p-3 border border-pink-300 text-sm rounded">
-
+                                <h3 className="text-center font-semibold mb-3">Wife</h3>
                                 {/* Father Citizenship */}
                                 <span className="invisible">
                                     <p>9. Citizenship</p>
@@ -634,44 +633,46 @@ export default function MarriageCertificateCreateForm() {
 
                         {/* Options a, b, c */}
                         <div className="mt-2 space-y-2 pl-10">
-                        <label className="flex items-center gap-2">
-                            <input type="checkbox" name="certification" value="license" />
-                            a. Marriage License No.{" "}
-                            <input
-                            type="text"
-                            name="marriageLicenseNo"
-                            className="border-b border-gray-500 w-32 text-center mx-1"
-                            />{" "}
-                            issued on{" "}
-                            <input
-                            type="text"
-                            name="marriageIssuedOn"
-                            className="border-b border-gray-500 w-32 text-center mx-1"
-                            />{" "}
-                            at{" "}
-                            <input
-                            type="text"
-                            name="marriageIssuedAt"
-                            className="border-b border-gray-500 w-48 text-center mx-1"
-                            />{" "}
-                            in favor of said parties, was exhibited to me.
-                        </label>
+                            <label className="flex items-start gap-2">
+                                <input type="checkbox" name="certification" value="license" className="mt-1" />
+                                <span>
+                                    a. Marriage License No.{" "}
+                                    <input
+                                    type="text"
+                                    name="marriageLicenseNo"
+                                    className="border-b border-gray-500 w-32 text-center mx-1"
+                                    />{" "}
+                                    issued on{" "}
+                                    <input
+                                    type="text"
+                                    name="marriageIssuedOn"
+                                    className="border-b border-gray-500 w-32 text-center mx-1"
+                                    />{" "}
+                                    at{" "}
+                                    <input
+                                    type="text"
+                                    name="marriageIssuedAt"
+                                    className="border-b border-gray-500 w-48 text-center mx-1"
+                                    />{" "}
+                                    in favor of said parties, was exhibited to me.
+                                </span>
+                            </label>
 
-                        <label className="flex items-center gap-2">
-                            <input type="checkbox" name="certification" value="noLicense" />
-                            b. No marriage license was necessary, the marriage being solemnized under Art.{" "}
-                            <input
-                            type="text"
-                            name="executiveOrder"
-                            className="border-b border-gray-500 w-16 text-center mx-1"
-                            />{" "}
-                            of Executive Order No. 209.
-                        </label>
+                            <label className="flex items-center gap-2">
+                                <input type="checkbox" name="certification" value="noLicense" />
+                                b. No marriage license was necessary, the marriage being solemnized under Art.{" "}
+                                <input
+                                type="text"
+                                name="executiveOrder"
+                                className="border-b border-gray-500 w-16 text-center mx-1"
+                                />{" "}
+                                of Executive Order No. 209.
+                            </label>
 
-                        <label className="flex items-center gap-2">
-                            <input type="checkbox" name="certification" value="pd1083" />
-                            c. The marriage was solemnized in accordance with the provisions of Presidential Decree No. 1083.
-                        </label>
+                            <label className="flex items-center gap-2">
+                                <input type="checkbox" name="certification" value="pd1083" />
+                                c. The marriage was solemnized in accordance with the provisions of Presidential Decree No. 1083.
+                            </label>
                         </div>
 
                         {/* Signature fields */}
@@ -715,37 +716,37 @@ export default function MarriageCertificateCreateForm() {
                         </span>
 
                         <div className="border border-pink-300 p-3 rounded mb-3">
-                        <div className="grid grid-cols-2 gap-6">
-                            <div className="flex flex-col items-center">
-                            <input
-                                type="text"
-                                name="witness1Signature"
-                                className="w-56 border-b border-gray-500 text-center"
-                            />
-                            <label className="text-xs mt-1">(Signature of Witness 1)</label>
-                            <input
-                                type="text"
-                                name="witness1Name"
-                                placeholder="Name in Print"
-                                className="w-56 border-b border-gray-500 text-center mt-2"
-                            />
-                            </div>
+                            <div className="grid grid-cols-2 gap-6">
+                                <div className="flex flex-col items-center">
+                                <input
+                                    type="text"
+                                    name="witness1Signature"
+                                    className="w-56 border-b border-gray-500 text-center"
+                                />
+                                <label className="text-xs mt-1">(Signature of Witness 1)</label>
+                                <input
+                                    type="text"
+                                    name="witness1Name"
+                                    placeholder="Name in Print"
+                                    className="w-56 border-b border-gray-500 text-center mt-2"
+                                />
+                                </div>
 
-                            <div className="flex flex-col items-center">
-                            <input
-                                type="text"
-                                name="witness2Signature"
-                                className="w-56 border-b border-gray-500 text-center"
-                            />
-                            <label className="text-xs mt-1">(Signature of Witness 2)</label>
-                            <input
-                                type="text"
-                                name="witness2Name"
-                                placeholder="Name in Print"
-                                className="w-56 border-b border-gray-500 text-center mt-2"
-                            />
+                                <div className="flex flex-col items-center">
+                                <input
+                                    type="text"
+                                    name="witness2Signature"
+                                    className="w-56 border-b border-gray-500 text-center"
+                                />
+                                <label className="text-xs mt-1">(Signature of Witness 2)</label>
+                                <input
+                                    type="text"
+                                    name="witness2Name"
+                                    placeholder="Name in Print"
+                                    className="w-56 border-b border-gray-500 text-center mt-2"
+                                />
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </>
                 )}
@@ -815,11 +816,298 @@ export default function MarriageCertificateCreateForm() {
                                 />
                             </div>
                         </div>
+
+                        {/* Remarks/Annotations */}
+                        <span>
+                            <p className='font-semibold'>REMARKS/ANNOTATIONS (For LCRO/OCRG/Shari'a Circuit Registrar use only.)</p>
+                        </span>
+                        <div className="border border-pink-300 p-3 rounded mb-3">
+                            <textarea name="remarksAnnotation" className='w-full common-textarea' rows="3"></textarea>
+                        </div>
+
+                        <div className="border border-pink-300 p-3 rounded mb-3">
+                            <h3 className='text-md font-semibold'>TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR</h3>
+                            <input type="text" name='civilRegistrar' className='w-full common-input'/>
+                        </div>
+                    </>
+                )}
+
+                {currentPage === 7 && (
+                    <>
+                        {/* 20a. Witnesses */}
+                        <span>
+                        <p>20b. Witnesses (Print Name and Sign)</p>
+                        </span>
+
+                        <div className="border border-pink-300 p-3 rounded mb-3">
+                            <div className="grid grid-cols-2 gap-6">
+                                <div className="flex flex-col items-center">
+                                <input
+                                    type="text"
+                                    name="witness3Signature"
+                                    className="w-56 border-b border-gray-500 text-center"
+                                />
+                                <label className="text-xs mt-1">(Signature of Witness 1)</label>
+                                <input
+                                    type="text"
+                                    name="witness3Name"
+                                    placeholder="Name in Print"
+                                    className="w-56 border-b border-gray-500 text-center mt-2"
+                                />
+                                </div>
+
+                                <div className="flex flex-col items-center">
+                                <input
+                                    type="text"
+                                    name="witness4Signature"
+                                    className="w-56 border-b border-gray-500 text-center"
+                                />
+                                <label className="text-xs mt-1">(Signature of Witness 2)</label>
+                                <input
+                                    type="text"
+                                    name="witness4Name"
+                                    placeholder="Name in Print"
+                                    className="w-56 border-b border-gray-500 text-center mt-2"
+                                />
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 className='block text-center font-semibold'>AFFIDAVIT OF SOLEMNIZING OFFICER</h3>
+
+                        <div className='mt-1 mb-3'>
+                            <p>
+                                I, <input type="text" className='border-b border-b-black outline-none'/>, of legal age, Solemnizing Officer of <input type="text" className='border-b border-b-black outline-none'/> with address at <input type="text" className='border-b border-b-black outline-none'/>, after having sworn to in accordance with law, do hereby depose and say:
+                            </p>
+                        </div>
+
+                        <div className="space-y-4">
+                            {/* Statement 1 */}
+                            <p>
+                                1. That I have solemnized the marriage between{" "}
+                                <input
+                                type="text"
+                                className="border-b border-black outline-none px-1 w-40"
+                                />{" "}
+                                and{" "}
+                                <input
+                                type="text"
+                                className="border-b border-black outline-none px-1 w-40"
+                                />
+                                ;
+                            </p>
+
+                            {/* Statement 2 */}
+                            <div className="flex gap-2">
+                                <p>2.</p>
+                                <div className="flex flex-col gap-3">
+                                    {/* 2a */}
+                                    <label className="flex items-start gap-2">
+                                        <input type="checkbox" className="mt-1 scale-125" />
+                                        <span>
+                                        a. That I have ascertained the qualifications of contracting parties
+                                        and have found no legal impediment for them to marry as required by
+                                        Article 34 of the Family Code.
+                                        </span>
+                                    </label>
+
+                                    {/* 2b */}
+                                    <label className="flex items-start gap-2">
+                                        <input type="checkbox" className="mt-1 scale-125" />
+                                        <span>
+                                        b. That this marriage was performed in <i>articulo mortis</i> or at
+                                        the point of death.
+                                        </span>
+                                    </label>
+
+                                    {/* 2c */}
+                                    <label className="flex items-start gap-2">
+                                        <input type="checkbox" className="mt-1 scale-125" />
+                                        <span>
+                                        c. That the contracting party/ies{" "}
+                                        <input
+                                            type="text"
+                                            className="border-b border-black outline-none px-1 w-40"
+                                        />{" "}
+                                        and{" "}
+                                        <input
+                                            type="text"
+                                            className="border-b border-black outline-none px-1 w-40"
+                                        />
+                                        , being at the point of death and physically unable to sign the
+                                        foregoing certificate of marriage by signature or mark, one of the
+                                        witnesses to the marriage sign for him or her by writing the dying
+                                        party's name and beneath it, the witness' own signature preceded by
+                                        the preposition "By".
+                                        </span>
+                                    </label>
+
+                                    {/* 2d */}
+                                    <label className="flex items-start gap-2">
+                                        <input type="checkbox" className="mt-1 scale-125" />
+                                        <span>
+                                        d. That the residence of either party is so located that there is no means of transportation to enable concerned party/parties to appear personally before the civil registrar;
+                                        </span>
+                                    </label>
+
+                                    {/* 2e */}
+                                    <label className="flex items-start gap-2">
+                                        <input type="checkbox" className="mt-1 scale-125" />
+                                        <span>
+                                        e. That the marriage was among Muslims or among members of the Ethnic Cultural Communities and that the marriage was solemnized in accordance with their customs and practices;
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {currentPage === 8 && (
+                    <>
+                        <div className="space-y-4 mb-3">
+                            {/* Statement 3 */}
+                            <p>3. That I look the necessary steps to ascertain the ages and relationship of contracting parties and that neither of them are under any legal impediment to marry each other;</p>
+                            
+                            {/* Statement 4 */}
+                            <p>4. That I am executing this affidavit to attest to the truthfulness of the foregoing statements for all legal intents and purposes.</p>
+                        </div>
+
+                        <div className='mb-3'>
+                            <p>In truth whereof, I have affixed my signature below this <input type="text" className='border-b border-black outline-none w-[50px]'/>{''}day of{''}<input type="text" className='border-b border-black outline-none'/>,{''}<input type="text" className='border-b border-black outline-none'/>{''}at<input type="text" className='border-b border-black outline-none'/>{''}, Philippines.</p>
+                        </div>
+
+                        <div className='w-full flex justify-end mb-3'>
+                            <div className=' flex flex-col items-center'>
+                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
+                                <p className='text-xs'>Signature Over Printed Name of the Solemnizing Officer</p>
+                            </div>
+                        </div>
+
+                        <div className='mb-3'>
+                            <p><span>SUBSCRIBED AND SWORN</span> to before me this{' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '} day of {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '}, {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '} at {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '} issued on {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '}, {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '} at {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '}.</p>
+                        </div>
+
+                        <div className='flex justify-around items-center mb-3'>
+                            <div className=' flex flex-col items-center mb-3'>
+                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
+                                <p className='text-xs'>Signature of the Administering Officer</p>
+                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
+                                <p className='text-xs'>Name in Print</p>
+                            </div>
+                            <div className=' flex flex-col items-center mb-3'>
+                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
+                                <p className='text-xs'>Position/Title/Designation</p>
+                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
+                                <p className='text-xs'>Address</p>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {currentPage === 9 && (
+                    <>
+                        <h3 className='block text-center font-semibold'>AFFIDAVIT FOR DELAYED REGISTRATION OF MARRIAGE</h3>
+
+                        <div className='mt-2 mb-5'>
+                            <p>I, <input type="text" className='border-b border-b-black outline-none text-center'/>{' '}, of legal age, single/married/divorced/widow/widower, with residence and postal address <input type="text" className='border-b border-b-black outline-none text-center'/>{' '}, after having duly sworn in accordance with law do hereby depose and say:</p>
+                        </div>
+
+                        <div className='space-y-4 mb-3'>
+                            {/* Statement 1 */}
+                            <div className="flex flex-col mb-3">
+                                <p>1. That I am the applicant for the delayed registration of</p>
+                                <label className='flex items-center gap-2'>
+                                    <input type="checkbox" className='scale-125'/>
+                                    my marriage with <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} in <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} on <input type="text" className='border-b border-b-black outline-none text-center'/>{' '}.
+                                </label>
+                                <label className='flex items-center gap-2'>
+                                    <input type="checkbox" className='scale-125'/>
+                                    my marriage between <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} in <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} on <input type="text" className='border-b border-b-black outline-none text-center'/>{' '}.
+                                </label>
+                            </div>
+
+                            {/* Statement 2 */}
+                            <div className="flex flex-col mb-3">
+                                <p>2. That said marriage was solemnized by <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} (Solemnizing Officer's name) under</p>
+                                <div className='flex items-center gap-3'>
+                                <label className='flex items-center gap-1'>
+                                    a. <input type="checkbox" className='scale-125'/> religious ceremony
+                                </label>
+                                <label className='flex items-center gap-1'>
+                                    b. <input type="checkbox" className='scale-125'/> civil ceremony
+                                </label>
+                                <label className='flex items-center gap-1'>
+                                   c. <input type="checkbox" className='scale-125'/> muslim rites
+                                </label>
+                                <label className='flex items-center gap-1'>
+                                   d. <input type="checkbox" className='scale-125'/> tribal rites
+                                </label>
+                                </div>
+                            </div>
+
+                            {/* Statement 3 */}
+                            <div className="flex flex-col mb-3">
+                                <p>3. That the marriage was solemnized:</p>
+                                <label className='flex items-center gap-1'>
+                                    <input type="checkbox" className='scale-125'/> a. with marriage license no. <input type="text" className='border-b border-b-black outline-none text-center'/> issued on <input type="text" className='border-b border-b-black outline-none text-center'/> at <input type="text" className='border-b border-b-black outline-none text-center'/>; 
+                                </label>
+                                <label className='flex items-center gap-1'>
+                                    <input type="checkbox" className='scale-125'/> b. under the Article <input type="text" className='border-b border-b-black outline-none text-center'/> (marriages of exceptional character); 
+                                </label>
+                            </div>
+
+                            {/* Statement 4 */}
+                            <p>4. (If the applicant is either the wife or husband) That I am a citizen of <input type="text" className='border-b border-b-black outline-none text-center'/> and spouse is a citizen of <input type="text" className='border-b border-b-black outline-none text-center'/>.</p>
+                            
+                            {/* Statement 5 */}
+                            <p>5. That the reason for the delay in registering our/their marriage is <input type="text" className='border-b border-b-black outline-none text-center'/>.</p>
+                            
+                            {/* Statement 6 */}
+                            <div className="flex flex-col">
+                                <p>6. That I am executing this affidavit to attest to the truthfullness of the foregoing statements for all legal intents and puposes.</p>
+                                <span>
+                                    In truth whereof, I have affixed my signature below this <input type="text" className='border-b border-b-black outline-none text-center w-[100px]'/> day of <input type="text" className='border-b border-b-black outline-none text-center'/>, <input type="text" className='border-b border-b-black outline-none text-center'/> at <input type="text" className='border-b border-b-black outline-none text-center'/>, Philippines.
+                                </span>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {currentPage === 10 && (
+                    <>
+                        <div className='flex justify-end mb-10'>
+                            <div className='flex flex-col items-center'>
+                                <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/>
+                                <p className='text-sm'>Signature Over Printed Name of Affiant</p>
+                            </div>
+                        </div>
+
+                        <div className='mb-5'>
+                            <p><span className='pl-5 font-bold'>SUBSCRIBED AND SWORN</span> to before me this <input type="text" className='border-b border-b-black outline-none text-center w-[100px]'/>{' '} day of <input type="text" className='border-b border-b-black outline-none text-center'/>, <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/> at <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/> issued on <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/>, <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/> at <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/>.</p>
+                        </div>
+
+                        <div className='mb-3'>
+                            <div className="flex justify-evenly gap-3">
+                                <div className='flex flex-col items-center'>
+                                    <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/>
+                                    <p className='text-sm'>Signature of the Administering Officer</p>
+                                    <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/>
+                                    <p className='text-sm'>Name in Print</p>
+                                </div>
+                                <div className='flex flex-col items-center'>
+                                    <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/>
+                                    <p className='text-sm'>Position/Title/Designation</p>
+                                    <input type="text" className='border-b border-b-black outline-none text-center w-[300px]'/>
+                                    <p className='text-sm'>Address</p>
+                                </div>
+                            </div>
+                        </div>
                     </>
                 )}
             </form>
 
-            <div className="flex justify-center items-center gap-4">
+            <div className="flex justify-center items-center space-x-4 pb-8">
                 {/* Previous Button */}
                 <button
                     type="button"
@@ -846,6 +1134,5 @@ export default function MarriageCertificateCreateForm() {
                 </button>
             </div>
         </>
-
     );
 }

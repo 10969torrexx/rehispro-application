@@ -44,7 +44,7 @@ export default function MarriageCertificate() {
                         {activeTab === "home" && <div>Home Content</div>}
                         {activeTab === "upload" && <div>Upload Content</div>}
                         {activeTab === "create" &&
-                            <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[95%]">
+                            <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <div className="mb-4">
                                     <InfoCard
                                         title="Creating Marriage Certificates"
