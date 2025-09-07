@@ -1,16 +1,84 @@
+import React from 'react';
 import SignaturePad from 'react-signature-canvas';
 import { useState, useRef  } from "react";
+import { toast } from "react-toastify";
+import { ErrorMessages } from '@components';
+import { MarriageCertValidation } from '@services';
 
 export default function MarriageCertificateCreateForm() {
-    const [husbandBirthDate, setHusbandBirthDate] = useState("");
-    const [husbandAge, setHusbandAge] = useState("");
-    const [wifeBirthDate, setWifeBirthDate] = useState("");
-    const [wifeAge, setWifeAge] = useState("");
-
     // Handles the Pagination 
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 10;
 
+    // Handles FormData
+    const [formData, setFormData] = useState({
+        // Page 1 - Validation
+        page1: {
+            // Province, City and Registry No.
+            province: "",
+            city: "",
+            registry: "",
+
+            // Husband Information
+            husbandFirstName: "",
+            husbandMiddleName: "",
+            husbandLastName: "",
+            husbandBirthDate: "",
+            husbandBirthCtiy: "",
+            husbandBirthProvince: "",
+            husbandBirthCountry: "",
+            
+            // Wife Information
+            wifeFirstName: "",
+            wifeMiddleName: "",
+            wifeLastName: "",
+            wifeBirthDate: "",
+            wifeBirthCity: "",
+            wifeBirthProvince: "",
+            wifeBirthCountry: "",
+        }
+    });
+    
+    // Handles Input Change on Pages
+    const handleInputChange = (event, section) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => {
+        const updatedSection = {
+        ...prevData[section],
+        [name]: value,
+        };
+
+        if (name === "husbandBirthDate") {
+        updatedSection.husbandAge = calculateAge(value);
+        }
+        if (name === "wifeBirthDate") {
+        updatedSection.wifeAge = calculateAge(value);
+        }
+
+        return {
+        ...prevData,
+        [section]: updatedSection,
+        };
+    });
+    };
+
+    // Handles Page and Validations
+    const [errors, setErrors] = React.useState({});
+    const handlePageChange = (direction) => {
+        if(direction === "next"){
+            const response = MarriageCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
+
+            if (Object.keys(response).length > 0) {
+                setErrors(response);
+                toast.error("Please fix the errors in the form.");
+            } else {
+                setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
+            }
+            
+        }else if (direction === 'prev') {
+            setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+        }
+    };
 
     const calculateAge = (birthDate) => {
         if (!birthDate) return "";
@@ -22,18 +90,6 @@ export default function MarriageCertificateCreateForm() {
             age--;
         }
         return age;
-    };
-
-    const handleHusbandBirthDate = (e) => {
-        const value = e.target.value;
-        setHusbandBirthDate(value);
-        setHusbandAge(calculateAge(value));
-    };
-
-    const handleWifeBirthDate = (e) => {
-        const value = e.target.value;
-        setWifeBirthDate(value);
-        setWifeAge(calculateAge(value));
     };
 
     // Handles for Husband and Wife's Signature
@@ -51,15 +107,39 @@ export default function MarriageCertificateCreateForm() {
                         <div div className="w-full flex items-center gap-2 mb-3">
                             <div className="w-full">
                                 <label>Province</label>
-                                <input type="text" name="province" className="w-full common-input" placeholder="Province" />
+                                <input 
+                                    type="text" 
+                                    name="province" 
+                                    placeholder="Province" 
+                                    className={`w-full common-input ${errors.province ? 'input-error' : ''}`} 
+                                    value={formData.page1.province}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.province && <ErrorMessages errors={errors.province} />}
                             </div>
                             <div className="w-full">
                                 <label>City</label>
-                                <input type="text" name="city" className="w-full common-input" placeholder="City/Municipality" />
+                                <input 
+                                    type="text" 
+                                    placeholder="City/Municipality"
+                                    name="city" 
+                                    className={`w-full common-input ${errors.city ? 'input-error' : ''}`} 
+                                    value={formData.page1.city}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                 {errors.city && <ErrorMessages errors={errors.city} />}
                             </div>
                             <div className="w-full">
                                 <label>Registry No.</label>
-                                <input type="text" name="registry" className="w-full common-input" placeholder="Registry No." />
+                                <input 
+                                    type="text" 
+                                    name="registry" 
+                                    placeholder="Registry No." 
+                                    className={`w-full common-input ${errors.registry ? 'input-error' : ''}`}
+                                    value={formData.page1.registry}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.registry && <ErrorMessages errors={errors.registry} />}
                             </div>
                         </div>
 
@@ -71,18 +151,41 @@ export default function MarriageCertificateCreateForm() {
                                 <span>1. Name of contracting parties</span>
 
                                 {/* Name inputs */}
-                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                <div className="flex flex-col items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>First</label>
-                                        <input type="text" name="husbandFirstName" className="w-full common-input" placeholder="First" />
+                                        <input type="text" 
+                                            name="husbandFirstName" 
+                                            placeholder="First" 
+                                            className={`w-full common-input ${errors.husbandFirstName ? 'input-error' : ''}`}
+                                            value={formData.page1.husbandFirstName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandFirstName && <ErrorMessages errors={errors.husbandFirstName} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Middle</label>
-                                        <input type="text" name="husbandMiddleName" className="w-full common-input" placeholder="Middle" />
+                                        <input 
+                                            type="text" 
+                                            name="husbandMiddleName" 
+                                            placeholder="Middle" 
+                                            className={`w-full common-input ${errors.husbandMiddleName ? 'input-error' : ''}`}
+                                            value={formData.page1.husbandMiddleName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandMiddleName && <ErrorMessages errors={errors.husbandMiddleName} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Last</label>
-                                        <input type="text" name="husbandLastName" className="w-full common-input" placeholder="Last" />
+                                        <input
+                                            type="text" 
+                                            name="husbandLastName" 
+                                            placeholder="Last" 
+                                            className={`w-full common-input ${errors.husbandLastName ? 'input-error' : ''}`}
+                                            value={formData.page1.husbandLastName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandLastName && <ErrorMessages errors={errors.husbandLastName} />}
                                     </div>
                                 </div>
 
@@ -95,11 +198,27 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>Date of Birth</label>
-                                        <input type="date" name="husbandBirthDate" value={husbandBirthDate} onChange={handleHusbandBirthDate} className="w-full common-input" />
+                                        <input 
+                                            type="date" 
+                                            name="husbandBirthDate" 
+                                            className={`w-full common-input ${errors.husbandBirthDate ? 'input-error' : ''}`} 
+                                            value={formData.page1.husbandBirthDate}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)} 
+                                        />
+                                        {errors.husbandBirthDate && <ErrorMessages errors={errors.husbandBirthDate} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Age</label>
-                                        <input type="text" name="husbandAge" value={husbandAge} className="w-full common-input" placeholder="Age" readOnly />
+                                        <input 
+                                            type="text" 
+                                            name="husbandAge"  
+                                            placeholder="Age" 
+                                            value={formData.page1.husbandAge} 
+                                            className={`w-full common-input ${errors.husbandAge ? 'input-error' : ''}`} 
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            readOnly 
+                                        />
+                                        {errors.husbandAge && <ErrorMessages errors={errors.husbandAge} />}
                                     </div>
                                 </div>
 
@@ -108,18 +227,42 @@ export default function MarriageCertificateCreateForm() {
                                     <p>3. Place of Birth</p>
                                 </span>
 
-                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                <div className="flex flex-col items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>City/Municipality</label>
-                                        <input type="text" name="husbandBirthCity" className="w-full common-input" placeholder="City/Municipality" />
+                                        <input 
+                                            type="text" 
+                                            name="husbandBirthCity"
+                                            placeholder='City/Municipality' 
+                                            className={`w-full common-input ${errors.husbandBirthCtiy ? 'input-error' : ''}`}
+                                            value={formData.page1.husbandBirthCtiy}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandBirthCtiy && <ErrorMessages errors={errors.husbandBirthCtiy} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Province</label>
-                                        <input type="text" name="husbandBirthProvince" className="w-full common-input" placeholder="Province" />
+                                        <input 
+                                            type="text" 
+                                            name="husbandBirthProvince" 
+                                            placeholder="Province" 
+                                            className={`w-full common-input ${errors.husbandBirthProvince ? 'input-error' : ''}`}
+                                            value={formData.page1.husbandBirthProvince}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandBirthProvince && <ErrorMessages errors={errors.husbandBirthProvince} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Country</label>
-                                        <input type="text" name="husbandBirthCountry" className="w-full common-input" placeholder="Country" />
+                                        <input 
+                                            type="text" 
+                                            name="husbandBirthCountry" 
+                                            placeholder="Country" 
+                                            className={`w-full common-input ${errors.husbandBirthCountry ? 'input-error' : ''}`}
+                                            value={formData.page1.husbandBirthCountry}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandBirthCountry && <ErrorMessages errors={errors.husbandBirthCountry} />}
                                     </div>
                                 </div>
                             </div>
@@ -132,18 +275,42 @@ export default function MarriageCertificateCreateForm() {
                                 <span className="invisible">1. Name of contracting parties</span>
 
                                 {/* Name inputs */}
-                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                <div className="flex flex-col items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>First</label>
-                                        <input type="text" name="wifeFirstName" className="w-full common-input" placeholder="First" />
+                                        <input 
+                                            type="text" 
+                                            name="wifeFirstName" 
+                                            placeholder="First" 
+                                            className={`w-full common-input ${errors.wifeFirstName ? 'input-error' : ''}`}
+                                            value={formData.page1.wifeFirstName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeFirstName && <ErrorMessages errors={errors.wifeFirstName} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Middle</label>
-                                        <input type="text" name="wifeMiddleName" className="w-full common-input" placeholder="Middle" />
+                                        <input 
+                                            type="text" 
+                                            name="wifeMiddleName" 
+                                            placeholder="Middle" 
+                                            className={`w-full common-input ${errors.wifeMiddleName ? 'input-error' : ''}`}
+                                            value={formData.page1.wifeMiddleName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeMiddleName && <ErrorMessages errors={errors.wifeMiddleName} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Last</label>
-                                        <input type="text" name="wifeLastName" className="w-full common-input" placeholder="Last" />
+                                        <input 
+                                            type="text" 
+                                            name="wifeLastName" 
+                                            placeholder="Last" 
+                                            className={`w-full common-input ${errors.wifeLastName ? 'input-error' : ''}`}
+                                            value={formData.page1.wifeLastName}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeLastName && <ErrorMessages errors={errors.wifeLastName} />}
                                     </div>
                                 </div>
 
@@ -156,11 +323,26 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>Date of Birth</label>
-                                        <input type="date" name="wifeBirthDate" value={wifeBirthDate} onChange={handleWifeBirthDate} className="w-full common-input" />
+                                        <input 
+                                            type="date" 
+                                            name="wifeBirthDate" 
+                                            className={`w-full common-input ${errors.wifeBirthDate ? 'input-error' : ''}`} 
+                                            value={formData.page1.wifeBirthDate}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)} 
+                                        />
+                                        {errors.wifeBirthDate && <ErrorMessages errors={errors.wifeBirthDate} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Age</label>
-                                        <input type="text" name="wifeAge" value={wifeAge} className="w-full common-input" placeholder="Age" readOnly />
+                                        <input type="text" 
+                                            name="wifeAge" 
+                                            placeholder="Age" 
+                                            value={formData.page1.wifeAge} 
+                                            className={`w-full common-input ${errors.wifeAge ? 'input-error' : ''}`}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)} 
+                                            readOnly 
+                                        />
+                                        {errors.wifeAge && <ErrorMessages errors={errors.wifeAge} />}
                                     </div>
                                 </div>
 
@@ -169,18 +351,42 @@ export default function MarriageCertificateCreateForm() {
                                     <p>3. Place of Birth</p>
                                 </span>
 
-                                <div className="flex items-center gap-1 mt-1 mb-3">
+                                <div className="flex flex-col items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>City/Municipality</label>
-                                        <input type="text" name="wifeBirthCity" className="w-full common-input" placeholder="City/Municipality" />
+                                        <input 
+                                            type="text" 
+                                            name="wifeBirthCity" 
+                                            placeholder="City/Municipality" 
+                                            className={`w-full common-input ${errors.wifeBirthCity ? 'input-error' : ''}`}
+                                            value={formData.page1.wifeBirthCity}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeBirthCity && <ErrorMessages errors={errors.wifeBirthCity} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Province</label>
-                                        <input type="text" name="wifeBirthProvince" className="w-full common-input" placeholder="Province" />
+                                        <input 
+                                            type="text" 
+                                            name="wifeBirthProvince" 
+                                            placeholder="Province" 
+                                            className={`w-full common-input ${errors.wifeBirthProvince ? 'input-error' : ''}`}
+                                            value={formData.page1.wifeBirthProvince}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeBirthProvince && <ErrorMessages errors={errors.wifeBirthProvince} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Country</label>
-                                        <input type="text" name="wifeBirthCountry" className="w-full common-input" placeholder="Country" />
+                                        <input 
+                                            type="text" 
+                                            name="wifeBirthCountry" 
+                                            placeholder="Country" 
+                                            className={`w-full common-input ${errors.wifeBirthCountry ? 'input-error' : ''}`}
+                                            value={formData.page1.wifeBirthCountry}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeBirthCountry && <ErrorMessages errors={errors.wifeBirthCountry} />}
                                     </div>
                                 </div>
                             </div>
@@ -1111,7 +1317,7 @@ export default function MarriageCertificateCreateForm() {
                 {/* Previous Button */}
                 <button
                     type="button"
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    onClick={() => handlePageChange('prev')}
                     disabled={currentPage === 1}
                     className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
                 >
@@ -1126,7 +1332,7 @@ export default function MarriageCertificateCreateForm() {
                 {/* Next Button */}
                 <button
                     type="button"
-                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    onClick={() => handlePageChange('next')}
                     disabled={currentPage === totalPages}
                     className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
                 >

@@ -1,0 +1,138 @@
+{
+    "page1": {
+        "province": {
+            "required": true,
+            "minLength": 2,
+            "maxLength": 100,
+            "message": {
+                "required": "Province is required.",
+                "minLength": "Province must at least be 2 characters.",
+                "maxLength": "Province must not exceed 100 characters."
+            }
+        },
+        "city":{
+            "required": true,
+            "minLength": 2,
+            "maxLength": 100,
+            "message": {
+                "required": "City/Municipality is required.",
+                "minLength": "City/Municipality must at least be 2 characters.",
+                "maxLength": "City/Municipality must not exceed 100 characters."
+            }
+        },
+        "registry":{
+            "required": true,
+            "type": "number",
+            "max": 10,
+            "message": {
+                "required": "Registry No. is required.",
+                "number": "Must be a valid number.",
+                "max": "Must not exceed 10"
+            }
+        },
+        "husbandFirstName": {
+            "required": true,
+            "message":{
+                "required": "First name is required."
+            }
+        },
+        "husbandMiddleName": {
+            "required": true,
+            "message":{
+                "required": "Middle name is required."
+            }
+        },
+        "husbandLastName": {
+            "required": true,
+            "message":{
+                "required": "Last name is required."
+            }
+        },
+        "husbandBirthDate": {
+            "required": true,
+            "type": "date",
+            "message":{
+                "required": "Birth date is required.",
+                "date": "Invalid date"
+            }
+        },
+        "husbandAge":{
+            "required": true,
+            "min": 20,
+            "message":{
+                "required": "Age is required.",
+                "min": "Must be legel age."
+            }
+        },
+        "husbandBirthCtiy": {
+            "required": true,
+            "message":{
+                "required": "City/Municipality is required."
+            }
+        },
+        "husbandBirthProvince": {
+            "required": true,
+            "message":{
+                "required": "Province is required."
+            }
+        },
+        "husbandBirthCountry": {
+            "required": true,
+            "message":{
+                "required": "Country is required."
+            }
+        },
+        "wifeFirstName": {
+            "required": true,
+            "message":{
+                "required": "First name is required."
+            }
+        },
+        "wifeMiddleName": {
+            "required": true,
+            "message":{
+                "required": "Middle name is required."
+            }
+        },
+        "wifeLastName": {
+            "required": true,
+            "message":{
+                "required": "Last name is required."
+            }
+        },
+        "wifeBirthDate": {
+            "required": true,
+            "type": "date",
+            "message":{
+                "required": "Birth date is required.",
+                "date": "Invalid date"
+            }
+        },
+        "wifeAge":{
+            "required": true,
+            "min": 20,
+            "message":{
+                "required": "Age is required.",
+                "min": "Must be legel age."
+            }
+        },
+        "wifeBirthCity": {
+            "required": true,
+            "message":{
+                "required": "City/Municipality is required."
+            }
+        },
+        "wifeBirthProvince": {
+            "required": true,
+            "message":{
+                "required": "Province is required."
+            }
+        },
+        "wifeBirthCountry": {
+            "required": true,
+            "message":{
+                "required": "Country is required."
+            }
+        }
+    }
+}
