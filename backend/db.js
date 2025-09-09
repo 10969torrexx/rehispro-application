@@ -207,6 +207,149 @@ db.serialize(() => {
     );
   `);
 
+  db.run(`
+    CREATE TABLE IF NOT EXISTS deathcertificates (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      creator_id INTEGER NOT NULL,
+      creation_type TEXT DEFAULT 'manual',
+  
+      -- Page 1 - Deceased Information
+      province TEXT,
+      city TEXT,
+      first_name TEXT,
+      middle_name TEXT,
+      last_name TEXT,
+      sex TEXT,
+      date_of_death DATE,
+      date_of_birth DATE,
+      age_years INTEGER,
+      age_days INTEGER,
+      age_hours INTEGER,
+      age_minutes INTEGER,
+      place_of_death TEXT,
+  
+      -- Page 2 - Status & Residence
+      civil_status TEXT,
+      religion TEXT,
+      citizenship TEXT,
+      residence_house TEXT,
+      residence_street TEXT,
+      residence_barangay TEXT,
+      residence_city TEXT,
+      residence_province TEXT,
+      residence_country TEXT,
+      occupation TEXT,
+  
+      -- Page 3 - Parents' Information
+      father_first_name TEXT,
+      father_middle_name TEXT,
+      father_last_name TEXT,
+      mother_first_name TEXT,
+      mother_middle_name TEXT,
+      mother_last_name TEXT,
+  
+      -- Page 4 - Medical Certificate
+      immediate_cause TEXT,
+      antecedent_cause TEXT,
+      underlying_cause TEXT,
+      interval_immediate TEXT,
+      interval_antecedent TEXT,
+      interval_underlying TEXT,
+      other_conditions TEXT,
+      maternal_condition TEXT,
+  
+      -- Page 5 - Manner of Death & Attendant
+      manner_of_death TEXT,
+      autopsy TEXT,
+      place_occurrence TEXT,
+      attendant_private_physician INTEGER DEFAULT 0,
+      attendant_public_health INTEGER DEFAULT 0,
+      attendant_hospital INTEGER DEFAULT 0,
+      attendant_none INTEGER DEFAULT 0,
+      attendant_others INTEGER DEFAULT 0,
+      attendant_others_specify TEXT,
+      attendant_from DATE,
+      attendant_to DATE,
+  
+      -- Page 6 - Certification of Death
+      physician_name TEXT,
+      physician_title TEXT,
+      physician_address TEXT,
+      health_officer_name TEXT,
+  
+      -- Page 7 - Corpse Disposal
+      disposal_type TEXT,
+      permit_number TEXT,
+      permit_date DATE,
+      transfer_permit TEXT,
+      cemetery_name TEXT,
+      cemetery_address TEXT,
+  
+      -- Page 8 - Informant & Prepared By
+      informant_name TEXT,
+      informant_relationship TEXT,
+      informant_address TEXT,
+      informant_date DATE,
+      prepared_name TEXT,
+      prepared_title TEXT,
+      prepared_date DATE,
+  
+      -- Page 9 - Received & Registered By
+      received_name TEXT,
+      received_title TEXT,
+      received_date DATE,
+      registrar_name TEXT,
+      registrar_title TEXT,
+      registrar_date DATE,
+  
+      -- Page 10 - Remarks / Annotations
+      remarks TEXT,
+      office_boxes TEXT, -- JSON stored as TEXT
+  
+      -- Page 11 - Postmortem & Embalmer
+      postmortem_cause TEXT,
+      postmortem_name TEXT,
+      postmortem_title TEXT,
+      postmortem_address TEXT,
+      postmortem_date DATE,
+      embalmer_name TEXT,
+      embalmer_license TEXT,
+      embalmer_issued_on DATE,
+      embalmer_issued_at TEXT,
+      embalmer_expiry DATE,
+  
+      -- Page 12 - Affidavit for Delayed Registration
+      affiant_name TEXT,
+      affiant_civil_status TEXT,
+      address TEXT,
+      deceased_name TEXT,
+      death_date DATE,
+      death_place TEXT,
+      attended_by TEXT,
+      not_attended INTEGER DEFAULT 0,
+      cause_of_death TEXT,
+      reason_delay TEXT,
+  
+      -- Page 13 - Affidavit Jurat
+      jurat_day TEXT,
+      jurat_month_year TEXT,
+      jurat_place TEXT,
+      ctc_number TEXT,
+      ctc_issued_on DATE,
+      ctc_issued_at TEXT,
+      admin_name TEXT,
+      admin_position TEXT,
+      admin_address TEXT,
+  
+      -- Page 14 - Confirmation
+      confirmation INTEGER DEFAULT 0,
+  
+      -- Add timestamps
+      created_at TIMESTAMP DEFAULT (datetime('now')),
+      updated_at TIMESTAMP DEFAULT (datetime('now')),
+      deleted_at TIMESTAMP
+    );
+  `);
 });
 
 module.exports = db;

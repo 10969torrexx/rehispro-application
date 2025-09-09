@@ -7,6 +7,7 @@ import { DeathCertServices } from '@services';
 import { toast } from 'react-toastify';
 import { capitalizeFirst } from '../../../myTools/myTools';
 import { AllCaps } from '../../../myTools/myTools';
+import axios from 'axios';
 
 
 
@@ -32,8 +33,8 @@ export default function DeathCertificateCreate() {
     const [formData, setFormData] = React.useState({
         // Page 1 - Deceased's Information (merged original page1 and page2)
         page1: {
-            creatorId: null,
-            creationType: "",
+            creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
+            creationType: "manual",
             province: "",
             city: "",
             firstName: "",
@@ -160,7 +161,7 @@ export default function DeathCertificateCreate() {
         // Page 12 - Affidavit for Delayed Registration (original page13)
         page12: {
             affiantName: "",
-            civilStatus: "",
+            affiantCivilStatus: "",
             address: "",
             deceasedName: "",
             deathDate: "",
@@ -240,31 +241,183 @@ export default function DeathCertificateCreate() {
         });
     };
 
-    // const handlePageChange = (direction) => {
-    //     if (direction === 'next') {
-    //         setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
-    //     } else if (direction === 'prev') {
-    //         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    //     }
-    // };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log("Final Form Data:", formData);
-    // };
-
-      const handleSubmit = (e) => {
-            e.preventDefault();
-            console.log("Final Form Data:", formData);
-            BirthCertServices.insertBirthCertificate(formData)
-            .then(response => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        // flatten all page objects into one object
+        const flatData = Object.assign(
+            {},
+            formData.page1,
+            formData.page2,
+            formData.page3,
+            formData.page4,
+            formData.page5,
+            formData.page6,
+            formData.page7,
+            formData.page8,
+            formData.page9,
+            formData.page10,
+            formData.page11,
+            formData.page12,
+            formData.page13,
+            formData.page14
+        );
+    
+        console.log("Final Flat Data:", flatData);
+    
+        DeathCertServices.insertDeathCertificate(flatData)
+            .then((response) => {
                 console.log("[Death Form]", response);
+                toast.success(response.message || "Death certificate created successfully");
+    
+                // reset form state (same as your original code)
+                setFormData({
+                    page1: {
+                        creatorId: 1,
+                        creationType: "manual",
+                        province: "",
+                        city: "",
+                        firstName: "",
+                        middleName: "",
+                        lastName: "",
+                        sex: "",
+                        dateOfDeath: "",
+                        dateOfBirth: "",
+                        ageYears: "",
+                        ageDays: "",
+                        ageHours: "",
+                        ageMinutes: "",
+                        placeOfDeath: ""
+                    },
+                    page2: {
+                        civilStatus: "",
+                        religion: "",
+                        citizenship: "",
+                        residenceHouse: "",
+                        residenceStreet: "",
+                        residenceBarangay: "",
+                        residenceCity: "",
+                        residenceProvince: "",
+                        residenceCountry: "",
+                        occupation: ""
+                    },
+                    page3: {
+                        fatherFirstName: "",
+                        fatherMiddleName: "",
+                        fatherLastName: "",
+                        motherFirstName: "",
+                        motherMiddleName: "",
+                        motherLastName: ""
+                    },
+                    page4: {
+                        immediateCause: "",
+                        antecedentCause: "",
+                        underlyingCause: "",
+                        intervalImmediate: "",
+                        intervalAntecedent: "",
+                        intervalUnderlying: "",
+                        otherConditions: "",
+                        maternalCondition: ""
+                    },
+                    page5: {
+                        mannerOfDeath: "",
+                        autopsy: "",
+                        placeOccurrence: "",
+                        attendantPrivatePhysician: false,
+                        attendantPublicHealth: false,
+                        attendantHospital: false,
+                        attendantNone: false,
+                        attendantOthers: false,
+                        attendantOthersSpecify: "",
+                        attendantFrom: "",
+                        attendantTo: ""
+                    },
+                    page6: {
+                        physicianName: "",
+                        physicianTitle: "",
+                        physicianAddress: "",
+                        healthOfficerName: ""
+                    },
+                    page7: {
+                        disposalType: "",
+                        permitNumber: "",
+                        permitDate: "",
+                        transferPermit: "",
+                        cemeteryName: "",
+                        cemeteryAddress: ""
+                    },
+                    page8: {
+                        informantName: "",
+                        informantRelationship: "",
+                        informantAddress: "",
+                        informantDate: "",
+                        preparedName: "",
+                        preparedTitle: "",
+                        preparedDate: ""
+                    },
+                    page9: {
+                        receivedName: "",
+                        receivedTitle: "",
+                        receivedDate: "",
+                        registrarName: "",
+                        registrarTitle: "",
+                        registrarDate: ""
+                    },
+                    page10: {
+                        remarks: "",
+                        officeBoxes: []
+                    },
+                    page11: {
+                        postmortemCause: "",
+                        postmortemName: "",
+                        postmortemTitle: "",
+                        postmortemAddress: "",
+                        postmortemDate: "",
+                        embalmerName: "",
+                        embalmerLicense: "",
+                        embalmerIssuedOn: "",
+                        embalmerIssuedAt: "",
+                        embalmerExpiry: ""
+                    },
+                    page12: {
+                        affiantName: "",
+                        affiantCivilStatus: "",
+                        address: "",
+                        deceasedName: "",
+                        deathDate: "",
+                        deathPlace: "",
+                        attendedBy: "",
+                        notAttended: false,
+                        causeOfDeath: "",
+                        reasonDelay: ""
+                    },
+                    page13: {
+                        juratDay: "",
+                        juratMonthYear: "",
+                        juratPlace: "",
+                        ctcNumber: "",
+                        ctcIssuedOn: "",
+                        ctcIssuedAt: "",
+                        adminName: "",
+                        adminPosition: "",
+                        adminAddress: ""
+                    },
+                    page14: {
+                        confirmation: false
+                    }
+                });
+    
+                setCurrentPage(1);
+                setErrors({});
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("[Death Form]:", error);
+                toast.error(error.message || "Failed to create death certificate");
             });
-        }
-    return (
+    };
+    
+    
+      return (
         <>
             <form className="p-4 h-full mb-4 max-w-4xl mx-auto" onSubmit={handleSubmit}>
                 <div className='mb-4'>
@@ -1304,9 +1457,9 @@ export default function DeathCertificateCreate() {
                             </div>
                             <div>
                               <label className="block text-sm font-medium mb-1">Civil Status</label>
-                              <select name="civilStatus" 
-                                className={`w-full common-input ${errors.civilStatus ? 'input-error' : ''}`}
-                                value={formData.page12.civilStatus}
+                              <select name="affiantCivilStatus" 
+                                className={`w-full common-input ${errors.affiantCivilStatus ? 'input-error' : ''}`}
+                                value={formData.page12.affiantCivilStatus}
                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                               >
                                 <option value="">Select</option>
@@ -1315,7 +1468,7 @@ export default function DeathCertificateCreate() {
                                 <option value="Divorced">Divorced</option>
                                 <option value="Widow">Widow</option>
                               </select>
-                              {errors.civilStatus && <ErrorMessages errors={errors.civilStatus} />}
+                              {errors.affiantCivilStatus && <ErrorMessages errors={errors.affiantCivilStatus} />}
                             </div>
                             <div className="md:col-span-2">
                               <label className="block text-sm font-medium mb-1">Residence / Postal Address</label>

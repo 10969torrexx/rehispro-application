@@ -762,7 +762,7 @@
         "maxLength": "Name must not exceed 100 characters"
       }
     },
-    "civilStatus": {
+    "affiantCivilStatus": {
       "required": true,
       "type": "enum",
       "options": ["Single", "Married", "Divorced", "Widow / widower"],
