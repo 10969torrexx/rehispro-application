@@ -4,6 +4,8 @@ import { useState, useRef  } from "react";
 import { toast } from "react-toastify";
 import { ErrorMessages } from '@components';
 import { MarriageCertValidation } from '@services';
+import { MarriageCertificate } from '@enums';
+import { capitalizeFirst } from '../../../myTools/myTools';
 
 export default function MarriageCertificateCreateForm() {
     // Handles the Pagination 
@@ -12,23 +14,24 @@ export default function MarriageCertificateCreateForm() {
 
     // Handles FormData
     const [formData, setFormData] = useState({
-        // Page 1 - Validation
+        // Page 1: Input Validation
         page1: {
-            // Province, City and Registry No.
+            // Page 1: Province, City and Registry No.
             province: "",
             city: "",
             registry: "",
 
-            // Husband Information
+            // Page 1: Husband Information
             husbandFirstName: "",
             husbandMiddleName: "",
             husbandLastName: "",
             husbandBirthDate: "",
-            husbandBirthCtiy: "",
+            husbandBirthCity: "",
             husbandBirthProvince: "",
             husbandBirthCountry: "",
+            husbandAge: "",
             
-            // Wife Information
+            // Page 1: Wife Information
             wifeFirstName: "",
             wifeMiddleName: "",
             wifeLastName: "",
@@ -36,30 +39,217 @@ export default function MarriageCertificateCreateForm() {
             wifeBirthCity: "",
             wifeBirthProvince: "",
             wifeBirthCountry: "",
-        }
+            wifeAge: "",
+        },
+
+        // Page 2: Input Validation
+        page2: {
+            // Page 2: Husband Information
+            husbandSex: "",
+            husbandCitizenship: "",
+            husbandResidenceBarangay: "",
+            husbandResidenceCity: "",
+            husbandResidenceProvince: "",
+            husbandResidenceCountry: "",
+            husbandReligion: "",
+            husbandCivilStatus: "",
+            husbandFatherNameFirst: "",
+            husbandFatherNameMiddle: "",
+            husbandFatherNameLast: "",
+
+            // Page 2: Wife Information
+            wifeSex: "",
+            wifeCitizenship: "",
+            wifeResidenceBarangay: "",
+            wifeResidenceCity: "",
+            wifeResidenceProvince: "",
+            wifeResidenceCountry: "",
+            wifeReligion: "",
+            wifeCivilStatus: "",
+            wifeFatherNameFirst: "",
+            wifeFatherNameMiddle: "",
+            wifeFatherNameLast: "",
+        },
+
+        // Page 3: Input Validation
+        page3: {
+            // Page 3: Husband Information
+            husbandFatherCitizenship: "",
+            husbandMotherNameFirst: "",
+            husbandMotherNameMiddle: "",
+            husbandMotherNameLast: "",
+            husbandMotherNameLast: "",
+            husbandMotherCitizenship: "",
+            husbandConsentNameFirst: "",
+            husbandConsentNameMiddle: "",
+            husbandRelationship: "",
+            husbandConsentPersonBarangay: "",
+            husbandConsentPersonCity: "",
+            husbandConsentPersonProvince: "",
+            husbandConsentPersonCountry: "",
+
+            // Page 3: Wife Information
+            wifeFatherCitizenship: "",
+            wifeMotherNameFirst: "",
+            wifeMotherNameMiddle: "",
+            wifeMotherNameLast: "",
+            wifeMotherCitizenship: "",
+            wifeConsentNameFirst: "",
+            wifeConsentNameMiddle: "",
+            wifeConsentNameLast: "",
+            wifeRelationship: "",
+            wifeConsentPersonBarangay: "",
+            wifeConsentPersonCountry: "",
+            wifeConsentPersonProvince: "",
+            wifeConsentPersonCountry: "",
+        },
+
+        // Page 4: Input Validation
+        page4:{
+            placeOfMarriage: "",
+            dateOfMarriage: "",
+            timeOfMarriage: "",
+            certHusbandName: "",
+            certWifeName: "",
+            marriageSettlement: "",
+            certDay: "",
+            certMonth:"",
+            certYear:"",
+        },
+
+        // Page 5: Input Validation 
+        page5:{
+            certification: "",
+            marriageLicenseNo: "",
+            marriageIssuedOn: "",
+            marriageIssuedAt: "",
+            executiveOrder: "",
+            solemnizingOfficerName: "",
+            officerPosition: "",
+            officerReligion: "",
+            witness1Signature: "",
+            witness1Name: "",
+            witness2Signature: "",
+            witness2Name: "",
+        },
+
+        // Page 6: Input Validation
+        page6: {
+            receivedBySignature: "",
+            receivedByName: "",
+            receivedByTitle: "",
+            receivedByDate: "",
+            registrarSignature: "",
+            registrarName: "",
+            registrarTitle: "",
+            registrarDate: "",
+            remarksAnnotation: "",
+            civilRegistrar: "",
+        },
+
+        // Page 7: Input Validation
+        page7: {
+            witness3Signature: "",
+            witness3Name: "",
+            witness4Signature: "",
+            witness4Name: "",
+            affidavitOfficerName: "",
+            affidavitOfficerOrganization: "",
+            affidavitOfficerAddress: "",
+            statement1Party1: "",
+            statement1Party2: "",
+            statement2a: false,
+            statement2b: false,
+            statement2c: false,
+            statement2cParty1: "",
+            statement2cParty2: "",
+            statement2d: false,
+            statement2e: false,
+        },
+
+        // Page 8: Input Validation
+        page8:{
+            affidavitDay: "",
+            affidavitMonth: "",
+            affidavitYear: "",
+            affidavitPlace: "",
+            affidavitSolemnizingOfficerName: "",
+            swornDay: "",
+            swornMonth: "",
+            swornYear: "",
+            swornAt: "",
+            swornIssuedOn: "",
+            swornIssuedAt: "",
+            adminOfficerSignature: "",
+            adminOfficerName: "",
+            adminOfficerTitle: "",
+            adminOfficerAddress: "",
+        },
+
+        // Page 9: Input Validation
+        page9: {
+            affiantName: "",
+            affiantAddress: "",
+
+            statement1OptionA: false,
+            statement1MarriageWith: "",
+            statement1PlaceA: "",
+            statement1DateA: "",
+
+            statement1OptionB: false,
+            statement1MarriageBetween: "",
+            statement1PlaceB: "",
+            statement1DateB: "",
+
+            solemnizingOfficer: "",
+
+            ceremonyReligious: false,
+            ceremonyCivil: false,
+            ceremonyMuslim: false,
+            ceremonyTribal: false,
+
+            marriageWithLicense: false,
+            marriageLicenseNo: "",
+            marriageIssuedOn: "",
+            marriageIssuedAt: "",
+
+            marriageUnderArticle: false,
+            articleNumber: "",
+
+            citizenApplicant: "",
+            citizenSpouse: "",
+
+            reasonForDelay: "",
+
+            affidavitDay: "",
+            affidavitMonth: "",
+            affidavitYear: "",
+            affidavitPlace: "",
+        },
+
     });
     
     // Handles Input Change on Pages
     const handleInputChange = (event, section) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => {
-        const updatedSection = {
-        ...prevData[section],
-        [name]: value,
-        };
+    const { name, type, value, checked } = event.target;
+        setFormData((prevData) => {
+            const updatedSection = {
+            ...prevData[section],
+            [name]: type === "checkbox" ? checked : value,
+            };
 
-        if (name === "husbandBirthDate") {
-        updatedSection.husbandAge = calculateAge(value);
-        }
-        if (name === "wifeBirthDate") {
-        updatedSection.wifeAge = calculateAge(value);
-        }
+            if (name === "husbandBirthDate") {
+            updatedSection.husbandAge = calculateAge(value);
+            }
+            if (name === "wifeBirthDate") {
+            updatedSection.wifeAge = calculateAge(value);
+            }
 
-        return {
-        ...prevData,
-        [section]: updatedSection,
-        };
-    });
+            return {
+            ...prevData,
+            [section]: updatedSection,
+            };
+        });
     };
 
     // Handles Page and Validations
@@ -72,7 +262,7 @@ export default function MarriageCertificateCreateForm() {
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
             } else {
-                setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
+                setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
             }
             
         }else if (direction === 'prev') {
@@ -104,7 +294,7 @@ export default function MarriageCertificateCreateForm() {
             <form className="p-4 h-full">
                 {currentPage === 1 && (
                     <>
-                        <div div className="w-full flex items-center gap-2 mb-3">
+                        <div className="w-full flex items-center gap-2 mb-3">
                             <div className="w-full">
                                 <label>Province</label>
                                 <input 
@@ -234,11 +424,11 @@ export default function MarriageCertificateCreateForm() {
                                             type="text" 
                                             name="husbandBirthCity"
                                             placeholder='City/Municipality' 
-                                            className={`w-full common-input ${errors.husbandBirthCtiy ? 'input-error' : ''}`}
-                                            value={formData.page1.husbandBirthCtiy}
+                                            className={`w-full common-input ${errors.husbandBirthCity ? 'input-error' : ''}`}
+                                            value={formData.page1.husbandBirthCity}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
-                                        {errors.husbandBirthCtiy && <ErrorMessages errors={errors.husbandBirthCtiy} />}
+                                        {errors.husbandBirthCity && <ErrorMessages errors={errors.husbandBirthCity} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Province</label>
@@ -407,14 +597,27 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>Sex</label>
-                                        <select name="husbandSex" className="w-full common-input" >
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                        <select 
+                                            name="husbandSex" 
+                                            className={`common-input w-full ${errors.husbandSex ? 'input-error' : ''}`} 
+                                            value={formData.page2.husbandSex}  
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}>
+                                            <option value="">Select sex</option>
+                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.MALE)}>{ capitalizeFirst(MarriageCertificate.SexTypes.MALE) }</option>
+                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}>{ capitalizeFirst(MarriageCertificate.SexTypes.FEMALE) }</option>
                                         </select>
+                                        {errors.husbandSex && <ErrorMessages errors={errors.husbandSex} />}
                                     </div>
                                     <div className="w-full">
                                         <label>Citizenship</label>
-                                        <input name="husbandCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                        <input 
+                                            name="husbandCitizenship" 
+                                            placeholder="Citizenship"
+                                            className={`w-full common-input ${errors.husbandCitizenship ? 'input-error' : ''}`}
+                                            value={capitalizeFirst(formData.page2.husbandCitizenship)}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandCitizenship && <ErrorMessages errors={errors.husbandCitizenship} />}
                                     </div>
                                 </div>
 
@@ -424,16 +627,47 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="husbandBarangay" className="w-full common-input" placeholder="House No., St., Barangay"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandResidenceBarangay" 
+                                            placeholder="House No., St., Barangay"
+                                            className={`w-full common-input ${errors.husbandResidenceBarangay ? 'input-error' : ''}`}
+                                            value={formData.page2.husbandResidenceBarangay}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandResidenceBarangay && <ErrorMessages errors={errors.husbandResidenceBarangay} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandCity" className="w-full common-input" placeholder="City/Municipality"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandResidenceCity" 
+                                            placeholder="City/Municipality"
+                                            className={`w-full common-input ${errors.husbandResidenceCity ? 'input-error' : ''}`}
+                                            value={formData.page2.husbandResidenceCity}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandResidenceCity && <ErrorMessages errors={errors.husbandResidenceCity} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandProvince" className="w-full common-input" placeholder="Province"/>
+                                        <input type="text" 
+                                            name="husbandResidenceProvince" 
+                                            placeholder="Province"
+                                            className={`w-full common-input ${errors.husbandResidenceProvince ? 'input-error' : ''}`}
+                                            value={formData.page2.husbandResidenceProvince}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandResidenceProvince && <ErrorMessages errors={errors.husbandResidenceProvince} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandCountry" className="w-full common-input" placeholder="Country"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandResidenceCountry" 
+                                            placeholder="Country"
+                                            className={`w-full common-input ${errors.husbandResidenceCountry ? 'input-error' : ''}`}
+                                            value={formData.page2.husbandResidenceCountry}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandResidenceCountry && <ErrorMessages errors={errors.husbandResidenceCountry} />}
                                     </div>
                                 </div>
 
@@ -442,7 +676,15 @@ export default function MarriageCertificateCreateForm() {
                                     <p>6. Religion/Religous sect</p>
                                 </span>
                                 <div className="w-full mt-1 mb-3">
-                                    <input type="text" name="husbandReligion" className="w-full common-input" placeholder="Religion/Religious sect"/>
+                                    <input 
+                                        type="text" 
+                                        name="husbandReligion" 
+                                        placeholder="Religion/Religious sect"
+                                        className={`w-full common-input ${errors.husbandReligion ? 'input-error' : ''}`}
+                                        value={formData.page2.husbandReligion}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.husbandReligion && <ErrorMessages errors={errors.husbandReligion} />}
                                 </div>
 
                                 {/* Civil Status */}
@@ -450,7 +692,15 @@ export default function MarriageCertificateCreateForm() {
                                     <p>7. Civil Status</p>
                                 </span>
                                 <div className="w-full mt-1 mb-3">
-                                    <input type="text" name="husbandCivilStatus" className="w-full common-input" placeholder="Civil Status"/>
+                                    <input 
+                                        type="text" 
+                                        name="husbandCivilStatus" 
+                                        placeholder="Civil Status"
+                                        className={`w-full common-input ${errors.husbandCivilStatus ? 'input-error' : ''}`}
+                                        value={formData.page2.husbandCivilStatus}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.husbandCivilStatus && <ErrorMessages errors={errors.husbandCivilStatus} />}
                                 </div>
 
                                 {/* Name of Father */}
@@ -459,13 +709,36 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="husbandFatherNameFirst" className="w-full common-input" placeholder="First"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandFatherNameFirst" 
+                                            placeholder="First"
+                                            className={`w-full common-input ${errors.husbandFatherNameFirst ? 'input-error' : ''}`}
+                                            value={formData.page2.husbandFatherNameFirst}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandFatherNameFirst && <ErrorMessages errors={errors.husbandFatherNameFirst} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandFatherNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandFatherNameMiddle" 
+                                            className={`w-full common-input ${errors.husbandFatherNameMiddle ? 'input-error' : ''}`}
+                                            value={formData.page2.husbandFatherNameMiddle}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandFatherNameMiddle && <ErrorMessages errors={errors.husbandFatherNameMiddle} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandFatherNameLast" className="w-full common-input" placeholder="Last"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandFatherNameLast" 
+                                            placeholder="Last"
+                                            className={`w-full common-input ${errors.husbandFatherNameLast ? 'input-error' : ''}`}
+                                            value={formData.page2.husbandFatherNameLast}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandFatherNameLast && <ErrorMessages errors={errors.husbandFatherNameLast} />}
                                     </div>
                                 </div>
                             </div>
@@ -480,14 +753,26 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>Sex</label>
-                                        <select name="wifeSex" className="w-full common-input" >
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                        <select 
+                                            name="wifeSex" 
+                                            className={`common-input w-full ${errors.wifeSex ? 'input-error' : ''}`} 
+                                            value={formData.page2.wifeSex}  
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}>
+                                            <option value="">Select sex</option>
+                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.MALE)}>{ capitalizeFirst(MarriageCertificate.SexTypes.MALE) }</option>
+                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}>{ capitalizeFirst(MarriageCertificate.SexTypes.FEMALE) }</option>
                                         </select>
                                     </div>
                                     <div className="w-full">
                                         <label>Citizenship</label>
-                                        <input name="wifeCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                        <input 
+                                            name="wifeCitizenship" 
+                                            placeholder="Citizenship"
+                                            className={`w-full common-input ${errors.wifeCitizenship ? 'input-error' : ''}`}
+                                            value={formData.page2.wifeCitizenship}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeCitizenship && <ErrorMessages errors={errors.wifeCitizenship} />}
                                     </div>
                                 </div>
 
@@ -497,16 +782,48 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="wifeBarangay" className="w-full common-input" placeholder="House No., St., Barangay"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeResidenceBarangay" 
+                                            placeholder="House No., St., Barangay"
+                                            className={`w-full common-input ${errors.wifeResidenceBarangay ? 'input-error' : ''}`}
+                                            value={formData.page2.wifeResidenceBarangay}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeResidenceBarangay && <ErrorMessages errors={errors.wifeResidenceBarangay} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeCity" className="w-full common-input" placeholder="City/Municipality"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeResidenceCity" 
+                                            placeholder="City/Municipality"
+                                            className={`w-full common-input ${errors.wifeResidenceCity ? 'input-error' : ''}`}
+                                            value={formData.page2.wifeResidenceCity}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeResidenceCity && <ErrorMessages errors={errors.wifeResidenceCity} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeProvince" className="w-full common-input" placeholder="Province"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeResidenceProvince" 
+                                            placeholder="Province"
+                                            className={`w-full common-input ${errors.wifeResidenceProvince ? 'input-error' : ''}`}
+                                            value={formData.page2.wifeResidenceProvince}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeResidenceProvince && <ErrorMessages errors={errors.wifeResidenceProvince} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeCountry" className="w-full common-input" placeholder="Country"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeResidenceCountry" 
+                                            placeholder="Country"
+                                            className={`w-full common-input ${errors.wifeResidenceCountry ? 'input-error' : ''}`}
+                                            value={formData.page2.wifeResidenceCountry}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeResidenceCountry && <ErrorMessages errors={errors.wifeResidenceCountry} />}
                                     </div>
                                 </div>
 
@@ -515,7 +832,15 @@ export default function MarriageCertificateCreateForm() {
                                     <p>6. Religion/Religous sect</p>
                                 </span>
                                 <div className="w-full mt-1 mb-3">
-                                    <input type="text" name="wifeReligion" className="w-full common-input" placeholder="Religion/Religious sect"/>
+                                    <input 
+                                        type="text" 
+                                        name="wifeReligion" 
+                                        placeholder="Religion/Religious sect"
+                                        className={`w-full common-input ${errors.wifeReligion ? 'input-error' : ''}`}
+                                        value={formData.page2.wifeReligion}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.wifeReligion && <ErrorMessages errors={errors.wifeReligion} />}
                                 </div>
 
                                 {/* Civil Status */}
@@ -523,7 +848,15 @@ export default function MarriageCertificateCreateForm() {
                                     <p>7. Civil Status</p>
                                 </span>
                                 <div className="w-full mt-1 mb-3">
-                                    <input type="text" name="wifeCivilStatus" className="w-full common-input" placeholder="Civil Status"/>
+                                    <input 
+                                        type="text" 
+                                        name="wifeCivilStatus" 
+                                        placeholder="Civil Status"
+                                        className={`w-full common-input ${errors.wifeCivilStatus ? 'input-error' : ''}`}
+                                        value={formData.page2.wifeCivilStatus}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.wifeCivilStatus && <ErrorMessages errors={errors.wifeCivilStatus} />}
                                 </div>
 
                                 {/* Name of Father */}
@@ -532,13 +865,37 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="wifeFatherNameFirst" className="w-full common-input" placeholder="First"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeFatherNameFirst" 
+                                            placeholder="First"
+                                            className={`w-full common-input ${errors.wifeFatherNameFirst ? 'input-error' : ''}`}
+                                            value={formData.page2.wifeFatherNameFirst}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeFatherNameFirst && <ErrorMessages errors={errors.wifeFatherNameFirst} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeFatherNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeFatherNameMiddle" 
+                                            placeholder="Middle"
+                                            className={`w-full common-input ${errors.wifeFatherNameMiddle ? 'input-error' : ''}`}
+                                            value={formData.page2.wifeFatherNameMiddle}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeFatherNameMiddle && <ErrorMessages errors={errors.wifeFatherNameMiddle} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeFatherNameLast" className="w-full common-input" placeholder="Last"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeFatherNameLast" 
+                                            placeholder="Last"
+                                            className={`w-full common-input ${errors.wifeFatherNameLast ? 'input-error' : ''}`}
+                                            value={formData.page2.wifeFatherNameLast}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeFatherNameLast && <ErrorMessages errors={errors.wifeFatherNameLast} />}
                                     </div>
                                 </div>
                             </div>
@@ -559,7 +916,14 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>Citizenship</label>
-                                        <input name="husbandFatherCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                        <input 
+                                            name="husbandFatherCitizenship" 
+                                            placeholder="Citizenship"
+                                            className={`w-full common-input ${errors.husbandFatherCitizenship ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandFatherCitizenship}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandFatherCitizenship && <ErrorMessages errors={errors.husbandFatherCitizenship} />}
                                     </div>
                                 </div>
 
@@ -569,13 +933,36 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="husbandMotherNameFirst" className="w-full common-input" placeholder="First"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandMotherNameFirst" 
+                                            placeholder="First"
+                                            className={`w-full common-input ${errors.husbandMotherNameFirst ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandMotherNameFirst}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandMotherNameFirst && <ErrorMessages errors={errors.husbandMotherNameFirst} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandMotherNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                        <input type="text" 
+                                            name="husbandMotherNameMiddle" 
+                                            placeholder="Middle"
+                                            className={`w-full common-input ${errors.husbandMotherNameMiddle ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandMotherNameMiddle}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandMotherNameMiddle && <ErrorMessages errors={errors.husbandMotherNameMiddle} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandMotherNameLast" className="w-full common-input" placeholder="Last"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandMotherNameLast" 
+                                            placeholder="Last"
+                                            className={`w-full common-input ${errors.husbandMotherNameLast ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandMotherNameLast}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandMotherNameLast && <ErrorMessages errors={errors.husbandMotherNameLast} />}
                                     </div>
                                 </div>
 
@@ -586,7 +973,14 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>Citizenship</label>
-                                        <input name="husbandMotherCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                        <input 
+                                            name="husbandMotherCitizenship" 
+                                            placeholder="Citizenship"
+                                            className={`w-full common-input ${errors.husbandMotherCitizenship ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandMotherCitizenship}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandMotherCitizenship && <ErrorMessages errors={errors.husbandMotherCitizenship} />}
                                     </div>
                                 </div>
 
@@ -596,13 +990,37 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="flex items-center mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="husbandConsentNameFirst" className="w-full common-input" placeholder="First"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandConsentNameFirst" 
+                                            placeholder="First"
+                                            className={`w-full common-input ${errors.husbandConsentNameFirst ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandConsentNameFirst}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandConsentNameFirst && <ErrorMessages errors={errors.husbandConsentNameFirst} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandConsentNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandConsentNameMiddle" 
+                                            placeholder="Middle"
+                                            className={`w-full common-input ${errors.husbandConsentNameMiddle ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandConsentNameMiddle}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandConsentNameMiddle && <ErrorMessages errors={errors.husbandConsentNameMiddle} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandConsentNameLast" className="w-full common-input" placeholder="Last"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandConsentNameLast" 
+                                            placeholder="Last"
+                                            className={`w-full common-input ${errors.husbandConsentNameLast ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandConsentNameLast}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandConsentNameLast && <ErrorMessages errors={errors.husbandConsentNameLast} />}
                                     </div>
                                 </div>
 
@@ -612,7 +1030,15 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="w-full flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="husbandRelationship" className="w-full common-input" placeholder="Relationship"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandRelationship" 
+                                            placeholder="Relationship"
+                                            className={`w-full common-input ${errors.husbandRelationship ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandRelationship}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandRelationship && <ErrorMessages errors={errors.husbandRelationship} />}
                                     </div>
                                 </div>
 
@@ -622,16 +1048,48 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="w-full flex items-center gap-1 mt-1">
                                     <div className="w-full">
-                                        <input type="text" name="husbandConsentPersonBarangay" className="w-full common-input" placeholder="House No., St., Barangay"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandConsentPersonBarangay" 
+                                            placeholder="House No., St., Barangay"
+                                            className={`w-full common-input ${errors.husbandConsentPersonBarangay ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandConsentPersonBarangay}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandConsentPersonBarangay && <ErrorMessages errors={errors.husbandConsentPersonBarangay} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandConsentPersonCity" className="w-full common-input" placeholder="City/Municipality"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandConsentPersonCity" 
+                                            placeholder="City/Municipality"
+                                            className={`w-full common-input ${errors.husbandConsentPersonCity ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandConsentPersonCity}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandConsentPersonCity && <ErrorMessages errors={errors.husbandConsentPersonCity} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandConsentPersonProvince" className="w-full common-input" placeholder="Province"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandConsentPersonProvince" 
+                                            placeholder="Province"
+                                            className={`w-full common-input ${errors.husbandConsentPersonProvince ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandConsentPersonProvince}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandConsentPersonProvince && <ErrorMessages errors={errors.husbandConsentPersonProvince} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="husbandConsentPersonCountry" className="w-full common-input" placeholder="Country"/>
+                                        <input 
+                                            type="text" 
+                                            name="husbandConsentPersonCountry" 
+                                            placeholder="Country"
+                                            className={`w-full common-input ${errors.husbandConsentPersonCountry ? 'input-error' : ''}`}
+                                            value={formData.page3.husbandConsentPersonCountry}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.husbandConsentPersonCountry && <ErrorMessages errors={errors.husbandConsentPersonCountry} />}
                                     </div>
                                 </div>
                             </div>
@@ -646,7 +1104,14 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>Citizenship</label>
-                                        <input name="wifeFatherCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                        <input 
+                                            name="wifeFatherCitizenship" 
+                                            placeholder="Citizenship"
+                                            className={`w-full common-input ${errors.wifeFatherCitizenship ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeFatherCitizenship}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeFatherCitizenship && <ErrorMessages errors={errors.wifeFatherCitizenship} />}
                                     </div>
                                 </div>
 
@@ -656,13 +1121,37 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="wifeMotherNameFirst" className="w-full common-input" placeholder="First"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeMotherNameFirst" 
+                                            placeholder="First"
+                                            className={`w-full common-input ${errors.wifeMotherNameFirst ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeMotherNameFirst}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeMotherNameFirst && <ErrorMessages errors={errors.wifeMotherNameFirst} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeMotherNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeMotherNameMiddle" 
+                                            placeholder="Middle"
+                                            className={`w-full common-input ${errors.wifeMotherNameMiddle ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeMotherNameMiddle}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeMotherNameMiddle && <ErrorMessages errors={errors.wifeMotherNameMiddle} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeMotherNameLast" className="w-full common-input" placeholder="Last"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeMotherNameLast" 
+                                            placeholder="Last"
+                                            className={`w-full common-input ${errors.wifeMotherNameLast ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeMotherNameLast}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeMotherNameLast && <ErrorMessages errors={errors.wifeMotherNameLast} />}
                                     </div>
                                 </div>
 
@@ -673,7 +1162,14 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
                                         <label>Citizenship</label>
-                                        <input name="wifeMotherCitizenship" className="w-full common-input" placeholder="Citizenship"/>
+                                        <input 
+                                            name="wifeMotherCitizenship" 
+                                            placeholder="Citizenship"
+                                            className={`w-full common-input ${errors.wifeMotherCitizenship ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeMotherCitizenship}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeMotherCitizenship && <ErrorMessages errors={errors.wifeMotherCitizenship} />}
                                     </div>
                                 </div>
 
@@ -684,13 +1180,37 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="flex items-center mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="wifeConsentNameFirst" className="w-full common-input" placeholder="First"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeConsentNameFirst" 
+                                            placeholder="First"
+                                            className={`w-full common-input ${errors.wifeConsentNameFirst ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeConsentNameFirst}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeConsentNameFirst && <ErrorMessages errors={errors.wifeConsentNameFirst} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeConsentNameMiddle" className="w-full common-input" placeholder="Middle"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeConsentNameMiddle" 
+                                            placeholder="Middle"
+                                            className={`w-full common-input ${errors.wifeConsentNameMiddle ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeConsentNameMiddle}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeConsentNameMiddle && <ErrorMessages errors={errors.wifeConsentNameMiddle} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeConsentNameLast" className="w-full common-input" placeholder="Last"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeConsentNameLast" 
+                                            placeholder="Last"
+                                            className={`w-full common-input ${errors.wifeConsentNameLast ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeConsentNameLast}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeConsentNameLast && <ErrorMessages errors={errors.wifeConsentNameLast} />}
                                     </div>
                                 </div>
 
@@ -700,7 +1220,15 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="w-full flex items-center gap-1 mt-1 mb-3">
                                     <div className="w-full">
-                                        <input type="text" name="wifeRelationship" className="w-full common-input" placeholder="Relationship"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeRelationship" 
+                                            placeholder="Relationship"
+                                            className={`w-full common-input ${errors.wifeRelationship ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeRelationship}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeRelationship && <ErrorMessages errors={errors.wifeRelationship} />}
                                     </div>
                                 </div>
 
@@ -710,16 +1238,48 @@ export default function MarriageCertificateCreateForm() {
                                 </span>
                                 <div className="w-full flex items-center gap-1 mt-1">
                                     <div className="w-full">
-                                        <input type="text" name="wifeConsentPersonBarangay" className="w-full common-input" placeholder="House No., St., Barangay"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeConsentPersonBarangay" 
+                                            placeholder="House No., St., Barangay"
+                                            className={`w-full common-input ${errors.wifeConsentPersonBarangay ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeConsentPersonBarangay}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeConsentPersonBarangay && <ErrorMessages errors={errors.wifeConsentPersonBarangay} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeConsentPersonCity" className="w-full common-input" placeholder="City/Municipality"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeConsentPersonCity" 
+                                            placeholder="City/Municipality"
+                                            className={`w-full common-input ${errors.wifeConsentPersonCity ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeConsentPersonCity}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeConsentPersonCity && <ErrorMessages errors={errors.wifeConsentPersonCity} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeConsentPersonProvince" className="w-full common-input" placeholder="Province"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeConsentPersonProvince" 
+                                            placeholder="Province"
+                                            className={`w-full common-input ${errors.wifeConsentPersonProvince ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeConsentPersonProvince}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeConsentPersonProvince && <ErrorMessages errors={errors.wifeConsentPersonProvince} />}
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" name="wifeConsentPersonCountry" className="w-full common-input" placeholder="Country"/>
+                                        <input 
+                                            type="text" 
+                                            name="wifeConsentPersonCountry" 
+                                            placeholder="Country"
+                                            className={`w-full common-input ${errors.wifeConsentPersonCountry ? 'input-error' : ''}`}
+                                            value={formData.page3.wifeConsentPersonCountry}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.wifeConsentPersonCountry && <ErrorMessages errors={errors.wifeConsentPersonCountry} />}
                                     </div>
                                 </div>
                             </div>
@@ -736,7 +1296,15 @@ export default function MarriageCertificateCreateForm() {
                         <div className="flex items-center gap-1 mt-1 mb-3">
                             <div className="w-full">
                                 <label>Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province) </label>
-                                <input type="text" name="placeOfMarriage" className="w-full common-input" placeholder="Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province)"/>
+                                <input 
+                                    type="text" 
+                                    name="placeOfMarriage" 
+                                    placeholder="Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province)"
+                                    className={`w-full common-input ${errors.placeOfMarriage ? 'input-error' : ''}`}
+                                    value={formData.page4.placeOfMarriage}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.placeOfMarriage && <ErrorMessages errors={errors.placeOfMarriage} />}
                             </div>
                         </div>
 
@@ -747,16 +1315,22 @@ export default function MarriageCertificateCreateForm() {
                                 <input
                                     type="date"
                                     name="dateOfMarriage"
-                                    className="w-full common-input"
+                                    className={`w-full common-input ${errors.dateOfMarriage ? 'input-error' : ''}`}
+                                    value={formData.page4.dateOfMarriage}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                                {errors.dateOfMarriage && <ErrorMessages errors={errors.dateOfMarriage} />}
                             </div>
                             <div className="w-full">
                                 <label>17. Time of Marriage</label>
                                 <input
                                     type="time"
                                     name="timeOfMarriage"
-                                    className="w-full common-input"
+                                    className={`w-full common-input ${errors.timeOfMarriage ? 'input-error' : ''}`}
+                                    value={formData.page4.timeOfMarriage}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
+                                {errors.timeOfMarriage && <ErrorMessages errors={errors.timeOfMarriage} />}
                             </div>
                         </div>
 
@@ -767,30 +1341,71 @@ export default function MarriageCertificateCreateForm() {
                         <div className="text-sm leading-relaxed border border-pink-300 p-3 rounded mt-1 mb-3">
                             <p>
                                 THIS IS TO CERTIFY: That I, 
-                                <input type="text" name="certHusbandName" className="border-b border-gray-500 mx-2 w-40 text-center" /> 
-                                and I, 
-                                <input type="text" name="certWifeName" className="border-b border-gray-500 mx-2 w-40 text-center" />, 
+                                <input 
+                                    type="text" 
+                                    name="certHusbandName" 
+                                    className={`border-b border-gray-500 mx-2 w-40 text-center ${errors.certHusbandName ? 'input-error' : ''}`}
+                                    value={formData.page4.certHusbandName}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                /> 
+                                and I,
+                                <input 
+                                    type="text" 
+                                    name="certWifeName" 
+                                    className={`border-b border-gray-500 mx-2 w-40 text-center ${errors.certWifeName ? 'input-error' : ''}`}
+                                    value={formData.page4.certWifeName}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)} 
+                                />, 
                                 both of legal age, of our own free will and accord, and in the presence of the person solemnizing this marriage and of the witnesses named below, take each other as husband and wife and certifying further that we:
                             </p>
 
                             <p className="mt-2">
                                 <label className="mx-2">
-                                    <input type="radio" name="marriageSettlement" value="entered" className="mr-1" />
+                                    <input 
+                                        type="radio" 
+                                        name="marriageSettlement" 
+                                        value={MarriageCertificate.marriageSettlement.ENTERED} 
+                                        checked={formData.page4.marriageSettlement === MarriageCertificate.marriageSettlement.ENTERED}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)} 
+                                    />
                                     have entered, a copy of which is hereto attached
                                 </label>
                                 /
                                 <label className="mx-2">
-                                    <input type="radio" name="marriageSettlement" value="notEntered" className="mr-1" />
+                                    <input 
+                                        type="radio" 
+                                        name="marriageSettlement" 
+                                        value={MarriageCertificate.marriageSettlement.NOTENTERED} 
+                                        checked={formData.page4.marriageSettlement === MarriageCertificate.marriageSettlement.NOTENTERED}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}  
+                                    />
                                     have not entered into a marriage settlement.
                                 </label>
                             </p>
 
                             <p className="mt-2">
                                 IN WITNESS WHEREOF, we have signed/marked with our fingerprint this certificate in quadruplicate this 
-                                <input type="text" name="certDay" className="border-b border-gray-500 mx-2 w-12 text-center" /> 
+                                <input 
+                                    type="text" 
+                                    name="certDay" 
+                                    className={`border-b border-gray-500 mx-2 w-12 text-center ${errors.certDay ? 'input-error' : ''}`} 
+                                    value={formData.page4.certDay}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}  
+                                /> 
                                 day of 
-                                <input type="text" name="certMonth" className="border-b border-gray-500 mx-2 w-28 text-center" /> 
-                                <input type="text" name="certYear" className="border-b border-gray-500 mx-2 w-16 text-center" />.
+                                <input 
+                                    type="text" 
+                                    name="certMonth" 
+                                    className={`border-b border-gray-500 mx-2 w-12 text-center ${errors.certMonth ? 'input-error' : ''}`} 
+                                    value={formData.page4.certMonth}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)} 
+                                /> 
+                                <input 
+                                    type="text" 
+                                    name="certYear" 
+                                    className={`border-b border-gray-500 mx-2 w-12 text-center ${errors.certYear ? 'input-error' : ''}`} 
+                                    value={formData.page4.certYear}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}/>.
                             </p>
 
                             <div className="flex justify-evenly items-center mt-4">
@@ -829,90 +1444,142 @@ export default function MarriageCertificateCreateForm() {
 
                         <div className="mt-1 mb-3 text-sm leading-relaxed border border-pink-300 p-3 rounded">
                         <p>
-                        THIS IS TO CERTIFY: THAT BEFORE ME, on the date and place above-written,
-                        personally appeared the above-mentioned parties, with their mutual consent,
-                        lawfully joined together in marriage which was solemnized by me in the presence
-                        of the witnesses named below, all of legal age.
+                            THIS IS TO CERTIFY: THAT BEFORE ME, on the date and place above-written,
+                            personally appeared the above-mentioned parties, with their mutual consent,
+                            lawfully joined together in marriage which was solemnized by me in the presence
+                            of the witnesses named below, all of legal age.
                         </p>
 
                         <p className="mt-3 pl-6 font-semibold">I CERTIFY FURTHER THAT:</p>
 
                         {/* Options a, b, c */}
                         <div className="mt-2 space-y-2 pl-10">
+                            {/* Option A */}
                             <label className="flex items-start gap-2">
-                                <input type="checkbox" name="certification" value="license" className="mt-1" />
-                                <span>
-                                    a. Marriage License No.{" "}
-                                    <input
-                                    type="text"
-                                    name="marriageLicenseNo"
-                                    className="border-b border-gray-500 w-32 text-center mx-1"
-                                    />{" "}
-                                    issued on{" "}
-                                    <input
-                                    type="text"
-                                    name="marriageIssuedOn"
-                                    className="border-b border-gray-500 w-32 text-center mx-1"
-                                    />{" "}
-                                    at{" "}
-                                    <input
-                                    type="text"
-                                    name="marriageIssuedAt"
-                                    className="border-b border-gray-500 w-48 text-center mx-1"
-                                    />{" "}
-                                    in favor of said parties, was exhibited to me.
-                                </span>
-                            </label>
-
-                            <label className="flex items-center gap-2">
-                                <input type="checkbox" name="certification" value="noLicense" />
-                                b. No marriage license was necessary, the marriage being solemnized under Art.{" "}
+                            <input
+                                type="radio"
+                                name="certification"
+                                value="license"
+                                checked={formData.page5.certification === "license"}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`mt-1 ${errors.certification ? "input-error" : ""}`}
+                            />
+                            <span>
+                                a. Marriage License No.{" "}
                                 <input
                                 type="text"
-                                name="executiveOrder"
-                                className="border-b border-gray-500 w-16 text-center mx-1"
+                                name="marriageLicenseNo"
+                                value={formData.page5.marriageLicenseNo}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`border-b border-gray-500 w-32 text-center mx-1 ${
+                                    errors.marriageLicenseNo ? "input-error" : ""
+                                }`}
                                 />{" "}
-                                of Executive Order No. 209.
+                                issued on{" "}
+                                <input
+                                type="text"
+                                name="marriageIssuedOn"
+                                value={formData.page5.marriageIssuedOn}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`border-b border-gray-500 w-32 text-center mx-1 ${
+                                    errors.marriageIssuedOn ? "input-error" : ""
+                                }`}
+                                />{" "}
+                                at{" "}
+                                <input
+                                type="text"
+                                name="marriageIssuedAt"
+                                value={formData.page5.marriageIssuedAt}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`border-b border-gray-500 w-48 text-center mx-1 ${
+                                    errors.marriageIssuedAt ? "input-error" : ""
+                                }`}
+                                />{" "}
+                                in favor of said parties, was exhibited to me.
+                            </span>
                             </label>
 
+                            {/* Option B */}
                             <label className="flex items-center gap-2">
-                                <input type="checkbox" name="certification" value="pd1083" />
-                                c. The marriage was solemnized in accordance with the provisions of Presidential Decree No. 1083.
+                            <input
+                                type="radio"
+                                name="certification"
+                                value="noLicense"
+                                checked={formData.page5.certification === "noLicense"}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`${errors.certification ? "input-error" : ""}`}
+                            />
+                            b. No marriage license was necessary, the marriage being solemnized under Art.{" "}
+                            <input
+                                type="text"
+                                name="executiveOrder"
+                                value={formData.page5.executiveOrder}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`border-b border-gray-500 w-16 text-center mx-1 ${
+                                errors.executiveOrder ? "input-error" : ""
+                                }`}
+                            />{" "}
+                            of Executive Order No. 209.
+                            </label>
+
+                            {/* Option C */}
+                            <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="certification"
+                                value="pd1083"
+                                checked={formData.page5.certification === "pd1083"}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`${errors.certification ? "input-error" : ""}`}
+                            />
+                            c. The marriage was solemnized in accordance with the provisions of Presidential Decree No. 1083.
                             </label>
                         </div>
 
                         {/* Signature fields */}
                         <div className="flex justify-evenly items-center mt-6">
-                        <div className="flex flex-col items-center">
+                            <div className="flex flex-col items-center">
                             <input
-                            type="text"
-                            name="solemnizingOfficerName"
-                            className="w-56 border-b border-gray-500 text-center"
+                                type="text"
+                                name="solemnizingOfficerName"
+                                value={formData.page5.solemnizingOfficerName}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`w-56 border-b border-gray-500 text-center ${
+                                errors.solemnizingOfficerName ? "input-error" : ""
+                                }`}
                             />
                             <label className="text-xs text-center mt-1">
-                            (Signature Over Printed Name of Solemnizing Officer)
+                                (Signature Over Printed Name of Solemnizing Officer)
                             </label>
-                        </div>
+                            </div>
 
-                        <div className="flex flex-col items-center">
+                            <div className="flex flex-col items-center">
                             <input
-                            type="text"
-                            name="officerPosition"
-                            className="w-40 border-b border-gray-500 text-center"
+                                type="text"
+                                name="officerPosition"
+                                value={formData.page5.officerPosition}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`w-40 border-b border-gray-500 text-center ${
+                                errors.officerPosition ? "input-error" : ""
+                                }`}
                             />
                             <label className="text-xs text-center mt-1">(Position/Designation)</label>
-                        </div>
+                            </div>
 
-                        <div className="flex flex-col items-center">
+                            <div className="flex flex-col items-center">
                             <input
-                            type="text"
-                            name="officerReligion"
-                            className="w-56 border-b border-gray-500 text-center"
+                                type="text"
+                                name="officerReligion"
+                                value={formData.page5.officerReligion}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`w-56 border-b border-gray-500 text-center ${
+                                errors.officerReligion ? "input-error" : ""
+                                }`}
                             />
                             <label className="text-xs text-center mt-1">
-                            (Religion/Religious Sect, Registry No. and Expiration Date, if applicable)
+                                (Religion/Religious Sect, Registry No. and Expiration Date, if applicable)
                             </label>
-                        </div>
+                            </div>
                         </div>
                         </div>
 
@@ -922,37 +1589,53 @@ export default function MarriageCertificateCreateForm() {
                         </span>
 
                         <div className="border border-pink-300 p-3 rounded mb-3">
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="flex flex-col items-center">
-                                <input
-                                    type="text"
-                                    name="witness1Signature"
-                                    className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <label className="text-xs mt-1">(Signature of Witness 1)</label>
-                                <input
-                                    type="text"
-                                    name="witness1Name"
-                                    placeholder="Name in Print"
-                                    className="w-56 border-b border-gray-500 text-center mt-2"
-                                />
-                                </div>
-
-                                <div className="flex flex-col items-center">
-                                <input
-                                    type="text"
-                                    name="witness2Signature"
-                                    className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <label className="text-xs mt-1">(Signature of Witness 2)</label>
-                                <input
-                                    type="text"
-                                    name="witness2Name"
-                                    placeholder="Name in Print"
-                                    className="w-56 border-b border-gray-500 text-center mt-2"
-                                />
-                                </div>
+                        <div className="grid grid-cols-2 gap-6">
+                            <div className="flex flex-col items-center">
+                            <input
+                                type="text"
+                                name="witness1Signature"
+                                value={formData.page5.witness1Signature}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`w-56 border-b border-gray-500 text-center ${
+                                errors.witness1Signature ? "input-error" : ""
+                                }`}
+                            />
+                            <label className="text-xs mt-1">(Signature of Witness 1)</label>
+                            <input
+                                type="text"
+                                name="witness1Name"
+                                value={formData.page5.witness1Name}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                placeholder="Name in Print"
+                                className={`w-56 border-b border-gray-500 text-center mt-2 ${
+                                errors.witness1Name ? "input-error" : ""
+                                }`}
+                            />
                             </div>
+
+                            <div className="flex flex-col items-center">
+                            <input
+                                type="text"
+                                name="witness2Signature"
+                                value={formData.page5.witness2Signature}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`w-56 border-b border-gray-500 text-center ${
+                                errors.witness2Signature ? "input-error" : ""
+                                }`}
+                            />
+                            <label className="text-xs mt-1">(Signature of Witness 2)</label>
+                            <input
+                                type="text"
+                                name="witness2Name"
+                                value={formData.page5.witness2Name}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                placeholder="Name in Print"
+                                className={`w-56 border-b border-gray-500 text-center mt-2 ${
+                                errors.witness2Name ? "input-error" : ""
+                                }`}
+                            />
+                            </div>
+                        </div>
                         </div>
                     </>
                 )}
@@ -961,210 +1644,365 @@ export default function MarriageCertificateCreateForm() {
                     <>
                         {/* 21. Received By */}
                         <span>
-                            <p>21. Received By</p>
+                        <p>21. Received By</p>
                         </span>
                         <div className="border border-pink-300 p-3 rounded mb-3">
-                            <div className="flex flex-col items-center space-y-2">
-                                <input
-                                type="text"
-                                name="receivedBySignature"
-                                placeholder="Signature"
-                                className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <input
-                                type="text"
-                                name="receivedByName"
-                                placeholder="Name in Print"
-                                className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <input
-                                type="text"
-                                name="receivedByTitle"
-                                placeholder="Title or Position"
-                                className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <input
-                                type="date"
-                                name="receivedByDate"
-                                className="w-56 border-b border-gray-500 text-center"
-                                />
-                            </div>
+                        <div className="flex flex-col items-center space-y-2">
+                            <input
+                            type="text"
+                            name="receivedBySignature"
+                            placeholder="Signature"
+                            value={formData.page6.receivedBySignature}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-56 border-b border-gray-500 text-center ${
+                                errors.receivedBySignature ? "input-error" : ""
+                            }`}
+                            />
+                            <input
+                            type="text"
+                            name="receivedByName"
+                            placeholder="Name in Print"
+                            value={formData.page6.receivedByName}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-56 border-b border-gray-500 text-center ${
+                                errors.receivedByName ? "input-error" : ""
+                            }`}
+                            />
+                            <input
+                            type="text"
+                            name="receivedByTitle"
+                            placeholder="Title or Position"
+                            value={formData.page6.receivedByTitle}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-56 border-b border-gray-500 text-center ${
+                                errors.receivedByTitle ? "input-error" : ""
+                            }`}
+                            />
+                            <input
+                            type="date"
+                            name="receivedByDate"
+                            value={formData.page6.receivedByDate}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-56 border-b border-gray-500 text-center ${
+                                errors.receivedByDate ? "input-error" : ""
+                            }`}
+                            />
+                        </div>
                         </div>
 
                         {/* 22. Registered by the Civil Registrar */}
                         <span>
-                            <p>22. Registered by the Civil Registrar</p>
+                        <p>22. Registered by the Civil Registrar</p>
                         </span>
                         <div className="border border-pink-300 p-3 rounded mb-3">
-                            <div className="flex flex-col items-center space-y-2">
-                                <input
-                                type="text"
-                                name="registrarSignature"
-                                placeholder="Signature"
-                                className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <input
-                                type="text"
-                                name="registrarName"
-                                placeholder="Name in Print"
-                                className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <input
-                                type="text"
-                                name="registrarTitle"
-                                placeholder="Title or Position"
-                                className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <input
-                                type="date"
-                                name="registrarDate"
-                                className="w-56 border-b border-gray-500 text-center"
-                                />
-                            </div>
+                        <div className="flex flex-col items-center space-y-2">
+                            <input
+                            type="text"
+                            name="registrarSignature"
+                            placeholder="Signature"
+                            value={formData.page6.registrarSignature}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-56 border-b border-gray-500 text-center ${
+                                errors.registrarSignature ? "input-error" : ""
+                            }`}
+                            />
+                            <input
+                            type="text"
+                            name="registrarName"
+                            placeholder="Name in Print"
+                            value={formData.page6.registrarName}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-56 border-b border-gray-500 text-center ${
+                                errors.registrarName ? "input-error" : ""
+                            }`}
+                            />
+                            <input
+                            type="text"
+                            name="registrarTitle"
+                            placeholder="Title or Position"
+                            value={formData.page6.registrarTitle}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-56 border-b border-gray-500 text-center ${
+                                errors.registrarTitle ? "input-error" : ""
+                            }`}
+                            />
+                            <input
+                            type="date"
+                            name="registrarDate"
+                            value={formData.page6.registrarDate}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-56 border-b border-gray-500 text-center ${
+                                errors.registrarDate ? "input-error" : ""
+                            }`}
+                            />
+                        </div>
                         </div>
 
                         {/* Remarks/Annotations */}
                         <span>
-                            <p className='font-semibold'>REMARKS/ANNOTATIONS (For LCRO/OCRG/Shari'a Circuit Registrar use only.)</p>
+                        <p className="font-semibold">
+                            REMARKS/ANNOTATIONS (For LCRO/OCRG/Shari'a Circuit Registrar use only.)
+                        </p>
                         </span>
                         <div className="border border-pink-300 p-3 rounded mb-3">
-                            <textarea name="remarksAnnotation" className='w-full common-textarea' rows="3"></textarea>
+                        <textarea
+                            name="remarksAnnotation"
+                            value={formData.page6.remarksAnnotation}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-full common-textarea ${
+                            errors.remarksAnnotation ? "input-error" : ""
+                            }`}
+                            rows="3"
+                        ></textarea>
                         </div>
 
+                        {/* Civil Registrar */}
                         <div className="border border-pink-300 p-3 rounded mb-3">
-                            <h3 className='text-md font-semibold'>TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR</h3>
-                            <input type="text" name='civilRegistrar' className='w-full common-input'/>
+                        <h3 className="text-md font-semibold">
+                            TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR
+                        </h3>
+                        <input
+                            type="text"
+                            name="civilRegistrar"
+                            value={formData.page6.civilRegistrar}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`w-full common-input ${
+                            errors.civilRegistrar ? "input-error" : ""
+                            }`}
+                        />
                         </div>
                     </>
                 )}
 
                 {currentPage === 7 && (
                     <>
-                        {/* 20a. Witnesses */}
+                        {/* 20b. Witnesses */}
                         <span>
                         <p>20b. Witnesses (Print Name and Sign)</p>
                         </span>
 
                         <div className="border border-pink-300 p-3 rounded mb-3">
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="flex flex-col items-center">
-                                <input
-                                    type="text"
-                                    name="witness3Signature"
-                                    className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <label className="text-xs mt-1">(Signature of Witness 1)</label>
-                                <input
-                                    type="text"
-                                    name="witness3Name"
-                                    placeholder="Name in Print"
-                                    className="w-56 border-b border-gray-500 text-center mt-2"
-                                />
-                                </div>
+                        <div className="grid grid-cols-2 gap-6">
+                            {/* Witness 3 */}
+                            <div className="flex flex-col items-center">
+                            <input
+                                type="text"
+                                name="witness3Signature"
+                                value={formData.page7.witness3Signature}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`w-56 border-b border-gray-500 text-center ${
+                                errors.witness3Signature ? "input-error" : ""
+                                }`}
+                            />
+                            <label className="text-xs mt-1">(Signature of Witness 3)</label>
+                            <input
+                                type="text"
+                                name="witness3Name"
+                                value={formData.page7.witness3Name}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                placeholder="Name in Print"
+                                className={`w-56 border-b border-gray-500 text-center mt-2 ${
+                                errors.witness3Name ? "input-error" : ""
+                                }`}
+                            />
+                            </div>
 
-                                <div className="flex flex-col items-center">
-                                <input
-                                    type="text"
-                                    name="witness4Signature"
-                                    className="w-56 border-b border-gray-500 text-center"
-                                />
-                                <label className="text-xs mt-1">(Signature of Witness 2)</label>
-                                <input
-                                    type="text"
-                                    name="witness4Name"
-                                    placeholder="Name in Print"
-                                    className="w-56 border-b border-gray-500 text-center mt-2"
-                                />
-                                </div>
+                            {/* Witness 4 */}
+                            <div className="flex flex-col items-center">
+                            <input
+                                type="text"
+                                name="witness4Signature"
+                                value={formData.page7.witness4Signature}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className={`w-56 border-b border-gray-500 text-center ${
+                                errors.witness4Signature ? "input-error" : ""
+                                }`}
+                            />
+                            <label className="text-xs mt-1">(Signature of Witness 4)</label>
+                            <input
+                                type="text"
+                                name="witness4Name"
+                                value={formData.page7.witness4Name}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                placeholder="Name in Print"
+                                className={`w-56 border-b border-gray-500 text-center mt-2 ${
+                                errors.witness4Name ? "input-error" : ""
+                                }`}
+                            />
                             </div>
                         </div>
+                        </div>
 
-                        <h3 className='block text-center font-semibold'>AFFIDAVIT OF SOLEMNIZING OFFICER</h3>
+                        <h3 className="block text-center font-semibold">
+                        AFFIDAVIT OF SOLEMNIZING OFFICER
+                        </h3>
 
-                        <div className='mt-1 mb-3'>
-                            <p>
-                                I, <input type="text" className='border-b border-b-black outline-none'/>, of legal age, Solemnizing Officer of <input type="text" className='border-b border-b-black outline-none'/> with address at <input type="text" className='border-b border-b-black outline-none'/>, after having sworn to in accordance with law, do hereby depose and say:
-                            </p>
+                        {/* Officer affidavit */}
+                        <div className="mt-1 mb-3">
+                        <p>
+                            I,{" "}
+                            <input
+                            type="text"
+                            name="affidavitOfficerName"
+                            value={formData.page7.affidavitOfficerName}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none ${
+                                errors.affidavitOfficerName ? "input-error" : ""
+                            }`}
+                            />
+                            , of legal age, Solemnizing Officer of{" "}
+                            <input
+                            type="text"
+                            name="affidavitOfficerOrganization"
+                            value={formData.page7.affidavitOfficerOrganization}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none ${
+                                errors.affidavitOfficerOrganization ? "input-error" : ""
+                            }`}
+                            />{" "}
+                            with address at{" "}
+                            <input
+                            type="text"
+                            name="affidavitOfficerAddress"
+                            value={formData.page7.affidavitOfficerAddress}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none ${
+                                errors.affidavitOfficerAddress ? "input-error" : ""
+                            }`}
+                            />
+                            , after having sworn to in accordance with law, do hereby depose and
+                            say:
+                        </p>
                         </div>
 
                         <div className="space-y-4">
-                            {/* Statement 1 */}
-                            <p>
-                                1. That I have solemnized the marriage between{" "}
+                        {/* Statement 1 */}
+                        <p>
+                            1. That I have solemnized the marriage between{" "}
+                            <input
+                            type="text"
+                            name="statement1Party1"
+                            value={formData.page7.statement1Party1}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none px-1 w-40 ${
+                                errors.statement1Party1 ? "input-error" : ""
+                            }`}
+                            />{" "}
+                            and{" "}
+                            <input
+                            type="text"
+                            name="statement1Party2"
+                            value={formData.page7.statement1Party2}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none px-1 w-40 ${
+                                errors.statement1Party2 ? "input-error" : ""
+                            }`}
+                            />
+                            ;
+                        </p>
+
+                        {/* Statement 2 */}
+                        <div className="flex gap-2">
+                            <p>2.</p>
+                            <div className="flex flex-col gap-3">
+                            {/* 2a */}
+                            <label className="flex items-start gap-2">
                                 <input
-                                type="text"
-                                className="border-b border-black outline-none px-1 w-40"
+                                type="checkbox"
+                                name="statement2a"
+                                checked={formData.page7.statement2a || false}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="mt-1 scale-125"
+                                />
+                                <span>
+                                a. That I have ascertained the qualifications of contracting
+                                parties and have found no legal impediment for them to marry as
+                                required by Article 34 of the Family Code.
+                                </span>
+                            </label>
+
+                            {/* 2b */}
+                            <label className="flex items-start gap-2">
+                                <input
+                                type="checkbox"
+                                name="statement2b"
+                                checked={formData.page7.statement2b || false}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="mt-1 scale-125"
+                                />
+                                <span>
+                                b. That this marriage was performed in{" "}
+                                <i>articulo mortis</i> or at the point of death.
+                                </span>
+                            </label>
+
+                            {/* 2c */}
+                            <label className="flex items-start gap-2">
+                                <input
+                                type="checkbox"
+                                name="statement2c"
+                                checked={formData.page7.statement2c || false}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="mt-1 scale-125"
+                                />
+                                <span>
+                                c. That the contracting party/ies{" "}
+                                <input
+                                    type="text"
+                                    name="statement2cParty1"
+                                    value={formData.page7.statement2cParty1}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className="border-b border-black outline-none px-1 w-40"
                                 />{" "}
                                 and{" "}
                                 <input
-                                type="text"
-                                className="border-b border-black outline-none px-1 w-40"
+                                    type="text"
+                                    name="statement2cParty2"
+                                    value={formData.page7.statement2cParty2}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className="border-b border-black outline-none px-1 w-40"
                                 />
-                                ;
-                            </p>
+                                , being at the point of death and physically unable to sign the
+                                foregoing certificate of marriage by signature or mark, one of
+                                the witnesses to the marriage sign for him or her by writing the
+                                dying party's name and beneath it, the witness' own signature
+                                preceded by the preposition "By".
+                                </span>
+                            </label>
 
-                            {/* Statement 2 */}
-                            <div className="flex gap-2">
-                                <p>2.</p>
-                                <div className="flex flex-col gap-3">
-                                    {/* 2a */}
-                                    <label className="flex items-start gap-2">
-                                        <input type="checkbox" className="mt-1 scale-125" />
-                                        <span>
-                                        a. That I have ascertained the qualifications of contracting parties
-                                        and have found no legal impediment for them to marry as required by
-                                        Article 34 of the Family Code.
-                                        </span>
-                                    </label>
+                            {/* 2d */}
+                            <label className="flex items-start gap-2">
+                                <input
+                                type="checkbox"
+                                name="statement2d"
+                                checked={formData.page7.statement2d || false}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="mt-1 scale-125"
+                                />
+                                <span>
+                                d. That the residence of either party is so located that there is
+                                no means of transportation to enable concerned party/parties to
+                                appear personally before the civil registrar;
+                                </span>
+                            </label>
 
-                                    {/* 2b */}
-                                    <label className="flex items-start gap-2">
-                                        <input type="checkbox" className="mt-1 scale-125" />
-                                        <span>
-                                        b. That this marriage was performed in <i>articulo mortis</i> or at
-                                        the point of death.
-                                        </span>
-                                    </label>
-
-                                    {/* 2c */}
-                                    <label className="flex items-start gap-2">
-                                        <input type="checkbox" className="mt-1 scale-125" />
-                                        <span>
-                                        c. That the contracting party/ies{" "}
-                                        <input
-                                            type="text"
-                                            className="border-b border-black outline-none px-1 w-40"
-                                        />{" "}
-                                        and{" "}
-                                        <input
-                                            type="text"
-                                            className="border-b border-black outline-none px-1 w-40"
-                                        />
-                                        , being at the point of death and physically unable to sign the
-                                        foregoing certificate of marriage by signature or mark, one of the
-                                        witnesses to the marriage sign for him or her by writing the dying
-                                        party's name and beneath it, the witness' own signature preceded by
-                                        the preposition "By".
-                                        </span>
-                                    </label>
-
-                                    {/* 2d */}
-                                    <label className="flex items-start gap-2">
-                                        <input type="checkbox" className="mt-1 scale-125" />
-                                        <span>
-                                        d. That the residence of either party is so located that there is no means of transportation to enable concerned party/parties to appear personally before the civil registrar;
-                                        </span>
-                                    </label>
-
-                                    {/* 2e */}
-                                    <label className="flex items-start gap-2">
-                                        <input type="checkbox" className="mt-1 scale-125" />
-                                        <span>
-                                        e. That the marriage was among Muslims or among members of the Ethnic Cultural Communities and that the marriage was solemnized in accordance with their customs and practices;
-                                        </span>
-                                    </label>
-                                </div>
+                            {/* 2e */}
+                            <label className="flex items-start gap-2">
+                                <input
+                                type="checkbox"
+                                name="statement2e"
+                                checked={formData.page7.statement2e || false}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="mt-1 scale-125"
+                                />
+                                <span>
+                                e. That the marriage was among Muslims or among members of the
+                                Ethnic Cultural Communities and that the marriage was solemnized
+                                in accordance with their customs and practices;
+                                </span>
+                            </label>
                             </div>
+                        </div>
                         </div>
                     </>
                 )}
@@ -1172,108 +2010,547 @@ export default function MarriageCertificateCreateForm() {
                 {currentPage === 8 && (
                     <>
                         <div className="space-y-4 mb-3">
-                            {/* Statement 3 */}
-                            <p>3. That I look the necessary steps to ascertain the ages and relationship of contracting parties and that neither of them are under any legal impediment to marry each other;</p>
-                            
-                            {/* Statement 4 */}
-                            <p>4. That I am executing this affidavit to attest to the truthfulness of the foregoing statements for all legal intents and purposes.</p>
+                        {/* Statement 3 */}
+                        <p>
+                            3. That I took the necessary steps to ascertain the ages and relationship
+                            of contracting parties and that neither of them are under any legal
+                            impediment to marry each other;
+                        </p>
+
+                        {/* Statement 4 */}
+                        <p>
+                            4. That I am executing this affidavit to attest to the truthfulness of
+                            the foregoing statements for all legal intents and purposes.
+                        </p>
                         </div>
 
-                        <div className='mb-3'>
-                            <p>In truth whereof, I have affixed my signature below this <input type="text" className='border-b border-black outline-none w-[50px]'/>{''}day of{''}<input type="text" className='border-b border-black outline-none'/>,{''}<input type="text" className='border-b border-black outline-none'/>{''}at<input type="text" className='border-b border-black outline-none'/>{''}, Philippines.</p>
+                        {/* Affidavit Signature Line */}
+                        <div className="mb-3">
+                        <p>
+                            In truth whereof, I have affixed my signature below this{" "}
+                            <input
+                            type="text"
+                            name="affidavitDay"
+                            value={formData.page8.affidavitDay}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[50px] text-center ${
+                                errors.affidavitDay ? "input-error" : ""
+                            }`}
+                            />{" "}
+                            day of{" "}
+                            <input
+                            type="text"
+                            name="affidavitMonth"
+                            value={formData.page8.affidavitMonth}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[120px] text-center ${
+                                errors.affidavitMonth ? "input-error" : ""
+                            }`}
+                            />
+                            ,{" "}
+                            <input
+                            type="text"
+                            name="affidavitYear"
+                            value={formData.page8.affidavitYear}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[80px] text-center ${
+                                errors.affidavitYear ? "input-error" : ""
+                            }`}
+                            />{" "}
+                            at{" "}
+                            <input
+                            type="text"
+                            name="affidavitPlace"
+                            value={formData.page8.affidavitPlace}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[200px] text-center ${
+                                errors.affidavitPlace ? "input-error" : ""
+                            }`}
+                            />
+                            , Philippines.
+                        </p>
                         </div>
 
-                        <div className='w-full flex justify-end mb-3'>
-                            <div className=' flex flex-col items-center'>
-                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
-                                <p className='text-xs'>Signature Over Printed Name of the Solemnizing Officer</p>
-                            </div>
+                        {/* Solemnizing Officer */}
+                        <div className="w-full flex justify-end mb-3">
+                        <div className="flex flex-col items-center">
+                            <input
+                            type="text"
+                            name="affidavitSolemnizingOfficerName"
+                            value={formData.page8.affidavitSolemnizingOfficerName}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[300px] text-center ${
+                                errors.affidavitSolemnizingOfficerName ? "input-error" : ""
+                            }`}
+                            />
+                            <p className="text-xs">Signature Over Printed Name of the Solemnizing Officer</p>
+                        </div>
                         </div>
 
-                        <div className='mb-3'>
-                            <p><span>SUBSCRIBED AND SWORN</span> to before me this{' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '} day of {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '}, {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '} at {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '} issued on {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '}, {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '} at {' '}<input type="text" className='border-b border-b-black outline-none text-center'/>{' '}.</p>
+                        {/* Subscribed and Sworn */}
+                        <div className="mb-3">
+                        <p>
+                            <span>SUBSCRIBED AND SWORN</span> to before me this{" "}
+                            <input
+                            type="text"
+                            name="swornDay"
+                            value={formData.page8.swornDay}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[50px] text-center ${
+                                errors.swornDay ? "input-error" : ""
+                            }`}
+                            />{" "}
+                            day of{" "}
+                            <input
+                            type="text"
+                            name="swornMonth"
+                            value={formData.page8.swornMonth}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[120px] text-center ${
+                                errors.swornMonth ? "input-error" : ""
+                            }`}
+                            />
+                            ,{" "}
+                            <input
+                            type="text"
+                            name="swornYear"
+                            value={formData.page8.swornYear}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[80px] text-center ${
+                                errors.swornYear ? "input-error" : ""
+                            }`}
+                            />{" "}
+                            at{" "}
+                            <input
+                            type="text"
+                            name="swornAt"
+                            value={formData.page8.swornAt}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[200px] text-center ${
+                                errors.swornAt ? "input-error" : ""
+                            }`}
+                            />{" "}
+                            issued on{" "}
+                            <input
+                            type="text"
+                            name="swornIssuedOn"
+                            value={formData.page8.swornIssuedOn}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[120px] text-center ${
+                                errors.swornIssuedOn ? "input-error" : ""
+                            }`}
+                            />
+                            ,{" "}
+                            <input
+                            type="text"
+                            name="swornIssuedAt"
+                            value={formData.page8.swornIssuedAt}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[200px] text-center ${
+                                errors.swornIssuedAt ? "input-error" : ""
+                            }`}
+                            />
+                            .
+                        </p>
                         </div>
 
-                        <div className='flex justify-around items-center mb-3'>
-                            <div className=' flex flex-col items-center mb-3'>
-                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
-                                <p className='text-xs'>Signature of the Administering Officer</p>
-                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
-                                <p className='text-xs'>Name in Print</p>
-                            </div>
-                            <div className=' flex flex-col items-center mb-3'>
-                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
-                                <p className='text-xs'>Position/Title/Designation</p>
-                                <input type="text" className='border-b border-black outline-none w-[300px]'/>
-                                <p className='text-xs'>Address</p>
-                            </div>
+                        {/* Administering Officer */}
+                        <div className="flex justify-around items-center mb-3">
+                        <div className="flex flex-col items-center mb-3">
+                            <input
+                            type="text"
+                            name="adminOfficerSignature"
+                            value={formData.page8.adminOfficerSignature}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[300px] text-center ${
+                                errors.adminOfficerSignature ? "input-error" : ""
+                            }`}
+                            />
+                            <p className="text-xs">Signature of the Administering Officer</p>
+
+                            <input
+                            type="text"
+                            name="adminOfficerName"
+                            value={formData.page8.adminOfficerName}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[300px] text-center ${
+                                errors.adminOfficerName ? "input-error" : ""
+                            }`}
+                            />
+                            <p className="text-xs">Name in Print</p>
+                        </div>
+
+                        <div className="flex flex-col items-center mb-3">
+                            <input
+                            type="text"
+                            name="adminOfficerTitle"
+                            value={formData.page8.adminOfficerTitle}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[300px] text-center ${
+                                errors.adminOfficerTitle ? "input-error" : ""
+                            }`}
+                            />
+                            <p className="text-xs">Position/Title/Designation</p>
+
+                            <input
+                            type="text"
+                            name="adminOfficerAddress"
+                            value={formData.page8.adminOfficerAddress}
+                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            className={`border-b border-black outline-none w-[300px] text-center ${
+                                errors.adminOfficerAddress ? "input-error" : ""
+                            }`}
+                            />
+                            <p className="text-xs">Address</p>
+                        </div>
                         </div>
                     </>
                 )}
 
                 {currentPage === 9 && (
                     <>
-                        <h3 className='block text-center font-semibold'>AFFIDAVIT FOR DELAYED REGISTRATION OF MARRIAGE</h3>
+                        <h3 className="block text-center font-semibold">
+                            AFFIDAVIT FOR DELAYED REGISTRATION OF MARRIAGE
+                        </h3>
 
-                        <div className='mt-2 mb-5'>
-                            <p>I, <input type="text" className='border-b border-b-black outline-none text-center'/>{' '}, of legal age, single/married/divorced/widow/widower, with residence and postal address <input type="text" className='border-b border-b-black outline-none text-center'/>{' '}, after having duly sworn in accordance with law do hereby depose and say:</p>
+                        {/* Intro */}
+                        <div className="mt-2 mb-5">
+                            <p>
+                                I,{" "}
+                                <input
+                                    type="text"
+                                    name="affiantName"
+                                    value={formData.page9.affiantName}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center ${
+                                        errors.affiantName ? "input-error" : ""
+                                    }`}
+                                />
+                                , of legal age, single/married/divorced/widow/widower, with
+                                residence and postal address{" "}
+                                <input
+                                    type="text"
+                                    name="affiantAddress"
+                                    value={formData.page9.affiantAddress}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center ${
+                                        errors.affiantAddress ? "input-error" : ""
+                                    }`}
+                                />
+                                , after having duly sworn in accordance with law do hereby depose
+                                and say:
+                            </p>
                         </div>
 
-                        <div className='space-y-4 mb-3'>
+                        <div className="space-y-4 mb-3">
                             {/* Statement 1 */}
                             <div className="flex flex-col mb-3">
                                 <p>1. That I am the applicant for the delayed registration of</p>
-                                <label className='flex items-center gap-2'>
-                                    <input type="checkbox" className='scale-125'/>
-                                    my marriage with <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} in <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} on <input type="text" className='border-b border-b-black outline-none text-center'/>{' '}.
+
+                                {/* Option A */}
+                                <label className="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        name="statement1OptionA"
+                                        checked={formData.page9.statement1OptionA}
+                                        onChange={(e) =>
+                                            handleInputChange(e, `page${currentPage}`)
+                                        }
+                                        className="scale-125"
+                                    />
+                                    my marriage with{" "}
+                                    <input
+                                        type="text"
+                                        name="statement1MarriageWith"
+                                        value={formData.page9.statement1MarriageWith}
+                                        onChange={(e) =>
+                                            handleInputChange(e, `page${currentPage}`)
+                                        }
+                                        className="border-b border-b-black outline-none text-center"
+                                    />{" "}
+                                    in{" "}
+                                    <input
+                                        type="text"
+                                        name="statement1PlaceA"
+                                        value={formData.page9.statement1PlaceA}
+                                        onChange={(e) =>
+                                            handleInputChange(e, `page${currentPage}`)
+                                        }
+                                        className="border-b border-b-black outline-none text-center"
+                                    />{" "}
+                                    on{" "}
+                                    <input
+                                        type="text"
+                                        name="statement1DateA"
+                                        value={formData.page9.statement1DateA}
+                                        onChange={(e) =>
+                                            handleInputChange(e, `page${currentPage}`)
+                                        }
+                                        className="border-b border-b-black outline-none text-center"
+                                    />
+                                    .
                                 </label>
-                                <label className='flex items-center gap-2'>
-                                    <input type="checkbox" className='scale-125'/>
-                                    my marriage between <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} in <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} on <input type="text" className='border-b border-b-black outline-none text-center'/>{' '}.
+
+                                {/* Option B */}
+                                <label className="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        name="statement1OptionB"
+                                        checked={formData.page9.statement1OptionB}
+                                        onChange={(e) =>
+                                            handleInputChange(e, `page${currentPage}`)
+                                        }
+                                        className="scale-125"
+                                    />
+                                    my marriage between{" "}
+                                    <input
+                                        type="text"
+                                        name="statement1MarriageBetween"
+                                        value={formData.page9.statement1MarriageBetween}
+                                        onChange={(e) =>
+                                            handleInputChange(e, `page${currentPage}`)
+                                        }
+                                        className="border-b border-b-black outline-none text-center"
+                                    />{" "}
+                                    in{" "}
+                                    <input
+                                        type="text"
+                                        name="statement1PlaceB"
+                                        value={formData.page9.statement1PlaceB}
+                                        onChange={(e) =>
+                                            handleInputChange(e, `page${currentPage}`)
+                                        }
+                                        className="border-b border-b-black outline-none text-center"
+                                    />{" "}
+                                    on{" "}
+                                    <input
+                                        type="text"
+                                        name="statement1DateB"
+                                        value={formData.page9.statement1DateB}
+                                        onChange={(e) =>
+                                            handleInputChange(e, `page${currentPage}`)
+                                        }
+                                        className="border-b border-b-black outline-none text-center"
+                                    />
+                                    .
                                 </label>
                             </div>
 
                             {/* Statement 2 */}
                             <div className="flex flex-col mb-3">
-                                <p>2. That said marriage was solemnized by <input type="text" className='border-b border-b-black outline-none text-center'/>{' '} (Solemnizing Officer's name) under</p>
-                                <div className='flex items-center gap-3'>
-                                <label className='flex items-center gap-1'>
-                                    a. <input type="checkbox" className='scale-125'/> religious ceremony
-                                </label>
-                                <label className='flex items-center gap-1'>
-                                    b. <input type="checkbox" className='scale-125'/> civil ceremony
-                                </label>
-                                <label className='flex items-center gap-1'>
-                                   c. <input type="checkbox" className='scale-125'/> muslim rites
-                                </label>
-                                <label className='flex items-center gap-1'>
-                                   d. <input type="checkbox" className='scale-125'/> tribal rites
-                                </label>
+                                <p>
+                                    2. That said marriage was solemnized by{" "}
+                                    <input
+                                        type="text"
+                                        name="solemnizingOfficer"
+                                        value={formData.page9.solemnizingOfficer}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className={`border-b border-b-black outline-none text-center ${
+                                            errors.solemnizingOfficer ? "input-error" : ""
+                                        }`}
+                                    />{" "}
+                                    (Solemnizing Officer's name) under
+                                </p>
+                                <div className="flex items-center gap-3">
+                                    <label className="flex items-center gap-1">
+                                        <input
+                                            type="checkbox"
+                                            name="ceremonyReligious"
+                                            checked={formData.page9.ceremonyReligious}
+                                            onChange={(e) =>
+                                                handleInputChange(e, `page${currentPage}`)
+                                            }
+                                            className="scale-125"
+                                        />{" "}
+                                        religious ceremony
+                                    </label>
+                                    <label className="flex items-center gap-1">
+                                        <input
+                                            type="checkbox"
+                                            name="ceremonyCivil"
+                                            checked={formData.page9.ceremonyCivil}
+                                            onChange={(e) =>
+                                                handleInputChange(e, `page${currentPage}`)
+                                            }
+                                            className="scale-125"
+                                        />{" "}
+                                        civil ceremony
+                                    </label>
+                                    <label className="flex items-center gap-1">
+                                        <input
+                                            type="checkbox"
+                                            name="ceremonyMuslim"
+                                            checked={formData.page9.ceremonyMuslim}
+                                            onChange={(e) =>
+                                                handleInputChange(e, `page${currentPage}`)
+                                            }
+                                            className="scale-125"
+                                        />{" "}
+                                        muslim rites
+                                    </label>
+                                    <label className="flex items-center gap-1">
+                                        <input
+                                            type="checkbox"
+                                            name="ceremonyTribal"
+                                            checked={formData.page9.ceremonyTribal}
+                                            onChange={(e) =>
+                                                handleInputChange(e, `page${currentPage}`)
+                                            }
+                                            className="scale-125"
+                                        />{" "}
+                                        tribal rites
+                                    </label>
                                 </div>
                             </div>
 
                             {/* Statement 3 */}
                             <div className="flex flex-col mb-3">
                                 <p>3. That the marriage was solemnized:</p>
-                                <label className='flex items-center gap-1'>
-                                    <input type="checkbox" className='scale-125'/> a. with marriage license no. <input type="text" className='border-b border-b-black outline-none text-center'/> issued on <input type="text" className='border-b border-b-black outline-none text-center'/> at <input type="text" className='border-b border-b-black outline-none text-center'/>; 
+                                <label className="flex items-center gap-1">
+                                    <input
+                                        type="checkbox"
+                                        name="marriageWithLicense"
+                                        checked={formData.page9.marriageWithLicense}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className="scale-125"
+                                    />{" "}
+                                    a. with marriage license no.{" "}
+                                    <input
+                                        type="text"
+                                        name="marriageLicenseNo"
+                                        value={formData.page9.marriageLicenseNo}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className="border-b border-b-black outline-none text-center"
+                                    />{" "}
+                                    issued on{" "}
+                                    <input
+                                        type="text"
+                                        name="marriageIssuedOn"
+                                        value={formData.page9.marriageIssuedOn}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className="border-b border-b-black outline-none text-center"
+                                    />{" "}
+                                    at{" "}
+                                    <input
+                                        type="text"
+                                        name="marriageIssuedAt"
+                                        value={formData.page9.marriageIssuedAt}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className="border-b border-b-black outline-none text-center"
+                                    />
+                                    ;
                                 </label>
-                                <label className='flex items-center gap-1'>
-                                    <input type="checkbox" className='scale-125'/> b. under the Article <input type="text" className='border-b border-b-black outline-none text-center'/> (marriages of exceptional character); 
+                                <label className="flex items-center gap-1">
+                                    <input
+                                        type="checkbox"
+                                        name="marriageUnderArticle"
+                                        checked={formData.page9.marriageUnderArticle}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className="scale-125"
+                                    />{" "}
+                                    b. under the Article{" "}
+                                    <input
+                                        type="text"
+                                        name="articleNumber"
+                                        value={formData.page9.articleNumber}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className="border-b border-b-black outline-none text-center"
+                                    />{" "}
+                                    (marriages of exceptional character);
                                 </label>
                             </div>
 
                             {/* Statement 4 */}
-                            <p>4. (If the applicant is either the wife or husband) That I am a citizen of <input type="text" className='border-b border-b-black outline-none text-center'/> and spouse is a citizen of <input type="text" className='border-b border-b-black outline-none text-center'/>.</p>
-                            
+                            <p>
+                                4. (If the applicant is either the wife or husband) That I am a
+                                citizen of{" "}
+                                <input
+                                    type="text"
+                                    name="citizenApplicant"
+                                    value={formData.page9.citizenApplicant}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center ${
+                                        errors.citizenApplicant ? "input-error" : ""
+                                    }`}
+                                />{" "}
+                                and spouse is a citizen of{" "}
+                                <input
+                                    type="text"
+                                    name="citizenSpouse"
+                                    value={formData.page9.citizenSpouse}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center ${
+                                        errors.citizenSpouse ? "input-error" : ""
+                                    }`}
+                                />
+                                .
+                            </p>
+
                             {/* Statement 5 */}
-                            <p>5. That the reason for the delay in registering our/their marriage is <input type="text" className='border-b border-b-black outline-none text-center'/>.</p>
-                            
+                            <p>
+                                5. That the reason for the delay in registering our/their marriage
+                                is{" "}
+                                <input
+                                    type="text"
+                                    name="reasonForDelay"
+                                    value={formData.page9.reasonForDelay}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center ${
+                                        errors.reasonForDelay ? "input-error" : ""
+                                    }`}
+                                />
+                                .
+                            </p>
+
                             {/* Statement 6 */}
                             <div className="flex flex-col">
-                                <p>6. That I am executing this affidavit to attest to the truthfullness of the foregoing statements for all legal intents and puposes.</p>
+                                <p>
+                                    6. That I am executing this affidavit to attest to the
+                                    truthfullness of the foregoing statements for all legal intents
+                                    and purposes.
+                                </p>
                                 <span>
-                                    In truth whereof, I have affixed my signature below this <input type="text" className='border-b border-b-black outline-none text-center w-[100px]'/> day of <input type="text" className='border-b border-b-black outline-none text-center'/>, <input type="text" className='border-b border-b-black outline-none text-center'/> at <input type="text" className='border-b border-b-black outline-none text-center'/>, Philippines.
+                                    In truth whereof, I have affixed my signature below this{" "}
+                                    <input
+                                        type="text"
+                                        name="affidavitDay"
+                                        value={formData.page9.affidavitDay}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className={`border-b border-b-black outline-none text-center w-[100px] ${
+                                            errors.affidavitDay ? "input-error" : ""
+                                        }`}
+                                    />{" "}
+                                    day of{" "}
+                                    <input
+                                        type="text"
+                                        name="affidavitMonth"
+                                        value={formData.page9.affidavitMonth}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className={`border-b border-b-black outline-none text-center ${
+                                            errors.affidavitMonth ? "input-error" : ""
+                                        }`}
+                                    />
+                                    ,{" "}
+                                    <input
+                                        type="text"
+                                        name="affidavitYear"
+                                        value={formData.page9.affidavitYear}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className={`border-b border-b-black outline-none text-center ${
+                                            errors.affidavitYear ? "input-error" : ""
+                                        }`}
+                                    />{" "}
+                                    at{" "}
+                                    <input
+                                        type="text"
+                                        name="affidavitPlace"
+                                        value={formData.page9.affidavitPlace}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className={`border-b border-b-black outline-none text-center ${
+                                            errors.affidavitPlace ? "input-error" : ""
+                                        }`}
+                                    />
+                                    , Philippines.
                                 </span>
                             </div>
                         </div>

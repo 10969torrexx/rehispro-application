@@ -7,6 +7,48 @@ export function validateForm(data, page){
         const value = data[field];
         const rule = rules[field];
 
+        if (page === 5) {
+            if (data.certification === "license" && ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].includes(field)) {
+                rule.required = true;
+            }
+            if (data.certification === "noLicense" && field === "executiveOrder") {
+                rule.required = true;
+            }
+        }
+
+        if (page === 9) {
+            // Statement 1
+            if (data.statement1OptionA) {
+                ["statement1MarriageWith", "statement1PlaceA", "statement1DateA"].forEach(f => {
+                    if (rules[f]) rules[f].required = true;
+                });
+            }
+            if (data.statement1OptionB) {
+                ["statement1MarriageBetween", "statement1PlaceB", "statement1DateB"].forEach(f => {
+                    if (rules[f]) rules[f].required = true;
+                });
+            }
+
+            // Statement 2 - ceremony type (at least one must be checked)
+            const ceremonyFields = ["ceremonyReligious", "ceremonyCivil", "ceremonyMuslim", "ceremonyTribal"];
+            const ceremonySelected = ceremonyFields.some(f => data[f] === true);
+            if (!ceremonySelected) {
+                errors.ceremony = "At least one ceremony type must be selected.";
+            }
+
+            // Statement 3
+            if (data.marriageWithLicense) {
+                ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].forEach(f => {
+                    if (rules[f]) rules[f].required = true;
+                });
+            }
+            if (data.marriageUnderArticle) {
+                ["articleNumber"].forEach(f => {
+                    if (rules[f]) rules[f].required = true;
+                });
+            }
+        }
+
         if (rule.required && (!value || value.toString().trim() === "")) {
             errors[field] = rule.message.required;
         }
@@ -17,6 +59,10 @@ export function validateForm(data, page){
 
         if (rule.maxLength && value && value.length > rule.maxLength) {
             errors[field] = rule.message.maxLength;
+        }
+
+        if (rule.type === "enum" && value && !rule.options.includes(value)) {
+            errors[field] = rule.message.enum;
         }
 
         if (rule.type === "number" && value) {
@@ -37,6 +83,21 @@ export function validateForm(data, page){
             const date = new Date(value);
             if (isNaN(date.getTime())) {
                 errors[field] = rule.message.date;
+            }
+        }
+
+        if (rule.type === "time" && value) {
+        const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+            if (!timeRegex.test(value)) {
+                errors[field] = rule.message.time;
+            }
+        }
+
+        if (rule.type === "boolean") {
+            if (rule.required && value !== true) {
+                errors[field] = rule.message.required;
+            } else if (value !== undefined && typeof value !== "boolean") {
+                errors[field] = rule.message.boolean;
             }
         }
 
