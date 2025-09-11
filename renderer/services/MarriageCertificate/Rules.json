@@ -10,7 +10,7 @@
                 "maxLength": "Province must not exceed 100 characters."
             }
         },
-        "city":{
+        "city": {
             "required": true,
             "minLength": 2,
             "maxLength": 100,
@@ -20,7 +20,7 @@
                 "maxLength": "City/Municipality must not exceed 100 characters."
             }
         },
-        "registry":{
+        "registry": {
             "required": true,
             "type": "number",
             "message": {
@@ -30,105 +30,105 @@
         },
         "husbandFirstName": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "First name is required."
             }
         },
         "husbandMiddleName": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Middle name is required."
             }
         },
         "husbandLastName": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Last name is required."
             }
         },
         "husbandBirthDate": {
             "required": true,
             "type": "date",
-            "message":{
+            "message": {
                 "required": "Birth date is required.",
                 "date": "Invalid date"
             }
         },
-        "husbandAge":{
+        "husbandAge": {
             "required": true,
             "min": 20,
-            "message":{
+            "message": {
                 "required": "Age is required.",
                 "min": "Must be legel age."
             }
         },
         "husbandBirthCity": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "City/Municipality is required."
             }
         },
         "husbandBirthProvince": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Province is required."
             }
         },
         "husbandBirthCountry": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Country is required."
             }
         },
         "wifeFirstName": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "First name is required."
             }
         },
         "wifeMiddleName": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Middle name is required."
             }
         },
         "wifeLastName": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Last name is required."
             }
         },
         "wifeBirthDate": {
             "required": true,
             "type": "date",
-            "message":{
+            "message": {
                 "required": "Birth date is required.",
                 "date": "Invalid date"
             }
         },
-        "wifeAge":{
+        "wifeAge": {
             "required": true,
             "min": 20,
-            "message":{
+            "message": {
                 "required": "Age is required.",
                 "min": "Must be legel age."
             }
         },
         "wifeBirthCity": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "City/Municipality is required."
             }
         },
         "wifeBirthProvince": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Province is required."
             }
         },
         "wifeBirthCountry": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Country is required."
             }
         }
@@ -137,7 +137,10 @@
         "husbandSex": {
             "required": true,
             "type": "enum",
-            "options": ["Male", "Female"],
+            "options": [
+                "Male",
+                "Female"
+            ],
             "message": {
                 "required": "Sex is required.",
                 "enum": "Sex must be either Male or Female."
@@ -145,68 +148,71 @@
         },
         "husbandCitizenship": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Citizenship is required."
             }
         },
         "husbandResidenceBarangay": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Barangay is required."
             }
         },
         "husbandResidenceCity": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "City is required."
             }
         },
         "husbandResidenceProvince": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Province is required."
             }
         },
         "husbandResidenceCountry": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Country is required."
             }
         },
         "husbandReligion": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Religion is required."
             }
         },
         "husbandCivilStatus": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Civil Status is required."
             }
         },
         "husbandFatherNameFirst": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Father's First name is required."
             }
         },
         "husbandFatherNameMiddle": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Father's Middle name is required."
             }
         },
         "husbandFatherNameLast": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Father's Last name is required."
             }
         },
         "wifeSex": {
             "required": true,
             "type": "enum",
-            "options": ["Male", "Female"],
+            "options": [
+                "Male",
+                "Female"
+            ],
             "message": {
                 "required": "Sex is required.",
                 "enum": "Sex must be either Male or Female."
@@ -214,235 +220,234 @@
         },
         "wifeCitizenship": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Citizenship is required."
             }
         },
         "wifeResidenceBarangay": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Barangay is required."
             }
         },
         "wifeResidenceCity": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "City is required."
             }
         },
         "wifeResidenceProvince": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Province is required."
             }
         },
         "wifeResidenceCountry": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Country is required."
             }
         },
         "wifeReligion": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Religion is required."
             }
         },
         "wifeCivilStatus": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Civil status is required."
             }
         },
         "wifeFatherNameFirst": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Father's first name is required."
             }
         },
         "wifeFatherNameMiddle": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Father's middle name is required."
             }
         },
         "wifeFatherNameLast": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Father's last name is required."
             }
         }
     },
-    "page3":{
-        "husbandFatherCitizenship":{
+    "page3": {
+        "husbandFatherCitizenship": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Father's citizenship is required."
             }
         },
-        "husbandMotherNameFirst":{
+        "husbandMotherNameFirst": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Mother's first name is required."
             }
         },
-        "husbandMotherNameMiddle":{
+        "husbandMotherNameMiddle": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Mother's middle name is required."
             }
         },
-        "husbandMotherNameLast":{
+        "husbandMotherNameLast": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Mother's last name is required."
             }
         },
-        "husbandMotherCitizenship":{
+        "husbandMotherCitizenship": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Mother's citizenship is required."
             }
         },
-        "husbandConsentNameFirst":{
+        "husbandConsentNameFirst": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Consent's first name is required."
             }
         },
-        "husbandConsentNameMiddle":{
+        "husbandConsentNameMiddle": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Consent's middle name is required."
             }
         },
-        "husbandConsentNameLast":{
+        "husbandConsentNameLast": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Consent's last name is required."
             }
         },
-        "husbandRelationship":{
+        "husbandRelationship": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Relationship is required."
             }
         },
-        "husbandConsentPersonBarangay":{
+        "husbandConsentPersonBarangay": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Barangay is required."
             }
         },
-        "husbandConsentPersonCity":{
+        "husbandConsentPersonCity": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "City is required."
             }
         },
-        "husbandConsentPersonProvince":{
+        "husbandConsentPersonProvince": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Province is required."
             }
         },
-        "husbandConsentPersonCountry":{
+        "husbandConsentPersonCountry": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Country is required."
             }
         },
-        "wifeFatherCitizenship":{
+        "wifeFatherCitizenship": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Father's citizenship is required."
             }
         },
-        "wifeMotherNameFirst":{
+        "wifeMotherNameFirst": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Mother's first name is required."
             }
         },
-        "wifeMotherNameMiddle":{
+        "wifeMotherNameMiddle": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Mother's middle name is required."
             }
         },
-        "wifeMotherNameLast":{
+        "wifeMotherNameLast": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Mother's last name is required."
             }
         },
-        "wifeMotherCitizenship":{
+        "wifeMotherCitizenship": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Mother's citizenship is required."
             }
         },
-        "wifeConsentNameFirst":{
+        "wifeConsentNameFirst": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Consent's first name is required."
             }
         },
-        "wifeConsentNameMiddle":{
+        "wifeConsentNameMiddle": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Consent's middle name is required."
             }
         },
-        "wifeConsentNameLast":{
+        "wifeConsentNameLast": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Consent's last name is required."
             }
         },
-        "wifeRelationship":{
+        "wifeRelationship": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Relationship is required."
             }
         },
-        "wifeConsentPersonBarangay":{
+        "wifeConsentPersonBarangay": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Bara is required."
             }
         },
-        "wifeConsentPersonCity":{
+        "wifeConsentPersonCity": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "City is required."
             }
         },
-        "wifeConsentPersonProvince":{
+        "wifeConsentPersonProvince": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Province is required."
             }
         },
-        "wifeConsentPersonCountry":{
+        "wifeConsentPersonCountry": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Country is required."
             }
         }
     },
-
-    "page4":{
+    "page4": {
         "placeOfMarriage": {
             "required": true,
-            "message":{
+            "message": {
                 "required": "Place of Marriage is required."
             }
         },
         "dateOfMarriage": {
             "required": true,
-            "type":"date",
-            "message":{
+            "type": "date",
+            "message": {
                 "required": "Date of marriage is required.",
                 "date": "Invalid date."
             }
@@ -457,20 +462,23 @@
         },
         "certHusbandName": {
             "required": true,
-            "message":{
-                "required": "Name is required."
+            "message": {
+                "required": "Husband name is required."
             }
         },
         "certWifeName": {
             "required": true,
-            "message":{
-                "required": "Name is required."
+            "message": {
+                "required": "Wife name is required."
             }
         },
         "marriageSettlement": {
             "required": true,
             "type": "enum",
-            "options": ["entered", "notEntered"],
+            "options": [
+                "entered",
+                "notEntered"
+            ],
             "message": {
                 "required": "Marriage settlement choice is required.",
                 "enum": "Invalid option selected."
@@ -499,31 +507,35 @@
         "certification": {
             "required": true,
             "type": "enum",
-            "options": ["license", "noLicense", "pd1083"],
+            "options": [
+                "license",
+                "noLicense",
+                "pd1083"
+            ],
             "message": {
-            "required": "Certification option is required.",
-            "enum": "Invalid certification option."
+                "required": "Certification option is required.",
+                "enum": "Invalid certification option."
             }
         },
         "marriageLicenseNo": {
             "required": false,
             "minLength": 3,
             "message": {
-            "minLength": "Marriage License No. must be at least 3 characters."
+                "minLength": "Marriage License No. must be at least 3 characters."
             }
         },
         "marriageIssuedOn": {
             "required": false,
             "type": "date",
             "message": {
-            "date": "Please enter a valid issue date."
+                "date": "Please enter a valid issue date."
             }
         },
         "marriageIssuedAt": {
             "required": false,
             "minLength": 2,
             "message": {
-            "minLength": "Place of issue must be at least 2 characters."
+                "minLength": "Place of issue must be at least 2 characters."
             }
         },
         "executiveOrder": {
@@ -531,258 +543,208 @@
             "type": "number",
             "min": 1,
             "message": {
-            "number": "Executive Order must be a valid number.",
-            "min": "Executive Order number must be greater than 0."
-            }
-        },
-        "solemnizingOfficerName": {
-            "required": true,
-            "minLength": 3,
-            "message": {
-            "required": "Solemnizing Officer's name is required.",
-            "minLength": "Name must be at least 3 characters."
+                "number": "Executive Order must be a valid number.",
+                "min": "Executive Order number must be greater than 0."
             }
         },
         "officerPosition": {
             "required": true,
             "minLength": 2,
             "message": {
-            "required": "Officer's position is required.",
-            "minLength": "Position must be at least 2 characters."
+                "required": "Officer's position is required.",
+                "minLength": "Position must be at least 2 characters."
             }
         },
         "officerReligion": {
             "required": true,
             "minLength": 2,
             "message": {
-            "required": "Religion/Religious Sect is required.",
-            "minLength": "Religion must be at least 2 characters."
-            }
-        },
-        "witness1Signature": {
-            "required": true,
-            "message": {
-            "required": "Witness 1 signature is required."
+                "required": "Religion/Religious Sect is required.",
+                "minLength": "Religion must be at least 2 characters."
             }
         },
         "witness1Name": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Witness 1 name is required.",
-            "minLength": "Witness 1 name must be at least 3 characters."
-            }
-        },
-        "witness2Signature": {
-            "required": true,
-            "message": {
-            "required": "Witness 2 signature is required."
+                "required": "Witness 1 name is required.",
+                "minLength": "Witness 1 name must be at least 3 characters."
             }
         },
         "witness2Name": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Witness 2 name is required.",
-            "minLength": "Witness 2 name must be at least 3 characters."
+                "required": "Witness 2 name is required.",
+                "minLength": "Witness 2 name must be at least 3 characters."
             }
         }
     },
     "page6": {
-        "receivedBySignature": {
-            "required": true,
-            "message": {
-            "required": "Received By signature is required."
-            }
-        },
         "receivedByName": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Received By name is required.",
-            "minLength": "Received By name must be at least 3 characters."
+                "required": "Received By name is required.",
+                "minLength": "Received By name must be at least 3 characters."
             }
         },
         "receivedByTitle": {
             "required": true,
             "minLength": 2,
             "message": {
-            "required": "Received By title is required.",
-            "minLength": "Title must be at least 2 characters."
+                "required": "Received By title is required.",
+                "minLength": "Title must be at least 2 characters."
             }
         },
         "receivedByDate": {
             "required": true,
             "type": "date",
             "message": {
-            "required": "Received By date is required.",
-            "date": "Please enter a valid date."
-            }
-        },
-
-        "registrarSignature": {
-            "required": true,
-            "message": {
-            "required": "Registrar signature is required."
+                "required": "Received By date is required.",
+                "date": "Please enter a valid date."
             }
         },
         "registrarName": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Registrar name is required.",
-            "minLength": "Registrar name must be at least 3 characters."
+                "required": "Registrar name is required.",
+                "minLength": "Registrar name must be at least 3 characters."
             }
         },
         "registrarTitle": {
             "required": true,
             "minLength": 2,
             "message": {
-            "required": "Registrar title is required.",
-            "minLength": "Title must be at least 2 characters."
+                "required": "Registrar title is required.",
+                "minLength": "Title must be at least 2 characters."
             }
         },
         "registrarDate": {
             "required": true,
             "type": "date",
             "message": {
-            "required": "Registrar date is required.",
-            "date": "Please enter a valid date."
+                "required": "Registrar date is required.",
+                "date": "Please enter a valid date."
             }
         },
-
         "remarksAnnotation": {
             "required": false
         },
-
         "civilRegistrar": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Civil Registrar entry is required.",
-            "minLength": "Civil Registrar entry must be at least 3 characters."
+                "required": "Civil Registrar entry is required.",
+                "minLength": "Civil Registrar entry must be at least 3 characters."
             }
         }
     },
     "page7": {
-        "witness3Signature": {
-            "required": true,
-            "message": {
-            "required": "Witness 3 signature is required."
-            }
-        },
         "witness3Name": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Witness 3 name is required.",
-            "minLength": "Witness 3 name must be at least 3 characters."
-            }
-        },
-        "witness4Signature": {
-            "required": true,
-            "message": {
-            "required": "Witness 4 signature is required."
+                "required": "Witness 3 name is required.",
+                "minLength": "Witness 3 name must be at least 3 characters."
             }
         },
         "witness4Name": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Witness 4 name is required.",
-            "minLength": "Witness 4 name must be at least 3 characters."
+                "required": "Witness 4 name is required.",
+                "minLength": "Witness 4 name must be at least 3 characters."
             }
         },
-
         "affidavitOfficerName": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Affidavit Officer's name is required.",
-            "minLength": "Name must be at least 3 characters."
+                "required": "Affidavit Officer's name is required.",
+                "minLength": "Name must be at least 3 characters."
             }
         },
         "affidavitOfficerOrganization": {
             "required": true,
             "minLength": 2,
             "message": {
-            "required": "Organization/Church name is required.",
-            "minLength": "Organization name must be at least 2 characters."
+                "required": "Organization/Church name is required.",
+                "minLength": "Organization name must be at least 2 characters."
             }
         },
         "affidavitOfficerAddress": {
             "required": true,
             "minLength": 5,
             "message": {
-            "required": "Affidavit Officer's address is required.",
-            "minLength": "Address must be at least 5 characters."
+                "required": "Affidavit Officer's address is required.",
+                "minLength": "Address must be at least 5 characters."
             }
         },
-
         "statement1Party1": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "First contracting party name is required.",
-            "minLength": "Name must be at least 3 characters."
+                "required": "First contracting party name is required.",
+                "minLength": "Name must be at least 3 characters."
             }
         },
         "statement1Party2": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Second contracting party name is required.",
-            "minLength": "Name must be at least 3 characters."
+                "required": "Second contracting party name is required.",
+                "minLength": "Name must be at least 3 characters."
             }
         },
-
         "statement2a": {
             "required": false,
             "type": "boolean",
             "message": {
-            "boolean": "Invalid value for Statement 2a."
+                "boolean": "Invalid value for Statement 2a."
             }
         },
         "statement2b": {
             "required": false,
             "type": "boolean",
             "message": {
-            "boolean": "Invalid value for Statement 2b."
+                "boolean": "Invalid value for Statement 2b."
             }
         },
         "statement2c": {
             "required": false,
             "type": "boolean",
             "message": {
-            "boolean": "Invalid value for Statement 2c."
+                "boolean": "Invalid value for Statement 2c."
             }
         },
         "statement2cParty1": {
             "required": false,
             "minLength": 3,
             "message": {
-            "minLength": "Statement 2c Party 1 name must be at least 3 characters."
+                "minLength": "Statement 2c Party 1 name must be at least 3 characters."
             }
         },
         "statement2cParty2": {
             "required": false,
             "minLength": 3,
             "message": {
-            "minLength": "Statement 2c Party 2 name must be at least 3 characters."
+                "minLength": "Statement 2c Party 2 name must be at least 3 characters."
             }
         },
         "statement2d": {
             "required": false,
             "type": "boolean",
             "message": {
-            "boolean": "Invalid value for Statement 2d."
+                "boolean": "Invalid value for Statement 2d."
             }
         },
         "statement2e": {
             "required": false,
             "type": "boolean",
             "message": {
-            "boolean": "Invalid value for Statement 2e."
+                "boolean": "Invalid value for Statement 2e."
             }
         }
     },
@@ -790,114 +752,97 @@
         "affidavitDay": {
             "required": true,
             "message": {
-            "required": "Day is required."
+                "required": "Day is required."
             }
         },
         "affidavitMonth": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Month is required.",
-            "minLength": "Month must be at least 3 characters."
+                "required": "Month is required.",
+                "minLength": "Month must be at least 3 characters."
             }
         },
         "affidavitYear": {
             "required": true,
             "minLength": 4,
             "message": {
-            "required": "Year is required.",
-            "minLength": "Year must be at least 4 digits."
+                "required": "Year is required.",
+                "minLength": "Year must be at least 4 digits."
             }
         },
         "affidavitPlace": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Place is required.",
-            "minLength": "Place must be at least 3 characters."
+                "required": "Place is required.",
+                "minLength": "Place must be at least 3 characters."
             }
         },
-
-        "affidavitSolemnizingOfficerName": {
-            "required": true,
-            "minLength": 3,
-            "message": {
-            "required": "Solemnizing Officer's name is required.",
-            "minLength": "Name must be at least 3 characters."
-            }
-        },
-
         "swornDay": {
             "required": true,
             "message": {
-            "required": "Sworn day is required."
+                "required": "Sworn day is required."
             }
         },
         "swornMonth": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Sworn month is required.",
-            "minLength": "Sworn month must be at least 3 characters."
+                "required": "Sworn month is required.",
+                "minLength": "Sworn month must be at least 3 characters."
             }
         },
         "swornYear": {
             "required": true,
             "minLength": 4,
             "message": {
-            "required": "Sworn year is required.",
-            "minLength": "Year must be at least 4 digits."
+                "required": "Sworn year is required.",
+                "minLength": "Year must be at least 4 digits."
             }
         },
         "swornAt": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Sworn place is required.",
-            "minLength": "Place must be at least 3 characters."
+                "required": "Sworn place is required.",
+                "minLength": "Place must be at least 3 characters."
             }
         },
         "swornIssuedOn": {
             "required": true,
             "message": {
-            "required": "Issued on date is required."
+                "required": "Issued on date is required."
             }
         },
         "swornIssuedAt": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Issued at place is required.",
-            "minLength": "Place must be at least 3 characters."
-            }
-        },
-
-        "adminOfficerSignature": {
-            "required": true,
-            "message": {
-            "required": "Administering Officer's signature is required."
+                "required": "Issued at place is required.",
+                "minLength": "Place must be at least 3 characters."
             }
         },
         "adminOfficerName": {
             "required": true,
             "minLength": 3,
             "message": {
-            "required": "Administering Officer's name is required.",
-            "minLength": "Name must be at least 3 characters."
+                "required": "Administering Officer's name is required.",
+                "minLength": "Name must be at least 3 characters."
             }
         },
         "adminOfficerTitle": {
             "required": true,
             "message": {
-            "required": "Administering Officer's title is required."
+                "required": "Administering Officer's title is required."
             }
         },
         "adminOfficerAddress": {
             "required": true,
             "minLength": 5,
             "message": {
-            "required": "Administering Officer's address is required.",
-            "minLength": "Address must be at least 5 characters."
+                "required": "Administering Officer's address is required.",
+                "minLength": "Address must be at least 5 characters."
             }
         }
     },
@@ -918,7 +863,6 @@
                 "minLength": "Address must be at least 5 characters."
             }
         },
-
         "statement1OptionA": {
             "type": "boolean",
             "message": {
@@ -943,7 +887,6 @@
                 "required": "Date is required."
             }
         },
-
         "statement1OptionB": {
             "type": "boolean",
             "message": {
@@ -968,7 +911,6 @@
                 "required": "Date is required."
             }
         },
-
         "solemnizingOfficer": {
             "required": true,
             "minLength": 3,
@@ -977,13 +919,36 @@
                 "minLength": "Name must be at least 3 characters."
             }
         },
-
-        "ceremonyReligious": { "type": "boolean", "message": { "boolean": "Value must be true or false." } },
-        "ceremonyCivil": { "type": "boolean", "message": { "boolean": "Value must be true or false." } },
-        "ceremonyMuslim": { "type": "boolean", "message": { "boolean": "Value must be true or false." } },
-        "ceremonyTribal": { "type": "boolean", "message": { "boolean": "Value must be true or false." } },
-
-        "marriageWithLicense": { "type": "boolean", "message": { "boolean": "Value must be true or false." } },
+        "ceremonyReligious": {
+            "type": "boolean",
+            "message": {
+                "boolean": "Value must be true or false."
+            }
+        },
+        "ceremonyCivil": {
+            "type": "boolean",
+            "message": {
+                "boolean": "Value must be true or false."
+            }
+        },
+        "ceremonyMuslim": {
+            "type": "boolean",
+            "message": {
+                "boolean": "Value must be true or false."
+            }
+        },
+        "ceremonyTribal": {
+            "type": "boolean",
+            "message": {
+                "boolean": "Value must be true or false."
+            }
+        },
+        "marriageWithLicense": {
+            "type": "boolean",
+            "message": {
+                "boolean": "Value must be true or false."
+            }
+        },
         "marriageLicenseNo": {
             "required": false,
             "message": {
@@ -1002,15 +967,18 @@
                 "required": "Issued at place is required."
             }
         },
-
-        "marriageUnderArticle": { "type": "boolean", "message": { "boolean": "Value must be true or false." } },
+        "marriageUnderArticle": {
+            "type": "boolean",
+            "message": {
+                "boolean": "Value must be true or false."
+            }
+        },
         "articleNumber": {
             "required": false,
             "message": {
                 "required": "Article number is required."
             }
         },
-
         "citizenApplicant": {
             "required": true,
             "minLength": 3,
@@ -1027,7 +995,6 @@
                 "minLength": "Citizenship must be at least 3 characters."
             }
         },
-
         "reasonForDelay": {
             "required": true,
             "minLength": 5,
@@ -1036,7 +1003,6 @@
                 "minLength": "Reason must be at least 5 characters."
             }
         },
-
         "affidavitDay": {
             "required": true,
             "message": {
@@ -1067,6 +1033,75 @@
                 "minLength": "Place must be at least 3 characters."
             }
         }
+    },
+    "page10": {
+        "swornDay": {
+            "required": true,
+            "message": {
+                "required": "Day is required."
+            }
+        },
+        "swornMonth": {
+            "required": true,
+            "minLength": 3,
+            "message": {
+                "required": "Month is required.",
+                "minLength": "Month must be at least 3 characters."
+            }
+        },
+        "swornYear": {
+            "required": true,
+            "minLength": 4,
+            "message": {
+                "required": "Year is required.",
+                "minLength": "Year must be 4 digits."
+            }
+        },
+        "swornPlace": {
+            "required": true,
+            "minLength": 3,
+            "message": {
+                "required": "Place of oath is required.",
+                "minLength": "Place must be at least 3 characters."
+            }
+        },
+        "swornIssuedOn": {
+            "required": true,
+            "message": {
+                "required": "Issued on (date) is required."
+            }
+        },
+        "swornIssuedAt": {
+            "required": true,
+            "minLength": 3,
+            "message": {
+                "required": "Issued at (place) is required.",
+                "minLength": "Place must be at least 3 characters."
+            }
+        },
+        "administeringOfficerName": {
+            "required": true,
+            "minLength": 3,
+            "message": {
+                "required": "Name of administering officer is required.",
+                "minLength": "Name must be at least 3 characters."
+            }
+        },
+        "officerPosition": {
+            "required": true,
+            "minLength": 2,
+            "message": {
+                "required": "Position/Title/Designation is required.",
+                "minLength": "Position must be at least 2 characters."
+            }
+        },
+        "officerAddress": {
+            "required": true,
+            "minLength": 5,
+            "message": {
+                "required": "Address of officer is required.",
+                "minLength": "Address must be at least 5 characters."
+            }
+        }
     }
-
 }

@@ -1,6 +1,6 @@
 import Rules from './Rules.json'
 
-export function validateForm(data, page){
+export function validateForm(data, page) {
     const errors = {};
     const rules = Rules[`page${page}`];
     for (const field in rules) {
@@ -8,13 +8,33 @@ export function validateForm(data, page){
         const rule = rules[field];
 
         if (page === 5) {
-            if (data.certification === "license" && ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].includes(field)) {
-                rule.required = true;
+            if (data.certification === "license") {
+                // Only require Option A fields
+                ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].forEach(f => {
+                    if (rules[f]) rules[f].required = true;
+                });
+                if (rules.executiveOrder) rules.executiveOrder.required = false;
             }
-            if (data.certification === "noLicense" && field === "executiveOrder") {
-                rule.required = true;
+            else if (data.certification === "noLicense") {
+                // Only require Option B field
+                if (rules.executiveOrder) rules.executiveOrder.required = true;
+                ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].forEach(f => {
+                    if (rules[f]) rules[f].required = false;
+                });
+            }
+            else if (data.certification === "pd1083") {
+                // Option C selected → no extra required fields
+                if (rules.executiveOrder) rules.executiveOrder.required = false;
+                ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].forEach(f => {
+                    if (rules[f]) rules[f].required = false;
+                });
+            }
+            else {
+                // If no option selected at all
+                errors.certification = "Please select an option (a, b, or c).";
             }
         }
+
 
         if (page === 9) {
             // Statement 1
@@ -71,10 +91,10 @@ export function validateForm(data, page){
                 errors[field] = rule.message.number;
             } else {
                 if (rule.min !== undefined && num < rule.min) {
-                errors[field] = rule.message.min;
+                    errors[field] = rule.message.min;
                 }
                 if (rule.max !== undefined && num > rule.max) {
-                errors[field] = rule.message.max;
+                    errors[field] = rule.message.max;
                 }
             }
         }
@@ -87,7 +107,7 @@ export function validateForm(data, page){
         }
 
         if (rule.type === "time" && value) {
-        const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+            const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
             if (!timeRegex.test(value)) {
                 errors[field] = rule.message.time;
             }
