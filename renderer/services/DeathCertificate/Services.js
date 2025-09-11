@@ -26,3 +26,26 @@ export async function insertDeathCertificate(formData) {
         throw error;
     }
 }
+
+export async function listDeathCertificate() {
+    try {
+        const response = await fetch('http://localhost:3001/death/list', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            },
+            credentials: 'include' // include cookies/session if needed
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data; // { success, message, data }
+    } catch (error) {
+        console.error('[death form] Error fetching death certificates:', error);
+        throw error;
+    }
+}

@@ -14,3 +14,4 @@ export { default as SignaturePlaceholder } from './SignaturePlaceholder';
 export { default as BirthCertifcateForm } from './Forms/BirthCertifcateForm';
 
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
+export { default as DeathCertificateHome } from './Forms/DeathCertificate/DeathCertificateHome';

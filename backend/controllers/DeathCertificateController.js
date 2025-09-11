@@ -203,7 +203,29 @@ exports.create = (req, res) => {
 };
 
 // Placeholder for other CRUD operations
-exports.read = (req, res) => {};
+exports.list = (req, res) => {
+    console.log("🔍 Attempting to fetch death certificates..."); // Add this
+    db.all('SELECT * FROM deathcertificates', (err, rows) => {
+        if (err) {
+            console.error('❌ [DB Error]', err.message);
+            return res.status(500).json({
+                success: false,
+                message: 'Database fetch failed',
+                error: err.message
+            });
+        }
+        const list_of_death = rows;
+        // console.log("🟢 List of death certificates:", list_of_death.length, list_of_death);
+        res.status(200).json({
+            success: true,
+            message: 'Death Certificate List',
+            data: list_of_death
+        });
+    });
+};
+
+
+
 exports.update = (req, res) => {};
 exports.remove = (req, res) => {};
 exports.find = (req, res) => {};
