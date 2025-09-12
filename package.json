@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"cd renderer && npm run dev\" \"npm run electron\"",
-    "electron": "electron ."
+    "dev": "concurrently \"cd renderer && npm run dev\" \"npm run electron\" \"npm run server\"",
+    "electron": "electron .",
+    "server": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

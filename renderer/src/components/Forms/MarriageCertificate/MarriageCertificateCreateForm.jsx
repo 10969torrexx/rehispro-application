@@ -3,7 +3,7 @@ import SignaturePad from 'react-signature-canvas';
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { ErrorMessages, Divider, SignaturePlaceholder } from '@components';
-import { MarriageCertValidation } from '@services';
+import { MarriageCertValidation, MarriageCertServices } from '@services';
 import { MarriageCertificate } from '@enums';
 import { capitalizeFirst } from '../../../myTools/myTools';
 
@@ -330,17 +330,17 @@ export default function MarriageCertificateCreateForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Final Form Data:", formData);
-        BirthCertServices.insertBirthCertificate(formData)
+        MarriageCertServices.insertMarriageCertificate(formData)
             .then(response => {
-                console.log("[Birth Form]", response);
+                console.log("[Marriage Form]", response);
             })
             .catch(error => {
-                console.error("[Birth Form]:", error);
+                console.error("[Marriage Form]:", error);
             });
     }
     return (
         <>
-            <form className="p-4 h-full">
+            <form className="p-4 h-full" onSubmit={handleSubmit}>
                 {currentPage === 1 && (
                     <>
                         <h2 className="text-lg text-center font-semibold mb-3">{pageTitles[(currentPage) - 1]}</h2>
