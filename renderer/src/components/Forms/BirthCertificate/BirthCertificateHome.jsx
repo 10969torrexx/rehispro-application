@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { DeathCertServices } from "@services";
+import { BirthCertServices } from "@services";
 import { toast } from "react-toastify";
 import { Search } from "lucide-react"; 
 
-export default function DeathCertificateHome() {
-  const [list_of_death, setListOfDeath] = useState([]);
+export default function BirthCertificateHome() {
+  const [list_of_birth, setListOfBirth] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,12 +17,12 @@ export default function DeathCertificateHome() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await DeathCertServices.listDeathCertificate();
+        const response = await BirthCertServices.listBirthCertificate();
         if (response && response.success && response.data) {
-          setListOfDeath(response.data);
+          setListOfBirth(response.data);
         } else {
           const errorMsg =
-            response?.message || "Failed to load death certificates";
+            response?.message || "Failed to load birth certificates";
           setError(errorMsg);
           toast.error(errorMsg);
         }
@@ -30,7 +30,7 @@ export default function DeathCertificateHome() {
         const errorMessage =
           error.response?.data?.message ||
           error.message ||
-          "Failed to fetch death certificates";
+          "Failed to fetch birth certificates";
         setError(errorMessage);
         toast.error(errorMessage);
       } finally {
@@ -45,8 +45,8 @@ export default function DeathCertificateHome() {
   };
 
   // 🔎 Filter
-  const filteredData = list_of_death.filter((record) =>
-    `${record.first_name} ${record.middle_name || ""} ${record.last_name}`
+  const filteredData = list_of_birth.filter((record) =>
+    `${record.child_first_name} ${record.child_middle_name || ""} ${record.child_last_name}`
       .toLowerCase()
       .includes(search.toLowerCase())
   );
@@ -66,7 +66,7 @@ export default function DeathCertificateHome() {
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Search by name..."
+            placeholder="Search by child name..."
             className="border pl-9 pr-3 py-2 rounded-lg w-full focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm"
             value={search}
             onChange={(e) => {
@@ -95,43 +95,22 @@ export default function DeathCertificateHome() {
         <table className="min-w-full table-auto divide-y divide-gray-200 text-sm">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">
-                ID
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">
-                Deceased Name
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">
-                Sex
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">
-                Date of Death
-              </th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">
-                Place of Death
-              </th>
-              <th className="px-4 py-3 text-center font-semibold text-gray-600 uppercase text-xs">
-                Action
-              </th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">ID</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">Child Name</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">Sex</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">Date of Birth</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-600 uppercase text-xs">Place of Birth</th>
+              <th className="px-4 py-3 text-center font-semibold text-gray-600 uppercase text-xs">Action</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {paginatedData.map((record) => (
-              <tr
-                key={record.id}
-                className="hover:bg-gray-50 transition-colors"
-              >
+              <tr key={record.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-4 py-3">{record.id}</td>
-                <td className="px-4 py-3">{`${record.first_name} ${
-                  record.middle_name ? record.middle_name.charAt(0) + "." : ""
-                } ${record.last_name}`}</td>
+                <td className="px-4 py-3">{`${record.child_first_name} ${record.child_middle_name ? record.child_middle_name.charAt(0) + "." : ""} ${record.child_last_name}`}</td>
                 <td className="px-4 py-3">{record.sex}</td>
-                <td className="px-4 py-3">{record.date_of_death}</td>
-                <td className="px-4 py-3">
-                  {record.place_of_death
-                    ? `${record.city}, ${record.province}`
-                    : "N/A"}
-                </td>
+                <td className="px-4 py-3">{record.date_of_birth}</td>
+                <td className="px-4 py-3">{`${record.city || ""}, ${record.province || ""}`}</td>
                 <td className="px-4 py-3 text-center">
                   <button
                     onClick={() => handleView(record)}
@@ -145,10 +124,7 @@ export default function DeathCertificateHome() {
 
             {paginatedData.length === 0 && (
               <tr>
-                <td
-                  colSpan="6"
-                  className="px-4 py-6 text-center text-gray-500 text-sm"
-                >
+                <td colSpan="6" className="px-4 py-6 text-center text-gray-500 text-sm">
                   No records found
                 </td>
               </tr>
@@ -159,9 +135,7 @@ export default function DeathCertificateHome() {
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4 text-sm">
-        <span className="text-gray-600">
-          Page {currentPage} of {totalPages || 1}
-        </span>
+        <span className="text-gray-600">Page {currentPage} of {totalPages || 1}</span>
         <div className="flex space-x-2">
           <button
             disabled={currentPage === 1}
@@ -212,40 +186,16 @@ export default function DeathCertificateHome() {
             </button>
 
             <h3 className="text-lg font-semibold mb-4 border-b pb-2">
-              Death Certificate Details
+              Birth Certificate Details
             </h3>
             <div className="space-y-2 text-sm">
-              <p>
-                <b>Name:</b> {`${selectedRecord.first_name} ${
-                  selectedRecord.middle_name || ""
-                } ${selectedRecord.last_name}`}
-              </p>
-              <p>
-                <b>Sex:</b> {selectedRecord.sex}
-              </p>
-              <p>
-                <b>Age:</b> {selectedRecord.age_years}
-              </p>
-              <p>
-                <b>Date of Death:</b> {selectedRecord.date_of_death}
-              </p>
-              <p>
-                <b>Place of Death:</b>{" "}
-                {`${selectedRecord.place_of_death}, ${selectedRecord.city}, ${selectedRecord.province}`}
-              </p>
-              <p>
-                <b>Manner of Death:</b>{" "}
-                {selectedRecord.manner_of_death || "N/A"}
-              </p>
-              <p>
-                <b>Civil Status:</b> {selectedRecord.civil_status || "N/A"}
-              </p>
-              <p>
-                <b>Disposal:</b> {selectedRecord.disposal_type || "N/A"}
-              </p>
-              <p>
-                <b>Registrar:</b> {selectedRecord.registrar_name || "N/A"}
-              </p>
+              <p><b>Child Name:</b> {`${selectedRecord.child_first_name} ${selectedRecord.child_middle_name || ""} ${selectedRecord.child_last_name}`}</p>
+              <p><b>Sex:</b> {selectedRecord.sex}</p>
+              <p><b>Date of Birth:</b> {selectedRecord.date_of_birth}</p>
+              <p><b>Place of Birth:</b> {`${selectedRecord.city}, ${selectedRecord.province}`}</p>
+              <p><b>Mother:</b> {`${selectedRecord.maiden_first_name} ${selectedRecord.maiden_last_name}`}</p>
+              <p><b>Father:</b> {`${selectedRecord.father_first_name} ${selectedRecord.father_last_name}`}</p>
+              <p><b>Registrar:</b> {selectedRecord.registrar_name || "N/A"}</p>
             </div>
           </div>
         </div>

@@ -229,9 +229,27 @@ function create (req, res) {
 };
 
 
-function read() {
-
-}
+// LIST Death Certificate
+function list (req, res) {
+    console.log("🔍 Attempting to fetch birth certificates..."); // Add this
+    db.all('SELECT * FROM birthcertificates', (err, rows) => {
+        if (err) {
+            console.error('❌ [DB Error]', err.message);
+            return res.status(500).json({
+                success: false,
+                message: 'Database fetch failed',
+                error: err.message
+            });
+        }
+        const list_of_birth = rows;
+        // console.log("🟢 List of death certificates:", list_of_death.length, list_of_death);
+        res.status(200).json({
+            success: true,
+            message: 'Birth Certificate List',
+            data: list_of_birth
+        });
+    });
+};
 
 function update() {
 
@@ -247,7 +265,7 @@ function find() {
 
 module.exports = {
     create,
-    read,
+    list,
     update,
     remove,
     find

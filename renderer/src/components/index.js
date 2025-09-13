@@ -11,7 +11,8 @@ export { default as SignaturePlaceholder } from './SignaturePlaceholder';
  * TODO: export all form components
  * ? The following are the form components to be exported
  */
-export { default as BirthCertifcateForm } from './Forms/BirthCertifcateForm';
+export { default as BirthCertifcateForm } from './Forms/BirthCertificate/BirthCertifcateForm';
+export { default as BirthCertificateHome } from './Forms/BirthCertificate/BirthCertificateHome';
 
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
 export { default as DeathCertificateHome } from './Forms/DeathCertificate/DeathCertificateHome';

@@ -22,3 +22,27 @@ export async function insertBirthCertificate (formData) {
         throw error;
     }
 };
+
+
+export async function listBirthCertificate() {
+    try {
+        const response = await fetch('http://localhost:3001/birth/list', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            },
+            credentials: 'include' // include cookies/session if needed
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data; // { success, message, data }
+    } catch (error) {
+        console.error('[birth form] Error fetching birth certificates:', error);
+        throw error;
+    }
+}

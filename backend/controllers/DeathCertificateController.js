@@ -202,7 +202,7 @@ exports.create = (req, res) => {
     }
 };
 
-// Placeholder for other CRUD operations
+// LIST Death Certificate
 exports.list = (req, res) => {
     console.log("🔍 Attempting to fetch death certificates..."); // Add this
     db.all('SELECT * FROM deathcertificates', (err, rows) => {

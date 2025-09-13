@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { DocumentType } from '@enums';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
-import { InfoCard, BirthCertifcateForm } from '@components';
+import { InfoCard, BirthCertifcateForm, BirthCertificateHome } from '@components';
 
 export default function BirthCertificate() {
     const [userData, setUserData] = useState(null);
@@ -41,7 +41,19 @@ export default function BirthCertificate() {
                        </button>
                     </div>
                     <div id="managementContent" className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
-                        {activeTab === "home" && <div>Home Content</div>}
+                        {activeTab === "home" && 
+                            <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                            <div className="mb-4">
+                                <InfoCard 
+                                    title="List of Birth Certificates"
+                                    message="Browse and manage the official records of registered birth certificates"
+                                />
+                            </div>
+                            <div className="form-content mb-4">
+                                <BirthCertificateHome />
+                            </div>
+                        </div>   
+                        }
                         {activeTab === "upload" && <div>Upload Content</div>}
                         {activeTab === "create" && 
                             <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">

@@ -3,10 +3,10 @@ import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertValidation } from '@services';
 import { BirthCertificate, CivilStatus, MarriageStatus } from '@enums';
-import { capitalizeFirst } from '../../myTools/myTools';
+import { capitalizeFirst } from '../../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
-import { AllCaps } from '../../myTools/myTools';
+import { AllCaps } from '../../../myTools/myTools';
 import { BirthCertServices } from '@services';
  
 export default function BirthCertifcateForm() {
