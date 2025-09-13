@@ -3,6 +3,7 @@
  * @params {Object} formData - The form data to insert
  */
 export async function insertBirthCertificate (formData) {
+    console.log("📤 Sending formData:", formData);   // 👈 add this
     try {
         const response = await fetch('http://localhost:3001/birth/create', {
             method: 'POST',

@@ -207,6 +207,8 @@ db.serialize(() => {
     );
   `);
 
+  //TODO: create table for death certificates
+
   db.run(`
     CREATE TABLE IF NOT EXISTS deathcertificates (
       id INTEGER PRIMARY KEY AUTOINCREMENT,

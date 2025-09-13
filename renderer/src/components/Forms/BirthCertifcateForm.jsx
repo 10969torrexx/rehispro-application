@@ -267,16 +267,195 @@ export default function BirthCertifcateForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Final Form Data:", formData);
-        BirthCertServices.insertBirthCertificate(formData)
-        .then(response => {
+      
+        // flatten all page objects into one object
+        const flatData = Object.assign(
+          {},
+          formData.page1,
+          formData.page2,
+          formData.page3,
+          formData.page4,
+          formData.page5,
+          formData.page6,
+          formData.page7,
+          formData.page8,
+          formData.page9,
+          formData.page10,
+          formData.page11,
+          formData.page12,
+          formData.page13,
+          formData.page14
+        );
+      
+        console.log("Final Flat Birth Data:", flatData);
+      
+        BirthCertServices.insertBirthCertificate(flatData)
+          .then((response) => {
             console.log("[Birth Form]", response);
-        })
-        .catch(error => {
+            toast.success(response.message || "Birth certificate created successfully");
+      
+            // reset form state
+            setFormData({
+              page1: {
+                creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
+                creationType: BirthCertificate.CreationType.MANUAL,
+                province: "",
+                city: "",
+                childFirstName: "",
+                childMiddleName: "",
+                childLastName: "",
+                sex: "",
+                dateOfBirth: "",
+                typeOfBirth: "",
+                multipleBirthOrder: "",
+                birthOrder: "",
+                birthWeight: ""
+              },
+              page2: {
+                maidenFirstName: "",
+                maidenMiddleName: "",
+                maidenLastName: "",
+                citizenship: "",
+                religion: "",
+                childrenBornAlive: "",
+                childrenStillLiving: "",
+                childrenDeceased: "",
+                occupation: "",
+                ageAtBirth: "",
+                residenceHouse: "",
+                residenceCity: "",
+                residenceProvince: "",
+                residenceCountry: ""
+              },
+              page3: {
+                fatherFirstName: "",
+                fatherMiddleName: "",
+                fatherLastName: "",
+                fatherCitizenship: "",
+                fatherReligion: "",
+                fatherOccupation: "",
+                fatherAgeAtBirth: "",
+                fatherResidenceStreet: "",
+                fatherResidenceCity: "",
+                fatherResidenceProvince: "",
+                fatherResidenceCountry: ""
+              },
+              page4: {
+                dateOfMarriage: "",
+                marriageCity: "",
+                marriageProvince: "",
+                marriageCountry: ""
+              },
+              page5: {
+                attendantPhysician: false,
+                attendantNurse: false,
+                attendantMidwife: false,
+                attendantHilot: false,
+                attendantOthers: false,
+                attendantOthersSpecify: "",
+                dateOfAttendance: "",
+                attendantNameTitle: ""
+              },
+              page6: {
+                birthTime: "",
+                birthDate: "",
+                attendantName: "",
+                attendantTitle: "",
+                attendantAddress: "",
+                attendantDateSigned: "",
+                attendantSignature: ""
+              },
+              page7: {
+                informantName: "",
+                informantRelationship: "",
+                informantAddress: "",
+                informantDate: "",
+                preparedName: "",
+                preparedTitle: "",
+                preparedDate: ""
+              },
+              page8: {
+                receivedName: "",
+                receivedTitle: "",
+                receivedDate: "",
+                registrarSignature: "",
+                registrarName: "",
+                registrarTitle: "",
+                registrarDate: ""
+              },
+              page9: {
+                remarks: "",
+                officeBoxes: []
+              },
+              page10: {
+                motherName: "",
+                fatherName: "",
+                childName: "",
+                childBirthDate: "",
+                childBirthPlace: ""
+              },
+              page11: {
+                juratDay: "",
+                juratMonthYear: "",
+                juratAffiant1: "",
+                juratAffiant2: "",
+                ctcNumber: "",
+                ctcDateIssued: "",
+                ctcPlaceIssued: "",
+                adminName: "",
+                adminPosition: "",
+                adminAddress: "",
+                adminSignature: ""
+              },
+              page12: {
+                affiantName: "",
+                civilStatus: "",
+                address: "",
+                selfCheckbox: false,
+                selfPob: "",
+                selfDob: "",
+                childCheckbox: false,
+                childName: "",
+                childPob: "",
+                childDob: "",
+                attendantName: "",
+                attendantAddress: "",
+                citizenship: "",
+                parentsStatus: "",
+                marriageDate: "",
+                marriagePlace: "",
+                fatherName: "",
+                reasonDelay: "",
+                spouseApplicant: "",
+                spouseOwner: "",
+                affiantSignature: ""
+              },
+              page13: {
+                juratDay: "",
+                juratMonthYear: "",
+                juratPlace: "",
+                ctcNumber: "",
+                ctcIssuedOn: "",
+                ctcIssuedAt: "",
+                adminOfficerSignature: "",
+                adminOfficerName: "",
+                adminOfficerPosition: "",
+                adminOfficerAddress: ""
+              },
+              page14: {
+                confirmation: false
+              }
+            });
+      
+            setCurrentPage(1);
+            setErrors({});
+          })
+          .catch((error) => {
             console.error("[Birth Form]:", error);
-        });
-    }
-
+            toast.error(error.message || "Failed to create birth certificate");
+          });
+      };
+      
     return (
         <>
             <form className="p-4 h-full mb-4" onSubmit={handleSubmit}>
