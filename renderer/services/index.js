@@ -4,3 +4,6 @@ export * as BirthCertValidation from './BirthCertificate/Validation';
 
 export * as DeathCertServices from './DeathCertificate/Services';
 export * as DeathCertValidation from './DeathCertificate/Validation';
+export * as MarriageCertServices from './MarriageCertificate/Services';
+export * as BirthCertValidation from './BirthCertificate/Validation';
+export * as MarriageCertValidation from './MarriageCertificate/Validation';

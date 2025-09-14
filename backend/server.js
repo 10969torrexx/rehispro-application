@@ -96,8 +96,8 @@ app.post('/create-user', (req, res) => {
       if (err.message.includes("SQLITE_CONSTRAINT")) {
         return res.status(400).json({ success: false, message: "Duplicate user found" });
       }
-      return res.status(500).json({ 
-        success: false, 
+      return res.status(500).json({
+        success: false,
         message: err.message || 'Database error',
         data: null
       });
@@ -185,13 +185,12 @@ app.use('/birth/', birthCertificateRoutes);
 const deathCertificateRoutes = require('./routes/deathCertificate');
 app.use('/death', deathCertificateRoutes);
 
-
-
-
-
+//TODO: importing /routes marriageCertificate
+const marriageCertificateRoutes = require('./routes/marriageCertificate');
+app.use('/marriage/', marriageCertificateRoutes);
 
 //TODO: Start server
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const server = app.listen(PORT, () => {
   console.log(`✅ Backend running at http://localhost:${PORT}`);
 });

@@ -352,6 +352,92 @@ db.serialize(() => {
       deleted_at TIMESTAMP
     );
   `);
+  // TODO: Create Table for Marriage Certificate Form
+  db.run(`
+    CREATE TABLE IF NOT EXISTS marriage_certificates (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+      -- Page 1
+      province TEXT NOT NULL,
+      city TEXT NOT NULL,
+      registry INTEGER NOT NULL,
+      husbandFirstName TEXT NOT NULL,
+      husbandMiddleName TEXT NOT NULL,
+      husbandLastName TEXT NOT NULL,
+      husbandBirthDate DATE NOT NULL,
+      husbandAge INTEGER NOT NULL,
+      husbandBirthCity TEXT NOT NULL,
+      husbandBirthProvince TEXT NOT NULL,
+      husbandBirthCountry TEXT NOT NULL,
+      wifeFirstName TEXT NOT NULL,
+      wifeMiddleName TEXT NOT NULL,
+      wifeLastName TEXT NOT NULL,
+      wifeBirthDate DATE NOT NULL,
+      wifeAge INTEGER NOT NULL,
+      wifeBirthCity TEXT NOT NULL,
+      wifeBirthProvince TEXT NOT NULL,
+      wifeBirthCountry TEXT NOT NULL,
+
+      -- Page 2
+      husbandSex TEXT NOT NULL,
+      husbandCitizenship TEXT NOT NULL,
+      husbandResidenceBarangay TEXT NOT NULL,
+      husbandResidenceCity TEXT NOT NULL,
+      husbandResidenceProvince TEXT NOT NULL,
+      husbandResidenceCountry TEXT NOT NULL,
+      husbandReligion TEXT NOT NULL,
+      husbandCivilStatus TEXT NOT NULL,
+      husbandFatherNameFirst TEXT NOT NULL,
+      husbandFatherNameMiddle TEXT NOT NULL,
+      husbandFatherNameLast TEXT NOT NULL,
+      wifeSex TEXT NOT NULL,
+      wifeCitizenship TEXT NOT NULL,
+      wifeResidenceBarangay TEXT NOT NULL,
+      wifeResidenceCity TEXT NOT NULL,
+      wifeResidenceProvince TEXT NOT NULL,
+      wifeResidenceCountry TEXT NOT NULL,
+      wifeReligion TEXT NOT NULL,
+      wifeCivilStatus TEXT NOT NULL,
+      wifeFatherNameFirst TEXT NOT NULL,
+      wifeFatherNameMiddle TEXT NOT NULL,
+      wifeFatherNameLast TEXT NOT NULL,
+
+      -- Page 3 (example only, continue same style)
+      husbandFatherCitizenship TEXT,
+      husbandMotherNameFirst TEXT,
+      husbandMotherNameMiddle TEXT,
+      husbandMotherNameLast TEXT,
+      husbandMotherCitizenship TEXT,
+      wifeFatherCitizenship TEXT,
+      wifeMotherNameFirst TEXT,
+      wifeMotherNameMiddle TEXT,
+      wifeMotherNameLast TEXT,
+      wifeMotherCitizenship TEXT,
+
+      -- Boolean Example (stored as INTEGER 0/1)
+      statement2a BOOLEAN,
+      statement2b BOOLEAN,
+      statement2c BOOLEAN,
+      ceremonyReligious BOOLEAN,
+      ceremonyCivil BOOLEAN,
+      ceremonyMuslim BOOLEAN,
+      ceremonyTribal BOOLEAN,
+      marriageWithLicense BOOLEAN,
+      marriageUnderArticle BOOLEAN,
+
+      -- Page 4 (example)
+      placeOfMarriage TEXT,
+      dateOfMarriage DATE,
+      timeOfMarriage TIME,
+      marriageSettlement TEXT,
+
+      -- Meta
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+
 });
 
 module.exports = db;

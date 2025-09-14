@@ -15,7 +15,7 @@ export async function insertBirthCertificate (formData) {
         if (!response.ok) {
             throw new Error('Failed to insert birth certificate data');
         }
-        
+
         return await response.json();
     } catch (error) {
         console.error('[birth form] Error inserting birth certificate data:', error);

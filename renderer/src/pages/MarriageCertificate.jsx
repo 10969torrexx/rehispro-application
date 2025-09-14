@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { SideBar } from '@components';
+import { SideBar, InfoCard } from '@components';
 import { DocumentType } from '@enums';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
+import MarriageCertificateCreateForm from '@components/Forms/MarriageCertificate/MarriageCertificateCreateForm';
 
 export default function MarriageCertificate() {
     const [userData, setUserData] = useState(null);
@@ -26,23 +27,35 @@ export default function MarriageCertificate() {
                         <button className={`btn-${activeTab == 'home' ? 'primary' : 'secondary'} shadow-lg px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("home")}
                         >
-                           <i className="bi-house-door-fill"></i>
+                            <i className="bi-house-door-fill"></i>
                         </button>
                         <button className={`btn-${activeTab == 'upload' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("upload")}
                         >
-                           Upload
+                            Upload
                         </button>
-                       <button className={`btn-${activeTab == 'create' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
-                           onClick={() => setActiveTab("create")}
-                       >
-                           Create
-                       </button>
+                        <button className={`btn-${activeTab == 'create' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
+                            onClick={() => setActiveTab("create")}
+                        >
+                            Create
+                        </button>
                     </div>
-                    <div id="managementContent" className="p-4 bg-white w-full shadow-lg rounded-lg">
+                    <div id="managementContent" className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
                         {activeTab === "home" && <div>Home Content</div>}
                         {activeTab === "upload" && <div>Upload Content</div>}
-                        {activeTab === "create" && <div>Create Content</div>}
+                        {activeTab === "create" &&
+                            <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="Creating Marriage Certificates"
+                                        message="To create a marriage certificate, please fill out the form below with accurate information about the marriage event. Ensure all mandatory fields are completed before submitting the form."
+                                    />
+                                </div>
+                                <div className="form-content mb-4">
+                                    <MarriageCertificateCreateForm />
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
