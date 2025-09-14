@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"cd renderer && npm run dev\" \"npm run electron\"",
-    "electron": "electron ."
+    "dev": "concurrently \"cd renderer && npm run dev\" \"npm run electron\" \"npm run server\"",
+    "electron": "electron .",
+    "server": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "knex": "^3.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-signature-canvas": "^1.1.0-alpha.2",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
