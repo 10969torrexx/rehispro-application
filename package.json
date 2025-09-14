@@ -6,7 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"cd renderer && npm run dev\" \"npm run electron\" \"npm run server\"",
     "electron": "electron .",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "build": "cd renderer && npm run build",
+    "dist": "npm run build && electron-builder"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +20,6 @@
     "body-parser": "^2.2.0",
     "bootstrap-icons": "^1.13.1",
     "cors": "^2.8.5",
-    "electron": "^37.2.6",
     "express": "^5.1.0",
     "knex": "^3.1.0",
     "lucide-react": "^0.543.0",
@@ -31,8 +32,31 @@
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.2.0",
+    "electron-builder": "^26.0.12",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "vite": "^7.1.1"
+  },
+  "build": {
+    "appId": "com.rehispro.app",
+    "productName": "RehisPro",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "renderer/build/**/*",
+      "index.js",
+      "server.js",
+      "backend/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "database/",
+        "to": "database"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    }
   }
 }
