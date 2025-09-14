@@ -2,10 +2,14 @@
  * TODO: insert birth certificate data
  * @params {Object} formData - The form data to insert
  */
-export async function insertBirthCertificate (formData) {
+/**
+ * Insert death certificate data
+ * @param {Object} formData - The form data to insert
+ */
+export async function insertDeathCertificate(formData) {
     console.log("📤 Sending formData:", formData);   // 👈 add this
     try {
-        const response = await fetch('http://localhost:3001/birth/create', {
+        const response = await fetch('http://localhost:3001/death/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -13,20 +17,19 @@ export async function insertBirthCertificate (formData) {
             body: JSON.stringify(formData)
         });
         if (!response.ok) {
-            throw new Error('Failed to insert birth certificate data');
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to insert death certificate data');
         }
-
         return await response.json();
     } catch (error) {
-        console.error('[birth form] Error inserting birth certificate data:', error);
+        console.error('[death form] Error inserting death certificate data:', error);
         throw error;
     }
-};
+}
 
-
-export async function listBirthCertificate() {
+export async function listDeathCertificate() {
     try {
-        const response = await fetch('http://localhost:3001/birth/list', {
+        const response = await fetch('http://localhost:3001/death/list', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -42,7 +45,7 @@ export async function listBirthCertificate() {
 
         return data; // { success, message, data }
     } catch (error) {
-        console.error('[birth form] Error fetching birth certificates:', error);
+        console.error('[death form] Error fetching death certificates:', error);
         throw error;
     }
 }

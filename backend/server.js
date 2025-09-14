@@ -5,8 +5,27 @@ const usersController = require('./controllers/usersController');
 
 const app = express();
 
-app.use(cors());
-app.use(bodyParser.json());
+const allowedOrigins = [
+  'http://localhost:5173',   // dev
+  'app://.',                 // production Electron/Tauri app
+];
+
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return cb(null, true);
+    }
+    return cb(new Error('Not allowed by CORS'));
+  },
+  credentials: true
+}));
+
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+//this is just a just-in-case
+// app.use(express.json({ limit: '50mb' }));
+// app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 //TODO: handle user login
 app.post('/login', (req, res) => {
@@ -162,6 +181,10 @@ app.post('/update-user-details', (req, res) => {
 const birthCertificateRoutes = require('./routes/birthCertificate');
 app.use('/birth/', birthCertificateRoutes);
 
+//TODO: importing /routes deathCertificate
+const deathCertificateRoutes = require('./routes/deathCertificate');
+app.use('/death', deathCertificateRoutes);
+
 //TODO: importing /routes marriageCertificate
 const marriageCertificateRoutes = require('./routes/marriageCertificate');
 app.use('/marriage/', marriageCertificateRoutes);
@@ -171,5 +194,12 @@ const PORT = process.env.PORT || 3001;
 const server = app.listen(PORT, () => {
   console.log(`✅ Backend running at http://localhost:${PORT}`);
 });
+
+
+
+
+
+
+
 
 module.exports = server;
