@@ -10,5 +10,6 @@ router.get('/find', deathCertificateController.find);           // Retrieve a sp
 router.get('/list', deathCertificateController.list);          // List all death certificates
 router.put('/update/:id', deathCertificateController.update);  // Update a specific death certificate
 router.delete('/delete/:id', deathCertificateController.remove); // Delete a specific death certificate
+router.get('/view/:id', deathCertificateController.view);
 
 module.exports = router;

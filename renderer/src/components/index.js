@@ -16,3 +16,4 @@ export { default as BirthCertificateHome } from './Forms/BirthCertificate/BirthC
 
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
 export { default as DeathCertificateHome } from './Forms/DeathCertificate/DeathCertificateHome';
+export { default as DeathCertificateView } from './Forms/DeathCertificate/DeathCertificateView';
