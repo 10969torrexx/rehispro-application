@@ -327,12 +327,30 @@ export default function MarriageCertificateCreateForm() {
         });
     };
 
+    const initialFormData = {
+        page1: {},
+        page2: {},
+        page3: {},
+        page4: {},
+        page5: {},
+        page6: {},
+        page7: {},
+        page8: {},
+        page9: {},
+        page10: {},
+        page11: {},
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Final Form Data:", formData);
         MarriageCertServices.insertMarriageCertificate(formData)
             .then(response => {
                 console.log("[Marriage Form]", response);
+                toast.success("Marriage certificate added successfully!");
+
+                setFormData(initialFormData);
+                setCurrentPage(1);
             })
             .catch(error => {
                 console.error("[Marriage Form]:", error);

@@ -1,3 +1,4 @@
+// backend\controllers\MarriageCertificateController.js
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { logQuery, interpolateQuery } = require('../utils/querytrace');
@@ -104,6 +105,30 @@ function create(req, res) {
     }
 }
 
+function getAll(req, res) {
+    const query = `
+        SELECT 
+            id,
+            husbandFirstName || ' ' || husbandLastName AS husband,
+            wifeFirstName || ' ' || wifeLastName AS wife,
+            dateOfMarriage AS date,
+            placeOfMarriage AS place
+        FROM marriage_certificates
+        ORDER BY dateOfMarriage DESC
+    `;
+
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            writeLog("Error fetching marriage certificates", err);
+            return res.status(500).json({ success: false, error: err.message });
+        }
+        res.json({ success: true, data: rows });
+    });
+}
+
 module.exports = {
     create,
+    getAll,
 };
+
+

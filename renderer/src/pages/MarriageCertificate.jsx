@@ -3,6 +3,7 @@ import { SideBar, InfoCard } from '@components';
 import { DocumentType } from '@enums';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
 import MarriageCertificateCreateForm from '@components/Forms/MarriageCertificate/MarriageCertificateCreateForm';
+import MarriageCertificateHome from '@components/Forms/MarriageCertificate/MarriageCertificateHome';
 
 export default function MarriageCertificate() {
     const [userData, setUserData] = useState(null);
@@ -41,7 +42,19 @@ export default function MarriageCertificate() {
                         </button>
                     </div>
                     <div id="managementContent" className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
-                        {activeTab === "home" && <div>Home Content</div>}
+                        {activeTab === "home" &&
+                            <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="List of Marriage Certificates"
+                                        message="Browse and manage the official records of registered marriage certificates."
+                                    />
+                                </div>
+                                <div className="form-content mb-4">
+                                    <MarriageCertificateHome />
+                                </div>
+                            </div>
+                        }
                         {activeTab === "upload" && <div>Upload Content</div>}
                         {activeTab === "create" &&
                             <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
