@@ -1,3 +1,4 @@
+// backend\server.js
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -187,7 +188,7 @@ app.use('/death', deathCertificateRoutes);
 
 //TODO: importing /routes marriageCertificate
 const marriageCertificateRoutes = require('./routes/marriageCertificate');
-app.use('/marriage/', marriageCertificateRoutes);
+app.use('/marriage', marriageCertificateRoutes);
 
 //TODO: Start server
 const PORT = process.env.PORT || 3001;

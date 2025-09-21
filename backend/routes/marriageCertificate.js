@@ -1,3 +1,4 @@
+// backend\routes\marriageCertificate.js
 const express = require('express');
 const router = express.Router();
 const MarriageCertificateController = require('../controllers/MarriageCertificateController');
@@ -6,6 +7,7 @@ const MarriageCertificateController = require('../controllers/MarriageCertificat
  * TODO: implementing CRUD operations for birth certificates
  */
 router.post('/create', MarriageCertificateController.create);
+router.get('/list', MarriageCertificateController.getAll);
 
 // router.get('/:id', MarriageCertificateController.read);
 // router.put('/:id', MarriageCertificateController.update);
