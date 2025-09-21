@@ -16,6 +16,24 @@ exports.create = (req, res) => {
             return res.status(400).json({ success: false, message: 'Invalid or missing creator ID' });
         }
 
+        const attendant = flatData.attendant;
+        const attendantOthersSpecify = flatData.attendantOthersSpecify;
+        if(attendant === "Others") {
+            flatData.attendant = attendantOthersSpecify;
+            delete flatData.attendantOthersSpecify;
+        }
+        const attendedDeceased = flatData.attendedDeceased;
+        console.log("🟢 Attendant:", attendedDeceased);
+
+        if(attendedDeceased === true) {
+            flatData.attendedDeceased = "Yes";
+            delete flatData.notAttendedDeceased;
+        }
+        else {
+            flatData.attendedDeceased = "No";
+            delete flatData.notAttendedDeceased;
+        }
+        
         // Map frontend keys (camelCase) → DB keys (snake_case)
         const fieldMap = {
             // Page 1
@@ -69,16 +87,13 @@ exports.create = (req, res) => {
             mannerOfDeath: "manner_of_death",
             autopsy: "autopsy",
             placeOccurrence: "place_occurrence",
-            attendantPrivatePhysician: "attendant_private_physician",
-            attendantPublicHealth: "attendant_public_health",
-            attendantHospital: "attendant_hospital",
-            attendantNone: "attendant_none",
-            attendantOthers: "attendant_others",
-            attendantOthersSpecify: "attendant_others_specify",
+            attendant: "attendant",
             attendantFrom: "attendant_from",
             attendantTo: "attendant_to",
 
             // Page 6
+            attendedDeceased: "attended_deceased",
+            timeOfDeath: "time_of_death",
             physicianName: "physician_name",
             physicianTitle: "physician_title",
             physicianAddress: "physician_address",
@@ -171,9 +186,9 @@ exports.create = (req, res) => {
             VALUES (${placeholders})
         `;
 
-        console.log("🟢 Columns:", columns.length, columns);
-        console.log("🟢 Values:", values.length);
-        console.log("🟢 Query:", query);
+        // console.log("🟢 Columns:", columns.length, columns);
+        // console.log("🟢 Values:", values.length);
+        // console.log("🟢 Query:", query);
 
         db.run(query, values, function (err) {
             if (err) {
@@ -205,26 +220,85 @@ exports.create = (req, res) => {
 // LIST Death Certificate
 exports.list = (req, res) => {
     console.log("🔍 Attempting to fetch death certificates..."); // Add this
-    db.all('SELECT * FROM deathcertificates', (err, rows) => {
-        if (err) {
+    db.all(
+        `
+        SELECT 
+          id,
+          CONCAT_WS(' ', first_name, NULLIF(middle_name, ''), last_name) AS deceased_name,
+          sex,
+          DATE(created_at) AS created_at,
+          place_of_death,
+          city,
+          province
+        FROM deathcertificates
+        `,
+        (err, rows) => {
+          if (err) {
             console.error('❌ [DB Error]', err.message);
             return res.status(500).json({
-                success: false,
-                message: 'Database fetch failed',
-                error: err.message
+              success: false,
+              message: 'Database fetch failed',
+              error: err.message,
             });
-        }
-        const list_of_death = rows;
-        // console.log("🟢 List of death certificates:", list_of_death.length, list_of_death);
-        res.status(200).json({
+          }
+      
+          const list_of_death = rows;
+      
+          res.status(200).json({
             success: true,
             message: 'Death Certificate List',
-            data: list_of_death
-        });
-    });
-};
+            data: list_of_death,
+          });
+        }
+      );
+      };
+
+    // const id = req.params.id;
+    // db.get(
+    //     `SELECT * FROM deathcertificates WHERE id = ?`,
+    //     [id],
+    //     (err, row) => {
+    //       if (err) {
+    //         console.error('❌ [DB Error]', err.message);
+    //         return res.status(500).json({
+    //           success: false,
+    //           message: 'Database fetch failed',
+    //           error: err.message,
+    //         });
+    //       }
+      
+    //       const death_certificate = row;
+      
+    //       res.status(200).json({
+    //         success: true,
+    //         message: 'Death Certificate Found',
+    //         data: death_certificate,
+    //       });
+    //     }
+    //   );
+    
 
 
+    exports.view = async (req, res) => {
+        try {
+          const { id } = req.params;
+      
+          const [rows] = await db.query(
+            "SELECT * FROM deathcertificates WHERE id = ?",
+            [id]
+          );
+      
+          if (!rows.length) {
+            return res.status(404).json({ success: false, message: "Not found" });
+          }
+      
+          res.json({ success: true, data: rows[0] });
+        } catch (error) {
+          console.error("Error fetching certificate:", error);
+          res.status(500).json({ success: false, message: "Server error" });
+        }
+      };
+            
 
 exports.update = (req, res) => {};
 exports.remove = (req, res) => {};

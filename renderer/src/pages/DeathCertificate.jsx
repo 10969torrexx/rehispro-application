@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { DocumentType } from '@enums';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
-import { InfoCard, DeathCertificateCreate, DeathCertificateHome} from '@components';
+import { InfoCard, DeathCertificateCreate, DeathCertificateHome, DeathCertificateView } from '@components';
 
 export default function DeathCertificate() {
     const [userData, setUserData] = useState(null);
@@ -47,10 +47,10 @@ export default function DeathCertificate() {
                                 <InfoCard 
                                     title="List of Death Certificates"
                                     message="Browse and manage the official records of registered death certificates"
-                                />
+                                />  
                             </div>
                             <div className="form-content mb-4">
-                                <DeathCertificateHome />
+                                <DeathCertificateHome onView={() => setActiveTab("view")} />
                             </div>
                         </div>                        
                         }
@@ -69,6 +69,28 @@ export default function DeathCertificate() {
                                 </div>
                             </div>
                         }
+                        {activeTab === "view" && 
+                        <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                            <div className="mb-4">
+                                <div className="flex justify-end w-full">
+                                    <button 
+                                    className="btn-secondary shadow px-3 py-1 mb-2 rounded-full"
+                                    onClick={() => setActiveTab("home")}
+                                    >
+                                    ⬅ Back
+                                    </button>
+                                </div>
+                                <InfoCard 
+                                    title="Viewing Death Certificate"
+                                    message="Here is the full detail of the selected death certificate record."
+                                />
+                            </div>
+                            <div className="form-content mb-4">
+                            <DeathCertificateView />
+                            </div>
+                        </div>
+                        }
+
                     </div>
                 </div>
             </div>

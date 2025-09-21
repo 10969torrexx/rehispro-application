@@ -91,11 +91,7 @@ export default function DeathCertificateCreate() {
             mannerOfDeath: "",
             autopsy: "",
             placeOccurrence: "",
-            attendantPrivatePhysician: false,
-            attendantPublicHealth: false,
-            attendantHospital: false,
-            attendantNone: false,
-            attendantOthers: false,
+            attendant: "",
             attendantOthersSpecify: "",
             attendantFrom: "",
             attendantTo: ""
@@ -103,6 +99,9 @@ export default function DeathCertificateCreate() {
 
         // Page 6 - Certification of Death 
         page6: {
+            attendedDeceased: false,
+            notAttendedDeceased: false,
+            timeOfDeath: "",
             physicianName: "",
             physicianTitle: "",
             physicianAddress: "",
@@ -323,16 +322,15 @@ export default function DeathCertificateCreate() {
                         mannerOfDeath: "",
                         autopsy: "",
                         placeOccurrence: "",
-                        attendantPrivatePhysician: false,
-                        attendantPublicHealth: false,
-                        attendantHospital: false,
-                        attendantNone: false,
-                        attendantOthers: false,
+                        attendant: "",
                         attendantOthersSpecify: "",
                         attendantFrom: "",
                         attendantTo: ""
                     },
                     page6: {
+                        attendedDeceased: false,
+                        notAttendedDeceased: false,
+                        timeOfDeath: "",
                         physicianName: "",
                         physicianTitle: "",
                         physicianAddress: "",
@@ -511,10 +509,14 @@ export default function DeathCertificateCreate() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                 <div>
                                     <label className="block text-sm font-medium">Date of Death</label>
-                                    <input type="date" name="dateOfDeath" className={`w-full common-input ${errors.dateOfDeath ? 'input-error' : ''}`}
+                                    <input
+                                        type="date"
+                                        name="dateOfDeath"
+                                        className={`w-full common-input ${errors.dateOfDeath ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfDeath}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()} // 👈 open calendar when clicking anywhere
+                                        />
                                     {errors.dateOfDeath && <ErrorMessages errors={errors.dateOfDeath} />}
                                 </div>
                                 <div>
@@ -522,6 +524,7 @@ export default function DeathCertificateCreate() {
                                     <input type="date" name="dateOfBirth" className={`w-full common-input ${errors.dateOfBirth ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfBirth}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     {errors.dateOfBirth && <ErrorMessages errors={errors.dateOfBirth} />}
                                 </div>
@@ -975,56 +978,36 @@ export default function DeathCertificateCreate() {
                             </div>
                             {/* Attendant Type */}
                             <div className={`p-2 ${errors.attendantGroup ? 'input-error' : ''}`}>
-                                <label className="block w-full text-sm font-medium mb-1">Attended By</label>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <label className="flex items-center space-x-2">
-                                        <input type="checkbox" className={`custom-checkbox ${errors.attendantPrivatePhysician ? 'input-error' : ''}`} name="attendantPrivatePhysician" 
-                                            checked={formData.page5.attendantPrivatePhysician}
-                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
-                                        />
-                                        <span>Private Physician</span>
-                                    </label>
-                                    <label className="flex items-center space-x-2">
-                                        <input type="checkbox" className={`custom-checkbox ${errors.attendantPublicHealth ? 'input-error' : ''}`} name="attendantPublicHealth" 
-                                            checked={formData.page5.attendantPublicHealth}
-                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
-                                        />
-                                        <span>Public Health Authority</span>
-                                    </label>
-                                    <label className="flex items-center space-x-2">
-                                        <input type="checkbox" className={`custom-checkbox ${errors.attendantHospital ? 'input-error' : ''}`} name="attendantHospital"
-                                            checked={formData.page5.attendantHospital}
-                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
-                                        />
-                                        <span>Hospital</span>
-                                    </label>
-                                    <label className="flex items-center space-x-2">
-                                        <input type="checkbox" className={`custom-checkbox ${errors.attendantNone ? 'input-error' : ''}`} name="attendantNone" 
-                                            checked={formData.page5.attendantNone}
-                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
-                                        />
-                                        <span>None</span>
-                                    </label>
-                                    <label className="flex items-center space-x-2">
-                                        <input type="checkbox" className={`custom-checkbox ${errors.attendantOthers ? 'input-error' : ''}`} name="attendantOthers"
-                                            checked={formData.page5.attendantOthers}
-                                            onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
-                                        />
-                                        <span>Others (Specify)</span>
-                                    </label>
-                                </div>
+                            <label className="block w-full text-sm font-medium mb-1">Attended By</label>
+                            
+                            <select
+                                name="attendant"
+                                className={`common-input w-full ${errors.attendant ? 'input-error' : ''}`}
+                                value={formData.page5.attendant || ""}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                            >
+                                <option value="">Select</option>
+                                <option value="Private Physician">Private Physician</option>
+                                <option value="Public Health Authority">Public Health Authority</option>
+                                <option value="Hospital">Hospital</option>
+                                <option value="None">None</option>
+                                <option value="Others">Others (Specify)</option>
+                            </select>
+
+                            {formData.page5.attendant === "Others" && (
                                 <input
-                                    type="text"
-                                    name="attendantOthersSpecify"
-                                    placeholder="Specify"
-                                    className={`common-input mt-2 w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
-                                    value={formData.page5.attendantOthersSpecify}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    disabled={!formData.page5.attendantOthers}
+                                type="text"
+                                name="attendantOthersSpecify"
+                                placeholder="Specify"
+                                className={`common-input mt-2 w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
+                                value={formData.page5.attendantOthersSpecify}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
-                                {errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} />}
+                            )}
+
+                            {errors.attendant && <ErrorMessages errors={errors.attendant} />}
+                            {errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} />}
                             </div>
-                            {errors.attendantGroup && <ErrorMessages errors={errors.attendantGroup} />}  
 
                             {/* Attendant Duration */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1033,6 +1016,7 @@ export default function DeathCertificateCreate() {
                                     <input type="date" name="attendantFrom" className={`w-full common-input ${errors.attendantFrom ? 'input-error' : ''}`}
                                         value={formData.page5.attendantFrom}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     {errors.attendantFrom && <ErrorMessages errors={errors.attendantFrom} />}
                                 </div>
@@ -1041,6 +1025,7 @@ export default function DeathCertificateCreate() {
                                     <input type="date" name="attendantTo" className={`w-full common-input ${errors.attendantTo ? 'input-error' : ''}`}
                                         value={formData.page5.attendantTo}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     {errors.attendantTo && <ErrorMessages errors={errors.attendantTo} />}
                                 </div>
@@ -1048,45 +1033,169 @@ export default function DeathCertificateCreate() {
                         </div>
                     }
 
-                    {currentPage === 6 && 
-                        <div className="mb-6 space-y-6">
-                            <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
-                            {/* Physician Certification */}
-                            <div>
-                                <label className="block text-sm font-medium">Name in Print</label>
-                                <input type="text" name="physicianName" placeholder="Full Name" className={`w-full common-input ${errors.physicianName ? 'input-error' : ''}`}
-                                    value={formData.page6.physicianName}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.physicianName && <ErrorMessages errors={errors.physicianName} />}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium">Title or Position</label>
-                                <input type="text" name="physicianTitle" placeholder="Title/Position" className={`w-full common-input ${errors.physicianTitle ? 'input-error' : ''}`}
-                                    value={formData.page6.physicianTitle}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.physicianTitle && <ErrorMessages errors={errors.physicianTitle} />}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium">Address</label>
-                                <input type="text" name="physicianAddress" placeholder="Address" className={`w-full common-input ${errors.physicianAddress ? 'input-error' : ''}`}
-                                    value={formData.page6.physicianAddress}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.physicianAddress && <ErrorMessages errors={errors.physicianAddress} />}
-                            </div>
-                            {/* Reviewed By */}
-                            <div>
-                                <label className="block text-sm font-medium">Reviewed By (Health Officer Name)</label>
-                                <input type="text" name="healthOfficerName" placeholder="Full Name" className={`w-full common-input ${errors.healthOfficerName ? 'input-error' : ''}`}
-                                    value={formData.page6.healthOfficerName}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.healthOfficerName && <ErrorMessages errors={errors.healthOfficerName} />}
-                            </div>
-                        </div>
-                    }
+{currentPage === 6 && 
+  <div className="mb-6 space-y-8">
+    <h2 className="text-lg text-center font-semibold">
+      {pageTitles[currentPage - 1]}
+    </h2>
+
+    {/* Certification Oath */}
+    <div className="text-sm leading-relaxed flex flex-wrap items-center">
+        <span>
+            I hereby certify that the foregoing particulars are correct as near as same can be ascertained and I further certify that I
+        </span>
+
+        <div className={`p-2 ${errors.attendedDeceasedGroup ? 'input-error' : ''}`}>  
+            <div className="flex items-center space-x-2">
+                <label className="inline-flex items-center mx-2">
+                <input 
+                    type="checkbox" 
+                    name="attendedDeceased" 
+                    className="custom-checkbox w-4 h-4"
+                    checked={formData.page6.attendedDeceased || false}
+                    onChange={() => {
+                    handleInputChange(
+                        { target: { name: "attendedDeceased", value: !formData.page6.attendedDeceased } },
+                        `page${currentPage}`
+                    );
+                    handleInputChange(
+                        { target: { name: "notAttendedDeceased", value: false } },
+                        `page${currentPage}`
+                    );
+                    }}
+                />
+                <span className="ml-1">have attended</span>
+                </label>
+
+                <span>/</span>
+
+                <label className="inline-flex items-center mx-2">
+                <input 
+                    type="checkbox" 
+                    name="notAttendedDeceased" 
+                    className="custom-checkbox w-4 h-4"
+                    checked={formData.page6.notAttendedDeceased || false}
+                    onChange={() => {
+                    handleInputChange(
+                        { target: { name: "notAttendedDeceased", value: !formData.page6.notAttendedDeceased } },
+                        `page${currentPage}`
+                    );
+                    handleInputChange(
+                        { target: { name: "attendedDeceased", value: false } },
+                        `page${currentPage}`
+                    );
+                    }}
+                />
+                <span className="ml-1">have not attended</span>
+                </label>
+            </div>
+
+            {errors.attendedDeceasedGroup && (
+                <p className="text-red-500 text-sm mt-1">{errors.attendedDeceasedGroup}</p>
+            )}
+            </div>
+        </div>
+        <span>the deceased and that death occurred at</span>
+            <input 
+                type="time" 
+                name="timeOfDeath" 
+                className={`common-input inline-block  px-2 py-2 mx-2 ${errors.timeOfDeath ? 'input-error' : ''}`}
+                value={formData.page6.timeOfDeath || ""}
+                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                onClick={(e) => e.target.showPicker && e.target.showPicker()}
+            />
+            {errors.timeOfDeath && <ErrorMessages errors={errors.timeOfDeath} />}
+
+
+
+    {/* Physician Info */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label className="block text-sm font-medium mb-1">Signature</label>
+        <div className="flex flex-col">
+          <SignaturePlaceholder />
+        </div>
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Name in Print</label>
+        <input 
+          type="text" 
+          name="physicianName" 
+          placeholder="Full Name"
+          className={`w-full common-input ${errors.physicianName ? 'input-error' : ''}`} 
+          value={formData.page6.physicianName || ""}
+          onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+        />
+        {errors.physicianName && <ErrorMessages errors={errors.physicianName} />}
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Title or Position</label>
+        <input 
+          type="text" 
+          name="physicianTitle" 
+          placeholder="Title/Position"
+          className={`w-full common-input ${errors.physicianTitle ? 'input-error' : ''}`} 
+          value={formData.page6.physicianTitle || ""}
+          onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+        />
+        {errors.physicianTitle && <ErrorMessages errors={errors.physicianTitle} />}
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Address</label>
+        <input 
+          type="text" 
+          name="physicianAddress" 
+          placeholder="Address"
+          className={`w-full common-input ${errors.physicianAddress ? 'input-error' : ''}`} 
+          value={formData.page6.physicianAddress || ""}
+          onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+        />
+        {errors.physicianAddress && <ErrorMessages errors={errors.physicianAddress} />}
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Date</label>
+        <input 
+          type="date" 
+          name="certificationDate" 
+          className={`w-full common-input ${errors.certificationDate ? 'input-error' : ''}`} 
+          value={formData.page6.certificationDate || ""}
+          onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+          onClick={(e) => e.target.showPicker && e.target.showPicker()}
+        />
+        {errors.certificationDate && <ErrorMessages errors={errors.certificationDate} />}
+      </div>
+    </div>
+
+    {/* Reviewed By */}
+    <div className="space-y-4">
+      <p className="font-medium text-sm">REVIEWED BY:</p>
+      <div>
+        <label className="block text-sm font-medium mb-1">Signature Over Printed Name of Health Officer</label>
+        <input 
+          type="text" 
+          name="healthOfficerName" 
+          placeholder="Full Name"
+          className={`w-full common-input ${errors.healthOfficerName ? 'input-error' : ''}`} 
+          value={formData.page6.healthOfficerName || ""}
+          onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+        />
+        {errors.healthOfficerName && <ErrorMessages errors={errors.healthOfficerName} />}
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Date</label>
+        <input 
+          type="date" 
+          name="reviewedDate" 
+          className={`w-full common-input ${errors.reviewedDate ? 'input-error' : ''}`} 
+          value={formData.page6.reviewedDate || ""}
+          onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+          onClick={(e) => e.target.showPicker && e.target.showPicker()}
+        />
+        {errors.reviewedDate && <ErrorMessages errors={errors.reviewedDate} />}
+      </div>
+    </div>
+  </div>
+}
 
                     {currentPage === 7 && 
                         <div className="mb-6 space-y-6">
@@ -1120,6 +1229,7 @@ export default function DeathCertificateCreate() {
                                     <input type="date" name="permitDate" className={`w-full common-input ${errors.permitDate ? 'input-error' : ''}`}
                                         value={formData.page7.permitDate}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     {errors.permitDate && <ErrorMessages errors={errors.permitDate} />}
                                 </div>
@@ -1198,6 +1308,7 @@ export default function DeathCertificateCreate() {
                                         className={`w-full common-input ${errors.informantDate ? 'input-error' : ''}`} 
                                         value={formData.page8.informantDate}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     {errors.informantDate && <ErrorMessages errors={errors.informantDate} />}
                                 </div>
@@ -1235,6 +1346,7 @@ export default function DeathCertificateCreate() {
                                             className={`w-full common-input ${errors.preparedDate ? 'input-error' : ''}`} 
                                             value={formData.page8.preparedDate}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                         />
                                         {errors.preparedDate && <ErrorMessages errors={errors.preparedDate} />}
                                     </div>
@@ -1278,6 +1390,7 @@ export default function DeathCertificateCreate() {
                                             className={`w-full common-input ${errors.receivedDate ? 'input-error' : ''}`} 
                                             value={formData.page9.receivedDate}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                         />
                                         {errors.receivedDate && <ErrorMessages errors={errors.receivedDate} />}
                                     </div>
@@ -1315,6 +1428,7 @@ export default function DeathCertificateCreate() {
                                             className={`w-full common-input ${errors.registrarDate ? 'input-error' : ''}`}
                                             value={formData.page9.registrarDate}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                         />
                                         {errors.registrarDate && <ErrorMessages errors={errors.registrarDate} />}
                                     </div>
@@ -1383,6 +1497,7 @@ export default function DeathCertificateCreate() {
                                 <input type="date" name="postmortemDate" className={`w-full common-input ${errors.postmortemDate ? 'input-error' : ''}`}
                                     value={formData.page11.postmortemDate}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.postmortemDate && <ErrorMessages errors={errors.postmortemDate} />}
                             </div>
@@ -1409,6 +1524,7 @@ export default function DeathCertificateCreate() {
                                     <input type="date" name="embalmerIssuedOn" className={`w-full common-input ${errors.embalmerIssuedOn ? 'input-error' : ''}`}
                                         value={formData.page11.embalmerIssuedOn}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     {errors.embalmerIssuedOn && <ErrorMessages errors={errors.embalmerIssuedOn} />}
                                 </div>
@@ -1426,6 +1542,7 @@ export default function DeathCertificateCreate() {
                                 <input type="date" name="embalmerExpiry" className={`w-full common-input ${errors.embalmerExpiry ? 'input-error' : ''}`}
                                     value={formData.page11.embalmerExpiry}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.embalmerExpiry && <ErrorMessages errors={errors.embalmerExpiry} />}
                             </div>
@@ -1500,6 +1617,7 @@ export default function DeathCertificateCreate() {
                                 <input type="date" name="deathDate" className={`common-input ${errors.deathDate ? 'input-error' : ''}`}
                                   value={formData.page12.deathDate}
                                   onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                  onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.deathDate && <ErrorMessages errors={errors.deathDate} />}
                               </div>

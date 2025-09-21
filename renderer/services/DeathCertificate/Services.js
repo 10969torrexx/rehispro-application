@@ -49,3 +49,30 @@ export async function listDeathCertificate() {
         throw error;
     }
 }
+
+
+/**
+ * View death certificate data
+ * @param {string|number} id - The ID of the death certificate
+ */
+export async function viewDeathCertificate(id) {
+    try {
+        const response = await fetch(`http://localhost:3001/death/view?id=${id}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data; // { success, message, data }
+    } catch (error) {
+        console.error('[death form] Error viewing death certificate:', error);
+        throw error;
+    }
+}

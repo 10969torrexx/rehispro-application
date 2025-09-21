@@ -207,6 +207,8 @@ db.serialize(() => {
     );
   `);
 
+// db.run(`DROP TABLE IF EXISTS deathcertificates`);
+
   //TODO: create table for death certificates
 
   db.run(`
@@ -264,16 +266,13 @@ db.serialize(() => {
       manner_of_death TEXT,
       autopsy TEXT,
       place_occurrence TEXT,
-      attendant_private_physician INTEGER DEFAULT 0,
-      attendant_public_health INTEGER DEFAULT 0,
-      attendant_hospital INTEGER DEFAULT 0,
-      attendant_none INTEGER DEFAULT 0,
-      attendant_others INTEGER DEFAULT 0,
-      attendant_others_specify TEXT,
+      attendant TEXT,
       attendant_from DATE,
       attendant_to DATE,
   
       -- Page 6 - Certification of Death
+      attended_deceased TEXT,
+      time_of_death TEXT,
       physician_name TEXT,
       physician_title TEXT,
       physician_address TEXT,

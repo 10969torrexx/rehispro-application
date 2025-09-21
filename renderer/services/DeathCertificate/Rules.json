@@ -369,43 +369,17 @@
       "enum": "Please select a valid place of occurrence."
       }
     },
-    "attendantGroup": {
-      "requiredOneOf": [
-      "attendantPrivatePhysician",
-      "attendantPublicHealth",
-      "attendantHospital",
-      "attendantNone",
-      "attendantOthers"
-      ],
-      "message": "Please select at least one type of medical attendance."
-    },
-    "attendantPrivatePhysician": {
-      "required": false,
-      "type": "boolean",
-      "message": "Check if attended by private physician."
-    },
-    "attendantPublicHealth": {
-      "required": false,
-      "type": "boolean",
-      "message": "Check if attended by public health officer."
-    },
-    "attendantHospital": {
-      "required": false,
-      "type": "boolean",
-      "message": "Check if attended by hospital staff."
-    },
-    "attendantNone": {
-      "required": false,
-      "type": "boolean",
-      "message": "Check if no medical attendance."
-    },
-    "attendantOthers": {
-      "required": false,
-      "type": "boolean",
-      "message": "Check if other type of attendance."
+    "attendant": {
+      "required": true,
+      "type": "enum",
+      "options": ["Private Physician", "Public Health Authority", "Hospital", "None", "Others"],
+      "message": {
+      "required": "Attended by is required.",
+      "enum": "Please select a valid attended by."
+      }
     },
     "attendantOthersSpecify": {
-      "requiredIf": "attendantOthers",
+      "requiredIf": "attendant === 'Others",
       "type": "string",
       "maxLength": 100,
       "message": {
@@ -431,6 +405,21 @@
     }
   },
   "page6": {
+    "attendedDeceasedGroup": {
+      "requiredOneOf": [
+      "notAttendedDeceased",
+      "attendedDeceased"
+      ],
+      "message": "Please select at least one of these."
+    },
+    "timeOfDeath": {
+      "required": true,
+      "type": "date",
+      "message": {
+        "required": "TIme of Death is required.",
+        "date": "Invalid TIme of Death."
+      }
+    },
     "physicianName": {
       "required": true,
       "type": "string",
