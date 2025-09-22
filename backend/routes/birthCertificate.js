@@ -10,5 +10,6 @@ const BirthCertificateController = require('../controllers/BirthCertificateContr
     router.put('/:id', BirthCertificateController.update);
     router.delete('/:id', BirthCertificateController.remove);
     router.post('/', BirthCertificateController.find);
+    router.get('/scan', BirthCertificateController.scanImage);
 
 module.exports = router;

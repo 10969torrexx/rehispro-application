@@ -3,6 +3,8 @@ const db = require('../db');
 const bcrypt = require('bcryptjs');
 const { writeLog } = require('../utils/logger');
 const { logQuery, interpolateQuery } = require('../utils/querytrace');
+const Tesseract = require('tesseract.js');
+const path = require('path');
 
 function create (req, res) {
     try {
@@ -260,7 +262,16 @@ function remove() {
 }
 
 function find() {
+}
 
+async function scanImage() {
+  const { data: { text } } = await Tesseract.recognize(
+    '/sampledata/cert_livebirth.jpg',
+    'eng',
+    { logger: info => console.log(info) }
+  );
+
+  console.log("Extracted text:", text);
 }
 
 module.exports = {
@@ -268,5 +279,6 @@ module.exports = {
     list,
     update,
     remove,
-    find
+    find,
+    scanImage
 };
