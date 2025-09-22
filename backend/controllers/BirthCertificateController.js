@@ -164,12 +164,12 @@ function create (req, res) {
             affiantSignature: "affiant_signature",
           
             // Page 13 - Final Jurat / Affidavit
-            juratDay: "final_jurat_day",
-            juratMonthYear: "final_jurat_month_year",
-            juratPlace: "final_jurat_place",
-            ctcNumber: "final_ctc_number",
-            ctcIssuedOn: "final_ctc_issued_on",
-            ctcIssuedAt: "final_ctc_issued_at",
+            finalJuratDay: "final_jurat_day",
+            finalJuratMonthYear: "final_jurat_month_year",
+            finalJuratPlace: "final_jurat_place",
+            finalCtcNumber: "final_ctc_number",
+            finalCtcIssuedOn: "final_ctc_issued_on",
+            finalCtcIssuedAt: "final_ctc_issued_at",
             adminOfficerSignature: "admin_officer_signature",
             adminOfficerName: "admin_officer_name",
             adminOfficerPosition: "admin_officer_position",
@@ -232,7 +232,19 @@ function create (req, res) {
 // LIST Death Certificate
 function list (req, res) {
     console.log("🔍 Attempting to fetch birth certificates..."); // Add this
-    db.all('SELECT * FROM birthcertificates', (err, rows) => {
+    db.all(
+        `
+        SELECT 
+        id, 
+        CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
+        sex, 
+        CONCAT(mother_first_name, " ", mother_middle_name, " ", mother_last_name) AS mother_name,
+        CONCAT(father_first_name, " ", father_middle_name, " ", father_last_name) AS father_name,
+        DATE(created_at) AS created_at, 
+        CONCAT(city, ", ", province) AS residence 
+        FROM birthcertificates
+        `, 
+        (err, rows) => {
         if (err) {
             console.error('❌ [DB Error]', err.message);
             return res.status(500).json({
@@ -259,8 +271,31 @@ function remove() {
 
 }
 
-function find() {
+function view(req, res) {
+    console.log("Attempting to fetch birth certificate with ID:", req.params.id);
 
+    db.get(
+      `SELECT * FROM birthcertificates WHERE id = ?`,
+      [req.params.id],
+      (err, row) => {
+        if (err) {
+          console.error('❌ [DB Error]', err.message);
+          return res.status(500).json({
+            success: false,
+            message: 'Database fetch failed',
+            error: err.message,
+          });
+        }
+    
+        const birth_certificate = row;
+    
+        res.status(200).json({
+          success: true,
+          message: 'Birth Certificate Found',
+          data: birth_certificate,
+        });
+      }
+    );
 }
 
 module.exports = {
@@ -268,5 +303,5 @@ module.exports = {
     list,
     update,
     remove,
-    find
+    view
 };

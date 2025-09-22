@@ -1,15 +1,41 @@
-import React from 'react';
-import { Divider } from '@components';
-import { InfoCard } from '@components';
+import { useEffect } from 'react';
 import { SignaturePlaceholder } from '@components';
+import { DeathCertServices } from "@services";
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
-export default function DeathCertificateView() {
+export default function DeathCertificateView({ row }) {
+    const [loading, setLoading] = useState(true);
+    const [deceased, setDeceased] = useState({});
+  
+    useEffect(() => {
+      if (!row) return; // ✅ avoid undefined
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+          const response = await DeathCertServices.viewDeathCertificate(row.id);
+          if (response && response.success && response.data) {
+            setDeceased(response.data);
+          } else {
+            toast.error(response?.message || "Failed to load death certificates");
+          }
+        } catch (error) {
+          toast.error(error.message || "Failed to fetch death certificates");
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchData();
+    }, [row]); // ✅ re-fetch if row changes
+    console.log(deceased);
+
     return (
         <>
             <div className="p-4 h-full mb-4 max-w-4xl mx-auto">
                 <div className='mb-4'>
                     <div className="mb-4 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Deceased's Information</h2>
                         {/* Province & City / Municipality */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex flex-col">
@@ -19,6 +45,7 @@ export default function DeathCertificateView() {
                                     name="province"
                                     placeholder="Province"
                                     className="common-input"
+                                    value={deceased.province || ''}
                                     readOnly
                                 />
                             </div>  
@@ -29,11 +56,12 @@ export default function DeathCertificateView() {
                                     name="city"
                                     placeholder="City / Municipality"
                                     className="common-input"
+                                    value={deceased.city || ''}
                                     readOnly
                                 />
                             </div>
                         </div>
-
+    
                         {/* Deceased's Name */}
                         <div>
                             <label className="block text-sm font-medium">Deceased's Name</label>
@@ -44,6 +72,7 @@ export default function DeathCertificateView() {
                                         name="firstName"
                                         placeholder="First"
                                         className="common-input"
+                                        value={deceased.first_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -53,6 +82,7 @@ export default function DeathCertificateView() {
                                         name="middleName"
                                         placeholder="Middle (Optional)"
                                         className="common-input"
+                                        value={deceased.middle_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -62,22 +92,23 @@ export default function DeathCertificateView() {
                                         name="lastName"
                                         placeholder="Last"
                                         className="common-input"
+                                        value={deceased.last_name || ''}
                                         readOnly
                                     />
                                 </div>
                             </div>
                         </div>
-                
+                    
                         {/* Sex */}
                         <div>
                             <label className="block text-sm font-medium">Sex</label>
-                            <select name="sex" className="w-full common-input" disabled>
+                            <select name="sex" className="w-full common-input" value={deceased.sex || ''} readonly>
                                 <option value="">Select</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
-
+    
                         {/* Date of Death & Date of Birth */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                             <div>
@@ -86,6 +117,7 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="dateOfDeath"
                                     className="w-full common-input"
+                                    value={deceased.date_of_death || ''}
                                     readOnly
                                 />
                             </div>
@@ -95,11 +127,12 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="dateOfBirth"
                                     className="w-full common-input"
+                                    value={deceased.date_of_birth || ''}
                                     readOnly
                                 />
                             </div>
                         </div>
-                
+                    
                         {/* Age at Time of Death */}
                         <div className="space-y-2">
                             <label className="block text-sm font-medium">Age at Time of Death</label>
@@ -112,6 +145,7 @@ export default function DeathCertificateView() {
                                             placeholder="Years"
                                             min="0"
                                             className="common-input w-full pr-16"
+                                            value={deceased.age_years || 0}
                                             readOnly
                                         />
                                         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
@@ -128,6 +162,7 @@ export default function DeathCertificateView() {
                                             min="0"
                                             max="365"
                                             className="common-input w-full pr-16"
+                                            value={deceased.age_days || 0}
                                             readOnly
                                         />
                                         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
@@ -144,6 +179,7 @@ export default function DeathCertificateView() {
                                             min="0"
                                             max="24"
                                             className="common-input w-full pr-16"
+                                            value={deceased.age_hours || 0}
                                             readOnly
                                         />
                                         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
@@ -160,6 +196,7 @@ export default function DeathCertificateView() {
                                             min="0"
                                             max="60"
                                             className="common-input w-full pr-16"
+                                            value={deceased.age_minutes || 0}
                                             readOnly
                                         />
                                         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
@@ -169,7 +206,7 @@ export default function DeathCertificateView() {
                                 </div>
                             </div>
                         </div>
-
+    
                         {/* Place of Death */}
                         <div>
                             <label className="block text-sm font-medium">Place of Death</label>
@@ -178,17 +215,18 @@ export default function DeathCertificateView() {
                                 name="placeOfDeath"
                                 placeholder="Hospital/Clinic/Institution/House No., St., Barangay, City/Mun, Province"
                                 className="w-full common-input"
+                                value={deceased.place_of_death || ''}
                                 readOnly
                             />
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Status & Residence</h2>
                         {/* Civil Status */}
                         <div>
                             <label className="block text-sm font-medium">Civil Status</label>
-                            <select name="civilStatus" className="w-full common-input" disabled>
+                            <select name="civilStatus" className="w-full common-input" value={deceased.civil_status || ''} readonly>
                                 <option value="">Select</option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
@@ -206,6 +244,7 @@ export default function DeathCertificateView() {
                                     name="religion"
                                     placeholder="Religion"
                                     className="w-full common-input"
+                                    value={deceased.religion || ''}
                                     readOnly
                                 />
                             </div>
@@ -216,11 +255,12 @@ export default function DeathCertificateView() {
                                     name="citizenship"
                                     placeholder="Citizenship"
                                     className="w-full common-input"
+                                    value={deceased.citizenship || ''}
                                     readOnly
                                 />
                             </div>
                         </div>
-
+    
                         {/* Residence */}
                         <div className="space-y-4">
                             <label className="block text-sm font-medium">Residence</label>
@@ -231,6 +271,7 @@ export default function DeathCertificateView() {
                                         name="residenceHouse"
                                         placeholder="House No."
                                         className="common-input"
+                                        value={deceased.residence_house || ''}
                                         readOnly
                                     />
                                 </div>
@@ -240,6 +281,7 @@ export default function DeathCertificateView() {
                                         name="residenceStreet"
                                         placeholder="Street"
                                         className="common-input"
+                                        value={deceased.residence_street || ''}
                                         readOnly
                                     />
                                 </div>
@@ -251,6 +293,7 @@ export default function DeathCertificateView() {
                                         name="residenceBarangay"
                                         placeholder="Barangay"
                                         className="common-input"
+                                        value={deceased.residence_barangay || ''}
                                         readOnly
                                     />
                                 </div>
@@ -260,6 +303,7 @@ export default function DeathCertificateView() {
                                         name="residenceCity"
                                         placeholder="City / Municipality"
                                         className="common-input"
+                                        value={deceased.residence_city || ''}
                                         readOnly
                                     />
                                 </div>
@@ -271,6 +315,7 @@ export default function DeathCertificateView() {
                                         name="residenceProvince"
                                         placeholder="Province"
                                         className="common-input"
+                                        value={deceased.residence_province || ''}
                                         readOnly
                                     />
                                 </div>
@@ -280,12 +325,13 @@ export default function DeathCertificateView() {
                                         name="residenceCountry"
                                         placeholder="Country"
                                         className="common-input"
+                                        value={deceased.residence_country || ''}
                                         readOnly
                                     />
                                 </div>
                             </div>
                         </div>
-
+    
                         {/* Occupation */}
                         <div>
                             <label className="block text-sm font-medium">Occupation</label>
@@ -294,13 +340,14 @@ export default function DeathCertificateView() {
                                 name="occupation"
                                 placeholder="Occupation"
                                 className="w-full common-input"
+                                value={deceased.occupation || ''}
                                 readOnly
                             />
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Parents' Information</h2>
                         {/* Father’s Name */}
                         <div className="mb-8">
                             <label className="block text-base font-semibold mb-2">Father’s Name</label>
@@ -311,6 +358,7 @@ export default function DeathCertificateView() {
                                         name="fatherFirstName"
                                         placeholder="First"
                                         className="w-full common-input"
+                                        value={deceased.father_first_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -320,6 +368,7 @@ export default function DeathCertificateView() {
                                         name="fatherMiddleName"
                                         placeholder="Middle"
                                         className="w-full common-input"
+                                        value={deceased.father_middle_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -329,12 +378,13 @@ export default function DeathCertificateView() {
                                         name="fatherLastName"
                                         placeholder="Last"
                                         className="w-full common-input"
+                                        value={deceased.father_last_name || ''}
                                         readOnly
                                     />
                                 </div>
                             </div>
                         </div>
-
+    
                         {/* Mother’s Maiden Name */}
                         <div className="mb-8">
                             <label className="block text-base font-semibold mb-2">Mother’s Maiden Name</label>
@@ -345,6 +395,7 @@ export default function DeathCertificateView() {
                                         name="motherFirstName"
                                         placeholder="First"
                                         className="w-full common-input"
+                                        value={deceased.mother_first_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -354,6 +405,7 @@ export default function DeathCertificateView() {
                                         name="motherMiddleName"
                                         placeholder="Middle"
                                         className="w-full common-input"
+                                        value={deceased.mother_middle_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -363,15 +415,16 @@ export default function DeathCertificateView() {
                                         name="motherLastName"
                                         placeholder="Last"
                                         className="w-full common-input"
+                                        value={deceased.mother_last_name || ''}
                                         readOnly
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Medical Certificate</h2>
                         {/* Causes of Death */}
                         <div>
                             <label className="block text-sm font-medium">Immediate Cause</label>
@@ -379,6 +432,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="immediateCause"
                                 className="w-full common-input"
+                                value={deceased.immediate_cause || ''}
                                 readOnly
                             />
                             <label className="block text-sm font-medium mt-2">Interval</label>
@@ -386,6 +440,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="intervalImmediate"
                                 className="w-full common-input"
+                                value={deceased.interval_immediate || ''}
                                 readOnly
                             />
                         </div>
@@ -395,6 +450,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="antecedentCause"
                                 className="w-full common-input"
+                                value={deceased.antecedent_cause || ''}
                                 readOnly
                             />
                             <label className="block text-sm font-medium mt-2">Interval</label>
@@ -402,6 +458,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="intervalAntecedent"
                                 className="w-full common-input"
+                                value={deceased.interval_antecedent || ''}
                                 readOnly
                             />
                         </div>
@@ -411,6 +468,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="underlyingCause"
                                 className="w-full common-input"
+                                value={deceased.underlying_cause || ''}
                                 readOnly
                             />
                             <label className="block text-sm font-medium mt-2">Interval</label>
@@ -418,6 +476,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="intervalUnderlying"
                                 className="w-full common-input"
+                                value={deceased.interval_underlying || ''}
                                 readOnly
                             />
                         </div>
@@ -427,6 +486,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="otherConditions"
                                 className="w-full common-input"
+                                value={deceased.other_conditions || ''}
                                 readOnly
                             />
                         </div>
@@ -435,7 +495,8 @@ export default function DeathCertificateView() {
                             <select
                                 name="maternalCondition"
                                 className="w-full common-input"
-                                disabled
+                                value={deceased.maternal_condition || ''}
+                                readonly
                             >
                                 <option value="">Select</option>
                                 <option value="Pregnant, not in labor">Pregnant, not in labor</option>
@@ -446,16 +507,17 @@ export default function DeathCertificateView() {
                             </select>
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Manner of Death & Attendant Details</h2>
                         {/* Manner of Death */}
                         <div>
                             <label className="block text-sm font-medium">Manner of Death</label>
                             <select
                                 name="mannerOfDeath"
                                 className="w-full common-input"
-                                disabled
+                                value={deceased.manner_of_death || ''}
+                                readonly
                             >
                                 <option value="">Select</option>
                                 <option value="Homicide">Homicide</option>
@@ -471,7 +533,8 @@ export default function DeathCertificateView() {
                             <select
                                 name="autopsy"
                                 className="w-full common-input"
-                                disabled
+                                value={deceased.autopsy || ''}
+                                readonly
                             >
                                 <option value="">Select</option>
                                 <option value="Yes">Yes</option>
@@ -484,7 +547,8 @@ export default function DeathCertificateView() {
                             <select
                                 name="placeOccurrence"
                                 className="w-full common-input"
-                                disabled
+                                value={deceased.place_occurrence || ''}
+                                readonly
                             >
                                 <option value="">Select</option>
                                 <option value="Home">Home</option>
@@ -500,7 +564,8 @@ export default function DeathCertificateView() {
                             <select
                                 name="attendant"
                                 className="common-input w-full"
-                                disabled
+                                value={deceased.attendant || ''}
+                                readonly
                             >
                                 <option value="">Select</option>
                                 <option value="Private Physician">Private Physician</option>
@@ -514,6 +579,7 @@ export default function DeathCertificateView() {
                                 name="attendantOthersSpecify"
                                 placeholder="Specify"
                                 className="common-input mt-2 w-full"
+                                value={deceased.attendant_others_specify || ''} // Assuming a column for this
                                 readOnly
                             />
                         </div>
@@ -525,6 +591,7 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="attendantFrom"
                                     className="w-full common-input"
+                                    value={deceased.attendant_from || ''}
                                     readOnly
                                 />
                             </div>
@@ -534,14 +601,15 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="attendantTo"
                                     className="w-full common-input"
+                                    value={deceased.attendant_to || ''}
                                     readOnly
                                 />
                             </div>
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Certification of Death</h2>
                         {/* Certification Oath */}
                         <div className="text-sm leading-relaxed flex flex-wrap items-center">
                             <span>
@@ -554,7 +622,8 @@ export default function DeathCertificateView() {
                                             type="checkbox"
                                             name="attendedDeceased"
                                             className="custom-checkbox w-4 h-4"
-                                            disabled
+                                            checked={deceased.attended_deceased === 'Yes'} // Assuming 'Yes'/'No' values
+                                            readOnly
                                         />
                                         <span className="ml-1">have attended</span>
                                     </label>
@@ -564,7 +633,8 @@ export default function DeathCertificateView() {
                                             type="checkbox"
                                             name="notAttendedDeceased"
                                             className="custom-checkbox w-4 h-4"
-                                            disabled
+                                            checked={deceased.attended_deceased === 'No'} // Assuming 'Yes'/'No' values
+                                            readOnly
                                         />
                                         <span className="ml-1">have not attended</span>
                                     </label>
@@ -575,10 +645,11 @@ export default function DeathCertificateView() {
                                 type="time"
                                 name="timeOfDeath"
                                 className="common-input inline-block px-2 py-2 mx-2"
+                                value={deceased.time_of_death || ''}
                                 readOnly
                             />
                         </div>
-
+    
                         {/* Physician Info */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -594,6 +665,7 @@ export default function DeathCertificateView() {
                                     name="physicianName"
                                     placeholder="Full Name"
                                     className="w-full common-input"
+                                    value={deceased.physician_name || ''}
                                     readOnly
                                 />
                             </div>
@@ -604,6 +676,7 @@ export default function DeathCertificateView() {
                                     name="physicianTitle"
                                     placeholder="Title/Position"
                                     className="w-full common-input"
+                                    value={deceased.physician_title || ''}
                                     readOnly
                                 />
                             </div>
@@ -614,6 +687,7 @@ export default function DeathCertificateView() {
                                     name="physicianAddress"
                                     placeholder="Address"
                                     className="w-full common-input"
+                                    value={deceased.physician_address || ''}
                                     readOnly
                                 />
                             </div>
@@ -623,11 +697,12 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="certificationDate"
                                     className="w-full common-input"
+                                    value={deceased.certification_date || ''} // Assuming a column for this
                                     readOnly
                                 />
                             </div>
                         </div>
-
+    
                         {/* Reviewed By */}
                         <div className="space-y-4">
                             <p className="font-medium text-sm">REVIEWED BY:</p>
@@ -638,6 +713,7 @@ export default function DeathCertificateView() {
                                     name="healthOfficerName"
                                     placeholder="Full Name"
                                     className="w-full common-input"
+                                    value={deceased.health_officer_name || ''}
                                     readOnly
                                 />
                             </div>
@@ -647,21 +723,23 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="reviewedDate"
                                     className="w-full common-input"
+                                    value={deceased.reviewed_date || ''} // Assuming a column for this
                                     readOnly
                                 />
                             </div>
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Corpse Disposal</h2>
                         {/* Disposal Type */}
                         <div>
                             <label className="block text-sm font-medium">Corpse Disposal</label>
                             <select
                                 name="disposalType"
                                 className="w-full common-input"
-                                disabled
+                                value={deceased.disposal_type || ''}
+                                readonly
                             >
                                 <option value="">Select</option>
                                 <option value="Burial">Burial</option>
@@ -677,6 +755,7 @@ export default function DeathCertificateView() {
                                     type="text"
                                     name="permitNumber"
                                     className="w-full common-input"
+                                    value={deceased.permit_number || ''}
                                     readOnly
                                 />
                             </div>
@@ -686,6 +765,7 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="permitDate"
                                     className="w-full common-input"
+                                    value={deceased.permit_date || ''}
                                     readOnly
                                 />
                             </div>
@@ -697,6 +777,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="transferPermit"
                                 className="w-full common-input"
+                                value={deceased.transfer_permit || ''}
                                 readOnly
                             />
                         </div>
@@ -707,6 +788,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="cemeteryName"
                                 className="w-full common-input"
+                                value={deceased.cemetery_name || ''}
                                 readOnly
                             />
                         </div>
@@ -716,13 +798,14 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="cemeteryAddress"
                                 className="w-full common-input"
+                                value={deceased.cemetery_address || ''}
                                 readOnly
                             />
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Certification and Registration Details</h2>
                         {/* Certification of Informant */}
                         <div className="space-y-4">
                             <h3 className="text-md">Certification of Informant</h3>
@@ -738,6 +821,7 @@ export default function DeathCertificateView() {
                                         name="informantName"
                                         placeholder="Full Name"
                                         className="w-full common-input"
+                                        value={deceased.informant_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -748,6 +832,7 @@ export default function DeathCertificateView() {
                                         name="informantRelationship"
                                         placeholder="Relationship"
                                         className="w-full common-input"
+                                        value={deceased.informant_relationship || ''}
                                         readOnly
                                     />
                                 </div>
@@ -758,6 +843,7 @@ export default function DeathCertificateView() {
                                         name="informantAddress"
                                         placeholder="Full Address"
                                         className="w-full common-input"
+                                        value={deceased.informant_address || ''}
                                         readOnly
                                     />
                                 </div>
@@ -768,11 +854,12 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="informantDate"
                                     className="w-full common-input"
+                                    value={deceased.informant_date || ''}
                                     readOnly
                                 />
                             </div>
                         </div>
-
+    
                         {/* Prepared By */}
                         <div className="space-y-4">
                             <h3 className="text-md">Prepared By</h3>
@@ -788,6 +875,7 @@ export default function DeathCertificateView() {
                                         name="preparedName"
                                         placeholder="Full Name"
                                         className="w-full common-input"
+                                        value={deceased.prepared_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -798,6 +886,7 @@ export default function DeathCertificateView() {
                                         name="preparedTitle"
                                         placeholder="Title or Position"
                                         className="w-full common-input"
+                                        value={deceased.prepared_title || ''}
                                         readOnly
                                     />
                                 </div>
@@ -807,15 +896,15 @@ export default function DeathCertificateView() {
                                         type="date"
                                         name="preparedDate"
                                         className="w-full common-input"
+                                        value={deceased.prepared_date || ''}
                                         readOnly
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
                         {/* Received By */}
                         <div className="space-y-4">
                             <h3 className="text-md">Received By</h3>
@@ -831,6 +920,7 @@ export default function DeathCertificateView() {
                                         name="receivedName"
                                         placeholder="Full Name"
                                         className="w-full common-input"
+                                        value={deceased.received_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -841,6 +931,7 @@ export default function DeathCertificateView() {
                                         name="receivedTitle"
                                         placeholder="Title or Position"
                                         className="w-full common-input"
+                                        value={deceased.received_title || ''}
                                         readOnly
                                     />
                                 </div>
@@ -850,6 +941,7 @@ export default function DeathCertificateView() {
                                         type="date"
                                         name="receivedDate"
                                         className="w-full common-input"
+                                        value={deceased.received_date || ''}
                                         readOnly
                                     />
                                 </div>
@@ -870,6 +962,7 @@ export default function DeathCertificateView() {
                                         name="registrarName"
                                         placeholder="Full Name"
                                         className="w-full common-input"
+                                        value={deceased.registrar_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -880,6 +973,7 @@ export default function DeathCertificateView() {
                                         name="registrarTitle"
                                         placeholder="Title or Position"
                                         className="w-full common-input"
+                                        value={deceased.registrar_title || ''}
                                         readOnly
                                     />
                                 </div>
@@ -889,15 +983,16 @@ export default function DeathCertificateView() {
                                         type="date"
                                         name="registrarDate"
                                         className="w-full common-input"
+                                        value={deceased.registrar_date || ''}
                                         readOnly
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-2">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">For LCRO / Civil Registrar Use Only</h2>
                         <div>
                             <label className="block text-sm font-medium mb-1">
                                 REMARKS / ANNOTATIONS (For LCRO/OCRG Use Only)
@@ -906,13 +1001,14 @@ export default function DeathCertificateView() {
                                 name="remarks"
                                 placeholder="Enter remarks or annotations here..."
                                 className="common-textarea w-full h-32 resize-none"
+                                value={deceased.remarks || ''}
                                 readOnly
                             />
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Postmortem & Embalmer Certifications</h2>
                         {/* Postmortem Certificate */}
                         <div>
                             <label className="block text-sm font-medium">Cause of Death (from Autopsy)</label>
@@ -920,6 +1016,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="postmortemCause"
                                 className="w-full common-input"
+                                value={deceased.postmortem_cause || ''}
                                 readOnly
                             />
                         </div>
@@ -929,6 +1026,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="postmortemName"
                                 className="w-full common-input"
+                                value={deceased.postmortem_name || ''}
                                 readOnly
                             />
                         </div>
@@ -938,6 +1036,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="postmortemTitle"
                                 className="w-full common-input"
+                                value={deceased.postmortem_title || ''}
                                 readOnly
                             />
                         </div>
@@ -947,6 +1046,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="postmortemAddress"
                                 className="w-full common-input"
+                                value={deceased.postmortem_address || ''}
                                 readOnly
                             />
                         </div>
@@ -956,6 +1056,7 @@ export default function DeathCertificateView() {
                                 type="date"
                                 name="postmortemDate"
                                 className="w-full common-input"
+                                value={deceased.postmortem_date || ''}
                                 readOnly
                             />
                         </div>
@@ -966,6 +1067,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="embalmerName"
                                 className="w-full common-input"
+                                value={deceased.embalmer_name || ''}
                                 readOnly
                             />
                         </div>
@@ -975,6 +1077,7 @@ export default function DeathCertificateView() {
                                 type="text"
                                 name="embalmerLicense"
                                 className="w-full common-input"
+                                value={deceased.embalmer_license || ''}
                                 readOnly
                             />
                         </div>
@@ -985,6 +1088,7 @@ export default function DeathCertificateView() {
                                     type="date"
                                     name="embalmerIssuedOn"
                                     className="w-full common-input"
+                                    value={deceased.embalmer_issued_on || ''}
                                     readOnly
                                 />
                             </div>
@@ -994,6 +1098,7 @@ export default function DeathCertificateView() {
                                     type="text"
                                     name="embalmerIssuedAt"
                                     className="w-full common-input"
+                                    value={deceased.embalmer_issued_at || ''}
                                     readOnly
                                 />
                             </div>
@@ -1004,18 +1109,19 @@ export default function DeathCertificateView() {
                                 type="date"
                                 name="embalmerExpiry"
                                 className="w-full common-input"
+                                value={deceased.embalmer_expiry || ''}
                                 readOnly
                             />
                         </div>
                     </div>
-
+    
                     <div className="mb-6 space-y-8">
-                        <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
+                        <h2 className="text-lg text-center font-semibold">Affidavit for Delayed Registration of Death (Optional)</h2>
                         <p className="text-sm italic text-center">
                             (For delayed registration of death)
                         </p>
-                        <p className="text-sm italic text-center">
-                            I _____________________________ , of legal age, single / married / divorced / widow / widower, with residence and postal address at ______________________________________________________ after having been duly sworn in accordance with law, do hereby depose and say:
+                        <p className="text-sm text-left">
+                            I <span className="italic font-bold">{deceased.affiant_name || '_____________________________'}</span> ,<span className="italic font-bold">{deceased.affiant_civil_status || 'of legal age, single / married / divorced / widow / widower'}</span>, with residence and postal address at <span className="italic font-bold">{deceased.address || '_____________________________'}</span> after having been duly sworn in accordance with law, do hereby depose and say:
                         </p>
                         {/* Affiant Info */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1025,6 +1131,7 @@ export default function DeathCertificateView() {
                                     type="text"
                                     name="affiantName"
                                     className="w-full common-input"
+                                    value={deceased.affiant_name || ''}
                                     readOnly
                                 />
                             </div>
@@ -1033,7 +1140,8 @@ export default function DeathCertificateView() {
                                 <select
                                     name="affiantCivilStatus"
                                     className="w-full common-input"
-                                    disabled
+                                    value={deceased.affiant_civil_status || ''}
+                                    readOnly
                                 >
                                     <option value="">Select</option>
                                     <option value="Single">Single</option>
@@ -1048,6 +1156,7 @@ export default function DeathCertificateView() {
                                     type="text"
                                     name="address"
                                     className="w-full common-input"
+                                    value={deceased.address || ''}
                                     readOnly
                                 />
                             </div>
@@ -1055,35 +1164,38 @@ export default function DeathCertificateView() {
                         {/* Statement 1 */}
                         <div>
                             <p className="text-sm font-medium mb-2">
-                                1. That <span className="italic">[Deceased Name]</span> died on <span className="italic">[Date]</span> at <span className="italic">[Place]</span> and was buried/cremated in <span className="italic">[Burial Place]</span>
+                                1. That <span className="italic font-bold">{deceased.deceased_name || ''}</span> died on <span className="italic font-bold">{deceased.death_date || ''}</span> in <span className="italic font-bold">{deceased.death_place || ''}</span> and was buried/cremated in <span className="italic font-bold">{deceased.cemetery_name || ''}</span> on <span className="italic font-bold">{deceased.cemetery_address || ''}</span>
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
+                                {/* <div>
                                     <input
                                         type="text"
                                         name="deceasedName"
                                         placeholder="Deceased Name"
                                         className="common-input"
+                                        value={deceased.deceased_name || ''}
                                         readOnly
                                     />
-                                </div>
-                                <div>
+                                </div> */}
+                                {/* <div>
                                     <input
                                         type="date"
                                         name="deathDate"
                                         className="common-input"
+                                        value={deceased.death_date || ''}
                                         readOnly
                                     />
-                                </div>
-                                <div>
+                                </div> */}
+                                {/* <div>
                                     <input
                                         type="text"
                                         name="deathPlace"
                                         placeholder="Place of Death/Burial"
                                         className="common-input"
+                                        value={deceased.death_place || ''}
                                         readOnly
                                     />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         {/* Statement 2 */}
@@ -1095,51 +1207,64 @@ export default function DeathCertificateView() {
                                 <label className="flex items-center space-x-2">
                                     <input
                                         type="checkbox"
-                                        className="common-input"
+                                        className="custom-checkbox w-4 h-4"
                                         name="notAttended"
-                                        disabled
+                                        checked={deceased.attended_deceased === 'No'} // Assuming 1 for true, 0 for false
+                                        readonly
                                     />
                                     <span>Was not attended.</span>
+                                </label>
+                                <label className="flex items-center space-x-2">
+                                    <input
+                                        type="checkbox"
+                                        className="custom-checkbox w-4 h-4"
+                                        name="notAttended"
+                                        checked={deceased.attended_deceased === 'Yes'} // Assuming 1 for true, 0 for false
+                                        readonly
+                                    />
+                                    <span>Was attended.</span>
                                 </label>
                                 <input
                                     type="text"
                                     name="attendedBy"
                                     placeholder="Was attended by"
                                     className="common-input w-full md:w-auto"
+                                    value={deceased.physician_name || ''}
                                     readOnly
                                 />
                             </div>
                         </div>
                         {/* Statement 3 */}
                         <div>
-                            <label className="block text-sm font-medium mb-1">
-                                3. That the cause of death of the deceased was
-                            </label>
+                            <p className="text-sm font-medium mb-2">
+                                3. That the cause of death of the deceased was 
+                            </p>
                             <input
                                 type="text"
                                 name="causeOfDeath"
                                 className="w-full common-input"
+                                value={deceased.cause_of_death || ''}
                                 readOnly
                             />
                         </div>
                         {/* Statement 4 */}
                         <div>
-                            <label className="block text-sm font-medium mb-1">
-                                4. That the reason for the delay in registering this death was due to
-                            </label>
+                            <p className="text-sm font-medium mb-2">
+                                4. That the reason for the delay in registering this death was due to 
+                            </p>
                             <textarea
                                 name="reasonDelay"
                                 className="common-textarea w-full h-24 resize-none"
+                                value={deceased.reason_delay || ''}
                                 readOnly
                             />
                         </div>
                         <div className="mb-6 space-y-6">
-                            <h2 className="text-lg text-center font-semibold">Death Certificate</h2>
                             <p className="text-sm italic">
                                 5. That I am executing this affidavit to attest to the truthfulness of the foregoing statements for all legal intents and purposes.
                             </p>
                             <p className="text-sm italic">
-                                In truth whereof, I have affixed my signature below this ____ day of _____________ at __________________, Philippines.
+                                In truth whereof, I have affixed my signature below this <span className="italic font-bold">{deceased.jurat_day || '____'}</span> day of <span className="italic font-bold">{deceased.jurat_month_year || '____________'}</span> at <span className="italic font-bold">{deceased.jurat_place || '____________'}</span>, Philippines.
                             </p>
                             {/* Jurat Details */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1149,6 +1274,7 @@ export default function DeathCertificateView() {
                                         type="number"
                                         name="juratDay"
                                         className="common-input"
+                                        value={deceased.jurat_day || ''}
                                         readOnly
                                     />
                                 </div>
@@ -1158,6 +1284,7 @@ export default function DeathCertificateView() {
                                         type="text"
                                         name="juratMonthYear"
                                         className="common-input"
+                                        value={deceased.jurat_month_year || ''}
                                         readOnly
                                     />
                                 </div>
@@ -1167,8 +1294,13 @@ export default function DeathCertificateView() {
                                         type="text"
                                         name="juratPlace"
                                         className="common-input"
+                                        value={deceased.jurat_place || ''}
                                         readOnly
                                     />
+                                </div>
+                                <div className="col-span-3">
+                                    <label className="block text-sm font-medium mb-1">Signature</label>
+                                    <SignaturePlaceholder />
                                 </div>
                             </div>
                             {/* CTC Details */}
@@ -1179,6 +1311,7 @@ export default function DeathCertificateView() {
                                         type="text"
                                         name="ctcNumber"
                                         className="common-input"
+                                        value={deceased.ctc_number || ''}
                                         readOnly
                                     />
                                 </div>
@@ -1188,6 +1321,7 @@ export default function DeathCertificateView() {
                                         type="date"
                                         name="ctcIssuedOn"
                                         className="common-input"
+                                        value={deceased.ctc_issued_on || ''}
                                         readOnly
                                     />
                                 </div>
@@ -1197,18 +1331,24 @@ export default function DeathCertificateView() {
                                         type="text"
                                         name="ctcIssuedAt"
                                         className="common-input"
+                                        value={deceased.ctc_issued_at || ''}
                                         readOnly
                                     />
                                 </div>
                             </div>
                             {/* Admin Officer Details */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="col-span-3">
+                                    <label className="block text-sm font-medium mb-1">Signature</label>
+                                    <SignaturePlaceholder />
+                                </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Name in Print</label>
                                     <input
                                         type="text"
                                         name="adminName"
                                         className="common-input"
+                                        value={deceased.admin_name || ''}
                                         readOnly
                                     />
                                 </div>
@@ -1218,6 +1358,7 @@ export default function DeathCertificateView() {
                                         type="text"
                                         name="adminPosition"
                                         className="common-input"
+                                        value={deceased.admin_position || ''}
                                         readOnly
                                     />
                                 </div>
@@ -1227,6 +1368,7 @@ export default function DeathCertificateView() {
                                         type="text"
                                         name="adminAddress"
                                         className="common-input"
+                                        value={deceased.admin_address || ''}
                                         readOnly
                                     />
                                 </div>

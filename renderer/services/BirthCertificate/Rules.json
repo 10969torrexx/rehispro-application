@@ -954,7 +954,7 @@
     }
   },
   "page13": {
-    "juratDay": {
+    "finalJuratDay": {
       "required": false,
       "type": "number",
       "minLength": 1,
@@ -966,7 +966,7 @@
         "maxLength": "Day must not exceed 31."
       }
     },
-    "juratMonthYear": {
+    "finalJuratMonthYear": {
       "required": false,
       "type": "date",
       "pattern": "^(0[1-9]|1[0-2])\\/\\d{4}$",
@@ -975,7 +975,7 @@
         "pattern": "Month/Year must be in MM/YYYY format."
       }
     },
-    "juratPlace": {
+    "finalJuratPlace": {
       "required": false,
       "minLength": 2,
       "maxLength": 150,
@@ -985,7 +985,7 @@
         "maxLength": "Place must not exceed 150 characters."
       }
     },
-    "ctcNumber": {
+    "finalCtcNumber": {
       "required": false,
       "minLength": 5,
       "maxLength": 50,
@@ -995,7 +995,7 @@
         "maxLength": "CTC Number must not exceed 50 characters."
       }
     },
-    "ctcIssuedOn": {
+    "finalCtcIssuedOn": {
       "required": false,
       "type": "date",
       "message": {
@@ -1003,7 +1003,7 @@
         "date": "Invalid date format."
       }
     },
-    "ctcIssuedAt": {
+    "finalCtcIssuedAt": {
       "required": false,
       "maxLength": 100,
       "message": {

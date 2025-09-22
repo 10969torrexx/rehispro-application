@@ -46,3 +46,30 @@ export async function listBirthCertificate() {
         throw error;
     }
 }
+
+/**
+ * View birth certificate data
+ * @param {string|number} id - The ID of the birth certificate
+ */
+export async function viewBirthCertificate(id) {
+    try {
+        const response = await fetch(`http://localhost:3001/birth/view/${id}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            },
+            credentials: 'include' // include cookies/session if needed
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data; // { success, message, data }
+    } catch (error) {
+        console.error('[birth form] Error fetching birth certificate:', error);
+        throw error;
+    }
+}

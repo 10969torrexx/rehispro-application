@@ -194,12 +194,12 @@ export default function BirthCertifcateForm() {
         },
         // --- Page 13: Final Jurat / Affidavit ---
         page13: {
-            juratDay: "",
-            juratMonthYear: "",
-            juratPlace: "",
-            ctcNumber: "",
-            ctcIssuedOn: "",
-            ctcIssuedAt: "",
+            finalJuratDay: "",
+            finalJuratMonthYear: "",
+            finalJuratPlace: "",
+            finalCtcNumber: "",
+            finalCtcIssuedOn: "",
+            finalCtcIssuedAt: "",
             adminOfficerSignature: "",
             adminOfficerName: "",
             adminOfficerPosition: "",
@@ -431,12 +431,12 @@ export default function BirthCertifcateForm() {
                 affiantSignature: ""
               },
               page13: {
-                juratDay: "",
-                juratMonthYear: "",
-                juratPlace: "",
-                ctcNumber: "",
-                ctcIssuedOn: "",
-                ctcIssuedAt: "",
+                finalJuratDay: "",
+                finalJuratMonthYear: "",
+                finalJuratPlace: "",
+                finalCtcNumber: "",
+                finalCtcIssuedOn: "",
+                finalCtcIssuedAt: "",
                 adminOfficerSignature: "",
                 adminOfficerName: "",
                 adminOfficerPosition: "",
@@ -2051,25 +2051,25 @@ export default function BirthCertifcateForm() {
                                     <label className="block text-sm font-medium mb-1"> Day of</label>
                                     <input
                                         type="number"
-                                        name="juratDay"
+                                        name="finalJuratDay"
                                         placeholder="Day"
-                                        className={`common-input ${errors.juratDay ? 'input-error' : ''}`}
-                                        value={formData.page13.juratDay}
+                                        className={`common-input ${errors.finalJuratDay ? 'input-error' : ''}`}
+                                        value={formData.page13.finalJuratDay}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.juratDay && <ErrorMessages errors={errors.juratDay} />}
+                                    {errors.finalJuratDay && <ErrorMessages errors={errors.finalJuratDay} />}
                                 </div>
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1"> Month / Year</label>
                                     <input
                                         type="date"
-                                        name="juratMonthYear"
+                                        name="finalJuratMonthYear"
                                         placeholder="Month / Year"
-                                        className={`common-input ${errors.juratMonthYear ? 'input-error' : ''}`}
-                                        value={formData.page13.juratMonthYear}
+                                        className={`common-input ${errors.finalJuratMonthYear ? 'input-error' : ''}`}
+                                        value={formData.page13.finalJuratMonthYear}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.juratMonthYear && <ErrorMessages errors={errors.juratMonthYear} />}
+                                    {errors.finalJuratMonthYear && <ErrorMessages errors={errors.finalJuratMonthYear} />}
                                 </div>
                             </div>
 
@@ -2079,13 +2079,13 @@ export default function BirthCertifcateForm() {
                                 </label>
                                 <input
                                     type="text"
-                                    name="juratPlace"
+                                    name="finalJuratPlace"
                                     placeholder="e.g., Cebu City, Cebu"
-                                    className={`common-input ${errors.juratPlace ? 'input-error' : ''}`}
-                                    value={formData.page13.juratPlace}
+                                    className={`common-input ${errors.finalJuratPlace ? 'input-error' : ''}`}
+                                    value={formData.page13.finalJuratPlace}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
-                                {errors.juratPlace && <ErrorMessages errors={errors.juratPlace} />}
+                                {errors.finalJuratPlace && <ErrorMessages errors={errors.finalJuratPlace} />}
                             </div>
 
                             {/* Community Tax Certificate */}
@@ -2096,13 +2096,13 @@ export default function BirthCertifcateForm() {
                                     </label>
                                     <input
                                         type="text"
-                                        name="ctcNumber"
+                                        name="finalCtcNumber"
                                         placeholder="Community Tax Cert. No."
-                                        className={`common-input ${errors.ctcNumber ? 'input-error' : ''}`}
-                                        value={formData.page13.ctcNumber}
+                                        className={`common-input ${errors.finalCtcNumber ? 'input-error' : ''}`}
+                                        value={formData.page13.finalCtcNumber}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.ctcNumber && <ErrorMessages errors={errors.ctcNumber} />}
+                                    {errors.finalCtcNumber && <ErrorMessages errors={errors.finalCtcNumber} />}
                                 </div>
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">
@@ -2110,13 +2110,13 @@ export default function BirthCertifcateForm() {
                                     </label>
                                     <input
                                         type="date"
-                                        name="ctcIssuedOn"
+                                        name="finalCtcIssuedOn"
                                         placeholder="Date Issued"
-                                        className={`common-input ${errors.ctcIssuedOn ? 'input-error' : ''}`}
-                                        value={formData.page13.ctcIssuedOn}
+                                        className={`common-input ${errors.finalCtcIssuedOn ? 'input-error' : ''}`}
+                                        value={formData.page13.finalCtcIssuedOn}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.ctcIssuedOn && <ErrorMessages errors={errors.ctcIssuedOn} />}
+                                    {errors.finalCtcIssuedOn && <ErrorMessages errors={errors.finalCtcIssuedOn} />}
                                 </div>
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">
@@ -2124,13 +2124,13 @@ export default function BirthCertifcateForm() {
                                     </label>
                                     <input
                                         type="text"
-                                        name="ctcIssuedAt"
+                                        name="finalCtcIssuedAt"
                                         placeholder="Place Issued"
-                                        className={`common-input ${errors.ctcIssuedAt ? 'input-error' : ''}`}
-                                        value={formData.page13.ctcIssuedAt}
+                                        className={`common-input ${errors.finalCtcIssuedAt ? 'input-error' : ''}`}
+                                        value={formData.page13.finalCtcIssuedAt}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.ctcIssuedAt && <ErrorMessages errors={errors.ctcIssuedAt} />}
+                                    {errors.finalCtcIssuedAt && <ErrorMessages errors={errors.finalCtcIssuedAt} />}
                                 </div>
                             </div>
 

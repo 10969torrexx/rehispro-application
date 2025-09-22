@@ -42,17 +42,8 @@ export default function DeathCertificateHome({ onView }) {
     { field: "deceased_name", headerName: "Deceased Name", flex: 1 },
     { field: "sex", headerName: "Sex", width: 100 },
     { field: "created_at", headerName: "Date Created", width: 150 },
-    {
-      field: "place",
-      headerName: "Place of Death",
-      flex: 1,
-      valueGetter: (params) => {
-        const row = params?.row || {};
-        return row.place_of_death
-          ? `${row.place_of_death}, ${row.city || ""}, ${row.province || ""}`
-          : "N/A";
-      },
-    },
+    { field: "place_of_death", headerName: "Place of Death", flex: 1 },
+
     // inside DeathCertificateHome component, in your columns array
     {
       field: "action",
@@ -70,7 +61,7 @@ export default function DeathCertificateHome({ onView }) {
               e.target.value = "";
     
               if (action === "view") {
-                onView?.(row.id || row.death_id);
+                onView?.(row);
               } else if (action === "download") {
                 toast.info("Download clicked");
               }
@@ -97,7 +88,8 @@ export default function DeathCertificateHome({ onView }) {
       row.date_of_death?.toLowerCase().includes(query) ||
       row.place_of_death?.toLowerCase().includes(query) ||
       row.city?.toLowerCase().includes(query) ||
-      row.province?.toLowerCase().includes(query)
+      row.province?.toLowerCase().includes(query) ||
+      row.cause_of_death?.toLowerCase().includes(query)
     );
   });
 
@@ -108,7 +100,7 @@ export default function DeathCertificateHome({ onView }) {
         {/* 🔹 Search input styled like your other inputs */}
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search by name, sex, date, place, city, province, or cause of death..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="common-input w-full"

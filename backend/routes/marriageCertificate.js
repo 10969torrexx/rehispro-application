@@ -8,6 +8,7 @@ const MarriageCertificateController = require('../controllers/MarriageCertificat
  */
 router.post('/create', MarriageCertificateController.create);
 router.get('/list', MarriageCertificateController.getAll);
+router.get('/view/:id', MarriageCertificateController.view);
 
 // router.get('/:id', MarriageCertificateController.read);
 // router.put('/:id', MarriageCertificateController.update);
