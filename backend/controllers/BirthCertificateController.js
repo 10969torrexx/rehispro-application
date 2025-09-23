@@ -238,7 +238,7 @@ function list (req, res) {
         id, 
         CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
         sex, 
-        CONCAT(mother_first_name, " ", mother_middle_name, " ", mother_last_name) AS mother_name,
+        CONCAT(maiden_first_name, " ", maiden_middle_name, " ", maiden_last_name) AS mother_name,
         CONCAT(father_first_name, " ", father_middle_name, " ", father_last_name) AS father_name,
         DATE(created_at) AS created_at, 
         CONCAT(city, ", ", province) AS residence 
