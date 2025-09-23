@@ -55,7 +55,13 @@ export default function BirthCertificate() {
                         </div>   
                         }
                         {activeTab === "upload" && 
-                            <div className="py-8 h-full test-element text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                            <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="Upload Birth Certificates"
+                                        message="To upload a birth certificate, please use the form below to select and submit the document. Ensure that the file is in an accepted format (e.g., PDF, JPEG) and does not exceed the maximum file size limit."
+                                    />
+                                </div>
                                 <div>
                                     <Upload />
                                 </div>

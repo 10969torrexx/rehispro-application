@@ -91,19 +91,20 @@ select {
 
 .btn-primary {
   color: white;
-  background-color: #a855f7; /* purple-500 */
+  background-color: #a855f7;
 
   &:hover {
-    background-color: #9333ea; /* purple-600 */
+    background-color: #9333ea; 
+    transition: 0.2s;
   }
 }
 
 .btn-secondary {
   color: white;
-  background-color: #d582ff; /* purple-300 */
+  background-color: #d582ff; 
 
   &:hover {
-    background-color: #c084fc; /* purple-400 */
+    background-color: #c084fc; 
   }
 }
 
