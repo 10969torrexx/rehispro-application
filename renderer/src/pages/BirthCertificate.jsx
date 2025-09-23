@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { DocumentType } from '@enums';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
-import { InfoCard, BirthCertifcateForm, BirthCertificateHome, Upload } from '@components';
+import { InfoCard, BirthCertifcateForm, BirthCertificateHome, BirthCertificateUpload } from '@components';
 
 export default function BirthCertificate() {
     const [userData, setUserData] = useState(null);
@@ -63,7 +63,7 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div>
-                                    <Upload />
+                                    <BirthCertificateUpload />
                                 </div>
                             </div>
                         }
