@@ -1,7 +1,7 @@
 export default function ErrorMessages({ errors }) {
   if (!errors) return null;
   const errorList = typeof errors === "string"
-    ? [errors] // wrap string into array
+    ? [errors]
     : Object.values(errors).filter(Boolean);
 
   return (

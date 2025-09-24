@@ -1,9 +1,25 @@
-import React, { useCallback } from "react"
+import { UploadCloud } from "lucide-react";
+import { useCallback, useState, useEffect } from "react"
 import { useDropzone } from "react-dropzone";
+import { ErrorMessages } from '@components';
+import { FileValidation } from '@services';
 
-export default function Upload() { 
+export default function BirthCertificateUpload() { 
+    const [files, setFiles ] = useState([]);
     const onDrop = useCallback(uploadedFiles => {
-        console.log(uploadedFiles);
+        const sorted = [...uploadedFiles].sort((a, b) => {
+            a.name.localeCompare(b.name)
+        });
+        const readable = sorted.map((file) => ({
+            name: file.name,
+            sizeKB: Math.round(file.size / 1024) + " KB",
+            type: file.type,
+            lastModified: new Date(file.lastModified).toLocaleString()
+        }));
+        const errors = FileValidation.validateForm(readable);
+        console.table(readable);
+        console.table(errors);
+        setFiles(readable);
     }, []);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 

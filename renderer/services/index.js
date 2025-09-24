@@ -6,3 +6,5 @@ export * as DeathCertServices from './DeathCertificate/Services';
 export * as DeathCertValidation from './DeathCertificate/Validation';
 export * as MarriageCertServices from './MarriageCertificate/Services';
 export * as MarriageCertValidation from './MarriageCertificate/Validation';
+
+export * as FileValidation from './Files/Validations';
