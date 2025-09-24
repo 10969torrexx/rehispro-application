@@ -17,8 +17,6 @@ export default function BirthCertificateUpload() {
             lastModified: new Date(file.lastModified).toLocaleString()
         }));
         const errors = FileValidation.validateForm(readable);
-        console.table(readable);
-        console.table(errors);
         setFiles(readable);
     }, []);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
