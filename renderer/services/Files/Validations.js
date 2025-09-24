@@ -16,6 +16,11 @@ export function validateForm(data) {
             if (rule.required && (!value || value.length == 0)) {
                 errors[field] = rule.message.required;
             }
+
+            console.log(value);
+            if (rule.type && !rule.type.includes(value)) {
+                errors[field] = rule.message.type;
+            }
         }
     }
     console.log(errors);
