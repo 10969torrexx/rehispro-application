@@ -6,6 +6,7 @@ import { FileValidation } from '@services';
 
 export default function BirthCertificateUpload() { 
     const [files, setFiles ] = useState([]);
+    const [errors, setErrors] = useState([]);
     const onDrop = useCallback(uploadedFiles => {
         const sorted = [...uploadedFiles].sort((a, b) => {
             a.name.localeCompare(b.name)
@@ -17,6 +18,7 @@ export default function BirthCertificateUpload() {
             lastModified: new Date(file.lastModified).toLocaleString()
         }));
         const errors = FileValidation.validateForm(readable);
+        setError(errors);
         setFiles(readable);
     }, []);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
