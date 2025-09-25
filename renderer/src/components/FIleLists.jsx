@@ -4,7 +4,7 @@ export default function FileList({name, size, type}) {
         <div className="w-[400px] bg-white shadow-md rounded-lg p-3 mb-3 flex items-center justify-between hover:shadow-lg transition">
             <div className="flex items-center gap-3">
                 <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-blue-50 border">
-                    <i className={`${FileIcons.PDF} text-blue-600 text-2xl`}></i>
+                    <i className={`${FileIcons.PDF} text-primary text-2xl`}></i>
                 </div>
 
                 <div className="flex flex-col">
@@ -14,10 +14,6 @@ export default function FileList({name, size, type}) {
             </div>
 
             <div className="flex items-center gap-3">
-                <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="w-[70%] h-full bg-blue-500"></div>
-                </div>
-
                 <button className="text-gray-400 hover:text-gray-600">
                     <i className="bi bi-x-lg"></i>
                 </button>

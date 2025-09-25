@@ -8,7 +8,7 @@ import { FileList } from '@components';
 export default function BirthCertificateUpload() { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
-    const [processing, setProcessing] = setState(false);
+    const [processing, setProcessing] = useState(false);
     const onDrop = useCallback(uploadedFiles => {
         const sorted = [...uploadedFiles].sort((a, b) => {
             a.name.localeCompare(b.name)
@@ -19,9 +19,13 @@ export default function BirthCertificateUpload() {
             type: file.type,
             lastModified: new Date(file.lastModified).toLocaleString()
         }));
+        
         const errors = FileValidation.validateForm(readable);
-        setErrors(errors);
-        setFiles(readable);
+        if (errors.length > 0) {
+            setErrors(errors);
+        } else {
+            setFiles(readable);
+        }
     }, []);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
