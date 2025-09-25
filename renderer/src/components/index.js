@@ -6,6 +6,7 @@ export { ChangeCredentials } from './Modals/ChangeCredentials';
 export { default as UserCounts } from './UserCounts';
 export { default as InfoCard } from './InfoCard';
 export { default as SignaturePlaceholder } from './SignaturePlaceholder';
+export { default as FileList } from './FIleLists';
 
 /**
  * TODO: export all form components
@@ -13,7 +14,7 @@ export { default as SignaturePlaceholder } from './SignaturePlaceholder';
  */
 export { default as BirthCertifcateForm } from './Forms/BirthCertificate/BirthCertifcateForm';
 export { default as BirthCertificateHome } from './Forms/BirthCertificate/BirthCertificateHome';
-export { default as BirthCertificateUpload } from './Forms/BirthCertificate/BIrthCertificateUpload';
+export { default as BirthCertificateUpload } from './Forms/BirthCertificate/BirthCertificateUpload';
 
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
 export { default as DeathCertificateHome } from './Forms/DeathCertificate/DeathCertificateHome';

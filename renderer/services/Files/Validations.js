@@ -20,7 +20,7 @@ export function validateForm(data) {
       continue;
     }
 
-    const sizeNum = parseFloat(file.sizeKB);
+    const sizeNum = parseFloat(file.size);
     const sizeMB = sizeNum / 1024;
     if (sizeMB > rule.size) {
       errors.push({ file: `${file.name}: ${rule.message.size}` });
