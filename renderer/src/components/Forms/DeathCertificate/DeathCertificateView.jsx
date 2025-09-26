@@ -102,7 +102,7 @@ export default function DeathCertificateView({ row }) {
                         {/* Sex */}
                         <div>
                             <label className="block text-sm font-medium">Sex</label>
-                            <select name="sex" className="w-full common-input" value={deceased.sex || ''} readonly>
+                            <select name="sex" className="w-full common-input" value={deceased.sex || ''} readOnly>
                                 <option value="">Select</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -226,7 +226,7 @@ export default function DeathCertificateView({ row }) {
                         {/* Civil Status */}
                         <div>
                             <label className="block text-sm font-medium">Civil Status</label>
-                            <select name="civilStatus" className="w-full common-input" value={deceased.civil_status || ''} readonly>
+                            <select name="civilStatus" className="w-full common-input" value={deceased.civil_status || ''} readOnly>
                                 <option value="">Select</option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
@@ -496,7 +496,7 @@ export default function DeathCertificateView({ row }) {
                                 name="maternalCondition"
                                 className="w-full common-input"
                                 value={deceased.maternal_condition || ''}
-                                readonly
+                                readOnly
                             >
                                 <option value="">Select</option>
                                 <option value="Pregnant, not in labor">Pregnant, not in labor</option>
@@ -517,7 +517,7 @@ export default function DeathCertificateView({ row }) {
                                 name="mannerOfDeath"
                                 className="w-full common-input"
                                 value={deceased.manner_of_death || ''}
-                                readonly
+                                readOnly
                             >
                                 <option value="">Select</option>
                                 <option value="Homicide">Homicide</option>
@@ -534,7 +534,7 @@ export default function DeathCertificateView({ row }) {
                                 name="autopsy"
                                 className="w-full common-input"
                                 value={deceased.autopsy || ''}
-                                readonly
+                                readOnly
                             >
                                 <option value="">Select</option>
                                 <option value="Yes">Yes</option>
@@ -548,7 +548,7 @@ export default function DeathCertificateView({ row }) {
                                 name="placeOccurrence"
                                 className="w-full common-input"
                                 value={deceased.place_occurrence || ''}
-                                readonly
+                                readOnly
                             >
                                 <option value="">Select</option>
                                 <option value="Home">Home</option>
@@ -565,7 +565,7 @@ export default function DeathCertificateView({ row }) {
                                 name="attendant"
                                 className="common-input w-full"
                                 value={deceased.attendant || ''}
-                                readonly
+                                readOnly
                             >
                                 <option value="">Select</option>
                                 <option value="Private Physician">Private Physician</option>
@@ -739,7 +739,7 @@ export default function DeathCertificateView({ row }) {
                                 name="disposalType"
                                 className="w-full common-input"
                                 value={deceased.disposal_type || ''}
-                                readonly
+                                readOnly
                             >
                                 <option value="">Select</option>
                                 <option value="Burial">Burial</option>
@@ -1210,7 +1210,7 @@ export default function DeathCertificateView({ row }) {
                                         className="custom-checkbox w-4 h-4"
                                         name="notAttended"
                                         checked={deceased.attended_deceased === 'No'} // Assuming 1 for true, 0 for false
-                                        readonly
+                                        readOnly
                                     />
                                     <span>Was not attended.</span>
                                 </label>
@@ -1220,7 +1220,7 @@ export default function DeathCertificateView({ row }) {
                                         className="custom-checkbox w-4 h-4"
                                         name="notAttended"
                                         checked={deceased.attended_deceased === 'Yes'} // Assuming 1 for true, 0 for false
-                                        readonly
+                                        readOnly
                                     />
                                     <span>Was attended.</span>
                                 </label>

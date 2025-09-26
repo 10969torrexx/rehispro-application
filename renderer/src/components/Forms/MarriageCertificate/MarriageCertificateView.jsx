@@ -303,7 +303,7 @@ export default function MarriageCertificateView({ row }) {
                                     name="husbandSex"
                                     className="common-input w-full"
                                     value={marriage.husband_sex || ""}
-                                    disabled
+                                    readOnly
                                 >
                                     <option value="">Select sex</option>
                                     <option value="Male">Male</option>
@@ -452,7 +452,7 @@ export default function MarriageCertificateView({ row }) {
                                     name="wifeSex"
                                     className="common-input w-full"
                                     value={marriage.wife_sex || ""}
-                                    disabled
+                                    readOnly
                                 >
                                     <option value="">Select sex</option>
                                     <option value="Male">Male</option>
@@ -1004,7 +1004,7 @@ export default function MarriageCertificateView({ row }) {
                                 name="marriageSettlement"
                                 value="entered"
                                 checked={marriage.marriage_settlement === "entered"}
-                                disabled
+                                readOnly
                             />
                             have entered, a copy of which is hereto attached
                         </label>
@@ -1015,7 +1015,7 @@ export default function MarriageCertificateView({ row }) {
                                 name="marriageSettlement"
                                 value="notEntered"
                                 checked={marriage.marriage_settlement === "notEntered"}
-                                disabled
+                                readOnly
                             />
                             have not entered into a marriage settlement.
                         </label>
@@ -1080,7 +1080,7 @@ export default function MarriageCertificateView({ row }) {
                                 name="certification"
                                 value="license"
                                 checked={marriage.certification === "license"}
-                                disabled
+                                readOnly
                             />
                             <span className="flex flex-wrap">
                                 a. Marriage License No.&nbsp;
@@ -1117,7 +1117,7 @@ export default function MarriageCertificateView({ row }) {
                                 name="certification"
                                 value="noLicense"
                                 checked={marriage.certification === "noLicense"}
-                                disabled
+                                readOnly
                             />
                             <span>
                                 b. No marriage license was necessary, the marriage being solemnized under
@@ -1139,7 +1139,7 @@ export default function MarriageCertificateView({ row }) {
                                 name="certification"
                                 value="pd1083"
                                 checked={marriage.certification === "pd1083"}
-                                disabled
+                                readOnly
                             />
                             <span>
                                 c. The marriage was solemnized in accordance with the provisions of

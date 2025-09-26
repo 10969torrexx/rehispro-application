@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Death Certificate</title>
+  <style>
+
+
+    .field-label {
+        font-size: 10px;
+    }
+
+    .field-label-2 {
+        font-size: 8px;
+        color:blue;
+    }
+
+    .field-label-small-text {
+        font-size: 8px;
+        color:blue;
+    }
+    .field-label-small-text-2 {
+        font-size: 6px;
+        color:blue;
+    }
+
+
+    body {
+      font-family: Arial;
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
+    }
+
+    .page {
+      width: 8.5in;
+      height: 13in; /* Long bond paper */
+      margin: 20px auto;
+      background: white;
+      box-sizing: border-box;
+      page-break-after: always;
+      position: relative;
+    }
+
+    /* Inner content box with 1in margin and blue border */
+    .content {
+      position: absolute;
+      top: 0.5in;
+      left: 0.5in;
+      right: 0.5in;
+      bottom: 0.5in;
+      border: 2px solid blue;
+      box-sizing: border-box;
+      padding: 4px 0px 4px 0px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .header-left {
+      text-align: left;
+      font-size: 11px;
+    }
+
+    .header-center {
+      text-align: center;
+      margin-top: -12px;
+      line-height: 0.8;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .registry-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2px;
+        margin-bottom: 0;
+        padding-bottom: 20px;
+        border-bottom:  0.2px solid blue; /* line below table */
+        border-top:  0.2px solid blue; /* line below table */
+    }
+
+    .registry-table td {
+        vertical-align: top;
+        padding-left: 2px;
+        padding-bottom: 5px;
+    }
+
+    .registry-table td.registry-cell {
+        border-left: 0.2px solid blue; 
+        width: 30%; 
+    }
+
+    .common-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-bottom:  0.2px solid blue; /* line below table */
+    }
+    .common-table td {
+        vertical-align: top;
+    }
+    .common-table td.sex-cell {
+        border-left: 0.2px solid blue; 
+        width: 20%; 
+    }
+
+    .common-table td.civi-status-cell {
+        border-left: 0.2px solid blue; 
+        width: 26%; 
+    }
+
+    .inline-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .inline-table td {
+        width: 25%; /* evenly distributes NAME, First, Middle, Last */
+    }
+    .inline-table td:first-child {
+        text-align: left;  /* keep NAME aligned left */
+    }
+
+    .birth-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-bottom:  0.2px solid blue; /* line below table */
+    }
+    .birth-table td {
+        vertical-align: top;
+    }
+    .birth-table td.date-cell {
+        border-left: 0.2px solid blue; 
+        width: 30%; 
+    }   
+    .birth-table td.age-cell {
+        border-left: 0.2px solid blue; 
+        width: 40%; 
+    }   
+
+
+    .common-table-2 {
+        width: 100%;
+        border-collapse: collapse;
+        border-bottom:  0.2px solid blue; /* line below table */
+    }
+    .common-table-2 td {
+        vertical-align: top;
+    }
+    .common-table-2 td.common-cell-2 {
+        border-left: 0.2px solid blue; 
+        width: auto; 
+    }   
+
+    
+
+    @media print {
+      body {
+        background: none;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="certificate">
+  <!-- First Page -->
+  <div class="page">
+    <div class="content">
+      <div class="header">
+        <div class="header-left ">
+            <span>&nbsp;Municipal Form No. 103 <br>
+            <span style="margin-top: 20px;">&nbsp;(Revised January 2007)</span>
+        </div>
+        <div class="header-right">
+          <span>(To be accomplished in quadruplicate using black ink) &nbsp;</span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <span style="font-size:12px;">
+          Republic of the Philippines<br>
+        </span>
+        <span style="font-size:12px;">
+          OFFICE OF THE CIVIL REGISTRAR GENERAL<br>
+        </span>
+        <span style="font-size:28px; font-weight:bold;">
+          CERTIFICATE OF DEATH
+        </span>
+      </div>
+
+      <table class="registry-table" style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 2px; vertical-align: top;">
+            <div class="field-group" style="margin-bottom: 5px;">
+              <label class="field-label" style="font-size: 10px; display: block;">
+                Province:
+                <span class="field-value-span" 
+                      style="display: inline-block; width: 80%; border-bottom: 0.2px solid blue; height: 15px; line-height: 15px; text-align: center;">
+                  Leyte
+                </span>
+              </label>
+            </div>
+      
+            <div class="field-group" style="margin-bottom: 5px;">
+              <label class="field-label" style="font-size: 10px; display: block;">
+                City/Municipality:
+                <span class="field-value-span" 
+                      style="display: inline-block; width: 80%; border-bottom: 0.2px solid blue; height: 15px; line-height: 15px; text-align: center;">
+                  Sogod
+                </span>
+              </label>
+            </div>
+          </td>
+      
+          <td class="registry-cell" style="padding: 2px; vertical-align: top;">
+            <div class="field-group" style="margin-bottom: 5px;">
+              <label class="field-label" style="font-size: 10px; display: block;">
+                Registry No.
+              </label>
+              <span class="field-value-span" 
+                    style="display: inline-block; width: 98%;  height: 15px; line-height: 15px; text-align: center;">
+                2025-00123
+              </span>
+            </div>
+          </td>
+        </tr>
+      </table>
+      
+
+        <table class="common-table">
+            <tr>
+            <td>
+                <table class="inline-table">
+                <tr>
+                    <td class="field-label">1. NAME</td>
+                    <td class="field-label-small-text">(First)
+                        <input type="text" class="field-value" style="border: none; width: 150px; height: 20px; padding-top: -5px; margin: 0; font-size: 10px; text-align: center;">
+                    </td>
+                    <td class="field-label-small-text">(Middle)
+                        <input type="text" class="field-value" style="border: none; width: 150px; height: 20px; padding-top: -5px; margin: 0; font-size: 10px; text-align: center;">
+                    </td>
+                    <td class="field-label-small-text">(Last)
+                        <input type="text" class="field-value" style="border: none; width: 150px; height: 20px; padding-top: -5px; margin: 0; font-size: 10px; text-align: center;">
+                    </td>
+                </tr>
+                <tr>
+                    
+                </tr>
+                </table>
+            </td>
+        
+            <td class="sex-cell">
+                <table class="inline-table">
+                <tr>
+                    <td class="field-label">2. SEX</td>
+                    <td class="field-label-small-text">(Male/Female)</td>
+                </tr>
+                <tr > 
+                    <td colspan="2" style="text-align: center;">
+                      <span class="field-value-span" style="
+                      display: inline-block;
+                      width: 80%;
+                      height: 12px;
+                      line-height: 12px;
+                      font-size: 10px;
+                      text-align: center;
+                      
+                      vertical-align: middle;
+                  ">
+                      Your text here
+                  </span>
+                  </td>
+                </tr>
+
+                </table>
+            </td>
+            </tr>
+        </table>
+
+        <table class="birth-table">
+            <tr>
+            <td>
+                <table class="inline-table">
+                    <tr>
+                        <td class="field-label">3. DATE OF DEATH</td>
+                        <td class="field-label-small-text">(Day, Month, Year)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <span class="field-value-span" style="
+                            display: inline-block;
+                            width: 80%;
+                            height: 12px;
+                            line-height: 12px;
+                            font-size: 10px;
+                            text-align: center;
+                            
+                            vertical-align: middle;
+                        ">
+                            Your text here
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="date-cell">
+                <table class="inline-table">
+                    <tr>
+                        <td class="field-label">4. DATE OF BIRTH</td>
+                        <td class="field-label-small-text">(Day, Month, Year)</td>
+                    </tr>
+                    <tr > 
+                        <td colspan="2" style="text-align: center;">
+                            <span class="field-value-span" style="
+                            display: inline-block;
+                            width: 80%;
+                            height: 12px;
+                            line-height: 12px;
+                            font-size: 10px;
+                            text-align: center;
+                            
+                            vertical-align: middle;
+                        ">
+                            Your text here
+                            </span>
+                  </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="age-cell">
+                <table class="inline-table" style="border-collapse: collapse; border-spacing: 0; white-space: nowrap; ">
+                  <tr style="border-bottom: 0.2px solid blue;">
+                    <td class="field-label" style="padding: 0;">
+                      <span class="field-label">5. AGE AT THE TIME OF DEATH</span>
+                      <span class="field-label-small-text">(Fill-in below accodg to age category)</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0;">
+                      <table class="inline-table" style="border-collapse: collapse; border-spacing: 0;">
+                        <tr>
+                          <!-- Section A -->
+                          <td style="padding: 0; ">
+                            <table class="inline-table" style="border-collapse: collapse; border-spacing: 0; ">
+                              <tr>
+                                <td colspan="1" class="field-label-2"
+                                style="white-space: nowrap; padding: 0; border-bottom: 0.2px solid blue; padding-left: 2px;">
+                                  a IF 1 YEAR OR ABOVE
+                                </td>
+                              </tr>
+                              <tr style="text-align: center; " >
+                                <td class="field-label-small-text-2" style="padding: 0; text-align: center; width: 100%;" >(2) Completed years</td>
+                              </tr>
+                              <tr > 
+                                <td colspan="2" style="text-align: center;">
+                                  <span class="field-value-span" style="
+                                  display: inline-block;
+                                  width: 80%;
+                                  height: 12px;
+                                  line-height: 12px;
+                                  font-size: 10px;
+                                  text-align: center;
+                                  
+                                  vertical-align: middle;
+                              ">
+                                  Your text here
+                                  </span>
+                                  </td>
+                              </tr>
+                            </table>
+                          </td>
+              
+                          <!-- Section B -->
+                          <td style="padding: 0; border-left: 0.2px solid blue; vertical-align: top; ">
+                            <table style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                              <tr>
+                                <td colspan="2" class="field-label-2"
+                                    style="white-space: nowrap; padding: 0; border-bottom: 0.2px solid blue; padding-left: 2px;">
+                                  b. IF UNDER 1 YEAR
+                                </td>
+                              </tr>
+                              <tr style="border-top: 0.2px solid blue;">
+                                <td class="field-label-small-text-2" style="padding: 0; text-align: center; width: 50%; border-right: 0.2px solid blue;">
+                                  (1) months
+                                </td>
+                                <td class="field-label-small-text-2" style="padding: 0; text-align: center; width: 50%;">
+                                  (0) days
+                                </td>
+                              </tr>
+                              <tr > 
+                                <td colspan="2" style="text-align: center;">
+                                  <span class="field-value-span" style="
+                                  display: inline-block;
+                                  width: 80%;
+                                  height: 12px;
+                                  line-height: 12px;
+                                  font-size: 10px;
+                                  text-align: center;
+                                  
+                                  vertical-align: middle;
+                              ">
+                                  Your text here
+                                  </span>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                                        
+                          <!-- Section C -->
+                          <td style="padding: 0; border-left: 0.2px solid blue; vertical-align: top;">
+                            <table class="inline-table" style="border-collapse: collapse; width: 100%;">
+                              <tr>
+                                <td colspan="2" class="field-label-2"
+                                    style="white-space: nowrap; padding: 0; border-bottom: 0.2px solid blue; padding-left: 2px;">
+                                  c. IF UNDER 24 HOURS
+                                </td>
+                              </tr>
+                              <tr style="border-top: 0.2px solid blue;">
+                                <td class="field-label-small-text-2" style="padding: 0; text-align: center; width: 50%; border-right: 0.2px solid blue;">
+                                  Hours
+                                </td>
+                                <td class="field-label-small-text-2" style="padding: 0; text-align: center; width: 50%;">
+                                  Min/Sec
+                                </td>
+                              </tr>
+                              <tr > 
+                                <td colspan="2" style="text-align: center;">
+                                  <span class="field-value-span" style="
+                                    display: inline-block;
+                                    width: 80%;
+                                    height: 12px;
+                                    line-height: 12px;
+                                    font-size: 10px;
+                                    text-align: center;
+                                    
+                                    vertical-align: middle;
+                                    ">
+                                  Your text here
+                                  </span>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+        </table>
+        
+        <table class="common-table">
+            <tr>
+            <td>
+                <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td class="field-label">6. PLACE OF DEATH</td>
+                    <td class="field-label-small-text">(Name of Hospital/Institution/House No., St., Brgy, City/Mun., Province)</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <span class="field-value-span" style="
+                        display: inline-block;
+                        width: 80%;
+                        height: 12px;
+                        line-height: 12px;
+                        font-size: 10px;
+                        text-align: center;
+                        
+                        vertical-align: middle;
+                    ">
+                        Your text here
+                        </span>                    </td>
+                </tr>
+                </table>
+            </td>
+        
+            <td class="civi-status-cell">
+                <table class="inline-table">
+                <tr>
+                    <td class="field-label" style="white-space: nowrap;">7. CIVIL STATUS</td>
+                    <td class="field-label-small-text" style="white-space: wrap;">(Single/Married/Widow/Widower/etc.)</td>
+                </tr>
+                <tr > 
+                    <td colspan="2" style="text-align: center;">
+                        <span class="field-value-span" style="
+                        display: inline-block;
+                        width: 80%;
+                        height: 12px;
+                        line-height: 12px;
+                        font-size: 10px;
+                        text-align: center;
+                        
+                        vertical-align: middle;
+                    ">
+                        Your text here
+                        </span>
+                    </td>
+                </tr>
+
+                </table>
+            </td>
+            </tr>
+        </table>
+
+        <table class="common-table-2">
+            <tr>
+            <td>
+                <table class="inline-table">
+                    <tr>
+                        <td class="field-label">8. RELIGION/RELIGIOUS SECT</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" style="text-align: center;">
+                            <span class="field-value-span" style="
+                            display: inline-block;
+                            width: 80%;
+                            height: 12px;
+                            line-height: 12px;
+                            font-size: 10px;
+                            text-align: center;
+                            
+                            vertical-align: middle;
+                        ">
+                            Your text here
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="common-cell-2">
+                <table class="inline-table">
+                    <tr>
+                        <td class="field-label">9. CTIZENSHIP</td>
+                    </tr>
+                    <tr > 
+                        <td colspan="1" style="text-align: center;">
+                            <span class="field-value-span" style="
+                            display: inline-block;
+                            width: 80%;
+                            height: 12px;
+                            line-height: 12px;
+                            font-size: 10px;
+                            text-align: center;
+                            
+                            vertical-align: middle;
+                        ">
+                            Your text here
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="common-cell-2">
+                <table class="inline-table">
+                    <tr style="white-space: nowrap;">
+                        <td class="field-label">10. RESIDENCE</td>
+                        <td class="field-label-small-text">(House No., St., Brgy, City/Mun., Province, Country)</td>
+                    </tr>
+                    <tr > 
+                        <td colspan="2" style="text-align: center;">
+                            <span class="field-value-span" style="
+                            display: inline-block;
+                            width: 80%;
+                            height: 12px;
+                            line-height: 12px;
+                            font-size: 10px;
+                            text-align: center;
+                            
+                            vertical-align: middle;
+                        ">
+                            Your text here
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            </tr>
+        </table>
+        
+
+        <table class="common-table-2">
+          <tr>
+          <td>
+              <table class="inline-table">
+                  <tr>
+                      <td class="field-label">11. OCCUPATION</td>
+                  </tr>
+                  <tr>
+                      <td colspan="1" style="text-align: center;">
+                        <span class="field-value-span" style="
+                        display: inline-block;
+                        width: 80%;
+                        height: 12px;
+                        line-height: 12px;
+                        font-size: 10px;
+                        text-align: center;
+                        
+                        vertical-align: middle;
+                    ">
+                        Your text here
+                        </span>
+                    </td>
+                  </tr>
+              </table>
+          </td>
+          <td class="common-cell-2">
+              <table class="inline-table">
+                  <tr>
+                      <td class="field-label">12. NAME OF MOTHER</td>
+                      <td class="field-label-small-text">(First, Middle, Last)</td>
+                  </tr>
+                  <tr > 
+                      <td colspan="2" style="text-align: center;">
+                        <span class="field-value-span" style="
+                        display: inline-block;
+                        width: 80%;
+                        height: 12px;
+                        line-height: 12px;
+                        font-size: 10px;
+                        text-align: center;
+                        
+                        vertical-align: middle;
+                    ">
+                        Your text here
+                        </span>
+                    </td>
+                  </tr>
+              </table>
+          </td>
+          <td class="common-cell-2">
+              <table class="inline-table">
+                  <tr style="white-space: nowrap;">
+                      <td class="field-label">13. NAME OF FATHER</td>
+                      <td class="field-label-small-text">(First, Middle, Last)</td>
+                  </tr>
+                  <tr > 
+                      <td colspan="2" style="text-align: center;">
+                        <span class="field-value-span" style="
+                        display: inline-block;
+                        width: 80%;
+                        height: 12px;
+                        line-height: 12px;
+                        font-size: 10px;
+                        text-align: center;
+                        
+                        vertical-align: middle;
+                    ">
+                        Your text here
+                        </span>
+                    </td>
+                  </tr>
+              </table>
+          </td>
+          </tr>
+        </table>
+
+      <hr style="
+        border: none;
+        border-top: 1px solid blue;
+        margin: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+      ">
+
+      <div style="text-align: center; line-height: 0.8;">
+        <span style="font-size:12px; font-weight: bold;">
+          MEDICAL CERTIFICATE<br>
+        </span>
+        <span style="font-size:12px;">
+          (For ages 0 to 7 days, accomplish items 14-19 at the back)
+        </span>
+      </div>
+
+
+
+<!-- CAUSES OF DEATH -->
+        <div style=" font-size: 10px; margin-top: 5px; line-height: 1.2; border-top: 0.2px solid blue;">
+
+            <div style="display: flex; justify-content: space-between; padding: 2px 5px; margin-bottom: 5px;">
+              <div style="margin: 0; padding: 0;">
+                  19b. CAUSES OF DEATH (If the deceased is aged 8 days and over)
+              </div>
+              <div style="font-style: italic; white-space: nowrap; margin: 0; padding: 0 50px;"> 
+                  Interval Between Onset and Death
+              </div>
+          </div>
+
+          <ul style="list-style: none; padding: 0; margin: 0;">
+
+            <li style="display: flex; align-items: flex-end; margin-bottom: 3px;">
+                <div style="display: flex; justify-content: space-between; width: 200px;">
+                    <div style="margin: 0 0 0 20px; padding: 0;">I. Immediate cause</div>
+                    <div style="margin: 0 5px 0 0; white-space: nowrap; padding: 0;">: a.</div>
+                </div>
+                <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
+                    Your text here
+                </span>
+                <span class="field-value-span" style="flex-grow: 0.5; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin-left: 15px; padding: 0;">
+                    Your text here
+                </span>
+            </li>
+          
+            <li style="display: flex; align-items: flex-end; margin-bottom: 3px;">
+                <div style="display: flex; justify-content: space-between; width: 200px;">
+                    <div style="margin: 0 0 0 30px; padding: 0;">Antecedent cause</div>
+                    <div style="margin: 0 5px 0 0; white-space: nowrap; padding: 0;">: b.</div>
+                </div>
+                <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
+                    Your text here
+                </span>
+                <span class="field-value-span" style="flex-grow: 0.5; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin-left: 15px; padding: 0;">
+                    Your text here
+                </span>
+            </li>
+          
+            <li style="display: flex; align-items: flex-end; margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; width: 200px;">
+                    <div style="margin: 0 0 0 30px; padding: 0;">Underlying cause</div>
+                    <div style="margin: 0 5px 0 0; white-space: nowrap; padding: 0;">: c.</div>
+                </div>
+                <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
+                    Your text here
+                </span>
+                <span class="field-value-span" style="flex-grow: 0.5; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin-left: 15px; padding: 0;">
+                    Your text here
+                </span>
+            </li>
+          
+          </ul>
+          
+          <div style="display: flex; align-items: flex-end; border-bottom: 0.2px solid blue; padding-bottom: 5px;">
+              <div style="margin: 0 5px 0 20px; white-space: nowrap; padding: 0;">
+                  II. Other significant conditions contributing to death:
+              </div>
+              <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
+                  Your text here
+              </span>
+          </div>
+        </div>
+
+        <!-- MATERNAL CONDITION -->     
+        <div style="border-bottom: 0.2px solid blue; padding: 0 5px">
+
+            <div style="font-size: 10px; margin: 0 0 10px 0; padding: 0;">
+                19c. MATERNAL CONDITION (If the deceased is female aged 15-49 years old)
+            </div>
+        
+            <div class="field-label" style="display: flex; justify-content: space-between; align-items: flex-start; width: auto; margin-left: 20px; margin-right: 20px;">
+        
+                <div style="display: flex; align-items: flex-start; margin-right: 15px;">
+                    <span class="field-value-span" style="display:inline-block; width: 20px; height: 0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                        &nbsp;✓
+                    </span>
+                    <div style="margin: 0; padding: 0;">a. pregnant,<br>not in labour</div>
+                </div>
+        
+                <div style="display: flex; align-items: flex-start; margin-right: 15px;">
+                    <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                        &nbsp;✓
+                    </span>
+                    <div style="margin: 0; padding: 0;">b. pregnant, in<br>labour</div>
+                </div>
+        
+                <div style="display: flex; align-items: flex-start; margin-right: 15px;">
+                    <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                        &nbsp;✓
+                    </span>
+                    <div style="margin: 0; padding: 0;">c. less than 42 days after<br>delivery</div>
+                </div>
+        
+                <div style="display: flex; align-items: flex-start; margin-right: 15px;">
+                    <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                        &nbsp;✓
+                    </span>
+                    <div style="margin: 0; padding: 0;">d. 42 days to 1 year after<br>delivery</div>
+                </div>
+        
+                <div style="display: flex; align-items: flex-start;">
+                    <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                        &nbsp;✓
+                    </span>
+                    <div style="margin: 0; padding: 0;">e. None of the<br>choices</div>
+                </div>
+        
+            </div>
+        </div>
+        
+
+        <!-- DEATH BY EXTERNAL CAUSES -->
+        <div style="width: auto; font-size: 10px; line-height: 1.2; margin-top: 5px; padding: 0 5px 0 5px; border-bottom: 0.2px solid blue;">
+            <div style="display: flex; width: 100%;">
+                <div style="flex-grow: 1; border-right: 0.2px solid blue; ">
+        
+                    <div style="margin-bottom: 0;">
+                        19d. DEATH BY EXTERNAL CAUSES
+                    </div>
+        
+                    <div style="display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap;margin-top: 5px; margin-right: 10px;">
+                            a. Manner of death (<span style="color: blue; font-size: 8px;">Homicide, Suicide, Accident, Legal intervention, etc.</span>)
+                        </div>
+                        <span class="field-value-span" style="flex-grow: 1; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                            &nbsp; Sample 
+                        </span>
+                    </div>
+        
+                    <div style="display: flex; align-items: flex-end; padding-bottom: 1px;">
+                        <div style="white-space: nowrap;margin-top: 5px; margin-right: 10px;">
+                            b. Place of Occurrence of External Cause (<span style="color: blue; font-size: 8px;">e.g. home, farm, factory, street, sea, etc.</span>)
+                        </div>
+                        <span class="field-value-span" style="flex-grow: 1; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                            &nbsp; Sample 
+                        </span>
+                    </div>
+        
+                </div>
+        
+                <div style="width: 20%; text-align: center;">
+                    <div style="margin-bottom: 0;">
+                        20. AUTOPSY
+                    </div>
+                    <div style="margin-bottom: 1px; font-size: 8px;">
+                        (Yes / No)
+                    </div>
+                    <span class="field-value-span" style="margin-top: 5px; width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; ">
+                        &nbsp; Yes
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+
+      <!-- ATTENDANT -->
+      <div style="font-size: 10px; line-height: 1.2; border-bottom: 0.2px solid blue;">
+        <div style="display: flex; width: 100%;">
+    
+            <div style="flex-grow: 1; padding: 2px 5px; border-right: 1px solid black;">
+                <div style="margin-bottom: 5px;">21a. ATTENDANT</div>
+    
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+    
+                    <!-- Option 1 -->
+                    <div style="display: flex; align-items: flex-start; margin-right: 15px;">
+                        <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                            &nbsp;✓
+                        </span>
+                        <div style="margin: 0; padding: 0;">1 Private<br>Physician</div>
+                    </div>
+    
+                    <!-- Option 2 -->
+                    <div style="display: flex; align-items: flex-start; margin-right: 15px;">
+                        <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                            &nbsp;✓
+                        </span>
+                        <div style="margin: 0; padding: 0;">2 Public<br>Health Officer</div>
+                    </div>
+    
+                    <!-- Option 3 -->
+                    <div style="display: flex; align-items: flex-start; margin-right: 15px;">
+                        <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                            &nbsp;✓
+                        </span>
+                        <div style="margin: 0; padding: 0;">3 Hospital<br>Authority</div>
+                    </div>
+    
+                    <!-- Option 4 -->
+                    <div style="display: flex; align-items: flex-start; margin-right: 15px;">
+                        <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                            &nbsp;✓
+                        </span>
+                        <div style="margin: 0; padding: 0;">4 None</div>
+                    </div>
+    
+                    <!-- Option 5 -->
+                    <div style="display: flex; align-items: flex-start;">
+                        <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                            &nbsp;✓
+                        </span>
+                        <div style="margin: 0; padding: 0;">5 Others<br>(Specify)</div>
+                    </div>
+                </div>
+            </div>
+    
+            <div style="width: 30%; padding: 5px;">
+                <div style="margin-bottom: 15px;">21b. If attended, state duration (mm/dd/yy)</div>
+    
+                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div style="white-space: nowrap;">From</div>
+                    <span class="field-value-span" style="width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0 10px 0 5px; padding: 0;">&nbsp; sample</span>
+                    <div style="white-space: nowrap;">To</div>
+                    <span class="field-value-span" style="width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">&nbsp; sample</span>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+    <!-- CERTIFICATION OF DEATH -->
+    <div style="font-size: 10px; line-height: 1.2; background-color: white; margin-top: -1px; border-top: 0.2px solid blue; padding:2px 5px;">
+        <div style="margin-bottom: 0px;">22. CERTIFICATION OF DEATH</div>
+        <div style="margin-bottom: 0px;">
+            <span style="padding-left: 2em;">I hereby certify that the foregoing particulars are correct as near as same can be ascertained and I further certify that I</span>
+            <span style="display:inline-block; width:12px; text-align:center; border: 0.2px solid blue; margin:0 5px;">✓</span> have attended /
+            <span style="display:inline-block; width:12px; text-align:center; border: 0.2px solid blue; margin:0 5px;">&nbsp;</span> have not attended the deceased and that death occurred at
+            <span class="field-value-span" style="width:50px; display:inline-block; border-bottom:0.2px solid blue; text-align:center;">08:45</span> am/pm on the date of death specified above.
+        </div>
+    
+        <div style="display: flex; width: 100%; ">
+    
+            <ul style="list-style: none; padding: 10px 0 0 0; margin: 0; flex: 1; border-right: 0.2px solid blue;">
+                <li style="display: flex; align-items: flex-end; padding: 0 5px;">
+                    <div style="display: flex; margin-top: 5px; justify-content: space-between; width: 120px;">
+                        <div style="margin: 0; padding: 0;">Signature</div>
+                    </div>
+                    <span class="field-value-span" style="margin-top: 5px; padding-bottom: 1px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">Dr. Juan Dela Cruz</span>
+                </li>
+    
+                <li style="display: flex; align-items: flex-end; padding: 0 5px;">
+                    <div style="display: flex; margin-top: 5px; justify-content: space-between; width: 120px;">
+                        <div style="margin: 0; padding: 0;">Name in Print</div>
+                    </div>
+                    <span class="field-value-span" style="margin-top: 5px; padding-bottom: 1px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">Juan Dela Cruz</span>
+                </li>
+    
+                <li style="display: flex; align-items: flex-end; padding: 0 5px;">
+                    <div style="display: flex; margin-top: 5px; justify-content: space-between; width: 120px;">
+                        <div style="margin: 0; padding: 0;">Title or Position</div>
+                    </div>
+                    <span class="field-value-span" style="margin-top: 5px; padding-bottom: 1px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">Municipal Physician</span>
+                </li>
+    
+                <li style="display: flex; align-items: flex-end; padding: 0 5px;">
+                    <div style="display: flex; margin-top: 5px; justify-content: space-between; width: 120px;">
+                        <div style="margin: 0; padding: 0;">Address</div>
+                    </div>
+                    <span class="field-value-span" style="margin-top: 5px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">123 Main St., City</span>
+                </li>
+    
+                <li style="display: flex; align-items: flex-end; padding: 5px 5px 0 5px; justify-content: flex-end;">
+                    <div style="white-space: nowrap; margin-right: 5px;">Date</div>
+                    <span class="field-value-span" style="margin-top: 5px; font-size: 10px; width: 100px; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+                </li>
+            </ul>    
+    
+            <div style="flex: 0.8; padding:0 2px; border-top: 0.2px solid blue;">
+                <div style="font-weight: bold; text-align: left; margin-bottom: 20px; font-size: 11px;">REVIEWED BY:</div>
+    
+                <div style="margin-bottom: 5px; text-align: center;">
+                    <span class="field-value-span" style="width: 80%; height:1.2em; display:inline-block; border-bottom:0.2px solid blue;">Dr. Maria Santos</span>
+                    <div style="text-align: center; margin-top: 2px;">Signature Over Printed Name of Health Officer</div>
+                </div>
+                <div style="margin-bottom: 0px; text-align: center; padding-top: 5px;">
+                    <span class="field-value-span" style="font-size: 10px; width: 100px; display:inline-block; height:1.2em; border-bottom:0.2px solid blue; margin-left: 5px;">09/25/2025</span>
+                    <div style="text-align: center; margin-top: 0px;">Date</div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+      
+        <!-- CORPSE DISPOSAL -->
+        <div style="font-size: 10px; line-height: 1.2; background-color: white; border: 0.2px solid blue; padding: 0 5px;">
+
+            <div style="display: flex; width: 100%;">
+                <!-- Corpse Disposal -->
+                <div style="width: 35%; padding: 0px; border-right: 0.2px solid blue;">
+                    <div style="margin-bottom: 5px;">23. CORPSE DISPOSAL (Burial, Cremation, if others, specify)</div>
+                    <span class="field-value-span" style="width: 100%; display:inline-block; text-align: center; height:1.2em; border-bottom:0.2px solid blue;">Burial</span>
+                </div>
+        
+                <!-- Burial/Cremation and Transfer Permits -->
+                <div style="width: 65%; display: flex;">
+        
+                    <!-- 24a. Burial/Cremation Permit -->
+                    <div style="flex: 1; padding: 0px; border-right: 0.2px solid blue;">
+                        <div style="margin-bottom: 2px;">24a. BURIAL/CREMATION PERMIT</div>
+                        <div style="display: flex; align-items: flex-end; margin-bottom:2px;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Number</div>
+                            <span class="field-value-span" style="width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">12345</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-end;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Date Issued</div>
+                            <span class="field-value-span" style="width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+                        </div>
+                    </div>
+        
+                    <!-- 24b. Transfer Permit -->
+                    <div style="flex: 1; padding: 0px;">
+                        <div style="margin-bottom: 2px;">24b. TRANSFER PERMIT</div>
+                        <div style="display: flex; align-items: flex-end; margin-bottom:2px;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Number</div>
+                            <span class="field-value-span" style="width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">67890</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-end;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Date Issued</div>
+                            <span class="field-value-span" style="width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">09/26/2025</span>
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+        
+<!-- NAME AND ADDRESS OF CEMETERY OR CREMATORY -->
+<div style="font-size: 10px; border-top: 0.2px solid blue; border-bottom: 0.2px solid blue; padding:2px 5px;">
+    <div style="margin-bottom: 10px; margin-top: 2px;">25. NAME AND ADDRESS OF CEMETERY OR CREMATORY</div>
+    <span class="field-value-span" style="width:100%; display:inline-block; height:1.2em;">Greenwood Memorial Cemetery, 123 Main St, Cityville</span>
+</div>
+
+<!-- CERTIFICATION OF INFORMANT -->
+<div style="font-size: 10px; line-height: 1.2; background-color: white; padding:2px 5px;">
+
+    <div style="display: flex; width: 100%; border-bottom: 0.2px solid blue;">
+        <div style="flex: 1; padding: 2px; border-right: 0.2px solid blue;">
+            <div style="font-weight: bold; margin-bottom: 0;">26. CERTIFICATION OF INFORMANT</div>
+            <div style="margin-bottom: 0px; margin-left: 20px; font-size: 9px; text-indent: 20px;">
+                I hereby certify that all information supplied are true and correct to my own knowledge and belief.
+            </div>
+    
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Signature</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">John D. Doe</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Name in Print</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">John Doe</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Relationship to the Deceased</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Brother</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Address</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">456 Elm St, Cityville</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Date</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+            </div>
+        </div>
+    
+        <div style="flex: 1; padding: 2px;">
+            <div style="font-weight: bold; margin-bottom: 0;">27. PREPARED BY</div>
+    
+            <div style="margin-bottom: 0px; margin-top: 25px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Signature</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Dr. Alice Smith</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Name in Print</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Alice Smith</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Title or Position</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Attending Physician</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Date</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+            </div>
+        </div>
+    </div>
+    
+    <div style="display: flex; width: 100%; margin-top: 2px;">
+        <div style="flex: 1; padding: 2px; border-right: 0.2px solid blue;">
+            <div style="font-weight: bold; margin-bottom: 0;">28. RECEIVED BY</div>
+    
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Signature</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Jane M. Roe</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Name in Print</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Jane Roe</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Title or Position</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Registrar Assistant</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Date</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+            </div>
+        </div>
+    
+        <div style="flex: 1; padding: 2px;">
+            <div style="font-weight: bold; margin-bottom: 0;">29. REGISTERED BY THE CIVIL REGISTRAR</div>
+    
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Signature</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Richard B. Clark</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Name in Print</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Richard Clark</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Title or Position</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Civil Registrar</span>
+            </div>
+            <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
+                <div style="white-space: nowrap; margin-right: 5px;">Date</div>
+                <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+      <!-- REMARKS/ANNOTATIONS -->
+      <div style="font-size: 10px; border-top: 0.2px solid blue; border-bottom: 0.2px solid blue;">
+        <div style="margin-bottom: 2px; margin-top: 2px;">REMARKS/ANNOTATIONS (For LCRO/OCRG Use Only)</div>
+        <textarea style="font-size: 12px; width: 98%; height: 30px; border: none; resize: none;"></textarea>
+      </div>
+      
+      <!-- TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR -->
+      <div style="font-size: 10px; line-height: 1; background-color: white;  padding: 5px;">
+    
+        <div style="font-weight: bold; text-align: center; margin-bottom: 5px;">
+            TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; padding: 0 5px;">
+            
+            <div style="margin-right: 15px; text-align: left;">
+                <div style="font-size: 8px;">5</div>
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+            </div>
+            
+            <div style="margin-right: 15px; text-align: left;">
+                <div style="font-size: 8px;">8</div>
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+            </div>
+    
+            <div style="margin-right: 15px; text-align: left;">
+                <div style="font-size: 8px;">9</div>
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+            </div>
+            
+            <div style="margin-right: 25px; text-align: left;">
+                <div style="font-size: 8px;">10</div>
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+            </div>
+    
+            <div style="margin-right: 15px; text-align: left;">
+                <div style="font-size: 8px;">11</div>
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+            </div>
+            
+            <div style="margin-right: 15px; text-align: left;">
+                <div style="font-size: 8px;">19a(a)/19b</div>
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+            </div>
+            
+            <div style="text-align: left;">
+                <div style="font-size: 8px;">19a(c)</div>
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+                <input type="text" style="width: 12px; height: 18px; border: 0.2px solid blue; padding: 0; margin: 0 1px;">
+            </div>
+    
+        </div>
+    </div>
+
+      </div>
+  </div>
+
+  <!-- Second Page -->
+  <div class="page">
+    <div class="content">
+
+        <!-- FOR CHILDREN AGED 0 TO 7 DAYS -->
+        <div style="text-align: center; line-height: 0.8; border-bottom: 0.2px solid blue; padding-bottom: 5px;">
+            <span style="font-size:12px; font-weight: bold;">
+              FOR CHILDREN AGED 0 TO 7 DAYS<br>
+            </span>
+          </div>
+    <!-- AGE OF MOTHER -->
+        <table class="common-table-2">
+            <tr>
+            <td>
+                <table class="inline-table">
+                    <tr>
+                        <td class="field-label">14. AGE OF MOTHER</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" style="text-align: center;">
+                          <span class="field-value-span" style="
+                          display: inline-block;
+                          width: 80%;
+                          height: 12px;
+                          line-height: 12px;
+                          font-size: 10px;
+                          text-align: center;
+                          
+                          vertical-align: middle;
+                      ">
+                          Your text here
+                          </span>
+                      </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="common-cell-2">
+                <table class="inline-table">
+                    <tr>
+                        <td class="field-label">15. METHOD OF DELIVERY</td>
+                        <td class="field-label-small-text">(Normal spontaneous vertex, if others, specify)</td>
+                    </tr>
+                    <tr > 
+                        <td colspan="2" style="text-align: center;">
+                          <span class="field-value-span" style="
+                          display: inline-block;
+                          width: 80%;
+                          height: 12px;
+                          line-height: 12px;
+                          font-size: 10px;
+                          text-align: center;
+                          
+                          vertical-align: middle;
+                      ">
+                          Your text here
+                          </span>
+                      </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="common-cell-2">
+                <table class="inline-table">
+                    <tr style="white-space: nowrap;">
+                        <td class="field-label">16. LENGTH OF PREGNANCY</td>
+                        <td class="field-label-small-text">(in completed weeks)</td>
+                    </tr>
+                    <tr > 
+                        <td colspan="2" style="text-align: center;">
+                          <span class="field-value-span" style="
+                          display: inline-block;
+                          width: 80%;
+                          height: 12px;
+                          line-height: 12px;
+                          font-size: 10px;
+                          text-align: center;
+                          
+                          vertical-align: middle;
+                      ">
+                          Your text here
+                          </span>
+                      </td>
+                    </tr>
+                </table>
+            </td>
+            </tr>
+          </table>
+
+          <!-- TYPE OF BIRTH -->
+          <table class="common-table-2">
+            <tr>
+            <td>
+                <table class="inline-table">
+                    <tr>
+                        <td class="field-label">17. TYPE OF BIRTH</td>
+                        <td class="field-label-small-text">(Single, Twins, triplets, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" style="text-align: center;">
+                          <span class="field-value-span" style="
+                          display: inline-block;
+                          width: 80%;
+                          height: 12px;
+                          line-height: 12px;
+                          font-size: 10px;
+                          text-align: center;
+                          
+                          vertical-align: middle;
+                      ">
+                          Your text here
+                          </span>
+                      </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="common-cell-2">
+                <table class="inline-table">
+                    <tr>
+                        <td class="field-label">18. IF MULTIPLE BIRTH, CHILD WAS</td>
+                        <td class="field-label-small-text">(First, Second, Third, etc.)</td>
+                    </tr>
+                    <tr > 
+                        <td colspan="2" style="text-align: center;">
+                          <span class="field-value-span" style="
+                          display: inline-block;
+                          width: 80%;
+                          height: 12px;
+                          line-height: 12px;
+                          font-size: 10px;
+                          text-align: center;
+                          
+                          vertical-align: middle;
+                      ">
+                          Your text here
+                          </span>
+                      </td>
+                    </tr>
+                </table>
+            </td>
+            </tr>
+          </table>
+
+<!-- MEDICAL CERTIFICATE -->
+          <div style="text-align: center; line-height: 0.8; border-bottom: 0.2px solid blue; padding-bottom: 5px;">
+            <span style="font-size:12px; font-weight: bold;">
+              MEDICAL CERTIFICATE<br>
+            </span>
+          </div>
+
+          <!-- CAUSE OF DEATH -->
+          <div style="font-size: 10px; display: flex; width: 100%;">
+            <div style="flex: 1; padding: 2px; border-right: 0.2px solid blue;">
+                <div style="font-weight: bold; margin-bottom: 0;">19a. CAUSE OF DEATH</div>
+        
+                <ol style="list-style-type: lower-alpha; padding: 0; margin: 0 0 0 20px;">
+    
+                    <li style="margin-bottom: 0px;">
+                        <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Main disease/condition of infant</div>
+                            <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">John D. Doe</span>
+                        </div>
+                    </li>
+                    
+                    <li style="margin-bottom: 0px;">
+                        <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Other diseases/conditions of infant</div>
+                            <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">John Doe</span>
+                        </div>
+                    </li>
+                    
+                    <li style="margin-bottom: 0px;">
+                        <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Main maternal disease/condition affecting infant</div>
+                            <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">Brother</span>
+                        </div>
+                    </li>
+                    
+                    <li style="margin-bottom: 0px;">
+                        <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Other maternal disease/condition affecting infant</div>
+                            <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">456 Elm St, Cityville</span>
+                        </div>
+                    </li>
+                    
+                    <li style="margin-bottom: 0px;">
+                        <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                            <div style="white-space: nowrap; margin-right: 5px;">Other relevant circumstances</div>
+                            <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">09/25/2025</span>
+                        </div>
+                    </li>
+                    
+                </ol>                
+            </div>  
+          </div>
+
+          <div style="text-align: center; line-height: 0.8;">
+            <span style="font-size:12px; font-weight: bold;">
+              CONTINUE TO FILL UP ITEM 20<br>
+            </span>
+          </div>
+
+          <!-- Divider line inside rectangle -->
+          <hr  style="border-bottom: 2px solid blue;height: 8px; border-top: 2px solid blue; background-color: white; margin-top: 5px;"></hr>
+          <!-- POSTMARTEM CERTIFICATE OF DEATH -->
+          <div style="font-size: 10px; line-height: 1.2;  padding:2px 5px; ">
+            <div style="font-size:12px; font-weight: bold; text-align: center; margin-bottom: 5px;">
+                POSTMARTEM CERTIFICATE OF DEATH
+            </div>
+            
+            <div style="line-height: 1.5; margin-top: 5px; text-indent:100px;">
+                I HEREBY CERTIFY that I have performed an autopsy upon the body of the deceased and that the cause of death was:
+              </div>
+              
+              <div style="line-height: 1.5; margin-bottom: 2px; font-size: 10px;">
+                <span id="field2_line1"
+                  style="
+                    display: block;
+                    width: 100%;
+                    border-bottom: 0.2px solid blue;
+                    height: 1.2em;
+                    margin-top: 5px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                  "></span>
+              
+                <span id="field2_line2"
+                  style="
+                    display: block;
+                    width: 100%;
+                    border-bottom: 0.2px solid blue;
+                    height: 1.2em;
+                    margin-top: 5px;
+                    overflow: hidden;
+                  "></span>
+              </div>
+              
+            
+            <div style="display: flex; width: 100%; padding-top: 10px; font-size: 10px; line-height: 1.2;">
+    
+                <div style="flex: 1; padding-right: 10px;">
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Signature</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">J. Smith</span>
+                    </div>
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Name in Print</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">JONATHAN SMITH</span>
+                    </div>
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Date</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">2025-09-26</span>
+                    </div>
+                </div>
+            
+                <div style="flex: 1;">
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Title/Designation</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">Health Officer</span>
+                    </div>
+                                        
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Address</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">Municipal Health Office</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+          <!-- Divider line inside rectangle -->
+          <hr  style="border-bottom: 2px solid blue;height: 8px; border-top: 2px solid blue; background-color: white; margin-top: 2px;"></hr>
+        <!-- CERTIFICATION OF EMBALMER -->
+        <div style="font-size: 10px; line-height: 1.2; margin:0; padding:0px 5px">
+    
+            <div style="font-size:12px; font-weight: bold; text-align: center; margin-bottom: 5px;">
+                CERTIFICATION OF EMBALMER
+            </div>
+            
+            <div style="line-height: 1.5; text-indent: 20px;">
+                I HEREBY CERTIFY that I have embalmed
+                <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 400px;">&nbsp; loe</span>
+                following all the regulations prescribed by the Department of Health.
+            </div>
+            
+            <div style="display: flex; width: 100%; font-size: 10px; line-height: 1.2;padding-top: 10px;">
+                <div style="flex: 1; padding-right: 20px; ">
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Signature</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">A. Rivera</span>
+                    </div>
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Name in Print</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">ANNA RIVERA</span>
+                    </div>
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Address</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">123 Acacia Ave, Metro Manila</span>
+                    </div>
+                </div>
+            
+                <div style="flex: 1;">
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Title/Designation</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">Licensed Embalmer</span>
+                    </div>
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">License No.</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">004567</span>
+                    </div>
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Issued on</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">2024-03-10</span>
+                        <div style="white-space: nowrap; margin: 0 2px;">at</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">Quezon City</span>
+                    </div>
+                    
+                    <div style="margin-top: 5px; display: flex; align-items: flex-end;">
+                        <div style="white-space: nowrap; margin-right: 2px;">Expiry Date</div>
+                        <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">2026-03-09</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider line inside rectangle -->
+        <hr  style="border-bottom: 2px solid blue;height: 8px; border-top: 2px solid blue; background-color: white; margin-top: 5px;"></hr>
+
+        <!-- AFFIDAVIT FOR DELAYED REGISTRATION OF DEATH -->
+        <div style="font-size: 10px; line-height: 1.5; background-color: white; padding:2px 5px;">
+    
+            <div style="font-weight: bold; text-align: center; margin-bottom: 20px; font-size: 12px;">
+                AFFIDAVIT FOR DELAYED REGISTRATION OF DEATH
+            </div>
+            <div style="margin-bottom: 10px;  ">
+                <span style="padding-left: 80px;">I, </span>
+                <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 300px; text-align: center;">**JUAN P. DELA CRUZ**</span>, 
+                of legal age, single/married/divorced/widow/widower, with residence and postal address
+                <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 500px; text-align: center;">**#10 Sikatuna Street, Barangay Holy Spirit, Quezon City**</span>
+                after being duly sworn in accordance with law, do hereby depose and say:
+            </div>
+            
+            <div style="margin-bottom: 10px; padding-left: 80px;">
+                1. That
+                <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 180px; text-align: center;">**MARIA C. DELA CRUZ**</span>
+                died on
+                <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 120px; text-align: center;">**2023-01-15**</span> in
+                <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**Quezon City**</span>
+                <br>
+                and was buried/cremated in
+                <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**Manila North Cemetery**</span>
+                on
+                <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**2023-01-20**</span>
+            </div>
+            
+            <div style="margin-bottom: 10px; padding-left: 80px;">
+                2. That the deceased at the time of his/her death:
+                
+                <div style="margin-left: 20px; display: flex; flex-direction: column;">
+                    
+                    <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
+                        <input type="checkbox" style="width: 12px; height: 12px; margin-right: 5px; border: 0.2px solid blue; "checked>
+                        <div style="white-space: nowrap; margin-right: 5px;">was attended by</div>
+                        
+                        <span style="border-bottom: 0.2px solid blue; flex-grow: 1; height: 1.4em; text-align: center;">**Dr. Ricardo Reyes, MD**</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: flex-end;">
+                        <input type="checkbox" style="width: 12px; height: 12px; margin-right: 5px; border: 0.2px solid blue;" checked>
+                        was not attended.
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 5px; padding-left: 80px; display: flex; align-items: flex-end;">
+                3. That the cause of death of the deceased was
+                <span style="border-bottom: 0.2px solid blue; flex-grow: 1; height: 1.4em; margin-left: 5px; text-align: center;">**Cardiovascular Accident (Stroke)**</span>
+            </div>  
+
+            <div style="margin-bottom: 10px;padding-left: 80px;display: flex;flex-wrap: wrap;align-items: flex-end;">
+          
+            <!-- Label -->
+            <div style="flex-shrink: 0; margin-right: 5px;">
+              4. That the reason for the delay in registering this death was due to
+            </div>
+          
+            <!-- First line -->
+            <span id="field1_line1" style="display: inline-block;width: 320px;height: 1.4em;border-bottom: 0.2px solid blue;margin-top: 5px;overflow: hidden;white-space: nowrap;"></span>
+            
+            <!-- Second line -->
+            <span id="field1_line2" style="display: block;width: 100%;margin-left: 50px;height: 1.4em;border-bottom: 0.2px solid blue;margin-top: 5px;"></span>
+          </div>
+
+            <div style="margin-bottom: 5px; padding-left: 80px;">
+                5. That I am executing this affidavit to attest to the truthfulness of the foregoing statements for all legal intents and purposes.
+            </div>
+            <div style="margin-bottom: 10px; line-height: 1.4;">
+                <div style="padding-left: 80px;">
+                    In truth whereof, I have affixed my signature below this
+                    <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 100px;text-align: center;">Sample</span>
+                    day of
+                    <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 200px;text-align: center;">Sample</span>
+                    </div>
+                
+                <div style="padding-left: 0px;">
+                    at
+                    <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 250px;text-align: center;">Southern Leyte</span>,
+                    Philippines.
+                </div>
+            
+                <div style="text-align: right; margin: 15px 0;">
+                    <div style="display: inline-block; text-align: center;">
+                        <span style="display: inline-block;width: 270px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
+                            Sample
+                        </span>
+                        <div style="font-size: 10px;margin-top: 5px;width: 270px;text-align: center;">
+                            (Signature Over Printed Name of Affiant)
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            
+            <div style="padding-bottom: 10px; padding-top: 5px; line-height: 1.5;">
+    
+                <div style="padding-left: 80px;">
+                   <strong> SUBSCRIBED AND SWORN to before me this</strong>
+                    <span style="border-bottom: 0.3px solid blue;display: inline-block;width: 100px;text-align: center;">**10TH**</span>
+                    day of
+                    <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">**OCTOBER**</span>,
+                    <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">**2025**</span> at
+                </div>
+                
+                <div style="padding-left: 0px;">
+                    <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 200px;text-align: center;">**MAKATI CITY**</span>,
+                    Philippines, affiant who exhibited to me his Community Tax Cert.
+                </div>
+                
+                <div style="margin-top: 5px; padding-left: 0px; ">
+                    issued on
+                    <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**2025-01-05**</span>
+                    at
+                    <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**MAKATI**</span>
+                </div>
+                
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                <div style="flex: 1; margin-right: 5px; text-align: center;">
+                    <span style="display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
+                        Sample
+                    </span>
+                    <div style="font-size: 10px; text-align: center; margin-top: 5px;">
+                        Signature of the Administering Officer
+                    </div>
+                </div>
+                <div style="flex: 1; margin-left: 5px; text-align: center;">
+                    <span style="display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
+                        Sample
+                    </span>
+                    <div style="font-size: 10px; text-align: center; margin-top: 5px;">
+                        Position / Title / Designation
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 10px;;">
+                <div style="flex: 1; margin-right: 5px; text-align: center;">
+                    <span style="display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
+                        Sample
+                    </span>
+                    <div style="font-size: 10px; text-align: center; margin-top: 5px;">
+                        Name in Print
+                    </div>
+                </div>
+                <div style="flex: 1; margin-left: 5px; text-align: center;">
+                    <span style="display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
+                        Sample
+                    </span>
+                    <div style="font-size: 10px; text-align: center; margin-top: 5px;">
+                        Address
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <button id="downloadBtn">Download PDF</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <script>
+  document.getElementById('downloadBtn').addEventListener('click', async () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF('p', 'pt', [612, 936]); // 8.5in x 13in in points (72pt per inch)
+  
+      const pages = document.querySelectorAll('.page');
+  
+      for (let i = 0; i < pages.length; i++) {
+          const canvas = await html2canvas(pages[i], { scale: 2 });
+          const imgData = canvas.toDataURL('image/png');
+          const pdfWidth = doc.internal.pageSize.getWidth();
+          const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  
+          if (i > 0) doc.addPage();
+          doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      }
+  
+      doc.save('Death_Certificate.pdf');
+  });
+
+
+
+    /**
+     * Splits text between two underline spans so first line never wraps,
+     * and overflow automatically moves to the second line.
+     */
+        function fillUnderlineLines(line1Id, line2Id, text) {
+        const line1 = document.getElementById(line1Id);
+        const line2 = document.getElementById(line2Id);
+    
+        function adjust() {
+        line1.textContent = text;
+        line2.textContent = '';
+    
+        // Move overflow text to the second line
+        while (line1.scrollWidth > line1.clientWidth && line1.textContent.length > 0) {
+            line2.textContent = line1.textContent.slice(-1) + line2.textContent;
+            line1.textContent = line1.textContent.slice(0, -1);
+        }
+        }
+    
+        // Adjust on load and resize
+        window.addEventListener('load', adjust);
+        window.addEventListener('resize', adjust);
+    }
+    
+    // Usage for each field
+    fillUnderlineLines(
+        'field2_line1',
+        'field2_line2',
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio dolor atque consequatur similique quod, voluptates, sapiente, corrupti mollitia impedit ut obcaecati numquam? Molestiae distinctio consectetur quis cum, suscipit voluptas fugit.'
+    );
+    fillUnderlineLines(
+        'field1_line1',
+        'field1_line2',
+        'Massive pulmonary embolism due to deep vein thrombosis of the lower extremities, complicated by chronic heart disease and pneumonia.'
+    );
+  </script>
+        
+</body>
+</html>
