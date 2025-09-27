@@ -6,7 +6,7 @@ export { ChangeCredentials } from './Modals/ChangeCredentials';
 export { default as UserCounts } from './UserCounts';
 export { default as InfoCard } from './InfoCard';
 export { default as SignaturePlaceholder } from './SignaturePlaceholder';
-export { default as FileList } from './FIleLists';
+export { default as FileList } from './FileLists';
 
 /**
  * TODO: export all form components
