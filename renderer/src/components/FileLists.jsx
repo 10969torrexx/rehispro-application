@@ -1,10 +1,29 @@
 import { FileIcons } from "@enums";
+import { useState, useEffect } from "react";
 export default function FileList({name, size, type}) {
+    const [icon, setIcon] = useState(FileIcons.PDF);
+    useEffect(() => {
+        console.log(name, size, type);
+        switch(type) {
+            case 'application/pdf':
+                setIcon(FileIcons.PDF);
+                break;
+            case 'image/jpeg':
+                setIcon(FileIcons.JPEG);
+                break;
+            case 'image/png':
+                setIcon(FileIcons.PNG);
+                break;
+            default:
+                setIcon(FileIcons.PDF);
+                break;
+        }
+    }, [name, size, type]);
     return (
         <div className="w-full bg-white shadow-md rounded-lg p-3 mb-3 flex items-center justify-between hover:shadow-lg transition">
             <div className="flex items-center gap-3">
                 <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-blue-50 border">
-                    <i className={`${FileIcons.PDF} text-primary text-2xl`}></i>
+                    <i className={`${icon} text-primary text-2xl`}></i>
                 </div>
 
                 <div className="flex flex-col">
@@ -14,7 +33,7 @@ export default function FileList({name, size, type}) {
             </div>
 
             <div className="flex items-center gap-3">
-                <button className="text-gray-400 hover:text-gray-600">
+                <button className="text-gray-400 hover:text-gray-600" data-filetype={type}>
                     <i className="bi bi-x-lg"></i>
                 </button>
             </div>

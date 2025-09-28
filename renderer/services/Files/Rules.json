@@ -2,11 +2,11 @@
     "file": {
         "required": true,
         "type": ["jpeg", "jpg", "png", "pdf"],
-        "size": 5,
+        "size": 100,
         "message": {
-            "requried": "File is required",
+            "required": "File is required",
             "type": "Only JPG, PNG or PDF file are allowed",
-            "size": "File must not exceed 5MB."
+            "size": "File must not exceed 100MB."
         }
     }
 }
