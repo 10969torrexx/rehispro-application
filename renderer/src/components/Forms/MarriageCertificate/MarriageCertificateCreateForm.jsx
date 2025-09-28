@@ -29,6 +29,8 @@ export default function MarriageCertificateCreateForm() {
     const [formData, setFormData] = useState({
         // Page 1: formData Input Validation
         page1: {
+            creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
+            creationType: "manual",
             // Page 1: Province, City and Registry No.
             province: "",
             city: "",
@@ -213,9 +215,9 @@ export default function MarriageCertificateCreateForm() {
             ceremonyTribal: false,
 
             marriageWithLicense: false,
-            marriageLicenseNo: "",
-            marriageIssuedOn: "",
-            marriageIssuedAt: "",
+            marriageLicenseNoPage9: "",
+            marriageIssuedOnPage9: "",
+            marriageIssuedAtPage9: "",
 
             marriageUnderArticle: false,
             articleNumber: "",
@@ -225,23 +227,28 @@ export default function MarriageCertificateCreateForm() {
 
             reasonForDelay: "",
 
-            affidavitDay: "",
-            affidavitMonth: "",
-            affidavitYear: "",
-            affidavitPlace: "",
+            affidavitDayPage9: "",
+            affidavitMonthPage9: "",
+            affidavitYearPage9: "",
+            affidavitPlacePage9: "",
         },
 
         // Page 10: formData Input Validation
         page10: {
-            swornDay: "",
-            swornMonth: "",
-            swornYear: "",
-            swornPlace: "",
-            swornIssuedOn: "",
-            swornIssuedAt: "",
+            swornDayPage10: "",
+            swornMonthPage10: "",
+            swornYearPage10: "",
+            swornPlacePage10: "",
+            swornIssuedOnPage10: "",
+            swornIssuedAtPage10: "",
             administeringOfficerName: "",
-            officerPosition: "",
-            officerAddress: "",
+            officerPositionPage10: "",
+            officerAddressPage10: "",
+        }, 
+
+        // Page 11: Confirmation Input Validation
+        page11: {
+            confirmation: false
         }
 
     });
@@ -328,34 +335,226 @@ export default function MarriageCertificateCreateForm() {
     };
 
     const initialFormData = {
-        page1: {},
-        page2: {},
-        page3: {},
-        page4: {},
-        page5: {},
-        page6: {},
-        page7: {},
-        page8: {},
-        page9: {},
-        page10: {},
-        page11: {},
-    };
+        page1: {
+            province: "",
+            city: "",
+            registry: "",
+            husbandFirstName: "",
+            husbandMiddleName: "",
+            husbandLastName: "",
+            husbandBirthDate: "",
+            husbandBirthCity: "",
+            husbandBirthProvince: "",
+            husbandBirthCountry: "",
+            husbandAge: "",
+            wifeFirstName: "",
+            wifeMiddleName: "",
+            wifeLastName: "",
+            wifeBirthDate: "",
+            wifeBirthCity: "",
+            wifeBirthProvince: "",
+            wifeBirthCountry: "",
+            wifeAge: ""
+        },
+        page2: {
+            husbandSex: "",
+            husbandCitizenship: "",
+            husbandResidenceBarangay: "",
+            husbandResidenceCity: "",
+            husbandResidenceProvince: "",
+            husbandResidenceCountry: "",
+            husbandReligion: "",
+            husbandCivilStatus: "",
+            husbandFatherNameFirst: "",
+            husbandFatherNameMiddle: "",
+            husbandFatherNameLast: "",
+            wifeSex: "",
+            wifeCitizenship: "",
+            wifeResidenceBarangay: "",
+            wifeResidenceCity: "",
+            wifeResidenceProvince: "",
+            wifeResidenceCountry: "",
+            wifeReligion: "",
+            wifeCivilStatus: "",
+            wifeFatherNameFirst: "",
+            wifeFatherNameMiddle: "",
+            wifeFatherNameLast: ""
+        },
+        page3: {
+            husbandFatherCitizenship: "",
+            husbandMotherNameFirst: "",
+            husbandMotherNameMiddle: "",
+            husbandMotherNameLast: "",
+            husbandMotherCitizenship: "",
+            husbandConsentNameFirst: "",
+            husbandConsentNameMiddle: "",
+            husbandConsentNameLast: "",
+            husbandRelationship: "",
+            husbandConsentPersonBarangay: "",
+            husbandConsentPersonCity: "",
+            husbandConsentPersonProvince: "",
+            husbandConsentPersonCountry: "",
+            wifeFatherCitizenship: "",
+            wifeMotherNameFirst: "",
+            wifeMotherNameMiddle: "",
+            wifeMotherNameLast: "",
+            wifeMotherCitizenship: "",
+            wifeConsentNameFirst: "",
+            wifeConsentNameMiddle: "",
+            wifeConsentNameLast: "",
+            wifeRelationship: "",
+            wifeConsentPersonBarangay: "",
+            wifeConsentPersonCity: "",
+            wifeConsentPersonProvince: "",
+            wifeConsentPersonCountry: ""
+        },
+        page4: {
+            placeOfMarriage: "",
+            dateOfMarriage: "",
+            timeOfMarriage: "",
+            certHusbandName: "",
+            certWifeName: "",
+            marriageSettlement: "",
+            certDay: "",
+            certMonth: "",
+            certYear: ""
+        },
+        page5: {
+            certification: "",
+            marriageLicenseNo: "",
+            marriageIssuedOn: "",
+            marriageIssuedAt: "",
+            executiveOrder: "",
+            officerPosition: "",
+            officerReligion: "",
+            witness1Name: "",
+            witness2Name: ""
+        },
+        page6: {
+            receivedByName: "",
+            receivedByTitle: "",
+            receivedByDate: "",
+            registrarName: "",
+            registrarTitle: "",
+            registrarDate: "",
+            remarksAnnotation: "",
+            civilRegistrar: ""
+        },
+        page7: {
+            witness3Name: "",
+            witness4Name: "",
+            affidavitOfficerName: "",
+            affidavitOfficerOrganization: "",
+            affidavitOfficerAddress: "",
+            statement1Party1: "",
+            statement1Party2: "",
+            statement2a: false,
+            statement2b: false,
+            statement2c: false,
+            statement2cParty1: "",
+            statement2cParty2: "",
+            statement2d: false,
+            statement2e: false
+        },
+        page8: {
+            affidavitDay: "",
+            affidavitMonth: "",
+            affidavitYear: "",
+            affidavitPlace: "",
+            swornDay: "",
+            swornMonth: "",
+            swornYear: "",
+            swornAt: "",
+            swornIssuedOn: "",
+            swornIssuedAt: "",
+            adminOfficerName: "",
+            adminOfficerTitle: "",
+            adminOfficerAddress: ""
+        },
+        page9: {
+            affiantName: "",
+            affiantAddress: "",
+            statement1OptionA: false,
+            statement1MarriageWith: "",
+            statement1PlaceA: "",
+            statement1DateA: "",
+            statement1OptionB: false,
+            statement1MarriageBetween: "",
+            statement1PlaceB: "",
+            statement1DateB: "",
+            solemnizingOfficer: "",
+            ceremonyReligious: false,
+            ceremonyCivil: false,
+            ceremonyMuslim: false,
+            ceremonyTribal: false,
+            marriageWithLicense: false,
+            marriageLicenseNoPage9: "",
+            marriageIssuedOnPage9: "",
+            marriageIssuedAtPage9: "",
+            marriageUnderArticle: false,
+            articleNumber: "",
+            citizenApplicant: "",
+            citizenSpouse: "",
+            reasonForDelay: "",
+            affidavitDayPage9: "",
+            affidavitMonthPage9: "",
+            affidavitYearPage9: "",
+            affidavitPlacePage9: ""
+        },
+        page10: {
+            swornDayPage10: "",
+            swornMonthPage10: "",
+            swornYearPage10: "",
+            swornPlacePage10: "",
+            swornIssuedOnPage10: "",
+            swornIssuedAtPage10: "",
+            administeringOfficerName: "",
+            officerPositionPage10: "",
+            officerAddressPage10: ""
+        },
+        page11: {
+            confirmation: false
+        }
 
+    };
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Final Form Data:", formData);
-        MarriageCertServices.insertMarriageCertificate(formData)
-            .then(response => {
+    
+        // Flatten all page objects into one object
+        const flatData = Object.assign(
+            {},
+            formData.page1,
+            formData.page2,
+            formData.page3,
+            formData.page4,
+            formData.page5,
+            formData.page6,
+            formData.page7,
+            formData.page8,
+            formData.page9,
+            formData.page10,
+            formData.page11
+        );
+    
+        console.log("Final Flat Data:", flatData);
+    
+        MarriageCertServices.insertMarriageCertificate(flatData)
+            .then((response) => {
                 console.log("[Marriage Form]", response);
-                toast.success("Marriage certificate added successfully!");
-
+                toast.success(response.message || "Marriage certificate created successfully");
+    
+                // Reset form state
                 setFormData(initialFormData);
                 setCurrentPage(1);
+                setErrors({});
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("[Marriage Form]:", error);
+                toast.error(error.message || "Failed to create marriage certificate");
             });
-    }
+    };
+    
     return (
         <>
             <form className="p-4 h-full" onSubmit={handleSubmit}>
@@ -2397,24 +2596,24 @@ export default function MarriageCertificateCreateForm() {
                                     a. with marriage license no.{" "}
                                     <input
                                         type="text"
-                                        name="marriageLicenseNo"
-                                        value={formData.page9.marriageLicenseNo}
+                                        name="marriageLicenseNoPage9"
+                                        value={formData.page9.marriageLicenseNoPage9}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         className="border-b border-b-black outline-none text-center"
                                     />{" "}
                                     issued on{" "}
                                     <input
                                         type="text"
-                                        name="marriageIssuedOn"
-                                        value={formData.page9.marriageIssuedOn}
+                                        name="marriageIssuedOnPage9"
+                                        value={formData.page9.marriageIssuedOnPage9}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         className="border-b border-b-black outline-none text-center"
                                     />{" "}
                                     at{" "}
                                     <input
                                         type="text"
-                                        name="marriageIssuedAt"
-                                        value={formData.page9.marriageIssuedAt}
+                                        name="marriageIssuedAtPage9"
+                                        value={formData.page9.marriageIssuedAtPage9}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         className="border-b border-b-black outline-none text-center"
                                     />
@@ -2490,37 +2689,37 @@ export default function MarriageCertificateCreateForm() {
                                     In truth whereof, I have affixed my signature below this{" "}
                                     <input
                                         type="text"
-                                        name="affidavitDay"
-                                        value={formData.page9.affidavitDay}
+                                        name="affidavitDayPage9"
+                                        value={formData.page9.affidavitDayPage9}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        className={`border-b border-b-black outline-none text-center w-[100px] ${errors.affidavitDay ? "input-error" : ""
+                                        className={`border-b border-b-black outline-none text-center w-[100px] ${errors.affidavitDayPage9 ? "input-error" : ""
                                             }`}
                                     />{" "}
                                     day of{" "}
                                     <input
                                         type="text"
-                                        name="affidavitMonth"
-                                        value={formData.page9.affidavitMonth}
+                                        name="affidavitMonthPage9"
+                                        value={formData.page9.affidavitMonthPage9}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        className={`border-b border-b-black outline-none text-center ${errors.affidavitMonth ? "input-error" : ""
+                                        className={`border-b border-b-black outline-none text-center ${errors.affidavitMonthPage9 ? "input-error" : ""
                                             }`}
                                     />
                                     ,{" "}
                                     <input
                                         type="text"
-                                        name="affidavitYear"
-                                        value={formData.page9.affidavitYear}
+                                        name="affidavitYearPage9"
+                                        value={formData.page9.affidavitYearPage9}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        className={`border-b border-b-black outline-none text-center ${errors.affidavitYear ? "input-error" : ""
+                                        className={`border-b border-b-black outline-none text-center ${errors.affidavitYearPage9 ? "input-error" : ""
                                             }`}
                                     />{" "}
                                     at{" "}
                                     <input
                                         type="text"
-                                        name="affidavitPlace"
-                                        value={formData.page9.affidavitPlace}
+                                        name="affidavitPlacePage9"
+                                        value={formData.page9.affidavitPlacePage9}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        className={`border-b border-b-black outline-none text-center ${errors.affidavitPlace ? "input-error" : ""
+                                        className={`border-b border-b-black outline-none text-center ${errors.affidavitPlacePage9 ? "input-error" : ""
                                             }`}
                                     />
                                     , Philippines.
@@ -2548,8 +2747,8 @@ export default function MarriageCertificateCreateForm() {
                                 before me this{" "}
                                 <input
                                     type="text"
-                                    name="swornDay"
-                                    value={formData.page10.swornDay}
+                                    name="swornDayPage10"
+                                    value={formData.page10.swornDayPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     className={`border-b border-b-black outline-none text-center w-[100px] ${errors.swornDay ? "input-error" : ""
                                         }`}
@@ -2557,8 +2756,8 @@ export default function MarriageCertificateCreateForm() {
                                 day of{" "}
                                 <input
                                     type="text"
-                                    name="swornMonth"
-                                    value={formData.page10.swornMonth}
+                                    name="swornMonthPage10"
+                                    value={formData.page10.swornMonthPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     className={`border-b border-b-black outline-none text-center ${errors.swornMonth ? "input-error" : ""
                                         }`}
@@ -2566,8 +2765,8 @@ export default function MarriageCertificateCreateForm() {
                                 ,{" "}
                                 <input
                                     type="text"
-                                    name="swornYear"
-                                    value={formData.page10.swornYear}
+                                    name="swornYearPage10"
+                                    value={formData.page10.swornYearPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     className={`border-b border-b-black outline-none text-center w-[300px] ${errors.swornYear ? "input-error" : ""
                                         }`}
@@ -2575,8 +2774,8 @@ export default function MarriageCertificateCreateForm() {
                                 at{" "}
                                 <input
                                     type="text"
-                                    name="swornPlace"
-                                    value={formData.page10.swornPlace}
+                                    name="swornPlacePage10"
+                                    value={formData.page10.swornPlacePage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     className={`border-b border-b-black outline-none text-center w-[300px] ${errors.swornPlace ? "input-error" : ""
                                         }`}
@@ -2584,8 +2783,8 @@ export default function MarriageCertificateCreateForm() {
                                 issued on{" "}
                                 <input
                                     type="text"
-                                    name="swornIssuedOn"
-                                    value={formData.page10.swornIssuedOn}
+                                    name="swornIssuedOnPage10"
+                                    value={formData.page10.swornIssuedOnPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     className={`border-b border-b-black outline-none text-center w-[300px] ${errors.swornIssuedOn ? "input-error" : ""
                                         }`}
@@ -2593,8 +2792,8 @@ export default function MarriageCertificateCreateForm() {
                                 ,{" "}
                                 <input
                                     type="text"
-                                    name="swornIssuedAt"
-                                    value={formData.page10.swornIssuedAt}
+                                    name="swornIssuedAtPage10"
+                                    value={formData.page10.swornIssuedAtPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     className={`border-b border-b-black outline-none text-center w-[300px] ${errors.swornIssuedAt ? "input-error" : ""
                                         }`}
@@ -2622,8 +2821,8 @@ export default function MarriageCertificateCreateForm() {
                                 <div className="flex flex-col items-center">
                                     <input
                                         type="text"
-                                        name="officerPosition"
-                                        value={formData.page10.officerPosition}
+                                        name="officerPositionPage10"
+                                        value={formData.page10.officerPositionPage10}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         className={`border-b border-b-black outline-none text-center w-[300px] ${errors.officerPosition ? "input-error" : ""
                                             }`}
@@ -2631,8 +2830,8 @@ export default function MarriageCertificateCreateForm() {
                                     <p className="text-sm">Position/Title/Designation</p>
                                     <input
                                         type="text"
-                                        name="officerAddress"
-                                        value={formData.page10.officerAddress}
+                                        name="officerAddressPage10"
+                                        value={formData.page10.officerAddressPage10}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         className={`border-b border-b-black outline-none text-center w-[300px] ${errors.officerAddress ? "input-error" : ""
                                             }`}

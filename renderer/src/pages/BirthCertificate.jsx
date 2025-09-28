@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
-import { InfoCard, BirthCertifcateForm, BirthCertificateHome, BirthCertificateUpload } from '@components';
+import { InfoCard, BirthCertifcateForm, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
 
 export default function BirthCertificate() {
     const [userData, setUserData] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [selectedRow, setSelectedRow] = useState(null);
+
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
@@ -49,7 +51,12 @@ export default function BirthCertificate() {
                                 />
                             </div>
                             <div className="form-content mb-4">
-                                <BirthCertificateHome />
+                                <BirthCertificateHome 
+                                    onView={(row) => {
+                                        setSelectedRow(row);   // ✅ save the row
+                                        setActiveTab("view");  // ✅ go to view tab
+                                    }} 
+                                />
                             </div>
                         </div>   
                         }
@@ -78,6 +85,27 @@ export default function BirthCertificate() {
                                     <BirthCertifcateForm />
                                 </div>
                             </div>
+                        }
+                        {activeTab === "view" && 
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <div className="flex justify-end w-full">
+                                        <button 
+                                        className="btn-secondary shadow px-3 py-1 mb-2 rounded-full"
+                                        onClick={() => setActiveTab("home")}
+                                    >
+                                    ⬅ Back
+                                    </button>
+                                </div>
+                                <InfoCard 
+                                    title="Viewing Birth Certificate"
+                                    message="Here is the full detail of the selected birth certificate record."
+                                />
+                            </div>
+                            <div className="form-content mb-4">
+                                <BirthCertificateView row={selectedRow} />
+                            </div>
+                        </div>
                         }
                     </div>
                 </div>

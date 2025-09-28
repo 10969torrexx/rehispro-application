@@ -57,7 +57,7 @@ export async function listDeathCertificate() {
  */
 export async function viewDeathCertificate(id) {
     try {
-        const response = await fetch(`http://localhost:3001/death/view?id=${id}`, {
+        const response = await fetch(`http://localhost:3001/death/view/${id}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'

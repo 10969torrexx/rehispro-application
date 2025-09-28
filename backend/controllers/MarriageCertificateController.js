@@ -3,101 +3,245 @@ const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { logQuery, interpolateQuery } = require('../utils/querytrace');
 
-const flattenFormData = (formData) => {
-    return {
-        ...formData.page1,
-        ...formData.page2,
-        ...formData.page3,
-        ...formData.page4,
-        ...formData.page5,
-        ...formData.page6,
-        ...formData.page7,
-        ...formData.page8,
-        ...formData.page9,
-        ...formData.page10,
-    };
-};
 
 function create(req, res) {
     try {
         const formData = req.body;
-        const flatData = flattenFormData(formData);
+        if (!formData) {
+            return res.status(400).json({ success: false, message: 'No Data' });
+        }
+
+        const flatData = formData;
+
+        // Validate creatorId
+        const creatorId = Number(flatData.creatorId);
+        if (!creatorId || isNaN(creatorId) || creatorId <= 0) {
+            return res.status(400).json({ success: false, message: 'Invalid or missing creator ID' });
+        }
+
+        const fieldMap = {
+            // Page 1
+            creatorId: "creator_id",
+            creationType: "creation_type",
+            province: "province",
+            city: "city",
+            registry: "registry",
+            husbandFirstName: "husband_first_name",
+            husbandMiddleName: "husband_middle_name",
+            husbandLastName: "husband_last_name",
+            husbandBirthDate: "husband_birth_date",
+            husbandBirthCity: "husband_birth_city",
+            husbandBirthProvince: "husband_birth_province",
+            husbandBirthCountry: "husband_birth_country",
+            husbandAge: "husband_age",
+            wifeFirstName: "wife_first_name",
+            wifeMiddleName: "wife_middle_name",
+            wifeLastName: "wife_last_name",
+            wifeBirthDate: "wife_birth_date",
+            wifeBirthCity: "wife_birth_city",
+            wifeBirthProvince: "wife_birth_province",
+            wifeBirthCountry: "wife_birth_country",
+            wifeAge: "wife_age",
+
+            // Page 2
+            husbandSex: "husband_sex",
+            husbandCitizenship: "husband_citizenship",
+            husbandResidenceBarangay: "husband_residence_barangay",
+            husbandResidenceCity: "husband_residence_city",
+            husbandResidenceProvince: "husband_residence_province",
+            husbandResidenceCountry: "husband_residence_country",
+            husbandReligion: "husband_religion",
+            husbandCivilStatus: "husband_civil_status",
+            husbandFatherNameFirst: "husband_father_name_first",
+            husbandFatherNameMiddle: "husband_father_name_middle",
+            husbandFatherNameLast: "husband_father_name_last",
+            wifeSex: "wife_sex",
+            wifeCitizenship: "wife_citizenship",
+            wifeResidenceBarangay: "wife_residence_barangay",
+            wifeResidenceCity: "wife_residence_city",
+            wifeResidenceProvince: "wife_residence_province",
+            wifeResidenceCountry: "wife_residence_country",
+            wifeReligion: "wife_religion",
+            wifeCivilStatus: "wife_civil_status",
+            wifeFatherNameFirst: "wife_father_name_first",
+            wifeFatherNameMiddle: "wife_father_name_middle",
+            wifeFatherNameLast: "wife_father_name_last",
+
+            // Page 3
+            husbandFatherCitizenship: "husband_father_citizenship",
+            husbandMotherNameFirst: "husband_mother_name_first",
+            husbandMotherNameMiddle: "husband_mother_name_middle",
+            husbandMotherNameLast: "husband_mother_name_last",
+            husbandMotherCitizenship: "husband_mother_citizenship",
+            husbandConsentNameFirst: "husband_consent_name_first",
+            husbandConsentNameMiddle: "husband_consent_name_middle",
+            husbandConsentNameLast: "husband_consent_name_last",
+            husbandRelationship: "husband_relationship",
+            husbandConsentPersonBarangay: "husband_consent_person_barangay",
+            husbandConsentPersonCity: "husband_consent_person_city",
+            husbandConsentPersonProvince: "husband_consent_person_province",
+            husbandConsentPersonCountry: "husband_consent_person_country",
+            wifeFatherCitizenship: "wife_father_citizenship",
+            wifeMotherNameFirst: "wife_mother_name_first",
+            wifeMotherNameMiddle: "wife_mother_name_middle",
+            wifeMotherNameLast: "wife_mother_name_last",
+            wifeMotherCitizenship: "wife_mother_citizenship",
+            wifeConsentNameFirst: "wife_consent_name_first",
+            wifeConsentNameMiddle: "wife_consent_name_middle",
+            wifeConsentNameLast: "wife_consent_name_last",
+            wifeRelationship: "wife_relationship",
+            wifeConsentPersonBarangay: "wife_consent_person_barangay",
+            wifeConsentPersonCity: "wife_consent_person_city",
+            wifeConsentPersonProvince: "wife_consent_person_province",
+            wifeConsentPersonCountry: "wife_consent_person_country",
+
+            // Page 4
+            placeOfMarriage: "place_of_marriage",
+            dateOfMarriage: "date_of_marriage",
+            timeOfMarriage: "time_of_marriage",
+            certHusbandName: "cert_husband_name",
+            certWifeName: "cert_wife_name",
+            marriageSettlement: "marriage_settlement",
+            certDay: "cert_day",
+            certMonth: "cert_month",
+            certYear: "cert_year",
+
+            // Page 5
+            certification: "certification",
+            marriageLicenseNo: "marriage_license_no",
+            marriageIssuedOn: "marriage_issued_on",
+            marriageIssuedAt: "marriage_issued_at",
+            executiveOrder: "executive_order",
+            officerPosition: "officer_position",
+            officerReligion: "officer_religion",
+            witness1Name: "witness1_name",
+            witness2Name: "witness2_name",
+
+            // Page 6
+            receivedByName: "received_by_name",
+            receivedByTitle: "received_by_title",
+            receivedByDate: "received_by_date",
+            registrarName: "registrar_name",
+            registrarTitle: "registrar_title",
+            registrarDate: "registrar_date",
+            remarksAnnotation: "remarks_annotation",
+            civilRegistrar: "civil_registrar",
+
+            // Page 7
+            witness3Name: "witness3_name",
+            witness4Name: "witness4_name",
+            affidavitOfficerName: "affidavit_officer_name",
+            affidavitOfficerOrganization: "affidavit_officer_organization",
+            affidavitOfficerAddress: "affidavit_officer_address",
+            statement1Party1: "statement1_party1",
+            statement1Party2: "statement1_party2",
+            statement2a: "statement2a",
+            statement2b: "statement2b",
+            statement2c: "statement2c",
+            statement2cParty1: "statement2c_party1",
+            statement2cParty2: "statement2c_party2",
+            statement2d: "statement2d",
+            statement2e: "statement2e",
+
+            // Page 8
+            affidavitDay: "affidavit_day",
+            affidavitMonth: "affidavit_month",
+            affidavitYear: "affidavit_year",
+            affidavitPlace: "affidavit_place",
+            swornDay: "sworn_day",
+            swornMonth: "sworn_month",
+            swornYear: "sworn_year",
+            swornAt: "sworn_at",
+            swornIssuedOn: "sworn_issued_on",
+            swornIssuedAt: "sworn_issued_at",
+            adminOfficerName: "admin_officer_name",
+            adminOfficerTitle: "admin_officer_title",
+            adminOfficerAddress: "admin_officer_address",
+
+            // Page 9
+            affiantName: "affiant_name",
+            affiantAddress: "affiant_address",
+            statement1OptionA: "statement1_option_a",
+            statement1MarriageWith: "statement1_marriage_with",
+            statement1PlaceA: "statement1_place_a",
+            statement1DateA: "statement1_date_a",
+            statement1OptionB: "statement1_option_b",
+            statement1MarriageBetween: "statement1_marriage_between",
+            statement1PlaceB: "statement1_place_b",
+            statement1DateB: "statement1_date_b",
+            solemnizingOfficer: "solemnizing_officer",
+            ceremonyReligious: "ceremony_religious",
+            ceremonyCivil: "ceremony_civil",
+            ceremonyMuslim: "ceremony_muslim",
+            ceremonyTribal: "ceremony_tribal",
+            marriageWithLicense: "marriage_with_license",
+            marriageLicenseNoPage9: "marriage_license_no_page9",
+            marriageIssuedOnPage9: "marriage_issued_on_page9",
+            marriageIssuedAtPage9: "marriage_issued_at_page9",
+            marriageUnderArticle: "marriage_under_article",
+            articleNumber: "article_number",
+            citizenApplicant: "citizen_applicant",
+            citizenSpouse: "citizen_spouse",
+            reasonForDelay: "reason_for_delay",
+            affidavitDayPage9: "affidavit_day_page9",
+            affidavitMonthPage9: "affidavit_month_page9",
+            affidavitYearPage9: "affidavit_year_page9",
+            affidavitPlacePage9: "affidavit_place_page9",
+
+            // Page 10
+            swornDayPage10: "sworn_day_page10",
+            swornMonthPage10: "sworn_month_page10",
+            swornYearPage10: "sworn_year_page10",
+            swornPlacePage10: "sworn_place_page10",
+            swornIssuedOnPage10: "sworn_issued_on_page10",
+            swornIssuedAtPage10: "sworn_issued_at_page10",
+            administeringOfficerName: "administering_officer_name",
+            officerPositionPage10: "officer_position_page10",
+            officerAddressPage10: "officer_address_page10",
+
+            // Page 11
+            confirmation: "confirmation"
+        };  
+
+        // Build SQL columns + values only from mapped fields
+        const columns = [];
+        const values = [];
+
+        for (const key in flatData) {
+            if (fieldMap[key]) {
+                columns.push(fieldMap[key]);
+                // Convert boolean fields to integers (0 or 1) for SQL
+                values.push(typeof flatData[key] === 'boolean' ? (flatData[key] ? 1 : 0) : flatData[key]);
+            }
+        }
+
+        // Generate placeholders
+        const placeholders = columns.map(col => col === 'created_at' || col === 'updated_at' ? col : '?').join(', ');
 
         const query = `
-          INSERT INTO marriage_certificates (
-            province, city, registry,
-            husbandFirstName, husbandMiddleName, husbandLastName,
-            husbandBirthDate, husbandAge, husbandBirthCity, husbandBirthProvince, husbandBirthCountry,
-            wifeFirstName, wifeMiddleName, wifeLastName,
-            wifeBirthDate, wifeAge, wifeBirthCity, wifeBirthProvince, wifeBirthCountry,
-            husbandSex, husbandCitizenship, husbandResidenceBarangay, husbandResidenceCity,
-            husbandResidenceProvince, husbandResidenceCountry, husbandReligion, husbandCivilStatus,
-            husbandFatherNameFirst, husbandFatherNameMiddle, husbandFatherNameLast,
-            wifeSex, wifeCitizenship, wifeResidenceBarangay, wifeResidenceCity,
-            wifeResidenceProvince, wifeResidenceCountry, wifeReligion, wifeCivilStatus,
-            wifeFatherNameFirst, wifeFatherNameMiddle, wifeFatherNameLast,
-            husbandFatherCitizenship, husbandMotherNameFirst, husbandMotherNameMiddle, husbandMotherNameLast,
-            husbandMotherCitizenship, wifeFatherCitizenship, wifeMotherNameFirst, wifeMotherNameMiddle,
-            wifeMotherNameLast, wifeMotherCitizenship,
-            placeOfMarriage, dateOfMarriage, timeOfMarriage, marriageSettlement,
-            statement2a, statement2b, statement2c, ceremonyReligious, ceremonyCivil, ceremonyMuslim, ceremonyTribal,
-            marriageWithLicense, marriageUnderArticle,
-            created_at, updated_at
-          )
-          VALUES (
-            ?,?,?,?,?,?,
-            ?,?,?,?,?,
-            ?,?,?,?,
-            ?,?,?,?,?,
-            ?,?,?,?,
-            ?,?,?,?,?,
-            ?,?,?,?,
-            ?,?,?,?,?,
-            ?,?,?,?,
-            ?,?,?,?,?,
-            ?,?,?,?,?,
-            ?,?,?,?,
-            ?,?,?,?,?,?,
-            ?,?,
-            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
-          )
+            INSERT INTO marriage_certificates (${columns.join(', ')})
+            VALUES (${placeholders})
         `;
 
-        const values = [
-            flatData.province, flatData.city, flatData.registry,
-            flatData.husbandFirstName, flatData.husbandMiddleName, flatData.husbandLastName,
-            flatData.husbandBirthDate, flatData.husbandAge, flatData.husbandBirthCity, flatData.husbandBirthProvince, flatData.husbandBirthCountry,
-            flatData.wifeFirstName, flatData.wifeMiddleName, flatData.wifeLastName,
-            flatData.wifeBirthDate, flatData.wifeAge, flatData.wifeBirthCity, flatData.wifeBirthProvince, flatData.wifeBirthCountry,
-            flatData.husbandSex, flatData.husbandCitizenship, flatData.husbandResidenceBarangay, flatData.husbandResidenceCity,
-            flatData.husbandResidenceProvince, flatData.husbandResidenceCountry, flatData.husbandReligion, flatData.husbandCivilStatus,
-            flatData.husbandFatherNameFirst, flatData.husbandFatherNameMiddle, flatData.husbandFatherNameLast,
-            flatData.wifeSex, flatData.wifeCitizenship, flatData.wifeResidenceBarangay, flatData.wifeResidenceCity,
-            flatData.wifeResidenceProvince, flatData.wifeResidenceCountry, flatData.wifeReligion, flatData.wifeCivilStatus,
-            flatData.wifeFatherNameFirst, flatData.wifeFatherNameMiddle, flatData.wifeFatherNameLast,
-            flatData.husbandFatherCitizenship, flatData.husbandMotherNameFirst, flatData.husbandMotherNameMiddle, flatData.husbandMotherNameLast,
-            flatData.husbandMotherCitizenship, flatData.wifeFatherCitizenship, flatData.wifeMotherNameFirst, flatData.wifeMotherNameMiddle,
-            flatData.wifeMotherNameLast, flatData.wifeMotherCitizenship,
-            flatData.placeOfMarriage, flatData.dateOfMarriage, flatData.timeOfMarriage, flatData.marriageSettlement,
-            flatData.statement2a ? 1 : 0,
-            flatData.statement2b ? 1 : 0,
-            flatData.statement2c ? 1 : 0,
-            flatData.ceremonyReligious ? 1 : 0,
-            flatData.ceremonyCivil ? 1 : 0,
-            flatData.ceremonyMuslim ? 1 : 0,
-            flatData.ceremonyTribal ? 1 : 0,
-            flatData.marriageWithLicense ? 1 : 0,
-            flatData.marriageUnderArticle ? 1 : 0,
-        ];
+        console.log("🟢 Columns:", columns.length, columns);
+        console.log("🟢 Values:", values.length);
+        console.log("🟢 Query:", query);
 
-        logQuery(interpolateQuery(query, values));
-
-        db.run(query, values, function (err) {
+        db.run(query, values.filter(val => val !== 'CURRENT_TIMESTAMP'), function (err) {
             if (err) {
-                writeLog("Error inserting marriage certificate", err);
-                return res.status(500).json({ success: false, error: err.message });
+                console.error('[DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database insert failed',
+                    error: err.message
+                });
             }
-            res.status(201).json({ success: true, id: this.lastID });
+
+            res.status(201).json({
+                success: true,
+                message: 'Marriage Certificate Created Successfully',
+                id: this.lastID
+            });
         });
     } catch (error) {
         writeLog("Unexpected error", error);
@@ -109,12 +253,12 @@ function getAll(req, res) {
     const query = `
         SELECT 
             id,
-            husbandFirstName || ' ' || husbandLastName AS husband,
-            wifeFirstName || ' ' || wifeLastName AS wife,
-            dateOfMarriage AS date,
-            placeOfMarriage AS place
+            husband_first_name || ' ' || husband_last_name AS husband,
+            wife_first_name || ' ' || wife_last_name AS wife,
+            date_of_marriage AS date,
+            place_of_marriage AS place
         FROM marriage_certificates
-        ORDER BY dateOfMarriage DESC
+        ORDER BY date_of_marriage DESC
     `;
 
     db.all(query, [], (err, rows) => {
@@ -126,9 +270,37 @@ function getAll(req, res) {
     });
 }
 
+function view(req, res) {
+    console.log("Attempting to fetch marriage certificate with ID:", req.params.id);
+
+    db.get(
+      `SELECT * FROM marriage_certificates WHERE id = ?`,
+      [req.params.id],
+      (err, row) => {
+        if (err) {
+          console.error('❌ [DB Error]', err.message);
+          return res.status(500).json({
+            success: false,
+            message: 'Database fetch failed',
+            error: err.message,
+          });
+        }
+    
+        const marriage_certificate = row;
+    
+        res.status(200).json({
+          success: true,
+          message: 'Marriage Certificate Found',
+          data: marriage_certificate,
+        });
+      }
+    );
+}
+
 module.exports = {
     create,
     getAll,
+    view
 };
 
 

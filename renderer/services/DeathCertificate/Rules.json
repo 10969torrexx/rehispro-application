@@ -414,10 +414,10 @@
     },
     "timeOfDeath": {
       "required": true,
-      "type": "date",
+      "type": "time",
       "message": {
-        "required": "TIme of Death is required.",
-        "date": "Invalid TIme of Death."
+        "required": "Time of Death is required.",
+        "time": "Invalid Time of Death."
       }
     },
     "physicianName": {
@@ -742,7 +742,7 @@
   },
   "page12": {
     "affiantName": {
-      "required": true,
+      "required": false,
       "minLength": 3,
       "maxLength": 100,
       "message": {
@@ -752,7 +752,7 @@
       }
     },
     "affiantCivilStatus": {
-      "required": true,
+      "required": false,
       "type": "enum",
       "options": ["Single", "Married", "Divorced", "Widow / widower"],
       "message": {
@@ -761,7 +761,7 @@
       }
     },
     "address": {
-      "required": true,
+      "required": false,
       "minLength": 5,
       "maxLength": 150,
       "message": {
@@ -771,7 +771,7 @@
       }
     },
     "deceasedName": {
-      "required": true,
+      "required": false,
       "minLength": 3,
       "maxLength": 100,
       "message": {
@@ -781,7 +781,7 @@
       }
     },
     "deathDate": {
-      "required": true,
+      "required": false,
       "type": "date",
       "message": {
         "required": "Death date is required",
@@ -789,7 +789,7 @@
       }
     },
     "deathPlace": {
-      "required": true,
+      "required": false,
       "minLength": 5,
       "maxLength": 150,
       "message": {
@@ -810,7 +810,7 @@
       "type": "boolean"
     },
     "causeOfDeath": {
-      "required": true,
+      "required": false,
       "minLength": 3,
       "maxLength": 200,
       "message": {
@@ -820,7 +820,7 @@
       }
     },
     "reasonDelay": {
-      "required": true,
+      "required": false,
       "minLength": 3,
       "maxLength": 300,
       "message": {
@@ -832,7 +832,7 @@
   },
   "page13": {
     "juratDay": {
-      "required": true,
+      "required": false,
       "type": "string",
       "maxLength": 2,
       "message": {
@@ -841,7 +841,7 @@
       }
     },
     "juratMonthYear": {
-      "required": true,
+      "required": false,
       "type": "string",
       "maxLength": 20,
       "message": {
@@ -850,7 +850,7 @@
       }
     },
     "juratPlace": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -860,7 +860,7 @@
       }
     },
     "ctcNumber": {
-      "required": true,
+      "required": false,
       "minLength": 5,
       "maxLength": 50,
       "message": {
@@ -870,7 +870,7 @@
       }
     },
     "ctcIssuedOn": {
-      "required": true,
+      "required": false,
       "type": "date",
       "message": {
         "required": "Issue date is required",
@@ -878,7 +878,7 @@
       }
     },
     "ctcIssuedAt": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -888,7 +888,7 @@
       }
     },
     "adminName": {
-      "required": true,
+      "required": false,
       "minLength": 3,
       "maxLength": 100,
       "message": {
@@ -898,7 +898,7 @@
       }
     },
     "adminPosition": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 50,
       "message": {
@@ -908,7 +908,7 @@
       }
     },
     "adminAddress": {
-      "required": true,
+      "required": false,
       "minLength": 5,
       "maxLength": 150,
       "message": {

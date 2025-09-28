@@ -7,6 +7,8 @@ import { InfoCard, DeathCertificateCreate, DeathCertificateHome, DeathCertificat
 export default function DeathCertificate() {
     const [userData, setUserData] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [selectedRow, setSelectedRow] = useState(null);
+    
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
@@ -50,7 +52,12 @@ export default function DeathCertificate() {
                                 />  
                             </div>
                             <div className="form-content mb-4">
-                                <DeathCertificateHome onView={() => setActiveTab("view")} />
+                                <DeathCertificateHome 
+                                    onView={(row) => {
+                                        setSelectedRow(row);   // ✅ save the row
+                                        setActiveTab("view");  // ✅ go to view tab
+                                    }}  
+                                />
                             </div>
                         </div>                        
                         }
@@ -70,6 +77,7 @@ export default function DeathCertificate() {
                             </div>
                         }
                         {activeTab === "view" && 
+                        
                         <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                             <div className="mb-4">
                                 <div className="flex justify-end w-full">
@@ -86,7 +94,7 @@ export default function DeathCertificate() {
                                 />
                             </div>
                             <div className="form-content mb-4">
-                            <DeathCertificateView />
+                                <DeathCertificateView row={selectedRow} />
                             </div>
                         </div>
                         }

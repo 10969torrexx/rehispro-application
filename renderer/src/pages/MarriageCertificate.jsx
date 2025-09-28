@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { SideBar, InfoCard } from '@components';
-import { DocumentType } from '@enums';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
-import MarriageCertificateCreateForm from '@components/Forms/MarriageCertificate/MarriageCertificateCreateForm';
-import MarriageCertificateHome from '@components/Forms/MarriageCertificate/MarriageCertificateHome';
+import {MarriageCertificateHome, MarriageCertificateCreateForm, MarriageCertificateView} from '@components';
 
 export default function MarriageCertificate() {
     const [userData, setUserData] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [selectedRow, setSelectedRow] = useState(null);
+
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
@@ -51,7 +51,12 @@ export default function MarriageCertificate() {
                                     />
                                 </div>
                                 <div className="form-content mb-4">
-                                    <MarriageCertificateHome />
+                                    <MarriageCertificateHome 
+                                        onView={(row) => {
+                                            setSelectedRow(row);   // ✅ save the row
+                                            setActiveTab("view");  // ✅ go to view tab
+                                        }}
+                                    />
                                 </div>
                             </div>
                         }
@@ -66,6 +71,27 @@ export default function MarriageCertificate() {
                                 </div>
                                 <div className="form-content mb-4">
                                     <MarriageCertificateCreateForm />
+                                </div>
+                            </div>
+                        }
+                        {activeTab === "view" &&
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <div className="flex justify-end w-full">
+                                        <button 
+                                        className="btn-secondary shadow px-3 py-1 mb-2 rounded-full"
+                                        onClick={() => setActiveTab("home")}
+                                        >
+                                        ⬅ Back
+                                        </button>
+                                    </div>
+                                    <InfoCard 
+                                        title="Viewing  Marriage Certificate"
+                                        message="Here is the full detail of the selected marriage certificate record."
+                                    />
+                                </div>
+                                <div className="form-content mb-4">
+                                <MarriageCertificateView row={selectedRow} />
                                 </div>
                             </div>
                         }

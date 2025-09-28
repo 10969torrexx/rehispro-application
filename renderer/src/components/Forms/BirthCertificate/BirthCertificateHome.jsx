@@ -36,75 +36,63 @@ export default function BirthCertificateHome({ onView }) {
 
   // 🔹 Define DataGrid columns
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "ID", width: 50 },
     {
       field: "child_name",
       headerName: "Child Name",
-      flex: 1,
-      valueGetter: (params) => {
-        const row = params?.row || {};
-        return `${row.child_first_name || ""} ${
-          row.child_middle_name ? row.child_middle_name.charAt(0) + "." : ""
-        } ${row.child_last_name || ""}`;
-      },
+      width: 150,
     },
     { field: "sex", headerName: "Sex", width: 100 },
-    { field: "date_of_birth", headerName: "Date of Birth", width: 150 },
+    { field: "created_at", headerName: "Created At", width: 150 },
     {
-      field: "place",
-      headerName: "Place of Birth",
-      flex: 1,
-      valueGetter: (params) => {
-        const row = params?.row || {};
-        return `${row.city || ""}, ${row.province || ""}`;
-      },
+      field: "residence",
+      headerName: "Residence",
+      width: 150,
     },
     {
       field: "action",
       headerName: "Action",
-      width: 110,
+      width: 110, // 🔹 narrower column
       sortable: false,
       renderCell: (params) => {
         const row = params?.row || {};
         return (
           <select
             defaultValue=""
-            className="common-input text-xs px-1 py-0.5 w-full"
-            onChange={(e) => {
-              const action = e.target.value;
-              e.target.value = "";
-
-              if (action === "view") {
-                onView?.(row.id || row.birth_id);
-              } else if (action === "download") {
-                toast.info("Download clicked");
-              }
-            }}
-          >
-            <option value="" disabled>
-              Actions
-            </option>
-            <option value="view">View</option>
-            <option value="download">Download</option>
-          </select>
-        );
-      },
-    },
-  ];
+            className="common-input text-xs px-1 py-0.5 w-full" // 🔹 smaller text + reduced padding
+                onChange={(e) => {
+                  const action = e.target.value;
+                  e.target.value = "";
+        
+                  if (action === "view") {
+                    onView?.(row);
+                  } else if (action === "download") {
+                    toast.info("Download clicked");
+                  }
+                }}
+              >
+                <option value="" disabled>
+                  Actions
+                </option>
+                <option value="view">View</option>
+                <option value="download">Download</option>
+              </select>
+            );
+          },
+        },
+    ];
 
   // 🔹 Filter rows (client-side search)
   const filteredRows = listOfBirth.filter((row) => {
     const query = searchQuery.toLowerCase();
     return (
-      `${row.child_first_name || ""} ${row.child_middle_name || ""} ${
-        row.child_last_name || ""
-      }`
-        .toLowerCase()
-        .includes(query) ||
+      row.child_name?.toLowerCase().includes(query) ||
       row.sex?.toLowerCase().includes(query) ||
       row.date_of_birth?.toLowerCase().includes(query) ||
       row.city?.toLowerCase().includes(query) ||
-      row.province?.toLowerCase().includes(query)
+      row.province?.toLowerCase().includes(query) ||
+      row.mother_name?.toLowerCase().includes(query) ||
+      row.father_name?.toLowerCase().includes(query)
     );
   });
 
@@ -120,7 +108,7 @@ export default function BirthCertificateHome({ onView }) {
       <div className="flex justify-between items-center mb-4">
         <input
           type="text"
-          placeholder="Search by name, sex, date, or place..."
+          placeholder="Search by name, sex, date, mother name, father name, or residence..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="common-input w-full"
