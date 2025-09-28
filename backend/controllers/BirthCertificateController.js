@@ -264,14 +264,14 @@ function remove() {
 function find() {
 }
 
-async function scanImage() {
-  const { data: { text } } = await Tesseract.recognize(
-    '/sampledata/cert_livebirth.jpg',
-    'eng',
-    { logger: info => console.log(info) }
-  );
-
-  console.log("Extracted text:", text);
+async function scanImage(req, res) {
+    try{
+        res.status(200).json({ success: true, message: 'File upload endpoint hit' });
+    }
+    catch (error) {
+        console.error('❌ [Upload Error]', error);
+        res.status(500).json({ success: false, message: 'File upload failed', error: error.message });
+    }
 }
 
 module.exports = {

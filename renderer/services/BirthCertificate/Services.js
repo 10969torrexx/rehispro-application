@@ -46,3 +46,25 @@ export async function listBirthCertificate() {
         throw error;
     }
 }
+
+/**
+ * TODO: this wil handle the uploading process of the files
+ * @parmas {FormData} formData - The form data containing files to upload
+ */
+export async function uploadFiles(formData) {
+    try {
+        const response = await fetch('http://localhost:5000/birth/scan', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to upload files');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('[birth form] Error uploading files:', error);
+        throw error;
+    }
+}

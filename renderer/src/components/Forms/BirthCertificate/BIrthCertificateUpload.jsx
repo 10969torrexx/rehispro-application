@@ -6,6 +6,7 @@ import { FileValidation } from '@services';
 import { FileList } from '@components';
 import { Limits } from '@enums';
 import { toast } from "react-toastify";
+import { BirthCertServices } from '@services';
 
 export default function BirthCertificateUpload() { 
     const [files, setFiles ] = useState([]);
@@ -42,8 +43,21 @@ export default function BirthCertificateUpload() {
     }, []);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
+    const removeFile = (id) => { 
+        const newFiles = files.filter((file, index) => index !== id);
+        setFiles(newFiles);
+    }
+
+    const handleSubmit = (e) => { 
+        e.preventDefault();
+        const formData = new FormData();
+        files.forEach(file => formData.append('files', file));
+
+        BirthCertServices.uploadField(formData)
+        
+    }
     return (
-        <>
+        <form onSubmit={handleSubmit}>
             <div className="mb-2">
                 {errors.uploadField && <ErrorMessages errors={errors.uploadField} />}
                 {errors && <ErrorMessages errors={errors.map(err => err.file)} />}
@@ -51,7 +65,11 @@ export default function BirthCertificateUpload() {
             <div {...getRootProps()} className={`border-2 border-dashed p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer 
                     ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
                     ${errors.length > 0 ? 'input-error' : ''}`}>
-                <input {...getInputProps()} />
+                <input {...getInputProps()} 
+                    type="file"
+                    multiple
+                    accept="image/jpeg,image/png,application/pdf"
+                />
                 <div className='p-4 rounded-full'>
                     <i className="text-4xl fa-solid fa-cloud-arrow-up"></i>
                 </div>
@@ -68,10 +86,15 @@ export default function BirthCertificateUpload() {
             <div className="mt-4 w-full">
                 {files.length > 0 && (
                     files.map((item, index) => (
-                        <FileList name={item.name} size={item.size} type={item.type} />
+                        <FileList key={index} id={index} name={item.name} size={item.size} type={item.type} onRemove={removeFile} />
                     ))
                 )}
             </div>
-        </>
+            {files.length > 0 && (
+                <div className="mt-4 w-full">
+                    <button type="submit" className='mt-4 rounded-full px-4 py-2 btn-primary'>Upload Files</button>
+                </div>
+            )}
+        </form>
     )
 }

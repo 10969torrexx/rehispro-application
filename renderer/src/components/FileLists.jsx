@@ -1,9 +1,8 @@
 import { FileIcons } from "@enums";
 import { useState, useEffect } from "react";
-export default function FileList({name, size, type}) {
+export default function FileList({id, name, size, type, onRemove}) {
     const [icon, setIcon] = useState(FileIcons.PDF);
     useEffect(() => {
-        console.log(name, size, type);
         switch(type) {
             case 'application/pdf':
                 setIcon(FileIcons.PDF);
@@ -33,7 +32,8 @@ export default function FileList({name, size, type}) {
             </div>
 
             <div className="flex items-center gap-3">
-                <button className="text-gray-400 hover:text-gray-600" data-filetype={type}>
+                <button className="text-gray-400 hover:text-gray-600" data-filetype={type}
+                onClick={() => onRemove(id)}>
                     <i className="bi bi-x-lg"></i>
                 </button>
             </div>
