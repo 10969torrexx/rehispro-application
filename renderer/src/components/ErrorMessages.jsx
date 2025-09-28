@@ -5,9 +5,10 @@ export default function ErrorMessages({ errors }) {
     : Object.values(errors).filter(Boolean);
 
   return (
-    <div className="w-full pl-2 rounded">
+    <div className="w-full pl-2">
       {errorList.map((error, i) => (
         <p key={i} className="text-red-500 text-xs mt-1 text-left">
+          <i className="bi bi-exclamation-circle mr-2"></i>
           {error}
         </p>
       ))}

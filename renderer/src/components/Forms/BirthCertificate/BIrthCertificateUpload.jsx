@@ -4,6 +4,8 @@ import { useDropzone } from "react-dropzone";
 import { ErrorMessages } from '@components';
 import { FileValidation } from '@services';
 import { FileList } from '@components';
+import { Limits } from '@enums';
+import { toast } from "react-toastify";
 
 export default function BirthCertificateUpload() { 
     const [files, setFiles ] = useState([]);
@@ -19,7 +21,18 @@ export default function BirthCertificateUpload() {
             type: file.type,
             lastModified: new Date(file.lastModified).toLocaleString()
         }));
-        
+
+        //TODO: check the numbe of files uploaded
+        if (readable.length > Limits.MAX_FILE_UPLOAD) {
+            toast.error(`Please check the error(s)`);
+            setErrors({
+                uploadField: `You can only upload up to ${Limits.MAX_FILE_UPLOAD} files at a time.`
+            })
+            return;
+        } else {
+            setErrors([]);
+        }
+
         const errors = FileValidation.validateForm(readable);
         if (errors.length > 0) {
             setErrors(errors);
@@ -31,7 +44,12 @@ export default function BirthCertificateUpload() {
 
     return (
         <>
-            <div {...getRootProps()} className="w-full border-dashed border rounded-lg border-2 border-gray-300 h-64 flex flex-col justify-center items-center text-gray-400">
+            <div className="mb-2">
+                {errors.uploadField && <ErrorMessages errors={errors.uploadField} />}
+            </div>
+            <div {...getRootProps()} className={`border-2 border-dashed p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer 
+                    ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
+                    ${errors.uploadField ? 'input-error' : ''}`}>
                 <input {...getInputProps()} />
                 <div className='p-4 rounded-full'>
                     <i className="text-4xl fa-solid fa-cloud-arrow-up"></i>

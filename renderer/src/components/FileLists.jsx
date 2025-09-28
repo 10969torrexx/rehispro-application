@@ -1,7 +1,7 @@
 import { FileIcons } from "@enums";
 export default function FileList({name, size, type}) {
     return (
-        <div className="w-[400px] bg-white shadow-md rounded-lg p-3 mb-3 flex items-center justify-between hover:shadow-lg transition">
+        <div className="w-full bg-white shadow-md rounded-lg p-3 mb-3 flex items-center justify-between hover:shadow-lg transition">
             <div className="flex items-center gap-3">
                 <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-blue-50 border">
                     <i className={`${FileIcons.PDF} text-primary text-2xl`}></i>

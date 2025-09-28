@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
-import { DocumentType } from '@enums';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
 import { InfoCard, BirthCertifcateForm, BirthCertificateHome, BirthCertificateUpload } from '@components';
 
