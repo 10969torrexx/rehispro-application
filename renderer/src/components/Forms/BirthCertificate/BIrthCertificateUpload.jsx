@@ -11,24 +11,23 @@ import { BirthCertServices } from '@services';
 export default function BirthCertificateUpload() { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
-    const [processing, setProcessing] = useState(false);
+
     const onDrop = useCallback(uploadedFiles => {
-        const sorted = [...uploadedFiles].sort((a, b) => {
-            a.name.localeCompare(b.name)
-        });
-        const readable = sorted.map((file) => ({
+        const sorted = [...uploadedFiles].sort((a, b) => a.name.localeCompare(b.name));
+
+        const readable = sorted.map(file => ({
             name: file.name,
             size: Math.round(file.size / 1024) + " KB",
             type: file.type,
             lastModified: new Date(file.lastModified).toLocaleString()
         }));
 
-        //TODO: check the numbe of files uploaded
+        //TODO: check the number of files uploaded
         if (readable.length > Limits.MAX_FILE_UPLOAD) {
             toast.error(`Please check the error(s)`);
             setErrors({
                 uploadField: `You can only upload up to ${Limits.MAX_FILE_UPLOAD} files at a time.`
-            })
+            });
             return;
         } else {
             setErrors([]);
@@ -38,7 +37,7 @@ export default function BirthCertificateUpload() {
         if (errors.length > 0) {
             setErrors(errors);
         } else {
-            setFiles(readable);
+            setFiles(sorted);
         }
     }, []);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
