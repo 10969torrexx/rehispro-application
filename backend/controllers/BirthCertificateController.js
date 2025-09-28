@@ -1,10 +1,9 @@
 const { data } = require('autoprefixer');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
-const { writeLog } = require('../utils/logger');
-const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const Tesseract = require('tesseract.js');
 const path = require('path');
+const { writeLog } = require('../utils/logger');
 
 function create (req, res) {
     try {
@@ -230,8 +229,6 @@ function create (req, res) {
     }
 };
 
-
-// LIST Death Certificate
 function list (req, res) {
     console.log("🔍 Attempting to fetch birth certificates..."); // Add this
     db.all(
@@ -265,26 +262,38 @@ function list (req, res) {
     });
 };
 
-function update() {
+async function uploadAndScan(req, res) {
+    try {
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ success: false, message: 'No files uploaded' });
+        }
 
-}
+        const results = [];
+        for (const file of req.files) {
+            const result = await Tesseract.recognize(file.path, 'eng');
+            results.push({
+                file: {
+                    originalname: file.originalname,
+                    savedPath: file.path
+                },
+                extractedText: result.data.text
+            });
+        }
 
-function remove() {
+        res.status(200).json({
+            success: true,
+            message: 'Files uploaded and processed successfully',
+            results
+        });
 
-}
-
-function find() {
-}
-
-async function scanImage(req, res) {
-    try{
-        res.status(200).json({ success: true, message: 'File upload endpoint hit' });
+    } catch (error) {
+        writeLog('❌ [Upload Error] ' + error);
+        res.status(500).json({
+            success: false,
+            message: 'File upload failed',
+            error: error.message
+        });
     }
-    catch (error) {
-        console.error('❌ [Upload Error]', error);
-        res.status(500).json({ success: false, message: 'File upload failed', error: error.message });
-    }
-
 }
 
 function view(req, res) {
@@ -317,9 +326,6 @@ function view(req, res) {
 module.exports = {
     create,
     list,
-    update,
-    remove,
-    find,
-    scanImage,
+    uploadAndScan,
     view
 };

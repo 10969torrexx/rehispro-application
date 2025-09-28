@@ -50,9 +50,10 @@ export default function BirthCertificateUpload() {
 
     const handleSubmit = async (e) => { 
         e.preventDefault();
+        console.log("Submitting files:", files.length);
+
         const formData = new FormData();
         files.forEach(file => formData.append('files', file));
-
         try {
             const response = await BirthCertServices.uploadFiles(formData);
             console.log("Upload success:", response);
@@ -61,7 +62,7 @@ export default function BirthCertificateUpload() {
         }
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="mb-2">
                 {errors.uploadField && <ErrorMessages errors={errors.uploadField} />}
                 {errors && <ErrorMessages errors={errors.map(err => err.file)} />}

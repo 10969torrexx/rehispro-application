@@ -53,7 +53,7 @@ export async function listBirthCertificate() {
  */
 export async function uploadFiles(formData) {
     try {
-        const response = await fetch('http://localhost:3001/birth/scan', {
+        const response = await fetch('http://localhost:3001/birth/upload-and-scan', {
             method: 'POST',
             body: formData
         });
@@ -61,8 +61,9 @@ export async function uploadFiles(formData) {
         if (!response.ok) {
             throw new Error('Failed to upload files');
         }
-
-        return await response.json();
+        const parsedResponse = await response.json();
+        console.log('File upload response:', parsedResponse);
+        return parsedResponse;
     } catch (error) {
         console.error('[birth form] Error uploading files:', error);
     }
