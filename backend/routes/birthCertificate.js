@@ -9,6 +9,5 @@ const BirthCertificateController = require('../controllers/BirthCertificateContr
     router.get('/list', BirthCertificateController.list);
     router.put('/:id', BirthCertificateController.update);
     router.delete('/:id', BirthCertificateController.remove);
-    router.post('/', BirthCertificateController.find);
-
+    router.get('/view/:id', BirthCertificateController.view);
 module.exports = router;

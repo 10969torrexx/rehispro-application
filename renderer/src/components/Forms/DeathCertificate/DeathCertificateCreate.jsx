@@ -25,7 +25,7 @@ export default function DeathCertificateCreate() {
         "Certification and Registration Details (Cont.)",
         "For LCRO / Civil Registrar Use Only",
         "Postmortem & Embalmer Certifications",
-        "Affidavit for Delayed Registration of Death",
+        "Affidavit for Delayed Registration of Death (Optional)",
         "Affidavit for Delayed Registration of Death (Cont.)",
         "Confirmation Notice"
     ];
@@ -1060,6 +1060,7 @@ export default function DeathCertificateCreate() {
                     );
                     handleInputChange(
                         { target: { name: "notAttendedDeceased", value: false } },
+                        // { target: { name: "notAttended", value: false, readOnly: true }},
                         `page${currentPage}`
                     );
                     }}
@@ -1081,12 +1082,12 @@ export default function DeathCertificateCreate() {
                         `page${currentPage}`
                     );
                     handleInputChange(
-                        { target: { name: "attendedDeceased", value: false } },
+                        { target: { name: "attendedDeceased", value: false }},
                         `page${currentPage}`
                     );
                     }}
                 />
-                <span className="ml-1">have not attended</span>
+                <span className="ml-1">have not attended </span>
                 </label>
             </div>
 
@@ -1555,8 +1556,8 @@ export default function DeathCertificateCreate() {
                           <p className="text-sm italic text-center">
                             (For delayed registration of death)
                           </p>
-                          <p className="text-sm italic text-center">
-                            I _____________________________ , of legal age, single / married / divorced / widow / widower, with residence and postal address at ______________________________________________________ after having been duly sworn in accordance with law, do hereby depose and say:
+                          <p className="text-sm text-left">
+                            I <spam className="italic font-bold">{formData.page12.affiantName || '_____________________________'}</spam> , of legal age, <spam className="italic font-bold">{formData.page12.affiantCivilStatus || 'single / married / divorced / widow / widower'}</spam>, with residence and postal address at <spam className="italic font-bold">{formData.page12.address || '_____________________________'}</spam>  after having been duly sworn in accordance with law, do hereby depose and say:
                           </p>
                         
                           {/* Affiant Info */}
@@ -1603,28 +1604,28 @@ export default function DeathCertificateCreate() {
                           {/* Statement 1 */}
                           <div>
                             <p className="text-sm font-medium mb-2">
-                              1. That <span className="italic">[Deceased Name]</span> died on <span className="italic">[Date]</span> at <span className="italic">[Place]</span> and was buried/cremated in <span className="italic">[Burial Place]</span>
+                              1. That <span className="italic font-bold ">{formData.page1.firstName} {formData.page1.lastName}</span> died on <span className="italic font-bold">{formData.page1.dateOfDeath}</span> at <span className="italic font-bold">{formData.page1.placeOfDeath}</span> and was buried/cremated in <span className="italic font-bold">{formData.page7.cemeteryName}</span> on <span className="italic font-bold">{formData.page7.cemeteryAddress}</span>
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                               <div>
                                 <input type="text" name="deceasedName" placeholder="Deceased Name" className={`common-input ${errors.deceasedName ? 'input-error' : ''}`}
-                                  value={formData.page12.deceasedName}
-                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                  value={`${formData.page1.firstName} ${formData.page1.lastName}`}
+                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)} readOnly
                                 />
                                 {errors.deceasedName && <ErrorMessages errors={errors.deceasedName} />}
                               </div>
                               <div>
                                 <input type="date" name="deathDate" className={`common-input ${errors.deathDate ? 'input-error' : ''}`}
-                                  value={formData.page12.deathDate}
-                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                  value={formData.page1.dateOfDeath}
+                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)} readOnly
                                   onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.deathDate && <ErrorMessages errors={errors.deathDate} />}
                               </div>
                               <div>
                                 <input type="text" name="deathPlace" placeholder="Place of Death/Burial" className={`common-input ${errors.deathPlace ? 'input-error' : ''}`}
-                                  value={formData.page12.deathPlace}
-                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                  value={formData.page1.placeOfDeath}
+                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)} readOnly
                                 />
                                 {errors.deathPlace && <ErrorMessages errors={errors.deathPlace} />}
                               </div>
@@ -1638,16 +1639,22 @@ export default function DeathCertificateCreate() {
                             </p>
                             <div className="flex flex-col md:flex-row md:items-center gap-4">
                               <label className="flex items-center space-x-2">
-                                <input type="checkbox" className={`common-input ${errors.notAttended ? 'input-error' : ''}`} name="notAttended" 
-                                  checked={formData.page12.notAttended}
+                                <input type="checkbox" className={`custom-checkbox w-4 h-4 ${errors.notAttended ? 'input-error' : ''}`} name="notAttended" 
+                                  checked={formData.page6.attendedDeceased === true ? true : false}
+                                />
+                                <span>Was attended.</span>
+                              </label>
+                              <label className="flex items-center space-x-2">
+                                <input type="checkbox" className={`custom-checkbox w-4 h-4 ${errors.notAttended ? 'input-error' : ''}`} name="notAttended" 
+                                  checked={formData.page6.attendedDeceased === true ? false : true}
                                   onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
                                 />
                                 <span>Was not attended.</span>
-                              </label>
+                              </label> 
                               <input type="text" name="attendedBy" placeholder="Was attended by" className={`common-input w-full md:w-auto ${errors.attendedBy ? 'input-error' : ''}`}
-                                value={formData.page12.attendedBy}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                disabled={formData.page12.notAttended}
+                                value={formData.page6.physicianName || ""}
+                                readOnly
+                                disabled={formData.page6.attendedDeceased === true ? false : true}
                               />
                             </div>
                             {errors.notAttended && <ErrorMessages errors={errors.notAttended} />}
@@ -1687,7 +1694,7 @@ export default function DeathCertificateCreate() {
                                 5. That I am executing this affidavit to attest to the truthfulness of the foregoing statements for all legal intents and purposes.
                             </p>
                             <p className="text-sm italic">
-                                In truth whereof, I have affixed my signature below this ____ day of _____________ at __________________, Philippines.
+                                In truth whereof, I have affixed my signature below this <spam className="italic font-bold">{formData.page13.juratDay || '____'}</spam> day of <spam className="italic font-bold">{formData.page13.juratMonthYear || '_____________'}</spam> at <spam className="italic font-bold">{formData.page13.juratPlace || '_____________'}</spam>, Philippines.
                             </p>
                         
                             {/* Jurat Details */}
@@ -1724,6 +1731,10 @@ export default function DeathCertificateCreate() {
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
                                     {errors.juratPlace && <ErrorMessages errors={errors.juratPlace} />}
+                                </div>
+                                <div className="col-span-3">
+                                    <label className="block text-sm font-medium mb-1">Signature</label>
+                                    <SignaturePlaceholder />
                                 </div>
                             </div>
                         
@@ -1766,6 +1777,10 @@ export default function DeathCertificateCreate() {
                         
                             {/* Admin Officer Details */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="col-span-3">
+                                    <label className="block text-sm font-medium mb-1">Signature</label>
+                                    <SignaturePlaceholder />
+                                </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Name in Print</label>
                                     <input

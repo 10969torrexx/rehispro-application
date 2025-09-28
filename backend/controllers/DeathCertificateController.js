@@ -219,7 +219,6 @@ exports.create = (req, res) => {
 
 // LIST Death Certificate
 exports.list = (req, res) => {
-    console.log("🔍 Attempting to fetch death certificates..."); // Add this
     db.all(
         `
         SELECT 
@@ -229,7 +228,8 @@ exports.list = (req, res) => {
           DATE(created_at) AS created_at,
           place_of_death,
           city,
-          province
+          province,
+          cause_of_death
         FROM deathcertificates
         `,
         (err, rows) => {
@@ -251,53 +251,37 @@ exports.list = (req, res) => {
           });
         }
       );
-      };
+};
 
-    // const id = req.params.id;
-    // db.get(
-    //     `SELECT * FROM deathcertificates WHERE id = ?`,
-    //     [id],
-    //     (err, row) => {
-    //       if (err) {
-    //         console.error('❌ [DB Error]', err.message);
-    //         return res.status(500).json({
-    //           success: false,
-    //           message: 'Database fetch failed',
-    //           error: err.message,
-    //         });
-    //       }
-      
-    //       const death_certificate = row;
-      
-    //       res.status(200).json({
-    //         success: true,
-    //         message: 'Death Certificate Found',
-    //         data: death_certificate,
-    //       });
-    //     }
-    //   );
+
+// VIEW Death Certificate
+exports.view = async (req, res) => {
+  console.log("Attempting to fetch death certificate with ID:", req.params.id);
+
+  db.get(
+    `SELECT * FROM deathcertificates WHERE id = ?`,
+    [req.params.id],
+    (err, row) => {
+      if (err) {
+        console.error('❌ [DB Error]', err.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Database fetch failed',
+          error: err.message,
+        });
+      }
+  
+      const death_certificate = row;
+  
+      res.status(200).json({
+        success: true,
+        message: 'Death Certificate Found',
+        data: death_certificate,
+      });
+    }
+  );
+};
     
-
-
-    exports.view = async (req, res) => {
-        try {
-          const { id } = req.params;
-      
-          const [rows] = await db.query(
-            "SELECT * FROM deathcertificates WHERE id = ?",
-            [id]
-          );
-      
-          if (!rows.length) {
-            return res.status(404).json({ success: false, message: "Not found" });
-          }
-      
-          res.json({ success: true, data: rows[0] });
-        } catch (error) {
-          console.error("Error fetching certificate:", error);
-          res.status(500).json({ success: false, message: "Server error" });
-        }
-      };
             
 
 exports.update = (req, res) => {};

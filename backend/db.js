@@ -13,7 +13,7 @@ db.serialize(() => {
       login_id TEXT,
       password TEXT,
       role VARCHAR(255) NOT NULL DEFAULT 'supervisor',
-      is_firsttime_flg BOOLEAN NOT NULL DEFAULT 1,
+      is_firsttime_flg INTEGER DEFAULT 0 NOT NULL DEFAULT 1,
       status VARCHAR(255) NOT NULL DEFAULT 'active',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -351,90 +351,211 @@ db.serialize(() => {
       deleted_at TIMESTAMP
     );
   `);
+
+  // db.run  (
+  //   `DROP TABLE marriage_certificates`
+  // )
   // TODO: Create Table for Marriage Certificate Form
   db.run(`
     CREATE TABLE IF NOT EXISTS marriage_certificates (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        creator_id INTEGER NOT NULL,
+        creation_type TEXT DEFAULT 'manual',
 
-      -- Page 1
-      province TEXT NOT NULL,
-      city TEXT NOT NULL,
-      registry INTEGER NOT NULL,
-      husbandFirstName TEXT NOT NULL,
-      husbandMiddleName TEXT NOT NULL,
-      husbandLastName TEXT NOT NULL,
-      husbandBirthDate DATE NOT NULL,
-      husbandAge INTEGER NOT NULL,
-      husbandBirthCity TEXT NOT NULL,
-      husbandBirthProvince TEXT NOT NULL,
-      husbandBirthCountry TEXT NOT NULL,
-      wifeFirstName TEXT NOT NULL,
-      wifeMiddleName TEXT NOT NULL,
-      wifeLastName TEXT NOT NULL,
-      wifeBirthDate DATE NOT NULL,
-      wifeAge INTEGER NOT NULL,
-      wifeBirthCity TEXT NOT NULL,
-      wifeBirthProvince TEXT NOT NULL,
-      wifeBirthCountry TEXT NOT NULL,
+        -- Page 1: Province, City, and Registry No.
+        province TEXT,
+        city TEXT,
+        registry TEXT,
 
-      -- Page 2
-      husbandSex TEXT NOT NULL,
-      husbandCitizenship TEXT NOT NULL,
-      husbandResidenceBarangay TEXT NOT NULL,
-      husbandResidenceCity TEXT NOT NULL,
-      husbandResidenceProvince TEXT NOT NULL,
-      husbandResidenceCountry TEXT NOT NULL,
-      husbandReligion TEXT NOT NULL,
-      husbandCivilStatus TEXT NOT NULL,
-      husbandFatherNameFirst TEXT NOT NULL,
-      husbandFatherNameMiddle TEXT NOT NULL,
-      husbandFatherNameLast TEXT NOT NULL,
-      wifeSex TEXT NOT NULL,
-      wifeCitizenship TEXT NOT NULL,
-      wifeResidenceBarangay TEXT NOT NULL,
-      wifeResidenceCity TEXT NOT NULL,
-      wifeResidenceProvince TEXT NOT NULL,
-      wifeResidenceCountry TEXT NOT NULL,
-      wifeReligion TEXT NOT NULL,
-      wifeCivilStatus TEXT NOT NULL,
-      wifeFatherNameFirst TEXT NOT NULL,
-      wifeFatherNameMiddle TEXT NOT NULL,
-      wifeFatherNameLast TEXT NOT NULL,
+        -- Page 1: Husband Information
+        husband_first_name TEXT,
+        husband_middle_name TEXT,
+        husband_last_name TEXT,
+        husband_birth_date TEXT,
+        husband_birth_city TEXT,
+        husband_birth_province TEXT,
+        husband_birth_country TEXT,
+        husband_age TEXT,
 
-      -- Page 3 (example only, continue same style)
-      husbandFatherCitizenship TEXT,
-      husbandMotherNameFirst TEXT,
-      husbandMotherNameMiddle TEXT,
-      husbandMotherNameLast TEXT,
-      husbandMotherCitizenship TEXT,
-      wifeFatherCitizenship TEXT,
-      wifeMotherNameFirst TEXT,
-      wifeMotherNameMiddle TEXT,
-      wifeMotherNameLast TEXT,
-      wifeMotherCitizenship TEXT,
+        -- Page 1: Wife Information
+        wife_first_name TEXT,
+        wife_middle_name TEXT,
+        wife_last_name TEXT,
+        wife_birth_date TEXT,
+        wife_birth_city TEXT,
+        wife_birth_province TEXT,
+        wife_birth_country TEXT,
+        wife_age TEXT,
 
-      -- Boolean Example (stored as INTEGER 0/1)
-      statement2a BOOLEAN,
-      statement2b BOOLEAN,
-      statement2c BOOLEAN,
-      ceremonyReligious BOOLEAN,
-      ceremonyCivil BOOLEAN,
-      ceremonyMuslim BOOLEAN,
-      ceremonyTribal BOOLEAN,
-      marriageWithLicense BOOLEAN,
-      marriageUnderArticle BOOLEAN,
+        -- Page 2: Husband Information
+        husband_sex TEXT,
+        husband_citizenship TEXT,
+        husband_residence_barangay TEXT,
+        husband_residence_city TEXT,
+        husband_residence_province TEXT,
+        husband_residence_country TEXT,
+        husband_religion TEXT,
+        husband_civil_status TEXT,
+        husband_father_name_first TEXT,
+        husband_father_name_middle TEXT,
+        husband_father_name_last TEXT,
 
-      -- Page 4 (example)
-      placeOfMarriage TEXT,
-      dateOfMarriage DATE,
-      timeOfMarriage TIME,
-      marriageSettlement TEXT,
+        -- Page 2: Wife Information
+        wife_sex TEXT,
+        wife_citizenship TEXT,
+        wife_residence_barangay TEXT,
+        wife_residence_city TEXT,
+        wife_residence_province TEXT,
+        wife_residence_country TEXT,
+        wife_religion TEXT,
+        wife_civil_status TEXT,
+        wife_father_name_first TEXT,
+        wife_father_name_middle TEXT,
+        wife_father_name_last TEXT,
 
-      -- Meta
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
+        -- Page 3: Husband Information
+        husband_father_citizenship TEXT,
+        husband_mother_name_first TEXT,
+        husband_mother_name_middle TEXT,
+        husband_mother_name_last TEXT,
+        husband_mother_citizenship TEXT,
+        husband_consent_name_first TEXT,
+        husband_consent_name_middle TEXT,
+        husband_consent_name_last TEXT,
+        husband_relationship TEXT,
+        husband_consent_person_barangay TEXT,
+        husband_consent_person_city TEXT,
+        husband_consent_person_province TEXT,
+        husband_consent_person_country TEXT,
+
+        -- Page 3: Wife Information
+        wife_father_citizenship TEXT,
+        wife_mother_name_first TEXT,
+        wife_mother_name_middle TEXT,
+        wife_mother_name_last TEXT,
+        wife_mother_citizenship TEXT,
+        wife_consent_name_first TEXT,
+        wife_consent_name_middle TEXT,
+        wife_consent_name_last TEXT,
+        wife_relationship TEXT,
+        wife_consent_person_barangay TEXT,
+        wife_consent_person_city TEXT,
+        wife_consent_person_province TEXT,
+        wife_consent_person_country TEXT,
+
+        -- Page 4: Marriage Details
+        place_of_marriage TEXT,
+        date_of_marriage TEXT,
+        time_of_marriage TEXT,
+        cert_husband_name TEXT,
+        cert_wife_name TEXT,
+        marriage_settlement TEXT,
+        cert_day TEXT,
+        cert_month TEXT,
+        cert_year TEXT,
+
+        -- Page 5: Certification and Officer Details
+        certification TEXT,
+        marriage_license_no TEXT,
+        marriage_issued_on TEXT,
+        marriage_issued_at TEXT,
+        executive_order TEXT,
+        officer_position TEXT,
+        officer_religion TEXT,
+        witness1_name TEXT,
+        witness2_name TEXT,
+
+        -- Page 6: Registrar Details
+        received_by_name TEXT,
+        received_by_title TEXT,
+        received_by_date TEXT,
+        registrar_name TEXT,
+        registrar_title TEXT,
+        registrar_date TEXT,
+        remarks_annotation TEXT,
+        civil_registrar TEXT,
+
+        -- Page 7: Additional Witnesses and Affidavit
+        witness3_name TEXT,
+        witness4_name TEXT,
+        affidavit_officer_name TEXT,
+        affidavit_officer_organization TEXT,
+        affidavit_officer_address TEXT,
+        statement1_party1 TEXT,
+        statement1_party2 TEXT,
+        statement2a INTEGER DEFAULT 0,
+        statement2b INTEGER DEFAULT 0,
+        statement2c INTEGER DEFAULT 0,
+        statement2c_party1 TEXT,
+        statement2c_party2 TEXT,
+        statement2d INTEGER DEFAULT 0,
+        statement2e INTEGER DEFAULT 0,
+
+        -- Page 8: Affidavit and Sworn Details
+        affidavit_day TEXT,
+        affidavit_month TEXT,
+        affidavit_year TEXT,
+        affidavit_place TEXT,
+        sworn_day TEXT,
+        sworn_month TEXT,
+        sworn_year TEXT,
+        sworn_at TEXT,
+        sworn_issued_on TEXT,
+        sworn_issued_at TEXT,
+        admin_officer_name TEXT,
+        admin_officer_title TEXT,
+        admin_officer_address TEXT,
+
+        -- Page 9: Affiant and Ceremony Details
+        affiant_name TEXT,
+        affiant_address TEXT,
+        statement1_option_a INTEGER DEFAULT 0,
+        statement1_marriage_with TEXT,
+        statement1_place_a TEXT,
+        statement1_date_a TEXT,
+        statement1_option_b INTEGER DEFAULT 0,
+        statement1_marriage_between TEXT,
+        statement1_place_b TEXT,
+        statement1_date_b TEXT,
+        solemnizing_officer TEXT,
+        ceremony_religious INTEGER DEFAULT 0,
+        ceremony_civil INTEGER DEFAULT 0,
+        ceremony_muslim INTEGER DEFAULT 0,
+        ceremony_tribal INTEGER DEFAULT 0,
+        marriage_with_license INTEGER DEFAULT 0,
+        marriage_license_no_page9 TEXT,
+        marriage_issued_on_page9 TEXT,
+        marriage_issued_at_page9 TEXT,
+        marriage_under_article INTEGER DEFAULT 0,
+        article_number TEXT,
+        citizen_applicant TEXT,
+        citizen_spouse TEXT,
+        reason_for_delay TEXT,
+        affidavit_day_page9 TEXT,
+        affidavit_month_page9 TEXT,
+        affidavit_year_page9 TEXT,
+        affidavit_place_page9 TEXT,
+
+        -- Page 10: Sworn Details
+        sworn_day_page10 TEXT,
+        sworn_month_page10 TEXT,
+        sworn_year_page10 TEXT,
+        sworn_place_page10 TEXT,
+        sworn_issued_on_page10 TEXT,
+        sworn_issued_at_page10 TEXT,
+        administering_officer_name TEXT,
+        officer_position_page10 TEXT,
+        officer_address_page10 TEXT,
+
+        -- Page 11: Confirmation
+        confirmation INTEGER DEFAULT 0,
+
+        -- Add timestamps
+        created_at TIMESTAMP DEFAULT (datetime('now')),
+        updated_at TIMESTAMP DEFAULT (datetime('now')),
+        deleted_at TIMESTAMP
+    );
+`);
 
 
 });
