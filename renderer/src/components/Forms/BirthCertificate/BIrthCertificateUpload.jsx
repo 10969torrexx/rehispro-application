@@ -48,13 +48,17 @@ export default function BirthCertificateUpload() {
         setFiles(newFiles);
     }
 
-    const handleSubmit = (e) => { 
+    const handleSubmit = async (e) => { 
         e.preventDefault();
         const formData = new FormData();
         files.forEach(file => formData.append('files', file));
 
-        BirthCertServices.uploadField(formData)
-        
+        try {
+            const response = await BirthCertServices.uploadFiles(formData);
+            console.log("Upload success:", response);
+        } catch (error) {
+            console.error("Upload failed:", error);
+        }
     }
     return (
         <form onSubmit={handleSubmit}>
