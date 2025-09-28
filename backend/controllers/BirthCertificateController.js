@@ -279,7 +279,7 @@ async function uploadAndScan(req, res) {
                 extractedText: result.data.text
             });
         }
-
+        writeLog(`text extraction results: ${JSON.stringify(results)}`);
         res.status(200).json({
             success: true,
             message: 'Files uploaded and processed successfully',
