@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
 import { InfoCard, BirthCertifcateForm, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
+import { userSearchParams, useSearchParams } from 'react-router-dom'; 
 
 export default function BirthCertificate() {
+    const [searchParams] = useSearchParams();
     const [userData, setUserData] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [selectedRow, setSelectedRow] = useState(null);
@@ -13,7 +15,7 @@ export default function BirthCertificate() {
             setUserData(JSON.parse(localStorage.getItem('user')));
         }
     }, []);
-    const [activeTab, setActiveTab] = useState("home"); //TODO: handle the active tab
+    const [activeTab, setActiveTab] = useState(searchParams.get('activeTab') ? searchParams.get('activeTab') : 'home'); //TODO: handle the active tab
     return (
         <>
             <div className="flex w-screen h-screen">
