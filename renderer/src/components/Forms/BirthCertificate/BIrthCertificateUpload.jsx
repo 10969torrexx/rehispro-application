@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect } from "react"
 import { useDropzone } from "react-dropzone";
 import { ErrorMessages } from '@components';
 import { FileValidation } from '@services';
-import { FileList } from '@components';
+import { FileList, LoadingScreen } from '@components';
 import { Limits } from '@enums';
 import { toast } from "react-toastify";
 import { BirthCertServices } from '@services';
@@ -63,6 +63,15 @@ export default function BirthCertificateUpload() {
             setLoading(false);
         }
     }
+
+    if (loading) {
+        return (
+            <>
+                <LoadingScreen />
+            </>
+        );
+    }
+
     return (
         <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="mb-2">

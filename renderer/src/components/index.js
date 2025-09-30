@@ -7,6 +7,7 @@ export { default as UserCounts } from './UserCounts';
 export { default as InfoCard } from './InfoCard';
 export { default as SignaturePlaceholder } from './SignaturePlaceholder';
 export { default as FileList } from './FileLists';
+export { default as LoadingScreen } from './LoadingScreen';
 
 /**
  * TODO: export all form components
