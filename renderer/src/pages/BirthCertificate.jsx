@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
 import { InfoCard, BirthCertifcateForm, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
-import { userSearchParams, useSearchParams } from 'react-router-dom'; 
+import { useSearchParams } from 'react-router-dom'; 
 
 export default function BirthCertificate() {
     const [searchParams] = useSearchParams();

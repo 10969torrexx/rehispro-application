@@ -61,6 +61,7 @@ export default function BirthCertificateUpload() {
             console.error("Upload failed:", error);
         } finally {
             setLoading(false);
+            window.location.href = `${window.location.pathname}/documents/birth-certificates?activeTab=create`
         }
     }
 
