@@ -96,7 +96,7 @@ export default function BirthCertificateUpload() {
             </div>
             {files.length > 0 && (
                 <div className="mt-4 w-full">
-                    <button type="submit" className='mt-4 rounded-full px-4 py-2 btn-primary'>Upload Files</button>
+                    <button type="submit" className='mt-4 rounded-full px-4 py-2 btn-primary'>Scan Files</button>
                 </div>
             )}
         </form>
