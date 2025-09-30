@@ -62,10 +62,11 @@ export async function uploadFiles(formData) {
             throw new Error('Failed to upload files');
         }
         const parsedResponse = await response.json();
-        console.log('File upload response:', parsedResponse);
         return parsedResponse;
     } catch (error) {
-        console.error('[birth form] Error uploading files:', error);
+       throw new Error(JSON.stringify({
+        'error': error
+       }))
     }
 }
 

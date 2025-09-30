@@ -1,4 +1,3 @@
-import { UploadCloud } from "lucide-react";
 import { useCallback, useState, useEffect } from "react"
 import { useDropzone } from "react-dropzone";
 import { ErrorMessages } from '@components';
@@ -47,6 +46,7 @@ export default function BirthCertificateUpload() {
         setFiles(newFiles);
     }
 
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => { 
         e.preventDefault();
         console.log("Submitting files:", files.length);
@@ -54,10 +54,13 @@ export default function BirthCertificateUpload() {
         const formData = new FormData();
         files.forEach(file => formData.append('files', file));
         try {
+            setLoading(true)
             const response = await BirthCertServices.uploadFiles(formData);
             console.log("Upload success:", response);
         } catch (error) {
             console.error("Upload failed:", error);
+        } finally {
+            setLoading(false);
         }
     }
     return (
