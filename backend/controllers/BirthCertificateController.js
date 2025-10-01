@@ -279,7 +279,7 @@ async function uploadAndScan(req, res) {
                 extractedText: result.data.text
             });
         }
-        writeLog(`text extraction results: ${JSON.stringify(results)}`);
+        writeLog(`tesseract: ${JSON.stringify(results)}`);
         res.status(200).json({
             success: true,
             message: 'Files uploaded and processed successfully',
@@ -287,7 +287,6 @@ async function uploadAndScan(req, res) {
         });
 
     } catch (error) {
-        writeLog('❌ [Upload Error] ' + error);
         res.status(500).json({
             success: false,
             message: 'File upload failed',
