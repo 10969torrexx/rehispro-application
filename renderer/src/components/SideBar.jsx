@@ -19,7 +19,7 @@ export default function SideBar({ role = "supervisor", isOpen, setIsOpen }) {
         }));
     };
 
-    return (
+return (
         <div
             className={`
                 h-full bg-white text-gray-800 flex flex-col p-4 shadow-lg

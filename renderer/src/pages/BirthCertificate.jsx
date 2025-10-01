@@ -10,12 +10,13 @@ export default function BirthCertificate() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [selectedRow, setSelectedRow] = useState(null);
 
+    const [activeTab, setActiveTab] = useState('home'); //TODO: handle the active tab
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
         }
+        setActiveTab(searchParams.get('activeTab') ? searchParams.get('activeTab') : 'home' );
     }, []);
-    const [activeTab, setActiveTab] = useState(searchParams.get('activeTab') ? searchParams.get('activeTab') : 'home'); //TODO: handle the active tab
     return (
         <>
             <div className="flex w-screen h-screen">
@@ -55,8 +56,8 @@ export default function BirthCertificate() {
                             <div className="form-content mb-4">
                                 <BirthCertificateHome 
                                     onView={(row) => {
-                                        setSelectedRow(row);   // ✅ save the row
-                                        setActiveTab("view");  // ✅ go to view tab
+                                        setSelectedRow(row); 
+                                        setActiveTab("view"); 
                                     }} 
                                 />
                             </div>
@@ -71,7 +72,7 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div>
-                                    <BirthCertificateUpload />
+                                    <BirthCertificateUpload setActiveTab={setActiveTab} />
                                 </div>
                             </div>
                         }

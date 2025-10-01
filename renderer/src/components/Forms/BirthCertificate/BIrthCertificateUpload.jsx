@@ -7,7 +7,7 @@ import { Limits } from '@enums';
 import { toast } from "react-toastify";
 import { BirthCertServices } from '@services';
 
-export default function BirthCertificateUpload() { 
+export default function BirthCertificateUpload({setActiveTab}) { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
 
@@ -56,20 +56,19 @@ export default function BirthCertificateUpload() {
         try {
             setLoading(true)
             const response = await BirthCertServices.uploadFiles(formData);
-            console.log("Upload success:", response);
         } catch (error) {
             console.error("Upload failed:", error);
+            toast.error('Runtime Error');
         } finally {
             setLoading(false);
-            window.location.href = `${window.location.pathname}/documents/birth-certificates?activeTab=create`
+            //TODO: change the active tab to create
+            setActiveTab('create');
         }
     }
 
     if (loading) {
         return (
-            <>
-                <LoadingScreen />
-            </>
+           <LoadingScreen />
         );
     }
 
