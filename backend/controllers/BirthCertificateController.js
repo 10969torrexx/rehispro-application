@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const Tesseract = require('tesseract.js');
 const path = require('path');
 const { writeLog } = require('../utils/logger');
+const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 
 function create (req, res) {
     try {
@@ -271,15 +272,16 @@ async function uploadAndScan(req, res) {
         const results = [];
         for (const file of req.files) {
             const result = await Tesseract.recognize(file.path, 'eng');
+            const parsedData = _birthParseData(result.data.text);
             results.push({
                 file: {
                     originalname: file.originalname,
                     savedPath: file.path
                 },
-                extractedText: result.data.text
+                extractedText: parsedData
             });
         }
-        writeLog(`tesseract: ${JSON.stringify(results)}`);
+        
         res.status(200).json({
             success: true,
             message: 'Files uploaded and processed successfully',
