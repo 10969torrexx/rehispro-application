@@ -2,8 +2,10 @@ const { writeLog } = require('../utils/logger');
 const fs = require("fs");
 function parsedData(extractedText) {
   let cleanText = extractedText
-    .replace(/\s+/g, " ") 
     .replace(/\r?\n\s*/g, "\n")
+    .split("\n")
+    .map(line => line.replace(/\s+/g, " ").trim())
+    .join("\n")
     .replace(/OCCUPATON/gi, "OCCUPATION")
     .replace(/ClTY/gi, "CITY")
     .replace(/Marrlage/gi, "MARRIAGE")
