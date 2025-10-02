@@ -281,7 +281,7 @@ async function uploadAndScan(req, res) {
                 extractedText: parsedData
             });
         }
-        
+        writeLog(`uploadAndScan ${JSON.stringify(results)}`);
         res.status(200).json({
             success: true,
             message: 'Files uploaded and processed successfully',
