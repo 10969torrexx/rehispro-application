@@ -1,8 +1,4 @@
-const { data } = require('autoprefixer');
 const db = require('../db');
-const bcrypt = require('bcryptjs');
-const Tesseract = require('tesseract.js');
-const path = require('path');
 const { writeLog } = require('../utils/logger');
 const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
