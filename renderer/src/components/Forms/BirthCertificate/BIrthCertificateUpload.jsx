@@ -87,7 +87,7 @@ export default function BirthCertificateUpload({setActiveTab}) {
                     accept="image/jpeg,image/png,application/pdf"
                 />
                 <div className='p-4 rounded-full'>
-                    <i className="text-4xl fa-solid fa-cloud-arrow-up"></i>
+                    <i className="text-4xl fa-solid fa-cloud-arrow-up text-gray-500"></i>
                 </div>
                 <div className="flex flex-col items-center">
                     {isDragActive ? <p>Drop the files here ...</p> : (

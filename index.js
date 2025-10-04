@@ -1,9 +1,39 @@
 const { app, BrowserWindow } = require('electron');
+const { spawn } = require("child_process");
 const path = require('path');
+const net = require("net");
 
 const isDev = !app.isPackaged;
+let pyProc = null;
+let backendServer;
 
-let backendServer; // store server instance
+function waitForPort(port, host = "127.0.0.1") {
+  return new Promise((resolve) => {
+    const interval = setInterval(() => {
+      const socket = new net.Socket();
+      socket.once("connect", () => {
+        clearInterval(interval);
+        socket.destroy();
+        resolve();
+      });
+      socket.once("error", () => socket.destroy());
+      socket.connect(port, host);
+    }, 500);
+  });
+}
+
+async function startPythonServer() {
+  const pythonCmd = process.platform === "win32" ? "python" : "python3";
+  const script = path.join(__dirname, "python-backend", "server.py");
+
+  pyProc = spawn(pythonCmd, [script]);
+
+  pyProc.stdout.on("data", (d) => console.log("[PY]", d.toString()));
+  pyProc.stderr.on("data", (d) => console.error("[PY ERR]", d.toString()));
+
+  await waitForPort(5001);
+  console.log("✅ Python OCR server is ready on 5001");
+}
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -23,9 +53,10 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   backendServer = require('./backend/server');
 
+  await startPythonServer();
   createWindow();
 
   app.on('activate', () => {
@@ -33,14 +64,25 @@ app.whenReady().then(() => {
   });
 });
 
-app.on('window-all-closed', () => {
-  // localStorage.clear();
-  if (backendServer) {
-    backendServer.close(() => {
-      console.log('Backend server stopped');
-      if (process.platform !== 'darwin') app.quit();
-    });
-  } else {
-    if (process.platform !== 'darwin') app.quit();
+app.on("before-quit", () => {
+  if (pyProc) {
+    try {
+      pyProc.kill();
+      console.log("🛑 Python server stopped");
+    } catch (e) {
+      console.error("Failed to kill python", e);
+    }
   }
+
+  if (backendServer) {
+    try {
+      backendServer.close(() => console.log("🛑 Node backend stopped"));
+    } catch (e) {
+      console.error("Failed to stop backend server", e);
+    }
+  }
+});
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
 });

@@ -5,6 +5,7 @@ const Tesseract = require('tesseract.js');
 const path = require('path');
 const { writeLog } = require('../utils/logger');
 const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
+const { callPythonOCR } = require('../services/OCRService');
 
 function create (req, res) {
     try {
@@ -271,14 +272,15 @@ async function uploadAndScan(req, res) {
 
         const results = [];
         for (const file of req.files) {
-            const result = await Tesseract.recognize(file.path, 'eng');
-            const parsedData = _birthParseData(result.data.text);
+            const result = await callPythonOCR(file.path);
+            // const result = await Tesseract.recognize(file.path, 'eng'); # this is the tesseract
+            writeLog(result);
             results.push({
                 file: {
                     originalname: file.originalname,
                     savedPath: file.path
                 },
-                extractedText: parsedData
+                extractedText: result
             });
         }
         writeLog(`uploadAndScan ${JSON.stringify(results)}`);
