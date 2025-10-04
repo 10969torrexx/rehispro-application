@@ -99,7 +99,6 @@ def parse_birth_certificate(ocr_list):
     for idx, text in enumerate(ocr_list):
         t = text.strip().upper()
 
-        # --- CHILD ---
         if t == "NAME":
             try:
                 data["child"]["name"]["first"] = ocr_list[idx+1]
