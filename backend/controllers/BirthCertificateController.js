@@ -273,8 +273,6 @@ async function uploadAndScan(req, res) {
         const results = [];
         for (const file of req.files) {
             const result = await callPythonOCR(file.path);
-            // const result = await Tesseract.recognize(file.path, 'eng'); # this is the tesseract
-            writeLog(result);
             results.push({
                 file: {
                     originalname: file.originalname,
