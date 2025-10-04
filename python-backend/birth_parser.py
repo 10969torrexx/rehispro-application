@@ -107,16 +107,24 @@ def parse_birth_certificate(ocr_list):
             except IndexError:
                 pass
 
-        elif "SEX" in t:
-            data["child"]["sex"] = ocr_list[idx+1] if idx+1 < len(ocr_list) else ""
+        # --- CHILD SEX ---
+        if "SEX" in t:
+            next_tokens = ocr_list[idx+1:idx+10]
+            sex_token = next((tok.upper() for tok in next_tokens if tok.upper() in ["F", "M"]), "")
+            if sex_token == "F":
+                sex_token = "FEMALE"
+            elif sex_token == "M":
+                sex_token = "MALE"
+            data["child"]["sex"] = sex_token
 
-        elif "DATE OF" in t and "BIRTH" in t:
-            try:
-                data["child"]["date_of_birth"]["day"] = ocr_list[idx+1]
-                data["child"]["date_of_birth"]["month"] = ocr_list[idx+2]
-                data["child"]["date_of_birth"]["year"] = ocr_list[idx+3]
-            except IndexError:
-                pass
+        if "BIRTH" in t:
+            day = ocr_list[idx+1] if idx+1 < len(ocr_list) else ""
+            month = ocr_list[idx+2] if idx+2 < len(ocr_list) else ""
+            year = ocr_list[idx+3] if idx+3 < len(ocr_list) else ""
+
+            data["child"]["date_of_birth"]["day"] = day
+            data["child"]["date_of_birth"]["month"] = month
+            data["child"]["date_of_birth"]["year"] = year
 
         elif "PLACE" in t and "BIRTH" in t:
             try:
