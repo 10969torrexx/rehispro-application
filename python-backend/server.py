@@ -8,6 +8,7 @@ import numpy as np
 import easyocr
 from fastapi.responses import JSONResponse
 from fastapi.requests import Request
+from birth_parser import parse_birth_certificate
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_DIR = os.path.join(BASE_DIR, "logs")
@@ -52,15 +53,14 @@ async def ocr_endpoint(file: UploadFile = File(...)):
 
         out = []
         for r in results:
-            bbox = [(float(x), float(y)) for x, y in r[0]]
             text = str(r[1])
-            conf = float(r[2])
-            out.append({"bbox": bbox, "text": text, "conf": conf})
+            out.append(text)
 
+        parsed_data = parse_birth_certificate(out)
         ocr_logger.info("File: %s | Results: %s", file.filename, out)
 
         logger.info("OCR processed successfully for %s", file.filename)
-        return {"ocr": out}
+        return {"ocr": parsed_data}
 
     except Exception as e:
         logger.error("OCR processing failed: %s", str(e), exc_info=True)

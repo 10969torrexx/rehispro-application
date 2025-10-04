@@ -274,7 +274,7 @@ async function uploadAndScan(req, res) {
                     originalname: file.originalname,
                     savedPath: file.path
                 },
-                extractedText: result
+                extractedText: result['ocr']
             });
         }
         writeLog(`uploadAndScan ${JSON.stringify(results)}`);
