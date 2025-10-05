@@ -2,13 +2,15 @@ from copy import deepcopy
 import re
 
 birth_certificate_template = {
+    "province": "",
+    "city_municiaplity": "",
+    "registry_no": "",
     "child": {
         "name": {"first": "", "middle": "", "last": ""},
         "sex": "",
         "date_of_birth": {"day": "", "month": "", "year": ""},
         "place_of_birth": {
-            "hospital_or_house": "",
-            "barangay": "",
+            "hospital_barangay": "",
             "city_municipality": "",
             "province": ""
         },
