@@ -232,9 +232,175 @@ default_keywords = [
     "day"
 ]
 
-def parse(ocr_text):
-    text = []
-    for word in ocr_text: 
-        text.append(word)
+parseResult = {
+    # Page 1 - Child Information
+    "province": "",
+    "city": "",
+    "child_first_name": "",
+    "child_middle_name": "",
+    "child_last_name": "",
+    "sex": "",
+    "date_of_birth": "",
+    "place_of_birth_barangay": "",
+    "place_of_birth_city": "",
+    "place_of_birth_province": "",
+    "type_of_birth": "",
+    "multiple_birth_order": "",
+    "birth_order": "",
+    "birth_weight": "",
 
-    return text
+    # Page 2 - Mother Information
+    "maiden_first_name": "",
+    "maiden_middle_name": "",
+    "maiden_last_name": "",
+    "citizenship": "",
+    "religion": "",
+    "children_born_alive": "",
+    "children_still_living": "",
+    "children_deceased": "",
+    "occupation": "",
+    "age_at_birth": "",
+    "residence_house": "",
+    "residence_city": "",
+    "residence_province": "",
+    "residence_country": "",
+
+    # Page 3 - Father Information
+    "father_first_name": "",
+    "father_middle_name": "",
+    "father_last_name": "",
+    "father_citizenship": "",
+    "father_religion": "",
+    "father_occupation": "",
+    "father_age_at_birth": "",
+    "father_residence_street": "",
+    "father_residence_city": "",
+    "father_residence_province": "",
+    "father_residence_country": "",
+
+    # Page 4 - Marriage Information
+    "date_of_marriage": "",
+    "marriage_city": "",
+    "marriage_province": "",
+    "marriage_country": "",
+
+    # Page 5 - Attendant Information
+    "attendant_physician": 0,
+    "attendant_nurse": 0,
+    "attendant_midwife": 0,
+    "attendant_hilot": 0,
+    "attendant_others": 0,
+    "attendant_others_specify": "",
+    "date_of_attendance": "",
+    "attendant_name_title": "",
+
+    # Page 6 - Attendant Certification
+    "birth_time": "",
+    "birth_date": "",
+    "attendant_name": "",
+    "attendant_title": "",
+    "attendant_address": "",
+    "attendant_date_signed": "",
+    "attendant_signature": "",
+
+    # Page 7 - Informant & Prepared By
+    "informant_name": "",
+    "informant_relationship": "",
+    "informant_address": "",
+    "informant_date": "",
+    "prepared_name": "",
+    "prepared_title": "",
+    "prepared_date": "",
+
+    # Page 8 - Civil Registrar Section
+    "received_name": "",
+    "received_title": "",
+    "received_date": "",
+    "registrar_signature": "",
+    "registrar_name": "",
+    "registrar_title": "",
+    "registrar_date": "",
+
+    # Page 9 - Remarks / Annotations
+    "remarks": "",
+    "office_boxes": "",
+
+    # Page 10 - Affidavit of Acknowledgment
+    "mother_name": "",
+    "father_name": "",
+    "child_name": "",
+    "child_birth_date": "",
+    "child_birth_place": "",
+
+    # Page 11 - Jurat
+    "jurat_day": "",
+    "jurat_month_year": "",
+    "jurat_affiant1": "",
+    "jurat_affiant2": "",
+    "ctc_number": "",
+    "ctc_date_issued": "",
+    "ctc_place_issued": "",
+    "admin_name": "",
+    "admin_position": "",
+    "admin_address": "",
+    "admin_signature": "",
+
+    # Page 12 - Affidavit
+    "affiant_name": "",
+    "civil_status": "",
+    "address": "",
+    "self_checkbox": 0,
+    "self_pob": "",
+    "self_dob": "",
+    "child_checkbox": 0,
+    "child_name_affidavit": "",
+    "child_pob": "",
+    "child_dob": "",
+    "affidavit_attendant_name": "",
+    "affidavit_attendant_address": "",
+    "affidavit_citizenship": "",
+    "parents_status": "",
+    "marriage_date": "",
+    "marriage_place": "",
+    "affidavit_father_name": "",
+    "reason_delay": "",
+    "spouse_applicant": "",
+    "spouse_owner": "",
+    "affiant_signature": "",
+
+    # Page 13 - Final Jurat / Affidavit
+    "final_jurat_day": "",
+    "final_jurat_month_year": "",
+    "final_jurat_place": "",
+    "final_ctc_number": "",
+    "final_ctc_issued_on": "",
+    "final_ctc_issued_at": "",
+    "admin_officer_signature": "",
+    "admin_officer_name": "",
+    "admin_officer_position": "",
+    "admin_officer_address": ""
+}
+
+from difflib import SequenceMatcher
+import re
+
+def is_similar(a: str, b: str, threshold: float = 0.75) -> bool:
+    """Check if two strings are similar above a threshold"""
+    return SequenceMatcher(None, a.lower(), b.lower()).ratio() >= threshold
+
+def parse(ocr_text):
+    """Clean OCR text by removing printed template words or similar phrases"""
+    clean_text = []
+
+    for word in ocr_text:
+        cleaned = word.strip()
+
+        if not cleaned or any(ch in cleaned for ch in "()[]{}:."):
+            continue
+
+        if any(is_similar(cleaned, kw) for kw in default_keywords):
+            continue
+
+        clean_text.append(cleaned)
+
+    return clean_text
