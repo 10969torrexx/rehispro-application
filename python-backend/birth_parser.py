@@ -381,26 +381,26 @@ parseResult = {
     "admin_officer_address": ""
 }
 
+from rapidfuzz import fuzz, process
 from difflib import SequenceMatcher
 import re
 
-def is_similar(a: str, b: str, threshold: float = 0.75) -> bool:
-    """Check if two strings are similar above a threshold"""
-    return SequenceMatcher(None, a.lower(), b.lower()).ratio() >= threshold
+def remove_similar_sentences(source_list, reference_list, threshold=80):
+    cleaned = []
+    for src in source_list:
+        s = src.strip()
+
+        if "(" in s or ")" in s:
+            continue
+
+        match = process.extractOne(s, reference_list, scorer=fuzz.token_sort_ratio)
+        if match and match[1] >= threshold:
+            continue
+
+        cleaned.append(s)
+
+    return cleaned
 
 def parse(ocr_text):
-    """Clean OCR text by removing printed template words or similar phrases"""
-    clean_text = []
-
-    for word in ocr_text:
-        cleaned = word.strip()
-
-        if not cleaned or any(ch in cleaned for ch in "()[]{}:."):
-            continue
-
-        if any(is_similar(cleaned, kw) for kw in default_keywords):
-            continue
-
-        clean_text.append(cleaned)
-
-    return clean_text
+    cleaned = remove_similar_sentences(ocr_text, default_keywords, threshold=80)
+    return cleaned

@@ -4,3 +4,4 @@ easyocr
 python-multipart # for FastAPI file uploads
 pillow
 numpy
+rapidfuzz
