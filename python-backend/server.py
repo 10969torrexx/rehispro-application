@@ -57,8 +57,9 @@ async def ocr_endpoint(file: UploadFile = File(...)):
             text = str(r[1])
             out.append(text)
 
-        parsed_data = parse(out)
         ocr_logger.info("File: %s | Results: %s", file.filename, out)
+        parsed_data = parse(out)
+        ocr_logger.info("results %s", parsed_data)
 
         logger.info("OCR processed successfully for %s", file.filename)
         return {"ocr": parsed_data}

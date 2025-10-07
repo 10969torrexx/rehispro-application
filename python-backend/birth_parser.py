@@ -232,7 +232,7 @@ default_keywords = [
     "day"
 ]
 
-parseResult = {
+template = {
     # Page 1 - Child Information
     "province": "",
     "city": "",
@@ -404,6 +404,30 @@ def remove_similar_sentences(source_list, reference_list, threshold=70):
 
     return cleaned
 
+def fill_template_from_list(template: dict, ocr_list: list):
+    """
+    Dynamically fills a template dictionary with values from an OCR result list.
+
+    - Assigns OCR text in order to template keys.
+    - If there are fewer OCR entries than keys, remaining keys stay empty.
+    - If there are more OCR entries, extras are ignored.
+
+    Returns: a new filled dictionary (does not modify original).
+    """
+
+    filled = template.copy()
+    keys = list(filled.keys())
+
+    for i, key in enumerate(keys):
+        if i < len(ocr_list):
+            filled[key] = ocr_list[i]
+        else:
+            filled[key] = ""  # keep it empty if OCR has fewer items
+
+    return filled
+
+
 def parse(ocr_text):
     cleaned = remove_similar_sentences(ocr_text, default_keywords, threshold=80)
-    return cleaned
+    template_form = fill_template_from_list(template, cleaned)
+    return template_form
