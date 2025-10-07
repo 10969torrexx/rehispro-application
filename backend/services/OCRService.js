@@ -16,7 +16,7 @@ async function callPythonOCR(filePaths) {
       timeout: 60000
     });
 
-    writeLog(`json data ${JSON.stringify(response.data)}`)
+    writeLog(`[info] [callPythonOCR] ${JSON.stringify(response.data)}`)
     if (response.data.success) {
       return {
         success: response.data.success,

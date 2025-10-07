@@ -77,9 +77,9 @@ async def ocr_endpoint(files: List[UploadFile] = File(...)):
         results = ({
             "success": True,
             "message": "OCR completed successfully",
-            "data": {
+            "result": {
                 "combined_files": [file.filename for file in files],
-                "result": parsed_data
+                "parsed_data": parsed_data
             }
         })
     except Exception as e:

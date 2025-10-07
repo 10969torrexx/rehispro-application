@@ -56,14 +56,12 @@ export default function BirthCertificateUpload({setActiveTab}) {
         try {
             setLoading(true)
             const response = await BirthCertServices.uploadFiles(formData);
+            console.log(response);
+            setLoading(false);
         } catch (error) {
             console.error("Upload failed:", error);
             toast.error('Runtime Error');
-        } finally {
-            setLoading(false);
-            //TODO: change the active tab to create
-            setActiveTab('create');
-        }
+        } 
     }
 
     if (loading) {
