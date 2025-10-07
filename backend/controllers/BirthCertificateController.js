@@ -266,18 +266,9 @@ async function uploadAndScan(req, res) {
             return res.status(400).json({ success: false, message: 'No files uploaded' });
         }
 
-        const results = [];
-        for (const file of req.files) {
-            const result = await callPythonOCR(file.path);
-            results.push({
-                file: {
-                    originalname: file.originalname,
-                    savedPath: file.path
-                },
-                extractedText: result['ocr']
-            });
-        }
-        writeLog(`uploadAndScan ${JSON.stringify(results)}`);
+        const filePaths = req.files.map(file => file.path);
+        const result = await callPythonOCR(filePaths);
+        writeLog(`uploadAndScan ${JSON.stringify(result)}`);
         res.status(200).json({
             success: true,
             message: 'Files uploaded and processed successfully',
@@ -285,6 +276,7 @@ async function uploadAndScan(req, res) {
         });
 
     } catch (error) {
+        writeLog(`[error] ${JSON.stringify(error)}`)
         res.status(500).json({
             success: false,
             message: 'File upload failed',

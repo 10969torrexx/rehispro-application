@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 from fastapi.requests import Request
 from birth_parser import parse
 import json
+from typing import List
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_DIR = os.path.join(BASE_DIR, "logs")
@@ -43,30 +44,48 @@ async def load_model():
         logger.error("Failed to load EasyOCR model: %s", str(e), exc_info=True)
 
 
+"""
+    TODO: this is the function that handles the ocr operations
+    ?params: array of files
+"""
 @app.post('/ocr')
-async def ocr_endpoint(file: UploadFile = File(...)):
+async def ocr_endpoint(files: List[UploadFile] = File(...)):
+    results = []
+    join_ocr_output = []
+    for file in files:
+        try:
+            logger.info("Received OCR request: %s", file.filename)
+            contents = await file.read()
+            image = Image.open(io.BytesIO(contents)).convert('RGB')
+            img_np = np.array(image)
+            ocr_output = reader.readtext(img_np)
+
+            out = [str(r[1]) for r in ocr_output]
+            join_ocr_output.extend(out) 
+            ocr_logger.info("File: %s | Results: %s", file.filename, out)
+
+        except Exception as e:
+            logger.error("OCR failed for %s: %s", file.filename, str(e), exc_info=True)
+            results.append({
+                "filename": file.filename,
+                "error": str(e)
+            })
+
+    logger.info("join ocr %s", join_ocr_output)
+    
     try:
-        logger.info("Received OCR request: %s", file.filename)
-        contents = await file.read()
-        image = Image.open(io.BytesIO(contents)).convert('RGB')
-        img_np = np.array(image)
-        results = reader.readtext(img_np)
-
-        out = []
-        for r in results:
-            text = str(r[1])
-            out.append(text)
-
-        ocr_logger.info("File: %s | Results: %s", file.filename, out)
-        parsed_data = parse(out)
-        ocr_logger.info("results %s", parsed_data)
-
-        logger.info("OCR processed successfully for %s", file.filename)
-        return {"ocr": parsed_data}
-
+        parsed_data = parse(join_ocr_output)
+        ocr_logger.info("Parsed combined results: %s", parsed_data)
+        results.append({
+            "combined_files": [file.filename for file in files],
+            "ocr": parsed_data
+        })
     except Exception as e:
-        logger.error("OCR processing failed: %s", str(e), exc_info=True)
-        return {"error": "OCR failed, check error.log"}
+        logger.error("Parsing failed: %s", str(e), exc_info=True)
+        results.append({
+            "combined_files": [file.filename for file in files],
+            "error": f"Parsing failed: {str(e)}"
+        })
 
 
 @app.exception_handler(Exception)
