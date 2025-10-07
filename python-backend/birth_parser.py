@@ -386,7 +386,7 @@ from rapidfuzz import fuzz, process
 from difflib import SequenceMatcher
 import re
 
-def remove_similar_sentences(source_list, reference_list, threshold=80):
+def remove_similar_sentences(source_list, reference_list, threshold=70):
     cleaned = []
     for src in source_list:
         s = src.strip()
@@ -394,9 +394,11 @@ def remove_similar_sentences(source_list, reference_list, threshold=80):
         if "(" in s or ")" in s:
             continue
 
-        match = process.extractOne(s, reference_list, scorer=fuzz.token_sort_ratio)
-        if match and match[1] >= threshold:
-            continue
+        match = process.extractOne(s, reference_list, scorer=fuzz.token_set_ratio)
+        if match:
+            _, score, _ = match
+            if score >= threshold:
+                continue
 
         cleaned.append(s)
 
