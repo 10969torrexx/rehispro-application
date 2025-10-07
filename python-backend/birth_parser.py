@@ -27,6 +27,11 @@ default_keywords = [
     "6",
     "5a. TYPE OF BIRTH",
     "5b. IF MULTIPLE BIRTH, CHILD WAS",
+    "CHILDWAS",
+    "MULTIPLE",
+    "BIRTH",
+    "elc",
+    "Sb.IF MULTIPLE BIRTH, CHILDWAS",
     "5c. BIRTH ORDER (Order of this birth to",
     "6.WEIGHTAT BIRTH",
     "(Single, Twin, Triplet, etc.)",
@@ -78,6 +83,7 @@ default_keywords = [
     "birth (completed years)",
     "19. RESIDENCE",
     "(House No:, St . Barangay)",
+    "House No:",
     "(CitylMunicipality)",
     "Province)",
     "Country)",
@@ -93,6 +99,7 @@ default_keywords = [
     "21a.ATTENDANT",
     "Physician",
     "2 Nurse",
+    "Nurse"
     "Midwife",
     "Hilot (Traditional Birth Attendant)",
     "Others (Specify)",
@@ -242,10 +249,13 @@ template = {
     "child_middle_name": "",
     "child_last_name": "",
     "sex": "",
-    "date_of_birth": "",
-    "place_of_birth_barangay": "",
-    "place_of_birth_city": "",
-    "place_of_birth_province": "",
+    "dateOfBirth_day": "",
+    "dateOfBirth_month": "",
+    "dateOfBirth_year": "",
+    "placeOfBirth_hospital": "",
+    "placeOfBirth_barangay": "",
+    "placeOfBirth_city": "",
+    "placeOfBirth_province": "",
     "type_of_birth": "",
     "multiple_birth_order": "",
     "birth_order": "",
@@ -389,10 +399,18 @@ import re
 
 def remove_similar_sentences(source_list, reference_list, threshold=70):
     cleaned = []
+    junk_pattern = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,5}$")  
+
     for src in source_list:
         s = src.strip()
 
         if "(" in s or ")" in s:
+            continue
+
+        if junk_pattern.match(s):
+            continue
+
+        if len(s) < 2 or re.fullmatch(r"[^A-Za-z0-9]+", s):
             continue
 
         match = process.extractOne(s, reference_list, scorer=fuzz.token_set_ratio)
@@ -400,14 +418,13 @@ def remove_similar_sentences(source_list, reference_list, threshold=70):
             _, score, _ = match
             if score >= threshold:
                 continue
-
         cleaned.append(s)
 
     return cleaned
 
 def fill_template_from_list(template: dict, ocr_list: list):
     """
-    Dynamically fills a template dictionary with values from an OCR result list.
+    TODO: Dynamically fills a template dictionary with values from an OCR result list.
 
     - Assigns OCR text in order to template keys.
     - If there are fewer OCR entries than keys, remaining keys stay empty.
