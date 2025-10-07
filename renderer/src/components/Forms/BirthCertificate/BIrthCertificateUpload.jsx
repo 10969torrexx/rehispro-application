@@ -59,7 +59,7 @@ export default function BirthCertificateUpload({setActiveTab}) {
             console.log(response);
             setLoading(false);
         } catch (error) {
-            console.error("Upload failed:", error);
+            console.error(error);
             toast.error('Runtime Error');
         } 
     }
