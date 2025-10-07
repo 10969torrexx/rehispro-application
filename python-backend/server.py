@@ -51,7 +51,8 @@ async def load_model():
 @app.post('/ocr')
 async def ocr_endpoint(files: List[UploadFile] = File(...)):
     results = []
-    join_ocr_output = []
+    all_text = []
+    errors = []
     for file in files:
         try:
             logger.info("Received OCR request: %s", file.filename)
@@ -60,33 +61,36 @@ async def ocr_endpoint(files: List[UploadFile] = File(...)):
             img_np = np.array(image)
             ocr_output = reader.readtext(img_np)
 
-            out = [str(r[1]) for r in ocr_output]
-            join_ocr_output.extend(out) 
-            ocr_logger.info("File: %s | Results: %s", file.filename, out)
+            texts = [str(r[1]) for r in ocr_output]
+            all_text.extend(texts) 
+            ocr_logger.info("File: %s | Results: %s", file.filename, texts)
 
         except Exception as e:
             logger.error("OCR failed for %s: %s", file.filename, str(e), exc_info=True)
-            results.append({
-                "filename": file.filename,
-                "error": str(e)
-            })
+            errors.append({"filename": file.filename, "error": str(e)})
 
-    logger.info("join ocr %s", join_ocr_output)
+    logger.info("join ocr %s", all_text)
     
     try:
-        parsed_data = parse(join_ocr_output)
+        parsed_data = parse(all_text)
         ocr_logger.info("Parsed combined results: %s", parsed_data)
-        results.append({
-            "combined_files": [file.filename for file in files],
-            "ocr": parsed_data
+        results = ({
+            "success": True,
+            "message": "OCR completed successfully",
+            "data": {
+                "combined_files": [file.filename for file in files],
+                "result": parsed_data
+            }
         })
     except Exception as e:
-        logger.error("Parsing failed: %s", str(e), exc_info=True)
-        results.append({
-            "combined_files": [file.filename for file in files],
-            "error": f"Parsing failed: {str(e)}"
+        logger.error(f"Parsing failed: {e}", exc_info=True)
+        results = ({
+            "success": False,
+            "message": f"Parsing failed: {e}",
+            "errors": errors
         })
 
+    return results
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):

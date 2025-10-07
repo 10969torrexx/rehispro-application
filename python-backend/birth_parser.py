@@ -239,7 +239,6 @@ default_keywords = [
     "duly",
     "day"
 ]
-
 template = {
     # Page 1 - Child Information
     "province": "",
@@ -396,6 +395,7 @@ template = {
 from rapidfuzz import fuzz, process
 from difflib import SequenceMatcher
 import re
+import logging
 
 def remove_similar_sentences(source_list, reference_list, threshold=70):
     cleaned = []

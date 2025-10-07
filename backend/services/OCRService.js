@@ -10,14 +10,31 @@ async function callPythonOCR(filePaths) {
     for (const path of files) {
       form.append("files", fs.createReadStream(path));
     }
-    const res = await axios.post("http://127.0.0.1:5001/ocr", form, {
+    const response = await axios.post("http://127.0.0.1:5001/ocr", form, {
       headers: form.getHeaders(),
       maxBodyLength: Infinity,
       timeout: 60000
     });
-    return res.data;
+
+    writeLog(`json data ${JSON.stringify(response.data)}`)
+    if (response.data.success) {
+      return {
+        success: response.data.success,
+        message: response.data.message,
+        result: response.data.result
+      }
+    } else {
+      return {
+        success: response.data.success,
+        message: response.data.message
+      }
+    }
   } catch (error) {
-    writeLog(`[error] [callPythonOCR]: ${erorr}`)
+    writeLog(`[error] [callPythonOCR]: ${error}`)
+    return {
+      success: false,
+      message: "Internal Server Error"
+    }
   }
 }
 
