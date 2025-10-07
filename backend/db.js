@@ -51,6 +51,7 @@ db.serialize(() => {
       -- Page 1 - Child Information
       province TEXT,
       city TEXT,
+      registery_number TEXT,
       child_first_name TEXT,
       child_middle_name TEXT,
       child_last_name TEXT,

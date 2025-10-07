@@ -236,6 +236,7 @@ parseResult = {
     # Page 1 - Child Information
     "province": "",
     "city": "",
+    "registry_number": "",
     "child_first_name": "",
     "child_middle_name": "",
     "child_last_name": "",
