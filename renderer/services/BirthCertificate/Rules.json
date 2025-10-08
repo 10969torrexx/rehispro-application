@@ -20,6 +20,16 @@
         "maxLength": "City must not exceed 100 characters."
       }
     },
+    "registryNumber": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Registry Number is required.",
+        "minLength": "Registry Number must be at least 2 characters.",
+        "maxLength": "Registry Number must not exceed 100 characters."
+      }
+    },
     "childFirstName": {
       "required": true,
       "minLength": 2,
@@ -64,6 +74,30 @@
         "date": "Invalid Date of Birth."
       }
     },
+    "placeOfBirthBarangay": {
+      "required": true,
+      "type": "string",
+      "minLength": 4,
+      "message": {
+        "minLength": "Place of Birth Barangay must be at least 4 characters."
+      }
+    },
+    "placeOfBirthCity": {
+      "required": true,
+      "type": "string",
+      "minLength": 4,
+      "message": {
+        "minLength": "Place of Birth City must be at least 4 characters."
+      }
+    },
+    "placeOfBirthProvince": {
+      "required": true,
+      "type": "string",
+      "minLength": 4,
+      "message": {
+        "minLength": "Place of Birth Province Barangay must be at least 4 characters."
+      }
+    },
     "typeOfBirth": {
       "required": true,
       "maxLength": 50,
@@ -91,12 +125,10 @@
       "required": true,
       "type": "number",
       "min": 0.1,
-      "max": 20,
       "message": {
         "required": "Weight at Birth is required.",
         "number": "Weight must be a valid number.",
-        "min": "Weight must be at least 0.1 kg.",
-        "max": "Weight must not exceed 20 kg."
+        "min": "Weight must be at least 0.1 grams."
       }
     }
   },

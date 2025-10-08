@@ -36,11 +36,15 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
             creationType: BirthCertificate.CreationType.MANUAL,
             province: defaultOCRValues?.province ?? "",
             city: defaultOCRValues?.city ?? "",
+            registryNumber: defaultOCRValues?.registry_number ?? "",
             childFirstName: defaultOCRValues?.child_first_name ?? "",
             childMiddleName: defaultOCRValues?.child_middle_name ?? "",
             childLastName: defaultOCRValues?.child_last_name ?? "",
             sex: defaultOCRValues?.sex ?? "",
             dateOfBirth: "",
+            placeOfBirthBarangay: defaultOCRValues?.placeOfBirth_barangay ?? "",
+            placeOfBirthCity: defaultOCRValues?.placeOfBirth_city ?? "",
+            placeOfBirthProvince: defaultOCRValues?.placeOfBirth_province ?? "",
             typeOfBirth: "",
             multipleBirthOrder: "",
             birthOrder: "",
@@ -499,13 +503,13 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     <label className="block text-sm font-medium mb-1">Registry No.</label>
                                     <input
                                         type="text"
-                                        name="city"
+                                        name="registryNumber"
                                         placeholder="City / Municipality"
-                                        className={`common-input ${errors.city ? 'input-error' : ''}`}
-                                        value={formData.page1.city}
+                                        className={`common-input ${errors.registryNumber ? 'input-error' : ''}`}
+                                        value={formData.page1.registryNumber}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.city && <ErrorMessages errors={errors.city} />}
+                                    {errors.city && <ErrorMessages errors={errors.registryNumber} />}
                                 </div>
                             </div>
 
@@ -579,27 +583,29 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 <div className='grid grid-cols-1 md:grid-cols-3 gap-2'>
                                     <div className="">
                                         <input type="text" 
-                                            name="placeOfBirthHospital" 
+                                            name="placeOfBirthBarangay" 
                                             className={`w-full common-input ${errors.placeOfBirthBarangay ? 'input-error' : ''} `}
                                             value={formData.page1.placeOfBirthBarangay}
                                             placeholder='Name of Hospital / Clinic / Institution / House No., St, Barangay'
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
+                                        {errors.dateOfBirth && <ErrorMessages errors={errors.placeOfBirthBarangay} />}
                                     </div>
                                   
                                     <div className="">
                                         <input type="text" 
-                                            name="placeOfBirthHospital" 
-                                            className={`w-full common-input ${errors.placeOfBirthBarangay ? 'input-error' : ''} `}
-                                            value={formData.page1.placeOfBirthBarangay}
+                                            name="placeOfBirthCity" 
+                                            className={`w-full common-input ${errors.placeOfBirthCity ? 'input-error' : ''} `}
+                                            value={formData.page1.placeOfBirthCity}
                                             placeholder='City / Municipality'
                                         />
                                     </div>
 
                                      <div className="">
                                         <input type="text" 
-                                            name="placeOfBirthHospital" 
-                                            className={`w-full common-input ${errors.placeOfBirthBarangay ? 'input-error' : ''} `}
-                                            value={formData.page1.placeOfBirthBarangay}
+                                            name="placeOfBirthProvince" 
+                                            className={`w-full common-input ${errors.placeOfBirthProvince ? 'input-error' : ''} `}
+                                            value={formData.page1.placeOfBirthProvince}
                                             placeholder='Province'
                                         />
                                     </div>
