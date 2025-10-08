@@ -34,17 +34,17 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
         page1: {
             creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
             creationType: BirthCertificate.CreationType.MANUAL,
-            province: "",
-            city: "",
-            childFirstName: "",
-            childMiddleName: "",
-            childLastName: "",
-            sex: "",
+            province: defaultOCRValues?.province ?? "",
+            city: defaultOCRValues?.city ?? "",
+            childFirstName: defaultOCRValues?.child_first_name ?? "",
+            childMiddleName: defaultOCRValues?.child_middle_name ?? "",
+            childLastName: defaultOCRValues?.child_last_name ?? "",
+            sex: defaultOCRValues?.sex ?? "",
             dateOfBirth: "",
             typeOfBirth: "",
             multipleBirthOrder: "",
             birthOrder: "",
-            birthWeight: ""
+            birthWeight: defaultOCRValues?.birth_weight ?? ""
         },
 
         // Page 2 - Mother Information
@@ -468,7 +468,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                         <div className="mb-4 text-left space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Province & City / Municipality */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">Province</label>
                                     <input
@@ -494,11 +494,24 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     />
                                     {errors.city && <ErrorMessages errors={errors.city} />}
                                 </div>
+
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">Registry No.</label>
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        placeholder="City / Municipality"
+                                        className={`common-input ${errors.city ? 'input-error' : ''}`}
+                                        value={formData.page1.city}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.city && <ErrorMessages errors={errors.city} />}
+                                </div>
                             </div>
 
                             {/* Child’s Name */}
                             <div>
-                                <label className="block text-sm font-medium">Child’s Name</label>
+                                <label className="block text-sm font-medium">1. Name</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                     <div>
                                         <input
@@ -537,9 +550,9 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             </div>
 
                             {/* Sex & Date of Birth */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 space-x-2">
                                 <div>
-                                    <label className="block text-sm font-medium">Sex</label>
+                                    <label className="block text-sm font-medium">2. Sex</label>
                                     <select name="sex" className={`common-input w-full ${errors.sex ? 'input-error' : ''}`}
                                         value={formData.page1.sex}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -551,7 +564,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     {errors.sex && <ErrorMessages errors={errors.sex} />}
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium">Date of Birth</label>
+                                    <label className="block text-sm font-medium">3. Date of Birth</label>
                                     <input type="date" name="dateOfBirth" className={`common-input w-full ${errors.dateOfBirth ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfBirth}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -560,11 +573,44 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 </div>
                             </div>
 
+                            {/* Place of Birth */}
+                            <div>
+                                <label className="block text-sm font-medium">4. Place of Birth</label>
+                                <div className='grid grid-cols-1 md:grid-cols-3 gap-2'>
+                                    <div className="">
+                                        <input type="text" 
+                                            name="placeOfBirthHospital" 
+                                            className={`w-full common-input ${errors.placeOfBirthBarangay ? 'input-error' : ''} `}
+                                            value={formData.page1.placeOfBirthBarangay}
+                                            placeholder='Name of Hospital / Clinic / Institution / House No., St, Barangay'
+                                        />
+                                    </div>
+                                  
+                                    <div className="">
+                                        <input type="text" 
+                                            name="placeOfBirthHospital" 
+                                            className={`w-full common-input ${errors.placeOfBirthBarangay ? 'input-error' : ''} `}
+                                            value={formData.page1.placeOfBirthBarangay}
+                                            placeholder='City / Municipality'
+                                        />
+                                    </div>
+
+                                     <div className="">
+                                        <input type="text" 
+                                            name="placeOfBirthHospital" 
+                                            className={`w-full common-input ${errors.placeOfBirthBarangay ? 'input-error' : ''} `}
+                                            value={formData.page1.placeOfBirthBarangay}
+                                            placeholder='Province'
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
                             {/* Type of Birth & Multiple Birth */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">
-                                        Type of Birth (Single, Twin, Triplet, etc)
+                                        5a. Type of Birth (Single, Twin, Triplet, etc)
                                     </label>
                                     <input
                                         type="text"
@@ -579,7 +625,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">
-                                        If Multiple Birth, Child was (First, Second, Third, etc)
+                                        5b. If Multiple Birth, Child was (First, Second, Third, etc)
                                     </label>
                                     <input
                                         type="text"
@@ -597,7 +643,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">
-                                        Birth Order (First, Second, Third, etc)
+                                        5c. Birth Order (First, Second, Third, etc)
                                     </label>
                                     <input
                                         type="text"
@@ -611,7 +657,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 </div>
 
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Weight at Birth</label>
+                                    <label className="block text-sm font-medium mb-1">6. Weight at Birth</label>
                                     <input
                                         type="number"
                                         name="birthWeight"
