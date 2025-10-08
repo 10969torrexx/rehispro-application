@@ -282,7 +282,6 @@ async function uploadAndScan(req, res) {
             result: response.result
         });
     } catch (error) {
-        console.table(error)
         res.status(500).json({
             success: false,
             message: 'File upload failed',

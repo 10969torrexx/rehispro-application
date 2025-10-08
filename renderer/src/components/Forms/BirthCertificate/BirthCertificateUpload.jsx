@@ -59,7 +59,6 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
                 setActiveTab('create');
                 onOCRComplete(response.result);
-                console.table(response.result);
             } else {
                 toast.error("Failed: No OCR Response");
             }
@@ -71,7 +70,7 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
 
     if (loading) {
         return (
-           <LoadingScreen />
+           <LoadingScreen title={"Running OCR, Please wait.. "} message={"This might take sometime."} />
         );
     }
 

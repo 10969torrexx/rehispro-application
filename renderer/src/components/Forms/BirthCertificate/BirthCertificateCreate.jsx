@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertValidation } from '@services';
@@ -9,8 +9,8 @@ import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { AllCaps } from '../../../myTools/myTools';
 import { BirthCertServices } from '@services';
 
-export default function BirthCertificateCreate() {
-    const [currentPage, setCurrentPage] = React.useState(1); //TODO: handle current page
+export default function BirthCertificateCreate({defaultOCRValues}) {
+    const [currentPage, setCurrentPage] = useState(1); //TODO: handle current page
     const pageTitles = [
         "Province & Child's Information",
         "Mother's Information",
@@ -29,7 +29,7 @@ export default function BirthCertificateCreate() {
     ];
 
     //TODO: handle form data
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         // Page 1 - Child Information
         page1: {
             creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
@@ -224,7 +224,7 @@ export default function BirthCertificateCreate() {
     };
 
     //TODO: handle changes pages & validations
-    const [errors, setErrors] = React.useState({});
+    const [errors, setErrors] = useState({});
     const handlePageChange = (direction) => {
         if (direction === 'next') {
             const response = BirthCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
@@ -454,7 +454,11 @@ export default function BirthCertificateCreate() {
             console.error("[Birth Form]:", error);
             toast.error(error.message || "Failed to create birth certificate");
           });
-      };
+    };
+
+    useEffect(() => {
+        console.log(defaultOCRValues);
+    });
       
     return (
         <>

@@ -87,7 +87,7 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div className="form-content mb-4">
-                                    <BirthCertificateCreate />
+                                    <BirthCertificateCreate defaultOCRValues={ocrResults} />
                                 </div>
                             </div>
                         }
