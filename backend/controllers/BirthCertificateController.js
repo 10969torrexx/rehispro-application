@@ -197,9 +197,6 @@ function create (req, res) {
             VALUES (${placeholders})
         `;
 
-        console.log("🟢 Columns:", columns);
-        console.log("🟢 Values length:", values.length);
-
         db.run(query, values, function (err) {
             if (err) {
                 console.error("[DB Error]", err.message);

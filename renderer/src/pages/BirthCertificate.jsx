@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
-import { InfoCard, BirthCertifcateForm, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
+import { InfoCard, BirthCertificateCreate, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
 import { useSearchParams } from 'react-router-dom'; 
 
 export default function BirthCertificate() {
@@ -87,7 +87,7 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div className="form-content mb-4">
-                                    <BirthCertifcateForm />
+                                    <BirthCertificateCreate />
                                 </div>
                             </div>
                         }
