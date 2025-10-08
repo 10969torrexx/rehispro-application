@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
-import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
 import { InfoCard, BirthCertifcateForm, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
 import { useSearchParams } from 'react-router-dom'; 
 
@@ -73,7 +72,9 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div>
-                                    <BirthCertificateUpload setActiveTab={setActiveTab} onOCRComplete={() => {setOCRResults();}} />
+                                    <BirthCertificateUpload setActiveTab={setActiveTab} onOCRComplete={(data) => {
+                                        setOCRResults(data);
+                                    }} />
                                 </div>
                             </div>
                         }

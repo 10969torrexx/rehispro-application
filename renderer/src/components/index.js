@@ -13,7 +13,6 @@ export { default as LoadingScreen } from './LoadingScreen';
  * TODO: export all form components
  * ? The following are the form components to be exported
  */
-export { default as BirthCertifcateForm } from './Forms/BirthCertificate/BirthCertifcateForm';
 export { default as BirthCertificateHome } from './Forms/BirthCertificate/BirthCertificateHome';
 export { default as BirthCertificateView } from './Forms/BirthCertificate/BirthCertificateView';
 export { default as BirthCertificateUpload } from './Forms/BirthCertificate/BirthCertificateUpload';
