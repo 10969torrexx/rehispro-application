@@ -1,41 +1,40 @@
-const axios = require("axios");
-const FormData = require("form-data");
-const fs = require("fs");
 const { writeLog } = require('../utils/logger');
+const { spawn } = require("child_process");
+const path = require("path");
 
 async function callPythonOCR(filePaths) {
-  try {
-    const form = new FormData();
-    const files = Array.isArray(filePaths) ? filePaths : [filePaths];
-    for (const path of files) {
-      form.append("files", fs.createReadStream(path));
-    }
-    const response = await axios.post("http://127.0.0.1:5001/ocr", form, {
-      headers: form.getHeaders(),
-      maxBodyLength: Infinity,
-      timeout: 60000
-    });
+  return new Promise((resolve, reject) => {
+    try{
+      const pythonCmd = process.platform === "win32"? "python" : "python3";
+      const scriptPath = path.join(__dirname, "../..", "python-backend", "ocr_script.py");
+      const files = Array.isArray(filePaths) ? filePaths : [filePaths];
 
-    writeLog(`[info] [callPythonOCR] ${JSON.stringify(response.data)}`)
-    if (response.data.success) {
-      return {
-        success: response.data.success,
-        message: response.data.message,
-        result: response.data.result
-      }
-    } else {
-      return {
-        success: response.data.success,
-        message: response.data.message
-      }
+      const pyProc = spawn(pythonCmd, [scriptPath, ...files]);
+      let output= "";
+      let errorOutput= "";
+      pyProc.stdout.on("data", (data) => (output += data.toString()));
+      pyProc.stderr.on("data", (data) => (errorOutput += data.toString()));
+
+      pyProc.on("close", (code) => {
+        if (code !== 0) {
+          writeLog(`[error] [callPythonOCR] exited with code ${code}: ${errorOutput}`);
+          return resolve({ success: false, message: "Python script error" });
+        }
+
+        try {
+          const result = JSON.parse(output);
+          writeLog(`[info] [callPythonOCR] ${JSON.stringify(result)}`);
+          resolve(result);
+        } catch (err) {
+          writeLog(`[error] [callPythonOCR] Invalid JSON: ${output}`);
+          resolve({ success: false, message: "Invalid Python output" });
+        }
+      });
+    } catch(error) {
+      writeLog(`[error] [callPythonOCR] ${error}`);
+      resolve({ success: false, message: "Something went wrong." });
     }
-  } catch (error) {
-    writeLog(`[error] [callPythonOCR]: ${error}`)
-    return {
-      success: false,
-      message: "Internal Server Error"
-    }
-  }
+  });
 }
 
 module.exports = { callPythonOCR }
