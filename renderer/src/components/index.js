@@ -15,7 +15,6 @@ export { default as LoadingScreen } from './LoadingScreen';
  */
 export { default as BirthCertifcateForm } from './Forms/BirthCertificate/BirthCertifcateForm';
 export { default as BirthCertificateHome } from './Forms/BirthCertificate/BirthCertificateHome';
-export { default as BirthCertificateUpload } from './Forms/BirthCertificate/BirthCertificateUpload';
 export { default as BirthCertificateView } from './Forms/BirthCertificate/BirthCertificateView';
 
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
