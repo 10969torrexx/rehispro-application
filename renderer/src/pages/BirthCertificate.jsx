@@ -11,6 +11,7 @@ export default function BirthCertificate() {
     const [selectedRow, setSelectedRow] = useState(null);
 
     const [activeTab, setActiveTab] = useState('home'); //TODO: handle the active tab
+    const [ocrResults, setOCRResults] = useState(null);
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
@@ -72,7 +73,7 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div>
-                                    <BirthCertificateUpload setActiveTab={setActiveTab} />
+                                    <BirthCertificateUpload setActiveTab={setActiveTab} onOCRComplete={() => {setOCRResults();}} />
                                 </div>
                             </div>
                         }

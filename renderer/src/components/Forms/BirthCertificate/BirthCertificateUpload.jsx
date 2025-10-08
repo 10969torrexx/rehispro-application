@@ -7,7 +7,7 @@ import { Limits } from '@enums';
 import { toast } from "react-toastify";
 import { BirthCertServices } from '@services';
 
-export default function BirthCertificateUpload({setActiveTab}) { 
+export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
 
@@ -49,15 +49,20 @@ export default function BirthCertificateUpload({setActiveTab}) {
     const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => { 
         e.preventDefault();
-        console.log("Submitting files:", files.length);
-
         const formData = new FormData();
         files.forEach(file => formData.append('files', file));
         try {
             setLoading(true)
             const response = await BirthCertServices.uploadFiles(formData);
-            console.log(response);
             setLoading(false);
+            if (response.success) {
+                //TODO: handle changing the active tab to create; passing orc results to create active tab.
+                setActiveTab('create');
+                onOCRComplete(response.result);
+                console.table(response.result);
+            } else {
+                toast.error("Failed: No OCR Response");
+            }
         } catch (error) {
             console.error(error);
             toast.error('Runtime Error');

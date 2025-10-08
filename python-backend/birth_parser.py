@@ -100,6 +100,7 @@ default_keywords = [
     "Physician",
     "2 Nurse",
     "Nurse"
+    "78.",
     "Midwife",
     "Hilot (Traditional Birth Attendant)",
     "Others (Specify)",
