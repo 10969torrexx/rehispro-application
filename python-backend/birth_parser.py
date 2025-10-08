@@ -401,6 +401,7 @@ import logging
 def remove_similar_sentences(source_list, reference_list, threshold=70):
     cleaned = []
     junk_pattern = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,5}$")  
+    numbered_dot_pattern = re.compile(r"^\d+\.$")
 
     for src in source_list:
         s = src.strip()
@@ -412,6 +413,9 @@ def remove_similar_sentences(source_list, reference_list, threshold=70):
             continue
 
         if len(s) < 2 or re.fullmatch(r"[^A-Za-z0-9]+", s):
+            continue
+        
+        if numbered_dot_pattern.match(s):
             continue
 
         match = process.extractOne(s, reference_list, scorer=fuzz.token_set_ratio)
