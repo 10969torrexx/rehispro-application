@@ -10,7 +10,7 @@ import { AllCaps, StringToDate } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = useState(2); //TODO: handle current page
+    const [currentPage, setCurrentPage] = useState(4); //TODO: handle current page
     const pageTitles = [
         "Province & Child's Information",
         "Mother's Information",
@@ -88,7 +88,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
         page4: {
             dateOfMarriage: StringToDate(defaultOCRValues?.date_of_marriage) ?? "",
             marriageCity: defaultOCRValues?.marriage_city ?? "",
-            marriageProvince: defaultOCRValues?.province ?? "",
+            marriageProvince: defaultOCRValues?.marriage_province ?? "",
             marriageCountry: defaultOCRValues?.marriage_country ?? ""
         },
 
@@ -1032,12 +1032,12 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Date of Marriage */}
                             <div>
-                                <label className="block w-full text-sm font-medium mb-1">Date of Marriage</label>
+                                <label className="block w-full text-sm font-medium mb-1">20a. Date of Marriage</label>
                                 <input
                                     type="date"
                                     name="dateOfMarriage"
                                     className={`common-input w-full ${errors.dateOfMarriage ? 'input-error' : ''}`}
-                                    value={formData.page4.dateOfMarriage}
+                                    value={formData.page4.dateOfMarriage} data-value={formData.page4.dateOfMarriage}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.dateOfMarriage && <ErrorMessages errors={errors.dateOfMarriage} />}
@@ -1045,7 +1045,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Place of Marriage */}
                             <div>
-                                <label className="block text-sm font-medium mb-1">Place of Marriage</label>
+                                <label className="block text-sm font-medium mb-1">20b. Place of Marriage</label>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
                                         <input

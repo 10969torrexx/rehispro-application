@@ -1,5 +1,4 @@
-import { parse } from "date-fns";
-import { format } from "date-fns";
+import { parse, format, isValid } from "date-fns";
 
 export function capitalizeFirst(str) {
     if (!str) return '';
@@ -17,9 +16,18 @@ export function AllCaps(str) {
 }
 
 export function StringToDate(str) {
-    try{
-        return format(parse(str, "yyyy-MMMM-dd", new Date()), "yyyy-MM-dd");
-    } catch(error) {
-        return null;
+    const formats = [
+        "yyyy-MMMM-dd",     
+        "MMMM dd, yyyy",    
+        "MMM dd, yyyy",
+    ];
+
+    for (const fmt of formats) {
+        const parsed = parse(str, fmt, new Date());
+        if (isValid(parsed)) {
+            return format(parsed, "yyyy-MM-dd");
+        }
     }
+
+    return null;
 }
