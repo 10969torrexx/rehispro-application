@@ -53,20 +53,20 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
         // Page 2 - Mother Information
         page2: {
-            maidenFirstName: "",
-            maidenMiddleName: "",
-            maidenLastName: "",
-            citizenship: "",
-            religion: "",
-            childrenBornAlive: "",
-            childrenStillLiving: "",
-            childrenDeceased: "",
-            occupation: "",
-            ageAtBirth: "",
-            residenceHouse: "", 
-            residenceCity: "",
-            residenceProvince: "",
-            residenceCountry: ""
+            maidenFirstName: defaultOCRValues?.maiden_first_name ?? "",
+            maidenMiddleName: defaultOCRValues?.maiden_middle_name ?? "",
+            maidenLastName: defaultOCRValues?.maiden_last_name ?? "",
+            citizenship: defaultOCRValues?.citizenship ?? "",
+            religion: defaultOCRValues?.religion ?? "",
+            childrenBornAlive: defaultOCRValues?.children_born_alive ?? "",
+            childrenStillLiving: defaultOCRValues?.children_still_living ?? "",
+            childrenDeceased: defaultOCRValues?.children_deceased ?? "",
+            occupation: defaultOCRValues?.occupation ?? "",
+            ageAtBirth: defaultOCRValues?.age_at_birth ?? "",
+            residenceHouse: defaultOCRValues?.residence_house ?? "", 
+            residenceCity: defaultOCRValues?.residence_city ?? "",
+            residenceProvince: defaultOCRValues?.residence_province ?? "",
+            residenceCountry: defaultOCRValues?.residence_country ?? ""
         },
 
         // Page 3 - Father Information

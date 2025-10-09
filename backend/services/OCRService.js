@@ -23,7 +23,7 @@ async function callPythonOCR(filePaths) {
 
         try {
           const result = JSON.parse(output);
-          writeLog(`[info] [callPythonOCR] ${JSON.stringify(result)}`);
+          writeLog(`${result.success === true ? '[info]' : '[error]'} [callPythonOCR] ${JSON.stringify(result)}`);
           resolve(result);
         } catch (err) {
           writeLog(`[error] [callPythonOCR] Invalid JSON: ${output}`);

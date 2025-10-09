@@ -35,12 +35,14 @@ def run_ocr(file_paths):
             ocr_output = reader.readtext(img_np)
             texts = [str(r[1]) for r in ocr_output]
             all_text.extend(texts)
+            logger.info("[ocr results] %s", all_text)
         except Exception as e:
             logger.error(f"OCR failed for {path}: {e}", exc_info=True)
             errors.append({"file": path, "error": str(e)})
 
     try:
         parsed_data = parse(all_text)
+        logger.info("[parsed data] %s", parsed_data)
         result = {
             "success": True,
             "result": parsed_data,

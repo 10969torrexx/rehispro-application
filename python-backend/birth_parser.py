@@ -54,6 +54,9 @@ default_keywords = [
     "Total number of",
     "children born alive"
     "10b.",
+    "1Oa,",
+    "10b, No_",
+    "1Oc. No.",
     "No",
     "of children still",
     "10c.",
@@ -434,6 +437,7 @@ def fill_template_from_list(template: dict, ocr_list: list):
     - Assigns OCR text in order to template keys.
     - If there are fewer OCR entries than keys, remaining keys stay empty.
     - If there are more OCR entries, extras are ignored.
+    - Depending of certain keys it will check if value is valid for the key; skips if otherwise
 
     Returns: a new filled dictionary (does not modify original).
     """
@@ -441,11 +445,26 @@ def fill_template_from_list(template: dict, ocr_list: list):
     filled = template.copy()
     keys = list(filled.keys())
 
-    for i, key in enumerate(keys):
-        if i < len(ocr_list):
-            filled[key] = ocr_list[i]
+    numeric_keys = ["children_born_alive", "children_still_living", "children_deceased"]
+
+    ocr_index = 0
+    key_index = 0
+    while key_index < len(keys) and ocr_index < len(ocr_list):
+        key = keys[key_index]
+        value = ocr_list[ocr_index].strip() if isinstance(ocr_list[ocr_index], str) else ocr_list[ocr_index]
+        if key in numeric_keys:
+            try:
+                int(value)
+                filled[key] = value
+                key_index += 1
+                ocr_index += 1
+            except (ValueError, TypeError):
+                filled[key] = ""
+                key_index += 1
         else:
-            filled[key] = ""  # keep it empty if OCR has fewer items
+            filled[key] = value
+            key_index += 1
+            ocr_index += 1
 
     return filled
 
