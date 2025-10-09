@@ -17,5 +17,9 @@ export function AllCaps(str) {
 }
 
 export function StringToDate(str) {
-    return format(parse(str, "yyyy-MMMM-dd", new Date()), "yyyy-MM-dd");
+    try{
+        return format(parse(str, "yyyy-MMMM-dd", new Date()), "yyyy-MM-dd");
+    } catch(error) {
+        return null;
+    }
 }

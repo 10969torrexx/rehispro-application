@@ -10,7 +10,7 @@ import { AllCaps, StringToDate } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = useState(1); //TODO: handle current page
+    const [currentPage, setCurrentPage] = useState(2); //TODO: handle current page
     const pageTitles = [
         "Province & Child's Information",
         "Mother's Information",
@@ -41,9 +41,8 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
             childMiddleName: defaultOCRValues?.child_middle_name ?? "",
             childLastName: defaultOCRValues?.child_last_name ?? "",
             sex: defaultOCRValues?.sex ?? "",
-            // dateOfBirth: StringToDate(`${defaultOCRValues?.dateOfBirth_day}, ${defaultOCRValues?.dateOfBirth_month}, ${defaultOCRValues?.dateOfBirth_year}`) ?? "",
             dateOfBirth: StringToDate(`${defaultOCRValues?.dateOfBirth_year}-${defaultOCRValues?.dateOfBirth_month}-${defaultOCRValues?.dateOfBirth_day}`) ?? "",
-            placeOfBirthBarangay: (`${defaultOCRValues?.placeOfBirth_barangay} / ${defaultOCRValues?.placeOfBirth_hospital}`) ?? "",
+            placeOfBirthBarangay: (`${defaultOCRValues?.placeOfBirth_barangay ?? ""}`) ?? "",
             placeOfBirthCity: defaultOCRValues?.placeOfBirth_city ?? "",
             placeOfBirthProvince: defaultOCRValues?.placeOfBirth_province ?? "",
             typeOfBirth: defaultOCRValues?.type_of_birth ?? "",
@@ -555,7 +554,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 <div>
                                     <label className="block text-sm font-medium">2. Sex</label>
                                     <select name="sex" className={`common-input w-full ${errors.sex ? 'input-error' : ''}`}
-                                        value={formData.page1.sex}
+                                        value={capitalizeFirst(formData.page1.sex.toLowerCase())}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     >
                                         <option value="">Select</option>
