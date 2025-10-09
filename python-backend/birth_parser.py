@@ -430,6 +430,36 @@ def remove_similar_sentences(source_list, reference_list, threshold=70):
 
     return cleaned
 
+MONTHS = [
+    "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+]
+
+def merge_split_dates(ocr_list):
+    merged = []
+    skip_next = False
+    for i in range(len(ocr_list)):
+        if skip_next:
+            skip_next = False
+            continue
+
+        current = ocr_list[i].strip()
+        next_item = ocr_list[i + 1].strip() if i + 1 < len(ocr_list) else ""
+
+        parts = current.split()
+        if (
+            len(parts) >= 2
+            and parts[0] in MONTHS
+            and re.match(r"^\d{1,2},$", parts[1])
+            and re.match(r"^\d{4}$", next_item)
+        ):
+            merged.append(f"{current} {next_item}")
+            skip_next = True
+        else:
+            merged.append(current)
+
+    return merged
+
 def fill_template_from_list(template: dict, ocr_list: list):
     """
     TODO: Dynamically fills a template dictionary with values from an OCR result list.
@@ -471,5 +501,6 @@ def fill_template_from_list(template: dict, ocr_list: list):
 
 def parse(ocr_text):
     cleaned = remove_similar_sentences(ocr_text, default_keywords, threshold=80)
+    cleaned = merge_split_dates(cleaned)
     template_form = fill_template_from_list(template, cleaned)
     return template_form

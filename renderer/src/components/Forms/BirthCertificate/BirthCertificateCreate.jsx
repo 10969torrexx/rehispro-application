@@ -71,25 +71,25 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
         // Page 3 - Father Information
         page3: {
-            fatherFirstName: "",
-            fatherMiddleName: "",
-            fatherLastName: "",
-            fatherCitizenship: "",
-            fatherReligion: "",
-            fatherOccupation: "",
-            fatherAgeAtBirth: "",
-            fatherResidenceStreet: "",
-            fatherResidenceCity: "",
-            fatherResidenceProvince: "",
-            fatherResidenceCountry: ""
+            fatherFirstName: defaultOCRValues?.father_first_name ?? "",
+            fatherMiddleName: defaultOCRValues?.father_middle_name ?? "",
+            fatherLastName: defaultOCRValues?.father_last_name ?? "",
+            fatherCitizenship: defaultOCRValues?.father_citizenship ?? "",
+            fatherReligion: defaultOCRValues?.father_religion ?? "",
+            fatherOccupation: defaultOCRValues?.father_occupation ?? "",
+            fatherAgeAtBirth: defaultOCRValues?.father_age_at_birth ?? "",
+            fatherResidenceStreet: defaultOCRValues?.father_residence_street ?? "",
+            fatherResidenceCity: defaultOCRValues?.father_residence_city ?? "",
+            fatherResidenceProvince: defaultOCRValues?.father_residence_province ?? "",
+            fatherResidenceCountry: defaultOCRValues?.father_residence_country ?? ""
         },
 
         // Page 4 - Marriage Information
         page4: {
-            dateOfMarriage: "",
-            marriageCity: "",
-            marriageProvince: "",
-            marriageCountry: ""
+            dateOfMarriage: StringToDate(defaultOCRValues?.date_of_marriage) ?? "",
+            marriageCity: defaultOCRValues?.marriage_city ?? "",
+            marriageProvince: defaultOCRValues?.province ?? "",
+            marriageCountry: defaultOCRValues?.marriage_country ?? ""
         },
 
         // Page 5 - Attendant Information
@@ -683,7 +683,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Maiden Name */}
                             <div>
-                                <label className="block text-sm font-medium mb-1">Maiden Name</label>
+                                <label className="block text-sm font-medium mb-1">7. Maiden Name</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                     <div>
                                         <input
@@ -724,7 +724,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             {/* Citizenship & Religion */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Citizenship</label>
+                                    <label className="block text-sm font-medium mb-1">8. Citizenship</label>
                                     <input
                                         type="text"
                                         name="citizenship"
@@ -736,7 +736,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     {errors.citizenship && <ErrorMessages errors={errors.citizenship} />}
                                 </div>
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Religion / Religious Sect</label>
+                                    <label className="block text-sm font-medium mb-1">9. Religion / Religious Sect</label>
                                     <input
                                         type="text"
                                         name="religion"
@@ -751,7 +751,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Children Statistics */}
                             <div className="space-y-3">
-                                <label className="block text-sm font-medium">Total number of Children Born Alive</label>
+                                <label className="block text-sm font-medium">10a. Total number of Children Born Alive</label>
                                 <input
                                     type="number"
                                     name="childrenBornAlive"
@@ -764,7 +764,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium">
-                                            No. of Children Still Living (including this birth)
+                                           10b. No. of Children Still Living (including this birth)
                                         </label>
                                         <input
                                             type="number"
@@ -778,7 +778,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium">
-                                            No. of Children Born Alive but are now Dead
+                                           10c. No. of Children Born Alive but are now Dead
                                         </label>
                                         <input
                                             type="number"
@@ -796,7 +796,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             {/* Occupation & Age */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Occupation</label>
+                                    <label className="block text-sm font-medium mb-1">11. Occupation</label>
                                     <input
                                         type="text"
                                         name="occupation"
@@ -808,7 +808,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     {errors.occupation && <ErrorMessages errors={errors.occupation} />}
                                 </div>
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Age at the time of this birth</label>
+                                    <label className="block text-sm font-medium mb-1">12. Age at the time of this birth</label>
                                     <input
                                         type="number"
                                         name="ageAtBirth"
@@ -823,7 +823,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Residence */}
                             <div>
-                                <label className="block text-sm font-medium mb-2">Residence</label>
+                                <label className="block text-sm font-medium mb-2">13. Residence</label>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <input
@@ -879,7 +879,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Father’s Name */}
                             <div>
-                                <label className="block text-sm font-medium mb-1">Father’s Name</label>
+                                <label className="block text-sm font-medium mb-1">14. Father’s Name</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                     <div>
                                         <input
