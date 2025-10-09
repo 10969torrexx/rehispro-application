@@ -476,7 +476,9 @@ def fill_template_from_list(template: dict, ocr_list: list):
     keys = list(filled.keys())
 
     numeric_keys = ["children_born_alive", "children_still_living", "children_deceased"]
-
+    notvalid_values = {
+        "attendant_others_specify": "dale",
+    }
     ocr_index = 0
     key_index = 0
     while key_index < len(keys) and ocr_index < len(ocr_list):
@@ -491,6 +493,10 @@ def fill_template_from_list(template: dict, ocr_list: list):
             except (ValueError, TypeError):
                 filled[key] = ""
                 key_index += 1
+        elif key in notvalid_values and str(value).lower() == str(notvalid_values[key]).lower():
+            filled[key] = ""
+            key_index += 1
+            ocr_index += 1
         else:
             filled[key] = value
             key_index += 1
