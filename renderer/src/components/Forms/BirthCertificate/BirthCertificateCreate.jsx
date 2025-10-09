@@ -460,10 +460,6 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
           });
     };
 
-    useEffect(() => {
-        console.log(defaultOCRValues);
-    });
-      
     return (
         <>
             <form className="p-4 h-full mb-4" onSubmit={handleSubmit}>
@@ -598,7 +594,9 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                             className={`w-full common-input ${errors.placeOfBirthCity ? 'input-error' : ''} `}
                                             value={formData.page1.placeOfBirthCity}
                                             placeholder='City / Municipality'
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
+                                        {errors.dateOfBirth && <ErrorMessages errors={errors.placeOfBirthCity} />}
                                     </div>
 
                                      <div className="">
@@ -607,7 +605,9 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                             className={`w-full common-input ${errors.placeOfBirthProvince ? 'input-error' : ''} `}
                                             value={formData.page1.placeOfBirthProvince}
                                             placeholder='Province'
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
+                                        {errors.dateOfBirth && <ErrorMessages errors={errors.placeOfBirthProvince} />}
                                     </div>
                                 </div>
                             </div>
@@ -667,7 +667,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     <input
                                         type="number"
                                         name="birthWeight"
-                                        placeholder="Weight in Kilograms (kg)"
+                                        placeholder="Weight in grams (g)"
                                         className={`common-input ${errors.birthWeight ? 'input-error' : ''}`}
                                         value={formData.page1.birthWeight}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}

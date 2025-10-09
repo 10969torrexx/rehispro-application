@@ -81,10 +81,19 @@ export default function BirthCertificate() {
                         {activeTab === "create" &&
                             <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <div className="mb-4">
-                                    <InfoCard
-                                        title="Creating Birth Certificates"
-                                        message="To create a birth certificate, please fill out the form below with accurate information about the birth event. Ensure all mandatory fields are completed before submitting the form."
-                                    />
+                                    {ocrResults? (
+                                        <>
+                                            <InfoCard
+                                                title="Warning before creating Live Birth"
+                                                message="Please double check each values before confirming."
+                                            />
+                                        </>
+                                    ) : (
+                                        <InfoCard
+                                            title="Creating Birth Certificates"
+                                            message="To create a birth certificate, please fill out the form below with accurate information about the birth event. Ensure all mandatory fields are completed before submitting the form."
+                                        />
+                                    )}
                                 </div>
                                 <div className="form-content mb-4">
                                     <BirthCertificateCreate defaultOCRValues={ocrResults} />

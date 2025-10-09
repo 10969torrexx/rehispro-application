@@ -79,7 +79,8 @@
       "type": "string",
       "minLength": 4,
       "message": {
-        "minLength": "Place of Birth Barangay must be at least 4 characters."
+        "required": "Place of Birth (Barangay) is required",
+        "minLength": "Place of Birth (Barangay) must be at least 4 characters."
       }
     },
     "placeOfBirthCity": {
@@ -87,7 +88,8 @@
       "type": "string",
       "minLength": 4,
       "message": {
-        "minLength": "Place of Birth City must be at least 4 characters."
+        "required": "Place of Birth (City) is required",
+        "minLength": "Place of Birth (City) must be at least 4 characters."
       }
     },
     "placeOfBirthProvince": {
@@ -95,7 +97,8 @@
       "type": "string",
       "minLength": 4,
       "message": {
-        "minLength": "Place of Birth Province Barangay must be at least 4 characters."
+        "required": "Place of Birth (Province) is required",
+        "minLength": "Place of Birth (Province) Barangay must be at least 4 characters."
       }
     },
     "typeOfBirth": {
@@ -107,10 +110,11 @@
       }
     },
     "multipleBirthOrder": {
-      "required": false,
+      "required": true,
       "maxLength": 20,
       "message": {
-        "maxLength": "Order must not exceed 20 characters."
+        "maxLength": "Order must not exceed 20 characters.",
+        "required": "Multiple birth order is required."
       }
     },
     "birthOrder": {
