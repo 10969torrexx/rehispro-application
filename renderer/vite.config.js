@@ -12,6 +12,7 @@ export default defineConfig({
       '@enums': '/src/enums',
       '@modals': '/src/components/Modals',
       '@services': '/services',
+      '@myTools' : '/src/myTools'
     },
   },
 })

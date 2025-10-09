@@ -6,7 +6,7 @@ import { BirthCertificate, CivilStatus, MarriageStatus } from '@enums';
 import { capitalizeFirst } from '../../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
-import { AllCaps } from '../../../myTools/myTools';
+import { AllCaps, StringToDate } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
@@ -41,13 +41,14 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
             childMiddleName: defaultOCRValues?.child_middle_name ?? "",
             childLastName: defaultOCRValues?.child_last_name ?? "",
             sex: defaultOCRValues?.sex ?? "",
-            dateOfBirth: "",
-            placeOfBirthBarangay: defaultOCRValues?.placeOfBirth_barangay ?? "",
+            // dateOfBirth: StringToDate(`${defaultOCRValues?.dateOfBirth_day}, ${defaultOCRValues?.dateOfBirth_month}, ${defaultOCRValues?.dateOfBirth_year}`) ?? "",
+            dateOfBirth: StringToDate(`${defaultOCRValues?.dateOfBirth_year}-${defaultOCRValues?.dateOfBirth_month}-${defaultOCRValues?.dateOfBirth_day}`) ?? "",
+            placeOfBirthBarangay: (`${defaultOCRValues?.placeOfBirth_barangay} / ${defaultOCRValues?.placeOfBirth_hospital}`) ?? "",
             placeOfBirthCity: defaultOCRValues?.placeOfBirth_city ?? "",
             placeOfBirthProvince: defaultOCRValues?.placeOfBirth_province ?? "",
-            typeOfBirth: "",
-            multipleBirthOrder: "",
-            birthOrder: "",
+            typeOfBirth: defaultOCRValues?.type_of_birth ?? "",
+            multipleBirthOrder: defaultOCRValues?.multiple_birth_order ?? "",
+            birthOrder: defaultOCRValues?.birth_order ?? "",
             birthWeight: defaultOCRValues?.birth_weight ?? ""
         },
 
@@ -63,7 +64,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
             childrenDeceased: "",
             occupation: "",
             ageAtBirth: "",
-            residenceHouse: "",
+            residenceHouse: "", 
             residenceCity: "",
             residenceProvince: "",
             residenceCountry: ""
@@ -565,7 +566,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">3. Date of Birth</label>
-                                    <input type="date" name="dateOfBirth" className={`common-input w-full ${errors.dateOfBirth ? 'input-error' : ''}`}
+                                    <input type="date" name="dateOfBirth" data-value={formData.page1.dateOfBirth} className={`common-input w-full ${errors.dateOfBirth ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfBirth}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
