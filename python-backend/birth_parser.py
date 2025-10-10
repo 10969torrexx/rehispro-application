@@ -246,8 +246,8 @@ default_keywords = [
 template = {
     # Page 1 - Child Information
     "province": "",
-    "city": "",
     "registry_number": "",
+    "city": "",
     "child_first_name": "",
     "child_middle_name": "",
     "child_last_name": "",
@@ -483,6 +483,9 @@ def fill_template_from_list(template: dict, ocr_list: list):
     notvalid_values = {
         "attendant_others_specify": "dale",
     }
+    valid_values = {
+        "sex": ["Male", "Female", "Other"]
+    }
     ocr_index = 0
     key_index = 0
     while key_index < len(keys) and ocr_index < len(ocr_list):
@@ -498,6 +501,10 @@ def fill_template_from_list(template: dict, ocr_list: list):
                 filled[key] = ""
                 key_index += 1
         elif key in notvalid_values and str(value).lower() == str(notvalid_values[key]).lower():
+            filled[key] = ""
+            key_index += 1
+            ocr_index += 1
+        elif key in valid_values and value not in valid_values[key]:
             filled[key] = ""
             key_index += 1
             ocr_index += 1
