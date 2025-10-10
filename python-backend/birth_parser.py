@@ -400,6 +400,19 @@ from rapidfuzz import fuzz, process
 from difflib import SequenceMatcher
 import re
 import logging
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_DIR = os.path.join(BASE_DIR, "logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+
+logging.basicConfig(
+    filename=os.path.join(LOG_DIR, "birth_parser.log"),
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger(__name__)
 
 def remove_similar_sentences(source_list, reference_list, threshold=70):
     cleaned = []
@@ -409,6 +422,15 @@ def remove_similar_sentences(source_list, reference_list, threshold=70):
 
     for src in source_list:
         s = src.strip()
+
+        if " " in s:
+            parts = s.split()
+            first_word = parts[0].lower().rstrip(":")
+            if "/" in first_word or first_word in reference_list:
+                # only keep the part after the label
+                old_value = s
+                s = " ".join(parts[1:])
+                logger.info(f"[DEBUG] Split merged OCR text: '{old_value}' → '{s}'")
 
         if "(" in s or ")" in s:
             continue
@@ -484,7 +506,7 @@ def fill_template_from_list(template: dict, ocr_list: list):
         "attendant_others_specify": "dale",
     }
     valid_values = {
-        "sex": ["Male", "Female", "Other"]
+        "sex": ["MALE", "FEMALE", "OTHER"]
     }
     ocr_index = 0
     key_index = 0
