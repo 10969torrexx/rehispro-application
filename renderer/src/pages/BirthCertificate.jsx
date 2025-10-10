@@ -213,7 +213,7 @@ export default function BirthCertificate() {
                                         <>
                                             <InfoCard
                                                 title="Warning before creating Live Birth"
-                                                message="Please double check each values before confirming."
+                                                message={`Please double check each values before confirming. \nYou may go back to the upload tab to re-upload another document if the values are incorrect.`}
                                             />
                                         </>
                                     ) : (

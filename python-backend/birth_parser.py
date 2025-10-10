@@ -405,6 +405,7 @@ def remove_similar_sentences(source_list, reference_list, threshold=70):
     cleaned = []
     junk_pattern = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,5}$")  
     numbered_dot_pattern = re.compile(r"^\d+\.$")
+    noisy_symbol_pattern = re.compile(r"[^\w\s.'-]")
 
     for src in source_list:
         s = src.strip()
@@ -416,6 +417,9 @@ def remove_similar_sentences(source_list, reference_list, threshold=70):
             continue
 
         if len(s) < 2 or re.fullmatch(r"[^A-Za-z0-9]+", s):
+            continue
+
+        if noisy_symbol_pattern.search(s):
             continue
         
         if numbered_dot_pattern.match(s):
