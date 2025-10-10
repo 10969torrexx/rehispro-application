@@ -418,7 +418,7 @@
         "attendantHilot",
         "attendantOthers"
       ],
-      "message": "Please select at least one birth attendant."
+      "message": "Please select at least one type of attendant."
     },
     "attendantPhysician": {
       "required": false,

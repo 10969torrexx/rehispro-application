@@ -100,7 +100,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
             attendantHilot: false,
             attendantOthers: false,
             attendantOthersSpecify: "",
-            dateOfAttendance: "",
+            dateOfAttendance: StringToDate(defaultOCRValues?.date_of_attendance) ?? "",
             attendantNameTitle: ""
         },
 
@@ -1091,7 +1091,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Type of Attendant */}
                             <div className={`p-2 ${errors.attendantGroup ? 'input-error' : ''}`}>
-                                <label className="block w-full text-sm font-medium mb-1">Type of Attendant</label>
+                                <label className="block w-full text-sm font-medium mb-1">21a. Type of Attendant</label>
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                                     <label className="flex items-center space-x-2">
                                         <input type="checkbox" className='custom-checkbox' name="attendantPhysician"
@@ -1150,7 +1150,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Date of Attendance */}
                             <div>
-                                <label className="block w-full text-sm font-medium mb-1">Date of Attendance</label>
+                                <label className="block w-full text-sm font-medium mb-1">21b. Date of Attendance</label>
                                 <input
                                     type="date"
                                     name="dateOfAttendance"
@@ -1163,7 +1163,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Name and Title of Attendant */}
                             <div>
-                                <label className="block w-full text-sm font-medium mb-1">Name and Title of Attendant</label>
+                                <label className="block w-full text-sm font-medium mb-1">21b. Name and Title of Attendant</label>
                                 <input
                                     type="text"
                                     name="attendantNameTitle"
