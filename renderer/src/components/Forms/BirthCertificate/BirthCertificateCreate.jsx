@@ -10,7 +10,7 @@ import { AllCaps, StringToDate } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = useState(4); //TODO: handle current page
+    const [currentPage, setCurrentPage] = useState(1); //TODO: handle current page
     const pageTitles = [
         "Province & Child's Information",
         "Mother's Information",
@@ -920,7 +920,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             {/* Citizenship & Religion */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Citizenship</label>
+                                    <label className="block text-sm font-medium mb-1">15. Citizenship</label>
                                     <input
                                         type="text"
                                         name="fatherCitizenship"
@@ -932,7 +932,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     {errors.fatherCitizenship && <ErrorMessages errors={errors.fatherCitizenship} />}
                                 </div>
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Religion / Religious Sect</label>
+                                    <label className="block text-sm font-medium mb-1">16. Religion / Religious Sect</label>
                                     <input
                                         type="text"
                                         name="fatherReligion"
@@ -948,7 +948,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             {/* Occupation & Age */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Occupation</label>
+                                    <label className="block text-sm font-medium mb-1">17. Occupation</label>
                                     <input
                                         type="text"
                                         name="fatherOccupation"
@@ -960,7 +960,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     {errors.fatherOccupation && <ErrorMessages errors={errors.fatherOccupation} />}
                                 </div>
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Age at the time of this birth</label>
+                                    <label className="block text-sm font-medium mb-1">18. Age at the time of this birth</label>
                                     <input
                                         type="number"
                                         name="fatherAgeAtBirth"
@@ -975,7 +975,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Residence */}
                             <div>
-                                <label className="block text-sm font-medium mb-2">Residence</label>
+                                <label className="block text-sm font-medium mb-2">19. Residence</label>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <input
