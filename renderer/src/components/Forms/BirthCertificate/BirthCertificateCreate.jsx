@@ -10,7 +10,7 @@ import { AllCaps, StringToDate } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = useState(1); //TODO: handle current page
+    const [currentPage, setCurrentPage] = useState(8); //TODO: handle current page
     const pageTitles = [
         "Province & Child's Information",
         "Mother's Information",
@@ -1029,7 +1029,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                     {currentPage === 4 &&
                         <div className="mb-6 text-left space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
-
+                            <p className="text-center">If not married, accomplish affidavit of Acknowledgement / Admission of Paternity.</p>
                             {/* Date of Marriage */}
                             <div>
                                 <label className="block w-full text-sm font-medium mb-1">20a. Date of Marriage</label>
@@ -1091,7 +1091,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Type of Attendant */}
                             <div className={`p-2 ${errors.attendantGroup ? 'input-error' : ''}`}>
-                                <label className="block w-full text-sm font-medium mb-1">21a. Type of Attendant</label>
+                                <label className="block w-full text-sm font-medium mb-1">21a. Attendant</label>
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                                     <label className="flex items-center space-x-2">
                                         <input type="checkbox" className='custom-checkbox' name="attendantPhysician"
@@ -1147,40 +1147,16 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 </div>
                                 {errors.attendantGroup && <ErrorMessages errors={errors.attendantGroup} />}
                             </div>
-
-                            {/* Date of Attendance */}
-                            <div>
-                                <label className="block w-full text-sm font-medium mb-1">21b. Date of Attendance</label>
-                                <input
-                                    type="date"
-                                    name="dateOfAttendance"
-                                    className={`common-input w-full ${errors.dateOfAttendance ? 'input-error' : ''}`}
-                                    value={formData.page5.dateOfAttendance}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.dateOfAttendance && <ErrorMessages errors={errors.dateOfAttendance} />}
-                            </div>
-
-                            {/* Name and Title of Attendant */}
-                            <div>
-                                <label className="block w-full text-sm font-medium mb-1">21b. Name and Title of Attendant</label>
-                                <input
-                                    type="text"
-                                    name="attendantNameTitle"
-                                    placeholder="Enter name and title"
-                                    className={`common-input w-full ${errors.attendantNameTitle ? 'input-error' : ''}`}
-                                    value={formData.page5.attendantNameTitle}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.attendantNameTitle && <ErrorMessages errors={errors.attendantNameTitle} />}
-                            </div>
                         </div>
                     }
 
                     {currentPage === 6 &&
                         <div className="mb-6 text-left space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
-
+                            <p className="text-left">
+                                <span className='font-semibold'>(Physician, Nurse, Midwife, Traditional Birth Attendance / Hilot, etc.) </span>
+                                I hereby certify that I attended the birth of the child was born alive at <span className="font-semibold">{formData.page6.birthTime ? ( <span className='border-b'>{formData.page6.birthTime}</span> ) : "_________"}</span> am/pm on the date of birth specified above.
+                            </p>
                             {/* Birth Details */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
@@ -1235,42 +1211,27 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 </div>
                             </div>
 
-                            {/* Address */}
-                            <div>
-                                <label className="block text-sm font-medium mb-1">Address</label>
-                                <input
-                                    type="text"
-                                    name="attendantAddress"
-                                    placeholder="House No., Street, Barangay, City/Municipality, Province"
-                                    className={`common-input w-full ${errors.attendantAddress ? 'input-error' : ''}`}
-                                    value={formData.page6.attendantAddress}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.attendantAddress && <ErrorMessages errors={errors.attendantAddress} />}
-                            </div>
-
-                            {/* Signature and Date */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {/* Address & signature */}
+                            
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Date Signed</label>
-                                    <input
-                                        type="date"
-                                        name="attendantDateSigned"
-                                        className={`common-input w-full ${errors.attendantDateSigned ? 'input-error' : ''}`}
-                                        value={formData.page6.attendantDateSigned}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">Signature</label>
+                                    <label className="block text-sm font-medium mb-1">Address</label>
                                     <input
                                         type="text"
-                                        name="attendantSignature"
-                                        placeholder="Signature"
-                                        className={`common-input w-full ${errors.attendantSignature ? 'input-error' : ''}`}
-                                        value={formData.page6.attendantSignature}
+                                        name="attendantAddress"
+                                        placeholder="House No., Street, Barangay, City/Municipality, Province"
+                                        className={`common-input w-full ${errors.attendantAddress ? 'input-error' : ''}`}
+                                        value={formData.page6.attendantAddress}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
+                                    {errors.attendantAddress && <ErrorMessages errors={errors.attendantAddress} />}
+                                </div>
+
+                                <div>
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">Signature</label>
+                                        <SignaturePlaceholder />
+                                    </div>
                                 </div>
                             </div>
                         </div>

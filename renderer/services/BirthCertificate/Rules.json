@@ -449,23 +449,6 @@
       "requiredIf": "attendantOthers",
       "type": "string",
       "message": "If 'Others' is checked, please specify the attendant."
-    },
-    "dateOfAttendance": {
-      "required": true,
-      "type": "date",
-      "message": {
-        "required": "Date of attendance is required.",
-        "date": "Date of attendance must be a valid date."
-      }
-    },
-    "attendantNameTitle": {
-      "required": true,
-      "type": "string",
-      "minLength": 3,
-      "message": {
-        "required": "Name and title of attendant is required.",
-        "minLength": "Name and title must be at least 3 characters."
-      }
     }
   },
   "page6": {
@@ -507,20 +490,6 @@
       "message": {
         "required": "Please enter a complete address (at least 10 characters).",
         "minLength": "Address must be at least 10 characters."
-      }
-    },
-    "attendantDateSigned": {
-      "required": true,
-      "type": "date",
-      "message": {
-        "required": "Please provide the date the form was signed."
-      }
-    },
-    "attendantSignature": {
-      "required": true,
-      "type": "string",
-      "message": {
-        "required": "Signature is required."
       }
     }
   },
