@@ -10,7 +10,7 @@ import { AllCaps, StringToDate } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = useState(1); //TODO: handle current page
+    const [currentPage, setCurrentPage] = useState(7); //TODO: handle current page
     const pageTitles = [
         "Province & Child's Information",
         "Mother's Information",
@@ -100,58 +100,52 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
             attendantHilot: false,
             attendantOthers: false,
             attendantOthersSpecify: "",
-            dateOfAttendance: StringToDate(defaultOCRValues?.date_of_attendance) ?? "",
-            attendantNameTitle: ""
         },
 
         // Page 6 - Attendant Certification
         page6: {
             birthTime: "",
             birthDate: "",
-            attendantName: "",
-            attendantTitle: "",
-            attendantAddress: "",
-            attendantDateSigned: "",
-            attendantSignature: ""
+            attendantName: defaultOCRValues?.attendant_name ?? "",
+            attendantTitle: defaultOCRValues?.attendant_title ?? "",
+            attendantAddress: defaultOCRValues?.attendant_address ?? "",
         },
 
         // Page 7 - Informant & Prepared By
         page7: {
-            // informantSignature: "",
-            informantName: "",
-            informantRelationship: "",
-            informantAddress: "",
-            informantDate: "",
-            // preparedBySignature: "",
-            preparedName: "",
-            preparedTitle: "",
-            preparedDate: ""
+            informantName: defaultOCRValues?.informant_name ?? "",
+            informantRelationship: defaultOCRValues?.informant_relationship ?? "",
+            informantAddress: defaultOCRValues?.informant_address ?? "",
+            informantDate: defaultOCRValues?.informant_date ?? "",
+            preparedName: defaultOCRValues?.prepared_name ?? "",
+            preparedTitle: defaultOCRValues?.prepared_title ?? "",
+            preparedDate: defaultOCRValues?.prepared_date ?? ""
         },
 
         // Page 8 - Civil Registrar Section
         page8: {
             // receivedSignature: "",
-            receivedName: "",
-            receivedTitle: "",
-            receivedDate: "",
-            registrarSignature: "",
-            registrarName: "",
-            registrarTitle: "",
-            registrarDate: ""
+            receivedName:  defaultOCRValues?.received_name ?? "",
+            receivedTitle: defaultOCRValues?.received_title ?? "",
+            receivedDate: defaultOCRValues?.received_date ?? "",
+            registrarSignature: defaultOCRValues?.registrar_signature ?? "",
+            registrarName: defaultOCRValues?.registrar_name ?? "",
+            registrarTitle: defaultOCRValues?.registrar_title ?? "",
+            registrarDate: defaultOCRValues?.registrar_date ?? ""
         },
 
         // Page 9 - Remarks / Annotations
         page9: {
-            remarks: "",
+            remarks: defaultOCRValues?.remarks ?? "",
             officeBoxes: []
         },
         // Page 10 - Affidavit of Acknowledgment
         page10: {
-            motherName: "",
-            fatherName: "",
-            childName: "",
-            childBirthDate: "",
-            childBirthPlace: "",
+            motherName: `${defaultOCRValues?.maiden_first_name ?? ""} ${defaultOCRValues?.maiden_middle_name ?? ""} ${defaultOCRValues?.maiden_last_name ?? ""}`.trim() ?? "",
+            fatherName: `${defaultOCRValues?.father_first_name ?? ""} ${defaultOCRValues?.father_middle_name ?? ""} ${defaultOCRValues?.father_last_name ?? ""}`.trim() ?? "",
+            childName: `${defaultOCRValues?.child_first_name ?? ""} ${defaultOCRValues?.child_middle_name ?? ""} ${defaultOCRValues?.child_last_name ?? ""}`.trim() ?? "",
+            childBirthDate: defaultOCRValues?.child_birth_date ?? "",
+            childBirthPlace: defaultOCRValues?.child_birth_place ?? "",
         },
         // Page 11 - Jurat
         page11: {
@@ -367,7 +361,6 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                 attendantTitle: "",
                 attendantAddress: "",
                 attendantDateSigned: "",
-                attendantSignature: ""
               },
               page7: {
                 informantName: "",

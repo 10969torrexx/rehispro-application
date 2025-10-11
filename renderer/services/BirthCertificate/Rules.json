@@ -463,7 +463,8 @@
       "required": true,
       "type": "date",
       "message": {
-        "required": "Please provide the date of birth."
+        "required": "Please provide the date of birth.",
+        "date": "Invalid date format."
       }
     },
     "attendantName": {
@@ -525,7 +526,8 @@
       "required": true,
       "type": "date",
       "message": {
-        "required": "Date of informant’s certification is required."
+        "required": "Date of informant’s certification is required.",
+        "date": "Invalid date format."
       }
     },
 
@@ -551,7 +553,8 @@
       "required": true,
       "type": "date",
       "message": {
-        "required": "Date of preparation is required."
+        "required": "Date of preparation is required.",
+        "date": "Invalid date format."
       }
     }
   },

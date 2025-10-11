@@ -309,7 +309,6 @@ template = {
     "attendant_name": "",
     "attendant_title": "",
     "attendant_address": "",
-    "attendant_date_signed": "",
 
     # Page 7 - Informant & Prepared By
     "informant_name": "",
@@ -390,6 +389,7 @@ from difflib import SequenceMatcher
 import re
 import logging
 import os
+from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_DIR = os.path.join(BASE_DIR, "logs")
@@ -475,6 +475,34 @@ def merge_split_dates(ocr_list):
 
     return merged
 
+def normalize_ocr_date(value):
+    if not value:
+        return ""
+    text = value.upper().strip()
+
+    text = re.sub(r"[^A-Z0-9\s]", " ", text)
+
+    text = re.sub(r"([A-Z]+)\s*Z?\s*(\d{4})", r"\1 \2", text)
+
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+def parse_ocr_date(value):
+    text = normalize_ocr_date(value)
+    date_formats = [
+        "%B %Y",  
+        "%b %Y",  
+        "%m/%Y",  
+        "%Y-%m-%d" 
+    ]
+    for fmt in date_formats:
+        try:
+            dt = datetime.strptime(text, fmt)
+            return dt.strftime("%Y-%m-%d") 
+        except ValueError:
+            continue
+    return ""
+
 def fill_template_from_list(template: dict, ocr_list: list):
     """
     TODO: Dynamically fills a template dictionary with values from an OCR result list.
@@ -491,11 +519,13 @@ def fill_template_from_list(template: dict, ocr_list: list):
     keys = list(filled.keys())
 
     numeric_keys = ["children_born_alive", "children_still_living", "children_deceased"]
+    date_keys = ["birth_date", "registrar_date", "informant_date", "prepared_date", "received_date", "registrar_date", "child_birth_date", "jurat_month_year", "final_jurat_month_year", "ctc_date_issued", "final_ctc_issued_on", "marriage_date"]
     notvalid_values = {
         "attendant_others_specify": "dale",
     }
     valid_values = {
-        "sex": ["MALE", "FEMALE", "OTHER"]
+        "sex": ["MALE", "FEMALE", "OTHER"],
+        "attendant": ["PHYSICIAN", "NURSE", "MIDWIFE", "HILOT (TRADITIONAL BIRTH ATTENDANT)", "OTHERS (SPECIFY)"],
     }
     ocr_index = 0
     key_index = 0
@@ -511,6 +541,16 @@ def fill_template_from_list(template: dict, ocr_list: list):
             except (ValueError, TypeError):
                 filled[key] = ""
                 key_index += 1
+        elif key in date_keys:
+            parsed_date = parse_ocr_date(value)
+            if parsed_date:
+                filled[key] = parsed_date
+                key_index += 1
+                ocr_index += 1
+            else:
+                filled[key] = ""
+                key_index += 1
+
         elif key in notvalid_values and str(value).lower() == str(notvalid_values[key]).lower():
             filled[key] = ""
             key_index += 1
