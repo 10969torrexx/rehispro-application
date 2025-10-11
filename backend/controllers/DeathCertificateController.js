@@ -22,6 +22,15 @@ exports.create = (req, res) => {
             flatData.attendant = attendantOthersSpecify;
             delete flatData.attendantOthersSpecify;
         }
+
+        const methodOfDelivery = flatData.methodOfDelivery;
+        const methodOfDeliverySpecify = flatData.methodOfDeliverySpecify;
+
+        if(methodOfDelivery === "Others") {
+            flatData.methodOfDelivery = methodOfDeliverySpecify;
+            delete flatData.methodOfDeliverySpecify;
+        }
+        
         const attendedDeceased = flatData.attendedDeceased;
         console.log("🟢 Attendant:", attendedDeceased);
 
@@ -48,6 +57,7 @@ exports.create = (req, res) => {
             dateOfDeath: "date_of_death",
             dateOfBirth: "date_of_birth",
             ageYears: "age_years",
+            ageMonths: "age_months",
             ageDays: "age_days",
             ageHours: "age_hours",
             ageMinutes: "age_minutes",
@@ -74,6 +84,19 @@ exports.create = (req, res) => {
             motherLastName: "mother_last_name",
 
             // Page 4
+            agedOfMother: "aged_of_mother",
+            methodOfDelivery: "method_of_delivery",
+            lengthOfPregnancy: "length_of_pregnancy",
+            typeOfBirth: "type_of_birth",
+            ifMultipleBirth: "if_multiple_birth",
+
+            mainDiseaseConditionOfInfant: "main_disease_condition_of_infant",
+            otherDiseasesConditionsOfInfant: "other_diseases_conditions_of_infant",
+            mainMaternalDiseaseConditionAffectingInfant: "main_maternal_disease_condition_affecting_infant",
+            otherMaternalDiseaseConditionAffectingInfant: "other_maternal_disease_condition_affecting_infant",
+            otherRelevantCircumstances: "other_relevant_circumstances",
+
+            // Page 5
             immediateCause: "immediate_cause",
             antecedentCause: "antecedent_cause",
             underlyingCause: "underlying_cause",
@@ -83,7 +106,7 @@ exports.create = (req, res) => {
             otherConditions: "other_conditions",
             maternalCondition: "maternal_condition",
 
-            // Page 5
+            // Page 6
             mannerOfDeath: "manner_of_death",
             autopsy: "autopsy",
             placeOccurrence: "place_occurrence",
@@ -91,7 +114,7 @@ exports.create = (req, res) => {
             attendantFrom: "attendant_from",
             attendantTo: "attendant_to",
 
-            // Page 6
+            // Page 7
             attendedDeceased: "attended_deceased",
             timeOfDeath: "time_of_death",
             physicianName: "physician_name",
@@ -99,15 +122,16 @@ exports.create = (req, res) => {
             physicianAddress: "physician_address",
             healthOfficerName: "health_officer_name",
 
-            // Page 7
+            // Page 8
             disposalType: "disposal_type",
             permitNumber: "permit_number",
             permitDate: "permit_date",
             transferPermit: "transfer_permit",
+            transferPermitDate: "transfer_permit_date",
             cemeteryName: "cemetery_name",
             cemeteryAddress: "cemetery_address",
 
-            // Page 8
+            // Page 9
             informantName: "informant_name",
             informantRelationship: "informant_relationship",
             informantAddress: "informant_address",
@@ -116,7 +140,7 @@ exports.create = (req, res) => {
             preparedTitle: "prepared_title",
             preparedDate: "prepared_date",
 
-            // Page 9
+            // Page 10
             receivedName: "received_name",
             receivedTitle: "received_title",
             receivedDate: "received_date",
@@ -124,23 +148,25 @@ exports.create = (req, res) => {
             registrarTitle: "registrar_title",
             registrarDate: "registrar_date",
 
-            // Page 10
+            // Page 11
             remarks: "remarks",
             officeBoxes: "office_boxes",
 
-            // Page 11
+            // Page 12
             postmortemCause: "postmortem_cause",
             postmortemName: "postmortem_name",
             postmortemTitle: "postmortem_title",
             postmortemAddress: "postmortem_address",
             postmortemDate: "postmortem_date",
             embalmerName: "embalmer_name",
+            embalmerTitle: "embalmer_title",
+            embalmerAddress: "embalmer_address",
             embalmerLicense: "embalmer_license",
             embalmerIssuedOn: "embalmer_issued_on",
             embalmerIssuedAt: "embalmer_issued_at",
             embalmerExpiry: "embalmer_expiry",
 
-            // Page 12
+            // Page 13
             affiantName: "affiant_name",
             affiantCivilStatus: "affiant_civil_status",
             address: "address",
@@ -152,7 +178,7 @@ exports.create = (req, res) => {
             causeOfDeath: "cause_of_death",
             reasonDelay: "reason_delay",
 
-            // Page 13
+            // Page 14
             juratDay: "jurat_day",
             juratMonthYear: "jurat_month_year",
             juratPlace: "jurat_place",
@@ -163,7 +189,7 @@ exports.create = (req, res) => {
             adminPosition: "admin_position",
             adminAddress: "admin_address",
 
-            // Page 14
+            // Page 15
             confirmation: "confirmation"
         };
 
