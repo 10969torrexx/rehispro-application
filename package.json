@@ -13,26 +13,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/material": "^7.3.2",
-    "@mui/x-data-grid": "^8.11.2",
-    "axios": "^1.11.0",
     "bcryptjs": "^3.0.2",
     "body-parser": "^2.2.0",
-    "bootstrap-icons": "^1.13.1",
     "cors": "^2.8.5",
     "electron": "^37.2.6",
     "express": "^5.1.0",
     "knex": "^3.1.0",
-    "lucide-react": "^0.543.0",
     "multer": "^2.0.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-dropzone": "^14.3.8",
-    "react-signature-canvas": "^1.1.0-alpha.2",
-    "sqlite3": "^5.1.7",
-    "tesseract.js": "^6.0.1"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.0",
