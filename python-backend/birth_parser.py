@@ -302,8 +302,6 @@ template = {
 
     # Page 5 - Attendant Information
     "attendant": "",
-    "date_of_attendance": "",
-    "attendant_name_title": "",
 
     # Page 6 - Attendant Certification
     "birth_time": "",
@@ -312,7 +310,6 @@ template = {
     "attendant_title": "",
     "attendant_address": "",
     "attendant_date_signed": "",
-    "attendant_signature": "",
 
     # Page 7 - Informant & Prepared By
     "informant_name": "",
@@ -327,7 +324,6 @@ template = {
     "received_name": "",
     "received_title": "",
     "received_date": "",
-    "registrar_signature": "",
     "registrar_name": "",
     "registrar_title": "",
     "registrar_date": "",
@@ -354,7 +350,6 @@ template = {
     "admin_name": "",
     "admin_position": "",
     "admin_address": "",
-    "admin_signature": "",
 
     # Page 12 - Affidavit
     "affiant_name": "",
@@ -377,7 +372,6 @@ template = {
     "reason_delay": "",
     "spouse_applicant": "",
     "spouse_owner": "",
-    "affiant_signature": "",
 
     # Page 13 - Final Jurat / Affidavit
     "final_jurat_day": "",
@@ -386,7 +380,6 @@ template = {
     "final_ctc_number": "",
     "final_ctc_issued_on": "",
     "final_ctc_issued_at": "",
-    "admin_officer_signature": "",
     "admin_officer_name": "",
     "admin_officer_position": "",
     "admin_officer_address": ""

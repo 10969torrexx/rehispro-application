@@ -112,7 +112,6 @@ db.serialize(() => {
       attendant_title TEXT,
       attendant_address TEXT,
       attendant_date_signed TEXT,
-      attendant_signature TEXT,
 
       -- Page 7 - Informant & Prepared By
       informant_name TEXT,
@@ -127,7 +126,6 @@ db.serialize(() => {
       received_name TEXT,
       received_title TEXT,
       received_date TEXT,
-      registrar_signature TEXT,
       registrar_name TEXT,
       registrar_title TEXT,
       registrar_date TEXT,
@@ -154,7 +152,6 @@ db.serialize(() => {
       admin_name TEXT,
       admin_position TEXT,
       admin_address TEXT,
-      admin_signature TEXT,
 
       -- Page 12 - Affidavit
       affiant_name TEXT,
@@ -182,7 +179,6 @@ db.serialize(() => {
       reason_delay TEXT,
       spouse_applicant TEXT,
       spouse_owner TEXT,
-      affiant_signature TEXT,
 
       -- Page 13 - Final Jurat / Affidavit
       final_jurat_day TEXT,
@@ -191,7 +187,6 @@ db.serialize(() => {
       final_ctc_number TEXT,
       final_ctc_issued_on TEXT,
       final_ctc_issued_at TEXT,
-      admin_officer_signature TEXT,
       admin_officer_name TEXT,
       admin_officer_position TEXT,
       admin_officer_address TEXT,
