@@ -101,12 +101,7 @@ db.serialize(() => {
       marriage_country TEXT,
 
       -- Page 5 - Attendant Information
-      attendant_physician INTEGER DEFAULT 0,
-      attendant_nurse INTEGER DEFAULT 0,
-      attendant_midwife INTEGER DEFAULT 0,
-      attendant_hilot INTEGER DEFAULT 0,
-      attendant_others INTEGER DEFAULT 0,
-      attendant_others_specify TEXT,
+      attendant TEXT,
       date_of_attendance TEXT,
       attendant_name_title TEXT,
 

@@ -150,6 +150,7 @@ default_keywords = [
     "15",
     "16",
     "No-.",
+    "Iuu_",
     "time",
     "living",
     "(City",
@@ -300,12 +301,7 @@ template = {
     "marriage_country": "",
 
     # Page 5 - Attendant Information
-    "attendant_physician": 0,
-    "attendant_nurse": 0,
-    "attendant_midwife": 0,
-    "attendant_hilot": 0,
-    "attendant_others": 0,
-    "attendant_others_specify": "",
+    "attendant": "",
     "date_of_attendance": "",
     "attendant_name_title": "",
 
