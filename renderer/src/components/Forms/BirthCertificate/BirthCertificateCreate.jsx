@@ -1242,7 +1242,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Certification of Informant */}
                             <div className="space-y-4">
-                                <h3 className="text-md">Certification of Informant</h3>
+                                <h3 className="text-md">22. Certification of Informant</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Signature</label>
@@ -1289,7 +1289,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                             {/* Prepared By */}
                             <div className="space-y-4">
-                                <h3 className="text-md">Prepared By</h3>
+                                <h3 className="text-md">23. Prepared By</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Signature</label>
@@ -1332,7 +1332,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Received By */}
                             <div className="space-y-4 mb-4">
-                                <h3 className="text-md">Received By</h3>
+                                <h3 className="text-md">24. Received By</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Signature</label>
@@ -1369,7 +1369,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             </div>
                             {/* Registered by the Civil Registrar */}
                             <div className="space-y-4">
-                                <h3 className="text-md">Registered by the Civil Registrar</h3>
+                                <h3 className="text-md">25. Registered by the Civil Registrar</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium mb-1">Signature</label>
