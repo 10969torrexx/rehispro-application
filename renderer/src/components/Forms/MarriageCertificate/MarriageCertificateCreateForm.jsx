@@ -1,5 +1,4 @@
 import React from 'react';
-import SignaturePad from 'react-signature-canvas';
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { ErrorMessages, Divider, SignaturePlaceholder } from '@components';
