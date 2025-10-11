@@ -681,7 +681,7 @@
   },
   "page11": {
     "juratDay": {
-      "required": true,
+      "required": false,
       "type": "string",
       "maxLength": 10,
       "message": {
@@ -690,7 +690,7 @@
       }
     },
     "juratMonthYear": {
-      "required": true,
+      "required": false,
       "type": "string",
       "maxLength": 20,
       "message": {
@@ -699,7 +699,7 @@
       }
     },
     "juratAffiant1": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -709,7 +709,7 @@
       }
     },
     "juratAffiant2": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -719,7 +719,7 @@
       }
     },
     "ctcNumber": {
-      "required": true,
+      "required": false,
       "minLength": 3,
       "maxLength": 30,
       "message": {
@@ -729,7 +729,7 @@
       }
     },
     "ctcDateIssued": {
-      "required": true,
+      "required": false,
       "type": "date",
       "message": {
         "required": "Date issued is required.",
@@ -737,7 +737,7 @@
       }
     },
     "ctcPlaceIssued": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -747,7 +747,7 @@
       }
     },
     "adminName": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -757,7 +757,7 @@
       }
     },
     "adminPosition": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -767,7 +767,7 @@
       }
     },
     "adminAddress": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 150,
       "message": {
@@ -779,7 +779,7 @@
   },
   "page12": {
     "affiantName": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -789,7 +789,7 @@
       }
     },
     "civilStatus": {
-      "required": true,
+      "required": false,
       "type": "enum",
       "options": ["Single", "Married", "Divorced", "Widow / widower"],
       "message": {
@@ -798,7 +798,7 @@
       }
     },
     "address": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 150,
       "message": {

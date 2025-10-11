@@ -12,6 +12,7 @@ function create (req, res) {
 
         // 🔹 Flatten directly (your frontend already sends structured formData)
         const flatData = formData;
+        writeLog(`[info] [BirthCertificateController][create] Received data: ${JSON.stringify(flatData)}`);
 
         // 🔹 Validate creatorId
         const creatorId = Number(flatData.creatorId);
@@ -80,8 +81,6 @@ function create (req, res) {
             attendantHilot: "attendant_hilot",
             attendantOthers: "attendant_others",
             attendantOthersSpecify: "attendant_others_specify",
-            dateOfAttendance: "date_of_attendance",
-            attendantNameTitle: "attendant_name_title",
           
             // Page 6 - Attendant Certification
             birthTime: "birth_time",
@@ -89,8 +88,6 @@ function create (req, res) {
             attendantName: "attendant_name",
             attendantTitle: "attendant_title",
             attendantAddress: "attendant_address",
-            attendantDateSigned: "attendant_date_signed",
-            attendantSignature: "attendant_signature",
           
             // Page 7 - Informant & Prepared By
             informantName: "informant_name",
@@ -105,7 +102,6 @@ function create (req, res) {
             receivedName: "received_name",
             receivedTitle: "received_title",
             receivedDate: "received_date",
-            registrarSignature: "registrar_signature",
             registrarName: "registrar_name",
             registrarTitle: "registrar_title",
             registrarDate: "registrar_date",
@@ -132,7 +128,6 @@ function create (req, res) {
             adminName: "admin_name",
             adminPosition: "admin_position",
             adminAddress: "admin_address",
-            adminSignature: "admin_signature",
           
             // Page 12 - Affidavit
             affiantName: "affiant_name",
@@ -160,7 +155,6 @@ function create (req, res) {
             reasonDelay: "reason_delay",
             spouseApplicant: "spouse_applicant",
             spouseOwner: "spouse_owner",
-            affiantSignature: "affiant_signature",
           
             // Page 13 - Final Jurat / Affidavit
             finalJuratDay: "final_jurat_day",
@@ -169,7 +163,6 @@ function create (req, res) {
             finalCtcNumber: "final_ctc_number",
             finalCtcIssuedOn: "final_ctc_issued_on",
             finalCtcIssuedAt: "final_ctc_issued_at",
-            adminOfficerSignature: "admin_officer_signature",
             adminOfficerName: "admin_officer_name",
             adminOfficerPosition: "admin_officer_position",
             adminOfficerAddress: "admin_officer_address",
@@ -197,9 +190,11 @@ function create (req, res) {
             VALUES (${placeholders})
         `;
 
+        writeLog(`[info] [BirthCertificateController][create] Executing query: ${query} with values: ${values}`);
+
         db.run(query, values, function (err) {
             if (err) {
-                console.error("[DB Error]", err.message);
+                writeLog(`[error] [BirthCertificateController][create] ${err.message}`);
                 return res.status(500).json({
                     success: false,
                     message: "Database insert failed",
@@ -215,7 +210,7 @@ function create (req, res) {
         });
 
     } catch (error) {
-        console.error("[Controller Error]", error);
+        writeLog(`[error] [BirthCertificateController][create] ${error.message}`);
         res.status(500).json({
             success: false,
             message: "Server error",

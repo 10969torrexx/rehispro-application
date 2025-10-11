@@ -10,7 +10,7 @@ import { AllCaps, StringToDate } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = useState(7); //TODO: handle current page
+    const [currentPage, setCurrentPage] = useState(1); //TODO: handle current page
     const pageTitles = [
         "Province & Child's Information",
         "Mother's Information",
@@ -149,59 +149,56 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
         },
         // Page 11 - Jurat
         page11: {
-            juratDay: "",
-            juratMonthYear: "",
-            juratAffiant1: "",
-            juratAffiant2: "",
-            ctcNumber: "",
-            ctcDateIssued: "",
-            ctcPlaceIssued: "",
-            adminName: "",
-            adminPosition: "",
-            adminAddress: "",
-            adminSignature: "" // optional if you want a text input for digital signature
+            juratDay: defaultOCRValues?.jurat_day ?? "",
+            juratMonthYear: defaultOCRValues?.jurat_month_year ?? "",
+            juratAffiant1: defaultOCRValues?.jurat_affiant1 ?? "",
+            juratAffiant2: defaultOCRValues?.jurat_affiant2 ?? "",
+            ctcNumber: defaultOCRValues?.ctc_number ?? "",
+            ctcDateIssued: defaultOCRValues?.ctc_date_issued ?? "",
+            ctcPlaceIssued: defaultOCRValues?.ctc_place_issued ?? "",
+            adminName: defaultOCRValues?.admin_name ?? "",
+            adminPosition: defaultOCRValues?.admin_position ?? "",
+            adminAddress: defaultOCRValues?.admin_address ?? "",
         },
         // --- Page 12: Affidavit ---
         page12: {
-            affiantName: "",
-            civilStatus: "",
-            address: "",
+            affiantName: defaultOCRValues?.affiant_name ?? "",
+            civilStatus: defaultOCRValues?.civil_status ?? "",
+            address: defaultOCRValues?.address ?? "",
 
             selfCheckbox: false, // "self" or "child"
-            selfPob: "",
-            selfDob: "",
+            selfPob:  defaultOCRValues?.self_pob ?? "",
+            selfDob: defaultOCRValues?.self_dob ?? "",
 
             childCheckbox: false,
-            childName: "",
-            childPob: "",
-            childDob: "",
+            childName: `${defaultOCRValues?.child_first_name ?? ""} ${defaultOCRValues?.child_middle_name ?? ""} ${defaultOCRValues?.child_last_name ?? ""}`.trim() ?? "",
+            childPob: `${defaultOCRValues?.placeOfBirth_barangay ?? ""} ${defaultOCRValues?.placeOfBirth_city ?? ""} ${defaultOCRValues?.placeOfBirth_province ?? ""}`.trim() ?? "",
+            childDob: defaultOCRValues?.child_dob ?? "",
 
-            attendantName: "",
-            attendantAddress: "",
-            citizenship: "",
+            attendantName: defaultOCRValues?.attendant_name ?? "",
+            attendantAddress: defaultOCRValues?.attendant_address ?? "",
+            citizenship: defaultOCRValues?.citizenship ?? "",
 
-            parentsStatus: "", // "married" or "notMarried"
-            marriageDate: "",
-            marriagePlace: "",
-            fatherName: "",
+            parentsStatus: defaultOCRValues?.parents_status ?? "", // "married" or "notMarried"
+            marriageDate: defaultOCRValues?.marriage_date ?? "",
+            marriagePlace: defaultOCRValues?.marriage_place ?? "",
+            fatherName: defaultOCRValues?.father_name ?? "",
 
-            reasonDelay: "",
-            spouseApplicant: "",
-            spouseOwner: "",
-            affiantSignature: "",
+            reasonDelay: defaultOCRValues?.reason_delay ?? "",
+            spouseApplicant: defaultOCRValues?.spouse_applicant ?? "",
+            spouseOwner: defaultOCRValues?.spouse_owner ?? "",
         },
         // --- Page 13: Final Jurat / Affidavit ---
         page13: {
-            finalJuratDay: "",
-            finalJuratMonthYear: "",
-            finalJuratPlace: "",
-            finalCtcNumber: "",
-            finalCtcIssuedOn: "",
-            finalCtcIssuedAt: "",
-            adminOfficerSignature: "",
-            adminOfficerName: "",
-            adminOfficerPosition: "",
-            adminOfficerAddress: "",
+            finalJuratDay: defaultOCRValues?.final_jurat_day ?? "",
+            finalJuratMonthYear: defaultOCRValues?.final_jurat_month_year ?? "",
+            finalJuratPlace: defaultOCRValues?.final_jurat_place ?? "",
+            finalCtcNumber: defaultOCRValues?.final_ctc_number ?? "",
+            finalCtcIssuedOn: defaultOCRValues?.final_ctc_issued_on ?? "",
+            finalCtcIssuedAt: defaultOCRValues?.final_ctc_issued_at ?? "",
+            adminOfficerName: defaultOCRValues?.admin_officer_name ?? "",
+            adminOfficerPosition: defaultOCRValues?.admin_officer_position ?? "",
+            adminOfficerAddress: defaultOCRValues?.admin_officer_address ?? "",
         },
 
         page14: {
