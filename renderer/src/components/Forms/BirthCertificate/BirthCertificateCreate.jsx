@@ -10,7 +10,7 @@ import { AllCaps, StringToDate } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = useState(8); //TODO: handle current page
+    const [currentPage, setCurrentPage] = useState(1); //TODO: handle current page
     const pageTitles = [
         "Province & Child's Information",
         "Mother's Information",

@@ -16,18 +16,23 @@ export function AllCaps(str) {
 }
 
 export function StringToDate(str) {
-    const formats = [
-        "yyyy-MMMM-dd",     
-        "MMMM dd, yyyy",    
-        "MMM dd, yyyy",
-    ];
+    try {
+        const formats = [
+            "yyyy-MMMM-dd",     
+            "MMMM dd, yyyy",    
+            "MMM dd, yyyy",
+        ];
 
-    for (const fmt of formats) {
-        const parsed = parse(str, fmt, new Date());
-        if (isValid(parsed)) {
-            return format(parsed, "yyyy-MM-dd");
+        for (const fmt of formats) {
+            const parsed = parse(str, fmt, new Date());
+            if (isValid(parsed)) {
+                return format(parsed, "yyyy-MM-dd");
+            }
         }
-    }
 
     return null;
+    } catch (error) {
+        console.error("Error parsing date:", error);
+        return null;
+    }
 }
