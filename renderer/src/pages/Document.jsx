@@ -5,7 +5,7 @@ import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
 
 export default function Document() {
     const [userData, setUserData] = useState(null);
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));

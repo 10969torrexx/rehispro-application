@@ -42,7 +42,7 @@ export default function Dashboard() {
   }, []);
 
   //TODO: handling side bar open / close state
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
       {(userData?.is_firsttime_flg ) && showChangePassword && (
