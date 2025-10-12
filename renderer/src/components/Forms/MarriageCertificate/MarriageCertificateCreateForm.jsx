@@ -142,6 +142,9 @@ export default function MarriageCertificateCreateForm() {
             officerReligion: "",
             witness1Name: "",
             witness2Name: "",
+            witness3Name: "",
+            witness4Name: ""
+
         },
 
         // Page 6: formData Input Validation
@@ -158,8 +161,15 @@ export default function MarriageCertificateCreateForm() {
 
         // Page 7: formData Input Validation
         page7: {
-            witness3Name: "",
-            witness4Name: "",
+            witness5Name: "",
+            witness6Name: "",
+            witness7Name: "",
+            witness8Name: "",
+            witness9Name: "",
+            witness10Name: "",
+            witness11Name: "",
+            witness12Name: "",
+
             affidavitOfficerName: "",
             affidavitOfficerOrganization: "",
             affidavitOfficerAddress: "",
@@ -185,6 +195,7 @@ export default function MarriageCertificateCreateForm() {
             swornYear: "",
             swornAt: "",
             swornIssuedOn: "",
+            swornIssuedOn2: "",
             swornIssuedAt: "",
             adminOfficerName: "",
             adminOfficerTitle: "",
@@ -194,6 +205,7 @@ export default function MarriageCertificateCreateForm() {
         // Page 9: formData Input Validation
         page9: {
             affiantName: "",
+            affiantCivilStatus: "",
             affiantAddress: "",
 
             statement1OptionA: false,
@@ -202,7 +214,8 @@ export default function MarriageCertificateCreateForm() {
             statement1DateA: "",
 
             statement1OptionB: false,
-            statement1MarriageBetween: "",
+            statement1spouseName1: "",
+            statement1spouseName2: "",
             statement1PlaceB: "",
             statement1DateB: "",
 
@@ -223,6 +236,8 @@ export default function MarriageCertificateCreateForm() {
 
             citizenApplicant: "",
             citizenSpouse: "",
+            citizenApplicant2: "",
+            citizenSpouse2: "",
 
             reasonForDelay: "",
 
@@ -239,6 +254,7 @@ export default function MarriageCertificateCreateForm() {
             swornYearPage10: "",
             swornPlacePage10: "",
             swornIssuedOnPage10: "",
+            swornIssuedOnPage102: "",
             swornIssuedAtPage10: "",
             administeringOfficerName: "",
             officerPositionPage10: "",
@@ -427,7 +443,9 @@ export default function MarriageCertificateCreateForm() {
             officerPosition: "",
             officerReligion: "",
             witness1Name: "",
-            witness2Name: ""
+            witness2Name: "",
+            witness3Name: "",
+            witness4Name: ""
         },
         page6: {
             receivedByName: "",
@@ -440,8 +458,15 @@ export default function MarriageCertificateCreateForm() {
             civilRegistrar: ""
         },
         page7: {
-            witness3Name: "",
-            witness4Name: "",
+            witness5Name: "",
+            witness6Name: "",
+            witness7Name: "",
+            witness8Name: "",
+            witness9Name: "",
+            witness10Name: "",
+            witness11Name: "",
+            witness12Name: "",
+            
             affidavitOfficerName: "",
             affidavitOfficerOrganization: "",
             affidavitOfficerAddress: "",
@@ -465,6 +490,7 @@ export default function MarriageCertificateCreateForm() {
             swornYear: "",
             swornAt: "",
             swornIssuedOn: "",
+            swornIssuedOn2: "",
             swornIssuedAt: "",
             adminOfficerName: "",
             adminOfficerTitle: "",
@@ -472,13 +498,14 @@ export default function MarriageCertificateCreateForm() {
         },
         page9: {
             affiantName: "",
+            affiantCivilStatus: "",
             affiantAddress: "",
             statement1OptionA: false,
             statement1MarriageWith: "",
             statement1PlaceA: "",
             statement1DateA: "",
             statement1OptionB: false,
-            statement1MarriageBetween: "",
+            statement1Marriage: "",
             statement1PlaceB: "",
             statement1DateB: "",
             solemnizingOfficer: "",
@@ -494,6 +521,8 @@ export default function MarriageCertificateCreateForm() {
             articleNumber: "",
             citizenApplicant: "",
             citizenSpouse: "",
+            citizenApplicant2: "",
+            citizenSpouse2: "",
             reasonForDelay: "",
             affidavitDayPage9: "",
             affidavitMonthPage9: "",
@@ -506,6 +535,7 @@ export default function MarriageCertificateCreateForm() {
             swornYearPage10: "",
             swornPlacePage10: "",
             swornIssuedOnPage10: "",
+            swornIssuedOnPage102: "",
             swornIssuedAtPage10: "",
             administeringOfficerName: "",
             officerPositionPage10: "",
@@ -1856,8 +1886,6 @@ export default function MarriageCertificateCreateForm() {
                         <div className="border border-pink-300 p-3 rounded mb-3">
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="flex flex-col items-center">
-                                    <SignaturePlaceholder />
-                                    <label className="text-xs mt-1">(Signature of Witness 1)</label>
                                     <input
                                         type="text"
                                         name="witness1Name"
@@ -1867,11 +1895,6 @@ export default function MarriageCertificateCreateForm() {
                                         className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness1Name ? "input-error" : ""
                                             }`}
                                     />
-                                </div>
-
-                                <div className="flex flex-col items-center">
-                                    <SignaturePlaceholder />
-                                    <label className="text-xs mt-1">(Signature of Witness 2)</label>
                                     <input
                                         type="text"
                                         name="witness2Name"
@@ -1879,6 +1902,27 @@ export default function MarriageCertificateCreateForm() {
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         placeholder="Name in Print"
                                         className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness2Name ? "input-error" : ""
+                                            }`}
+                                    />
+                                </div>
+
+                                <div className="flex flex-col items-center">
+                                    <input
+                                        type="text"
+                                        name="witness3Name"
+                                        value={formData.page5.witness3Name}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        placeholder="Name in Print"
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness3Name ? "input-error" : ""
+                                            }`}
+                                    />
+                                    <input
+                                        type="text"
+                                        name="witness4Name"
+                                        value={formData.page5.witness4Name}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        placeholder="Name in Print"
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness4Name ? "input-error" : ""
                                             }`}
                                     />
                                 </div>
@@ -2010,36 +2054,94 @@ export default function MarriageCertificateCreateForm() {
 
                         <div className="border border-pink-300 p-3 rounded mb-3">
                             <div className="grid grid-cols-2 gap-6">
-                                {/* Witness 3 */}
+                                {/* Witness 4 */}
                                 <div className="flex flex-col items-center">
-                                    <div className='w-[250px]'>
-                                        <SignaturePlaceholder />
-                                    </div>
-                                    <label className="text-xs mt-1">(Signature of Witness 3)</label>
                                     <input
                                         type="text"
-                                        name="witness3Name"
-                                        value={formData.page7.witness3Name}
+                                        name="witness5Name"
+                                        value={formData.page7.witness5Name}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         placeholder="Name in Print"
-                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness3Name ? "input-error" : ""
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness5Name ? "input-error" : ""
                                             }`}
                                     />
                                 </div>
 
-                                {/* Witness 4 */}
+                                {/* Witness 5 */}
                                 <div className="flex flex-col items-center">
-                                    <div className='w-[250px]'>
-                                        <SignaturePlaceholder />
-                                    </div>
-                                    <label className="text-xs mt-1">(Signature of Witness 4)</label>
                                     <input
                                         type="text"
-                                        name="witness4Name"
-                                        value={formData.page7.witness4Name}
+                                        name="witness6Name"
+                                        value={formData.page7.witness6Name}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         placeholder="Name in Print"
-                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness4Name ? "input-error" : ""
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness6Name ? "input-error" : ""
+                                            }`}
+                                    />
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <input
+                                        type="text"
+                                        name="witness7Name"
+                                        value={formData.page7.witness7Name}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        placeholder="Name in Print"
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness7Name ? "input-error" : ""
+                                            }`}
+                                    />
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <input
+                                        type="text"
+                                        name="witness8Name"
+                                        value={formData.page7.witness8Name}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        placeholder="Name in Print"
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness8Name ? "input-error" : ""
+                                            }`}
+                                    />
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <input
+                                        type="text"
+                                        name="witness9Name"
+                                        value={formData.page7.witness9Name}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        placeholder="Name in Print"
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness9Name ? "input-error" : ""
+                                            }`}
+                                    />
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <input
+                                        type="text"
+                                        name="witness10Name"
+                                        value={formData.page7.witness10Name}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        placeholder="Name in Print"
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness10Name ? "input-error" : ""
+                                            }`}
+                                    />
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <input
+                                        type="text"
+                                        name="witness11Name"
+                                        value={formData.page7.witness11Name}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        placeholder="Name in Print"
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness11Name ? "input-error" : ""
+                                            }`}
+                                    />
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <input
+                                        type="text"
+                                        name="witness12Name"
+                                        value={formData.page7.witness12Name}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        placeholder="Name in Print"
+                                        className={`w-56 border-b border-gray-500 text-center mt-2 ${errors.witness12Name ? "input-error" : ""
                                             }`}
                                     />
                                 </div>
@@ -2269,7 +2371,7 @@ export default function MarriageCertificateCreateForm() {
                                     name="affidavitPlace"
                                     value={formData.page8.affidavitPlace}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-black outline-none w-[200px] text-center ${errors.affidavitPlace ? "input-error" : ""
+                                    className={`border-b border-black outline-none w-[400px] text-center ${errors.affidavitPlace ? "input-error" : ""
                                         }`}
                                 />
                                 , Philippines.
@@ -2320,10 +2422,10 @@ export default function MarriageCertificateCreateForm() {
                                     name="swornAt"
                                     value={formData.page8.swornAt}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-black outline-none w-[200px] text-center ${errors.swornAt ? "input-error" : ""
+                                    className={`border-b border-black outline-none w-[500px] text-center ${errors.swornAt ? "input-error" : ""
                                         }`}
-                                />{" "}
-                                issued on{" "}
+                                />{", "}
+                                Philippines, affiant who exhibited to me his Community Tax Cert. issued on{" "}
                                 <input
                                     type="text"
                                     name="swornIssuedOn"
@@ -2332,13 +2434,23 @@ export default function MarriageCertificateCreateForm() {
                                     className={`border-b border-black outline-none w-[120px] text-center ${errors.swornIssuedOn ? "input-error" : ""
                                         }`}
                                 />
-                                ,{" "}
+                                ,
+                                <input
+                                    type="text"
+                                    name="swornIssuedOn2"
+                                    value={formData.page8.swornIssuedOn2}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-black outline-none w-[120px] text-center ${errors.swornIssuedOn2 ? "input-error" : ""
+                                        }`}
+                                />
+                                {" "}
+                                at{" "}
                                 <input
                                     type="text"
                                     name="swornIssuedAt"
                                     value={formData.page8.swornIssuedAt}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-black outline-none w-[200px] text-center ${errors.swornIssuedAt ? "input-error" : ""
+                                    className={`border-b border-black outline-none w-[400px] text-center ${errors.swornIssuedAt ? "input-error" : ""
                                         }`}
                                 />
                                 .
@@ -2390,10 +2502,6 @@ export default function MarriageCertificateCreateForm() {
                 {currentPage === 9 && (
                     <>
                         <h2 className="text-lg text-center font-semibold mb-3">{pageTitles[(currentPage) - 1]}</h2>
-                        <h3 className="block text-center font-semibold">
-                            AFFIDAVIT FOR DELAYED REGISTRATION OF MARRIAGE
-                        </h3>
-
                         {/* Intro */}
                         <div className="mt-2 mb-5">
                             <p>
@@ -2403,17 +2511,35 @@ export default function MarriageCertificateCreateForm() {
                                     name="affiantName"
                                     value={formData.page9.affiantName}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-b-black outline-none text-center ${errors.affiantName ? "input-error" : ""
+                                    className={`border-b border-b-black outline-none text-center w-[250px] ${errors.affiantName ? "input-error" : ""
                                         }`}
                                 />
-                                , of legal age, single/married/divorced/widow/widower, with
+                                , of legal age, 
+                                
+                                <select
+                                    name="affiantCivilStatus"
+                                    value={formData.page9.affiantCivilStatus}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center bg-transparent ${
+                                        errors.affiantCivilStatus ? "input-error" : ""
+                                    }`}
+                                    >
+                                    <option value="">Select status</option>
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+                                    <option value="divorced">Divorced</option>
+                                    <option value="widow">Widow</option>
+                                    <option value="widower">Widower</option>
+                                </select>
+
+                                 with
                                 residence and postal address{" "}
                                 <input
                                     type="text"
                                     name="affiantAddress"
                                     value={formData.page9.affiantAddress}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-b-black outline-none text-center ${errors.affiantAddress ? "input-error" : ""
+                                    className={`border-b border-b-black outline-none text-center w-[550px] ${errors.affiantAddress ? "input-error" : ""
                                         }`}
                                 />
                                 , after having duly sworn in accordance with law do hereby depose
@@ -2423,96 +2549,88 @@ export default function MarriageCertificateCreateForm() {
 
                         <div className="space-y-4 mb-3">
                             {/* Statement 1 */}
-                            <div className="flex flex-col mb-3">
-                                <p>1. That I am the applicant for the delayed registration of</p>
+                            <div className="flex flex-col mb-3 space-y-3">
+                            <p>1. That I am the applicant for the delayed registration of</p>
 
-                                {/* Option A */}
-                                <label className="flex items-center gap-2">
-                                    <input
-                                        type="checkbox"
-                                        name="statement1OptionA"
-                                        checked={formData.page9.statement1OptionA}
-                                        onChange={(e) =>
-                                            handleInputChange(e, `page${currentPage}`)
-                                        }
-                                        className="scale-125"
-                                    />
-                                    my marriage with{" "}
-                                    <input
-                                        type="text"
-                                        name="statement1MarriageWith"
-                                        value={formData.page9.statement1MarriageWith}
-                                        onChange={(e) =>
-                                            handleInputChange(e, `page${currentPage}`)
-                                        }
-                                        className="border-b border-b-black outline-none text-center"
-                                    />{" "}
-                                    in{" "}
-                                    <input
-                                        type="text"
-                                        name="statement1PlaceA"
-                                        value={formData.page9.statement1PlaceA}
-                                        onChange={(e) =>
-                                            handleInputChange(e, `page${currentPage}`)
-                                        }
-                                        className="border-b border-b-black outline-none text-center"
-                                    />{" "}
-                                    on{" "}
-                                    <input
-                                        type="text"
-                                        name="statement1DateA"
-                                        value={formData.page9.statement1DateA}
-                                        onChange={(e) =>
-                                            handleInputChange(e, `page${currentPage}`)
-                                        }
-                                        className="border-b border-b-black outline-none text-center"
-                                    />
-                                    .
-                                </label>
+                            {/* Option A */}
+                            <label className="flex flex-wrap items-center gap-2">
+                                <input
+                                type="checkbox"
+                                name="statement1OptionA"
+                                checked={formData.page9.statement1OptionA}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="scale-125"
+                                />
+                                <span>my marriage with</span>
+                                <input
+                                type="text"
+                                name="statement1MarriageWith"
+                                value={formData.page9.statement1MarriageWith}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="border-b border-b-black outline-none text-center w-[150px]"
+                                />
+                                <span>in</span>
+                                <input
+                                type="text"
+                                name="statement1PlaceA"
+                                value={formData.page9.statement1PlaceA}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="border-b border-b-black outline-none text-center w-[150px]"
+                                />
+                                <span>on</span>
+                                <input
+                                type="text"
+                                name="statement1DateA"
+                                value={formData.page9.statement1DateA}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="border-b border-b-black outline-none text-center w-[120px]"
+                                />
+                                <span>.</span>
+                            </label>
 
-                                {/* Option B */}
-                                <label className="flex items-center gap-2">
-                                    <input
-                                        type="checkbox"
-                                        name="statement1OptionB"
-                                        checked={formData.page9.statement1OptionB}
-                                        onChange={(e) =>
-                                            handleInputChange(e, `page${currentPage}`)
-                                        }
-                                        className="scale-125"
-                                    />
-                                    my marriage between{" "}
-                                    <input
-                                        type="text"
-                                        name="statement1MarriageBetween"
-                                        value={formData.page9.statement1MarriageBetween}
-                                        onChange={(e) =>
-                                            handleInputChange(e, `page${currentPage}`)
-                                        }
-                                        className="border-b border-b-black outline-none text-center"
-                                    />{" "}
-                                    in{" "}
-                                    <input
-                                        type="text"
-                                        name="statement1PlaceB"
-                                        value={formData.page9.statement1PlaceB}
-                                        onChange={(e) =>
-                                            handleInputChange(e, `page${currentPage}`)
-                                        }
-                                        className="border-b border-b-black outline-none text-center"
-                                    />{" "}
-                                    on{" "}
-                                    <input
-                                        type="text"
-                                        name="statement1DateB"
-                                        value={formData.page9.statement1DateB}
-                                        onChange={(e) =>
-                                            handleInputChange(e, `page${currentPage}`)
-                                        }
-                                        className="border-b border-b-black outline-none text-center"
-                                    />
-                                    .
-                                </label>
+                            {/* Option B */}
+                            <label className="flex flex-wrap items-center gap-2">
+                                <input
+                                type="checkbox"
+                                name="statement1OptionB"
+                                checked={formData.page9.statement1OptionB}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="scale-125"
+                                />
+                                <span>my marriage between</span>
+                                <input
+                                type="text"
+                                name="statement1spouseName1"
+                                value={formData.page9.statement1spouseName1}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="border-b border-b-black outline-none text-center min-w-[120px]"
+                                />
+                                <span>and</span>
+                                <input
+                                type="text"
+                                name="statement1spouseName2"
+                                value={formData.page9.statement1spouseName2}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="border-b border-b-black outline-none text-center min-w-[120px]"
+                                />
+                                <span>in</span>
+                                <input
+                                type="text"
+                                name="statement1PlaceB"
+                                value={formData.page9.statement1PlaceB}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="border-b border-b-black outline-none text-center min-w-[120px]"
+                                />
+                                <span>on</span>
+                                <input
+                                type="text"
+                                name="statement1DateB"
+                                value={formData.page9.statement1DateB}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                className="border-b border-b-black outline-none text-center min-w-[100px]"
+                                />
+                                <span>.</span>
+                            </label>
                             </div>
 
                             {/* Statement 2 */}
@@ -2661,6 +2779,28 @@ export default function MarriageCertificateCreateForm() {
                                 />
                                 .
                             </p>
+                            <p style={{ paddingLeft: "50px" }}  >
+                                (If the applicant is other than the wife or husband) That the wife is a
+                                citizen of{" "}
+                                <input
+                                    type="text"
+                                    name="citizenApplicant2"
+                                    value={formData.page9.citizenApplicant2}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center ${errors.citizenApplicant2 ? "input-error" : ""
+                                        }`}
+                                />{" "}
+                                and the husband is a citizen of{" "}
+                                <input
+                                    type="text"
+                                    name="citizenSpouse2"
+                                    value={formData.page9.citizenSpouse2}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center ${errors.citizenSpouse2 ? "input-error" : ""
+                                        }`}
+                                />
+                                .
+                            </p>
 
                             {/* Statement 5 */}
                             <p>
@@ -2718,12 +2858,29 @@ export default function MarriageCertificateCreateForm() {
                                         name="affidavitPlacePage9"
                                         value={formData.page9.affidavitPlacePage9}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        className={`border-b border-b-black outline-none text-center ${errors.affidavitPlacePage9 ? "input-error" : ""
+                                        className={`border-b border-b-black outline-none text-center w-[400px] ${errors.affidavitPlacePage9 ? "input-error" : ""
                                             }`}
                                     />
                                     , Philippines.
                                 </span>
                             </div>
+                        {/* Affiant Signature */}
+                        <div className="flex justify-end mb-10">
+                            <div className="flex flex-col items-center">
+                                <SignaturePlaceholder />
+                                <p className="text-sm">Signature Over Printed Name of Affiant</p>
+                                <input
+                                    type="text"
+                                    readOnly
+                                    name="affiantName"
+                                    value={formData.page9.affiantName}
+                                    className={`border-b border-b-black outline-none text-center w-[300px] ${errors.affiantName ? "input-error" : ""
+                                        }`}
+                                />
+                                <p className="text-sm">Name in Print</p>
+                            </div>
+                        </div>
+
                         </div>
                     </>
                 )}
@@ -2731,13 +2888,6 @@ export default function MarriageCertificateCreateForm() {
                 {currentPage === 10 && (
                     <>
                         <h2 className="text-lg text-center font-semibold mb-3">{pageTitles[(currentPage) - 1]}</h2>
-                        {/* Affiant Signature */}
-                        <div className="flex justify-end mb-10">
-                            <div className="flex flex-col items-center">
-                                <SignaturePlaceholder />
-                                <p className="text-sm">Signature Over Printed Name of Affiant</p>
-                            </div>
-                        </div>
 
                         {/* Sworn Statement */}
                         <div className="mb-5">
@@ -2749,7 +2899,7 @@ export default function MarriageCertificateCreateForm() {
                                     name="swornDayPage10"
                                     value={formData.page10.swornDayPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-b-black outline-none text-center w-[100px] ${errors.swornDay ? "input-error" : ""
+                                    className={`border-b border-b-black outline-none text-center w-[50px] ${errors.swornDayPage10 ? "input-error" : ""
                                         }`}
                                 />{" "}
                                 day of{" "}
@@ -2758,7 +2908,7 @@ export default function MarriageCertificateCreateForm() {
                                     name="swornMonthPage10"
                                     value={formData.page10.swornMonthPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-b-black outline-none text-center ${errors.swornMonth ? "input-error" : ""
+                                    className={`border-b border-b-black outline-none text-center w-[120px] ${errors.swornMonthPage10 ? "input-error" : ""
                                         }`}
                                 />
                                 ,{" "}
@@ -2767,7 +2917,7 @@ export default function MarriageCertificateCreateForm() {
                                     name="swornYearPage10"
                                     value={formData.page10.swornYearPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-b-black outline-none text-center w-[300px] ${errors.swornYear ? "input-error" : ""
+                                    className={`border-b border-b-black outline-none text-center w-[80px] ${errors.swornYearPage10 ? "input-error" : ""
                                         }`}
                                 />{" "}
                                 at{" "}
@@ -2776,25 +2926,35 @@ export default function MarriageCertificateCreateForm() {
                                     name="swornPlacePage10"
                                     value={formData.page10.swornPlacePage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-b-black outline-none text-center w-[300px] ${errors.swornPlace ? "input-error" : ""
+                                    className={`border-b border-b-black outline-none text-center w-[500px] ${errors.swornPlacePage10 ? "input-error" : ""
                                         }`}
-                                />{" "}
-                                issued on{" "}
+                                />{", "}
+                                Philippines, affiant who exhibited to me his Community Tax Cert. issued on{" "}
                                 <input
                                     type="text"
                                     name="swornIssuedOnPage10"
                                     value={formData.page10.swornIssuedOnPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-b-black outline-none text-center w-[300px] ${errors.swornIssuedOn ? "input-error" : ""
+                                    className={`border-b border-b-black outline-none text-center w-[120px] ${errors.swornIssuedOnPage10 ? "input-error" : ""
                                         }`}
                                 />
-                                ,{" "}
+                                ,
+                                <input
+                                    type="text"
+                                    name="swornIssuedOnPage102"
+                                    value={formData.page10.swornIssuedOnPage102}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    className={`border-b border-b-black outline-none text-center w-[120px] ${errors.swornIssuedOnPage102 ? "input-error" : ""
+                                        }`}
+                                />
+                                {" "}
+                                at{" "}
                                 <input
                                     type="text"
                                     name="swornIssuedAtPage10"
                                     value={formData.page10.swornIssuedAtPage10}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-b-black outline-none text-center w-[300px] ${errors.swornIssuedAt ? "input-error" : ""
+                                    className={`border-b border-b-black outline-none text-center w-[400px] ${errors.swornIssuedAtPage10 ? "input-error" : ""
                                         }`}
                                 />
                                 .

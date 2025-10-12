@@ -578,11 +578,27 @@
                 "required": "Witness 2 name is required.",
                 "minLength": "Witness 2 name must be at least 3 characters."
             }
+        },
+        "witness3Name": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Witness 3 name is required.",
+                "minLength": "Witness 3 name must be at least 3 characters."
+            }
+        },
+        "witness4Name": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Witness 4 name is required.",
+                "minLength": "Witness 4 name must be at least 3 characters."
+            }
         }
     },
     "page6": {
         "receivedByName": {
-            "required": true,
+            "required": false,
             "minLength": 3,
             "message": {
                 "required": "Received By name is required.",
@@ -590,7 +606,7 @@
             }
         },
         "receivedByTitle": {
-            "required": true,
+            "required": false,
             "minLength": 2,
             "message": {
                 "required": "Received By title is required.",
@@ -598,7 +614,7 @@
             }
         },
         "receivedByDate": {
-            "required": true,
+            "required": false,
             "type": "date",
             "message": {
                 "required": "Received By date is required.",
@@ -642,20 +658,68 @@
         }
     },
     "page7": {
-        "witness3Name": {
-            "required": true,
+        "witness5Name": {
+            "required": false,
             "minLength": 3,
             "message": {
-                "required": "Witness 3 name is required.",
-                "minLength": "Witness 3 name must be at least 3 characters."
+                "required": "Witness 5 name is required.",
+                "minLength": "Witness 5 name must be at least 3 characters."
             }
         },
-        "witness4Name": {
-            "required": true,
+        "witness6Name": {
+            "required": false,
             "minLength": 3,
             "message": {
-                "required": "Witness 4 name is required.",
-                "minLength": "Witness 4 name must be at least 3 characters."
+                "required": "Witness 6 name is required.",
+                "minLength": "Witness 6 name must be at least 3 characters."
+            }
+        },
+        "witness7Name": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Witness 7 name is required.",
+                "minLength": "Witness 7 name must be at least 3 characters."
+            }
+        },
+        "witness8Name": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Witness 8 name is required.",
+                "minLength": "Witness 8 name must be at least 3 characters."
+            }
+        },
+        "witness9Name": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Witness 9 name is required.",
+                "minLength": "Witness 9 name must be at least 3 characters."
+            }
+        },
+        "witness10Name": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Witness 10 name is required.",
+                "minLength": "Witness 10 name must be at least 3 characters."
+            }
+        },
+        "witness11Name": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Witness 11 name is required.",
+                "minLength": "Witness 11 name must be at least 3 characters."
+            }
+        },
+        "witness12Name": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Witness 12 name is required.",
+                "minLength": "Witness 12 name must be at least 3 characters."
             }
         },
         "affidavitOfficerName": {
@@ -815,6 +879,12 @@
                 "required": "Issued on date is required."
             }
         },
+        "swornIssuedOn2": {
+            "required": true,
+            "message": {
+                "required": "Issued on date is required."
+            }
+        },
         "swornIssuedAt": {
             "required": true,
             "minLength": 3,
@@ -855,6 +925,20 @@
                 "minLength": "Name must be at least 3 characters."
             }
         },
+        "affiantCivilStatus": {
+            "required": true,
+            "type": "enum",
+            "options": [
+                "single",
+                "married",
+                "divorced",
+                "widow",
+                "widower"
+            ],
+            "message": {
+                "required": "Affiant's civil status is required."
+            }
+        },
         "affiantAddress": {
             "required": true,
             "minLength": 5,
@@ -893,7 +977,13 @@
                 "boolean": "Value must be true or false."
             }
         },
-        "statement1MarriageBetween": {
+        "statement1SpouseName1": {
+            "required": false,
+            "message": {
+                "required": "Marriage parties are required."
+            }
+        },
+        "statement1SpouseName2": {
             "required": false,
             "message": {
                 "required": "Marriage parties are required."
@@ -995,6 +1085,22 @@
                 "minLength": "Citizenship must be at least 3 characters."
             }
         },
+        "citizenApplicant2": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Applicant's citizenship is required.",
+                "minLength": "Citizenship must be at least 3 characters."
+            }
+        },
+        "citizenSpouse2": {
+            "required": false,
+            "minLength": 3,
+            "message": {
+                "required": "Spouse's citizenship is required.",
+                "minLength": "Citizenship must be at least 3 characters."
+            }
+        },
         "reasonForDelay": {
             "required": true,
             "minLength": 5,
@@ -1064,8 +1170,14 @@
                 "required": "Place of oath is required.",
                 "minLength": "Place must be at least 3 characters."
             }
-        },
+        }, 
         "swornIssuedOnPage10": {
+            "required": true,
+            "message": {
+                "required": "Issued on (date) is required."
+            }
+        },
+        "swornIssuedOnPage102": {
             "required": true,
             "message": {
                 "required": "Issued on (date) is required."

@@ -132,79 +132,83 @@ export default function DeathCertificateView({ row }) {
                                 />
                             </div>
                         </div>
-                    
+                                            
                         {/* Age at Time of Death */}
                         <div className="space-y-2">
-                            <label className="block text-sm font-medium">Age at Time of Death</label>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                <div className="flex flex-col">
-                                    <div className="relative">
-                                        <input
-                                            type="number"
-                                            name="ageYears"
-                                            placeholder="Years"
-                                            min="0"
-                                            className="common-input w-full pr-16"
-                                            value={deceased.age_years || 0}
-                                            readOnly
-                                        />
-                                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
-                                            Years
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col">
-                                    <div className="relative">
-                                        <input
-                                            type="number"
-                                            name="ageDays"
-                                            placeholder="Days"
-                                            min="0"
-                                            max="365"
-                                            className="common-input w-full pr-16"
-                                            value={deceased.age_days || 0}
-                                            readOnly
-                                        />
-                                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
-                                            Days
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col">
-                                    <div className="relative">
-                                        <input
-                                            type="number"
-                                            name="ageHours"
-                                            placeholder="Hours"
-                                            min="0"
-                                            max="24"
-                                            className="common-input w-full pr-16"
-                                            value={deceased.age_hours || 0}
-                                            readOnly
-                                        />
-                                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
-                                            Hrs
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col">
-                                    <div className="relative">
-                                        <input
-                                            type="number"
-                                            name="ageMinutes"
-                                            placeholder="Minutes"
-                                            min="0"
-                                            max="60"
-                                            className="common-input w-full pr-16"
-                                            value={deceased.age_minutes || 0}
-                                            readOnly
-                                        />
-                                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
-                                            Min
-                                        </span>
-                                    </div>
-                                </div>
+                        <label className="block text-sm font-medium">Age at Time of Death</label>
+                        <div className="flex flex-col md:flex-row gap-4">
+                            {/* If 1 year or above */}
+                            <div className="flex-1">
+                            <label className="block text-sm font-medium">If 1 year or above</label>
+                            <input
+                                type="number"
+                                name="age_years"
+                                placeholder="Years"
+                                min="0"
+                                className="common-input w-full pr-16"
+                                value={deceased.age_years || 0}
+                                readOnly
+                            />
                             </div>
+
+                            {/* If under 1 year */}
+                            <div className="flex-1">
+                            <label className="block text-sm font-medium">If under 1 year</label>
+                            <div className="flex-1">
+                                <input
+                                type="number"
+                                name="age_months"
+                                placeholder="Months"
+                                min="0"
+                                max="12"
+                                className="common-input w-full pr-16"
+                                value={deceased.age_months || 0}
+                                readOnly
+                                />
+                            </div>
+                            <div className="flex-1 mt-2">
+                                <input
+                                type="number"
+                                name="age_days"
+                                placeholder="Days"
+                                min="0"
+                                max="365"
+                                className="common-input w-full pr-16"
+                                value={deceased.age_days || 0}
+                                readOnly
+                                />
+                            </div>
+                            </div>
+
+                            {/* If under 24 hours */}
+                            <div className="flex-1">
+                            <label className="block text-sm font-medium">If under 24 hours</label>
+                            <div className="flex-1">
+                                <input
+                                type="number"
+                                name="age_hours"
+                                placeholder="Hours"
+                                min="0"
+                                max="24"
+                                className="common-input w-full pr-16"
+                                value={deceased.age_hours || 0}
+                                readOnly
+                                />
+                            </div>
+                            <div className="flex-1 mt-2">
+                                <input
+                                type="number"
+                                name="age_minutes"
+                                placeholder="Minutes"
+                                min="0"
+                                max="60"
+                                className="common-input w-full pr-16"
+                                value={deceased.age_minutes || 0}
+                                readOnly
+                                />
+                            </div>
+                            </div>
+                        </div>
                         </div>
     
                         {/* Place of Death */}
@@ -422,9 +426,169 @@ export default function DeathCertificateView({ row }) {
                             </div>
                         </div>
                     </div>
-    
+<div className="mb-6 space-y-6">
+  <h2 className="text-lg text-center font-semibold">
+    For Children Aged 0 to 7 Days
+  </h2>
+
+  {/* Age of Mother & Length of Pregnancy */}
+  <div className="mb-8">
+    <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex-1">
+        <label className="block text-sm font-medium mb-1">
+          Age of Mother
+        </label>
+        <input
+          type="text"
+          name="aged_of_mother"
+          placeholder="Age of Mother"
+          className="w-full common-input"
+          value={deceased.aged_of_mother || ""}
+          readOnly
+        />
+      </div>
+
+      <div className="flex-1">
+        <label className="block text-sm font-medium mb-1">
+          Length of Pregnancy
+        </label>
+        <input
+          type="text"
+          name="length_of_pregnancy"
+          placeholder="In Complete Weeks"
+          className="w-full common-input"
+          value={deceased.length_of_pregnancy || ""}
+          readOnly
+        />
+      </div>
+    </div>
+  </div>
+
+  {/* Method of Delivery */}
+  <div className="p-2">
+    <label className="block w-full text-sm font-medium mb-1">
+      Method of Delivery
+    </label>
+    <input
+      type="text"
+      name="method_of_delivery"
+      placeholder="e.g. Normal Spontaneous Vertex, Others"
+      className="common-input w-full"
+      value={deceased.method_of_delivery || ""}
+      readOnly
+    />
+  </div>
+
+  {/* Type of Birth */}
+  <div className="mb-8">
+    <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex-1">
+        <label className="block text-sm font-medium mb-1">
+          Type of Birth
+        </label>
+        <input
+          type="text"
+          name="type_of_birth"
+          placeholder="Single, Twin, Triplets, etc."
+          className="w-full common-input"
+          value={deceased.type_of_birth || ""}
+          readOnly
+        />
+      </div>
+
+      <div className="flex-1">
+        <label className="block text-sm font-medium mb-1">
+          If Multiple Birth
+        </label>
+        <input
+          type="text"
+          name="if_multiple_birth"
+          placeholder="First, Second, Third, etc."
+          className="w-full common-input"
+          value={deceased.if_multiple_birth || ""}
+          readOnly
+        />
+      </div>
+    </div>
+  </div>
+
+  {/* Medical Certificate Section */}
+  <div className="flex flex-col items-center">
+        <h2 className="text-lg text-center font-semibold">Medical Certificate</h2>
+        <label className="text-center">(if the deceased is aged 7 days or below)</label>
+    </div>
+
+  <div>
+    <label className="block text-sm font-medium">
+      Main Disease Condition of Infant
+    </label>
+    <input
+      type="text"
+      name="main_disease_condition_of_infant"
+      className="w-full common-input"
+      value={deceased.main_disease_condition_of_infant || ""}
+      readOnly
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium">
+      Other Diseases Conditions of Infant
+    </label>
+    <input
+      type="text"
+      name="other_diseases_conditions_of_infant"
+      className="w-full common-input"
+      value={deceased.other_diseases_conditions_of_infant || ""}
+      readOnly
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium">
+      Main Maternal Disease Condition Affecting Infant
+    </label>
+    <input
+      type="text"
+      name="main_maternal_disease_condition_affecting_infant"
+      className="w-full common-input"
+      value={deceased.main_maternal_disease_condition_affecting_infant || ""}
+      readOnly
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium">
+      Other Maternal Disease Condition Affecting Infant
+    </label>
+    <input
+      type="text"
+      name="other_maternal_disease_condition_affecting_infant"
+      className="w-full common-input"
+      value={deceased.other_maternal_disease_condition_affecting_infant || ""}
+      readOnly
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-medium">
+      Other Relevant Circumstances
+    </label>
+    <input
+      type="text"
+      name="other_relevant_circumstances"
+      className="w-full common-input"
+      value={deceased.other_relevant_circumstances || ""}
+      readOnly
+    />
+  </div>
+</div>
+
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Medical Certificate</h2>
+                        <div className="flex flex-col items-center">
+                            <h2 className="text-lg text-center font-semibold">Medical Certificate</h2>
+                            <label className="text-center">(if the deceased is aged 8 days or over)</label>
+                        </div>
                         {/* Causes of Death */}
                         <div>
                             <label className="block text-sm font-medium">Immediate Cause</label>
@@ -491,7 +655,7 @@ export default function DeathCertificateView({ row }) {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium">Maternal Condition (if applicable)</label>
+                            <label className="block text-sm font-medium">Maternal Condition (if the deceased is female aged 15-49 years old)</label>
                             <select
                                 name="maternalCondition"
                                 className="w-full common-input"
@@ -561,25 +725,12 @@ export default function DeathCertificateView({ row }) {
                         {/* Attendant Type */}
                         <div className="p-2">
                             <label className="block w-full text-sm font-medium mb-1">Attended By</label>
-                            <select
-                                name="attendant"
-                                className="common-input w-full"
-                                value={deceased.attendant || ''}
-                                readOnly
-                            >
-                                <option value="">Select</option>
-                                <option value="Private Physician">Private Physician</option>
-                                <option value="Public Health Authority">Public Health Authority</option>
-                                <option value="Hospital">Hospital</option>
-                                <option value="None">None</option>
-                                <option value="Others">Others (Specify)</option>
-                            </select>
                             <input
                                 type="text"
-                                name="attendantOthersSpecify"
+                                name="attendant"
                                 placeholder="Specify"
                                 className="common-input mt-2 w-full"
-                                value={deceased.attendant_others_specify || ''} // Assuming a column for this
+                                value={deceased.attendant || ''}
                                 readOnly
                             />
                         </div>
@@ -771,6 +922,8 @@ export default function DeathCertificateView({ row }) {
                             </div>
                         </div>
                         {/* Transfer Permit */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
                         <div>
                             <label className="block text-sm font-medium">Transfer Permit Number</label>
                             <input
@@ -780,6 +933,17 @@ export default function DeathCertificateView({ row }) {
                                 value={deceased.transfer_permit || ''}
                                 readOnly
                             />
+                        </div>
+                            <div>
+                                <label className="block text-sm font-medium">Date Issued</label>
+                                <input
+                                    type="date"
+                                    name="transferPermitDate"
+                                    className="w-full common-input"
+                                    value={deceased.transfer_permit_date || ''}
+                                    readOnly
+                                />
+                            </div>
                         </div>
                         {/* Cemetery */}
                         <div>
@@ -1008,7 +1172,7 @@ export default function DeathCertificateView({ row }) {
                     </div>
     
                     <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Postmortem & Embalmer Certifications</h2>
+                        <h2 className="text-lg text-center font-semibold">Postmortem Certifications</h2>
                         {/* Postmortem Certificate */}
                         <div>
                             <label className="block text-sm font-medium">Cause of Death (from Autopsy)</label>
@@ -1060,6 +1224,7 @@ export default function DeathCertificateView({ row }) {
                                 readOnly
                             />
                         </div>
+                        <h2 className="text-lg text-center font-semibold">Embalmer Certification</h2>
                         {/* Embalmer Certification */}
                         <div>
                             <label className="block text-sm font-medium">Embalmer Name</label>
@@ -1068,6 +1233,26 @@ export default function DeathCertificateView({ row }) {
                                 name="embalmerName"
                                 className="w-full common-input"
                                 value={deceased.embalmer_name || ''}
+                                readOnly
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium">Title/Designation</label>
+                            <input
+                                type="text"
+                                name="embalmerTitle"
+                                className="w-full common-input"
+                                value={deceased.embalmer_title || ''}
+                                readOnly
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium">Address</label>
+                            <input
+                                type="text"
+                                name="embalmerAddress"
+                                className="w-full common-input"
+                                value={deceased.embalmer_address || ''}
                                 readOnly
                             />
                         </div>

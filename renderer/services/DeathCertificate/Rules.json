@@ -84,6 +84,17 @@
         "max": "Age cannot exceed 300."
       }
     }, 
+    "ageMonths": {
+      "required": false,
+      "type": "number",
+      "min": 0,
+      "max": 12,
+      "message": {
+        "number": "Age in months must be a valid number.",
+        "min": "Age in months cannot be less than 0.",
+        "max": "Age in months cannot exceed 12."
+      }
+    },
     "ageDays": {
       "required": false,
       "type": "number",
@@ -273,8 +284,91 @@
     }
   },
   "page4": {
+    "agedOfMother": {
+      "required": false,
+      "maxLength": 10,
+      "message": {
+        "maxLength": "Age of mother must not exceed 10 characters."
+      }
+    },
+    "methodOfDelivery": {
+      "required": false,
+      "type": "enum",
+      "options": ["Normal Spontaneous Vertex", "Others"],
+      "message": {
+      "enum": "Please select a valid method of delivery."
+      }
+    },
+    "methodOfDeliverySpecify": {
+      "requiredIf": "methodOfDelivery === 'Other",
+      "type": "string",
+      "maxLength": 100,
+      "message": {
+      "requiredIf": "Please specify other type of method of delivery.",
+      "maxLength": "Specification must not exceed 100 characters."
+      }
+    },
+    "lengthOfPregnancy": {
+      "required": false,
+      "maxLength": 50,
+      "message": {
+        "maxLength": "Length of pregnancy must not exceed 50 characters."
+      }
+    },
+    "typeOfBirth": {
+      "required": false,
+      "maxLength": 50,
+      "message": {
+        "maxLength": "Type of birth must not exceed 50 characters."
+      }
+    },
+    "ifMultipleBirth": {
+      "required": false,
+      "maxLength": 50,
+      "message": {
+        "maxLength": "If multiple birth must not exceed 50 characters."
+      }
+    },
+
+    "mainDiseaseConditionOfInfant": {
+      "required": false,
+      "maxLength": 150,
+      "message": {
+        "maxLength": "Main disease condition of infant must not exceed 150 characters."
+      }
+    },
+    "otherDiseasesConditionsOfInfant": {
+      "required": false,
+      "maxLength": 150,
+      "message": {
+        "maxLength": "Other diseases conditions of infant must not exceed 150 characters."
+      }
+    },
+    "mainMaternalDiseaseConditionAffectingInfant": {
+      "required": false,
+      "maxLength": 150,
+      "message": {
+        "maxLength": "Main maternal disease condition affecting infant must not exceed 150 characters."
+      }
+    },
+    "otherMaternalDiseaseConditionAffectingInfant": {
+      "required": false,
+      "maxLength": 150,
+      "message": {
+        "maxLength": "Other maternal disease condition affecting infant must not exceed 150 characters."
+      }
+    },
+    "otherRelevantCircumstances": {
+      "required": false,
+      "maxLength": 150,
+      "message": {
+        "maxLength": "Other relevant circumstances must not exceed 150 characters."
+      }
+    }
+  },
+  "page5": {
     "immediateCause": {
-      "required": true,
+      "required": false,
       "type": "string",
       "minLength": 2,
       "maxLength": 150,
@@ -341,7 +435,7 @@
       }
     }
   },
-  "page5": {
+  "page6": {
     "mannerOfDeath": {
       "required": true,
       "type": "enum",
@@ -404,7 +498,7 @@
       }
     }
   },
-  "page6": {
+  "page7": {
     "attendedDeceasedGroup": {
       "requiredOneOf": [
       "notAttendedDeceased",
@@ -465,7 +559,7 @@
       }
     }
   },
-  "page7": {
+  "page8": {
     "disposalType": {
       "required": true,
       "type": "string",
@@ -503,6 +597,14 @@
         "maxLength": "Transfer permit must not exceed 100 characters"
       }
     },
+    "transferPermitDate": {
+      "required": false,
+      "type": "date",
+      "message": {
+        "required": "Transfer permit date is required",
+        "date": "Invalid date format"
+      }
+    },
     "cemeteryName": {
       "required": true,
       "minLength": 2, 
@@ -524,7 +626,7 @@
       }
     }
   },
-  "page8": {
+  "page9": {
     "informantName": {
       "required": true,
       "minLength": 3,
@@ -592,7 +694,7 @@
       }
     }
   },
-  "page9": {
+  "page10": {
     "receivedName": {
       "required": true,
       "minLength": 3,
@@ -650,7 +752,7 @@
       }
     }
   },
-  "page10": {
+  "page11": {
     "remarks": {
       "required": false,
       "maxLength": 500,
@@ -666,7 +768,7 @@
       }
     }
   },
-  "page11": {
+  "page12": {
     "postmortemCause": {
       "required": false,
       "maxLength": 200,
@@ -711,6 +813,20 @@
         "maxLength": "Name must not exceed 100 characters"
       }
     },
+    "embalmerTitle": {
+      "required": false,
+      "maxLength": 50,
+      "message": {
+        "maxLength": "Title must not exceed 50 characters"
+      }
+    },
+    "embalmerAddress": {
+      "required": false,
+      "maxLength": 150,
+      "message": {
+        "maxLength": "Address must not exceed 150 characters"
+      }
+    },
     "embalmerLicense": {
       "required": false,
       "maxLength": 50,
@@ -740,7 +856,7 @@
       }
     }
   },
-  "page12": {
+  "page13": {
     "affiantName": {
       "required": false,
       "minLength": 3,
@@ -830,7 +946,7 @@
       }
     }
   },
-  "page13": {
+  "page14": {
     "juratDay": {
       "required": false,
       "type": "string",
@@ -918,7 +1034,7 @@
       }
     }
   },
-  "page14": {
+  "page15": {
     "confirmation": {
       "required": true,
       "type": "boolean",

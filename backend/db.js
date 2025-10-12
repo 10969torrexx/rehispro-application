@@ -221,6 +221,7 @@ db.serialize(() => {
       date_of_death DATE,
       date_of_birth DATE,
       age_years INTEGER,
+      age_months INTEGER,
       age_days INTEGER,
       age_hours INTEGER,
       age_minutes INTEGER,
@@ -245,8 +246,21 @@ db.serialize(() => {
       mother_first_name TEXT,
       mother_middle_name TEXT,
       mother_last_name TEXT,
+
+      -- Page 4 - For Children Aged 0 to 7 Days
+      aged_of_mother TEXT,
+      method_of_delivery TEXT,
+      length_of_pregnancy TEXT,
+      type_of_birth TEXT,
+      if_multiple_birth TEXT,
+
+      main_disease_condition_of_infant TEXT,
+      other_diseases_conditions_of_infant TEXT,
+      main_maternal_disease_condition_affecting_infant TEXT,
+      other_maternal_disease_condition_affecting_infant TEXT,
+      other_relevant_circumstances TEXT,
   
-      -- Page 4 - Medical Certificate
+      -- Page 5 - Medical Certificate
       immediate_cause TEXT,
       antecedent_cause TEXT,
       underlying_cause TEXT,
@@ -256,7 +270,7 @@ db.serialize(() => {
       other_conditions TEXT,
       maternal_condition TEXT,
   
-      -- Page 5 - Manner of Death & Attendant
+      -- Page 6 - Manner of Death & Attendant
       manner_of_death TEXT,
       autopsy TEXT,
       place_occurrence TEXT,
@@ -264,7 +278,7 @@ db.serialize(() => {
       attendant_from DATE,
       attendant_to DATE,
   
-      -- Page 6 - Certification of Death
+      -- Page 7 - Certification of Death
       attended_deceased TEXT,
       time_of_death TEXT,
       physician_name TEXT,
@@ -272,15 +286,16 @@ db.serialize(() => {
       physician_address TEXT,
       health_officer_name TEXT,
   
-      -- Page 7 - Corpse Disposal
+      -- Page 8 - Corpse Disposal
       disposal_type TEXT,
       permit_number TEXT,
       permit_date DATE,
       transfer_permit TEXT,
+      transfer_permit_date DATE,
       cemetery_name TEXT,
       cemetery_address TEXT,
   
-      -- Page 8 - Informant & Prepared By
+      -- Page 9 - Informant & Prepared By
       informant_name TEXT,
       informant_relationship TEXT,
       informant_address TEXT,
@@ -289,7 +304,7 @@ db.serialize(() => {
       prepared_title TEXT,
       prepared_date DATE,
   
-      -- Page 9 - Received & Registered By
+      -- Page 10 - Received & Registered By
       received_name TEXT,
       received_title TEXT,
       received_date DATE,
@@ -297,23 +312,25 @@ db.serialize(() => {
       registrar_title TEXT,
       registrar_date DATE,
   
-      -- Page 10 - Remarks / Annotations
+      -- Page 11 - Remarks / Annotations
       remarks TEXT,
       office_boxes TEXT, -- JSON stored as TEXT
   
-      -- Page 11 - Postmortem & Embalmer
+      -- Page 12 - Postmortem & Embalmer
       postmortem_cause TEXT,
       postmortem_name TEXT,
       postmortem_title TEXT,
       postmortem_address TEXT,
       postmortem_date DATE,
       embalmer_name TEXT,
+      embalmer_title TEXT,
+      embalmer_address TEXT,
       embalmer_license TEXT,
       embalmer_issued_on DATE,
       embalmer_issued_at TEXT,
       embalmer_expiry DATE,
   
-      -- Page 12 - Affidavit for Delayed Registration
+      -- Page 13 - Affidavit for Delayed Registration
       affiant_name TEXT,
       affiant_civil_status TEXT,
       address TEXT,
@@ -325,7 +342,7 @@ db.serialize(() => {
       cause_of_death TEXT,
       reason_delay TEXT,
   
-      -- Page 13 - Affidavit Jurat
+      -- Page 14 - Affidavit Jurat
       jurat_day TEXT,
       jurat_month_year TEXT,
       jurat_place TEXT,
@@ -336,7 +353,7 @@ db.serialize(() => {
       admin_position TEXT,
       admin_address TEXT,
   
-      -- Page 14 - Confirmation
+      -- Page 15 - Confirmation
       confirmation INTEGER DEFAULT 0,
   
       -- Add timestamps
@@ -346,9 +363,7 @@ db.serialize(() => {
     );
   `);
 
-  // db.run  (
-  //   `DROP TABLE marriage_certificates`
-  // )
+  // db.run  (`DROP TABLE IF EXISTS marriage_certificates`);
   // TODO: Create Table for Marriage Certificate Form
   db.run(`
     CREATE TABLE IF NOT EXISTS marriage_certificates (
@@ -458,6 +473,8 @@ db.serialize(() => {
         officer_religion TEXT,
         witness1_name TEXT,
         witness2_name TEXT,
+        witness3_name TEXT,
+        witness4_name TEXT,
 
         -- Page 6: Registrar Details
         received_by_name TEXT,
@@ -470,8 +487,14 @@ db.serialize(() => {
         civil_registrar TEXT,
 
         -- Page 7: Additional Witnesses and Affidavit
-        witness3_name TEXT,
-        witness4_name TEXT,
+        witness5_name TEXT,
+        witness6_name TEXT,
+        witness7_name TEXT,
+        witness8_name TEXT,
+        witness9_name TEXT,
+        witness10_name TEXT,
+        witness11_name TEXT,
+        witness12_name TEXT,
         affidavit_officer_name TEXT,
         affidavit_officer_organization TEXT,
         affidavit_officer_address TEXT,
@@ -495,6 +518,7 @@ db.serialize(() => {
         sworn_year TEXT,
         sworn_at TEXT,
         sworn_issued_on TEXT,
+        sworn_issued_on2 TEXT,
         sworn_issued_at TEXT,
         admin_officer_name TEXT,
         admin_officer_title TEXT,
@@ -502,13 +526,15 @@ db.serialize(() => {
 
         -- Page 9: Affiant and Ceremony Details
         affiant_name TEXT,
+        affiant_civil_status TEXT,
         affiant_address TEXT,
         statement1_option_a INTEGER DEFAULT 0,
         statement1_marriage_with TEXT,
         statement1_place_a TEXT,
         statement1_date_a TEXT,
         statement1_option_b INTEGER DEFAULT 0,
-        statement1_marriage_between TEXT,
+        statement1_spouse_name_1 TEXT,
+        statement1_spouse_name_2 TEXT,
         statement1_place_b TEXT,
         statement1_date_b TEXT,
         solemnizing_officer TEXT,
@@ -524,6 +550,8 @@ db.serialize(() => {
         article_number TEXT,
         citizen_applicant TEXT,
         citizen_spouse TEXT,
+        citizen_applicant2 TEXT,
+        citizen_spouse2 TEXT,
         reason_for_delay TEXT,
         affidavit_day_page9 TEXT,
         affidavit_month_page9 TEXT,
@@ -536,6 +564,7 @@ db.serialize(() => {
         sworn_year_page10 TEXT,
         sworn_place_page10 TEXT,
         sworn_issued_on_page10 TEXT,
+        sworn_issued_on_page102 TEXT,
         sworn_issued_at_page10 TEXT,
         administering_officer_name TEXT,
         officer_position_page10 TEXT,
