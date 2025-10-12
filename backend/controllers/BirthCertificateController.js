@@ -59,6 +59,7 @@ function create (req, res) {
             // Page 1 - Child Information
             province: "province",
             city: "city",
+            registryNumber: "registry_number",
             childFirstName: "child_first_name",
             childMiddleName: "child_middle_name",
             childLastName: "child_last_name",

@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 
 export default function BirthCertificateView({ row }) {
-    const [loading, setLoading] = useState(true);
     const [birth, setBirth] = useState({});
   
     useEffect(() => {
@@ -27,7 +26,7 @@ export default function BirthCertificateView({ row }) {
       };
   
       fetchData();
-    }, [row]); // ✅ re-fetch if row changes
+    }, [row]); 
 
     return (
       <>
