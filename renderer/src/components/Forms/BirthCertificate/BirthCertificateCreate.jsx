@@ -1150,7 +1150,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             {/* Birth Details */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Time of Birth</label>
+                                    <label className="block text-sm font-medium mb-1">21b. Time of Birth</label>
                                     <input
                                         type="time"
                                         name="birthTime"
@@ -1161,7 +1161,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     {errors.birthTime && <ErrorMessages errors={errors.birthTime} />}
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Date of Birth</label>
+                                    <label className="block text-sm font-medium mb-1">21b. Date of Birth</label>
                                     <input
                                         type="date"
                                         name="birthDate"
@@ -1176,7 +1176,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             {/* Attendant Details */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Name in Print</label>
+                                    <label className="block text-sm font-medium mb-1">21b. Name in Print</label>
                                     <input
                                         type="text"
                                         name="attendantName"
@@ -1188,7 +1188,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     {errors.attendantName && <ErrorMessages errors={errors.attendantName} />}
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Title or Position</label>
+                                    <label className="block text-sm font-medium mb-1">21b. Title or Position</label>
                                     <input
                                         type="text"
                                         name="attendantTitle"
@@ -1205,7 +1205,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                             
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Address</label>
+                                    <label className="block text-sm font-medium mb-1">21b. Address</label>
                                     <input
                                         type="text"
                                         name="attendantAddress"
@@ -1219,7 +1219,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
 
                                 <div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-1">Signature</label>
+                                        <label className="block text-sm font-medium mb-1">21b. Signature</label>
                                         <SignaturePlaceholder />
                                     </div>
                                 </div>
