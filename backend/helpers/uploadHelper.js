@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { writeLog } = require('../utils/logger');
 
-const uploadDir = path.join(process.cwd(), 'backend/uploads');
+const uploadDir = path.join(process.cwd(), 'backend/uploads/birthCertificates');
 
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });

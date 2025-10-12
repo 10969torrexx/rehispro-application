@@ -3,10 +3,12 @@ import { SignaturePlaceholder } from '@components';
 import { BirthCertServices } from "@services";
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+import { BirthCertificate } from '@enums';
+import { capitalizeFirst } from '@myTools';
 
 export default function BirthCertificateView({ row }) {
     const [birth, setBirth] = useState({});
-  
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
       if (!row) return; // ✅ avoid undefined
       const fetchData = async () => {
@@ -66,7 +68,7 @@ export default function BirthCertificateView({ row }) {
                                 name="registry_number"
                                 placeholder="Registry No."
                                 className="w-full common-input"
-                                value={birth.registryNumber || ""}
+                                value={birth.registry_number || ""}
                                 readOnly
                             />
                         </div>
@@ -144,7 +146,7 @@ export default function BirthCertificateView({ row }) {
                                 <input type="text" 
                                     name="placeOfBirthBarangay" 
                                     className={`w-full common-input`}
-                                    value={birth.placeOfBirthBarangay}
+                                    value={birth.place_of_birth_barangay}
                                     placeholder='Name of Hospital / Clinic / Institution / House No., St, Barangay'
                                     readOnly
                                 />
@@ -154,7 +156,7 @@ export default function BirthCertificateView({ row }) {
                                 <input type="text" 
                                     name="placeOfBirthCity" 
                                     className={`w-full common-input`}
-                                    value={birth.placeOfBirthCity}
+                                    value={birth.place_of_birth_city}
                                     placeholder='City / Municipality'
                                     readOnly
                                 />
@@ -164,7 +166,7 @@ export default function BirthCertificateView({ row }) {
                                 <input type="text" 
                                     name="placeOfBirthProvince" 
                                     className={`w-full common-input`}
-                                    value={birth.placeOfBirthProvince}
+                                    value={birth.place_of_birth_province}
                                     placeholder='Province'
                                     readOnly
                                 />
@@ -611,7 +613,7 @@ export default function BirthCertificateView({ row }) {
                                     type="checkbox"
                                     className="custom-checkbox"
                                     name="attendant_physician"
-                                    checked={birth.attendant_physician !== 0? true : false}
+                                    checked={birth.attendant === capitalizeFirst(BirthCertificate.AttendantTypes.PHYSICIAN) ? true : false}
                                     readOnly
                                 />
                                 <span>Physician</span>
@@ -621,7 +623,7 @@ export default function BirthCertificateView({ row }) {
                                     type="checkbox"
                                     className="custom-checkbox"
                                     name="attendant_nurse"
-                                    checked={birth.attendant_nurse !== 0? true : false}
+                                    checked={birth.attendant === capitalizeFirst(BirthCertificate.AttendantTypes.NURSE) ? true : false}
                                     readOnly
                                 />
                                 <span>Nurse</span>
@@ -631,7 +633,7 @@ export default function BirthCertificateView({ row }) {
                                     type="checkbox"
                                     className="custom-checkbox"
                                     name="attendant_midwife"
-                                    checked={birth.attendant_midwife !== 0? true : false}
+                                    checked={birth.attendant === capitalizeFirst(BirthCertificate.AttendantTypes.MIDWIFE) ? true : false}
                                     readOnly
                                 />
                                 <span>Midwife</span>
@@ -641,7 +643,7 @@ export default function BirthCertificateView({ row }) {
                                     type="checkbox"
                                     className="custom-checkbox"
                                     name="attendant_hilot"
-                                    checked={birth.attendant_hilot !== 0? true : false}
+                                    checked={birth.attendant === capitalizeFirst(BirthCertificate.AttendantTypes.HILOT) ? true : false}
                                     readOnly
                                 />
                                 <span>Hilot</span>
@@ -655,7 +657,7 @@ export default function BirthCertificateView({ row }) {
                                     type="checkbox"
                                     className="custom-checkbox"
                                     name="attendant_others"
-                                    checked={birth.attendant_others !== 0? true : false}
+                                    checked={birth.attendant === BirthCertificate.AttendantTypes.OTHER ? true : false}
                                     readOnly
                                 />
                                 <span>Others (Specify)</span>
@@ -665,7 +667,10 @@ export default function BirthCertificateView({ row }) {
                                 name="attendant_others_specify"
                                 placeholder="Specify"
                                 className="common-input w-full mt-2 sm:mt-0"
-                                value={birth.attendant_others_specify || ""}
+                                value={
+                                    Object.values(BirthCertificate.AttendantTypes).includes(birth.attendant?.toLowerCase())
+                                    ? "" : (birth.attendant || "")
+                                }
                                 readOnly
                             />
                         </div>
