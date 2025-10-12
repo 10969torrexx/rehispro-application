@@ -20,6 +20,16 @@
         "maxLength": "City must not exceed 100 characters."
       }
     },
+    "registryNumber": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Registry Number is required.",
+        "minLength": "Registry Number must be at least 2 characters.",
+        "maxLength": "Registry Number must not exceed 100 characters."
+      }
+    },
     "childFirstName": {
       "required": true,
       "minLength": 2,
@@ -64,6 +74,33 @@
         "date": "Invalid Date of Birth."
       }
     },
+    "placeOfBirthBarangay": {
+      "required": true,
+      "type": "string",
+      "minLength": 4,
+      "message": {
+        "required": "Place of Birth (Barangay) is required",
+        "minLength": "Place of Birth (Barangay) must be at least 4 characters."
+      }
+    },
+    "placeOfBirthCity": {
+      "required": true,
+      "type": "string",
+      "minLength": 4,
+      "message": {
+        "required": "Place of Birth (City) is required",
+        "minLength": "Place of Birth (City) must be at least 4 characters."
+      }
+    },
+    "placeOfBirthProvince": {
+      "required": true,
+      "type": "string",
+      "minLength": 4,
+      "message": {
+        "required": "Place of Birth (Province) is required",
+        "minLength": "Place of Birth (Province) Barangay must be at least 4 characters."
+      }
+    },
     "typeOfBirth": {
       "required": true,
       "maxLength": 50,
@@ -73,10 +110,11 @@
       }
     },
     "multipleBirthOrder": {
-      "required": false,
+      "required": true,
       "maxLength": 20,
       "message": {
-        "maxLength": "Order must not exceed 20 characters."
+        "maxLength": "Order must not exceed 20 characters.",
+        "required": "Multiple birth order is required."
       }
     },
     "birthOrder": {
@@ -91,12 +129,10 @@
       "required": true,
       "type": "number",
       "min": 0.1,
-      "max": 20,
       "message": {
         "required": "Weight at Birth is required.",
         "number": "Weight must be a valid number.",
-        "min": "Weight must be at least 0.1 kg.",
-        "max": "Weight must not exceed 20 kg."
+        "min": "Weight must be at least 0.1 grams."
       }
     }
   },
@@ -382,7 +418,7 @@
         "attendantHilot",
         "attendantOthers"
       ],
-      "message": "Please select at least one birth attendant."
+      "message": "Please select at least one type of attendant."
     },
     "attendantPhysician": {
       "required": false,
@@ -413,23 +449,6 @@
       "requiredIf": "attendantOthers",
       "type": "string",
       "message": "If 'Others' is checked, please specify the attendant."
-    },
-    "dateOfAttendance": {
-      "required": true,
-      "type": "date",
-      "message": {
-        "required": "Date of attendance is required.",
-        "date": "Date of attendance must be a valid date."
-      }
-    },
-    "attendantNameTitle": {
-      "required": true,
-      "type": "string",
-      "minLength": 3,
-      "message": {
-        "required": "Name and title of attendant is required.",
-        "minLength": "Name and title must be at least 3 characters."
-      }
     }
   },
   "page6": {
@@ -444,7 +463,8 @@
       "required": true,
       "type": "date",
       "message": {
-        "required": "Please provide the date of birth."
+        "required": "Please provide the date of birth.",
+        "date": "Invalid date format."
       }
     },
     "attendantName": {
@@ -471,20 +491,6 @@
       "message": {
         "required": "Please enter a complete address (at least 10 characters).",
         "minLength": "Address must be at least 10 characters."
-      }
-    },
-    "attendantDateSigned": {
-      "required": true,
-      "type": "date",
-      "message": {
-        "required": "Please provide the date the form was signed."
-      }
-    },
-    "attendantSignature": {
-      "required": true,
-      "type": "string",
-      "message": {
-        "required": "Signature is required."
       }
     }
   },
@@ -520,7 +526,8 @@
       "required": true,
       "type": "date",
       "message": {
-        "required": "Date of informant’s certification is required."
+        "required": "Date of informant’s certification is required.",
+        "date": "Invalid date format."
       }
     },
 
@@ -546,7 +553,8 @@
       "required": true,
       "type": "date",
       "message": {
-        "required": "Date of preparation is required."
+        "required": "Date of preparation is required.",
+        "date": "Invalid date format."
       }
     }
   },
@@ -673,7 +681,7 @@
   },
   "page11": {
     "juratDay": {
-      "required": true,
+      "required": false,
       "type": "string",
       "maxLength": 10,
       "message": {
@@ -682,7 +690,7 @@
       }
     },
     "juratMonthYear": {
-      "required": true,
+      "required": false,
       "type": "string",
       "maxLength": 20,
       "message": {
@@ -691,7 +699,7 @@
       }
     },
     "juratAffiant1": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -701,7 +709,7 @@
       }
     },
     "juratAffiant2": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -711,7 +719,7 @@
       }
     },
     "ctcNumber": {
-      "required": true,
+      "required": false,
       "minLength": 3,
       "maxLength": 30,
       "message": {
@@ -721,7 +729,7 @@
       }
     },
     "ctcDateIssued": {
-      "required": true,
+      "required": false,
       "type": "date",
       "message": {
         "required": "Date issued is required.",
@@ -729,7 +737,7 @@
       }
     },
     "ctcPlaceIssued": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -739,7 +747,7 @@
       }
     },
     "adminName": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -749,7 +757,7 @@
       }
     },
     "adminPosition": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -759,7 +767,7 @@
       }
     },
     "adminAddress": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 150,
       "message": {
@@ -771,7 +779,7 @@
   },
   "page12": {
     "affiantName": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 100,
       "message": {
@@ -781,7 +789,7 @@
       }
     },
     "civilStatus": {
-      "required": true,
+      "required": false,
       "type": "enum",
       "options": ["Single", "Married", "Divorced", "Widow / widower"],
       "message": {
@@ -790,7 +798,7 @@
       }
     },
     "address": {
-      "required": true,
+      "required": false,
       "minLength": 2,
       "maxLength": 150,
       "message": {

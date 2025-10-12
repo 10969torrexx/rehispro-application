@@ -2,8 +2,7 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
 const isDev = !app.isPackaged;
-
-let backendServer; // store server instance
+let backendServer;
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -23,9 +22,8 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   backendServer = require('./backend/server');
-
   createWindow();
 
   app.on('activate', () => {
@@ -33,14 +31,16 @@ app.whenReady().then(() => {
   });
 });
 
-app.on('window-all-closed', () => {
-  // localStorage.clear();
+app.on("before-quit", () => {
   if (backendServer) {
-    backendServer.close(() => {
-      console.log('Backend server stopped');
-      if (process.platform !== 'darwin') app.quit();
-    });
-  } else {
-    if (process.platform !== 'darwin') app.quit();
+    try {
+      backendServer.close(() => console.log("🛑 Node backend stopped"));
+    } catch (e) {
+      console.error("Failed to stop backend server", e);
+    }
   }
+});
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
 });

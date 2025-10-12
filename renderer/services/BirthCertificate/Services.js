@@ -3,7 +3,7 @@
  * @params {Object} formData - The form data to insert
  */
 export async function insertBirthCertificate (formData) {
-    console.log("📤 Sending formData:", formData);   // 👈 add this
+    console.log("📤 Sending formData:", formData);
     try {
         const response = await fetch('http://localhost:3001/birth/create', {
             method: 'POST',
@@ -44,6 +44,30 @@ export async function listBirthCertificate() {
     } catch (error) {
         console.error('[birth form] Error fetching birth certificates:', error);
         throw error;
+    }
+}
+
+/**
+ * TODO: this will handle the uploading process of the files
+ * @params {FormData} formData - The form data containing files to upload
+ */
+export async function uploadFiles(formData) {
+    try {
+        const response = await fetch('http://localhost:3001/birth/upload-and-scan', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to upload files');
+        }
+        const parsedResponse = await response.json();
+        return parsedResponse;
+    } catch (error) {
+        console.error(error);
+        throw new Error(JSON.stringify({
+            'error': error
+        }))
     }
 }
 

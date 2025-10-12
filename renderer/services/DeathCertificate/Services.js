@@ -7,7 +7,7 @@
  * @param {Object} formData - The form data to insert
  */
 export async function insertDeathCertificate(formData) {
-    console.log("📤 Sending formData:", formData);   // 👈 add this
+    console.log("📤 Sending formData:", formData);
     try {
         const response = await fetch('http://localhost:3001/death/create', {
             method: 'POST',

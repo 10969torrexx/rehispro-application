@@ -1,8 +1,7 @@
-const { data } = require('autoprefixer');
 const db = require('../db');
-const bcrypt = require('bcryptjs');
 const { writeLog } = require('../utils/logger');
-const { logQuery, interpolateQuery } = require('../utils/querytrace');
+const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
+const { callPythonOCR } = require('../services/OCRService');
 
 function create (req, res) {
     try {
@@ -11,16 +10,47 @@ function create (req, res) {
             return res.status(400).json({ success: false, message: 'No Data' });
         }
 
-        // 🔹 Flatten directly (your frontend already sends structured formData)
         const flatData = formData;
+        writeLog(`[info] [BirthCertificateController][create] Received data: ${JSON.stringify(flatData)}`);
 
-        // 🔹 Validate creatorId
+        //TODO: process the attendant value
+        const attendantMap = {
+            attendantPhysician: "Physician",
+            attendantNurse: "Nurse",
+            attendantMidwife: "Midwife",
+            attendantHilot: "Hilot",
+        };
+
+        let attendantValue = "";
+        for (const key in attendantMap) {
+            if (flatData[key] == "on" || flatData[key] === true) {
+                attendantValue = attendantMap[key];
+                break;
+            }
+        }
+
+        if (
+            !attendantValue &&
+            (flatData.attendantOthers === "on" || flatData.attendantOthers === true)
+        ) {
+            attendantValue = flatData.attendantOthersSpecify?.trim() || "";
+        }
+
+        flatData.attendant = attendantValue || "";
+        delete flatData.attendantPhysician;
+        delete flatData.attendantNurse;
+        delete flatData.attendantMidwife;
+        delete flatData.attendantHilot;
+        delete flatData.attendantOthers;
+        delete flatData.attendantOthersSpecify;
+
+        writeLog(`[info] [BirthCertificateController][create] Processed flat data: ${JSON.stringify(flatData)}`);
+
         const creatorId = Number(flatData.creatorId);
         if (!creatorId || isNaN(creatorId) || creatorId <= 0) {
             return res.status(400).json({ success: false, message: 'Invalid or missing creator ID' });
         }
 
-        // 🔹 Map frontend camelCase → database snake_case
         const fieldMap = {
             // Core
             creatorId: "creator_id",
@@ -29,11 +59,15 @@ function create (req, res) {
             // Page 1 - Child Information
             province: "province",
             city: "city",
+            registryNumber: "registry_number",
             childFirstName: "child_first_name",
             childMiddleName: "child_middle_name",
             childLastName: "child_last_name",
             sex: "sex",
             dateOfBirth: "date_of_birth",
+            place_of_birth_barangay: "place_of_birth_barangay",
+            placeOfBirthCity: "place_of_birth_city",
+            placeOfBirthProvince: "place_of_birth_province",
             typeOfBirth: "type_of_birth",
             multipleBirthOrder: "multiple_birth_order",
             birthOrder: "birth_order",
@@ -75,14 +109,7 @@ function create (req, res) {
             marriageCountry: "marriage_country",
           
             // Page 5 - Attendant Information
-            attendantPhysician: "attendant_physician",
-            attendantNurse: "attendant_nurse",
-            attendantMidwife: "attendant_midwife",
-            attendantHilot: "attendant_hilot",
-            attendantOthers: "attendant_others",
-            attendantOthersSpecify: "attendant_others_specify",
-            dateOfAttendance: "date_of_attendance",
-            attendantNameTitle: "attendant_name_title",
+            attendant: "attendant",
           
             // Page 6 - Attendant Certification
             birthTime: "birth_time",
@@ -90,8 +117,6 @@ function create (req, res) {
             attendantName: "attendant_name",
             attendantTitle: "attendant_title",
             attendantAddress: "attendant_address",
-            attendantDateSigned: "attendant_date_signed",
-            attendantSignature: "attendant_signature",
           
             // Page 7 - Informant & Prepared By
             informantName: "informant_name",
@@ -106,7 +131,6 @@ function create (req, res) {
             receivedName: "received_name",
             receivedTitle: "received_title",
             receivedDate: "received_date",
-            registrarSignature: "registrar_signature",
             registrarName: "registrar_name",
             registrarTitle: "registrar_title",
             registrarDate: "registrar_date",
@@ -133,7 +157,6 @@ function create (req, res) {
             adminName: "admin_name",
             adminPosition: "admin_position",
             adminAddress: "admin_address",
-            adminSignature: "admin_signature",
           
             // Page 12 - Affidavit
             affiantName: "affiant_name",
@@ -161,7 +184,6 @@ function create (req, res) {
             reasonDelay: "reason_delay",
             spouseApplicant: "spouse_applicant",
             spouseOwner: "spouse_owner",
-            affiantSignature: "affiant_signature",
           
             // Page 13 - Final Jurat / Affidavit
             finalJuratDay: "final_jurat_day",
@@ -170,14 +192,13 @@ function create (req, res) {
             finalCtcNumber: "final_ctc_number",
             finalCtcIssuedOn: "final_ctc_issued_on",
             finalCtcIssuedAt: "final_ctc_issued_at",
-            adminOfficerSignature: "admin_officer_signature",
             adminOfficerName: "admin_officer_name",
             adminOfficerPosition: "admin_officer_position",
             adminOfficerAddress: "admin_officer_address",
           
             // Page 14 - Confirmation
             confirmation: "confirmation"
-          };
+        };
           
 
         // 🔹 Build SQL dynamically
@@ -198,12 +219,11 @@ function create (req, res) {
             VALUES (${placeholders})
         `;
 
-        console.log("🟢 Columns:", columns);
-        console.log("🟢 Values length:", values.length);
+        writeLog(`[info] [BirthCertificateController][create] Executing query: ${query} with values: ${values}`);
 
         db.run(query, values, function (err) {
             if (err) {
-                console.error("[DB Error]", err.message);
+                writeLog(`[error] [BirthCertificateController][create] ${err.message}`);
                 return res.status(500).json({
                     success: false,
                     message: "Database insert failed",
@@ -219,7 +239,7 @@ function create (req, res) {
         });
 
     } catch (error) {
-        console.error("[Controller Error]", error);
+        writeLog(`[error] [BirthCertificateController][create] ${error.message}`);
         res.status(500).json({
             success: false,
             message: "Server error",
@@ -228,8 +248,6 @@ function create (req, res) {
     }
 };
 
-
-// LIST Death Certificate
 function list (req, res) {
     console.log("🔍 Attempting to fetch birth certificates..."); // Add this
     db.all(
@@ -263,12 +281,38 @@ function list (req, res) {
     });
 };
 
-function update() {
+async function uploadAndScan(req, res) {
+    try {
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ success: false, message: 'No files uploaded' });
+        }
 
-}
-
-function remove() {
-
+        const filePaths = req.files.map(file => file.path);
+        const response = await callPythonOCR(filePaths);
+        writeLog(`${response.success === true ? '[info]' : '[error]' } [uploadAndScan] ${JSON.stringify({
+            success: response.success,
+            message: response.message,
+            data: response.result
+        })}`);
+        if (!response.success) {
+            res.status(500).json({
+                success: response.success,
+                message: response.message,
+            });
+        } 
+        res.status(200).json({
+            success: response.success,
+            message: response.message,
+            result: response.result
+        });
+    } catch (error) {
+        writeLog(`[error] [uploadAndScan] ${JSON.stringify(error)}`);
+        res.status(500).json({
+            success: false,
+            message: 'File upload failed',
+            error: error.message
+        });
+    }
 }
 
 function view(req, res) {
@@ -301,7 +345,6 @@ function view(req, res) {
 module.exports = {
     create,
     list,
-    update,
-    remove,
+    uploadAndScan,
     view
 };

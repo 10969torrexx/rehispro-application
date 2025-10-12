@@ -1,0 +1,12 @@
+{
+    "file": {
+        "required": true,
+        "type": ["jpeg", "jpg", "png"],
+        "size": 100,
+        "message": {
+            "required": "File is required",
+            "type": "Only JPG, or PNG file are allowed",
+            "size": "File must not exceed 100MB."
+        }
+    }
+}

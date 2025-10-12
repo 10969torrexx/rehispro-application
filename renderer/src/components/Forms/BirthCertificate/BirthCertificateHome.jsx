@@ -105,7 +105,6 @@ export default function BirthCertificateHome({ onView }) {
         flexDirection: "column",
       }}
     >
-      {/* 🔹 Search bar */}
       <div className="flex justify-between items-center mb-4">
         <input
           type="text"
@@ -116,7 +115,6 @@ export default function BirthCertificateHome({ onView }) {
         />
       </div>
 
-      {/* 🔹 DataGrid table */}
       <DataGrid
         rows={filteredRows}
         columns={columns}

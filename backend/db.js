@@ -51,11 +51,15 @@ db.serialize(() => {
       -- Page 1 - Child Information
       province TEXT,
       city TEXT,
+      registry_number TEXT,
       child_first_name TEXT,
       child_middle_name TEXT,
       child_last_name TEXT,
       sex TEXT,
       date_of_birth date,
+      place_of_birth_barangay TEXT,
+      place_of_birth_city TEXT,
+      place_of_birth_province TEXT,
       type_of_birth TEXT,
       multiple_birth_order TEXT,
       birth_order TEXT,
@@ -97,12 +101,7 @@ db.serialize(() => {
       marriage_country TEXT,
 
       -- Page 5 - Attendant Information
-      attendant_physician INTEGER DEFAULT 0,
-      attendant_nurse INTEGER DEFAULT 0,
-      attendant_midwife INTEGER DEFAULT 0,
-      attendant_hilot INTEGER DEFAULT 0,
-      attendant_others INTEGER DEFAULT 0,
-      attendant_others_specify TEXT,
+      attendant TEXT,
       date_of_attendance TEXT,
       attendant_name_title TEXT,
 
@@ -113,7 +112,6 @@ db.serialize(() => {
       attendant_title TEXT,
       attendant_address TEXT,
       attendant_date_signed TEXT,
-      attendant_signature TEXT,
 
       -- Page 7 - Informant & Prepared By
       informant_name TEXT,
@@ -128,7 +126,6 @@ db.serialize(() => {
       received_name TEXT,
       received_title TEXT,
       received_date TEXT,
-      registrar_signature TEXT,
       registrar_name TEXT,
       registrar_title TEXT,
       registrar_date TEXT,
@@ -155,7 +152,6 @@ db.serialize(() => {
       admin_name TEXT,
       admin_position TEXT,
       admin_address TEXT,
-      admin_signature TEXT,
 
       -- Page 12 - Affidavit
       affiant_name TEXT,
@@ -183,7 +179,6 @@ db.serialize(() => {
       reason_delay TEXT,
       spouse_applicant TEXT,
       spouse_owner TEXT,
-      affiant_signature TEXT,
 
       -- Page 13 - Final Jurat / Affidavit
       final_jurat_day TEXT,
@@ -192,7 +187,6 @@ db.serialize(() => {
       final_ctc_number TEXT,
       final_ctc_issued_on TEXT,
       final_ctc_issued_at TEXT,
-      admin_officer_signature TEXT,
       admin_officer_name TEXT,
       admin_officer_position TEXT,
       admin_officer_address TEXT,
