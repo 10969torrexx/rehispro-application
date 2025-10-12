@@ -33,151 +33,151 @@ export default function BirthCertificateView({ row }) {
       <>
           <form className="p-4 h-full mb-4 max-w-4xl mx-auto">
               {/* Page 1 */}
-              <div className="mb-6 text-left space-y-6">
+                <div className="mb-6 text-left space-y-6">
                   <h2 className="text-lg text-center font-semibold">General Information</h2>
   
                   {/* Province & City / Municipality*/}
-                  <div className="w-full flex items-center gap-2 mb-3">
-                      <div className="w-full">
-                          <label className="block text-sm font-medium mb-1">Province</label>
-                          <input
-                              type="text"
-                              name="province"
-                              placeholder="Province"
-                              className="w-full common-input"
-                              value={birth.province || ""}
-                              readOnly
-                          />
-                      </div>
-                      <div className="w-full">
-                          <label className="block text-sm font-medium mb-1">City / Municipality</label>
-                          <input
-                              type="text"
-                              name="city"
-                              placeholder="City / Municipality"
-                              className="w-full common-input"
-                              value={birth.city || ""}
-                              readOnly
-                          />
-                      </div>
-                  </div>
+                    <div className="w-full flex items-center gap-2 mb-3">
+                        <div className="w-full">
+                            <label className="block text-sm font-medium mb-1">Province</label>
+                            <input
+                                type="text"
+                                name="province"
+                                placeholder="Province"
+                                className="w-full common-input"
+                                value={birth.province || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block text-sm font-medium mb-1">City / Municipality</label>
+                            <input
+                                type="text"
+                                name="city"
+                                placeholder="City / Municipality"
+                                className="w-full common-input"
+                                value={birth.city || ""}
+                                readOnly
+                            />
+                        </div>
+                    </div>
   
-                  {/* Child’s Name */}
-                  <div>
-                      <label className="block text-sm font-medium mb-1">Child’s Name</label>
-                      <div className="flex flex-col sm:flex-row gap-2">
-                          <div className="w-full">
-                              <input
-                                  type="text"
-                                  name="child_first_name"
-                                  placeholder="First"
-                                  className="w-full common-input"
-                                  value={birth.child_first_name || ""}
-                                  readOnly
-                              />
-                          </div>
-                          <div className="w-full">
-                              <input
-                                  type="text"
-                                  name="child_middle_name"
-                                  placeholder="Middle (Optional)"
-                                  className="w-full common-input"
-                                  value={birth.child_middle_name || ""}
-                                  readOnly
-                              />
-                          </div>
-                          <div className="w-full">
-                              <input
-                                  type="text"
-                                  name="child_last_name"
-                                  placeholder="Last"
-                                  className="w-full common-input"
-                                  value={birth.child_last_name || ""}
-                                  readOnly
-                              />
-                          </div>
-                      </div>
-                  </div>
+                    {/* Child’s Name */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1">1. Child’s Name</label>
+                        <div className="flex flex-col sm:flex-row gap-2">
+                            <div className="w-full">
+                                <input
+                                    type="text"
+                                    name="child_first_name"
+                                    placeholder="First"
+                                    className="w-full common-input"
+                                    value={birth.child_first_name || ""}
+                                    readOnly
+                                />
+                            </div>
+                            <div className="w-full">
+                                <input
+                                    type="text"
+                                    name="child_middle_name"
+                                    placeholder="Middle (Optional)"
+                                    className="w-full common-input"
+                                    value={birth.child_middle_name || ""}
+                                    readOnly
+                                />
+                            </div>
+                            <div className="w-full">
+                                <input
+                                    type="text"
+                                    name="child_last_name"
+                                    placeholder="Last"
+                                    className="w-full common-input"
+                                    value={birth.child_last_name || ""}
+                                    readOnly
+                                />
+                            </div>
+                        </div>
+                    </div>
   
-                  {/* Sex & Date of Birth */}
-                  <div className="flex flex-col sm:flex-row gap-2">
-                      <div className="w-full">
-                          <label className="block text-sm font-medium mb-1">Sex</label>
-                          <select
-                              name="sex"
-                              className="common-input w-full"
-                              value={birth.sex || ""}
-                              readOnly
-                          >
-                              <option value="">Select</option>
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                          </select>
-                      </div>
-                      <div className="w-full">
-                          <label className="block text-sm font-medium mb-1">Date of Birth</label>
-                          <input
-                              type="date"
-                              name="date_of_birth"
-                              className="common-input w-full"
-                              value={birth.date_of_birth || ""}
-                              readOnly
-                          />
-                      </div>
-                  </div>
+                    {/* Sex & Date of Birth */}
+                    <div className="flex flex-col sm:flex-row gap-2">
+                        <div className="w-full">
+                            <label className="block text-sm font-medium mb-1">2. Sex</label>
+                            <select
+                                name="sex"
+                                className="common-input w-full"
+                                value={birth.sex || ""}
+                                readOnly
+                            >
+                                <option value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div className="w-full">
+                            <label className="block text-sm font-medium mb-1">3. Date of Birth</label>
+                            <input
+                                type="date"
+                                name="date_of_birth"
+                                className="common-input w-full"
+                                value={birth.date_of_birth || ""}
+                                readOnly
+                            />
+                        </div>
+                    </div>
   
-                  {/* Type of Birth & Multiple Birth */}
-                  <div className="flex flex-col sm:flex-row gap-4">
-                      <div className="w-full">
-                          <label className="block text-sm font-medium mb-1">Type of Birth (Single, Twin, Triplet, etc)</label>
-                          <input
-                              type="text"
-                              name="type_of_birth"
-                              placeholder="Type of Birth"
-                              className="common-input w-full"
-                              value={birth.type_of_birth || ""}
-                              readOnly
-                          />
-                      </div>
-                      <div className="w-full">
-                          <label className="block text-sm font-medium mb-1">If Multiple Birth, Child was (First, Second, Third, etc)</label>
-                          <input
-                              type="text"
-                              name="multiple_birth_order"
-                              placeholder="Order"
-                              className="common-input w-full"
-                              value={birth.multiple_birth_order || ""}
-                              readOnly
-                          />
-                      </div>
-                  </div>
+                    {/* Type of Birth & Multiple Birth */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <div className="w-full">
+                            <label className="block text-sm font-medium mb-1">Type of Birth (Single, Twin, Triplet, etc)</label>
+                            <input
+                                type="text"
+                                name="type_of_birth"
+                                placeholder="Type of Birth"
+                                className="common-input w-full"
+                                value={birth.type_of_birth || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block text-sm font-medium mb-1">If Multiple Birth, Child was (First, Second, Third, etc)</label>
+                            <input
+                                type="text"
+                                name="multiple_birth_order"
+                                placeholder="Order"
+                                className="common-input w-full"
+                                value={birth.multiple_birth_order || ""}
+                                readOnly
+                            />
+                        </div>
+                    </div>
   
                   {/* Birth Order & Weight at Birth */}
-                  <div className="flex flex-col sm:flex-row gap-4">
-                      <div className="w-full">
-                          <label className="block text-sm font-medium mb-1">Birth Order (First, Second, Third, etc)</label>
-                          <input
-                              type="text"
-                              name="birth_order"
-                              placeholder="Birth Order"
-                              className="common-input w-full"
-                              value={birth.birth_order || ""}
-                              readOnly
-                          />
-                      </div>
-                      <div className="w-full">
-                          <label className="block text-sm font-medium mb-1">Weight at Birth</label>
-                          <input
-                              type="number"
-                              name="birth_weight"
-                              placeholder="Weight in Kilograms (kg)"
-                              className="common-input w-full"
-                              value={birth.birth_weight || ""}
-                              readOnly
-                          />
-                      </div>
-                  </div>
-              </div>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <div className="w-full">
+                            <label className="block text-sm font-medium mb-1">Birth Order (First, Second, Third, etc)</label>
+                            <input
+                                type="text"
+                                name="birth_order"
+                                placeholder="Birth Order"
+                                className="common-input w-full"
+                                value={birth.birth_order || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block text-sm font-medium mb-1">Weight at Birth</label>
+                            <input
+                                type="number"
+                                name="birth_weight"
+                                placeholder="Weight in Kilograms (kg)"
+                                className="common-input w-full"
+                                value={birth.birth_weight || ""}
+                                readOnly
+                            />
+                        </div>
+                    </div>
+                </div>
   
               {/* Page 2 */}
               <div className="mb-6 text-left space-y-6">
