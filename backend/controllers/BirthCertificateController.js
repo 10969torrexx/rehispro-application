@@ -10,17 +10,47 @@ function create (req, res) {
             return res.status(400).json({ success: false, message: 'No Data' });
         }
 
-        // 🔹 Flatten directly (your frontend already sends structured formData)
         const flatData = formData;
         writeLog(`[info] [BirthCertificateController][create] Received data: ${JSON.stringify(flatData)}`);
 
-        // 🔹 Validate creatorId
+        //TODO: process the attendant value
+        const attendantMap = {
+            attendantPhysician: "Physician",
+            attendantNurse: "Nurse",
+            attendantMidwife: "Midwife",
+            attendantHilot: "Hilot",
+        };
+
+        let attendantValue = "";
+        for (const key in attendantMap) {
+            if (flatData[key] == "on" || flatData[key] === true) {
+                attendantValue = attendantMap[key];
+                break;
+            }
+        }
+
+        if (
+            !attendantValue &&
+            (flatData.attendantOthers === "on" || flatData.attendantOthers === true)
+        ) {
+            attendantValue = flatData.attendantOthersSpecify?.trim() || "";
+        }
+
+        flatData.attendant = attendantValue || "";
+        delete flatData.attendantPhysician;
+        delete flatData.attendantNurse;
+        delete flatData.attendantMidwife;
+        delete flatData.attendantHilot;
+        delete flatData.attendantOthers;
+        delete flatData.attendantOthersSpecify;
+
+        writeLog(`[info] [BirthCertificateController][create] Processed flat data: ${JSON.stringify(flatData)}`);
+
         const creatorId = Number(flatData.creatorId);
         if (!creatorId || isNaN(creatorId) || creatorId <= 0) {
             return res.status(400).json({ success: false, message: 'Invalid or missing creator ID' });
         }
 
-        // 🔹 Map frontend camelCase → database snake_case
         const fieldMap = {
             // Core
             creatorId: "creator_id",
@@ -75,12 +105,7 @@ function create (req, res) {
             marriageCountry: "marriage_country",
           
             // Page 5 - Attendant Information
-            attendantPhysician: "attendant_physician",
-            attendantNurse: "attendant_nurse",
-            attendantMidwife: "attendant_midwife",
-            attendantHilot: "attendant_hilot",
-            attendantOthers: "attendant_others",
-            attendantOthersSpecify: "attendant_others_specify",
+            attendant: "attendant",
           
             // Page 6 - Attendant Certification
             birthTime: "birth_time",
@@ -169,7 +194,7 @@ function create (req, res) {
           
             // Page 14 - Confirmation
             confirmation: "confirmation"
-          };
+        };
           
 
         // 🔹 Build SQL dynamically
