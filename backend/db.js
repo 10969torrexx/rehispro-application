@@ -369,9 +369,7 @@ db.serialize(() => {
     );
   `);
 
-  // db.run  (
-  //   `DROP TABLE marriage_certificates`
-  // )
+  // db.run  (`DROP TABLE IF EXISTS marriage_certificates`);
   // TODO: Create Table for Marriage Certificate Form
   db.run(`
     CREATE TABLE IF NOT EXISTS marriage_certificates (
@@ -481,6 +479,8 @@ db.serialize(() => {
         officer_religion TEXT,
         witness1_name TEXT,
         witness2_name TEXT,
+        witness3_name TEXT,
+        witness4_name TEXT,
 
         -- Page 6: Registrar Details
         received_by_name TEXT,
@@ -493,8 +493,14 @@ db.serialize(() => {
         civil_registrar TEXT,
 
         -- Page 7: Additional Witnesses and Affidavit
-        witness3_name TEXT,
-        witness4_name TEXT,
+        witness5_name TEXT,
+        witness6_name TEXT,
+        witness7_name TEXT,
+        witness8_name TEXT,
+        witness9_name TEXT,
+        witness10_name TEXT,
+        witness11_name TEXT,
+        witness12_name TEXT,
         affidavit_officer_name TEXT,
         affidavit_officer_organization TEXT,
         affidavit_officer_address TEXT,
@@ -518,6 +524,7 @@ db.serialize(() => {
         sworn_year TEXT,
         sworn_at TEXT,
         sworn_issued_on TEXT,
+        sworn_issued_on2 TEXT,
         sworn_issued_at TEXT,
         admin_officer_name TEXT,
         admin_officer_title TEXT,
@@ -525,13 +532,15 @@ db.serialize(() => {
 
         -- Page 9: Affiant and Ceremony Details
         affiant_name TEXT,
+        affiant_civil_status TEXT,
         affiant_address TEXT,
         statement1_option_a INTEGER DEFAULT 0,
         statement1_marriage_with TEXT,
         statement1_place_a TEXT,
         statement1_date_a TEXT,
         statement1_option_b INTEGER DEFAULT 0,
-        statement1_marriage_between TEXT,
+        statement1_spouse_name_1 TEXT,
+        statement1_spouse_name_2 TEXT,
         statement1_place_b TEXT,
         statement1_date_b TEXT,
         solemnizing_officer TEXT,
@@ -547,6 +556,8 @@ db.serialize(() => {
         article_number TEXT,
         citizen_applicant TEXT,
         citizen_spouse TEXT,
+        citizen_applicant2 TEXT,
+        citizen_spouse2 TEXT,
         reason_for_delay TEXT,
         affidavit_day_page9 TEXT,
         affidavit_month_page9 TEXT,
@@ -559,6 +570,7 @@ db.serialize(() => {
         sworn_year_page10 TEXT,
         sworn_place_page10 TEXT,
         sworn_issued_on_page10 TEXT,
+        sworn_issued_on_page102 TEXT,
         sworn_issued_at_page10 TEXT,
         administering_officer_name TEXT,
         officer_position_page10 TEXT,
