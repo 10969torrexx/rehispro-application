@@ -13,7 +13,7 @@ export default function DeathCertificateUpload({setActiveTab, onOCRComplete}) {
     const [loading, setLoading] = useState(false);
 
     const onDrop = useCallback(uploadedFiles => {
-        const sorted = [...uploadedFiles].sort((a, b) => a.name.localeCompare(b.name));
+        const sorted = uploadedFiles;
 
         const readable = sorted.map(file => ({
             name: file.name,
@@ -78,7 +78,7 @@ export default function DeathCertificateUpload({setActiveTab, onOCRComplete}) {
                 {errors.uploadField && <ErrorMessages errors={errors.uploadField} />}
                 {errors && <ErrorMessages errors={errors.map(err => err.file)} />}
             </div>
-            <div className={`border-2 border-dashed p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer
+            <div {...getRootProps()} className={`border-2 border-dashed p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer
                 ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
             `}>
                 <input {...getInputProps()} 

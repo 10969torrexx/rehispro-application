@@ -11,17 +11,17 @@
       "url": "/user-management"
     },
     {
-      "icon": "bi-clipboard2-pulse",
+      "icon": "bi-cake2",
       "name": "Birth Certificates",
       "url": "/birth-certificates"
     },
     {
-      "icon": "bi-archive",
+      "icon": "bi-person-hearts",
       "name": "Marriage Certificates",
       "url": "/marriage-certificates"
     },
     {
-      "icon": "bi-folder2",
+      "icon": "bi-activity",
       "name": "Death Certificates",
       "url": "/death-certificates"
     }
@@ -33,17 +33,17 @@
       "url": "/dashboard"
     },
     {
-      "icon": "bi-clipboard2-pulse",
+      "icon": "bi-cake2",
       "name": "Birth Certificates",
       "url": "/birth-certificates"
     },
     {
-      "icon": "bi-archive",
+      "icon": "bi-person-hearts",
       "name": "Marriage Certificates",
       "url": "/marriage-certificates"
     },
     {
-      "icon": "bi-folder2",
+      "icon": "bi-activity",
       "name": "Death Certificates",
       "url": "/death-certificates"
     }

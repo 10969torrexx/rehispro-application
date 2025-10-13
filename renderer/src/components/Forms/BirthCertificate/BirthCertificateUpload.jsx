@@ -12,7 +12,7 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
     const [errors, setErrors] = useState([]);
 
     const onDrop = useCallback(uploadedFiles => {
-        const sorted = [...uploadedFiles].sort((a, b) => a.name.localeCompare(b.name));
+        const sorted = uploadedFiles;
 
         const readable = sorted.map(file => ({
             name: file.name,
