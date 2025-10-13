@@ -156,7 +156,6 @@ export default function MarriageCertificateCreateForm() {
             registrarTitle: "",
             registrarDate: "",
             remarksAnnotation: "",
-            civilRegistrar: "",
         },
 
         // Page 7: formData Input Validation
@@ -455,7 +454,6 @@ export default function MarriageCertificateCreateForm() {
             registrarTitle: "",
             registrarDate: "",
             remarksAnnotation: "",
-            civilRegistrar: ""
         },
         page7: {
             witness5Name: "",
@@ -505,7 +503,6 @@ export default function MarriageCertificateCreateForm() {
             statement1PlaceA: "",
             statement1DateA: "",
             statement1OptionB: false,
-            statement1Marriage: "",
             statement1PlaceB: "",
             statement1DateB: "",
             solemnizingOfficer: "",
@@ -690,6 +687,7 @@ export default function MarriageCertificateCreateForm() {
                                             className={`w-full common-input ${errors.husbandBirthDate ? 'input-error' : ''}`}
                                             value={formData.page1.husbandBirthDate}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                         />
                                         {errors.husbandBirthDate && <ErrorMessages errors={errors.husbandBirthDate} />}
                                     </div>
@@ -815,6 +813,7 @@ export default function MarriageCertificateCreateForm() {
                                             className={`w-full common-input ${errors.wifeBirthDate ? 'input-error' : ''}`}
                                             value={formData.page1.wifeBirthDate}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                         />
                                         {errors.wifeBirthDate && <ErrorMessages errors={errors.wifeBirthDate} />}
                                     </div>
@@ -1629,6 +1628,7 @@ export default function MarriageCertificateCreateForm() {
                                     className={`w-full common-input ${errors.dateOfMarriage ? 'input-error' : ''}`}
                                     value={formData.page4.dateOfMarriage}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.dateOfMarriage && <ErrorMessages errors={errors.dateOfMarriage} />}
                             </div>
@@ -1640,6 +1640,7 @@ export default function MarriageCertificateCreateForm() {
                                     className={`w-full common-input ${errors.timeOfMarriage ? 'input-error' : ''}`}
                                     value={formData.page4.timeOfMarriage}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.timeOfMarriage && <ErrorMessages errors={errors.timeOfMarriage} />}
                             </div>
@@ -1966,6 +1967,7 @@ export default function MarriageCertificateCreateForm() {
                                     name="receivedByDate"
                                     value={formData.page6.receivedByDate}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     className={`w-56 border-b border-gray-500 text-center ${errors.receivedByDate ? "input-error" : ""
                                         }`}
                                 />
@@ -2004,6 +2006,7 @@ export default function MarriageCertificateCreateForm() {
                                     name="registrarDate"
                                     value={formData.page6.registrarDate}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     className={`w-56 border-b border-gray-500 text-center ${errors.registrarDate ? "input-error" : ""
                                         }`}
                                 />
@@ -2025,21 +2028,6 @@ export default function MarriageCertificateCreateForm() {
                                     }`}
                                 rows="3"
                             ></textarea>
-                        </div>
-
-                        {/* Civil Registrar */}
-                        <div className="border border-pink-300 p-3 rounded mb-3">
-                            <h3 className="text-md font-semibold">
-                                TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR
-                            </h3>
-                            <input
-                                type="text"
-                                name="civilRegistrar"
-                                value={formData.page6.civilRegistrar}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                className={`w-full common-input ${errors.civilRegistrar ? "input-error" : ""
-                                    }`}
-                            />
                         </div>
                     </>
                 )}
@@ -2404,7 +2392,7 @@ export default function MarriageCertificateCreateForm() {
                                     name="swornMonth"
                                     value={formData.page8.swornMonth}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    className={`border-b border-black outline-none w-[120px] text-center ${errors.swornMonth ? "input-error" : ""
+                                    className={`border-b border-black outline-none w-[110px] text-center ${errors.swornMonth ? "input-error" : ""
                                         }`}
                                 />
                                 ,{" "}

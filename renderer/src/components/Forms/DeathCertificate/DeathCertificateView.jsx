@@ -102,11 +102,7 @@ export default function DeathCertificateView({ row }) {
                         {/* Sex */}
                         <div>
                             <label className="block text-sm font-medium">Sex</label>
-                            <select name="sex" className="w-full common-input" value={deceased.sex || ''} readOnly>
-                                <option value="">Select</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
+                            <input name="sex" className="w-full common-input" value={deceased.sex || ''} readOnly/>
                         </div>
     
                         {/* Date of Death & Date of Birth */}
@@ -114,7 +110,7 @@ export default function DeathCertificateView({ row }) {
                             <div>
                                 <label className="block text-sm font-medium">Date of Death</label>
                                 <input
-                                    type="date"
+                                    type="text"
                                     name="dateOfDeath"
                                     className="w-full common-input"
                                     value={deceased.date_of_death || ''}
@@ -124,7 +120,7 @@ export default function DeathCertificateView({ row }) {
                             <div>
                                 <label className="block text-sm font-medium">Date of Birth</label>
                                 <input
-                                    type="date"
+                                    type="text"
                                     name="dateOfBirth"
                                     className="w-full common-input"
                                     value={deceased.date_of_birth || ''}
@@ -141,7 +137,7 @@ export default function DeathCertificateView({ row }) {
                             <div className="flex-1">
                             <label className="block text-sm font-medium">If 1 year or above</label>
                             <input
-                                type="number"
+                                type="text"
                                 name="age_years"
                                 placeholder="Years"
                                 min="0"
@@ -156,7 +152,7 @@ export default function DeathCertificateView({ row }) {
                             <label className="block text-sm font-medium">If under 1 year</label>
                             <div className="flex-1">
                                 <input
-                                type="number"
+                                type="text"
                                 name="age_months"
                                 placeholder="Months"
                                 min="0"
@@ -168,7 +164,7 @@ export default function DeathCertificateView({ row }) {
                             </div>
                             <div className="flex-1 mt-2">
                                 <input
-                                type="number"
+                                type="text"
                                 name="age_days"
                                 placeholder="Days"
                                 min="0"
@@ -185,7 +181,7 @@ export default function DeathCertificateView({ row }) {
                             <label className="block text-sm font-medium">If under 24 hours</label>
                             <div className="flex-1">
                                 <input
-                                type="number"
+                                type="text"
                                 name="age_hours"
                                 placeholder="Hours"
                                 min="0"
@@ -197,7 +193,7 @@ export default function DeathCertificateView({ row }) {
                             </div>
                             <div className="flex-1 mt-2">
                                 <input
-                                type="number"
+                                type="text"
                                 name="age_minutes"
                                 placeholder="Minutes"
                                 min="0"
@@ -230,13 +226,7 @@ export default function DeathCertificateView({ row }) {
                         {/* Civil Status */}
                         <div>
                             <label className="block text-sm font-medium">Civil Status</label>
-                            <select name="civilStatus" className="w-full common-input" value={deceased.civil_status || ''} readOnly>
-                                <option value="">Select</option>
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                                <option value="Widow">Widow</option>
-                                <option value="Divorced">Divorced</option>
-                            </select>
+                            <input name="civilStatus" className="w-full common-input" value={deceased.civil_status || ''} readOnly/>
                         </div>
                     
                         {/* Religion & Citizenship */}
@@ -656,150 +646,116 @@ export default function DeathCertificateView({ row }) {
                         </div>
                         <div>
                             <label className="block text-sm font-medium">Maternal Condition (if the deceased is female aged 15-49 years old)</label>
-                            <select
+                            <input
                                 name="maternalCondition"
                                 className="w-full common-input"
                                 value={deceased.maternal_condition || ''}
                                 readOnly
-                            >
-                                <option value="">Select</option>
-                                <option value="Pregnant, not in labor">Pregnant, not in labor</option>
-                                <option value="Pregnant, in labor">Pregnant, in labor</option>
-                                <option value="Less than 42 days after delivery">Less than 42 days after delivery</option>
-                                <option value="42 days to 1 year after delivery">42 days to 1 year after delivery</option>
-                                <option value="None">None</option>
-                            </select>
-                        </div>
-                    </div>
-    
-                    <div className="mb-6 space-y-6">
-                        <h2 className="text-lg text-center font-semibold">Manner of Death & Attendant Details</h2>
-                        {/* Manner of Death */}
-                        <div>
-                            <label className="block text-sm font-medium">Manner of Death</label>
-                            <select
-                                name="mannerOfDeath"
-                                className="w-full common-input"
-                                value={deceased.manner_of_death || ''}
-                                readOnly
-                            >
-                                <option value="">Select</option>
-                                <option value="Homicide">Homicide</option>
-                                <option value="Suicide">Suicide</option>
-                                <option value="Accident">Accident</option>
-                                <option value="Legal Intervention">Legal Intervention</option>
-                                <option value="Natural">Natural</option>
-                            </select>
-                        </div>
-                        {/* Autopsy */}
-                        <div>
-                            <label className="block text-sm font-medium">Autopsy</label>
-                            <select
-                                name="autopsy"
-                                className="w-full common-input"
-                                value={deceased.autopsy || ''}
-                                readOnly
-                            >
-                                <option value="">Select</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                        </div>
-                        {/* Place of Occurrence */}
-                        <div>
-                            <label className="block text-sm font-medium mb-1">Place of Occurrence (for external cause)</label>
-                            <select
-                                name="placeOccurrence"
-                                className="w-full common-input"
-                                value={deceased.place_occurrence || ''}
-                                readOnly
-                            >
-                                <option value="">Select</option>
-                                <option value="Home">Home</option>
-                                <option value="Hospital">Hospital</option>
-                                <option value="Work">Work</option>
-                                <option value="Public Place">Public Place</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        {/* Attendant Type */}
-                        <div className="p-2">
-                            <label className="block w-full text-sm font-medium mb-1">Attended By</label>
-                            <input
-                                type="text"
-                                name="attendant"
-                                placeholder="Specify"
-                                className="common-input mt-2 w-full"
-                                value={deceased.attendant || ''}
-                                readOnly
                             />
                         </div>
-                        {/* Attendant Duration */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium">From (mm/dd/yy)</label>
-                                <input
-                                    type="date"
-                                    name="attendantFrom"
-                                    className="w-full common-input"
-                                    value={deceased.attendant_from || ''}
-                                    readOnly
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium">To (mm/dd/yy)</label>
-                                <input
-                                    type="date"
-                                    name="attendantTo"
-                                    className="w-full common-input"
-                                    value={deceased.attendant_to || ''}
-                                    readOnly
-                                />
-                            </div>
+                    </div>
+                    <div className="mb-6">
+                    <h2 className="text-lg text-center font-semibold mb-4">
+                        Manner of Death & Attendant Details
+                    </h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Manner of Death */}
+                        <div>
+                        <label className="block text-sm font-medium">Manner of Death</label>
+                        <input
+                            name="mannerOfDeath"
+                            className="w-full common-input"
+                            value={deceased.manner_of_death || ''}
+                            readOnly
+                        />
                         </div>
+
+                        {/* Autopsy */}
+                        <div>
+                        <label className="block text-sm font-medium">Autopsy</label>
+                        <input
+                            name="autopsy"
+                            className="w-full common-input"
+                            value={deceased.autopsy || ''}
+                            readOnly
+                        />
+                        </div>
+
+                        {/* Place of Occurrence */}
+                        <div className="md:col-span-2">
+                        <label className="block text-sm font-medium mb-1">
+                            Place of Occurrence (for external cause)
+                        </label>
+                        <input
+                            name="placeOccurrence"
+                            className="w-full common-input"
+                            value={deceased.place_occurrence || ''}
+                            readOnly
+                        />
+                        </div>
+
+                        {/* Attendant Type */}
+                        <div className="md:col-span-2">
+                        <label className="block text-sm font-medium mb-1">Attended By</label>
+                        <input
+                            type="text"
+                            name="attendant"
+                            placeholder="Specify"
+                            className="common-input mt-2 w-full"
+                            value={deceased.attendant || ''}
+                            readOnly
+                        />
+                        </div>
+
+                        {/* Attendant Duration */}
+                        <div>
+                        <label className="block text-sm font-medium">From (mm/dd/yy)</label>
+                        <input
+                            type="text"
+                            name="attendantFrom"
+                            className="w-full common-input"
+                            value={deceased.attendant_from || ''}
+                            readOnly
+                        />
+                        </div>
+
+                        <div>
+                        <label className="block text-sm font-medium">To (mm/dd/yy)</label>
+                        <input
+                            type="text"
+                            name="attendantTo"
+                            className="w-full common-input"
+                            value={deceased.attendant_to || ''}
+                            readOnly
+                        />
+                        </div>
+                    </div>
                     </div>
     
                     <div className="mb-6 space-y-6">
                         <h2 className="text-lg text-center font-semibold">Certification of Death</h2>
                         {/* Certification Oath */}
-                        <div className="text-sm leading-relaxed flex flex-wrap items-center">
+                            <p className="text-sm leading-relaxed flex flex-wrap items-center">
                             <span>
-                                I hereby certify that the foregoing particulars are correct as near as same can be ascertained and I further certify that I
+                                I hereby certify that the foregoing particulars are correct as near as same can be ascertained and I&nbsp;
                             </span>
-                            <div className="p-2">
-                                <div className="flex items-center space-x-2">
-                                    <label className="inline-flex items-center mx-2">
-                                        <input
-                                            type="checkbox"
-                                            name="attendedDeceased"
-                                            className="custom-checkbox w-4 h-4"
-                                            checked={deceased.attended_deceased === 'Yes'} // Assuming 'Yes'/'No' values
-                                            readOnly
-                                        />
-                                        <span className="ml-1">have attended</span>
-                                    </label>
-                                    <span>/</span>
-                                    <label className="inline-flex items-center mx-2">
-                                        <input
-                                            type="checkbox"
-                                            name="notAttendedDeceased"
-                                            className="custom-checkbox w-4 h-4"
-                                            checked={deceased.attended_deceased === 'No'} // Assuming 'Yes'/'No' values
-                                            readOnly
-                                        />
-                                        <span className="ml-1">have not attended</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <span>the deceased and that death occurred at</span>
-                            <input
-                                type="time"
-                                name="timeOfDeath"
-                                className="common-input inline-block px-2 py-2 mx-2"
-                                value={deceased.time_of_death || ''}
-                                readOnly
-                            />
-                        </div>
+                            {deceased.attended_deceased === 'Yes' ? (
+                                <span className="font-bold mx-1">have attended</span>
+                            ) : (
+                                <span className="font-bold mx-1">have not attended</span>
+                            )}
+                            <span>&nbsp;the deceased and that death occurred at&nbsp;</span>
+                            <span className="font-bold">
+                                {deceased.time_of_death
+                                ? new Date(`1970-01-01T${deceased.time_of_death}`).toLocaleTimeString('en-US', {
+                                    hour: 'numeric',
+                                    minute: '2-digit',
+                                    })
+                                : '__________'}
+                            </span>
+                            .
+                            </p>
     
                         {/* Physician Info */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -842,18 +798,18 @@ export default function DeathCertificateView({ row }) {
                                     readOnly
                                 />
                             </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-1">Date</label>
-                                <input
-                                    type="date"
-                                    name="certificationDate"
-                                    className="w-full common-input"
-                                    value={deceased.certification_date || ''} // Assuming a column for this
-                                    readOnly
-                                />
-                            </div>
                         </div>
-    
+                        <div>
+                            <label className="block text-sm font-medium mb-1">Date</label>
+                            <input
+                                type="text"
+                                name="certificationDate"
+                                className="w-full common-input"
+                                value={deceased.certification_date || ''} // Assuming a column for this
+                                readOnly
+                            />
+                        </div>
+
                         {/* Reviewed By */}
                         <div className="space-y-4">
                             <p className="font-medium text-sm">REVIEWED BY:</p>
@@ -871,7 +827,7 @@ export default function DeathCertificateView({ row }) {
                             <div>
                                 <label className="block text-sm font-medium mb-1">Date</label>
                                 <input
-                                    type="date"
+                                    type="text"
                                     name="reviewedDate"
                                     className="w-full common-input"
                                     value={deceased.reviewed_date || ''} // Assuming a column for this
@@ -886,17 +842,12 @@ export default function DeathCertificateView({ row }) {
                         {/* Disposal Type */}
                         <div>
                             <label className="block text-sm font-medium">Corpse Disposal</label>
-                            <select
+                            <input
                                 name="disposalType"
                                 className="w-full common-input"
                                 value={deceased.disposal_type || ''}
                                 readOnly
-                            >
-                                <option value="">Select</option>
-                                <option value="Burial">Burial</option>
-                                <option value="Cremation">Cremation</option>
-                                <option value="Others">Others (Specify)</option>
-                            </select>
+                            />
                         </div>
                         {/* Permit */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -913,7 +864,7 @@ export default function DeathCertificateView({ row }) {
                             <div>
                                 <label className="block text-sm font-medium">Date Issued</label>
                                 <input
-                                    type="date"
+                                    type="text"
                                     name="permitDate"
                                     className="w-full common-input"
                                     value={deceased.permit_date || ''}
@@ -937,7 +888,7 @@ export default function DeathCertificateView({ row }) {
                             <div>
                                 <label className="block text-sm font-medium">Date Issued</label>
                                 <input
-                                    type="date"
+                                    type="text"
                                     name="transferPermitDate"
                                     className="w-full common-input"
                                     value={deceased.transfer_permit_date || ''}
@@ -1015,7 +966,7 @@ export default function DeathCertificateView({ row }) {
                             <div>
                                 <label className="block text-sm font-medium mb-1">Date</label>
                                 <input
-                                    type="date"
+                                    type="text"
                                     name="informantDate"
                                     className="w-full common-input"
                                     value={deceased.informant_date || ''}
@@ -1057,7 +1008,7 @@ export default function DeathCertificateView({ row }) {
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Date</label>
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="preparedDate"
                                         className="w-full common-input"
                                         value={deceased.prepared_date || ''}
@@ -1102,7 +1053,7 @@ export default function DeathCertificateView({ row }) {
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Date</label>
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="receivedDate"
                                         className="w-full common-input"
                                         value={deceased.received_date || ''}
@@ -1144,7 +1095,7 @@ export default function DeathCertificateView({ row }) {
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Date</label>
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="registrarDate"
                                         className="w-full common-input"
                                         value={deceased.registrar_date || ''}
@@ -1173,104 +1124,111 @@ export default function DeathCertificateView({ row }) {
     
                     <div className="mb-6 space-y-6">
                         <h2 className="text-lg text-center font-semibold">Postmortem Certifications</h2>
+                        <p className="text-sm italic w-full break-words whitespace-normal">
+                            I HEREBY CERTIFY that I have performed an autopsy upon the body of the deceased and that the cause of death was: <spam className="italic font-bold">{deceased.postmortem_cause || '____________________________________________'}</spam>.
+                        </p>
                         {/* Postmortem Certificate */}
-                        <div>
-                            <label className="block text-sm font-medium">Cause of Death (from Autopsy)</label>
-                            <input
-                                type="text"
-                                name="postmortemCause"
-                                className="w-full common-input"
-                                value={deceased.postmortem_cause || ''}
-                                readOnly
-                            />
-                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-sm font-medium">Name in Print</label>
                             <input
-                                type="text"
-                                name="postmortemName"
-                                className="w-full common-input"
-                                value={deceased.postmortem_name || ''}
-                                readOnly
+                            type="text"
+                            name="postmortemName"
+                            className="w-full common-input"
+                            value={deceased.postmortem_name || ''}
+                            readOnly
                             />
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium">Title/Designation</label>
                             <input
-                                type="text"
-                                name="postmortemTitle"
-                                className="w-full common-input"
-                                value={deceased.postmortem_title || ''}
-                                readOnly
+                            type="text"
+                            name="postmortemTitle"
+                            className="w-full common-input"
+                            value={deceased.postmortem_title || ''}
+                            readOnly
                             />
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium">Address</label>
                             <input
-                                type="text"
-                                name="postmortemAddress"
-                                className="w-full common-input"
-                                value={deceased.postmortem_address || ''}
-                                readOnly
+                            type="text"
+                            name="postmortemAddress"
+                            className="w-full common-input"
+                            value={deceased.postmortem_address || ''}
+                            readOnly
                             />
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium">Date</label>
                             <input
-                                type="date"
-                                name="postmortemDate"
-                                className="w-full common-input"
-                                value={deceased.postmortem_date || ''}
-                                readOnly
+                            type="text"
+                            name="postmortemDate"
+                            className="w-full common-input"
+                            value={deceased.postmortem_date || ''}
+                            readOnly
                             />
                         </div>
+                        </div>
                         <h2 className="text-lg text-center font-semibold">Embalmer Certification</h2>
+                        <p className="text-sm italic">
+                            I HEREBY CERTIFY that I have embalmed <spam className="italic font-bold">{deceased.embalmered_name || '__________________'} </spam> {' '} following all the regulations prescribed by the Department of Health.
+                        </p>
                         {/* Embalmer Certification */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-sm font-medium">Embalmer Name</label>
                             <input
-                                type="text"
-                                name="embalmerName"
-                                className="w-full common-input"
-                                value={deceased.embalmer_name || ''}
-                                readOnly
+                            type="text"
+                            name="embalmerName"
+                            className="w-full common-input"
+                            value={deceased.embalmer_name || ''}
+                            readOnly
                             />
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium">Title/Designation</label>
                             <input
-                                type="text"
-                                name="embalmerTitle"
-                                className="w-full common-input"
-                                value={deceased.embalmer_title || ''}
-                                readOnly
+                            type="text"
+                            name="embalmerTitle"
+                            className="w-full common-input"
+                            value={deceased.embalmer_title || ''}
+                            readOnly
                             />
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium">Address</label>
                             <input
-                                type="text"
-                                name="embalmerAddress"
-                                className="w-full common-input"
-                                value={deceased.embalmer_address || ''}
-                                readOnly
+                            type="text"
+                            name="embalmerAddress"
+                            className="w-full common-input"
+                            value={deceased.embalmer_address || ''}
+                            readOnly
                             />
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium">License No.</label>
                             <input
-                                type="text"
-                                name="embalmerLicense"
-                                className="w-full common-input"
-                                value={deceased.embalmer_license || ''}
-                                readOnly
+                            type="text"
+                            name="embalmerLicense"
+                            className="w-full common-input"
+                            value={deceased.embalmer_license || ''}
+                            readOnly
                             />
                         </div>
+                        </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium">Issued On</label>
                                 <input
-                                    type="date"
+                                    type="text"
                                     name="embalmerIssuedOn"
                                     className="w-full common-input"
                                     value={deceased.embalmer_issued_on || ''}
@@ -1291,7 +1249,7 @@ export default function DeathCertificateView({ row }) {
                         <div>
                             <label className="block text-sm font-medium">Expiry Date</label>
                             <input
-                                type="date"
+                                type="text"
                                 name="embalmerExpiry"
                                 className="w-full common-input"
                                 value={deceased.embalmer_expiry || ''}
@@ -1309,7 +1267,7 @@ export default function DeathCertificateView({ row }) {
                             I <span className="italic font-bold">{deceased.affiant_name || '_____________________________'}</span> ,<span className="italic font-bold">{deceased.affiant_civil_status || 'of legal age, single / married / divorced / widow / widower'}</span>, with residence and postal address at <span className="italic font-bold">{deceased.address || '_____________________________'}</span> after having been duly sworn in accordance with law, do hereby depose and say:
                         </p>
                         {/* Affiant Info */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-sm font-medium mb-1">Name of Affiant</label>
                                 <input
@@ -1322,18 +1280,12 @@ export default function DeathCertificateView({ row }) {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-1">Civil Status</label>
-                                <select
+                                <input
                                     name="affiantCivilStatus"
                                     className="w-full common-input"
                                     value={deceased.affiant_civil_status || ''}
                                     readOnly
-                                >
-                                    <option value="">Select</option>
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
-                                    <option value="Divorced">Divorced</option>
-                                    <option value="Widow">Widow</option>
-                                </select>
+                                />
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-sm font-medium mb-1">Residence / Postal Address</label>
@@ -1345,11 +1297,11 @@ export default function DeathCertificateView({ row }) {
                                     readOnly
                                 />
                             </div>
-                        </div>
+                        </div> */}
                         {/* Statement 1 */}
                         <div>
                             <p className="text-sm font-medium mb-2">
-                                1. That <span className="italic font-bold">{deceased.deceased_name || ''}</span> died on <span className="italic font-bold">{deceased.death_date || ''}</span> in <span className="italic font-bold">{deceased.death_place || ''}</span> and was buried/cremated in <span className="italic font-bold">{deceased.cemetery_name || ''}</span> on <span className="italic font-bold">{deceased.cemetery_address || ''}</span>
+                                1. That <span className="italic font-bold">{deceased.deceased_name || '__________________'}</span> died on <span className="italic font-bold">{deceased.death_date || '__________________'}</span> in <span className="italic font-bold">{deceased.death_place || '__________________'}</span> and was buried/cremated in <span className="italic font-bold">{deceased.delayed_cemetery_name || '__________________'}</span> on <span className="italic font-bold">{deceased.delayed_cemetery_address || '__________________'}</span>
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 {/* <div>
@@ -1364,7 +1316,7 @@ export default function DeathCertificateView({ row }) {
                                 </div> */}
                                 {/* <div>
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="deathDate"
                                         className="common-input"
                                         value={deceased.death_date || ''}
@@ -1386,63 +1338,43 @@ export default function DeathCertificateView({ row }) {
                         {/* Statement 2 */}
                         <div>
                             <p className="text-sm font-medium mb-2">
-                                2. That the deceased at the time of his/her death:
+                            2. That the deceased at the time of his/her death:&nbsp;
+                            {deceased.was_attended === 'Yes' ? (
+                                <>
+                                <span className="font-bold">was attended</span> by{' '}
+                                <span className="font-bold">
+                                    {deceased.attended_by || '________________________'}
+                                </span>.
+                                </>
+                            ) : (
+                                <span className="font-bold">was not attended.</span>
+                            )}
                             </p>
-                            <div className="flex flex-col md:flex-row md:items-center gap-4">
-                                <label className="flex items-center space-x-2">
-                                    <input
-                                        type="checkbox"
-                                        className="custom-checkbox w-4 h-4"
-                                        name="notAttended"
-                                        checked={deceased.attended_deceased === 'No'} // Assuming 1 for true, 0 for false
-                                        readOnly
-                                    />
-                                    <span>Was not attended.</span>
-                                </label>
-                                <label className="flex items-center space-x-2">
-                                    <input
-                                        type="checkbox"
-                                        className="custom-checkbox w-4 h-4"
-                                        name="notAttended"
-                                        checked={deceased.attended_deceased === 'Yes'} // Assuming 1 for true, 0 for false
-                                        readOnly
-                                    />
-                                    <span>Was attended.</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="attendedBy"
-                                    placeholder="Was attended by"
-                                    className="common-input w-full md:w-auto"
-                                    value={deceased.physician_name || ''}
-                                    readOnly
-                                />
-                            </div>
                         </div>
                         {/* Statement 3 */}
                         <div>
                             <p className="text-sm font-medium mb-2">
-                                3. That the cause of death of the deceased was 
+                                3. That the cause of death of the deceased was <span className="italic font-bold">{deceased.cause_of_death || '__________________'}</span>
                             </p>
-                            <input
+                            {/* <input
                                 type="text"
                                 name="causeOfDeath"
                                 className="w-full common-input"
                                 value={deceased.cause_of_death || ''}
                                 readOnly
-                            />
+                            /> */}
                         </div>
                         {/* Statement 4 */}
                         <div>
                             <p className="text-sm font-medium mb-2">
-                                4. That the reason for the delay in registering this death was due to 
+                                4. That the reason for the delay in registering this death was due to  <span className="italic font-bold">{deceased.reason_delay || '__________________'}</span>
                             </p>
-                            <textarea
+                            {/* <textarea
                                 name="reasonDelay"
                                 className="common-textarea w-full h-24 resize-none"
                                 value={deceased.reason_delay || ''}
                                 readOnly
-                            />
+                            /> */}
                         </div>
                         <div className="mb-6 space-y-6">
                             <p className="text-sm italic">
@@ -1453,74 +1385,26 @@ export default function DeathCertificateView({ row }) {
                             </p>
                             {/* Jurat Details */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">Day</label>
-                                    <input
-                                        type="number"
-                                        name="juratDay"
-                                        className="common-input"
-                                        value={deceased.jurat_day || ''}
-                                        readOnly
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">Month/Year</label>
-                                    <input
-                                        type="text"
-                                        name="juratMonthYear"
-                                        className="common-input"
-                                        value={deceased.jurat_month_year || ''}
-                                        readOnly
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">Place</label>
-                                    <input
-                                        type="text"
-                                        name="juratPlace"
-                                        className="common-input"
-                                        value={deceased.jurat_place || ''}
-                                        readOnly
-                                    />
-                                </div>
                                 <div className="col-span-3">
                                     <label className="block text-sm font-medium mb-1">Signature</label>
                                     <SignaturePlaceholder />
                                 </div>
-                            </div>
-                            {/* CTC Details */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">CTC Number</label>
+                                <div className='col-span-3 text-center'>
                                     <input
                                         type="text"
-                                        name="ctcNumber"
-                                        className="common-input"
-                                        value={deceased.ctc_number || ''}
+                                        name=""
                                         readOnly
+                                        className={`common-input w-full text-center`}
+                                        value={deceased.affiant_name}
                                     />
+                                    <label className="block text-sm font-medium mb-1">Name in Print</label>
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">Issued On</label>
-                                    <input
-                                        type="date"
-                                        name="ctcIssuedOn"
-                                        className="common-input"
-                                        value={deceased.ctc_issued_on || ''}
-                                        readOnly
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">Issued At</label>
-                                    <input
-                                        type="text"
-                                        name="ctcIssuedAt"
-                                        className="common-input"
-                                        value={deceased.ctc_issued_at || ''}
-                                        readOnly
-                                    />
-                                </div>
+
                             </div>
+                            <p className="text-sm italic">
+                                <strong>SUBSCRIBED AND SWORN</strong> to before me this <spam className="italic font-bold">{deceased.ctc_day || '____'}</spam> day of <spam className="italic font-bold">{deceased.ctc_month_year || '_____________'}</spam> at <spam className="italic font-bold">{deceased.ctc_place || '_____________'}</spam>, Philippines, affiant who exhibited to me his Community Tax Cert. issued on <spam className="italic font-bold">{deceased.ctc_issued_on || '_____________'}</spam> at <spam className="italic font-bold">{deceased.ctc_issued_at || '_____________'}</spam>.
+                            </p>
+
                             {/* Admin Officer Details */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div className="col-span-3">
