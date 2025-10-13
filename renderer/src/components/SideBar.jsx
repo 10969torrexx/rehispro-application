@@ -51,7 +51,6 @@ return (
             <ul className="space-y-2 flex-1">
                 {menuItems.map(({ icon, name, url, submenu }) => (
                     <li key={name}>
-                        {/* Parent link or toggle */}
                         <div
                             onClick={() => submenu ? toggleSubmenu(name) : navigate(url)}
                             className="flex items-center justify-between hover:bg-purple-100 rounded px-2 py-2 cursor-pointer"
@@ -61,7 +60,6 @@ return (
                                 {isOpen && <span className="whitespace-nowrap">{name}</span>}
                             </div>
 
-                            {/* Show caret only if submenu exists */}
                             {submenu && isOpen && (
                                 <i
                                     className={`bi bi-chevron-${openMenus[name] ? "down" : "right"} text-sm`}
@@ -69,7 +67,6 @@ return (
                             )}
                         </div>
 
-                        {/* Submenu items with smooth transition */}
                         <div
                             className={`
                                 overflow-hidden transition-all duration-300 ease-in-out

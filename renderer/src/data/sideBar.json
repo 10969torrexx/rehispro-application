@@ -11,23 +11,19 @@
       "url": "/user-management"
     },
     {
-      "icon": "bi-file-earmark-text",
-      "name": "Documents",
-      "url": "/documents",
-      "submenu": [
-        {
-          "name": "Birth Certificates",
-          "url": "/documents/birth-certificates"
-        },
-        {
-          "name": "Marriage Certificates",
-          "url": "/documents/marriage-certificates"
-        },
-        {
-          "name": "Death Certificates",
-          "url": "/documents/death-certificates"
-        }
-      ]
+      "icon": "bi-clipboard2-pulse",
+      "name": "Birth Certificates",
+      "url": "/birth-certificates"
+    },
+    {
+      "icon": "bi-archive",
+      "name": "Marriage Certificates",
+      "url": "/marriage-certificates"
+    },
+    {
+      "icon": "bi-folder2",
+      "name": "Death Certificates",
+      "url": "/death-certificates"
     }
   ],
   "staff" : [
@@ -37,23 +33,19 @@
       "url": "/dashboard"
     },
     {
-      "icon": "bi-file-earmark-text",
-      "name": "Documents",
-      "url": "/documents",
-      "submenu": [
-        {
-          "name": "Birth Certificates",
-          "url": "/documents/birth-certificates"
-        },
-        {
-          "name": "Marriage Certificates",
-          "url": "/documents/marriage-certificates"
-        },
-        {
-          "name": "Death Certificates",
-          "url": "/documents/death-certificates"
-        }
-      ]
+      "icon": "bi-clipboard2-pulse",
+      "name": "Birth Certificates",
+      "url": "/birth-certificates"
+    },
+    {
+      "icon": "bi-archive",
+      "name": "Marriage Certificates",
+      "url": "/marriage-certificates"
+    },
+    {
+      "icon": "bi-folder2",
+      "name": "Death Certificates",
+      "url": "/death-certificates"
     }
   ]
 }

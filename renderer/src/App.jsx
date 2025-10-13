@@ -39,9 +39,9 @@ function App() {
           <Route path="/" element={<Login onLoginSuccess={() => {setIsLoggedIn(true);}} />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-management" element={<UsersManagement />} />
-          <Route path="/documents/birth-certificates" element={<BirthCertificate />} />
-          <Route path="/documents/death-certificates" element={<DeathCertificate />} />
-          <Route path="/documents/marriage-certificates" element={<MarriageCertificate />} />
+          <Route path="/birth-certificates" element={<BirthCertificate />} />
+          <Route path="/death-certificates" element={<DeathCertificate />} />
+          <Route path="/marriage-certificates" element={<MarriageCertificate />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
