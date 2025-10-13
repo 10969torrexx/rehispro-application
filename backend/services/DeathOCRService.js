@@ -2,7 +2,7 @@ const { writeLog } = require('../utils/logger');
 const { spawn } = require("child_process");
 const path = require("path");
 
-async function callPythonOCR(filePaths, type) {
+async function callPythonOCR(filePaths) {
   return new Promise((resolve, reject) => {
     try{
       const pythonCmd = process.platform === "win32"? "python" : "python3";

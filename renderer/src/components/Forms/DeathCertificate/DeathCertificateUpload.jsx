@@ -5,7 +5,7 @@ import { FileValidation } from '@services';
 import { FileList, LoadingScreen } from '@components';
 import { Limits } from '@enums';
 import { toast } from "react-toastify";
-import { BirthCertServices } from '@services';
+import { DeathCertServices } from '@services';
 
 export default function DeathCertificateUpload({setActiveTab, onOCRComplete}) { 
     const [files, setFiles ] = useState([]);
@@ -52,7 +52,7 @@ export default function DeathCertificateUpload({setActiveTab, onOCRComplete}) {
         files.forEach(file => formData.append('files', file));
         try {
             setLoading(true)
-            const response = await BirthCertServices.uploadFiles(formData);
+            const response = await DeathCertServices.uploadFiles(formData);
             setLoading(false);
             if (response.success) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
