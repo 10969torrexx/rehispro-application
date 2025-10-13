@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 export default function BirthCertificate() {
     const [searchParams] = useSearchParams();
     const [userData, setUserData] = useState(null);
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
 
     const [activeTab, setActiveTab] = useState('home'); //TODO: handle the active tab

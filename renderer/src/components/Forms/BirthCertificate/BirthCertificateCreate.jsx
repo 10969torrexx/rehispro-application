@@ -33,7 +33,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
         // Page 1 - Child Information
         page1: {
             creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
-            creationType: defaultOCRValues.length > 0 ? BirthCertificate.CreationType.SCANNED : BirthCertificate.CreationType.MANUAL,
+            creationType: (defaultOCRValues && defaultOCRValues.length > 0) ? BirthCertificate.CreationType.SCANNED : BirthCertificate.CreationType.MANUAL,
             province: defaultOCRValues?.province ?? "",
             city: defaultOCRValues?.city ?? "",
             registryNumber: defaultOCRValues?.registry_number ?? "",

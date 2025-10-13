@@ -21,7 +21,9 @@ export { default as BirthCertificateCreate } from './Forms/BirthCertificate/Birt
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
 export { default as DeathCertificateHome } from './Forms/DeathCertificate/DeathCertificateHome';
 export { default as DeathCertificateView } from './Forms/DeathCertificate/DeathCertificateView';
+export { default as DeathCertificateUpload } from './Forms/DeathCertificate/DeathCertificateUpload';
 
 export { default as MarriageCertificateCreateForm } from './Forms/MarriageCertificate/MarriageCertificateCreateForm';
 export { default as MarriageCertificateHome } from './Forms/MarriageCertificate/MarriageCertificateHome';
 export { default as MarriageCertificateView } from './Forms/MarriageCertificate/MarriageCertificateView';
+export { default as MarriageCertificateUpload } from './Forms/MarriageCertificate/MarriageCertficiateUpload';

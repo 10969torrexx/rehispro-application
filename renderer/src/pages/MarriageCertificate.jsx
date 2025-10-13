@@ -5,7 +5,7 @@ import {MarriageCertificateHome, MarriageCertificateCreateForm, MarriageCertific
 
 export default function MarriageCertificate() {
     const [userData, setUserData] = useState(null);
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
 
     useEffect(() => {

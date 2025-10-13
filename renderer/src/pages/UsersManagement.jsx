@@ -104,7 +104,7 @@ export default function UsersManagement() {
     ];
 
   //TODO: handling side bar open / close state
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
   //TODO handle edit user
     const [ showEditUserModal, setShowEditUserModal ] = useState(false);
     const handleEditUser = (userId) => { 
