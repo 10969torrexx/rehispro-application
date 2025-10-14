@@ -11,7 +11,7 @@ from death_parser import deathParse
 """
 TODO: logger setup
 """
-logger = setup_logger(__name__, "logs/ocr_script.log")
+logger = setup_logger(__name__, "python-backend/logs/ocr_script.log")
 
 def run_ocr(file_paths, type_arg):
     """Runs OCR on all given file paths and returns parsed result"""
@@ -28,7 +28,7 @@ def run_ocr(file_paths, type_arg):
             ocr_output = reader.readtext(img_np)
             texts = [str(r[1]) for r in ocr_output]
             all_text.extend(texts)
-            logger.info("all text=%s", all_text)
+            logger.info("[%s] all text=%s",type_arg, all_text)
         except Exception as e:
             errors.append({"file": path, "error": str(e)})
 
