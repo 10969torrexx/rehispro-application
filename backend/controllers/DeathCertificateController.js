@@ -315,10 +315,23 @@ exports.uploadAndScan = async(req, res) => {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ success: false, message: 'No files uploaded' });
     }
-
+    const filePaths = req.files.map(file => file.path);
+    const response = await callPythonOCR(filePaths, "death");
+    writeLog(`${response.success === true ? '[info]' : '[error]' } [uploadAndScan] ${JSON.stringify({
+      success: response.success,
+      message: response.message,
+      data: response.result
+    })}`);
+    if (!response.success) {
+      res.status(500).json({
+          success: response.success,
+          message: response.message,
+      });
+    } 
     res.status(200).json({
-      success: false,
-      message: "Scan Failed."
+      success: response.success,
+      message: response.message,
+      result: response.result
     });
 
   } catch (error) {

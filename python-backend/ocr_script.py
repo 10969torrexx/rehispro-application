@@ -1,47 +1,44 @@
-
 import sys
 import os
 import json
-import logging
+from logger_setup import setup_logger
 import numpy as np
 from PIL import Image
 import easyocr
-from birth_parser import parse
+from birth_parser import birthParse
+from death_parser import deathParse
 
-# Setup logging (optional)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOG_DIR = os.path.join(BASE_DIR, "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
+"""
+TODO: logger setup
+"""
+logger = setup_logger(__name__, "logs/ocr_script.log")
 
-logging.basicConfig(
-    filename=os.path.join(LOG_DIR, "runner.log"),
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-logger = logging.getLogger(__name__)
-
-def run_ocr(file_paths):
+def run_ocr(file_paths, type_arg):
     """Runs OCR on all given file paths and returns parsed result"""
     reader = easyocr.Reader(['en'], verbose=False)
     all_text = []
     errors = []
 
+    logger.info("type_arg: %s", type_arg)
+
     for path in file_paths:
         try:
-            logger.info(f"Processing {path}")
             image = Image.open(path).convert('RGB')
             img_np = np.array(image)
             ocr_output = reader.readtext(img_np)
             texts = [str(r[1]) for r in ocr_output]
             all_text.extend(texts)
-            logger.info("[ocr results] %s", all_text)
+            logger.info("all text=%s", all_text)
         except Exception as e:
-            logger.error(f"OCR failed for {path}: {e}", exc_info=True)
             errors.append({"file": path, "error": str(e)})
 
     try:
-        parsed_data = parse(all_text)
+        parsed_data = ""
+        if type_arg == "birth":
+            parsed_data = birthParse(all_text)
+        elif type_arg == "death":
+            parsed_data == deathParse(all_text)
+            
         logger.info("[parsed data] %s", parsed_data)
         result = {
             "success": True,
@@ -55,15 +52,16 @@ def run_ocr(file_paths):
             "errors": errors
         }
 
-    print(json.dumps(result))  # <-- Node reads this stdout
+    print(json.dumps(result))
     return result
 
 
 if __name__ == "__main__":
-    # Take file paths from command line args
-    file_paths = sys.argv[1:]
-    if not file_paths:
-        print(json.dumps({"success": False, "message": "No files provided"}))
+    if len(sys.argv) < 3:
+        print(json.dumps({"success": False, "message": "Type and file paths are required"}))
         sys.exit(1)
 
-    run_ocr(file_paths)
+    type_arg = sys.argv[1]
+    file_paths = sys.argv[2:]
+
+    run_ocr(file_paths, type_arg)
