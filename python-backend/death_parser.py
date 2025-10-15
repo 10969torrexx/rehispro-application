@@ -1,6 +1,7 @@
 from rapidfuzz import fuzz, process
 from difflib import SequenceMatcher
 import os
+import re
 from datetime import datetime
 from logger_setup import setup_logger
 logger = setup_logger(__name__, "python-backend/logs/death_parser.log")
@@ -371,6 +372,65 @@ template = {
   "admin_address": ""
 }
 
+def remove_data_placeholders(source_list, reference_list, threshold=70):
+  cleaned=[]
+  junk_pattern = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,5}$")
+  numbered_dot_pattern = re.compile(r"^\d+\.$")
+  noisy_symbol_pattern = re.compile(r"[^\w\s.'-]")
+
+  for src in source_list:
+      s = src.strip()
+
+      if " " in s:
+          parts = s.split()
+          first_word = parts[0].lower().rstrip(":")
+          if "/" in first_word or first_word in reference_list:
+              # only keep the part after the label
+              old_value = s
+              s = " ".join(parts[1:])
+              logger.info(f"[DEBUG] Split merged OCR text: '{old_value}' → '{s}'")
+
+      if "(" in s or ")" in s:
+          continue
+
+      if junk_pattern.match(s):
+          continue
+
+      if len(s) < 2 or re.fullmatch(r"[^A-Za-z0-9]+", s):
+          continue
+
+      if noisy_symbol_pattern.search(s):
+          continue
+      
+      if numbered_dot_pattern.match(s):
+          continue
+
+      match = process.extractOne(s, reference_list, scorer=fuzz.token_set_ratio)
+      if match:
+          _, score, _ = match
+          if score >= threshold:
+              continue
+      cleaned.append(s)
+
+  return cleaned
+
+def generate_template(template: dict, ocr_list: list):
+  filled = template.copy()
+  keys = list(filled.keys())
+  ocr_index = 0
+  key_index = 0
+  while key_index < len(keys) and ocr_index < len(ocr_list):
+    key = keys[key_index]
+    value = ocr_list[ocr_index].strip() if isinstance(ocr_list[ocr_index], str) else ocr_list[ocr_index]
+    filled[key] = value
+    key_index += 1
+    ocr_index += 1
+  
+  return filled
+
 def deathParse(ocr_text):
-    logger.info("death parse")
-    logger.info(ocr_text)
+  cleaned = remove_data_placeholders(ocr_text, default_keywords)
+  logger.info("[remove_data_placeholders] %s", cleaned)
+  template = generate_template(template, cleaned)
+  logger.info("[parsed] %s", template)
+  logger.info(ocr_text)
