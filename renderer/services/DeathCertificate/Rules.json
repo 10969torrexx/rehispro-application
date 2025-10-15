@@ -20,6 +20,16 @@
         "maxLength": "City must not exceed 100 characters."
       }
     },
+    "registry_number": {
+      "required": true,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Registry Number is required.",
+        "minLength": "Registry Number must be at least 2 characters.",
+        "maxLength": "Registry Number must not exceed 100 characters."
+      }
+    },
     "firstName": {
       "required": true,
       "minLength": 2,

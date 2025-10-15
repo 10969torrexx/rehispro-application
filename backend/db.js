@@ -581,8 +581,7 @@ db.serialize(() => {
         updated_at TIMESTAMP DEFAULT (datetime('now')),
         deleted_at TIMESTAMP
     );
-`);
-
+  `);
 
 });
 

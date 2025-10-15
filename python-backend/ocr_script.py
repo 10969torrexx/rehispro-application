@@ -37,7 +37,7 @@ def run_ocr(file_paths, type_arg):
         if type_arg == "birth":
             parsed_data = birthParse(all_text)
         elif type_arg == "death":
-            parsed_data == deathParse(all_text)
+            parsed_data = deathParse(all_text)
             
         logger.info("[parsed data] %s", parsed_data)
         result = {
@@ -54,7 +54,6 @@ def run_ocr(file_paths, type_arg):
 
     print(json.dumps(result))
     return result
-
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:

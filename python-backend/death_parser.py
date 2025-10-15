@@ -27,9 +27,21 @@ default_keywords = [
   "(Month)",
   "(Year)",
   "5.AGEAT THE TIME OF DEATH (Fill-in below accdg to age category)",
-  "a IELYEAR ORABOVE",
+  "a. IF 1 YEAR OR ABOVE",
   "IF UNDER",
+  "LELYEAR ORABQYE",
+  "DEVNDER LYEAR",
+  "UNDFR 24HRS",
+  "b. APLASTIC ANEMIA",
+  "Heallh Olficer"
+  "OFFICER",
   "YEAR",
+  "fUr",
+  "Dal",
+  "MURibto",
+  "A.",
+  "City Eivil Registrar",
+  "6_",
   "G EUNDER 24 HRS",
   "(2] Compteted years",
   "[T]Monlhs",
@@ -37,10 +49,10 @@ default_keywords = [
   "Hours",
   "Min Sec",
   "6 . PLACE OF DEATH",
-  "(Name of Hospital/CliniclInstitution/Hlouse",
+  "(Name of Hospital/Clinic/Institution/House",
   "St , Barangay. CitylMunicipality. Province)",
   "7. CIVIL STATUS",
-  "(SinglelMarried Widowl",
+  "(Single/Married Widow)",
   "Widower Annulled Divorced)",
   "8.RELIGIONIRELIGIOUS SECT",
   "9.CITIZENSHIP",
@@ -245,6 +257,7 @@ default_keywords = [
 template = {
   "province": "",
   "city": "",
+  "register_number": "",
   "first_name": "",
   "middle_name": "",
   "last_name": "",
@@ -431,6 +444,8 @@ def generate_template(template: dict, ocr_list: list):
 def deathParse(ocr_text):
   cleaned = remove_data_placeholders(ocr_text, default_keywords)
   logger.info("[remove_data_placeholders] %s", cleaned)
-  template = generate_template(template, cleaned)
-  logger.info("[parsed] %s", template)
+  response = generate_template(template, cleaned)
+  logger.info("[parsed] %s", response)
   logger.info(ocr_text)
+  
+  return response
