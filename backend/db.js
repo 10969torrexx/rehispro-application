@@ -322,6 +322,7 @@ db.serialize(() => {
       postmortem_title TEXT,
       postmortem_address TEXT,
       postmortem_date DATE,
+      embalmered_name TEXT,
       embalmer_name TEXT,
       embalmer_title TEXT,
       embalmer_address TEXT,
@@ -337,8 +338,10 @@ db.serialize(() => {
       deceased_name TEXT,
       death_date DATE,
       death_place TEXT,
+      delayed_cemetery_name TEXT,
+      delayed_cemetery_address TEXT,
+      was_attended TEXT,
       attended_by TEXT,
-      not_attended INTEGER DEFAULT 0,
       cause_of_death TEXT,
       reason_delay TEXT,
   
@@ -346,7 +349,9 @@ db.serialize(() => {
       jurat_day TEXT,
       jurat_month_year TEXT,
       jurat_place TEXT,
-      ctc_number TEXT,
+      ctc_day TEXT,
+      ctc_month_year TEXT,
+      ctc_place TEXT,
       ctc_issued_on DATE,
       ctc_issued_at TEXT,
       admin_name TEXT,
@@ -484,7 +489,6 @@ db.serialize(() => {
         registrar_title TEXT,
         registrar_date TEXT,
         remarks_annotation TEXT,
-        civil_registrar TEXT,
 
         -- Page 7: Additional Witnesses and Affidavit
         witness5_name TEXT,

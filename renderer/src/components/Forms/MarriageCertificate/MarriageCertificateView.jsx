@@ -1212,6 +1212,144 @@ export default function MarriageCertificateView({ row }) {
                                 readOnly
                             />
                         </div>
+                        <div className="flex flex-col items-center">
+                            <SignaturePlaceholder />
+                            <label className="text-xs mt-1">(Signature of Witness 3)</label>
+                            <input
+                                type="text"
+                                name="witness3Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness3_name || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <SignaturePlaceholder />
+                            <label className="text-xs mt-1">(Signature of Witness 4)</label>
+                            <input
+                                type="text"
+                                name="witness4Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness4_name || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-[250px]">
+                                <SignaturePlaceholder />
+                            </div>
+                            <label className="text-xs mt-1">(Signature of Witness 5)</label>
+                            <input
+                                type="text"
+                                name="witness5Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness5_name || ""}
+                                readOnly
+                            />
+                        </div>
+    
+                        <div className="flex flex-col items-center">
+                            <div className="w-[250px]">
+                                <SignaturePlaceholder />
+                            </div>
+                            <label className="text-xs mt-1">(Signature of Witness 6)</label>
+                            <input
+                                type="text"
+                                name="witness6Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness6_name || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-[250px]">
+                                <SignaturePlaceholder />
+                            </div>
+                            <label className="text-xs mt-1">(Signature of Witness 7)</label>
+                            <input
+                                type="text"
+                                name="witness7Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness7_name || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-[250px]">
+                                <SignaturePlaceholder />
+                            </div>
+                            <label className="text-xs mt-1">(Signature of Witness 8)</label>
+                            <input
+                                type="text"
+                                name="witness8Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness8_name || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-[250px]">
+                                <SignaturePlaceholder />
+                            </div>
+                            <label className="text-xs mt-1">(Signature of Witness 9)</label>
+                            <input
+                                type="text"
+                                name="witness9Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness9_name || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-[250px]">
+                                <SignaturePlaceholder />
+                            </div>
+                            <label className="text-xs mt-1">(Signature of Witness 10)</label>
+                            <input
+                                type="text"
+                                name="witness10Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness10_name || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-[250px]">
+                                <SignaturePlaceholder />
+                            </div>
+                            <label className="text-xs mt-1">(Signature of Witness 11)</label>
+                            <input
+                                type="text"
+                                name="witness11Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness11_name || ""}
+                                readOnly
+                            />
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-[250px]">
+                                <SignaturePlaceholder />
+                            </div>
+                            <label className="text-xs mt-1">(Signature of Witness 12)</label>
+                            <input
+                                type="text"
+                                name="witness12Name"
+                                placeholder="Name in Print"
+                                className="w-56 border-b border-gray-500 text-center mt-2"
+                                value={marriage.witness12_name || ""}
+                                readOnly
+                            />
+                        </div>
+
                     </div>
                 </div>
     
@@ -1298,58 +1436,8 @@ export default function MarriageCertificateView({ row }) {
                         readOnly
                     />
                 </div>
-    
-                <div className="border border-pink-300 p-3 rounded mb-3">
-                    <h3 className="text-md font-semibold">
-                        TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR
-                    </h3>
-                    <input
-                        type="text"
-                        name="civilRegistrar"
-                        className="w-full common-input"
-                        value={marriage.civil_registrar || ""}
-                        readOnly
-                    />
-                </div>
-    
+                
                 {/* Page 7 */}
-                <span>
-                    <p>20b. Witnesses (Print Name and Sign)</p>
-                </span>
-                <div className="border border-pink-300 p-3 rounded mb-3">
-                    <div className="grid grid-cols-2 gap-6">
-                        <div className="flex flex-col items-center">
-                            <div className="w-[250px]">
-                                <SignaturePlaceholder />
-                            </div>
-                            <label className="text-xs mt-1">(Signature of Witness 3)</label>
-                            <input
-                                type="text"
-                                name="witness3Name"
-                                placeholder="Name in Print"
-                                className="w-56 border-b border-gray-500 text-center mt-2"
-                                value={marriage.witness3_name || ""}
-                                readOnly
-                            />
-                        </div>
-    
-                        <div className="flex flex-col items-center">
-                            <div className="w-[250px]">
-                                <SignaturePlaceholder />
-                            </div>
-                            <label className="text-xs mt-1">(Signature of Witness 4)</label>
-                            <input
-                                type="text"
-                                name="witness4Name"
-                                placeholder="Name in Print"
-                                className="w-56 border-b border-gray-500 text-center mt-2"
-                                value={marriage.witness4_name || ""}
-                                readOnly
-                            />
-                        </div>
-                    </div>
-                </div>
-    
                 <h3 className="block text-center font-semibold">
                     AFFIDAVIT OF SOLEMNIZING OFFICER
                 </h3>
@@ -1359,7 +1447,7 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="affidavitOfficerName"
-                            className="border-b border-black outline-none"
+                            className="border-b border-black outline-none text-center"
                             value={marriage.affidavit_officer_name || ""}
                             readOnly
                         />
@@ -1367,7 +1455,7 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="affidavitOfficerOrganization"
-                            className="border-b border-black outline-none"
+                            className="border-b border-black outline-none text-center"
                             value={marriage.affidavit_officer_organization || ""}
                             readOnly
                         />
@@ -1375,7 +1463,7 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="affidavitOfficerAddress"
-                            className="border-b border-black outline-none"
+                            className="border-b border-black outline-none text-center"
                             value={marriage.affidavit_officer_address || ""}
                             readOnly
                         />
@@ -1390,7 +1478,7 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="statement1Party1"
-                            className="border-b border-black outline-none px-1 w-40"
+                            className="border-b border-black outline-none px-1 w-40 text-center"
                             value={marriage.statement1_party1 || ""}
                             readOnly
                         />
@@ -1398,7 +1486,7 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="statement1Party2"
-                            className="border-b border-black outline-none px-1 w-40"
+                            className="border-b border-black outline-none px-1 w-40 text-center"
                             value={marriage.statement1_party2 || ""}
                             readOnly
                         />
@@ -1450,7 +1538,7 @@ export default function MarriageCertificateView({ row }) {
                                     <input
                                         type="text"
                                         name="statement2cParty1"
-                                        className="border-b border-black outline-none px-1 w-40"
+                                        className="border-b border-black outline-none px-1 w-40 text-center"
                                         value={marriage.statement2c_party1 || ""}
                                         readOnly
                                     />
@@ -1458,7 +1546,7 @@ export default function MarriageCertificateView({ row }) {
                                     <input
                                         type="text"
                                         name="statement2cParty2"
-                                        className="border-b border-black outline-none px-1 w-40"
+                                        className="border-b border-black outline-none px-1 w-40 text-center"
                                         value={marriage.statement2c_party2 || ""}
                                         readOnly
                                     />
@@ -1563,7 +1651,7 @@ export default function MarriageCertificateView({ row }) {
     
                 <div className="mb-3">
                     <p>
-                        <span>SUBSCRIBED AND SWORN</span> to before me this
+                        <span className="font-bold">SUBSCRIBED AND SWORN</span> to before me this
                         <input
                             type="text"
                             name="swornDay"
@@ -1591,11 +1679,11 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="swornAt"
-                            className="border-b border-black outline-none w-[200px] text-center"
+                            className="border-b border-black outline-none w-[500px] text-center"
                             value={marriage.sworn_at || ""}
                             readOnly
                         />
-                        issued on
+                        Philippines, affiant who exhibited to me his Community Tax Cert. issued on
                         <input
                             type="text"
                             name="swornIssuedOn"
@@ -1606,8 +1694,16 @@ export default function MarriageCertificateView({ row }) {
                         ,
                         <input
                             type="text"
+                            name="swornIssuedOn2"
+                            className="border-b border-black outline-none w-[120px] text-center"
+                            value={marriage.sworn_issued_on2 || ""}
+                            readOnly
+                        />
+                        at
+                        <input
+                            type="text"
                             name="swornIssuedAt"
-                            className="border-b border-black outline-none w-[200px] text-center"
+                            className="border-b border-black outline-none w-[400px] text-center"
                             value={marriage.sworn_issued_at || ""}
                             readOnly
                         />
@@ -1659,16 +1755,16 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="affiantName"
-                            className="border-b border-b-black outline-none text-center"
+                            className="border-b border-b-black outline-none text-center w-[240px]"
                             value={marriage.affiant_name || ""}
                             readOnly
                         />
-                        , of legal age, single/married/divorced/widow/widower, with
+                        , of legal age, <spam className="italic font-bold">{marriage.affiant_civil_status || 'single / married / divorced / widow / widower'}</spam>, with
                         residence and postal address
                         <input
                             type="text"
                             name="affiantAddress"
-                            className="border-b border-b-black outline-none text-center"
+                            className="border-b border-b-black outline-none text-center w-[550px]"
                             value={marriage.affiant_address || ""}
                             readOnly
                         />
@@ -1678,78 +1774,90 @@ export default function MarriageCertificateView({ row }) {
                 </div>
     
                 <div className="space-y-4 mb-3">
-                    <div className="flex flex-col mb-3">
-                        <p>1. That I am the applicant for the delayed registration of</p>
-                        <label className="flex items-center gap-2">
-                            <input
-                                type="checkbox"
-                                name="statement1OptionA"
-                                className="scale-125"
-                                checked={marriage.statement1_option_a === 1}
-                                readOnly
-                            />
-                            my marriage with
-                            <input
-                                type="text"
-                                name="statement1MarriageWith"
-                                className="border-b border-b-black outline-none text-center"
-                                value={marriage.statement1_marriage_with || ""}
-                                readOnly
-                            />
-                            in
-                            <input
-                                type="text"
-                                name="statement1PlaceA"
-                                className="border-b border-b-black outline-none text-center"
-                                value={marriage.statement1_place_a || ""}
-                                readOnly
-                            />
-                            on
-                            <input
-                                type="text"
-                                name="statement1DateA"
-                                className="border-b border-b-black outline-none text-center"
-                                value={marriage.statement1_date_a || ""}
-                                readOnly
-                            />
-                            .
-                        </label>
-    
-                        <label className="flex items-center gap-2">
-                            <input
-                                type="checkbox"
-                                name="statement1OptionB"
-                                className="scale-125"
-                                checked={marriage.statement1_option_b === 1}
-                                readOnly
-                            />
-                            my marriage between
-                            <input
-                                type="text"
-                                name="statement1MarriageBetween"
-                                className="border-b border-b-black outline-none text-center"
-                                value={marriage.statement1_marriage_between || ""}
-                                readOnly
-                            />
-                            in
-                            <input
-                                type="text"
-                                name="statement1PlaceB"
-                                className="border-b border-b-black outline-none text-center"
-                                value={marriage.statement1_place_b || ""}
-                                readOnly
-                            />
-                            on
-                            <input
-                                type="text"
-                                name="statement1DateB"
-                                className="border-b border-b-black outline-none text-center"
-                                value={marriage.statement1_date_b || ""}
-                                readOnly
-                            />
-                            .
-                        </label>
+                    <div className="flex flex-col mb-3 space-y-3">
+                    <p>1. That I am the applicant for the delayed registration of</p>
+
+                    {/* Option A */}
+                    <label className="flex flex-wrap items-center gap-2">
+                        <input
+                        type="checkbox"
+                        name="statement1OptionA"
+                        checked={marriage.statement1_option_a === 1}
+                        readOnly
+                        className="scale-125"
+                        />
+                        <span>my marriage with</span>
+                        <input
+                        type="text"
+                        name="statement1MarriageWith"
+                        value={marriage.statement1_marriage_with || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center w-[140px]"
+                        />
+                        <span>in</span>
+                        <input
+                        type="text"
+                        name="statement1PlaceA"
+                        value={marriage.statement1_place_a || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center w-[140px]"
+                        />
+                        <span>on</span>
+                        <input
+                        type="text"
+                        name="statement1DateA"
+                        value={marriage.statement1_date_a || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center w-[120px]"
+                        />
+                        <span>.</span>
+                    </label>
+
+                    {/* Option B */}
+                    <label className="flex flex-wrap items-center gap-2">
+                        <input
+                        type="checkbox"
+                        name="statement1OptionB"
+                        checked={marriage.statement1_option_b === 1}
+                        readOnly
+                        className="scale-125"
+                        />
+                        <span>my marriage between</span>
+                        <input
+                        type="text"
+                        name="statement1MarriageBetweenA"
+                        value={marriage.statement1_spouse_name_1 || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center min-w-[120px]"
+                        />
+                        <span>and</span>
+                        <input
+                        type="text"
+                        name="statement1MarriageBetweenB"
+                        value={marriage.statement1_spouse_name_2 || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center min-w-[120px]"
+                        />
+                        <span>in</span>
+                        <input
+                        type="text"
+                        name="statement1PlaceB"
+                        value={marriage.statement1_place_b || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center min-w-[120px]"
+                        />
+                        <span>on</span>
+                        <input
+                        type="text"
+                        name="statement1DateB"
+                        value={marriage.statement1_date_b || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center min-w-[150px]"
+                        />
+                        <span>.</span>
+                    </label>
                     </div>
+
     
                     <div className="flex flex-col mb-3">
                         <p>
@@ -1883,6 +1991,26 @@ export default function MarriageCertificateView({ row }) {
                         />
                         .
                     </p>
+                    <p style={{ paddingLeft: "50px" }}>
+                    (If the applicant is other than the wife or husband) That the wife is a citizen of{" "}
+                    <input
+                        type="text"
+                        name="citizenApplicant2"
+                        value={marriage.citizen_applicant2 || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center w-[150px]"
+                    />{" "}
+                    and the husband is a citizen of{" "}
+                    <input
+                        type="text"
+                        name="citizenSpouse2"
+                        value={marriage.citizen_spouse2 || ""}
+                        readOnly
+                        className="border-b border-b-black outline-none text-center w-[150px]"
+                    />
+                    .
+                    </p>
+
     
                     <p>
                         5. That the reason for the delay in registering our/their marriage
@@ -1946,17 +2074,26 @@ export default function MarriageCertificateView({ row }) {
                     <div className="flex flex-col items-center">
                         <SignaturePlaceholder />
                         <p className="text-sm">Signature Over Printed Name of Affiant</p>
+                          <input
+                            type="text"
+                            name="affiantName"
+                            value={marriage.affiant_name || ""}
+                            readOnly
+                            className="border-b border-b-black outline-none text-center w-[300px]"
+                        />
+                        <p className="text-sm">Name in Print</p>
+
                     </div>
                 </div>
     
                 <div className="mb-5">
                     <p>
-                        <span className="pl-5 font-bold">SUBSCRIBED AND SWORN</span> to
+                        <span className="font-bold">SUBSCRIBED AND SWORN</span> to
                         before me this
                         <input
                             type="text"
                             name="swornDayPage10"
-                            className="border-b border-b-black outline-none text-center w-[100px]"
+                            className="border-b border-b-black outline-none text-center w-[50px]"
                             value={marriage.sworn_day_page10 || ""}
                             readOnly
                         />
@@ -1964,7 +2101,7 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="swornMonthPage10"
-                            className="border-b border-b-black outline-none text-center"
+                            className="border-b border-b-black outline-none text-center w-[110px]"
                             value={marriage.sworn_month_page10 || ""}
                             readOnly
                         />
@@ -1972,7 +2109,7 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="swornYearPage10"
-                            className="border-b border-b-black outline-none text-center w-[300px]"
+                            className="border-b border-b-black outline-none text-center w-[80px]"
                             value={marriage.sworn_year_page10 || ""}
                             readOnly
                         />
@@ -1980,23 +2117,31 @@ export default function MarriageCertificateView({ row }) {
                         <input
                             type="text"
                             name="swornPlacePage10"
-                            className="border-b border-b-black outline-none text-center w-[300px]"
+                            className="border-b border-b-black outline-none text-center w-[500px]"
                             value={marriage.sworn_place_page10 || ""}
                             readOnly
                         />
-                        issued on
+                        Philippines, affiant who exhibited to me his Community Tax Cert. issued on
                         <input
                             type="text"
                             name="swornIssuedOnPage10"
-                            className="border-b border-b-black outline-none text-center w-[300px]"
+                            className="border-b border-b-black outline-none text-center w-[120px]"
                             value={marriage.sworn_issued_on_page10 || ""}
                             readOnly
                         />
                         ,
                         <input
                             type="text"
+                            name="swornIssuedOnPage102"
+                            className="border-b border-b-black outline-none text-center w-[120px]"
+                            value={marriage.sworn_issued_on_page102 || ""}
+                            readOnly
+                        />
+                        at
+                        <input
+                            type="text"
                             name="swornIssuedAtPage10"
-                            className="border-b border-b-black outline-none text-center w-[300px]"
+                            className="border-b border-b-black outline-none text-center w-[400px]"
                             value={marriage.sworn_issued_at_page10 || ""}
                             readOnly
                         />

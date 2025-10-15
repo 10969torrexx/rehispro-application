@@ -143,7 +143,7 @@
     "civilStatus": {
       "required": true,
       "type": "enum",
-      "options": ["Single", "Married", "Divorced", "Widow / widower"],
+      "options": ["Single", "Married", "Divorced", "Widow", "Widower"],
       "message": {
         "required": "Civil status is required.",
         "enum": "Invalid civil status."
@@ -806,6 +806,13 @@
         "date": "Invalid date format"
       }
     },
+    "embalmeredName": {
+      "required": false,
+      "maxLength": 100,
+      "message": {
+        "maxLength": "Name must not exceed 100 characters"
+      }
+    },
     "embalmerName": {
       "required": false,
       "maxLength": 100,
@@ -914,16 +921,40 @@
         "maxLength": "Place must not exceed 150 characters"
       }
     },
+    "delayedCemeteryName": {
+      "required": false,
+      "minLength": 3,
+      "maxLength": 100,
+      "message": {
+        "required": "Cemetery name is required",
+        "minLength": "Name must be at least 3 characters",
+        "maxLength": "Name must not exceed 100 characters"
+      }
+    },
+    "delayedCemeteryAddress": {
+      "required": false,
+      "minLength": 5,
+      "maxLength": 150,
+      "message": {
+        "required": "Cemetery address is required",
+        "minLength": "Address must be at least 5 characters",
+        "maxLength": "Address must not exceed 150 characters"
+      }
+    },
+    "wasAttended": {
+      "required": false,
+      "type": "boolean"
+    },
+    "wasNotAttended": {
+      "required": false,
+      "type": "boolean"
+    },
     "attendedBy": {
       "required": false,
       "maxLength": 100,
       "message": {
         "maxLength": "Attended by must not exceed 100 characters"
       }
-    },
-    "notAttended": {
-      "required": false,
-      "type": "boolean"
     },
     "causeOfDeath": {
       "required": false,
@@ -975,14 +1006,32 @@
         "maxLength": "Place must not exceed 100 characters"
       }
     },
-    "ctcNumber": {
+    "ctcDay": {
       "required": false,
-      "minLength": 5,
-      "maxLength": 50,
+      "type": "string",
+      "maxLength": 2,
       "message": {
-        "required": "CTC Number is required",
-        "minLength": "CTC Number must be at least 5 characters",
-        "maxLength": "CTC Number must not exceed 50 characters"
+        "required": "Day is required",
+        "maxLength": "Day must not exceed 2 characters"
+      }
+    },
+    "ctcMonthYear": {
+      "required": false,
+      "type": "string",
+      "maxLength": 20,
+      "message": {
+        "required": "Month/Year is required",
+        "maxLength": "Month/Year must not exceed 20 characters"
+      }
+    },
+    "ctcPlace": {
+      "required": false,
+      "minLength": 2,
+      "maxLength": 100,
+      "message": {
+        "required": "Place is required",
+        "minLength": "Place must be at least 2 characters",
+        "maxLength": "Place must not exceed 100 characters"
       }
     },
     "ctcIssuedOn": {

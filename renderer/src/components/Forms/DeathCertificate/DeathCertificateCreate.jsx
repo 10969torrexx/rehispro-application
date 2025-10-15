@@ -171,6 +171,7 @@ export default function DeathCertificateCreate() {
             postmortemTitle: "",
             postmortemAddress: "",
             postmortemDate: "",
+            embalmeredName: "",
             embalmerName: "",
             embalmerTitle: "",
             embalmerAddress: "",
@@ -187,8 +188,11 @@ export default function DeathCertificateCreate() {
             deceasedName: "",
             deathDate: "",
             deathPlace: "",
+            delayedCemeteryName: "",
+            delayedCemeteryAddress: "",
+            wasAttended: false,
+            ctcPlace: false,
             attendedBy: "",
-            notAttended: false,
             causeOfDeath: "",
             reasonDelay: ""
         },
@@ -197,7 +201,9 @@ export default function DeathCertificateCreate() {
             juratDay: "",
             juratMonthYear: "",
             juratPlace: "",
-            ctcNumber: "",
+            ctcDay: "",
+            ctcMonthYear: "",
+            ctcPlace: "",
             ctcIssuedOn: "",
             ctcIssuedAt: "",
             adminName: "",
@@ -224,17 +230,17 @@ export default function DeathCertificateCreate() {
     const [errors, setErrors] = React.useState({});
     const handlePageChange = (direction) => {
         if (direction === 'next') {
-            const response = DeathCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
-            if (Object.keys(response).length > 0) {
-                setErrors(response);
-                toast.error("Please fix the errors in the form.");
-                console.log("[Death form] Validation Errors:", response);
-                console.log(
-                    `[Death form] form Data ${currentPage}:`, formData[`page${currentPage}`]
-                );
-            } else {
+            // const response = DeathCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
+            // if (Object.keys(response).length > 0) {
+            //     setErrors(response);
+            //     toast.error("Please fix the errors in the form.");
+            //     console.log("[Death form] Validation Errors:", response);
+            //     console.log(
+            //         `[Death form] form Data ${currentPage}:`, formData[`page${currentPage}`]
+            //     );
+            // } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
-            }
+            // }
         } else if (direction === 'prev') {
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
         }
@@ -410,6 +416,7 @@ export default function DeathCertificateCreate() {
                         postmortemTitle: "",
                         postmortemAddress: "",
                         postmortemDate: "",
+                        embalmeredName: "",
                         embalmerName: "",
                         embalmerTitle: "",
                         embalmerAddress: "",
@@ -425,8 +432,11 @@ export default function DeathCertificateCreate() {
                         deceasedName: "",
                         deathDate: "",
                         deathPlace: "",
+                        delayedCemeteryName: "",
+                        delayedCemeteryAddress: "",
+                        wasAttended: false,
+                        ctcPlace: false,
                         attendedBy: "",
-                        notAttended: false,
                         causeOfDeath: "",
                         reasonDelay: ""
                     },
@@ -434,7 +444,9 @@ export default function DeathCertificateCreate() {
                         juratDay: "",
                         juratMonthYear: "",
                         juratPlace: "",
-                        ctcNumber: "",
+                        ctcDay: "",
+                        ctcMonthYear: "",
+                        ctcPlace: "",
                         ctcIssuedOn: "",
                         ctcIssuedAt: "",
                         adminName: "",
@@ -682,6 +694,7 @@ export default function DeathCertificateCreate() {
                                     <option value="Married">Married</option>
                                     <option value="Widow">Widow</option>
                                     <option value="Divorced">Divorced</option>
+                                    <option value="Widower">Widower</option>
                                 </select>
                                 {errors.civilStatus && <ErrorMessages errors={errors.civilStatus} />}
                             </div>
@@ -1329,19 +1342,20 @@ export default function DeathCertificateCreate() {
                         />
                         {errors.physicianAddress && <ErrorMessages errors={errors.physicianAddress} />}
                     </div>
+                    </div>
                     <div>
                         <label className="block text-sm font-medium mb-1">Date</label>
                         <input 
                         type="date" 
                         name="certificationDate" 
-                        className={`w-full common-input ${errors.certificationDate ? 'input-error' : ''}`} 
+                        className={` w-full common-input ${errors.certificationDate ? 'input-error' : ''}`} 
                         value={formData.page7.certificationDate || ""}
                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                         onClick={(e) => e.target.showPicker && e.target.showPicker()}
                         />
                         {errors.certificationDate && <ErrorMessages errors={errors.certificationDate} />}
                     </div>
-                    </div>
+
 
                     {/* Reviewed By */}
                     <div className="space-y-4">
@@ -1648,81 +1662,131 @@ export default function DeathCertificateCreate() {
                     {currentPage === 12 && 
                         <div className="mb-6 space-y-6">
                             <h2 className="text-lg text-center font-semibold">Postmortem Certificate</h2>
+                            
+                            <p className="text-sm italic w-full break-words whitespace-normal">
+                            I HEREBY CERTIFY that I have performed an autopsy upon the body of the deceased and that the cause of death was: 
+                            <span className="italic font-bold break-words">
+                                {formData.page12.postmortemCause || '____________________________________________'}
+                            </span>.
+                            </p>
+
                             {/* Postmortem Certificate */}
                             <div>
                                 <label className="block text-sm font-medium">Cause of Death (from Autopsy)</label>
-                                <input type="text" name="postmortemCause" className={`w-full common-input ${errors.postmortemCause ? 'input-error' : ''}`}
+                                <textarea name="postmortemCause" className={`common-textarea w-full h-32 resize-none ${errors.postmortemCause ? 'input-error' : ''}`}
                                     value={formData.page12.postmortemCause}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.postmortemCause && <ErrorMessages errors={errors.postmortemCause} />}
                             </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-sm font-medium">Name in Print</label>
-                                <input type="text" name="postmortemName" className={`w-full common-input ${errors.postmortemName ? 'input-error' : ''}`}
-                                    value={formData.page12.postmortemName}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                <input
+                                type="text"
+                                name="postmortemName"
+                                className={`w-full common-input ${errors.postmortemName ? 'input-error' : ''}`}
+                                value={formData.page12.postmortemName}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.postmortemName && <ErrorMessages errors={errors.postmortemName} />}
                             </div>
+
                             <div>
                                 <label className="block text-sm font-medium">Title/Designation</label>
-                                <input type="text" name="postmortemTitle" className={`w-full common-input ${errors.postmortemTitle ? 'input-error' : ''}`}
-                                    value={formData.page12.postmortemTitle}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                <input
+                                type="text"
+                                name="postmortemTitle"
+                                className={`w-full common-input ${errors.postmortemTitle ? 'input-error' : ''}`}
+                                value={formData.page12.postmortemTitle}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.postmortemTitle && <ErrorMessages errors={errors.postmortemTitle} />}
                             </div>
+
                             <div>
                                 <label className="block text-sm font-medium">Address</label>
-                                <input type="text" name="postmortemAddress" className={`w-full common-input ${errors.postmortemAddress ? 'input-error' : ''}`}
-                                    value={formData.page12.postmortemAddress}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                <input
+                                type="text"
+                                name="postmortemAddress"
+                                className={`w-full common-input ${errors.postmortemAddress ? 'input-error' : ''}`}
+                                value={formData.page12.postmortemAddress}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.postmortemAddress && <ErrorMessages errors={errors.postmortemAddress} />}
                             </div>
+
                             <div>
                                 <label className="block text-sm font-medium">Date</label>
-                                <input type="date" name="postmortemDate" className={`w-full common-input ${errors.postmortemDate ? 'input-error' : ''}`}
-                                    value={formData.page12.postmortemDate}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                <input
+                                type="date"
+                                name="postmortemDate"
+                                className={`w-full common-input ${errors.postmortemDate ? 'input-error' : ''}`}
+                                value={formData.page12.postmortemDate}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.postmortemDate && <ErrorMessages errors={errors.postmortemDate} />}
                             </div>
+                            </div>
+
                             <h2 className="text-lg text-center font-semibold">Embalmer Certification</h2>
-                            {/* Embalmer Certification */}
+
+                            <p className="text-sm italic">
+                                 I HEREBY CERTIFY that I have embalmed <spam className="italic font-bold">{formData.page12.embalmeredName || '__________________'} </spam> {' '} following all the regulations prescribed by the Department of Health.
+                            </p>
+
                             <div>
-                                <label className="block text-sm font-medium">Embalmer Name</label>
-                                <input type="text" name="embalmerName" className={`w-full common-input ${errors.embalmerName ? 'input-error' : ''}`}
+                                <label className="block text-sm font-medium">Name</label>
+                                <input type="text" name="embalmeredName" className={`w-full common-input ${errors.embalmerName ? 'input-error' : ''}`}
+                                    value={formData.page12.embalmeredName}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.embalmeredName && <ErrorMessages errors={errors.embalmeredName} />}
+                            </div>
+
+                            {/* Embalmer Certification */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                                <div>
+                                    <label className="block text-sm font-medium">Embalmer Name</label>
+                                    <input
+                                    type="text"
+                                    name="embalmerName"
+                                    className={`w-full common-input ${errors.embalmerName ? 'input-error' : ''}`}
                                     value={formData.page12.embalmerName}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.embalmerName && <ErrorMessages errors={errors.embalmerName} />}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium">Title/Designation</label>
-                                <input type="text" name="embalmerTitle" className={`w-full common-input ${errors.embalmerTitle ? 'input-error' : ''}`}
+                                    />
+                                    {errors.embalmerName && <ErrorMessages errors={errors.embalmerName} />}
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium">Title/Designation</label>
+                                    <input
+                                    type="text"
+                                    name="embalmerTitle"
+                                    className={`w-full common-input ${errors.embalmerTitle ? 'input-error' : ''}`}
                                     value={formData.page12.embalmerTitle}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.embalmerTitle && <ErrorMessages errors={errors.embalmerTitle} />}
-                            </div>
-                            <div>
+                                    />
+                                    {errors.embalmerTitle && <ErrorMessages errors={errors.embalmerTitle} />}
+                                </div>
+                                <div>
                                 <label className="block text-sm font-medium">Address</label>
                                 <input type="text" name="embalmerAddress" className={`w-full common-input ${errors.embalmerAddress ? 'input-error' : ''}`}
                                     value={formData.page12.embalmerAddress}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.embalmerAddress && <ErrorMessages errors={errors.embalmerAddress} />}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium">License No.</label>
-                                <input type="text" name="embalmerLicense" className={`w-full common-input ${errors.embalmerLicense ? 'input-error' : ''}`}
-                                    value={formData.page12.embalmerLicense}
-                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                                {errors.embalmerLicense && <ErrorMessages errors={errors.embalmerLicense} />}
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">License No.</label>
+                                    <input type="text" name="embalmerLicense" className={`w-full common-input ${errors.embalmerLicense ? 'input-error' : ''}`}
+                                        value={formData.page12.embalmerLicense}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.embalmerLicense && <ErrorMessages errors={errors.embalmerLicense} />}
+                                </div>
+
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
@@ -1809,30 +1873,44 @@ export default function DeathCertificateCreate() {
                           {/* Statement 1 */}
                           <div>
                             <p className="text-sm font-medium mb-2">
-                              1. That <span className="italic font-bold ">{formData.page1.firstName} {formData.page1.lastName}</span> died on <span className="italic font-bold">{formData.page1.dateOfDeath}</span> at <span className="italic font-bold">{formData.page1.placeOfDeath}</span> and was buried/cremated in <span className="italic font-bold">{formData.page8.cemeteryName}</span> on <span className="italic font-bold">{formData.page8.cemeteryAddress}</span>
+                              1. That <span className="italic font-bold ">{formData.page13.deceasedName || '__________________'}</span> died on <span className="italic font-bold">{formData.page13.deathDate || '__________________'}</span> at <span className="italic font-bold">{formData.page13.deathPlace || '__________________'}</span> and was buried/cremated in <span className="italic font-bold">{formData.page13.delayedCemeteryName || '__________________'}</span> on <span className="italic font-bold">{formData.page13.delayedCemeteryAddress || '__________________'}</span>
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                               <div>
                                 <input type="text" name="deceasedName" placeholder="Deceased Name" className={`common-input ${errors.deceasedName ? 'input-error' : ''}`}
-                                  value={`${formData.page1.firstName} ${formData.page1.lastName}`}
-                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)} readOnly
+                                  value={formData.page13.deceasedName}
+                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.deceasedName && <ErrorMessages errors={errors.deceasedName} />}
                               </div>
                               <div>
                                 <input type="date" name="deathDate" className={`common-input ${errors.deathDate ? 'input-error' : ''}`}
-                                  value={formData.page1.dateOfDeath}
-                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)} readOnly
+                                  value={formData.page13.deathDate}
+                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                   onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.deathDate && <ErrorMessages errors={errors.deathDate} />}
                               </div>
                               <div>
-                                <input type="text" name="deathPlace" placeholder="Place of Death/Burial" className={`common-input ${errors.deathPlace ? 'input-error' : ''}`}
-                                  value={formData.page1.placeOfDeath}
-                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)} readOnly
+                                <input type="text" name="deathPlace" placeholder="Place of Death" className={`common-input ${errors.deathPlace ? 'input-error' : ''}`}
+                                  value={formData.page13.deathPlace}
+                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)} 
                                 />
                                 {errors.deathPlace && <ErrorMessages errors={errors.deathPlace} />}
+                              </div>
+                              <div>
+                                <input type="text" name="delayedCemeteryName" placeholder="Cemetery name or cremation location" className={`common-input ${errors.delayedCemeteryName ? 'input-error' : ''}`}
+                                  value={formData.page13.delayedCemeteryName}
+                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)} 
+                                />
+                                {errors.delayedCemeteryName && <ErrorMessages errors={errors.delayedCemeteryName} />}
+                              </div>
+                              <div>
+                                <input type="text" name="delayedCemeteryAddress" placeholder="Cemetery/Cremation address" className={`common-input ${errors.delayedCemeteryAddress ? 'input-error' : ''}`}
+                                  value={formData.page13.delayedCemeteryAddress}
+                                  onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.delayedCemeteryAddress && <ErrorMessages errors={errors.delayedCemeteryAddress} />}
                               </div>
                             </div>
                           </div>
@@ -1843,26 +1921,52 @@ export default function DeathCertificateCreate() {
                               2. That the deceased at the time of his/her death:
                             </p>
                             <div className="flex flex-col md:flex-row md:items-center gap-4">
-                              <label className="flex items-center space-x-2">
-                                <input type="checkbox" className={`custom-checkbox w-4 h-4 ${errors.notAttended ? 'input-error' : ''}`} name="notAttended" 
-                                  checked={formData.page7.attendedDeceased === true ? true : false}
-                                />
-                                <span>Was attended.</span>
-                              </label>
-                              <label className="flex items-center space-x-2">
-                                <input type="checkbox" className={`custom-checkbox w-4 h-4 ${errors.notAttended ? 'input-error' : ''}`} name="notAttended" 
-                                  checked={formData.page7.attendedDeceased === true ? false : true}
-                                  onChange={(e) => handleCheckboxChange(e, `page${currentPage}`)}
-                                />
-                                <span>Was not attended.</span>
-                              </label> 
+                            <label className="flex items-center space-x-2">
+                            <input
+                                type="checkbox"
+                                className={`custom-checkbox w-4 h-4 ${errors.wasAttended ? 'input-error' : ''}`}
+                                name="wasAttended"
+                                checked={formData.page13.wasAttended || false}
+                                onChange={() => {
+                                handleInputChange(
+                                    { target: { name: "wasAttended", value: !formData.page13.wasAttended } },
+                                    `page${currentPage}`
+                                );
+                                handleInputChange(
+                                    { target: { name: "ctcPlace", value: false } },
+                                    `page${currentPage}`
+                                );
+                                }}
+                            />
+                            <span>Was attended.</span>
+                            </label>
+
+                            <label className="flex items-center space-x-2">
+                            <input
+                                type="checkbox"
+                                className={`custom-checkbox w-4 h-4 ${errors.ctcPlace ? 'input-error' : ''}`}
+                                name="ctcPlace"
+                                checked={formData.page13.ctcPlace || false}
+                                onChange={() => {
+                                handleInputChange(
+                                    { target: { name: "ctcPlace", value: !formData.page13.ctcPlace } },
+                                    `page${currentPage}`
+                                );
+                                handleInputChange(
+                                    { target: { name: "wasAttended", value: false } },
+                                    `page${currentPage}`
+                                );
+                                }}
+                            />
+                            <span>Was not attended.</span>
+                            </label>
                               <input type="text" name="attendedBy" placeholder="Was attended by" className={`common-input w-full md:w-auto ${errors.attendedBy ? 'input-error' : ''}`}
-                                value={formData.page7.physicianName || ""}
-                                readOnly
-                                disabled={formData.page7.attendedDeceased === true ? false : true}
+                                value={formData.page13.wasAttended === true ? formData.page13.attendedBy : formData.page13.attendedBy = ""}
+                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                disabled={formData.page13.wasAttended === true ? false : true}
+                                
                               />
                             </div>
-                            {errors.notAttended && <ErrorMessages errors={errors.notAttended} />}
                             {errors.attendedBy && <ErrorMessages errors={errors.attendedBy} />}
                           </div>
                         
@@ -1941,20 +2045,59 @@ export default function DeathCertificateCreate() {
                                     <label className="block text-sm font-medium mb-1">Signature</label>
                                     <SignaturePlaceholder />
                                 </div>
+                                <div className='col-span-3 text-center'>
+                                    <input
+                                        type="text"
+                                        name=""
+                                        readOnly
+                                        className={`common-input w-full text-center`}
+                                        value={formData.page13.affiantName}
+                                    />
+                                    <label className="block text-sm font-medium mb-1">Name in Print</label>
+                                </div>
+
                             </div>
+                            <p className="text-sm italic">
+                                <strong>SUBSCRIBED AND SWORN</strong> to before me this <spam className="italic font-bold">{formData.page14.ctcDay || '____'}</spam> day of <spam className="italic font-bold">{formData.page14.ctcMonthYear || '_____________'}</spam> at <spam className="italic font-bold">{formData.page14.ctcPlace || '_____________'}</spam>, Philippines, affiant who exhibited to me his Community Tax Cert. issued on <spam className="italic font-bold">{formData.page14.ctcIssuedOn || '_____________'}</spam> at <spam className="italic font-bold">{formData.page14.ctcIssuedAt || '_____________'}</spam>.
+                            </p>
                         
+
                             {/* CTC Details */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">CTC Number</label>
+                                    <label className="block text-sm font-medium mb-1">Day</label>
                                     <input
-                                        type="text"
-                                        name="ctcNumber"
-                                        className={`common-input ${errors.ctcNumber ? 'input-error' : ''}`}
-                                        value={formData.page14.ctcNumber}
+                                        type="number"
+                                        name="ctcDay"
+                                        className={`common-input ${errors.ctcDay ? 'input-error' : ''}`}
+                                        value={formData.page14.ctcDay}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.ctcNumber && <ErrorMessages errors={errors.ctcNumber} />}
+                                    {errors.ctcDay && <ErrorMessages errors={errors.ctcDay} />}
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Month/Year</label>
+                                    <input
+                                        type="text"
+                                        name="ctcMonthYear"
+                                        className={`common-input ${errors.ctcMonthYear ? 'input-error' : ''}`}
+                                        value={formData.page14.ctcMonthYear}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.ctcMonthYear && <ErrorMessages errors={errors.ctcMonthYear} />}
+                                </div>
+
+                                
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">Place</label>
+                                    <input
+                                        type="text"
+                                        name="ctcPlace"
+                                        className={`common-input ${errors.ctcPlace ? 'input-error' : ''}`}
+                                        value={formData.page14.ctcPlace}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.ctcPlace && <ErrorMessages errors={errors.ctcPlace} />}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Issued On</label>
@@ -1964,6 +2107,7 @@ export default function DeathCertificateCreate() {
                                         className={`common-input ${errors.ctcIssuedOn ? 'input-error' : ''}`}
                                         value={formData.page14.ctcIssuedOn}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()} // 👈 open calendar when clicking anywhere
                                     />
                                     {errors.ctcIssuedOn && <ErrorMessages errors={errors.ctcIssuedOn} />}
                                 </div>

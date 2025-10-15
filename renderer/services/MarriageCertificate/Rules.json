@@ -567,12 +567,13 @@
             "required": true,
             "minLength": 3,
             "message": {
-                "required": "Witness 1 name is required.",
+                "required": "Least 2 Witnesses are required.",
                 "minLength": "Witness 1 name must be at least 3 characters."
             }
         },
+        
         "witness2Name": {
-            "required": true,
+            "required": false,
             "minLength": 3,
             "message": {
                 "required": "Witness 2 name is required.",
@@ -580,10 +581,10 @@
             }
         },
         "witness3Name": {
-            "required": false,
+            "required": true,
             "minLength": 3,
             "message": {
-                "required": "Witness 3 name is required.",
+                "required": "Least 2 Witnesses are required.",
                 "minLength": "Witness 3 name must be at least 3 characters."
             }
         },
@@ -647,14 +648,6 @@
         },
         "remarksAnnotation": {
             "required": false
-        },
-        "civilRegistrar": {
-            "required": true,
-            "minLength": 3,
-            "message": {
-                "required": "Civil Registrar entry is required.",
-                "minLength": "Civil Registrar entry must be at least 3 characters."
-            }
         }
     },
     "page7": {

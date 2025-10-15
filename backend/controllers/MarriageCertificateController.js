@@ -127,7 +127,6 @@ function create(req, res) {
             registrarTitle: "registrar_title",
             registrarDate: "registrar_date",
             remarksAnnotation: "remarks_annotation",
-            civilRegistrar: "civil_registrar",
 
             // Page 7
             witness5Name: "witness5_name",

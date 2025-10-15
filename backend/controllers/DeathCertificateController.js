@@ -32,8 +32,6 @@ exports.create = (req, res) => {
         }
         
         const attendedDeceased = flatData.attendedDeceased;
-        console.log("🟢 Attendant:", attendedDeceased);
-
         if(attendedDeceased === true) {
             flatData.attendedDeceased = "Yes";
             delete flatData.notAttendedDeceased;
@@ -41,6 +39,16 @@ exports.create = (req, res) => {
         else {
             flatData.attendedDeceased = "No";
             delete flatData.notAttendedDeceased;
+        }
+        
+        const wasAttended = flatData.wasAttended;        
+        if(wasAttended === true) {
+            flatData.wasAttended = "Yes";
+            delete flatData.wasNotAttended;
+        }
+        else {
+            flatData.wasAttended = "No";
+            delete flatData.wasNotAttended;
         }
         
         // Map frontend keys (camelCase) → DB keys (snake_case)
@@ -158,6 +166,7 @@ exports.create = (req, res) => {
             postmortemTitle: "postmortem_title",
             postmortemAddress: "postmortem_address",
             postmortemDate: "postmortem_date",
+            embalmeredName: "embalmered_name",
             embalmerName: "embalmer_name",
             embalmerTitle: "embalmer_title",
             embalmerAddress: "embalmer_address",
@@ -173,8 +182,10 @@ exports.create = (req, res) => {
             deceasedName: "deceased_name",
             deathDate: "death_date",
             deathPlace: "death_place",
+            delayedCemeteryName: "delayed_cemetery_name",
+            delayedCemeteryAddress: "delayed_cemetery_address",
+            wasAttended: "was_attended",
             attendedBy: "attended_by",
-            notAttended: "not_attended",
             causeOfDeath: "cause_of_death",
             reasonDelay: "reason_delay",
 
@@ -182,7 +193,9 @@ exports.create = (req, res) => {
             juratDay: "jurat_day",
             juratMonthYear: "jurat_month_year",
             juratPlace: "jurat_place",
-            ctcNumber: "ctc_number",
+            ctcDay: "ctc_day",
+            ctcMonthYear: "ctc_month_year",
+            ctcPlace: "ctc_place",
             ctcIssuedOn: "ctc_issued_on",
             ctcIssuedAt: "ctc_issued_at",
             adminName: "admin_name",
