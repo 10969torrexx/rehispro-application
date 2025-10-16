@@ -257,7 +257,7 @@ default_keywords = [
 template = {
   "province": "",
   "city": "",
-  "register_number": "",
+  "registry_number": "",
   "first_name": "",
   "middle_name": "",
   "last_name": "",
@@ -430,14 +430,29 @@ def remove_data_placeholders(source_list, reference_list, threshold=70):
 def generate_template(template: dict, ocr_list: list):
   filled = template.copy()
   keys = list(filled.keys())
+
+  numeric_keys = ["age_years", "age_months", "age_days", "age_hours", "age_minutes",]
+
   ocr_index = 0
   key_index = 0
   while key_index < len(keys) and ocr_index < len(ocr_list):
     key = keys[key_index]
     value = ocr_list[ocr_index].strip() if isinstance(ocr_list[ocr_index], str) else ocr_list[ocr_index]
-    filled[key] = value
-    key_index += 1
-    ocr_index += 1
+
+    if key in numeric_keys:
+      try:
+        int(value)
+        filled[key] = value
+        key_index += 1
+        ocr_index += 1
+      except ValueError:
+        filled[key] = ""
+        key_index += 1
+        ocr_index += 1
+    else:
+      filled[key] = value
+      key_index += 1
+      ocr_index += 1
   
   return filled
 

@@ -15,6 +15,126 @@ export default function DeathCertificate() {
         }
     }, []);
     const [activeTab, setActiveTab] = useState("home"); //TODO: handle the active tab
+    const [ocrResults, setOCRResults] = useState(null);
+
+    useEffect(() => {
+        setOCRResults({
+            "province": "DAVAO DEL NORTE",
+            "city": "TAGUM CITY",
+            "registry_number": "2025-3945",
+            "first_name": "BLAISE",
+            "middle_name": "SUMAOY",
+            "last_name": "GATORIAN",
+            "sex": "FEMALE",
+            "date_of_death": "13 AUGUST  2025",
+            "date_of_birth": "14 NOVEMBER 2014",
+            "age_years": "DAVAO REGIONAL",
+            "age_months": "APOKON",
+            "age_days": "DAVAO DEL",
+            "age_hours": "NORTE",
+            "age_minutes": "PENTECOSTAL",
+            "place_of_death": "FILIPINO",
+            "civil_status": "PUROK",
+            "religion": "BAYOGO",
+            "citizenship": "MADRID",
+            "residence_house": "SUR IGAO DEL SUR",
+            "residence_street": "PHILIPPINES",
+            "residence_barangay": "STUDENT",
+            "residence_city": "JERLO",
+            "residence_province": "GATORIAN",
+            "residence_country": "DECEMJAY",
+            "occupation": "SUMAOY",
+            "father_first_name": "SEVERE",
+            "father_middle_name": "MONTHS",
+            "father_last_name": "UNKNOWN",
+            "mother_first_name": "UNKNOWN",
+            "mother_middle_name": "UNKNONMW",
+            "mother_last_name": "home",
+            "aged_of_mother": "NO",
+            "method_of_delivery": "MARY Trisha",
+            "length_of_pregnancy": "MERNIE",
+            "type_of_birth": "ESTRADA",
+            "if_multiple_birth": "MD",
+            "main_disease_condition_of_infant": "lica",
+            "other_diseases_conditions_of_infant": "OFFICER",
+            "main_maternal_disease_condition_affecting_infant": "III",
+            "other_maternal_disease_condition_affecting_infant": "APOKON",
+            "other_relevant_circumstances": "TAGUM CITY",
+            "immediate_cause": "iity",
+            "antecedent_cause": "AUGusT",
+            "underlying_cause": "2025",
+            "interval_immediate": "Hob",
+            "interval_antecedent": "24b. TRANSFER PERMIT",
+            "interval_underlying": "BURIAL",
+            "other_conditions": "ESPERANZA PUBLIC CEMETERY",
+            "maternal_condition": "SUR",
+            "manner_of_death": "JERLO_GATORIAN",
+            "autopsy": "RN",
+            "place_occurrence": "FATHER",
+            "attendant": "NURSE",
+            "attendant_from": "MADRID",
+            "attendant_to": "SURIGAO DELSUR",
+            "attended_deceased": "AUGUST",
+            "time_of_death": "2025",
+            "physician_name": "AUGUST",
+            "physician_title": "2025",
+            "physician_address": "RIZZAM_ALMEDORA",
+            "health_officer_name": "MCCARTNEY",
+            "disposal_type": "ASSISIANLREGISTRATION OFFICER",
+            "permit_number": "AUGuSt",
+            "permit_date": "414",
+            "transfer_permit": "2025",
+            "transfer_permit_date": "AUGUSL 14",
+            "cemetery_name": "2025",
+            "cemetery_address": "CWF",
+            "informant_name": "BLAISE",
+            "informant_relationship": "SUMAOI",
+            "informant_address": "GAIDRLAN",
+            "informant_date": "LONIED",
+            "prepared_name": "Edalme",
+            "prepared_title": "ENGR.",
+            "prepared_date": "JULLS",
+            "received_name": "CAEAK",
+            "received_title": "MAI",
+            "received_date": "MDKUD_",
+            "registrar_name": "oileol 2017",
+            "registrar_title": "JUl4 2D26",
+            "registrar_date": "",
+            "remarks": "",
+            "office_boxes": "",
+            "postmortem_cause": "",
+            "postmortem_name": "",
+            "postmortem_title": "",
+            "postmortem_address": "",
+            "postmortem_date": "",
+            "embalmer_name": "",
+            "embalmer_title": "",
+            "embalmer_address": "",
+            "embalmer_license": "",
+            "embalmer_issued_on": "",
+            "embalmer_issued_at": "",
+            "embalmer_expiry": "",
+            "affiant_name": "",
+            "affiant_civil_status": "",
+            "address": "",
+            "deceased_name": "",
+            "death_date": "",
+            "death_place": "",
+            "attended_by": "",
+            "not_attended": "",
+            "cause_of_death": "",
+            "reason_delay": "",
+            "jurat_day": "",
+            "jurat_month_year": "",
+            "jurat_place": "",
+            "ctc_number": "",
+            "ctc_issued_on": "",
+            "ctc_issued_at": "",
+            "admin_name": "",
+            "admin_position": "",
+            "admin_address": ""
+        });
+    }, []);
     return (
         <>
             <div className="flex w-screen h-screen">
@@ -54,8 +174,8 @@ export default function DeathCertificate() {
                             <div className="form-content mb-4">
                                 <DeathCertificateHome 
                                     onView={(row) => {
-                                        setSelectedRow(row);   // ✅ save the row
-                                        setActiveTab("view");  // ✅ go to view tab
+                                        setSelectedRow(row);  
+                                        setActiveTab("view");
                                     }}  
                                 />
                             </div>
@@ -86,7 +206,7 @@ export default function DeathCertificate() {
                                     />
                                 </div>
                                 <div className="form-content mb-4">
-                                    <DeathCertificateCreate />
+                                    <DeathCertificateCreate defaultOCRValues={ocrResults} />
                                 </div>
                             </div>
                         }

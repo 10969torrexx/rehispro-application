@@ -1,15 +1,12 @@
 import React from 'react';
 import { Divider } from '@components';
-import { InfoCard } from '@components';
 import { DeathCertValidation } from '@services';
 import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { DeathCertServices } from '@services';
 import { toast } from 'react-toastify';
-import { capitalizeFirst } from '../../../myTools/myTools';
-import { AllCaps } from '../../../myTools/myTools';
-import axios from 'axios';
+import { StringToDate } from '@myTools';
 
-export default function DeathCertificateCreate() {
+export default function DeathCertificateCreate({defaultOCRValues}) {
     const [currentPage, setCurrentPage] = React.useState(1);
     const pageTitles = [ 
         "Deceased's Information", 
@@ -33,22 +30,22 @@ export default function DeathCertificateCreate() {
         // Page 1 - Deceased's Information (merged original page1 and page2)
         page1: {
             creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
-            creationType: "manual",
-            province: "",
-            city: "",
-            registry_number: "",
-            firstName: "",
-            middleName: "",
-            lastName: "",
-            sex: "",
-            dateOfDeath: "",
-            dateOfBirth: "",
-            ageYears: "",
-            ageMonths: "",
-            ageDays: "",
-            ageHours: "",
-            ageMinutes: "",
-            placeOfDeath: ""
+            creationType: (defaultOCRValues && defaultOCRValues.length > 0)? 'scanned' : 'manual',
+            province: defaultOCRValues?.province || "",
+            city: defaultOCRValues?.city || "",
+            registry_number: defaultOCRValues?.registry_number || "",
+            firstName: defaultOCRValues?.first_name || "",
+            middleName: defaultOCRValues?.middle_name || "",
+            lastName: defaultOCRValues?.last_name || "",
+            sex: defaultOCRValues?.sex || "",
+            dateOfDeath: StringToDate(defaultOCRValues?.date_of_death) || "",
+            dateOfBirth: defaultOCRValues?.date_of_birth || "",
+            ageYears: defaultOCRValues?.age_years || "",
+            ageMonths: defaultOCRValues?.age_months || "",
+            ageDays: defaultOCRValues?.age_days || "",
+            ageHours: defaultOCRValues?.age_hours || "",
+            ageMinutes: defaultOCRValues?.age_minutes || "",
+            placeOfDeath: defaultOCRValues?.place_of_death || ""
         },
       
         // Page 2 - Status & Residence 
@@ -470,7 +467,7 @@ export default function DeathCertificateCreate() {
     
       return (
         <>
-            <form className="p-4 h-full mb-4 max-w-4xl mx-auto" onSubmit={handleSubmit}>
+            <form className="p-4 h-full mb-4 mx-auto" onSubmit={handleSubmit}>
                 <div className='mb-4'>
                     {currentPage === 1 && 
                         <div className="mb-4 space-y-6">

@@ -21,6 +21,7 @@ export function StringToDate(str) {
             "yyyy-MMMM-dd",     
             "MMMM dd, yyyy",    
             "MMM dd, yyyy",
+            "dd MMMM yyyy",
         ];
 
         for (const fmt of formats) {
