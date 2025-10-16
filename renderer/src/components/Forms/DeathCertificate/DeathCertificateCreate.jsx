@@ -917,7 +917,7 @@ export default function DeathCertificateCreate() {
                                 </div>
                             </div>
                         </div>                         
-                    </div>
+                        </div>
                     }
 
                     {currentPage === 4 && 
