@@ -438,7 +438,6 @@ def generate_template(template: dict, ocr_list: list):
   while key_index < len(keys) and ocr_index < len(ocr_list):
     key = keys[key_index]
     value = ocr_list[ocr_index].strip() if isinstance(ocr_list[ocr_index], str) else ocr_list[ocr_index]
-
     if key in numeric_keys:
       try:
         int(value)

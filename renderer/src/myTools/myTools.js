@@ -15,6 +15,14 @@ export function AllCaps(str) {
     return str.toUpperCase();
 }
 
+export function TitleCase(str) {
+    if (!str) return '';
+    return str.trim()
+    .replace(/\s+/g, ' ') 
+    .toLowerCase()
+    .replace(/\b\w/g, char => char.toUpperCase());
+}
+
 export function StringToDate(str) {
     try {
         const formats = [
@@ -25,7 +33,7 @@ export function StringToDate(str) {
         ];
 
         for (const fmt of formats) {
-            const parsed = parse(str, fmt, new Date());
+            const parsed = parse(str.trim().replace(/\s+/g, ' '), fmt, new Date());
             if (isValid(parsed)) {
                 return format(parsed, "yyyy-MM-dd");
             }

@@ -4,7 +4,7 @@ import { DeathCertValidation } from '@services';
 import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { DeathCertServices } from '@services';
 import { toast } from 'react-toastify';
-import { StringToDate } from '@myTools';
+import { StringToDate, capitalizeFirst, TitleCase } from '@myTools';
 
 export default function DeathCertificateCreate({defaultOCRValues}) {
     const [currentPage, setCurrentPage] = React.useState(1);
@@ -37,9 +37,9 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             firstName: defaultOCRValues?.first_name || "",
             middleName: defaultOCRValues?.middle_name || "",
             lastName: defaultOCRValues?.last_name || "",
-            sex: defaultOCRValues?.sex || "",
+            sex: TitleCase(defaultOCRValues?.sex) || "",
             dateOfDeath: StringToDate(defaultOCRValues?.date_of_death) || "",
-            dateOfBirth: defaultOCRValues?.date_of_birth || "",
+            dateOfBirth: StringToDate(defaultOCRValues?.date_of_birth) || "",
             ageYears: defaultOCRValues?.age_years || "",
             ageMonths: defaultOCRValues?.age_months || "",
             ageDays: defaultOCRValues?.age_days || "",
@@ -559,6 +559,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                 <label className="block text-sm font-medium">2. Sex</label>
                                 <select name="sex" className={`w-full common-input ${errors.sex ? 'input-error' : ''}`}
                                     value={formData.page1.sex}
+                                    data-value={formData.page1.sex}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
