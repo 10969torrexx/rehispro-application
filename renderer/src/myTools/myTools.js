@@ -2,7 +2,7 @@ import { parse, format, isValid } from "date-fns";
 
 export function capitalizeFirst(str) {
     if (!str) return '';
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return str.toLowerCase().charAt(0).toUpperCase() + str.slice(1);
 }
 
 export function capitalizeWords(str) {

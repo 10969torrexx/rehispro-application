@@ -269,7 +269,10 @@ template = {
   "age_days": "",
   "age_hours": "",
   "age_minutes": "",
-  "place_of_death": "",
+  "placeOfDeath_hospital": "",
+  "placeOfDeath_barangay": "",
+  "placeOfDeath_city": "",
+  "placeOfDeath_province": "",
 
   "civil_status": "",
   "religion": "",
@@ -432,12 +435,18 @@ def generate_template(template: dict, ocr_list: list):
   keys = list(filled.keys())
 
   numeric_keys = ["age_years", "age_months", "age_days", "age_hours", "age_minutes",]
+  valid_values = {
+    "civil_status": ["SINGLE", "MARRIED", "WIDO", "WIDOWER", "ANNULLED", "DIVORCED"],
+    "residence_country": ["PHILIPPINES", "PHILIPPINE", "PHILIPINES", "PHTLIPPINES"],
+  }
 
   ocr_index = 0
   key_index = 0
   while key_index < len(keys) and ocr_index < len(ocr_list):
     key = keys[key_index]
     value = ocr_list[ocr_index].strip() if isinstance(ocr_list[ocr_index], str) else ocr_list[ocr_index]
+    logger.info(f"Filling key: {key} with value: {value}")
+
     if key in numeric_keys:
       try:
         int(value)
@@ -447,7 +456,9 @@ def generate_template(template: dict, ocr_list: list):
       except ValueError:
         filled[key] = ""
         key_index += 1
-        ocr_index += 1
+    elif key in valid_values and value not in valid_values[key]:
+      filled[key] = ""
+      key_index += 1
     else:
       filled[key] = value
       key_index += 1
@@ -456,10 +467,10 @@ def generate_template(template: dict, ocr_list: list):
   return filled
 
 def deathParse(ocr_text):
+  logger.info(ocr_text)
   cleaned = remove_data_placeholders(ocr_text, default_keywords)
   logger.info("[remove_data_placeholders] %s", cleaned)
   response = generate_template(template, cleaned)
   logger.info("[parsed] %s", response)
-  logger.info(ocr_text)
   
   return response

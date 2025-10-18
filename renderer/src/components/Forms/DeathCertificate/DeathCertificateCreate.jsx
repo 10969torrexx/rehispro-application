@@ -45,166 +45,166 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             ageDays: defaultOCRValues?.age_days || "",
             ageHours: defaultOCRValues?.age_hours || "",
             ageMinutes: defaultOCRValues?.age_minutes || "",
-            placeOfDeath: defaultOCRValues?.place_of_death || ""
+            placeOfDeath: `${defaultOCRValues?.placeOfDeath_hospital || ""} ${defaultOCRValues?.placeOfDeath_barangay || ""} ${defaultOCRValues?.placeOfDeath_city || ""} ${defaultOCRValues?.placeOfDeath_province || ""}`.trim() || ""
         },
       
         // Page 2 - Status & Residence 
         page2: {
-            civilStatus: "",
-            religion: "",
-            citizenship: "",
-            residenceHouse: "",
-            residenceStreet: "",
-            residenceBarangay: "",
-            residenceCity: "",
-            residenceProvince: "",
-            residenceCountry: "",
-            occupation: ""
+            civilStatus: capitalizeFirst(defaultOCRValues?.civil_status) || "",
+            religion:  defaultOCRValues?.religion || "",
+            citizenship: defaultOCRValues?.citizenship || "",
+            residenceHouse: defaultOCRValues?.residence_house || "",
+            residenceStreet: defaultOCRValues?.residence_street || "",
+            residenceBarangay: defaultOCRValues?.residence_barangay || "",
+            residenceCity: defaultOCRValues?.residence_city || "",
+            residenceProvince: defaultOCRValues?.residence_province || "",
+            residenceCountry: defaultOCRValues?.residence_country || "",
+            occupation: defaultOCRValues?.occupation || ""
         },
       
         // Page 3 - Parents' Information
         page3: {
-            fatherFirstName: "",
-            fatherMiddleName: "",
-            fatherLastName: "",
-            motherFirstName: "",
-            motherMiddleName: "",
-            motherLastName: ""
+            fatherFirstName: defaultOCRValues?.father_first_name || "",
+            fatherMiddleName: defaultOCRValues?.father_middle_name || "",
+            fatherLastName: defaultOCRValues?.father_last_name || "",
+            motherFirstName: defaultOCRValues?.mother_first_name || "",
+            motherMiddleName: defaultOCRValues?.mother_middle_name || "",
+            motherLastName: defaultOCRValues?.mother_last_name || ""
         },      
 
         // Page 3b - For Children Aged 0 to 7 Days
         page4: {
-            agedOfMother: "",
-            methodOfDelivery: "",
-            methodOfDeliverySpecify: "",
-            lengthOfPregnancy: "",
-            typeOfBirth: "",
-            ifMultipleBirth: "",
+            agedOfMother: defaultOCRValues?.aged_of_mother || "",
+            methodOfDelivery: defaultOCRValues?.method_of_delivery || "",
+            methodOfDeliverySpecify: defaultOCRValues?.method_of_delivery_specify || "",
+            lengthOfPregnancy: defaultOCRValues?.length_of_pregnancy || "",
+            typeOfBirth: defaultOCRValues?.type_of_birth || "",
+            ifMultipleBirth: defaultOCRValues?.if_multiple_birth || "",
 
-            mainDiseaseConditionOfInfant: "",
-            otherDiseasesConditionsOfInfant: "",
-            mainMaternalDiseaseConditionAffectingInfant: "",
-            otherMaternalDiseaseConditionAffectingInfant: "",
-            otherRelevantCircumstances: ""
+            mainDiseaseConditionOfInfant: defaultOCRValues?.main_disease_condition_of_infant || "",
+            otherDiseasesConditionsOfInfant: defaultOCRValues?.other_diseases_conditions_of_infant || "",
+            mainMaternalDiseaseConditionAffectingInfant: defaultOCRValues?.main_maternal_disease_condition_affecting_infant || "",
+            otherMaternalDiseaseConditionAffectingInfant: defaultOCRValues?.other_maternal_disease_condition_affecting_infant || "",
+            otherRelevantCircumstances: defaultOCRValues?.other_relevant_circumstances || ""
         },
 
       
         // Page 4 - Medical Certificate
         page5: {
-            immediateCause: "",
-            antecedentCause: "",
-            underlyingCause: "",
-            intervalImmediate: "",
-            intervalAntecedent: "",
-            intervalUnderlying: "",
-            otherConditions: "",
-            maternalCondition: ""
+            immediateCause: defaultOCRValues?.immediate_cause || "",
+            antecedentCause: defaultOCRValues?.antecedent_cause || "",
+            underlyingCause: defaultOCRValues?.underlying_cause || "",
+            intervalImmediate: defaultOCRValues?.interval_immediate || "",
+            intervalAntecedent: defaultOCRValues?.interval_antecedent || "",
+            intervalUnderlying: defaultOCRValues?.interval_underlying || "",
+            otherConditions: defaultOCRValues?.other_conditions || "",
+            maternalCondition: defaultOCRValues?.maternal_condition || ""
         },
 
         // Page 5 - Manner of Death & Attendant 
         page6: {
-            mannerOfDeath: "",
-            autopsy: "",
-            placeOccurrence: "",
-            attendant: "",
-            attendantOthersSpecify: "",
-            attendantFrom: "",
-            attendantTo: ""
+            mannerOfDeath: defaultOCRValues?.manner_of_death || "",
+            autopsy: defaultOCRValues?.autopsy || "",
+            placeOccurrence: defaultOCRValues?.place_occurrence || "",
+            attendant: defaultOCRValues?.attendant || "",
+            attendantOthersSpecify: defaultOCRValues?.attendant_others_specify || "",
+            attendantFrom: defaultOCRValues?.attendant_from || "",
+            attendantTo: defaultOCRValues?.attendant_to || ""
         },
 
         // Page 6 - Certification of Death 
         page7: {
             attendedDeceased: false,
             notAttendedDeceased: false,
-            timeOfDeath: "",
-            physicianName: "",
-            physicianTitle: "",
-            physicianAddress: "",
-            healthOfficerName: ""
+            timeOfDeath: defaultOCRValues?.time_of_death || "",
+            physicianName: defaultOCRValues?.physician_name || "",
+            physicianTitle: defaultOCRValues?.physician_title || "",
+            physicianAddress: defaultOCRValues?.physician_address || "",
+            healthOfficerName: defaultOCRValues?.health_officer_name || ""
         },
 
         // Page 7 - Corpse Disposal (original page9)
         page8: {
-            disposalType: "",
-            permitNumber: "",
-            permitDate: "",
-            transferPermit: "",
-            transferPermitDate: "",
-            cemeteryName: "",
-            cemeteryAddress: ""
+            disposalType: defaultOCRValues?.disposal_type || "",
+            permitNumber: defaultOCRValues?.permit_number || "",
+            permitDate: defaultOCRValues?.permit_date || "",
+            transferPermit: defaultOCRValues?.transfer_permit || "",
+            transferPermitDate: defaultOCRValues?.transfer_permit_date || "",
+            cemeteryName: defaultOCRValues?.cemetery_name || "",
+            cemeteryAddress: defaultOCRValues?.cemetery_address || ""
         },
 
         // Page 8 - Informant & Prepared By (original page10)
         page9: {
-            informantName: "",
-            informantRelationship: "",
-            informantAddress: "",
-            informantDate: "",
-            preparedName: "",
-            preparedTitle: "",
-            preparedDate: ""
+            informantName: defaultOCRValues?.informant_name || "",
+            informantRelationship: defaultOCRValues?.informant_relationship || "",
+            informantAddress: defaultOCRValues?.informant_address || "",
+            informantDate: defaultOCRValues?.informant_date || "",
+            preparedName: defaultOCRValues?.prepared_name || "",
+            preparedTitle: defaultOCRValues?.prepared_title || "",
+            preparedDate: defaultOCRValues?.prepared_date || ""
         },
 
         // Page 9 - Received & Registered By (original page11)
         page10: {
-            receivedName: "",
-            receivedTitle: "",
-            receivedDate: "",
-            registrarName: "",
-            registrarTitle: "",
-            registrarDate: ""
+            receivedName: defaultOCRValues?.received_name || "",
+            receivedTitle: defaultOCRValues?.received_title || "",
+            receivedDate: defaultOCRValues?.received_date || "",
+            registrarName: defaultOCRValues?.registrar_name || "",
+            registrarTitle: defaultOCRValues?.registrar_title || "",
+            registrarDate: defaultOCRValues?.registrar_date || ""
         },
 
         // Page 10 - Remarks / Annotations (original page12)
         page11: {
-            remarks: "",      
+            remarks: defaultOCRValues?.remarks || "",
             officeBoxes: [] 
         },
         // Page 11 - Postmortem & Embalmer (original page13)
         page12: {
-            postmortemCause: "",
-            postmortemName: "",
-            postmortemTitle: "",
-            postmortemAddress: "",
-            postmortemDate: "",
-            embalmeredName: "",
-            embalmerName: "",
-            embalmerTitle: "",
-            embalmerAddress: "",
-            embalmerLicense: "",
-            embalmerIssuedOn: "",
-            embalmerIssuedAt: "",
-            embalmerExpiry: ""
+            postmortemCause: defaultOCRValues?.postmortem_cause || "",
+            postmortemName: defaultOCRValues?.postmortem_name || "",
+            postmortemTitle: defaultOCRValues?.postmortem_title || "",
+            postmortemAddress: defaultOCRValues?.postmortem_address || "",
+            postmortemDate: defaultOCRValues?.postmortem_date || "",
+            embalmeredName: defaultOCRValues?.embalmered_name || "",
+            embalmerName: defaultOCRValues?.embalmer_name || "",
+            embalmerTitle: defaultOCRValues?.embalmer_title || "",
+            embalmerAddress: defaultOCRValues?.embalmer_address || "",
+            embalmerLicense: defaultOCRValues?.embalmer_license || "",
+            embalmerIssuedOn: defaultOCRValues?.embalmer_issued_on || "",
+            embalmerIssuedAt: defaultOCRValues?.embalmer_issued_at || "",
+            embalmerExpiry: defaultOCRValues?.embalmer_expiry || ""
         },
         // Page 12 - Affidavit for Delayed Registration (original page14)
         page13: {
-            affiantName: "",
-            affiantCivilStatus: "",
-            address: "",
-            deceasedName: "",
-            deathDate: "",
-            deathPlace: "",
-            delayedCemeteryName: "",
-            delayedCemeteryAddress: "",
-            wasAttended: false,
-            ctcPlace: false,
-            attendedBy: "",
-            causeOfDeath: "",
-            reasonDelay: ""
+            affiantName: defaultOCRValues?.affiant_name || "",
+            affiantCivilStatus: defaultOCRValues?.affiant_civil_status || "",
+            address: defaultOCRValues?.address || "",
+            deceasedName: defaultOCRValues?.deceased_name || "",
+            deathDate: defaultOCRValues?.death_date || "",
+            deathPlace: defaultOCRValues?.death_place || "",
+            delayedCemeteryName: defaultOCRValues?.delayed_cemetery_name || "",
+            delayedCemeteryAddress: defaultOCRValues?.delayed_cemetery_address || "",
+            wasAttended: defaultOCRValues?.was_attended || false,
+            ctcPlace: defaultOCRValues?.ctc_place || false,
+            attendedBy: defaultOCRValues?.attended_by || "",
+            causeOfDeath: defaultOCRValues?.cause_of_death || "",
+            reasonDelay: defaultOCRValues?.reason_delay || ""
         },
         // Page 13 - Affidavit Jurat (original page15)
         page14: {
-            juratDay: "",
-            juratMonthYear: "",
-            juratPlace: "",
-            ctcDay: "",
-            ctcMonthYear: "",
-            ctcPlace: "",
-            ctcIssuedOn: "",
-            ctcIssuedAt: "",
-            adminName: "",
-            adminPosition: "",
-            adminAddress: ""
+            juratDay: defaultOCRValues?.jurat_day || "",
+            juratMonthYear: defaultOCRValues?.jurat_month_year || "",
+            juratPlace: defaultOCRValues?.jurat_place || "",
+            ctcDay: defaultOCRValues?.ctc_day || "",
+            ctcMonthYear: defaultOCRValues?.ctc_month_year || "",
+            ctcPlace: defaultOCRValues?.ctc_place || "",
+            ctcIssuedOn: defaultOCRValues?.ctc_issued_on || "",
+            ctcIssuedAt: defaultOCRValues?.ctc_issued_at || "",
+            adminName: defaultOCRValues?.admin_name || "",
+            adminPosition: defaultOCRValues?.admin_position || "",
+            adminAddress: defaultOCRValues?.admin_address || ""
         },
 
         page15: {
