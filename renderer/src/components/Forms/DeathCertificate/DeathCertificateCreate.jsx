@@ -948,6 +948,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                             <option value="Normal Spontaneous Vertex">Normal Spontaneous Vertex</option>
                                             <option value="Others">Others (Specify)</option>
                                         </select>
+                                        {errors.methodOfDelivery && <ErrorMessages errors={errors.methodOfDelivery} />}
                                         {formData.page4.methodOfDelivery === "Others" && (
                                             <input
                                             type="text"
@@ -1055,16 +1056,16 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                     {currentPage === 5 && 
                         <div className="mb-6 space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
-                            <label className="block text-center text-sm font-medium">(if the deceased is aged 8 days or over)</label>
+                            <label className="text-sm font-medium">19b. CAUSES OF DEATH (if the deceased is aged 8 days or over)</label>
                             {/* Causes of Death */}
                             <div>
-                                <label className="block text-sm font-medium">Immediate Cause</label>
+                                <label className="block text-sm font-medium">I. Immediate Cause</label>
                                 <input type="text" name="immediateCause" className={`w-full common-input ${errors.immediateCause ? 'input-error' : ''}`}
                                     value={formData.page5.immediateCause}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.immediateCause && <ErrorMessages errors={errors.immediateCause} />}
-                                <label className="block text-sm font-medium mt-2">Interval</label>
+                                <label className="block text-sm font-medium mt-2">Interval Between Onset and Death</label>
                                 <input type="text" name="intervalImmediate" className={`w-full common-input ${errors.intervalImmediate ? 'input-error' : ''}`}
                                     value={formData.page5.intervalImmediate}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1078,7 +1079,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.antecedentCause && <ErrorMessages errors={errors.antecedentCause} />}
-                                <label className="block text-sm font-medium mt-2">Interval</label>
+                                <label className="block text-sm font-medium mt-2">Interval Between Onset and Death</label>
                                 <input type="text" name="intervalAntecedent" className={`w-full common-input ${errors.intervalAntecedent ? 'input-error' : ''}`}
                                     value={formData.page5.intervalAntecedent}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1092,7 +1093,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.underlyingCause && <ErrorMessages errors={errors.underlyingCause} />}
-                                <label className="block text-sm font-medium mt-2">Interval</label>
+                                <label className="block text-sm font-medium mt-2">Interval Between Onset and Death</label>
                                 <input type="text" name="intervalUnderlying" className={`w-full common-input ${errors.intervalUnderlying ? 'input-error' : ''}`}
                                     value={formData.page5.intervalUnderlying}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1100,7 +1101,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                 {errors.intervalUnderlying && <ErrorMessages errors={errors.intervalUnderlying} />}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium">Other Significant Conditions</label>
+                                <label className="block text-sm font-medium">II. Other Significant Conditions contributing to death</label>
                                 <input type="text" name="otherConditions" className={`w-full common-input ${errors.otherConditions ? 'input-error' : ''}`}
                                     value={formData.page5.otherConditions}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1108,7 +1109,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                 {errors.otherConditions && <ErrorMessages errors={errors.otherConditions} />}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium">Maternal Condition (if the deceased is female aged 15-49 years old)</label>
+                                <label className="block text-sm font-medium">19c. Maternal Condition (if the deceased is female aged 15-49 years old)</label>
                                 <select name="maternalCondition" className={`w-full common-input ${errors.maternalCondition ? 'input-error' : ''}`}
                                     value={formData.page5.maternalCondition}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1129,8 +1130,9 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                         <div className="mb-6 space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Manner of Death */}
+                            <label htmlFor="">19c. Death by External Causes</label>
                             <div>
-                                <label className="block text-sm font-medium">Manner of Death</label>
+                                <label className="block text-sm font-medium">a. Manner of Death</label>
                                 <select name="mannerOfDeath" className={`w-full common-input ${errors.mannerOfDeath ? 'input-error' : ''}`}
                                     value={formData.page6.mannerOfDeath}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1159,56 +1161,58 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                             </div>
                             {/* Place of Occurrence */}
                             <div>
-                            <label className="block text-sm font-medium mb-1">Place of Occurrence (for external cause)</label>
-                            <select
-                                name="placeOccurrence"
-                                className={`w-full common-input ${errors.placeOccurrence ? 'input-error' : ''}`}
-                                value={formData.page6.placeOccurrence}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                            >
-                                <option value="">Select</option>
-                                <option value="Home">Home</option>
-                                <option value="Hospital">Hospital</option>
-                                <option value="Work">Work</option>
-                                <option value="Public Place">Public Place</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            {errors.placeOccurrence && <ErrorMessages errors={errors.placeOccurrence} />}
+                                <label className="block text-sm font-medium mb-1">b. Place of Occurrence (for external cause)</label>
+                                <select
+                                    name="placeOccurrence"
+                                    className={`w-full common-input ${errors.placeOccurrence ? 'input-error' : ''}`}
+                                    value={formData.page6.placeOccurrence}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                >
+                                    <option value="">Select</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Hospital">Hospital</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Public Place">Public Place</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                {errors.placeOccurrence && <ErrorMessages errors={errors.placeOccurrence} />}
                             </div>
+
                             {/* Attendant Type */}
                             <div className={`p-2 ${errors.attendantGroup ? 'input-error' : ''}`}>
-                            <label className="block w-full text-sm font-medium mb-1">Attended By</label>
-                            
-                            <select
-                                name="attendant"
-                                className={`common-input w-full ${errors.attendant ? 'input-error' : ''}`}
-                                value={formData.page6.attendant || ""}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                            >
-                                <option value="">Select</option>
-                                <option value="Private Physician">Private Physician</option>
-                                <option value="Public Health Authority">Public Health Authority</option>
-                                <option value="Hospital">Hospital</option>
-                                <option value="None">None</option>
-                                <option value="Others">Others (Specify)</option>
-                            </select>
+                                <label className="block w-full text-sm font-medium mb-1">21a. Attended By</label>
+                                
+                                <select
+                                    name="attendant"
+                                    className={`common-input w-full ${errors.attendant ? 'input-error' : ''}`}
+                                    value={formData.page6.attendant || ""}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                >
+                                    <option value="">Select</option>
+                                    <option value="Private Physician">Private Physician</option>
+                                    <option value="Public Health Authority">Public Health Authority</option>
+                                    <option value="Hospital">Hospital</option>
+                                    <option value="None">None</option>
+                                    <option value="Others">Others (Specify)</option>
+                                </select>
 
-                            {formData.page6.attendant === "Others" && (
-                                <input
-                                type="text"
-                                name="attendantOthersSpecify"
-                                placeholder="Specify"
-                                className={`common-input mt-2 w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
-                                value={formData.page6.attendantOthersSpecify}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                            )}
+                                {formData.page6.attendant === "Others" && (
+                                    <input
+                                    type="text"
+                                    name="attendantOthersSpecify"
+                                    placeholder="Specify"
+                                    className={`common-input mt-2 w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
+                                    value={formData.page6.attendantOthersSpecify}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                )}
 
-                            {errors.attendant && <ErrorMessages errors={errors.attendant} />}
-                            {errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} />}
+                                {errors.attendant && <ErrorMessages errors={errors.attendant} />}
+                                {errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} />}
                             </div>
 
                             {/* Attendant Duration */}
+                            <label htmlFor="">21b. If attended, state duration</label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium">From (mm/dd/yy)</label>
