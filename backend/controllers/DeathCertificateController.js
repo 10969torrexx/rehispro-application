@@ -1,4 +1,6 @@
 const db = require('../db');
+const { writeLog } = require('../utils/logger');
+const { callPythonOCR } = require('../services/OCRService');
 
 // CREATE Death Certificate
 exports.create = (req, res) => {
@@ -292,7 +294,6 @@ exports.list = (req, res) => {
       );
 };
 
-
 // VIEW Death Certificate
 exports.view = async (req, res) => {
   console.log("Attempting to fetch death certificate with ID:", req.params.id);
@@ -321,8 +322,37 @@ exports.view = async (req, res) => {
   );
 };
     
-            
+//TODO: handle upload and scan
+exports.uploadAndScan = async(req, res) => {
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ success: false, message: 'No files uploaded' });
+    }
+    const filePaths = req.files.map(file => file.path);
+    const response = await callPythonOCR(filePaths, "death");
+    writeLog(`${response.success === true ? '[info]' : '[error]' } [uploadAndScan] ${JSON.stringify({
+      success: response.success,
+      message: response.message,
+      data: response.result
+    })}`);
+    if (!response.success) {
+      res.status(500).json({
+          success: response.success,
+          message: response.message,
+      });
+    } 
+    res.status(200).json({
+      success: response.success,
+      message: response.message,
+      result: response.result
+    });
 
-exports.update = (req, res) => {};
-exports.remove = (req, res) => {};
-exports.find = (req, res) => {};
+  } catch (error) {
+    writeLog(`[error] [death] [uploadAndScan] ${JSON.stringify(error)}`);
+    res.status(500).json({
+      success: false,
+      message: 'File upload failed',
+      error: error.message || ""
+    });
+  }
+}   

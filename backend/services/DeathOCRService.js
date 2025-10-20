@@ -2,15 +2,14 @@ const { writeLog } = require('../utils/logger');
 const { spawn } = require("child_process");
 const path = require("path");
 
-async function callPythonOCR(filePaths, type) {
+async function callPythonOCR(filePaths) {
   return new Promise((resolve, reject) => {
     try{
-      writeLog(`[info][callPythonOCR] type= ${type}`)
       const pythonCmd = process.platform === "win32"? "python" : "python3";
       const scriptPath = path.join(__dirname, "../..", "python-backend", "ocr_script.py");
       const files = Array.isArray(filePaths) ? filePaths : [filePaths];
 
-      const pyProc = spawn(pythonCmd, [scriptPath, type, ...files]);
+      const pyProc = spawn(pythonCmd, [scriptPath, ...files]);
       let output= "";
       let errorOutput= "";
       pyProc.stdout.on("data", (data) => (output += data.toString()));

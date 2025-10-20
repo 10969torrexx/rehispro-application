@@ -288,7 +288,7 @@ async function uploadAndScan(req, res) {
         }
 
         const filePaths = req.files.map(file => file.path);
-        const response = await callPythonOCR(filePaths);
+        const response = await callPythonOCR(filePaths, "birth");
         writeLog(`${response.success === true ? '[info]' : '[error]' } [uploadAndScan] ${JSON.stringify({
             success: response.success,
             message: response.message,

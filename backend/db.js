@@ -201,8 +201,6 @@ db.serialize(() => {
     );
   `);
 
-// db.run(`DROP TABLE IF EXISTS deathcertificates`);
-
   //TODO: create table for death certificates
 
   db.run(`
@@ -214,6 +212,7 @@ db.serialize(() => {
       -- Page 1 - Deceased Information
       province TEXT,
       city TEXT,
+      registry_number TEXT,
       first_name TEXT,
       middle_name TEXT,
       last_name TEXT,
@@ -582,8 +581,7 @@ db.serialize(() => {
         updated_at TIMESTAMP DEFAULT (datetime('now')),
         deleted_at TIMESTAMP
     );
-`);
-
+  `);
 
 });
 

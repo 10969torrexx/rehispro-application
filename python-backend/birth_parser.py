@@ -1,3 +1,12 @@
+from rapidfuzz import fuzz, process
+from difflib import SequenceMatcher
+import re
+import os
+from datetime import datetime
+from logger_setup import setup_logger
+
+logger = setup_logger(__name__, "python-backend/logs/birth_parser.log")
+
 default_keywords = [
     "Municipal Form No. 102",
     "(To be accomplished in quadruplicate using black ink)",
@@ -384,25 +393,6 @@ template = {
     "admin_officer_address": ""
 }
 
-from rapidfuzz import fuzz, process
-from difflib import SequenceMatcher
-import re
-import logging
-import os
-from datetime import datetime
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOG_DIR = os.path.join(BASE_DIR, "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
-
-logging.basicConfig(
-    filename=os.path.join(LOG_DIR, "birth_parser.log"),
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-logger = logging.getLogger(__name__)
-
 def remove_similar_sentences(source_list, reference_list, threshold=70):
     cleaned = []
     junk_pattern = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,5}$")  
@@ -566,9 +556,14 @@ def fill_template_from_list(template: dict, ocr_list: list):
 
     return filled
 
-
-def parse(ocr_text):
+def birthParse(ocr_text):
     cleaned = remove_similar_sentences(ocr_text, default_keywords, threshold=80)
+    logger.info("[remove_similar_sentences] %s", cleaned)
+
     cleaned = merge_split_dates(cleaned)
+    logger.info("[merge_split_dates] %s", cleaned)
+
     template_form = fill_template_from_list(template, cleaned)
+    logger.info("[merge_split_dates] %s", template_form)
+
     return template_form

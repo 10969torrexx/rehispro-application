@@ -1,17 +1,12 @@
 import React from 'react';
 import { Divider } from '@components';
-import { InfoCard } from '@components';
 import { DeathCertValidation } from '@services';
 import { ErrorMessages, SignaturePlaceholder } from '@components';
 import { DeathCertServices } from '@services';
 import { toast } from 'react-toastify';
-import { capitalizeFirst } from '../../../myTools/myTools';
-import { AllCaps } from '../../../myTools/myTools';
-import axios from 'axios';
+import { StringToDate, capitalizeFirst, TitleCase } from '@myTools';
 
-
-
-export default function DeathCertificateCreate() {
+export default function DeathCertificateCreate({defaultOCRValues}) {
     const [currentPage, setCurrentPage] = React.useState(1);
     const pageTitles = [ 
         "Deceased's Information", 
@@ -35,180 +30,181 @@ export default function DeathCertificateCreate() {
         // Page 1 - Deceased's Information (merged original page1 and page2)
         page1: {
             creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
-            creationType: "manual",
-            province: "",
-            city: "",
-            firstName: "",
-            middleName: "",
-            lastName: "",
-            sex: "",
-            dateOfDeath: "",
-            dateOfBirth: "",
-            ageYears: "",
-            ageMonths: "",
-            ageDays: "",
-            ageHours: "",
-            ageMinutes: "",
-            placeOfDeath: ""
+            creationType: (defaultOCRValues && defaultOCRValues.length > 0)? 'scanned' : 'manual',
+            province: defaultOCRValues?.province || "",
+            city: defaultOCRValues?.city || "",
+            registry_number: defaultOCRValues?.registry_number || "",
+            firstName: defaultOCRValues?.first_name || "",
+            middleName: defaultOCRValues?.middle_name || "",
+            lastName: defaultOCRValues?.last_name || "",
+            sex: TitleCase(defaultOCRValues?.sex) || "",
+            dateOfDeath: StringToDate(defaultOCRValues?.date_of_death) || "",
+            dateOfBirth: StringToDate(defaultOCRValues?.date_of_birth) || "",
+            ageYears: defaultOCRValues?.age_years || "",
+            ageMonths: defaultOCRValues?.age_months || "",
+            ageDays: defaultOCRValues?.age_days || "",
+            ageHours: defaultOCRValues?.age_hours || "",
+            ageMinutes: defaultOCRValues?.age_minutes || "",
+            placeOfDeath: `${defaultOCRValues?.placeOfDeath_hospital || ""} ${defaultOCRValues?.placeOfDeath_barangay || ""} ${defaultOCRValues?.placeOfDeath_city || ""} ${defaultOCRValues?.placeOfDeath_province || ""}`.trim() || ""
         },
       
         // Page 2 - Status & Residence 
         page2: {
-            civilStatus: "",
-            religion: "",
-            citizenship: "",
-            residenceHouse: "",
-            residenceStreet: "",
-            residenceBarangay: "",
-            residenceCity: "",
-            residenceProvince: "",
-            residenceCountry: "",
-            occupation: ""
+            civilStatus: capitalizeFirst(defaultOCRValues?.civil_status) || "",
+            religion:  defaultOCRValues?.religion || "",
+            citizenship: defaultOCRValues?.citizenship || "",
+            residenceHouse: defaultOCRValues?.residence_house || "",
+            residenceStreet: defaultOCRValues?.residence_street || "",
+            residenceBarangay: defaultOCRValues?.residence_barangay || "",
+            residenceCity: defaultOCRValues?.residence_city || "",
+            residenceProvince: defaultOCRValues?.residence_province || "",
+            residenceCountry: defaultOCRValues?.residence_country || "",
+            occupation: defaultOCRValues?.occupation || ""
         },
       
         // Page 3 - Parents' Information
         page3: {
-            fatherFirstName: "",
-            fatherMiddleName: "",
-            fatherLastName: "",
-            motherFirstName: "",
-            motherMiddleName: "",
-            motherLastName: ""
+            fatherFirstName: defaultOCRValues?.father_first_name || "",
+            fatherMiddleName: defaultOCRValues?.father_middle_name || "",
+            fatherLastName: defaultOCRValues?.father_last_name || "",
+            motherFirstName: defaultOCRValues?.mother_first_name || "",
+            motherMiddleName: defaultOCRValues?.mother_middle_name || "",
+            motherLastName: defaultOCRValues?.mother_last_name || ""
         },      
 
         // Page 3b - For Children Aged 0 to 7 Days
         page4: {
-            agedOfMother: "",
-            methodOfDelivery: "",
-            methodOfDeliverySpecify: "",
-            lengthOfPregnancy: "",
-            typeOfBirth: "",
-            ifMultipleBirth: "",
+            agedOfMother: defaultOCRValues?.aged_of_mother || "",
+            methodOfDelivery: defaultOCRValues?.method_of_delivery || "",
+            methodOfDeliverySpecify: defaultOCRValues?.method_of_delivery_specify || "",
+            lengthOfPregnancy: defaultOCRValues?.length_of_pregnancy || "",
+            typeOfBirth: defaultOCRValues?.type_of_birth || "",
+            ifMultipleBirth: defaultOCRValues?.if_multiple_birth || "",
 
-            mainDiseaseConditionOfInfant: "",
-            otherDiseasesConditionsOfInfant: "",
-            mainMaternalDiseaseConditionAffectingInfant: "",
-            otherMaternalDiseaseConditionAffectingInfant: "",
-            otherRelevantCircumstances: ""
+            mainDiseaseConditionOfInfant: defaultOCRValues?.main_disease_condition_of_infant || "",
+            otherDiseasesConditionsOfInfant: defaultOCRValues?.other_diseases_conditions_of_infant || "",
+            mainMaternalDiseaseConditionAffectingInfant: defaultOCRValues?.main_maternal_disease_condition_affecting_infant || "",
+            otherMaternalDiseaseConditionAffectingInfant: defaultOCRValues?.other_maternal_disease_condition_affecting_infant || "",
+            otherRelevantCircumstances: defaultOCRValues?.other_relevant_circumstances || ""
         },
 
       
         // Page 4 - Medical Certificate
         page5: {
-            immediateCause: "",
-            antecedentCause: "",
-            underlyingCause: "",
-            intervalImmediate: "",
-            intervalAntecedent: "",
-            intervalUnderlying: "",
-            otherConditions: "",
-            maternalCondition: ""
+            immediateCause: defaultOCRValues?.immediate_cause || "",
+            antecedentCause: defaultOCRValues?.antecedent_cause || "",
+            underlyingCause: defaultOCRValues?.underlying_cause || "",
+            intervalImmediate: defaultOCRValues?.interval_immediate || "",
+            intervalAntecedent: defaultOCRValues?.interval_antecedent || "",
+            intervalUnderlying: defaultOCRValues?.interval_underlying || "",
+            otherConditions: defaultOCRValues?.other_conditions || "",
+            maternalCondition: defaultOCRValues?.maternal_condition || ""
         },
 
         // Page 5 - Manner of Death & Attendant 
         page6: {
-            mannerOfDeath: "",
-            autopsy: "",
-            placeOccurrence: "",
-            attendant: "",
-            attendantOthersSpecify: "",
-            attendantFrom: "",
-            attendantTo: ""
+            mannerOfDeath: defaultOCRValues?.manner_of_death || "",
+            autopsy: defaultOCRValues?.autopsy || "",
+            placeOccurrence: defaultOCRValues?.place_occurrence || "",
+            attendant: defaultOCRValues?.attendant || "",
+            attendantOthersSpecify: defaultOCRValues?.attendant_others_specify || "",
+            attendantFrom: defaultOCRValues?.attendant_from || "",
+            attendantTo: defaultOCRValues?.attendant_to || ""
         },
 
         // Page 6 - Certification of Death 
         page7: {
             attendedDeceased: false,
             notAttendedDeceased: false,
-            timeOfDeath: "",
-            physicianName: "",
-            physicianTitle: "",
-            physicianAddress: "",
-            healthOfficerName: ""
+            timeOfDeath: defaultOCRValues?.time_of_death || "",
+            physicianName: defaultOCRValues?.physician_name || "",
+            physicianTitle: defaultOCRValues?.physician_title || "",
+            physicianAddress: defaultOCRValues?.physician_address || "",
+            healthOfficerName: defaultOCRValues?.health_officer_name || ""
         },
 
         // Page 7 - Corpse Disposal (original page9)
         page8: {
-            disposalType: "",
-            permitNumber: "",
-            permitDate: "",
-            transferPermit: "",
-            transferPermitDate: "",
-            cemeteryName: "",
-            cemeteryAddress: ""
+            disposalType: defaultOCRValues?.disposal_type || "",
+            permitNumber: defaultOCRValues?.permit_number || "",
+            permitDate: defaultOCRValues?.permit_date || "",
+            transferPermit: defaultOCRValues?.transfer_permit || "",
+            transferPermitDate: defaultOCRValues?.transfer_permit_date || "",
+            cemeteryName: defaultOCRValues?.cemetery_name || "",
+            cemeteryAddress: defaultOCRValues?.cemetery_address || ""
         },
 
         // Page 8 - Informant & Prepared By (original page10)
         page9: {
-            informantName: "",
-            informantRelationship: "",
-            informantAddress: "",
-            informantDate: "",
-            preparedName: "",
-            preparedTitle: "",
-            preparedDate: ""
+            informantName: defaultOCRValues?.informant_name || "",
+            informantRelationship: defaultOCRValues?.informant_relationship || "",
+            informantAddress: defaultOCRValues?.informant_address || "",
+            informantDate: defaultOCRValues?.informant_date || "",
+            preparedName: defaultOCRValues?.prepared_name || "",
+            preparedTitle: defaultOCRValues?.prepared_title || "",
+            preparedDate: defaultOCRValues?.prepared_date || ""
         },
 
         // Page 9 - Received & Registered By (original page11)
         page10: {
-            receivedName: "",
-            receivedTitle: "",
-            receivedDate: "",
-            registrarName: "",
-            registrarTitle: "",
-            registrarDate: ""
+            receivedName: defaultOCRValues?.received_name || "",
+            receivedTitle: defaultOCRValues?.received_title || "",
+            receivedDate: defaultOCRValues?.received_date || "",
+            registrarName: defaultOCRValues?.registrar_name || "",
+            registrarTitle: defaultOCRValues?.registrar_title || "",
+            registrarDate: defaultOCRValues?.registrar_date || ""
         },
 
         // Page 10 - Remarks / Annotations (original page12)
         page11: {
-            remarks: "",      
+            remarks: defaultOCRValues?.remarks || "",
             officeBoxes: [] 
         },
         // Page 11 - Postmortem & Embalmer (original page13)
         page12: {
-            postmortemCause: "",
-            postmortemName: "",
-            postmortemTitle: "",
-            postmortemAddress: "",
-            postmortemDate: "",
-            embalmeredName: "",
-            embalmerName: "",
-            embalmerTitle: "",
-            embalmerAddress: "",
-            embalmerLicense: "",
-            embalmerIssuedOn: "",
-            embalmerIssuedAt: "",
-            embalmerExpiry: ""
+            postmortemCause: defaultOCRValues?.postmortem_cause || "",
+            postmortemName: defaultOCRValues?.postmortem_name || "",
+            postmortemTitle: defaultOCRValues?.postmortem_title || "",
+            postmortemAddress: defaultOCRValues?.postmortem_address || "",
+            postmortemDate: defaultOCRValues?.postmortem_date || "",
+            embalmeredName: defaultOCRValues?.embalmered_name || "",
+            embalmerName: defaultOCRValues?.embalmer_name || "",
+            embalmerTitle: defaultOCRValues?.embalmer_title || "",
+            embalmerAddress: defaultOCRValues?.embalmer_address || "",
+            embalmerLicense: defaultOCRValues?.embalmer_license || "",
+            embalmerIssuedOn: defaultOCRValues?.embalmer_issued_on || "",
+            embalmerIssuedAt: defaultOCRValues?.embalmer_issued_at || "",
+            embalmerExpiry: defaultOCRValues?.embalmer_expiry || ""
         },
         // Page 12 - Affidavit for Delayed Registration (original page14)
         page13: {
-            affiantName: "",
-            affiantCivilStatus: "",
-            address: "",
-            deceasedName: "",
-            deathDate: "",
-            deathPlace: "",
-            delayedCemeteryName: "",
-            delayedCemeteryAddress: "",
-            wasAttended: false,
-            ctcPlace: false,
-            attendedBy: "",
-            causeOfDeath: "",
-            reasonDelay: ""
+            affiantName: defaultOCRValues?.affiant_name || "",
+            affiantCivilStatus: defaultOCRValues?.affiant_civil_status || "",
+            address: defaultOCRValues?.address || "",
+            deceasedName: defaultOCRValues?.deceased_name || "",
+            deathDate: defaultOCRValues?.death_date || "",
+            deathPlace: defaultOCRValues?.death_place || "",
+            delayedCemeteryName: defaultOCRValues?.delayed_cemetery_name || "",
+            delayedCemeteryAddress: defaultOCRValues?.delayed_cemetery_address || "",
+            wasAttended: defaultOCRValues?.was_attended || false,
+            ctcPlace: defaultOCRValues?.ctc_place || false,
+            attendedBy: defaultOCRValues?.attended_by || "",
+            causeOfDeath: defaultOCRValues?.cause_of_death || "",
+            reasonDelay: defaultOCRValues?.reason_delay || ""
         },
         // Page 13 - Affidavit Jurat (original page15)
         page14: {
-            juratDay: "",
-            juratMonthYear: "",
-            juratPlace: "",
-            ctcDay: "",
-            ctcMonthYear: "",
-            ctcPlace: "",
-            ctcIssuedOn: "",
-            ctcIssuedAt: "",
-            adminName: "",
-            adminPosition: "",
-            adminAddress: ""
+            juratDay: defaultOCRValues?.jurat_day || "",
+            juratMonthYear: defaultOCRValues?.jurat_month_year || "",
+            juratPlace: defaultOCRValues?.jurat_place || "",
+            ctcDay: defaultOCRValues?.ctc_day || "",
+            ctcMonthYear: defaultOCRValues?.ctc_month_year || "",
+            ctcPlace: defaultOCRValues?.ctc_place || "",
+            ctcIssuedOn: defaultOCRValues?.ctc_issued_on || "",
+            ctcIssuedAt: defaultOCRValues?.ctc_issued_at || "",
+            adminName: defaultOCRValues?.admin_name || "",
+            adminPosition: defaultOCRValues?.admin_position || "",
+            adminAddress: defaultOCRValues?.admin_address || ""
         },
 
         page15: {
@@ -230,17 +226,17 @@ export default function DeathCertificateCreate() {
     const [errors, setErrors] = React.useState({});
     const handlePageChange = (direction) => {
         if (direction === 'next') {
-            // const response = DeathCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
-            // if (Object.keys(response).length > 0) {
-            //     setErrors(response);
-            //     toast.error("Please fix the errors in the form.");
-            //     console.log("[Death form] Validation Errors:", response);
-            //     console.log(
-            //         `[Death form] form Data ${currentPage}:`, formData[`page${currentPage}`]
-            //     );
-            // } else {
+            const response = DeathCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
+            if (Object.keys(response).length > 0) {
+                setErrors(response);
+                toast.error("Please fix the errors in the form.");
+                console.log("[Death form] Validation Errors:", response);
+                console.log(
+                    `[Death form] form Data ${currentPage}:`, formData[`page${currentPage}`]
+                );
+            } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
-            // }
+            }
         } else if (direction === 'prev') {
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
         }
@@ -305,6 +301,7 @@ export default function DeathCertificateCreate() {
                         creationType: "manual",
                         province: "",
                         city: "",
+                        registry_number: "",
                         firstName: "",
                         middleName: "",
                         lastName: "",
@@ -470,13 +467,13 @@ export default function DeathCertificateCreate() {
     
       return (
         <>
-            <form className="p-4 h-full mb-4 max-w-4xl mx-auto" onSubmit={handleSubmit}>
+            <form className="p-4 h-full mb-4 mx-auto" onSubmit={handleSubmit}>
                 <div className='mb-4'>
                     {currentPage === 1 && 
                         <div className="mb-4 space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                            { /* Province & City / Municipality */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div className="flex flex-col">
                                     <label className="block text-sm font-medium mb-1">Province</label>
                                     <input
@@ -502,11 +499,24 @@ export default function DeathCertificateCreate() {
                                     />
                                     {errors.city && <ErrorMessages errors={errors.city} />}
                                 </div>
+
+                                <div className="flex flex-col">
+                                    <label className="block text-sm font-medium mb-1">Registry Number</label>
+                                    <input
+                                        type="text"
+                                        name="registry_number"
+                                        placeholder="Registry Number" 
+                                        className={`common-input ${errors.registry_number ? 'input-error' : ''}`}
+                                        value={formData.page1.registry_number}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                    {errors.city && <ErrorMessages errors={errors.registry_number} />}
+                                </div>
                             </div>
 
                             {/* Deceased's Name */}
                             <div>
-                                <label className="block text-sm font-medium">Deceased's Name</label>
+                                <label className="block text-sm font-medium">1. Name</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                     <div className="flex flex-col">
                                         <input
@@ -546,9 +556,10 @@ export default function DeathCertificateCreate() {
                     
                             {/* Sex */}
                             <div>
-                                <label className="block text-sm font-medium">Sex</label>
+                                <label className="block text-sm font-medium">2. Sex</label>
                                 <select name="sex" className={`w-full common-input ${errors.sex ? 'input-error' : ''}`}
                                     value={formData.page1.sex}
+                                    data-value={formData.page1.sex}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
@@ -561,19 +572,19 @@ export default function DeathCertificateCreate() {
                             {/* Date of Death & Date of Birth */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                 <div>
-                                    <label className="block text-sm font-medium">Date of Death</label>
+                                    <label className="block text-sm font-medium">3. Date of Death</label>
                                     <input
                                         type="date"
                                         name="dateOfDeath"
                                         className={`w-full common-input ${errors.dateOfDeath ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfDeath}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        onClick={(e) => e.target.showPicker && e.target.showPicker()} // 👈 open calendar when clicking anywhere
+                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                         />
                                     {errors.dateOfDeath && <ErrorMessages errors={errors.dateOfDeath} />}
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium">Date of Birth</label>
+                                    <label className="block text-sm font-medium">5. Date of Birth</label>
                                     <input type="date" name="dateOfBirth" className={`w-full common-input ${errors.dateOfBirth ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfBirth}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -585,7 +596,7 @@ export default function DeathCertificateCreate() {
                     
                             {/* Age at Time of Death */}
                             <div className="space-y-2">
-                                <label className="block text-sm font-medium">Age at Time of Death</label>
+                                <label className="block text-sm font-medium">6. Age at Time of Death</label>
                                 <div className="flex flex-col md:flex-row gap-4">
                                     <div className="flex-1">
                                         <label className="block text-sm font-medium">If 1 year or above</label>
@@ -665,7 +676,7 @@ export default function DeathCertificateCreate() {
 
                             {/* Place of Death */}
                             <div>
-                                <label className="block text-sm font-medium">Place of Death</label>
+                                <label className="block text-sm font-medium">6. Place of Death</label>
                                 <input
                                     type="text"
                                     name="placeOfDeath"
@@ -684,7 +695,7 @@ export default function DeathCertificateCreate() {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Civil Status */}
                             <div>
-                                <label className="block text-sm font-medium">Civil Status</label>
+                                <label className="block text-sm font-medium">7. Civil Status</label>
                                 <select name="civilStatus" className={`w-full common-input ${errors.civilStatus ? 'input-error' : ''}`}
                                     value={formData.page2.civilStatus}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -702,7 +713,7 @@ export default function DeathCertificateCreate() {
                             {/* Religion & Citizenship */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Religion / Religious Sect</label>
+                                    <label className="block text-sm font-medium mb-1">8. Religion / Religious Sect</label>
                                     <input
                                         type="text"
                                         name="religion"
@@ -714,7 +725,7 @@ export default function DeathCertificateCreate() {
                                     {errors.religion && <ErrorMessages errors={errors.religion} />}
                                 </div>
                                 <div className="flex flex-col">
-                                    <label className="block text-sm font-medium mb-1">Citizenship</label>
+                                    <label className="block text-sm font-medium mb-1">9. Citizenship</label>
                                     <input
                                         type="text"
                                         name="citizenship"
@@ -729,7 +740,7 @@ export default function DeathCertificateCreate() {
 
                             {/* Residence */}
                             <div className="space-y-4">
-                                <label className="block text-sm font-medium">Residence</label>
+                                <label className="block text-sm font-medium">10. Residence</label>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="flex flex-col">
                                         <input
@@ -808,7 +819,7 @@ export default function DeathCertificateCreate() {
 
                             {/* Occupation */}
                             <div>
-                                <label className="block text-sm font-medium">Occupation</label>
+                                <label className="block text-sm font-medium">11. Occupation</label>
                                 <input
                                     type="text"
                                     name="occupation"
@@ -827,7 +838,7 @@ export default function DeathCertificateCreate() {
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Father’s Name */}
                             <div className="mb-8">
-                            <label className="block text-base mb-2">Father’s Name</label>
+                            <label className="block text-base mb-2">12. Name of Father</label>
                             <div className="flex flex-col md:flex-row gap-4">
                                 <div className="flex-1">
                                 <input
@@ -867,7 +878,7 @@ export default function DeathCertificateCreate() {
 
                             {/* Mother’s Maiden Name */}
                             <div className="mb-8">
-                            <label className="block text-base mb-2">Mother’s Maiden Name</label>
+                            <label className="block text-base mb-2">13. Maiden Name of Mother</label>
                             <div className="flex flex-col md:flex-row gap-4">
                                 <div className="flex-1">
                                 <input
@@ -904,7 +915,7 @@ export default function DeathCertificateCreate() {
                                 </div>
                             </div>
                         </div>                         
-                    </div>
+                        </div>
                     }
 
                     {currentPage === 4 && 
@@ -914,93 +925,93 @@ export default function DeathCertificateCreate() {
                                   {/* Age of mother */}
                                   <div className="flex flex-col md:flex-row gap-4">
                                     <div className="flex-1">
-                                    <label className="block text-sm font-medium mb-1">Age of Mother</label>
-                                    <input
-                                        type="number"
-                                        name="agedOfMother"
-                                        placeholder="Age of Mother"
-                                        className={`w-full common-input ${errors.agedOfMother ? 'border-red-500' : ''}`}
-                                        value={formData.page4.agedOfMother}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                    {errors.agedOfMother && <ErrorMessages errors={errors.agedOfMother} />}
+                                        <label className="block text-sm font-medium mb-1">14. Age of Mother</label>
+                                        <input
+                                            type="number"
+                                            name="agedOfMother"
+                                            placeholder="Age of Mother"
+                                            className={`w-full common-input ${errors.agedOfMother ? 'border-red-500' : ''}`}
+                                            value={formData.page4.agedOfMother}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.agedOfMother && <ErrorMessages errors={errors.agedOfMother} />}
                                     </div>
-                                    <div className="flex-1">
-                                    <label className="block text-sm font-medium mb-1">Length of Pregnancy</label>
-                                    <input
-                                        type="text"
-                                        name="lengthOfPregnancy"
-                                        placeholder="In Complete Weeks"
-                                        className={`w-full common-input ${errors.lengthOfPregnancy ? 'border-red-500' : ''}`}
-                                        value={formData.page4.lengthOfPregnancy}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                    {errors.lengthOfPregnancy && <ErrorMessages errors={errors.lengthOfPregnancy} />}
+                                    <div className='flex-1'>
+                                        <label className="block w-full text-sm font-medium mb-1">15. Method of Delivery</label>
+                                        <select
+                                            name="methodOfDelivery"
+                                            className={`common-input w-full ${errors.methodOfDelivery ? 'input-error' : ''}`}
+                                            value={formData.page4.methodOfDelivery || ""}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        >
+                                            <option value="">Select</option>
+                                            <option value="Normal Spontaneous Vertex">Normal Spontaneous Vertex</option>
+                                            <option value="Others">Others (Specify)</option>
+                                        </select>
+                                        {errors.methodOfDelivery && <ErrorMessages errors={errors.methodOfDelivery} />}
+                                        {formData.page4.methodOfDelivery === "Others" && (
+                                            <input
+                                            type="text"
+                                            name="methodOfDeliverySpecify"
+                                            placeholder="Specify"
+                                            className={`common-input mt-2 w-full ${errors.methodOfDeliverySpecify ? 'input-error' : ''}`}
+                                            value={formData.page4.methodOfDeliverySpecify}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                            />
+                                        )}
+                                        {errors.methodOfDeliverySpecify && <ErrorMessages errors={errors.methodOfDeliverySpecify} />}
+                                        {errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} />}
                                     </div>
                                 </div>
                             </div>
 
-                            {/* methodOfDelivery */}
-                            <div className={`p-2 ${errors.methodOfDelivery ? 'input-error' : ''}`}>
-                            <label className="block w-full text-sm font-medium mb-1">Method of Delivery</label>
-                            
-                            <select
-                                name="methodOfDelivery"
-                                className={`common-input w-full ${errors.methodOfDelivery ? 'input-error' : ''}`}
-                                value={formData.page4.methodOfDelivery || ""}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                            >
-                                <option value="">Select</option>
-                                <option value="Normal Spontaneous Vertex">Normal Spontaneous Vertex</option>
-                                <option value="Others">Others (Specify)</option>
-                            </select>
-
-                            {formData.page4.methodOfDelivery === "Others" && (
+                            <div className="flex-1">
+                                <label className="block text-sm font-medium mb-1">16. Length of Pregnancy</label>
                                 <input
-                                type="text"
-                                name="methodOfDeliverySpecify"
-                                placeholder="Specify"
-                                className={`common-input mt-2 w-full ${errors.methodOfDeliverySpecify ? 'input-error' : ''}`}
-                                value={formData.page4.methodOfDeliverySpecify}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    type="text"
+                                    name="lengthOfPregnancy"
+                                    placeholder="In Complete Weeks"
+                                    className={`w-full common-input ${errors.lengthOfPregnancy ? 'border-red-500' : ''}`}
+                                    value={formData.page4.lengthOfPregnancy}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
-                            )}
-
-                            {errors.methodOfDeliverySpecify && <ErrorMessages errors={errors.methodOfDeliverySpecify} />}
-                            {errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} />}
+                                {errors.lengthOfPregnancy && <ErrorMessages errors={errors.lengthOfPregnancy} />}
                             </div>
+
                             <div className="mb-8">
                                   {/* Type of Birth */}
                                   <div className="flex flex-col md:flex-row gap-4">
                                     <div className="flex-1">
-                                    <label className="block text-sm font-medium mb-1">Type of Birth</label>
-                                    <input
-                                        type="text"
-                                        name="typeOfBirth"
-                                        placeholder="Single, Twin, Triplets, etc"
-                                        className={`w-full common-input ${errors.typeOfBirth ? 'border-red-500' : ''}`}
-                                        value={formData.page4.typeOfBirth}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                    {errors.typeOfBirth && <ErrorMessages errors={errors.typeOfBirth} />}
+                                        <label className="block text-sm font-medium mb-1">17. Type of Birth</label>
+                                        <input
+                                            type="text"
+                                            name="typeOfBirth"
+                                            placeholder="Single, Twin, Triplets, etc"
+                                            className={`w-full common-input ${errors.typeOfBirth ? 'border-red-500' : ''}`}
+                                            value={formData.page4.typeOfBirth}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.typeOfBirth && <ErrorMessages errors={errors.typeOfBirth} />}
                                     </div>
                                     <div className="flex-1">
-                                    <label className="block text-sm font-medium mb-1">If Multiple Birth</label>
-                                    <input
-                                        type="text"
-                                        name="ifMultipleBirth"
-                                        placeholder="First, Second, Third, etc."
-                                        className={`w-full common-input ${errors.ifMultipleBirth ? 'border-red-500' : ''}`}
-                                        value={formData.page4.ifMultipleBirth}
-                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    />
-                                    {errors.ifMultipleBirth && <ErrorMessages errors={errors.ifMultipleBirth} />}
+                                        <label className="block text-sm font-medium mb-1">18. If Multiple Birth</label>
+                                        <input
+                                            type="text"
+                                            name="ifMultipleBirth"
+                                            placeholder="First, Second, Third, etc."
+                                            className={`w-full common-input ${errors.ifMultipleBirth ? 'border-red-500' : ''}`}
+                                            value={formData.page4.ifMultipleBirth}
+                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        />
+                                        {errors.ifMultipleBirth && <ErrorMessages errors={errors.ifMultipleBirth} />}
                                     </div>
                                 </div>
                             </div>
                             <h2 className="text-lg text-center font-semibold">Medical Certificate</h2>
+                            <div><label htmlFor="" className='mb-2'>19a. Cause of Death</label></div>
                             <div>
-                                <label className="block text-sm font-medium">Main Disease Condition of Infant</label>
+                                
+                                <label className="block text-sm font-medium">a. Main Disease Condition of Infant</label>
                                 <input type="text" name="mainDiseaseConditionOfInfant" className={`w-full common-input ${errors.mainDiseaseConditionOfInfant ? 'input-error' : ''}`}
                                     value={formData.page4.mainDiseaseConditionOfInfant}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1008,7 +1019,7 @@ export default function DeathCertificateCreate() {
                                 {errors.mainDiseaseConditionOfInfant && <ErrorMessages errors={errors.mainDiseaseConditionOfInfant} />}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium">Other Diseases Conditions of Infant</label>
+                                <label className="block text-sm font-medium">b. Other Diseases Conditions of Infant</label>
                                 <input type="text" name="otherDiseasesConditionsOfInfant" className={`w-full common-input ${errors.otherDiseasesConditionsOfInfant ? 'input-error' : ''}`}
                                     value={formData.page4.otherDiseasesConditionsOfInfant}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1016,7 +1027,7 @@ export default function DeathCertificateCreate() {
                                 {errors.otherDiseasesConditionsOfInfant && <ErrorMessages errors={errors.otherDiseasesConditionsOfInfant} />}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium">Main Maternal Disease Condition Affecting Infant</label>
+                                <label className="block text-sm font-medium">c. Main Maternal Disease Condition Affecting Infant</label>
                                 <input type="text" name="mainMaternalDiseaseConditionAffectingInfant" className={`w-full common-input ${errors.mainMaternalDiseaseConditionAffectingInfant ? 'input-error' : ''}`}
                                     value={formData.page4.mainMaternalDiseaseConditionAffectingInfant}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1024,7 +1035,7 @@ export default function DeathCertificateCreate() {
                                 {errors.mainMaternalDiseaseConditionAffectingInfant && <ErrorMessages errors={errors.mainMaternalDiseaseConditionAffectingInfant} />}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium">Other Maternal Disease Condition Affecting Infant</label>
+                                <label className="block text-sm font-medium">d. Other Maternal Disease Condition Affecting Infant</label>
                                 <input type="text" name="otherMaternalDiseaseConditionAffectingInfant" className={`w-full common-input ${errors.otherMaternalDiseaseConditionAffectingInfant ? 'input-error' : ''}`}
                                     value={formData.page4.otherMaternalDiseaseConditionAffectingInfant}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1032,7 +1043,7 @@ export default function DeathCertificateCreate() {
                                 {errors.otherMaternalDiseaseConditionAffectingInfant && <ErrorMessages errors={errors.otherMaternalDiseaseConditionAffectingInfant} />}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium">Other Relevant Circumstances</label>
+                                <label className="block text-sm font-medium">e. Other Relevant Circumstances</label>
                                 <input type="text" name="otherRelevantCircumstances" className={`w-full common-input ${errors.otherRelevantCircumstances ? 'input-error' : ''}`}
                                     value={formData.page4.otherRelevantCircumstances}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1045,16 +1056,16 @@ export default function DeathCertificateCreate() {
                     {currentPage === 5 && 
                         <div className="mb-6 space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
-                            <label className="block text-center text-sm font-medium">(if the deceased is aged 8 days or over)</label>
+                            <label className="text-sm font-medium">19b. CAUSES OF DEATH (if the deceased is aged 8 days or over)</label>
                             {/* Causes of Death */}
                             <div>
-                                <label className="block text-sm font-medium">Immediate Cause</label>
+                                <label className="block text-sm font-medium">I. Immediate Cause</label>
                                 <input type="text" name="immediateCause" className={`w-full common-input ${errors.immediateCause ? 'input-error' : ''}`}
                                     value={formData.page5.immediateCause}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.immediateCause && <ErrorMessages errors={errors.immediateCause} />}
-                                <label className="block text-sm font-medium mt-2">Interval</label>
+                                <label className="block text-sm font-medium mt-2">Interval Between Onset and Death</label>
                                 <input type="text" name="intervalImmediate" className={`w-full common-input ${errors.intervalImmediate ? 'input-error' : ''}`}
                                     value={formData.page5.intervalImmediate}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1068,7 +1079,7 @@ export default function DeathCertificateCreate() {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.antecedentCause && <ErrorMessages errors={errors.antecedentCause} />}
-                                <label className="block text-sm font-medium mt-2">Interval</label>
+                                <label className="block text-sm font-medium mt-2">Interval Between Onset and Death</label>
                                 <input type="text" name="intervalAntecedent" className={`w-full common-input ${errors.intervalAntecedent ? 'input-error' : ''}`}
                                     value={formData.page5.intervalAntecedent}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1082,7 +1093,7 @@ export default function DeathCertificateCreate() {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 {errors.underlyingCause && <ErrorMessages errors={errors.underlyingCause} />}
-                                <label className="block text-sm font-medium mt-2">Interval</label>
+                                <label className="block text-sm font-medium mt-2">Interval Between Onset and Death</label>
                                 <input type="text" name="intervalUnderlying" className={`w-full common-input ${errors.intervalUnderlying ? 'input-error' : ''}`}
                                     value={formData.page5.intervalUnderlying}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1090,7 +1101,7 @@ export default function DeathCertificateCreate() {
                                 {errors.intervalUnderlying && <ErrorMessages errors={errors.intervalUnderlying} />}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium">Other Significant Conditions</label>
+                                <label className="block text-sm font-medium">II. Other Significant Conditions contributing to death</label>
                                 <input type="text" name="otherConditions" className={`w-full common-input ${errors.otherConditions ? 'input-error' : ''}`}
                                     value={formData.page5.otherConditions}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1098,7 +1109,7 @@ export default function DeathCertificateCreate() {
                                 {errors.otherConditions && <ErrorMessages errors={errors.otherConditions} />}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium">Maternal Condition (if the deceased is female aged 15-49 years old)</label>
+                                <label className="block text-sm font-medium">19c. Maternal Condition (if the deceased is female aged 15-49 years old)</label>
                                 <select name="maternalCondition" className={`w-full common-input ${errors.maternalCondition ? 'input-error' : ''}`}
                                     value={formData.page5.maternalCondition}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1119,8 +1130,9 @@ export default function DeathCertificateCreate() {
                         <div className="mb-6 space-y-6">
                             <h2 className="text-lg text-center font-semibold">{pageTitles[(currentPage) - 1]}</h2>
                             {/* Manner of Death */}
+                            <label htmlFor="">19c. Death by External Causes</label>
                             <div>
-                                <label className="block text-sm font-medium">Manner of Death</label>
+                                <label className="block text-sm font-medium">a. Manner of Death</label>
                                 <select name="mannerOfDeath" className={`w-full common-input ${errors.mannerOfDeath ? 'input-error' : ''}`}
                                     value={formData.page6.mannerOfDeath}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -1149,56 +1161,58 @@ export default function DeathCertificateCreate() {
                             </div>
                             {/* Place of Occurrence */}
                             <div>
-                            <label className="block text-sm font-medium mb-1">Place of Occurrence (for external cause)</label>
-                            <select
-                                name="placeOccurrence"
-                                className={`w-full common-input ${errors.placeOccurrence ? 'input-error' : ''}`}
-                                value={formData.page6.placeOccurrence}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                            >
-                                <option value="">Select</option>
-                                <option value="Home">Home</option>
-                                <option value="Hospital">Hospital</option>
-                                <option value="Work">Work</option>
-                                <option value="Public Place">Public Place</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            {errors.placeOccurrence && <ErrorMessages errors={errors.placeOccurrence} />}
+                                <label className="block text-sm font-medium mb-1">b. Place of Occurrence (for external cause)</label>
+                                <select
+                                    name="placeOccurrence"
+                                    className={`w-full common-input ${errors.placeOccurrence ? 'input-error' : ''}`}
+                                    value={formData.page6.placeOccurrence}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                >
+                                    <option value="">Select</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Hospital">Hospital</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Public Place">Public Place</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                {errors.placeOccurrence && <ErrorMessages errors={errors.placeOccurrence} />}
                             </div>
+
                             {/* Attendant Type */}
                             <div className={`p-2 ${errors.attendantGroup ? 'input-error' : ''}`}>
-                            <label className="block w-full text-sm font-medium mb-1">Attended By</label>
-                            
-                            <select
-                                name="attendant"
-                                className={`common-input w-full ${errors.attendant ? 'input-error' : ''}`}
-                                value={formData.page6.attendant || ""}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                            >
-                                <option value="">Select</option>
-                                <option value="Private Physician">Private Physician</option>
-                                <option value="Public Health Authority">Public Health Authority</option>
-                                <option value="Hospital">Hospital</option>
-                                <option value="None">None</option>
-                                <option value="Others">Others (Specify)</option>
-                            </select>
+                                <label className="block w-full text-sm font-medium mb-1">21a. Attended By</label>
+                                
+                                <select
+                                    name="attendant"
+                                    className={`common-input w-full ${errors.attendant ? 'input-error' : ''}`}
+                                    value={formData.page6.attendant || ""}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                >
+                                    <option value="">Select</option>
+                                    <option value="Private Physician">Private Physician</option>
+                                    <option value="Public Health Authority">Public Health Authority</option>
+                                    <option value="Hospital">Hospital</option>
+                                    <option value="None">None</option>
+                                    <option value="Others">Others (Specify)</option>
+                                </select>
 
-                            {formData.page6.attendant === "Others" && (
-                                <input
-                                type="text"
-                                name="attendantOthersSpecify"
-                                placeholder="Specify"
-                                className={`common-input mt-2 w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
-                                value={formData.page6.attendantOthersSpecify}
-                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                />
-                            )}
+                                {formData.page6.attendant === "Others" && (
+                                    <input
+                                    type="text"
+                                    name="attendantOthersSpecify"
+                                    placeholder="Specify"
+                                    className={`common-input mt-2 w-full ${errors.attendantOthersSpecify ? 'input-error' : ''}`}
+                                    value={formData.page6.attendantOthersSpecify}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                    />
+                                )}
 
-                            {errors.attendant && <ErrorMessages errors={errors.attendant} />}
-                            {errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} />}
+                                {errors.attendant && <ErrorMessages errors={errors.attendant} />}
+                                {errors.attendantOthersSpecify && <ErrorMessages errors={errors.attendantOthersSpecify} />}
                             </div>
 
                             {/* Attendant Duration */}
+                            <label htmlFor="">21b. If attended, state duration</label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium">From (mm/dd/yy)</label>

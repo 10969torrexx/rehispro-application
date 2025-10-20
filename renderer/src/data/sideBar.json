@@ -1,59 +1,60 @@
 {
   "supervisor": [
     {
-      "icon": "bi-speedometer2",
+      "icon": "bi-house-door",
+      "iconActive": "bi-house-door-fill",
       "name": "Dashboard",
       "url": "/dashboard"
     },
     {
       "icon": "bi-person",
+      "iconActive": "bi-person-fill",
       "name": "Users",
       "url": "/user-management"
     },
     {
-      "icon": "bi-file-earmark-text",
-      "name": "Documents",
-      "url": "/documents",
-      "submenu": [
-        {
-          "name": "Birth Certificates",
-          "url": "/documents/birth-certificates"
-        },
-        {
-          "name": "Marriage Certificates",
-          "url": "/documents/marriage-certificates"
-        },
-        {
-          "name": "Death Certificates",
-          "url": "/documents/death-certificates"
-        }
-      ]
+      "icon": "bi-cake2",
+      "iconActive": "bi-cake2-fill",
+      "name": "Birth Certificates",
+      "url": "/birth-certificates"
+    },
+    {
+      "icon": "bi-arrow-through-heart",
+      "iconActive": "bi-arrow-through-heart-fill",
+      "name": "Marriage Certificates",
+      "url": "/marriage-certificates"
+    },
+    {
+      "icon": "bi-heart-pulse",
+      "iconActive": "bi-heart-pulse-fill",
+      "name": "Death Certificates",
+      "url": "/death-certificates"
     }
   ],
   "staff" : [
     {
-      "icon": "bi-speedometer2",
+      "icon": "bi-house-door",
+      "iconActive": "bi-house-door-fill",
       "name": "Dashboard",
       "url": "/dashboard"
     },
     {
-      "icon": "bi-file-earmark-text",
-      "name": "Documents",
-      "url": "/documents",
-      "submenu": [
-        {
-          "name": "Birth Certificates",
-          "url": "/documents/birth-certificates"
-        },
-        {
-          "name": "Marriage Certificates",
-          "url": "/documents/marriage-certificates"
-        },
-        {
-          "name": "Death Certificates",
-          "url": "/documents/death-certificates"
-        }
-      ]
+      "icon": "bi-cake2",
+      "iconActive": "bi-cake2-fill",
+      "name": "Birth Certificates",
+      "url": "/birth-certificates"
+    },
+    {
+      "icon": "bi-arrow-through-heart",
+      "iconActive": "bi-arrow-through-heart-fill",
+      "name": "Marriage Certificates",
+      "url": "/marriage-certificates"
+    },
+    {
+      "icon": "bi-heart-pulse",
+      "iconActive": "bi-heart-pulse-fill",
+      "name": "Death Certificates",
+      "url": "/death-certificates"
     }
   ]
 }

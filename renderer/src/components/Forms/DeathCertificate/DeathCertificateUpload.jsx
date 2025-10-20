@@ -5,11 +5,12 @@ import { FileValidation } from '@services';
 import { FileList, LoadingScreen } from '@components';
 import { Limits } from '@enums';
 import { toast } from "react-toastify";
-import { BirthCertServices } from '@services';
+import { DeathCertServices } from '@services';
 
-export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) { 
+export default function DeathCertificateUpload({setActiveTab, onOCRComplete}) { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const onDrop = useCallback(uploadedFiles => {
         const sorted = uploadedFiles;
@@ -39,21 +40,19 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
             setFiles(sorted);
         }
     }, []);
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
     const removeFile = (id) => { 
         const newFiles = files.filter((file, index) => index !== id);
         setFiles(newFiles);
     }
 
-    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => { 
         e.preventDefault();
         const formData = new FormData();
         files.forEach(file => formData.append('files', file));
         try {
             setLoading(true)
-            const response = await BirthCertServices.uploadFiles(formData);
+            const response = await DeathCertServices.uploadFiles(formData);
             setLoading(false);
             if (response.success) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
@@ -67,22 +66,21 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
             toast.error('Runtime Error');
         } 
     }
-
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     if (loading) {
         return (
-           <LoadingScreen title={"Running OCR, Please wait.. "} message={"This might take sometime."} />
+            <LoadingScreen title={"Running OCR, Please wait.. "} message={"This might take sometime."} />
         );
     }
-
-    return (
+    return(
         <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="mb-2">
                 {errors.uploadField && <ErrorMessages errors={errors.uploadField} />}
                 {errors && <ErrorMessages errors={errors.map(err => err.file)} />}
             </div>
-            <div {...getRootProps()} className={`border-2 border-dashed p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer 
-                    ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
-                    ${errors.length > 0 ? 'input-error' : ''}`}>
+            <div {...getRootProps()} className={`border-2 border-dashed p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer
+                ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
+            `}>
                 <input {...getInputProps()} 
                     type="file"
                     multiple

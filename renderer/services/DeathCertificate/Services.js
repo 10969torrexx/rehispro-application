@@ -76,3 +76,28 @@ export async function viewDeathCertificate(id) {
         throw error;
     }
 }
+
+
+/**
+ * TODO: handle file upload for the birth cert.
+ * @params {FormData} formData - The form data containing files to upload
+ */ 
+export async function uploadFiles(formData) {
+    try {
+        const response = await fetch('http://localhost:3001/death/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to upload files')
+        }
+        const parsedResponse = await response.json();
+        return parsedResponse;
+    } catch (error) {
+        console.error(error);
+        throw new Error(JSON.stringify({
+            'error': error
+        }))
+    }
+}
