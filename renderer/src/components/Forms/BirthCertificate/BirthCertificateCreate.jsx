@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertValidation } from '@services';
 import { BirthCertificate, CivilStatus, MarriageStatus } from '@enums';
-import { capitalizeFirst } from '../../../myTools/myTools';
 import { toast } from "react-toastify";
 import { ErrorMessages, SignaturePlaceholder } from '@components';
-import { AllCaps, StringToDate } from '@myTools';
+import { AllCaps, StringToDate, capitalizeFirst } from '@myTools';
 import { BirthCertServices } from '@services';
 
 export default function BirthCertificateCreate({defaultOCRValues}) {
@@ -40,7 +39,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
             childFirstName: defaultOCRValues?.child_first_name ?? "",
             childMiddleName: defaultOCRValues?.child_middle_name ?? "",
             childLastName: defaultOCRValues?.child_last_name ?? "",
-            sex: defaultOCRValues?.sex ?? "",
+            sex: capitalizeFirst(defaultOCRValues?.sex ?? ""),
             dateOfBirth: StringToDate(`${defaultOCRValues?.dateOfBirth_year}-${defaultOCRValues?.dateOfBirth_month}-${defaultOCRValues?.dateOfBirth_day}`) ?? "",
             placeOfBirthBarangay: (`${defaultOCRValues?.placeOfBirth_barangay ?? ""}`) ?? "",
             placeOfBirthCity: defaultOCRValues?.placeOfBirth_city ?? "",
@@ -546,6 +545,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     <select name="sex" className={`common-input w-full ${errors.sex ? 'input-error' : ''}`}
                                         value={capitalizeFirst(formData.page1.sex.toLowerCase())}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        data-value={capitalizeFirst(formData.page1.sex.toLowerCase())}
                                     >
                                         <option value="">Select</option>
                                         <option value={capitalizeFirst(BirthCertificate.SexTypes.MALE)}>{capitalizeFirst(BirthCertificate.SexTypes.MALE)}</option>
