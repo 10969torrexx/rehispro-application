@@ -306,10 +306,29 @@ function view(req, res) {
     );
 }
 
+async function upload(req, res) {
+    try {
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ success: false, message: 'No files uploaded' });
+        }
+        const filePaths = req.files.map(file => file.path);
+        const response = await callPythonOCR(filePaths, "death");
+        
+    } catch (error) {
+        writeLog(`[error] [marraige] [upload] ${JSON.stringify(error)}`);
+        res.status(500).json({
+            success: false,
+            message: 'File upload failed',
+            error: error.message || ""
+        });
+    }
+}
+
 module.exports = {
     create,
     getAll,
-    view
+    view,
+    upload
 };
 
 
