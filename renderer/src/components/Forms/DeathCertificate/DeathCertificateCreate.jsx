@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState} from 'react';
 import { Divider } from '@components';
 import { DeathCertValidation } from '@services';
 import { ErrorMessages, SignaturePlaceholder } from '@components';
@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { StringToDate, capitalizeFirst, TitleCase } from '@myTools';
 
 export default function DeathCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = React.useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const pageTitles = [ 
         "Deceased's Information", 
         "Status & Residence", 
@@ -26,7 +26,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
         "Confirmation Notice"
     ];
 
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         // Page 1 - Deceased's Information (merged original page1 and page2)
         page1: {
             creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
@@ -223,7 +223,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
         }));
     };
     //TODO: handle changes pages & validations
-    const [errors, setErrors] = React.useState({});
+    const [errors, setErrors] = useState({});
     const handlePageChange = (direction) => {
         if (direction === 'next') {
             const response = DeathCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
@@ -464,8 +464,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             });
     };
     
-    
-      return (
+    return (
         <>
             <form className="p-4 h-full mb-4 mx-auto" onSubmit={handleSubmit}>
                 <div className='mb-4'>
