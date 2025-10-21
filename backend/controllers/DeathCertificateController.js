@@ -227,10 +227,6 @@ exports.create = (req, res) => {
             VALUES (${placeholders})
         `;
 
-        // console.log("🟢 Columns:", columns.length, columns);
-        // console.log("🟢 Values:", values.length);
-        // console.log("🟢 Query:", query);
-
         db.run(query, values, function (err) {
             if (err) {
                 console.error('[DB Error]', err.message);

@@ -1653,6 +1653,7 @@ export default function MarriageCertificateCreateForm() {
                         <div className="text-sm leading-relaxed border border-pink-300 p-3 rounded mt-1 mb-3">
                             <p className="flex flex-wrap items-center">
                                 THIS IS TO CERTIFY: That I,
+                                {errors.certHusbandName && <ErrorMessages errors={errors.certHusbandName} />}
                                 <input
                                     type="text"
                                     name="certHusbandName"
@@ -1661,6 +1662,7 @@ export default function MarriageCertificateCreateForm() {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
                                 and I,
+                                {errors.certWifeName && <ErrorMessages errors={errors.certWifeName} />}
                                 <input
                                     type="text"
                                     name="certWifeName"
@@ -1672,7 +1674,7 @@ export default function MarriageCertificateCreateForm() {
                             </p>
 
 
-                            <p className="mt-2">
+                            <p className={`mt-2 ${errors.marriageSettlement ? 'input-error p-1': ''}`}>
                                 <label className="mx-2">
                                     <input
                                         type="radio"
@@ -1695,8 +1697,9 @@ export default function MarriageCertificateCreateForm() {
                                     have not entered into a marriage settlement.
                                 </label>
                             </p>
+                            {errors.marriageSettlement && <ErrorMessages errors={errors.marriageSettlement} />}
 
-                            <p className="mt-2">
+                            <p className="mt-2" >
                                 IN WITNESS WHEREOF, we have signed/marked with our fingerprint this certificate in quadruplicate this
                                 <input
                                     type="text"

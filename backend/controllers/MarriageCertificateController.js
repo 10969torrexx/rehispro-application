@@ -236,10 +236,6 @@ function create(req, res) {
             VALUES (${placeholders})
         `;
 
-        console.log("🟢 Columns:", columns.length, columns);
-        console.log("🟢 Values:", values.length);
-        console.log("🟢 Query:", query);
-
         db.run(query, values.filter(val => val !== 'CURRENT_TIMESTAMP'), function (err) {
             if (err) {
                 console.error('[DB Error]', err.message);
