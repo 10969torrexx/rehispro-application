@@ -68,7 +68,7 @@ export default function DeathCertificate() {
                                 <div className="mb-4">
                                     <InfoCard 
                                         title="Upload Death Certificates"
-                                        message="To upload a birth certificate, please use the form below to select and submit the document. Ensure that the file is in an accepted format (e.g., PDF, JPEG) and does not exceed the maximum file size limit."
+                                        message="To upload a birth certificate, please use the form below to select and submit the document. Ensure that the file is in an accepted format (e.g., PNG, JPEG) and does not exceed the maximum file size limit."
                                     />  
                                 </div>
                                 <div>
