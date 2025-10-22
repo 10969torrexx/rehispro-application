@@ -2,7 +2,7 @@
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { logQuery, interpolateQuery } = require('../utils/querytrace');
-
+const { callPythonOCR } = require('../services/OCRService');
 
 function create(req, res) {
     try {
@@ -312,7 +312,7 @@ async function upload(req, res) {
             return res.status(400).json({ success: false, message: 'No files uploaded' });
         }
         const filePaths = req.files.map(file => file.path);
-        const response = await callPythonOCR(filePaths, "death");
+        const response = await callPythonOCR(filePaths, "marriage");
         
     } catch (error) {
         writeLog(`[error] [marraige] [upload] ${JSON.stringify(error)}`);
