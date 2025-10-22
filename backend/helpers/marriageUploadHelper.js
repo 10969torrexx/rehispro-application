@@ -13,8 +13,8 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, uploadDir),
     filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
     onFileUploadComplete: (file, req) => {
-        writeLog('📁 File uploaded: ' + file.originalname + ' as ' + (Date.now() + '-' + file.originalname));
-        writeLog('📨 Request body: ' + JSON.stringify(req.body));
+        writeLog('📁 [marriage] File uploaded: ' + file.originalname + ' as ' + (Date.now() + '-' + file.originalname));
+        writeLog('📨 [marriage] Request body: ' + JSON.stringify(req.body));
     }
 });
 

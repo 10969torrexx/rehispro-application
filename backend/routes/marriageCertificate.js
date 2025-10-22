@@ -9,6 +9,6 @@ const upload = require('../helpers/marriageUploadHelper');
 router.post('/create', MarriageCertificateController.create);
 router.get('/list', MarriageCertificateController.getAll);
 router.get('/view/:id', MarriageCertificateController.view);
-router.get('/upload', upload.array('files'), MarriageCertificateController.upload);
+router.post('/upload', upload.array('files'), MarriageCertificateController.upload);
 
 module.exports = router;

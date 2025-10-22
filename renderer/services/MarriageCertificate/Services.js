@@ -70,7 +70,7 @@ export async function viewMarriageCertificate(id) {
 
 export async function upload(formData) {
     try {
-        const response = await fetch('http://localhost:3001/birth/upload-and-scan', {
+        const response = await fetch('http://localhost:3001/marriage/upload', {
             method: 'POST',
             body: formData
         });
