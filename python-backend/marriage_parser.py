@@ -4,7 +4,7 @@ import os
 import re
 from datetime import datetime
 from logger_setup import setup_logger
-logger = setup_logger(__name__, "python-backend/logs/death_parser.log")
+logger = setup_logger(__name__, "python-backend/logs/marriage_parser.log")
 
 default_keywords = [
   "AFFIDAVIT OF ACKNOWLEDGMENTIADMISSION OF PATERNITY",
