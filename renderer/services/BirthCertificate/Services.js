@@ -99,5 +99,11 @@ export async function viewBirthCertificate(id) {
 }
 
 export async function download(id) {
-    
+    try {
+
+    } catch(error) {
+        throw new Error(JSON.stringify({
+            'error': error
+        }))
+    }
 }

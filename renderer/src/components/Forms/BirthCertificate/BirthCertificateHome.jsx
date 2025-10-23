@@ -59,7 +59,7 @@ export default function BirthCertificateHome({ onView }) {
         return (
           <select
             defaultValue=""
-            className="common-input text-xs px-1 py-0.5 w-full" // 🔹 smaller text + reduced padding
+            className="common-input text-xs px-1 py-0.5 w-full"
                 onChange={(e) => {
                   const action = e.target.value;
                   e.target.value = "";
@@ -67,7 +67,7 @@ export default function BirthCertificateHome({ onView }) {
                   if (action === "view") {
                     onView?.(row);
                   } else if (action === "download") {
-                    toast.info("Download clicked");
+                    BirthCertServices.download(params?.row.id)
                   }
                 }}
               >
