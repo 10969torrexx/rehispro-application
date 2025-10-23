@@ -342,9 +342,14 @@ function view(req, res) {
     );
 }
 
+async function download(req, res) {
+
+}
+
 module.exports = {
     create,
     list,
     uploadAndScan,
-    view
+    view,
+    download
 };

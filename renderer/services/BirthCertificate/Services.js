@@ -97,3 +97,7 @@ export async function viewBirthCertificate(id) {
         throw error;
     }
 }
+
+export async function download(id) {
+    
+}
