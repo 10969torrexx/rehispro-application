@@ -100,7 +100,21 @@ export async function viewBirthCertificate(id) {
 
 export async function download(id) {
     try {
+        const reponse = await fetch(`http://localhost:3001/birth/download/${id}`, {
+            method: 'GET',
+            headers: {
+               'Accept': 'application/json' 
+            }
+        });
 
+        const data = await reponse.blob();
+        const url = window.URL.createObjectURL(data); 
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename.split('/').pop(); // sample.pdf
+        document.body.appendChild(link);
+        link.click();
+        link.remove();       
     } catch(error) {
         throw new Error(JSON.stringify({
             'error': error

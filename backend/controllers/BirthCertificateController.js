@@ -2,6 +2,7 @@ const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
+const path = require('path');
 
 function create (req, res) {
     try {
@@ -343,7 +344,14 @@ function view(req, res) {
 }
 
 async function download(req, res) {
-    
+    const filePath = path.join(__dirname, '..', '/download/pdf_template/birth-cert.pdf');
+
+    res.download(filePath, (err) => {
+        if (err) {
+            writeLog(`[birthcontroller][download] ${err}`)
+            res.status(500).send('File not found or error downloading file.');
+        }
+    })
 }
 
 module.exports = {
