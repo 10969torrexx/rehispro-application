@@ -100,7 +100,7 @@ export async function viewBirthCertificate(id) {
 
 export async function download(id) {
     try {
-        const reponse = await fetch(`http://localhost:3001/birth/download/${id}`, {
+        const reponse = await fetch(`http://localhost:3001/birth/extract-pdf/${id}`, {
             method: 'GET',
             headers: {
                'Accept': 'application/json' 
@@ -116,6 +116,7 @@ export async function download(id) {
         link.click();
         link.remove();       
     } catch(error) {
+        console.error(error);
         throw new Error(JSON.stringify({
             'error': error
         }))

@@ -146,7 +146,7 @@ export default function BirthCertificateView({ row }) {
                                 <input type="text" 
                                     name="placeOfBirthBarangay" 
                                     className={`w-full common-input`}
-                                    value={birth.place_of_birth_barangay}
+                                    value={birth.place_of_birth_barangay || ""}
                                     placeholder='Name of Hospital / Clinic / Institution / House No., St, Barangay'
                                     readOnly
                                 />
@@ -156,7 +156,7 @@ export default function BirthCertificateView({ row }) {
                                 <input type="text" 
                                     name="placeOfBirthCity" 
                                     className={`w-full common-input`}
-                                    value={birth.place_of_birth_city}
+                                    value={birth.place_of_birth_city || ""}
                                     placeholder='City / Municipality'
                                     readOnly
                                 />
@@ -166,7 +166,7 @@ export default function BirthCertificateView({ row }) {
                                 <input type="text" 
                                     name="placeOfBirthProvince" 
                                     className={`w-full common-input`}
-                                    value={birth.place_of_birth_province}
+                                    value={birth.place_of_birth_province || ""}
                                     placeholder='Province'
                                     readOnly
                                 />
