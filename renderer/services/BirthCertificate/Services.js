@@ -1,3 +1,5 @@
+import { response } from "express";
+
 /**
  * TODO: insert birth certificate data
  * @params {Object} formData - The form data to insert
@@ -103,22 +105,26 @@ export async function download(id) {
         const reponse = await fetch(`http://localhost:3001/birth/extract-pdf/${id}`, {
             method: 'GET',
             headers: {
-               'Accept': 'application/json' 
+               'Accept': 'application/pdf' 
             }
         });
+
+        if (!response.ok) {
+            throw new Error(`Failed to download file: ${response.status}`);
+        }
 
         const data = await reponse.blob();
         const url = window.URL.createObjectURL(data); 
         const link = document.createElement('a');
         link.href = url;
+        const filename = `birth_certificate_${id}.pdf`;
         link.download = filename.split('/').pop(); // sample.pdf
         document.body.appendChild(link);
         link.click();
-        link.remove();       
+        link.remove();      
+        window.URL.revokeObjectURL(url); 
     } catch(error) {
         console.error(error);
-        throw new Error(JSON.stringify({
-            'error': error
-        }))
+        throw error;
     }
 }
