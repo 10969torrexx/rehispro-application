@@ -1,4 +1,3 @@
-
 /**
  * TODO: insert birth certificate data
  * @params {Object} formData - The form data to insert
@@ -101,7 +100,7 @@ export async function viewBirthCertificate(id) {
 
 export async function download(id) {
     try {
-        const reponse = await fetch(`http://localhost:3001/birth/extract-pdf/${id}`, {
+        const response = await fetch(`http://localhost:3001/birth/extract-pdf/${id}`, {
             method: 'GET',
             headers: {
                'Accept': 'application/pdf' 
@@ -112,7 +111,7 @@ export async function download(id) {
             throw new Error(`Failed to download file: ${response.status}`);
         }
 
-        const data = await reponse.blob();
+        const data = await response.blob();
         const url = window.URL.createObjectURL(data); 
         const link = document.createElement('a');
         link.href = url;

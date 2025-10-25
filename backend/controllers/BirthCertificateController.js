@@ -320,38 +320,56 @@ function view(req, res) {
     console.log("Attempting to fetch birth certificate with ID:", req.params.id);
 
     db.get(
-      `SELECT * FROM birthcertificates WHERE id = ?`,
-      [req.params.id],
-      (err, row) => {
-        if (err) {
-          console.error('❌ [DB Error]', err.message);
-          return res.status(500).json({
-            success: false,
-            message: 'Database fetch failed',
-            error: err.message,
-          });
+        `SELECT * FROM birthcertificates WHERE id = ?`,
+        [req.params.id],
+        (err, row) => {
+            if (err) {
+                console.error('❌ [DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database fetch failed',
+                    error: err.message,
+                });
+            }
+        
+            const birth_certificate = row;
+        
+            res.status(200).json({
+                success: true,
+                message: 'Birth Certificate Found',
+                data: birth_certificate,
+            });
         }
-    
-        const birth_certificate = row;
-    
-        res.status(200).json({
-          success: true,
-          message: 'Birth Certificate Found',
-          data: birth_certificate,
-        });
-      }
     );
 }
 
 async function download(req, res) {
     const filePath = path.join(__dirname, '..', '/download/pdf_template/birth-cert.pdf');
-
-    res.download(filePath, (err) => {
-        if (err) {
-            writeLog(`[birthcontroller][download] ${err}`)
-            res.status(500).send('File not found or error downloading file.');
+    writeLog(`[birthcontroller][download] ${req.params.id}`);
+    db.get(
+        `SELECT * FROM birthcertificates WHERE id = ?`,
+        [req.params.id],
+        (err, row) => {
+            if (err) {
+                console.error('❌ [DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database fetch failed',
+                    error: err.message,
+                });
+            }
+    
+            const data = row;
+            writeLog(`[birthcontroller][download] ${JSON.stringify(data)}`);
+            res.download(filePath, (err) => {
+                if (err) {
+                    writeLog(`[birthcontroller][download] ${err}`)
+                    res.status(500).send('File not found or error downloading file.');
+                }
+            })
         }
-    })
+    );
+    
 }
 
 module.exports = {
