@@ -3,6 +3,8 @@ const { writeLog } = require('../utils/logger');
 const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
 const path = require('path');
+const birthGenerateHTML = require('../helpers/generatePDFFromHTML');
+const puppeteer = require('puppeteer');
 
 function create (req, res) {
     try {
@@ -344,32 +346,59 @@ function view(req, res) {
 }
 
 async function download(req, res) {
-    const filePath = path.join(__dirname, '..', '/download/pdf_template/birth-cert.pdf');
-    writeLog(`[birthcontroller][download] ${req.params.id}`);
-    db.get(
-        `SELECT * FROM birthcertificates WHERE id = ?`,
-        [req.params.id],
-        (err, row) => {
-            if (err) {
-                console.error('❌ [DB Error]', err.message);
-                return res.status(500).json({
-                    success: false,
-                    message: 'Database fetch failed',
-                    error: err.message,
-                });
-            }
-    
-            const data = row;
-            writeLog(`[birthcontroller][download] ${JSON.stringify(data)}`);
-            res.download(filePath, (err) => {
-                if (err) {
-                    writeLog(`[birthcontroller][download] ${err}`)
-                    res.status(500).send('File not found or error downloading file.');
-                }
-            })
-        }
-    );
-    
+   try {
+        const filePath = path.join(__dirname, '..', '/download/pdf_template/birth-cert.pdf');
+        writeLog(`[birthcontroller][download] ${req.params.id}`);
+        // db.get(
+        //     `SELECT * FROM birthcertificates WHERE id = ?`,
+        //     [req.params.id],
+        //     (err, row) => {
+        //         if (err) {
+        //             console.error('❌ [DB Error]', err.message);
+        //             return res.status(500).json({
+        //                 success: false,
+        //                 message: 'Database fetch failed',
+        //                 error: err.message,
+        //             });
+        //         }
+        
+        //         const data = row;
+        //         writeLog(`[birthcontroller][download] ${JSON.stringify(data)}`);
+                
+        //         res.download(filePath, (err) => {
+        //             if (err) {
+        //                 writeLog(`[birthcontroller][download] ${err}`)
+        //                 res.status(500).send('File not found or error downloading file.');
+        //             }
+        //         })
+        //     }
+        // );
+
+        const birthDetails = {
+            name: "Juan Dela Cruz",
+            dateOfBirth: "January 1, 2000",
+            placeOfBirth: "Manila, Philippines",
+            sex: "Male",
+            civilStatus: "Single"
+        };
+        const html = birthGenerateHTML(birthDetails);
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(html, { waitUntil: "networkidle0" });
+        const pdfBuffer = await page.pdf({
+            format: "A4",
+            printBackground: true
+        });
+        await browser.close();
+        res.set({
+            "Content-Type": "application/pdf",
+            "Content-Disposition": "attachment; filename=birth_certificate.pdf",
+            "Content-Length": pdfBuffer.length
+        });
+        res.send(pdfBuffer);
+   } catch (error) {
+        writeLog(`[birth][download] ${error}`)
+   }
 }
 
 module.exports = {
