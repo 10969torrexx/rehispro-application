@@ -1,4 +1,3 @@
-import { response } from "express";
 
 /**
  * TODO: insert birth certificate data
