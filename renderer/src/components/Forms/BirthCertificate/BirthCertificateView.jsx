@@ -1232,10 +1232,10 @@ export default function BirthCertificateView({ row }) {
                       I <input type="text" name="affiant_name" className="border-b border-gray-500 w-40 text-center" value={birth.affiant_name || ""} readOnly />,
                       of legal age, <select name="civil_status" className="border-b border-gray-500 w-40 text-center" value={birth.civil_status || ""} readOnly>
                           <option value="">Select</option>
-                          <option value="Single">Single</option>
-                          <option value="Married">Married</option>
-                          <option value="Divorced">Divorced</option>
-                          <option value="Widow">Widow</option>
+                          <option value="SINGLE">SINGLE</option>
+                          <option value="MARRIED">MARRIED</option>
+                          <option value="DIVORCED">DIVORCED</option>
+                          <option value="WIDOW / WIDOWER">WIDOW / WIDOWER</option>
                       </select>, with residence and postal address at
                       <input type="text" name="address" className="border-b border-gray-500 w-60 text-center" value={birth.address || ""} readOnly />,
                       after having been duly sworn in accordance with law, do hereby depose and say:

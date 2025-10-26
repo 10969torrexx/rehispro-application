@@ -354,7 +354,7 @@ async function download(req, res) {
                 resolve(row);
             });
         });
-
+        writeLog(`INFO [BirthCertificateController][download] ${JSON.stringify(data)}`);
         const html = birthGenerateHTML(data);
         const browser = await puppeteer.launch();
         const page = await browser.newPage();

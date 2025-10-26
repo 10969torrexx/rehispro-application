@@ -1101,14 +1101,14 @@ function birthGenerateHTML(params) {
                         <div style="display: flex; align-items: flex-end; margin-bottom: 8px;">
                             <span style="white-space: nowrap; margin-left: 80px;">I</span>
                             <span style="font-weight:600; border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
-                            
+                            ${params.affiant_name}
                             </span>
-                            <span style="white-space: nowrap; margin: 0 5px;">, of legal age, single/married/divorced/widow/widower, with</span>
+                            <span style="white-space: nowrap; margin: 0 5px;">, of legal age, <span style="font-weight:600;">${params.civil_status}</span>, with</span>
                         </div>
                         <div style="display: flex; align-items: flex-end; margin-bottom: 8px;">
                             <span style="white-space: nowrap;">residence and postal address at </span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
-                            
+                            <span style="font-weight:600; border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                ${params.address}
                             </span>
                             <span style="white-space: nowrap; margin-left: 5px;">,</span>
                         </div>
