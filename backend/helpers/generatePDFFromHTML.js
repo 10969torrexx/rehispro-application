@@ -1151,12 +1151,16 @@ function birthGenerateHTML(params) {
 
                             <div style="display: flex; align-items: flex-end; width: 100%;">
                                 <span style="white-space: nowrap;">2. That I/he/she was attended at birth by </span>
-                                <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">DR. JOSE M. PEREZ</span>
+                                <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
+                                
+                                </span>
                                 <span style="white-space: nowrap;"> who resides at </span>
                             </div>
                         
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 8px;">
-                                <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">TACLOBAN CITY</span>
+                                <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                
+                                </span>
                             </div>
                         </div>    
                         <div style="display: flex; align-items: flex-end; margin-bottom: 8px;">
@@ -1217,14 +1221,18 @@ function birthGenerateHTML(params) {
                         <div style="margin-bottom: 8px;">
                             <div style="display: flex; align-items: flex-end; width: 100%;">
                                 <span style="white-space: nowrap;">6. (For the applicant only) That I am married to </span>
-                                <span style="border-bottom: 0.2px solid green; width: 30%; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">CARLO M. DELA CRUZ</span>
+                                <span style="border-bottom: 0.2px solid green; width: 30%; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                
+                                </span>
                                 <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px;">&nbsp;</span>
                                 <span style="white-space: nowrap;"> of the said person.</span>
                             </div>
                         
                             <div style="display: flex; align-items: flex-end; margin-top: 8px;">
                                 <span style="white-space: nowrap;">(If the applicant is other than the document owner) That I am the </span>
-                                <span style="border-bottom: 0.2px solid green; width: 30%; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">MOTHER</span>
+                                <span style="border-bottom: 0.2px solid green; width: 30%; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                
+                                </span>
                                 <span style="white-space: nowrap;"> of the said person.</span>
                             </div>
                         </div>    
@@ -1265,11 +1273,17 @@ function birthGenerateHTML(params) {
                         <div style="display: flex; align-items: flex-end; width: 100%;">
                             <span style="white-space: nowrap; font-weight: bold; padding-left: 80px;">SUBSCRIBED AND SWORN</span>
                             <span style="white-space: nowrap;"> to before me this </span>
-                            <span style="border-bottom: 0.2px solid green; width: 10%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">16th</span>
+                            <span style="border-bottom: 0.2px solid green; width: 10%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
+                            
+                            </span>
                             <span style="white-space: nowrap;"> day of </span>
-                            <span style="border-bottom: 0.2px solid green; width: 25%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">JANUARY</span>
+                            <span style="border-bottom: 0.2px solid green; width: 25%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
+                            
+                            </span>
                             <span style="white-space: nowrap;">, </span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-right: 5px; text-align: center;">2025</span>
+                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-right: 5px; text-align: center;">
+                            
+                            </span>
                         </div>
                     
                         <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 8px;">
