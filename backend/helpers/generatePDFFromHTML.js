@@ -110,7 +110,7 @@ function birthGenerateHTML(params) {
                     <div style="padding-left: 4px; display: flex; justify-content:space-evenly;  flex-direction: column; width: 70%; border-right: 0.2px solid green;">
                         <div style="display: flex; padding-top: 4px;">
                             <span>Province:</span>
-                            <span style="flex-grow: 1; display:inline-block; height: 1.2em; border-bottom: 0.2px solid green; height: 1.2em; line-height: 1.2em; text-align: center;">
+                            <span style="flex-grow:1; display:inline-block; height:1.2em; border-bottom:0.2px solid green; line-height:1.2em; text-align:center; font-weight:600;">
                                 ${params.province}
                             </span>
                         </div>
