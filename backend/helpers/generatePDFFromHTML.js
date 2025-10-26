@@ -1063,19 +1063,27 @@ function birthGenerateHTML(params) {
                     <div style="display: flex; justify-content: space-evenly ; align-items: center; margin-top: 40px;">
                         
                         <div style="width: 48%; display: flex; flex-direction: column; padding: 0 20px;">
-                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">
+                                &nbsp;
+                            </div>
                             <span style="font-size: 10px; margin-bottom: 15px; text-align: center;">Signature of the Administering Officer</span>
 
-                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">
+                                &nbsp;
+                            </div>
                             <span style="font-size: 10px; text-align: center;">Name in Print</span>
                         </div>
                 
                         <div style="width: 48%; display: flex; flex-direction: column; padding: 0 20px;">
                             
-                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">
+                                &nbsp;
+                            </div>
                             <span style="font-size: 10px; margin-bottom: 15px; text-align: center;">Position / Title / Designation</span>
                             
-                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">
+                                &nbsp;
+                            </div>
                             <span style="font-size: 10px; text-align: center;">Address</span>
                         </div>
                     </div>
@@ -1092,7 +1100,7 @@ function birthGenerateHTML(params) {
                     <div style="margin-bottom: 14px; font-size: 10px;">
                         <div style="display: flex; align-items: flex-end; margin-bottom: 8px;">
                             <span style="white-space: nowrap; margin-left: 80px;">I</span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
+                            <span style="font-weight:600; border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
                             
                             </span>
                             <span style="white-space: nowrap; margin: 0 5px;">, of legal age, single/married/divorced/widow/widower, with</span>
@@ -1263,7 +1271,9 @@ function birthGenerateHTML(params) {
                     <div style="display: flex; justify-content: flex-end; margin-bottom: 30px;">
                         
                         <div style="width: 50%; text-align: center;">
-                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">
+                                &nbsp;
+                            </div>
                             <span style="font-size: 10px;">(Signature Over Printed Name of Affiant)</span>
                         </div>
                     </div>
@@ -1274,15 +1284,15 @@ function birthGenerateHTML(params) {
                             <span style="white-space: nowrap; font-weight: bold; padding-left: 80px;">SUBSCRIBED AND SWORN</span>
                             <span style="white-space: nowrap;"> to before me this </span>
                             <span style="border-bottom: 0.2px solid green; width: 10%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
-                            
+                                &nbsp; ${params.final_jurat_day || ''}
                             </span>
                             <span style="white-space: nowrap;"> day of </span>
                             <span style="border-bottom: 0.2px solid green; width: 25%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
-                            
+                                &nbsp; ${params.final_jurat_month_year || ''}
                             </span>
                             <span style="white-space: nowrap;">, </span>
                             <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-right: 5px; text-align: center;">
-                            
+                                &nbsp; ${params.final_jurat_place || ''}
                             </span>
                         </div>
                     
@@ -1290,14 +1300,14 @@ function birthGenerateHTML(params) {
                             <span style="white-space: nowrap;">Philippines, affiant who exhibited to me his Community Tax Cert.</span>
                             <span style="white-space: nowrap;">issued on </span>
                             <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
-                                &nbsp;
+                               &nbsp; ${params.final_ctc_issued_on || ''}
                             </span>
                         </div>
                         
                         <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 8px;">
                             <span style="white-space: nowrap;"> at </span>
                             <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
-                                &nbsp;
+                                &nbsp; ${params.final_ctc_issued_at || ''}
                             </span>
                         </div>
                     </div>        
@@ -1308,7 +1318,9 @@ function birthGenerateHTML(params) {
                             <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
                             <span style="font-size: 10px; margin-bottom: 15px; text-align: center;">Signature of the Administering Officer</span>
 
-                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">
+                                &nbsp; ${params.admin_officer_name}
+                            </div>
                             <span style="font-size: 10px; text-align: center;">Name in Print</span>
                         </div>
                 
