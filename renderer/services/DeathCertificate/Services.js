@@ -101,3 +101,32 @@ export async function uploadFiles(formData) {
         }))
     }
 }
+
+export async function download(id) {
+    try {
+        const response = await fetch(`http://localhost:3001/death/extract-pdf/${id}`, {
+            method: 'GET',
+            headers: {
+               'Accept': 'application/pdf' 
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to download file: ${response.status}`);
+        }
+
+        const data = await response.blob();
+        const url = window.URL.createObjectURL(data); 
+        const link = document.createElement('a');
+        link.href = url;
+        const filename = `death-certificate${id}.pdf`;
+        link.download = filename.split('/').pop(); // sample.pdf
+        document.body.appendChild(link);
+        link.click();
+        link.remove();      
+        window.URL.revokeObjectURL(url); 
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}

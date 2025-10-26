@@ -213,15 +213,16 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
     });
 
     const handleInputChange = (event, section) => {
-        const { name, value } = event.target;
-        setFormData((prevData) => ({
+        const { name, value, type } = event.target;
+        setFormData(prevData => ({
             ...prevData,
             [section]: {
-                ...prevData[section],
-                [name]: value
-            }
+            ...prevData[section],
+            [name]: type === 'text' ? value.toUpperCase() : value,
+            },
         }));
     };
+
     //TODO: handle changes pages & validations
     const [errors, setErrors] = useState({});
     const handlePageChange = (direction) => {
@@ -562,8 +563,8 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <option value="MALE">MALE</option>
+                                    <option value="FEMALE">FEMALE</option>
                                 </select>
                                 {errors.sex && <ErrorMessages errors={errors.sex} />}
                             </div>
@@ -584,10 +585,12 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">5. Date of Birth</label>
-                                    <input type="date" name="dateOfBirth" className={`w-full common-input ${errors.dateOfBirth ? 'input-error' : ''}`}
+                                    <input 
+                                        type="date" 
+                                        name="dateOfBirth" 
+                                        className={`w-full common-input ${errors.dateOfBirth ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfBirth}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     {errors.dateOfBirth && <ErrorMessages errors={errors.dateOfBirth} />}
                                 </div>
@@ -700,11 +703,11 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
-                                    <option value="Widow">Widow</option>
-                                    <option value="Divorced">Divorced</option>
-                                    <option value="Widower">Widower</option>
+                                    <option value="SINGLE">SINGLE</option>
+                                    <option value="MARRIED">MARRIED</option>
+                                    <option value="WIDOW">WIDOW</option>
+                                    <option value="DIVORCED">DIVORCED</option>
+                                    <option value="WIDOWER">WIDOWER</option>
                                 </select>
                                 {errors.civilStatus && <ErrorMessages errors={errors.civilStatus} />}
                             </div>
@@ -944,18 +947,18 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         >
                                             <option value="">Select</option>
-                                            <option value="Normal Spontaneous Vertex">Normal Spontaneous Vertex</option>
-                                            <option value="Others">Others (Specify)</option>
+                                            <option value="NORMAL SPONTANEOUS VERTEX">NORMAL SPONTANEOUS VERTEX</option>
+                                            <option value="OTHERS">OTHERS (Specify)</option>
                                         </select>
                                         {errors.methodOfDelivery && <ErrorMessages errors={errors.methodOfDelivery} />}
-                                        {formData.page4.methodOfDelivery === "Others" && (
+                                        {formData.page4.methodOfDelivery === "OTHERS" && (
                                             <input
-                                            type="text"
-                                            name="methodOfDeliverySpecify"
-                                            placeholder="Specify"
-                                            className={`common-input mt-2 w-full ${errors.methodOfDeliverySpecify ? 'input-error' : ''}`}
-                                            value={formData.page4.methodOfDeliverySpecify}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                                type="text"
+                                                name="methodOfDeliverySpecify"
+                                                placeholder="Specify"
+                                                className={`common-input mt-2 w-full ${errors.methodOfDeliverySpecify ? 'input-error' : ''}`}
+                                                value={formData.page4.methodOfDeliverySpecify}
+                                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                             />
                                         )}
                                         {errors.methodOfDeliverySpecify && <ErrorMessages errors={errors.methodOfDeliverySpecify} />}
@@ -1114,11 +1117,11 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Pregnant, not in labor">Pregnant, not in labor</option>
-                                    <option value="Pregnant, in labor">Pregnant, in labor</option>
-                                    <option value="Less than 42 days after delivery">Less than 42 days after delivery</option>
-                                    <option value="42 days to 1 year after delivery">42 days to 1 year after delivery</option>
-                                    <option value="None">None</option>
+                                    <option value="PREGNANT, NOT IN LABOR">PREGNANT, NOT IN LABOR</option>
+                                    <option value="PREGNANT, IN LABOR">PREGNANT, IN LABOR</option>
+                                    <option value="LESS THAN 42 DAYS AFTER DELIVERY">LESS THAN 42 DAYS AFTER DELIVERY</option>
+                                    <option value="42 DAYS TO 1 YEAR AFTER DELIVERY">42 DAYS TO 1 YEAR AFTER DELIVERY</option>
+                                    <option value="NONE">NONE</option>
                                 </select>
                                 {errors.maternalCondition && <ErrorMessages errors={errors.maternalCondition} />}
                             </div>
@@ -1137,11 +1140,11 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Homicide">Homicide</option>
-                                    <option value="Suicide">Suicide</option>
-                                    <option value="Accident">Accident</option>
-                                    <option value="Legal Intervention">Legal Intervention</option>
-                                    <option value="Natural">Natural</option>
+                                    <option value="HOMICIDE">HOMICIDE</option>
+                                    <option value="SUICIDE">SUICIDE</option>
+                                    <option value="ACCIDENT">ACCIDENT</option>
+                                    <option value="LEGAL INTERVENTION">LEGAL INTERVENTION</option>
+                                    <option value="NATURAL">NATURAL</option>
                                 </select>
                                 {errors.mannerOfDeath && <ErrorMessages errors={errors.mannerOfDeath} />}
                             </div>
@@ -1153,8 +1156,8 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
+                                    <option value="YES">YES</option>
+                                    <option value="NO">NO</option>
                                 </select>
                                 {errors.autopsy && <ErrorMessages errors={errors.autopsy} />}
                             </div>
@@ -1168,11 +1171,11 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Home">Home</option>
-                                    <option value="Hospital">Hospital</option>
-                                    <option value="Work">Work</option>
-                                    <option value="Public Place">Public Place</option>
-                                    <option value="Other">Other</option>
+                                    <option value="HOME">Home</option>
+                                    <option value="HOSPITAL">Hospital</option>
+                                    <option value="WORK">Work</option>
+                                    <option value="PUBLIC PLACE">Public Place</option>
+                                    <option value="OTHER">Other</option>
                                 </select>
                                 {errors.placeOccurrence && <ErrorMessages errors={errors.placeOccurrence} />}
                             </div>
@@ -1188,14 +1191,14 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Private Physician">Private Physician</option>
-                                    <option value="Public Health Authority">Public Health Authority</option>
-                                    <option value="Hospital">Hospital</option>
-                                    <option value="None">None</option>
-                                    <option value="Others">Others (Specify)</option>
+                                    <option value="PRIVATE PHYSICIAN">PRIVATE PHYSICIAN</option>
+                                    <option value="PUBLIC HEALTH AUTHORITY">PUBLIC HEALTH AUTHORITY</option>
+                                    <option value="HOSPITAL">HOSPITAL</option>
+                                    <option value="NONE">NONE</option>
+                                    <option value="OTHERS">OTHERS (Specify)</option>
                                 </select>
 
-                                {formData.page6.attendant === "Others" && (
+                                {formData.page6.attendant === "OTHERS" && (
                                     <input
                                     type="text"
                                     name="attendantOthersSpecify"
