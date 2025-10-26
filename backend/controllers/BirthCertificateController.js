@@ -359,7 +359,12 @@ async function download(req, res) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.setContent(html, { waitUntil: "networkidle0" });
-        const pdfBuffer = await page.pdf({ format: "long", printBackground: true });
+        const pdfBuffer = await page.pdf({ 
+            format: "A4", 
+            printBackground: true,
+            width: "8.5in",   
+            height: "13in",   
+        });
         await browser.close();
         res.set({
             "Content-Type": "application/pdf",
@@ -369,6 +374,7 @@ async function download(req, res) {
         res.send(pdfBuffer);
     } catch (error) {
         writeLog(`ERROR: [birth][download] ${error}`)
+        console.error(error);
         res.status(500).json({ success: false, message: "Error generating PDF", error: error.message });
    }
 }
