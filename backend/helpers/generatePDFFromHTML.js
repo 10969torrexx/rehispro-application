@@ -1092,12 +1092,16 @@ function birthGenerateHTML(params) {
                     <div style="margin-bottom: 14px; font-size: 10px;">
                         <div style="display: flex; align-items: flex-end; margin-bottom: 8px;">
                             <span style="white-space: nowrap; margin-left: 80px;">I</span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">JANE S. DELA CRUZ</span>
+                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
+                            
+                            </span>
                             <span style="white-space: nowrap; margin: 0 5px;">, of legal age, single/married/divorced/widow/widower, with</span>
                         </div>
                         <div style="display: flex; align-items: flex-end; margin-bottom: 8px;">
                             <span style="white-space: nowrap;">residence and postal address at </span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">0123 SAMPAGUITA ST., SOGOD, LEYTE</span>
+                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                            
+                            </span>
                             <span style="white-space: nowrap; margin-left: 5px;">,</span>
                         </div>
                         <div style="display: flex; align-items: flex-end; margin-bottom: 20px;">
@@ -1111,18 +1115,30 @@ function birthGenerateHTML(params) {
                             <span style="white-space: nowrap;">1. That I am the applicant for the delayed registration of:</span>
                             <div style="display: flex; flex-direction: column; margin-left: 15px;">
                                 <div style="display: flex; align-items: flex-end; margin: 5px 0px;">
-                                    <span style="border: 0.2px solid green; width: 10px; height: 10px; text-align: center; line-height: 0.8; margin-right: 5px;">&#10003;</span>
+                                    <span style="border: 0.2px solid green; width: 10px; height: 10px; text-align: center; line-height: 0.8; margin-right: 5px;">
+                                    
+                                    </span>
                                     <span style="white-space: nowrap;">my birth in </span>
-                                    <span style="border-bottom: 0.2px solid green; width: 30%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">SOGOD, LEYTE</span>
+                                    <span style="border-bottom: 0.2px solid green; width: 30%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
+                                    
+                                    </span>
                                     <span style="white-space: nowrap;"> on </span>
-                                    <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">JANUARY 1, 2025</span>
+                                    <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                    
+                                    </span>
                                 </div>
                                 <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
-                                    <span style="border: 0.2px solid green; width: 10px; height: 10px; text-align: center; line-height: 0.8; margin-right: 5px;">&nbsp;</span>
+                                    <span style="border: 0.2px solid green; width: 10px; height: 10px; text-align: center; line-height: 0.8; margin-right: 5px;">
+                                    
+                                    </span>
                                     <span style="white-space: nowrap;">the birth of </span>
-                                    <span style="border-bottom: 0.2px solid green; width: 30%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">MARCO DELA CRUZ</span>
+                                    <span style="border-bottom: 0.2px solid green; width: 30%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
+                                    
+                                    </span>
                                     <span style="white-space: nowrap;"> who was born in </span>
-                                    <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">SOGOD, LEYTE</span>
+                                    <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                    
+                                    </span>
                                 </div>
                                 <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
                                     <span style="white-space: nowrap; margin-left: 15px;">on </span>
@@ -1152,18 +1168,24 @@ function birthGenerateHTML(params) {
                             <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
 
                                 <span style="white-space: nowrap;">4. That my/his/her parents were &nbsp;</span>
-                                <span style="border: 0.2px solid green; width: 10px; height: 10px; text-align: center; line-height: 0.8; margin-right: 5px; margin-top: 3px;">&#10003;</span>
+                                <span style="border: 0.2px solid green; width: 10px; height: 10px; text-align: center; line-height: 0.8; margin-right: 5px; margin-top: 3px;">
+                                
+                                </span>
                                 
                                 <div style="display: flex; flex-direction: column; flex-grow: 1; font-size: 10px;">
                             
                                     <div style="display: flex; align-items: flex-end; width: 100%;">
                                         <span style="white-space: nowrap;">married on </span>
-                                        <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">FEBRUARY 14, 2024</span>
+                                        <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
+                                        
+                                        </span>
                                     </div>
                             
                                     <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 5px;">
                                         <span style="white-space: nowrap;">at </span>
-                                        <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">SOGOD, LEYTE</span>
+                                        <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                        
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -1181,7 +1203,9 @@ function birthGenerateHTML(params) {
                             
                                 <div style="display: flex; align-items: flex-end; width: 100%;">
                                 <span style="white-space: nowrap;">5. That the reason for the delay in registering my/his/her birth was </span>
-                                <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px;">NO IMMEDIATE NEED OF DOCUMENT</span>
+                                <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px;">
+                                
+                                </span>
                                 </div>
                         
                                 <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 8px;">
@@ -1210,13 +1234,19 @@ function birthGenerateHTML(params) {
                         <div style="margin-bottom: 30px;">
                             <div style="padding-left: 80px;">
                                 In truth whereof, I have affixed my signature below this
-                                <span style="border-bottom: 0.2px solid green;display: inline-block;width: 100px;text-align: center;">Sample</span>
+                                <span style="border-bottom: 0.2px solid green;display: inline-block;width: 100px;text-align: center;">
+                                    ${params.final_ctc_number || ''}
+                                </span>
                                 day of
-                                <span style="border-bottom: 0.2px solid green;display: inline-block;width: 200px;text-align: center;">Sample</span>
+                                <span style="border-bottom: 0.2px solid green;display: inline-block;width: 200px;text-align: center; font-weight:600;">
+                                    ${params.final_ctc_issued_on || ''}
+                                </span>
                                 </div>
                             <div style="padding-left: 0px;">
                                 at
-                                <span style="border-bottom: 0.2px solid green;display: inline-block;width: 250px;text-align: center;">Southern Leyte</span>,
+                                <span style="border-bottom: 0.2px solid green;display: inline-block;width: 250px;text-align: center; font-weight:600;">
+                                    ${params.final_ctc_issued_at || ''}
+                                </span>,
                                 Philippines.
                             </div>
                         </div>
@@ -1245,12 +1275,16 @@ function birthGenerateHTML(params) {
                         <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 8px;">
                             <span style="white-space: nowrap;">Philippines, affiant who exhibited to me his Community Tax Cert.</span>
                             <span style="white-space: nowrap;">issued on </span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">JANUARY 10, 2025</span>
+                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
+                                &nbsp;
+                            </span>
                         </div>
                         
                         <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 8px;">
                             <span style="white-space: nowrap;"> at </span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">SOGOD, LEYTE</span>
+                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                &nbsp;
+                            </span>
                         </div>
                     </div>        
 
@@ -1266,10 +1300,14 @@ function birthGenerateHTML(params) {
                 
                         <div style="width: 48%; display: flex; flex-direction: column; padding: 0 20px;">
                             
-                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px; font-weight:600;">
+                                &nbsp; ${params.admin_officer_position || ''}
+                            </div>
                             <span style="font-size: 10px; margin-bottom: 15px; text-align: center;">Position / Title / Designation</span>
                             
-                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                            <div style="border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px; font-weight:600;">
+                                &nbsp; ${params.admin_officer_address || ''}
+                            </div>
                             <span style="font-size: 10px; text-align: center;">Address</span>
                         </div>
                     </div>
