@@ -1018,7 +1018,7 @@ function birthGenerateHTML(params) {
                         </div>
                         <div style="width: 50%; text-align: center; padding: 0 20px;">
                             <div style="font-weight:600; border-bottom: 0.2px solid green; height: 1em; margin-bottom: 5px;">
-                                ${params.father_name || ''}
+                                ${params.mother_name || ''}
                             </div>
                             <span style="font-size: 10px;">(Signature Over Printed Name of Mother)</span>
                         </div>
@@ -1028,11 +1028,17 @@ function birthGenerateHTML(params) {
                         <div style="display: flex; align-items: flex-end; margin-bottom: 8px;">
                             <span style="white-space: nowrap; font-weight: bold; padding-left: 80px;">SUBSCRIBED AND SWORN</span>
                             <span style="white-space: nowrap;"> to before me this </span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px;">&nbsp;</span>
+                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px;">
+                               &nbsp; ${params.jurat_day || ''}
+                            </span>
                             <span style="white-space: nowrap;"> day of </span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px;">&nbsp;</span>
+                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin: 0 5px;">
+                               &nbsp; ${params.jurat_month_year || ''}
+                            </span>
                             <span style="white-space: nowrap;">, </span>
-                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-right: 5px;">&nbsp;</span>
+                            <span style="border-bottom: 0.2px solid green; flex-grow: 1; height: 1em; line-height: 1em; margin-right: 5px;">
+                                &nbsp; ${params.jurat_affiant1 || ''}
+                            </span>
                             <span style="white-space: nowrap;"> by</span>
                         </div>
                 
