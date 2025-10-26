@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { LoadingScreen } from '@components';
 
 export default function DeathCertificateHome({ onView }) {
   const [listOfDeath, setListOfDeath] = useState([]);

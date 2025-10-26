@@ -1,7 +1,8 @@
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { callPythonOCR } = require('../services/OCRService');
-
+const deathGenerateHTML = require('../helpers/generatePDFFromHTML');
+const puppeteer = require('puppeteer');
 // CREATE Death Certificate
 exports.create = (req, res) => {
     try {
@@ -362,12 +363,11 @@ exports.download = async(req, res) => {
         });
     });
     writeLog(`INFO [DeathCertificates][download] ${JSON.stringify(data)}`);
-    const html = birthGenerateHTML(data);
+    const html = deathGenerateHTML(data);
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
     const pdfBuffer = await page.pdf({ 
-      format: "A4", 
       printBackground: true,
       width: "8.5in",   
       height: "13in",   

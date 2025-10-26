@@ -5,7 +5,6 @@ const { callPythonOCR } = require('../services/OCRService');
 const path = require('path');
 const birthGenerateHTML = require('../helpers/generatePDFFromHTML');
 const puppeteer = require('puppeteer');
-const { write } = require('fs');
 
 function create (req, res) {
     try {
@@ -360,7 +359,6 @@ async function download(req, res) {
         const page = await browser.newPage();
         await page.setContent(html, { waitUntil: "networkidle0" });
         const pdfBuffer = await page.pdf({ 
-            format: "A4", 
             printBackground: true,
             width: "8.5in",   
             height: "13in",   

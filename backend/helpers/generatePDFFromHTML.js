@@ -2912,4 +2912,7 @@ function deathGenerateHTML(params) {
         </html>
     `;
 }
-module.exports = birthGenerateHTML;
+module.exports = (
+    birthGenerateHTML,
+    deathGenerateHTML
+);
