@@ -116,8 +116,8 @@ function birthGenerateHTML(params) {
                         </div>
                         <div style="display: flex;">
                             <span>City/Municipality:</span>
-                            <span style="flex-grow: 1; border-bottom: 0.2px solid green; height: 1.2em; line-height: 1.2em; text-align: center;">
-                            Sogod
+                            <span style="flex-grow: 1; border-bottom: 0.2px solid green; height: 1.2em; line-height: 1.2em; text-align: center; font-weight:600;">
+                            ${params.city}
                         </span>
                         </div>
                     </div>
@@ -125,8 +125,8 @@ function birthGenerateHTML(params) {
                         <span>
                             Registry No.
                         </span>
-                        <span style="display: inline-block; width: 98%;  height: 15px; line-height: 15px; text-align: center;">
-                            2025-00123
+                        <span style="display: inline-block; width: 98%;  height: 15px; line-height: 15px; text-align: center; font-weight:600;">
+                            ${params.registry_number}
                         </span>
                     </div>
                     </div>
@@ -145,19 +145,19 @@ function birthGenerateHTML(params) {
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(First)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Richard 
+                                ${params.child_first_name} 
                             </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Middle)</span>
                             <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Niez
+                                ${params.child_middle_name} 
                             </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Last)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Beniga
+                                ${params.child_last_name}
                             </spam>
                             </div>
                         </div>
@@ -172,7 +172,7 @@ function birthGenerateHTML(params) {
                                 <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                                 <span class="field-label-2">(Male/Female)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                    Male 
+                                    ${params.sex} 
                                 </spam>
                                 </div>
                             </div>
@@ -185,19 +185,19 @@ function birthGenerateHTML(params) {
                                 <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                                 <span class="field-label-2">(Day)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                    29 
+                                    ${params.date_of_birth.split('-')[2]} 
                                 </spam>
                                 </div>
                                 <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                                 <span class="field-label-2">(Month)</span>
                                 <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                    09
+                                    ${params.date_of_birth.split('-')[1]} 
                                 </spam>
                                 </div>
                                 <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                                 <span class="field-label-2">(Year)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                    2025
+                                    ${params.date_of_birth.split('-')[0]} 
                                 </spam>
                                 </div>
                             </div>    
@@ -212,19 +212,19 @@ function birthGenerateHTML(params) {
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-2">(Name of Hospital/Clinic/Institution/House No., St., Barangay)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 2px;">
-                                    Richard 
+                                    ${params.place_of_birth_barangay}  
                                 </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-2">(City/Municipality)</span>
                                 <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 13px;">
-                                Niez
+                                    ${params.place_of_birth_city}
                                 </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-2">(Province)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 13px;">
-                                Beniga
+                                    ${params.place_of_birth_province}
                                 </spam>
                             </div>
                             </div>
@@ -237,7 +237,7 @@ function birthGenerateHTML(params) {
                             <span class="field-label-2" style="padding-left: 20px;">(Single, Twin, Triplet, etc)</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="width: 100px; border: none; border-bottom: 0.1px solid green; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    triplet 
+                                    ${params.type_of_birth} 
                                 </spam>
                             </div>
                             </div>
@@ -248,7 +248,7 @@ function birthGenerateHTML(params) {
                             <span class="field-label-2" style="padding-left: 20px;">(First, Second, Third, etc)</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="width: 100px; border: none; border-bottom: 0.1px solid green; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    Tenth 
+                                    ${params.multiple_birth_order} 
                                 </spam>
                             </div>
                             </div>
@@ -259,7 +259,7 @@ function birthGenerateHTML(params) {
                             <span class="field-label-2" style="padding-left: 20px;">(First, Second, Third, etc)</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="width: 100px; border: none; border-bottom: 0.1px solid green; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em;">
-                                    First 
+                                    ${params.birth_order} 
                                 </spam>
                             </div>
                             </div>
@@ -269,7 +269,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">6. WEIGHT AT BIRTH</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="width: 100px; border: none; border-bottom: 0.1px solid green; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 20px;">
-                                    5.5 
+                                    ${params.birth_weight}
                                 </spam>
                                 <spam style="padding-top: 20px;">grams</spam>
                             </div>
@@ -296,19 +296,19 @@ function birthGenerateHTML(params) {
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(First)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Richard 
+                                ${params.maiden_first_name} 
                             </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Middle)</span>
                             <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Niez
+                                ${params.maiden_middle_name}
                             </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Last)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Beniga
+                                ${params.maiden_last_name}
                             </spam>
                             </div>
                         </div>
@@ -321,7 +321,7 @@ function birthGenerateHTML(params) {
                             </div>
                                 <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 20px;">
-                                    Filipino 
+                                    ${params.citizenship} 
                                 </spam>
                             </div>
                         </div>
@@ -331,7 +331,7 @@ function birthGenerateHTML(params) {
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 20px;">
-                                    Baptist 
+                                    ${params.religion} 
                                 </spam>
                             </div>
                         </div>
@@ -343,7 +343,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">10a. Total number of children born alive</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="width: 100px; border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    20 
+                                    ${params.children_born_alive} 
                                 </spam>
                             </div>
                             </div>
@@ -353,7 +353,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">10b. No. of children still living including this birth</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    20 
+                                    ${params.children_still_living} 
                                 </spam>
                             </div>
                             </div>
@@ -363,7 +363,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">10c. No. of children born alive but are now dead</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    0 
+                                    ${params.children_deceased} 
                                 </spam>
                             </div>
                             </div>
@@ -373,7 +373,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">11. OCCUPATION</span>
                             <div style="display: flex; justify-content: center; ">
                                 <spam style=" border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 10px;">
-                                    CEO of Richard Beniga Gwapo Company 
+                                    ${params.occupation}
                                 </spam>
                             </div>
                             </div>
@@ -383,7 +383,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">12. AGE at the time of this birth <span class="field-label-2">(completed years)</span></span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    triplet 
+                                    ${params.age_at_birth} 
                                 </spam>
                             </div>
                             </div>
@@ -398,25 +398,25 @@ function birthGenerateHTML(params) {
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-2">(House No., St., Barangay)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                    1234 
+                                    ${params.residence_house} 
                                 </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-2">(City/Municipality)</span>
                                 <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Manila
+                                ${params.residence_city}
                                 </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-2">(Province)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Manila
+                                ${params.residence_province}
                                 </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-2">(Country)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Philippines
+                                ${params.residence_country}
                                 </spam>
                             </div>
                             </div>
@@ -441,19 +441,19 @@ function birthGenerateHTML(params) {
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(First)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Richard 
+                                ${params.father_first_name} 
                             </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Middle)</span>
                             <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Niez
+                                ${params.father_middle_name} 
                             </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Last)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Beniga
+                                ${params.father_last_name} 
                             </spam>
                             </div>
                         </div>
@@ -465,7 +465,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">15. CITIZENSHIP</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="width: 100px; border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    Filipino 
+                                    ${params.father_citizenship}  
                                 </spam>
                             </div>
                             </div>
@@ -475,7 +475,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">16. RELIGION/RELIGIOUS SECT</span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    Baptist 
+                                    ${params.father_religion} 
                                 </spam>
                             </div>
                             </div>
@@ -485,7 +485,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">11. OCCUPATION</span>
                             <div style="display: flex; justify-content: center; ">
                                 <spam style=" border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 10px;">
-                                    CEO of Richard Beniga Gwapo Company 
+                                    ${params.father_occupation}
                                 </spam>
                             </div>
                             </div>
@@ -495,7 +495,7 @@ function birthGenerateHTML(params) {
                             <span style="white-space: wrap; padding-left: 4px;">12. AGE at the time of this birth <span class="field-label-2">(completed years)</span></span>
                             <div style="display: flex; justify-content: center;">
                                 <spam style="border: none; margin: 0; font-size: 10px; text-align: center; height: 1.2em; line-height: 1.2em; padding-top: 8px;">
-                                    triplet 
+                                    ${params.father_age_at_birth} 
                                 </spam>
                             </div>
                             </div>
@@ -510,25 +510,25 @@ function birthGenerateHTML(params) {
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-2">(House No., St., Barangay)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                    1234 
+                                    ${params.father_residence_street}  
                                 </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-2">(City/Municipality)</span>
                                 <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Manila
+                                    ${params.father_residence_city}
                                 </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-2">(Province)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Manila
+                                    ${params.father_residence_province}
                                 </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-2">(Country)</span>
                                 <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                Philippines
+                                    ${params.father_residence_country}
                                 </spam>
                             </div>
                             </div>
@@ -551,19 +551,19 @@ function birthGenerateHTML(params) {
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Day)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                29 
+                                ${params.date_of_marriage.split('-')[2]} 
                             </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Month)</span>
                             <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                09
+                                ${params.date_of_marriage.split('-')[1]}
                             </spam>
                             </div>
                             <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Year)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                                2025
+                                ${params.date_of_marriage.split('-')[0]}
                             </spam>
                             </div>
                         </div>    
@@ -576,19 +576,19 @@ function birthGenerateHTML(params) {
                         <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(City/Municipality)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px; ">
-                                Sogod 
+                                ${params.marriage_city} 
                             </spam>
                         </div>
                         <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Province)</span>
                             <spam style="border: none; height: 20px;  margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                            Cebu
+                                ${params.marriage_province} 
                             </spam>
                         </div>
                         <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                             <span class="field-label-2">(Country)</span>
                             <spam style="border: none; height: 20px; margin: 0; font-size: 10px; text-align: center; padding-top: 8px;">
-                            Philippines
+                                ${params.marriage_country}
                             </spam>
                         </div>
                         </div>    
