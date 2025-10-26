@@ -3,11 +3,13 @@ import { BirthCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { LoadingScreen } from '@components';
 
 export default function BirthCertificateHome({ onView }) {
   const [listOfBirth, setListOfBirth] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +54,7 @@ export default function BirthCertificateHome({ onView }) {
     {
       field: "action",
       headerName: "Action",
-      width: 110, // 🔹 narrower column
+      width: 110,
       sortable: false,
       renderCell: (params) => {
         const row = params?.row || {};
@@ -60,14 +62,23 @@ export default function BirthCertificateHome({ onView }) {
           <select
             defaultValue=""
             className="common-input text-xs px-1 py-0.5 w-full"
-                onChange={(e) => {
+                onChange={async (e) => {
                   const action = e.target.value;
                   e.target.value = "";
         
                   if (action === "view") {
                     onView?.(row);
                   } else if (action === "download") {
-                    BirthCertServices.download(params?.row.id)
+                    try {
+                      setIsDownloading(true);
+                      await BirthCertServices.download(params?.row.id);
+                      toast.success("PDF download complete!");
+                    } catch (error) {
+                      console.error(error);
+                      toast.error(`Download failed: ${error.message || error}`);
+                    } finally {
+                      setIsDownloading(false);
+                    }
                   }
                 }}
               >
@@ -96,37 +107,47 @@ export default function BirthCertificateHome({ onView }) {
     );
   });
 
-  return (
-    <Box
-      sx={{
-        height: 600,
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div className="flex justify-between items-center mb-4">
-        <input
-          type="text"
-          placeholder="Search by name, sex, date, mother name, father name, or residence..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="common-input w-full"
+  return (<>
+    {
+      isDownloading ? (
+        <LoadingScreen 
+          title={"Extracting data to PDF"} 
+          message={"This might take sometime."} 
         />
-      </div>
 
-      <DataGrid
-        rows={filteredRows}
-        columns={columns}
-        loading={loading}
-        pageSizeOptions={[5, 10, 20]}
-        initialState={{
-          pagination: { paginationModel: { pageSize: 5 } },
-        }}
-        disableRowSelectionOnClick
-        getRowId={(row) => row.id || row.birth_id}
-        sx={{ flexGrow: 1 }}
-      />
-    </Box>
-  );
+      ) : (
+        <Box
+          sx={{
+            height: 600,
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div className="flex justify-between items-center mb-4">
+            <input
+              type="text"
+              placeholder="Search by name, sex, date, mother name, father name, or residence..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="common-input w-full"
+            />
+          </div>
+
+          <DataGrid
+            rows={filteredRows}
+            columns={columns}
+            loading={loading}
+            pageSizeOptions={[5, 10, 20]}
+            initialState={{
+              pagination: { paginationModel: { pageSize: 5 } },
+            }}
+            disableRowSelectionOnClick
+            getRowId={(row) => row.id || row.birth_id}
+            sx={{ flexGrow: 1 }}
+          />
+        </Box>
+      )
+    }
+  </>);
 }
