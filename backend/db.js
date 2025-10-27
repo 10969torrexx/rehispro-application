@@ -477,6 +477,7 @@ db.serialize(() => {
         marriage_issued_at TEXT,
         executive_order TEXT,
         officer_position TEXT,
+        officer_printed_name TEXT,
         officer_religion TEXT,
         witness1_name TEXT,
         witness2_name TEXT,

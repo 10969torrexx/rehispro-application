@@ -117,6 +117,7 @@ function create(req, res) {
             marriageIssuedAt: "marriage_issued_at",
             executiveOrder: "executive_order",
             officerPosition: "officer_position",
+            officerPrintedName: "officer_printed_name",
             officerReligion: "officer_religion",
             witness1Name: "witness1_name",
             witness2Name: "witness2_name",

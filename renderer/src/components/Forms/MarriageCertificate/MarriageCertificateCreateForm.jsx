@@ -140,6 +140,7 @@ export default function MarriageCertificateCreateForm() {
             marriageIssuedAt: "",
             executiveOrder: "",
             officerPosition: "",
+            officerPrintedName: "",
             officerReligion: "",
             witness1Name: "",
             witness2Name: "",
@@ -1805,28 +1806,28 @@ export default function MarriageCertificateCreateForm() {
                                         <input
                                             type="text"
                                             name="marriageLicenseNo"
+                                            disabled={formData.page5.certification !== "license"}
                                             value={formData.page5.marriageLicenseNo}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            className={`border-b border-gray-500 w-32 text-center mx-1 ${errors.marriageLicenseNo ? "input-error" : ""
-                                                }`}
+                                            className={`border-b border-gray-500 w-32 text-center mx-1 ${errors.marriageLicenseNo ? "input-error" : ""}`}
                                         />
                                         &nbsp;issued on&nbsp;
                                         <input
                                             type="text"
                                             name="marriageIssuedOn"
+                                            disabled={formData.page5.certification !== "license"}
                                             value={formData.page5.marriageIssuedOn}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            className={`border-b border-gray-500 w-32 text-center mx-1 ${errors.marriageIssuedOn ? "input-error" : ""
-                                                }`}
+                                            className={`border-b border-gray-500 w-32 text-center mx-1 ${errors.marriageIssuedOn ? "input-error" : ""}`}
                                         />
                                         &nbsp;at&nbsp;
                                         <input
                                             type="text"
                                             name="marriageIssuedAt"
                                             value={formData.page5.marriageIssuedAt}
+                                            disabled={formData.page5.certification !== "license"}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            className={`border-b border-gray-500 w-48 text-center mx-1 ${errors.marriageIssuedAt ? "input-error" : ""
-                                                }`}
+                                            className={`border-b border-gray-500 w-48 text-center mx-1 ${errors.marriageIssuedAt ? "input-error" : "" }`}
                                         />
                                         &nbsp;in favor of said parties, was exhibited to me.
                                     </span>
@@ -1849,9 +1850,9 @@ export default function MarriageCertificateCreateForm() {
                                             type="text"
                                             name="executiveOrder"
                                             value={formData.page5.executiveOrder}
+                                            disabled={formData.page5.certification !== "noLicense"}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            className={`border-b border-gray-500 w-16 text-center mx-1 ${errors.executiveOrder ? "input-error" : ""
-                                                }`}
+                                            className={`border-b border-gray-500 w-16 text-center mx-1 ${errors.executiveOrder ? "input-error" : ""}`}
                                         />
                                         &nbsp;of Executive Order No. 209.
                                     </span>
@@ -1895,14 +1896,24 @@ export default function MarriageCertificateCreateForm() {
                                     <label className="text-xs text-center mt-1">(Position/Designation)</label>
                                 </div>
 
+                                 <div className="flex flex-col items-center">
+                                    <input
+                                        type="text"
+                                        name="officerPrintedName"
+                                        value={formData.page5.officerPrintedName}
+                                        onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                        className={`w-40 border-b border-gray-500 text-center ${errors.officerPrintedName ? "input-error" : "" }`}
+                                    />
+                                    <label className="text-xs text-center mt-1">(Printed Name)</label>
+                                </div>
+
                                 <div className="flex flex-col items-center">
                                     <input
                                         type="text"
                                         name="officerReligion"
                                         value={formData.page5.officerReligion}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        className={`w-56 border-b border-gray-500 text-center ${errors.officerReligion ? "input-error" : ""
-                                            }`}
+                                        className={`w-56 border-b border-gray-500 text-center ${errors.officerReligion ? "input-error" : "" }`}
                                     />
                                     <label className="text-xs text-center mt-1">
                                         (Religion/Religious Sect, Registry No. and Expiration Date, if applicable)
