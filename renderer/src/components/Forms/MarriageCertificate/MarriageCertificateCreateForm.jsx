@@ -290,7 +290,6 @@ export default function MarriageCertificateCreateForm() {
                 updatedSection.wifeAge = calculateAge(value);
             }
 
-            // 👇 Clear license fields if certification changes and is NOT "license"
             if (name === "certification" && value !== "license") {
                 updatedSection.marriageLicenseNo = "";
                 updatedSection.marriageIssuedOn = "";
