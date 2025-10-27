@@ -1,7 +1,7 @@
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { callPythonOCR } = require('../services/OCRService');
-const deathGenerateHTML = require('../helpers/generatePDFFromHTML');
+const deathGenerateHTML = require('../helpers/deathGeneratePDF');
 const puppeteer = require('puppeteer');
 // CREATE Death Certificate
 exports.create = (req, res) => {
