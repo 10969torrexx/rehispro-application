@@ -259,38 +259,38 @@ exports.create = (req, res) => {
 
 // LIST Death Certificate
 exports.list = (req, res) => {
-    db.all(
-        `
-        SELECT 
-          id,
-          CONCAT_WS(' ', first_name, NULLIF(middle_name, ''), last_name) AS deceased_name,
-          sex,
-          DATE(created_at) AS created_at,
-          place_of_death,
-          city,
-          province,
-          cause_of_death
-        FROM deathcertificates
-        `,
-        (err, rows) => {
-          if (err) {
-            console.error('❌ [DB Error]', err.message);
-            return res.status(500).json({
-              success: false,
-              message: 'Database fetch failed',
-              error: err.message,
-            });
-          }
-      
-          const list_of_death = rows;
-      
-          res.status(200).json({
-            success: true,
-            message: 'Death Certificate List',
-            data: list_of_death,
-          });
-        }
-      );
+  db.all(
+    `
+    SELECT 
+      id,
+      CONCAT_WS(' ', first_name, NULLIF(middle_name, ''), last_name) AS deceased_name,
+      sex,
+      DATE(created_at) AS created_at,
+      place_of_death,
+      city,
+      province,
+      cause_of_death
+    FROM deathcertificates
+    `,
+    (err, rows) => {
+      if (err) {
+        console.error('❌ [DB Error]', err.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Database fetch failed',
+          error: err.message,
+        });
+      }
+  
+      const list_of_death = rows;
+  
+      res.status(200).json({
+        success: true,
+        message: 'Death Certificate List',
+        data: list_of_death,
+      });
+    }
+  );
 };
 
 // VIEW Death Certificate
