@@ -4,11 +4,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import { MarriageCertServices } from "@services";
 import { toast } from "react-toastify";
 import Box from "@mui/material/Box";
+import { LoadingScreen } from '@components';
 
 export default function MarriageCertificateHome({ onView }) {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isDownloading, setIsDownloading] = useState(false); 
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -94,10 +96,15 @@ export default function MarriageCertificateHome({ onView }) {
       });
 
   return (
+    <>{
+      isDownloading ? (
+        <LoadingScreen 
+          title={"Extracting data to PDF"} 
+          message={"This might take sometime."} 
+        />        
+      ) : (
         <Box sx={{ height: 600, width: "100%", display: "flex", flexDirection: "column" }}>
-          {/* 🔹 Header / Toolbar */}
           <div className="flex justify-between items-center mb-4">  
-            {/* 🔹 Search input styled like your other inputs */}
             <input
               type="text"
               placeholder="Search by husband name, wife name, date, or place..."
@@ -106,15 +113,17 @@ export default function MarriageCertificateHome({ onView }) {
               className="common-input w-full"
             />
           </div>
-      <DataGrid
-        rows={filteredRows}
-        columns={columns}
-        pageSizeOptions={[5, 10]}
-        loading={loading} // ✅ show loader when fetching
-        initialState={{
-          pagination: { paginationModel: { pageSize: 5 } },
-        }}
-      />
-    </Box>
+          <DataGrid
+            rows={filteredRows}
+            columns={columns}
+            pageSizeOptions={[5, 10]}
+            loading={loading} 
+            initialState={{
+              pagination: { paginationModel: { pageSize: 5 } },
+            }}
+          />
+        </Box>
+      )
+    }</>
   );
 }
