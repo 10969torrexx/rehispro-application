@@ -3861,14 +3861,20 @@ function marriageGenerateHTML(params) {
                             </div>
                 
                             <div style="display: flex; align-items: center; margin-top: 5px; margin-bottom: 5px;">
-                                <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&nbsp;</span>
+                                <span style="font-weight: 600px; border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">
+                                    &nbsp; ${params.certification === 'noLicense' ? '&#10003;' : '&nbsp;'}
+                                </span>
                                 <span style="white-space: nowrap;">b. no marriage license was necessary, the marriage being solemnized under Art </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 20%; height: 1em; line-height: 1em; margin: 0 5px;">&nbsp;CERTIFY</span>
+                                <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); width: 20%; height: 1em; line-height: 1em; margin: 0 5px;">
+                                    &nbsp; ${params.executive_order || ''}
+                                </span>
                                 <span style="white-space: nowrap;"> of Executive Order No. 209.</span>
                             </div>
                             
                             <div style="display: flex; align-items: center;">
-                                <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&nbsp;</span>
+                                <span style="font-weight:600px; border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">
+                                    ${params.certification === '&pd1083;' ? '&#10003;' : '&nbsp;'}
+                                </span>
                                 <span style="white-space: nowrap;">c. the marriage was solemnized in accordance with the provisions of Presidential Decree No. 1083.</span>
                             </div>
                         </div>
@@ -3877,22 +3883,30 @@ function marriageGenerateHTML(params) {
                         <div style="display: flex; align-items: flex-start; white-space: wrap;">
                             
                             <div style="display: flex; flex-direction: column; text-align: center; margin-right: 15px; width: 200px;">
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">SAMPLE SIGNATURE</div>
+                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">
+                                    ___
+                                </div>
                                 <span style="display: block; font-size: 8px;">(Signature Over Printed Name of Solemnizing Officer)</span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; text-align: center; margin-right: 15px; width: 150px;">
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">PRIEST</div>
+                                <div style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">
+                                    ${params.officer_position || ''}
+                                </div>
                                 <span style="display: block; font-size: 8px;">(Position/Designation)</span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; text-align: center; margin-right: 15px; width: 200px;">
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">REV. FR. M. PEREZ</div>
+                                <div style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">
+                                    ${params.officer_religion || ''}
+                                </div>
                                 <span style="display: block; font-size: 8px;">(Printed Name)</span>
                             </div>
                     
                             <div style="display: flex; flex-direction: column; text-align: center; width: 300px;">
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">ROMAN CATHOLIC REG. NO. 12345</div>
+                                <div style="font-weight:600px; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">
+                                    ${params.officer_religion || ''}
+                                </div>
                                 <span style="display: block; font-size: 8px;">(Religion/Religious Sect. Registry No. and Expiration Date, if applicable)</span>
                             </div>
                         </div>
