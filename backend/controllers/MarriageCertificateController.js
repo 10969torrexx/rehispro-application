@@ -328,5 +328,3 @@ module.exports = {
     view,
     upload
 };
-
-

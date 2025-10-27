@@ -1,5 +1,3 @@
-const { param } = require("../routes/birthCertificate");
-
 function birthGenerateHTML(params) {
     return `
         <html lang="en">
@@ -1553,15 +1551,14 @@ function deathGenerateHTML(params) {
                     <div style="padding-left: 4px; display: flex; justify-content:space-evenly;  flex-direction: column; width: 70%; border-right: 0.2px solid blue;">
                     <div style="display: flex; padding-top: 4px;">
                         <span>Province:</span>
-                        <span
-                        style="flex-grow: 1; display:inline-block; height: 1.2em; border-bottom: 0.2px solid blue; height: 1.2em; line-height: 1.2em; text-align: center;">
-                        Leyte
+                        <span style="font-weight:600px; flex-grow: 1; display:inline-block; height: 1.2em; border-bottom: 0.2px solid blue; height: 1.2em; line-height: 1.2em; text-align: center;">
+                        ${params.province || ''}
                         </span>
                     </div>
                     <div style="display: flex;">
                         <span>City/Municipality:</span>
-                        <span style="flex-grow: 1; border-bottom: 0.2px solid blue; height: 1.2em; line-height: 1.2em; text-align: center;">
-                        Sogod
+                        <span style="font-weight:600px; flex-grow: 1; border-bottom: 0.2px solid blue; height: 1.2em; line-height: 1.2em; text-align: center;">
+                        ${params.city || ''}
                         </span>
                     </div>
                     </div>
@@ -1569,8 +1566,8 @@ function deathGenerateHTML(params) {
                     <span>
                         Registry No.
                     </span>
-                    <span style="display: inline-block; width: 98%;  height: 15px; line-height: 15px; text-align: center;">
-                        2025-00123
+                    <span style="font-weight:600px; display: inline-block; width: 98%;  height: 15px; line-height: 15px; text-align: center;">
+                        ${params.registry_number || ''}
                     </span>
                     </div>
                 </div>
@@ -1591,22 +1588,22 @@ function deathGenerateHTML(params) {
                                 
                                 <div style="display: flex; flex-direction: column; align-items: center; width: auto; justify-content: flex-start;">
                                     <span class="field-label-small-text" style=" padding-top: 2px;">(First)</span>
-                                    <span style="height: 20px; font-size: 10px; text-align: center; padding-top: 8px; ">
-                                        JUAN 
+                                    <span style="font-weight:600px; height: 20px; font-size: 10px; text-align: center; padding-top: 8px; ">
+                                        ${params.first_name || ''}
                                     </span>
                                 </div>
                                 
                                 <div style="display: flex; flex-direction: column; align-items: center; width: auto; justify-content: flex-start;">
                                     <span class="field-label-small-text" style=" padding-top: 2px;">(Middle)</span>
-                                    <span style="height: 20px; font-size: 10px; text-align: center; padding-top: 8px; ">
-                                        CRUZ
+                                    <span style="font-weight:600px; height: 20px; font-size: 10px; text-align: center; padding-top: 8px; ">
+                                        ${params.middle_name || ''}
                                     </span>
                                 </div>
                                 
                                 <div style="display: flex; flex-direction: column; align-items: center; width: auto; justify-content: flex-start;">
                                     <span class="field-label-small-text" style=" padding-top: 2px;">(Last)</span>
-                                    <span style="height: 20px; font-size: 10px; text-align: center; padding-top: 8px; ">
-                                        DELA CRUZ
+                                    <span style="font-weight:600px; height: 20px; font-size: 10px; text-align: center; padding-top: 8px; ">
+                                        ${params.last_name || ''}
                                     </span>
                                 </div>
                             </div>
@@ -1623,8 +1620,8 @@ function deathGenerateHTML(params) {
                                 <div style="display: flex; width: 70%; justify-content: center; align-items: flex-start;">
                                     <div style="display: flex; flex-direction: column; align-items: center; width: auto;">
                                         <span class="field-label-small-text" style=" padding-top: 2px;">(Male/Female)</span>
-                                        <span style="height: 20px; font-size: 10px; text-align: center; padding-top: 8px; ">
-                                            MALE 
+                                        <span style="font-weight:600px; height: 20px; font-size: 10px; text-align: center; padding-top: 8px; ">
+                                            MALE ${params.sex || ''}
                                         </span>
                                     </div>
                                 </div>
@@ -1643,21 +1640,20 @@ function deathGenerateHTML(params) {
                         
                         <!-- top row -->
                         <div style="display:flex; justify-content:space-between; padding:0 4px;">
-                        <span class="field-label">3. DATE OF DEATH</span>
-                        <span class="field-label-small-text">(Day, Month, Year)</span>
+                            <span class="field-label">3. DATE OF DEATH</span>
+                            <span class="field-label-small-text">(Day, Month, Year)</span>
                         </div>
                 
                         <!-- input row -->
                         <div style="display:flex; justify-content:center; align-items:center; height:30px;">
-                        <span class="field-value-span" style="
-                            display:inline-block;
-                            width:80%;
+                        <span class="field-value-span" style=" display:inline-block; width:80%;
                             height:12px;
+                            font-weight:600px;
                             line-height:12px;
                             font-size:10px;
                             text-align:center;
                             vertical-align:middle;">
-                            Your text here
+                           ${params.date_of_death.split('-')[2] || ''}, ${params.date_of_death.split('-')[1] || ''}, ${params.date_of_death.split('-')[0] || ''}
                         </span>
                         </div>
                     </div>
@@ -1667,21 +1663,22 @@ function deathGenerateHTML(params) {
                         
                         <!-- top row -->
                         <div style="display:flex; justify-content:space-between; padding:0 4px; ">
-                        <span class="field-label">4. DATE OF BIRTH</span>
-                        <span class="field-label-small-text">(Day, Month, Year)</span>
+                            <span class="field-label">4. DATE OF BIRTH</span>
+                            <span class="field-label-small-text">(Day, Month, Year)</span>
                         </div>
                 
                         <!-- input row -->
                         <div style="display:flex; justify-content:center; align-items:center; height:30px;">
                         <span class="field-value-span" style="
                             display:inline-block;
+                            font-weight:600px;
                             width:80%;
                             height:12px;
                             line-height:12px;
                             font-size:10px;
                             text-align:center;
                             vertical-align:middle;">
-                            Your text here
+                            ${params.date_of_birth.split('-')[2] || ''}, ${params.date_of_birth.split('-')[1] || ''}, ${params.date_of_birth.split('-')[0] || ''}
                         </span>
                         </div>
                     </div>
@@ -1709,12 +1706,13 @@ function deathGenerateHTML(params) {
                             <div style="display:flex; justify-content:center; align-items:center; flex:1;">
                             <span class="field-value-span" style="
                                 display:inline-block;
+                                font-weight:600px;
                                 width:80%;
                                 height:12px;
                                 line-height:12px;
                                 font-size:10px;
                                 text-align:center;">
-                                Your text here
+                               ${params.age_years || ''}
                             </span>
                             </div>
                         </div>
@@ -1727,14 +1725,14 @@ function deathGenerateHTML(params) {
                             <div style="display:flex; border-top:0.2px solid blue; height: 100%; justify-content: space-evenly;">
                             <div style="display: flex;flex-direction: column; flex:1; align-items:center; border-right:0.2px solid blue; ">
                                 <span class="field-label-small-text-2">(1) months</span>
-                                    <span class="field-value-span" style="display:inline-block; height:1em;line-height:1em;font-size:10px;text-align:center; padding-top: 4px;">
-                                    4
-                                    </span>      
+                                    <span class="field-value-span" style="font-weight:600px; display:inline-block; height:1em;line-height:1em;font-size:10px;text-align:center; padding-top: 4px;">
+                                    ${params.age_months || ''}
+                                </span>      
                             </div>
                             <div style="display: flex; flex:1; flex-direction: column; align-items: center;">
                                 <span class="field-label-small-text-2">(0) days</span>
-                                <span class="field-value-span" style="display:inline-block; height:1em;line-height:1em;font-size:10px;text-align:center; padding-top: 4px;">
-                                4
+                                <span class="field-value-span" style="font-weight:600px; display:inline-block; height:1em;line-height:1em;font-size:10px;text-align:center; padding-top: 4px;">
+                                    ${params.age_days || ''}
                                 </span>      
                             </div>
                             </div>
@@ -1748,14 +1746,14 @@ function deathGenerateHTML(params) {
                             <div style="display:flex; border-top:0.2px solid blue; height: 100%; justify-content: space-evenly;">
                                 <div style="display: flex;flex-direction: column; flex:1; align-items:center; border-right:0.2px solid blue; ">
                                 <span class="field-label-small-text-2">Hours</span>
-                                    <span class="field-value-span" style="display:inline-block; height:1em;line-height:1em;font-size:10px;text-align:center; padding-top: 4px;">
-                                        4
+                                    <span class="field-value-span" style="font-weight:600px; display:inline-block; height:1em;line-height:1em;font-size:10px;text-align:center; padding-top: 4px;">
+                                        ${params.age_hours || ''}
                                     </span>      
                                 </div>
                                 <div style="display: flex; flex:1; flex-direction: column; align-items: center;">
                                 <span class="field-label-small-text-2">Min/Sec</span>
-                                <span class="field-value-span" style="display:inline-block; height:1em;line-height:1em;font-size:10px;text-align:center; padding-top: 4px;">
-                                    4
+                                <span class="field-value-span" style="font-weight:600px; display:inline-block; height:1em;line-height:1em;font-size:10px;text-align:center; padding-top: 4px;">
+                                    ${params.age_minutes || ''}
                                 </span>      
                                 </div>
                             </div>
@@ -1781,9 +1779,8 @@ function deathGenerateHTML(params) {
                 
                     <!-- Input -->
                     <div style="display:flex; justify-content:center; align-items:center; height:30px;">
-                        <span class="field-value-span"
-                            style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                        Your text here
+                        <span class="field-value-span" style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                            ${params.place_of_death || ''}
                         </span>
                     </div>
                     </div>
@@ -1800,8 +1797,8 @@ function deathGenerateHTML(params) {
                     <!-- Input -->
                     <div style="display:flex; justify-content:center; align-items:center; height:30px; ">
                         <span class="field-value-span"
-                            style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                        Your text here
+                            style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                        ${params.civil_status || ''}
                         </span>
                     </div>
                     </div>
@@ -1821,8 +1818,8 @@ function deathGenerateHTML(params) {
             <!-- Input -->
             <div style="display:flex; justify-content:center; align-items:center; height:30px;">
                 <span class="field-value-span"
-                    style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                Your text here
+                    style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                ${params.religion || ''}
                 </span>
             </div>
             </div>
@@ -1838,8 +1835,8 @@ function deathGenerateHTML(params) {
             <!-- Input -->
             <div style="display:flex; justify-content:center; align-items:center; height:30px;">
                 <span class="field-value-span"
-                    style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                Your text here
+                    style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                ${params.citizenship || ''}
                 </span>
             </div>
             </div>
@@ -1858,8 +1855,8 @@ function deathGenerateHTML(params) {
             <!-- Input -->
             <div style="display:flex; justify-content:center; align-items:center; height:30px;">
                 <span class="field-value-span"
-                    style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                Your text here
+                    style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                ${params.residence || ''}
                 </span>
             </div>
             </div>
@@ -1880,8 +1877,8 @@ function deathGenerateHTML(params) {
             <!-- Input -->
             <div style="display:flex; justify-content:center; align-items:center; height:30px;">
                 <span class="field-value-span"
-                    style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                Your text here
+                    style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                ${params.occupation || ''}
                 </span>
             </div>
             </div>
@@ -1897,9 +1894,8 @@ function deathGenerateHTML(params) {
         
             <!-- Input -->
             <div style="display:flex; justify-content:center; align-items:center; height:30px;">
-                <span class="field-value-span"
-                    style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                Your text here
+                <span class="field-value-span" style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                    ${params.mother_first_name || ''}, ${params.mother_middle_name || ''}, ${params.mother_last_name || ''}
                 </span>
             </div>
             </div>
@@ -1915,9 +1911,8 @@ function deathGenerateHTML(params) {
         
             <!-- Input -->
             <div style="display:flex; justify-content:center; align-items:center; height:30px;">
-                <span class="field-value-span"
-                    style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                Your text here
+                <span class="field-value-span" style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                ${params.father_first_name || ''}, ${params.father_middle_name || ''}, ${params.father_last_name || ''}
                 </span>
             </div>
             </div>
@@ -1950,8 +1945,8 @@ function deathGenerateHTML(params) {
                     <div style="margin: 0; padding: 0;">
                         19b. CAUSES OF DEATH (If the deceased is aged 8 days and over)
                     </div>
-                    <div style="font-style: italic; white-space: nowrap; margin: 0; padding: 0 50px;"> 
-                        Interval Between Onset and Death
+                    <div style="font-weight: 600px; font-style: italic; white-space: nowrap; margin: 0; padding: 0 50px;"> 
+                        ${params.cause_of_death || ''}
                     </div>
                 </div>
 
@@ -1962,11 +1957,11 @@ function deathGenerateHTML(params) {
                             <div style="margin: 0 0 0 20px; padding: 0;">I. Immediate cause</div>
                             <div style="margin: 0 5px 0 0; white-space: nowrap; padding: 0;">: a.</div>
                         </div>
-                        <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
-                            Your text here
+                        <span class="field-value-span" style="font-weight: 600px; flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
+                            ${params.immediate_cause || ''}
                         </span>
                         <span class="field-value-span" style="flex-grow: 0.5; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin-left: 15px; padding: 0;">
-                            Your text here
+                            
                         </span>
                     </li>
                 
@@ -1975,11 +1970,11 @@ function deathGenerateHTML(params) {
                             <div style="margin: 0 0 0 30px; padding: 0;">Antecedent cause</div>
                             <div style="margin: 0 5px 0 0; white-space: nowrap; padding: 0;">: b.</div>
                         </div>
-                        <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
-                            Your text here
+                        <span class="field-value-span" style="font-weight: 600px; flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
+                            ${params.antecedent_cause || ''}
                         </span>
                         <span class="field-value-span" style="flex-grow: 0.5; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin-left: 15px; padding: 0;">
-                            Your text here
+                           
                         </span>
                     </li>
                 
@@ -1988,11 +1983,11 @@ function deathGenerateHTML(params) {
                             <div style="margin: 0 0 0 30px; padding: 0;">Underlying cause</div>
                             <div style="margin: 0 5px 0 0; white-space: nowrap; padding: 0;">: c.</div>
                         </div>
-                        <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
-                            Your text here
+                        <span class="field-value-span" style="font-weight: 600px; flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
+                            ${params.underlying_cause || ''}
                         </span>
                         <span class="field-value-span" style="flex-grow: 0.5; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin-left: 15px; padding: 0;">
-                            Your text here
+                            
                         </span>
                     </li>
                 
@@ -2003,7 +1998,7 @@ function deathGenerateHTML(params) {
                         II. Other significant conditions contributing to death:
                     </div>
                     <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
-                        Your text here
+                        ${params.other_significant_conditions || ''}
                     </span>
                 </div>
                 </div>
