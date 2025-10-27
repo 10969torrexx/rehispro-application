@@ -1637,7 +1637,6 @@ export default function MarriageCertificateCreateForm() {
                                     className={`w-full common-input ${errors.timeOfMarriage ? 'input-error' : ''}`}
                                     value={formData.page4.timeOfMarriage}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                 />
                                 {errors.timeOfMarriage && <ErrorMessages errors={errors.timeOfMarriage} />}
                             </div>
@@ -2006,9 +2005,7 @@ export default function MarriageCertificateCreateForm() {
                                     name="registrarDate"
                                     value={formData.page6.registrarDate}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                    onClick={(e) => e.target.showPicker && e.target.showPicker()}
-                                    className={`w-56 border-b border-gray-500 text-center ${errors.registrarDate ? "input-error" : ""
-                                        }`}
+                                    className={`w-56 border-b border-gray-500 text-center ${errors.registrarDate ? "input-error" : ""}`}
                                 />
                             </div>
                         </div>
@@ -2635,7 +2632,7 @@ export default function MarriageCertificateCreateForm() {
                                     />{" "}
                                     (Solemnizing Officer's name) under
                                 </p>
-                                <div className="flex items-center gap-3">
+                                <div className={`flex items-center gap-3 ${errors.ceremony ? 'input-error p-1' : ''}`}>
                                     <label className="flex items-center gap-1">
                                         <input
                                             type="checkbox"
@@ -2685,6 +2682,7 @@ export default function MarriageCertificateCreateForm() {
                                         tribal rites
                                     </label>
                                 </div>
+                                {errors.ceremony && <ErrorMessages errors={errors.ceremony} />}
                             </div>
 
                             {/* Statement 3 */}

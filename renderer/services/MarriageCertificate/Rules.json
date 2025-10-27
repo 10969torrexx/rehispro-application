@@ -814,10 +814,10 @@
         },
         "affidavitMonth": {
             "required": true,
-            "minLength": 3,
+            "minLength": 1,
             "message": {
                 "required": "Month is required.",
-                "minLength": "Month must be at least 3 characters."
+                "minLength": "Month must be at least 1 characters."
             }
         },
         "affidavitYear": {
@@ -844,10 +844,10 @@
         },
         "swornMonth": {
             "required": true,
-            "minLength": 3,
+            "minLength": 1,
             "message": {
                 "required": "Sworn month is required.",
-                "minLength": "Sworn month must be at least 3 characters."
+                "minLength": "Sworn month must be at least 1 characters."
             }
         },
         "swornYear": {
@@ -1110,10 +1110,10 @@
         },
         "affidavitMonthPage9": {
             "required": true,
-            "minLength": 3,
+            "minLength": 1,
             "message": {
                 "required": "Month is required.",
-                "minLength": "Month must be at least 3 characters."
+                "minLength": "Month must be at least 1 characters."
             }
         },
         "affidavitYearPage9": {
@@ -1142,10 +1142,10 @@
         },
         "swornMonthPage10": {
             "required": true,
-            "minLength": 3,
+            "minLength": 1,
             "message": {
                 "required": "Month is required.",
-                "minLength": "Month must be at least 3 characters."
+                "minLength": "Month must be at least 1 characters."
             }
         },
         "swornYearPage10": {
