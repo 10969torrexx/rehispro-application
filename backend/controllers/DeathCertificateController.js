@@ -12,6 +12,7 @@ exports.create = (req, res) => {
         }
 
         const flatData = formData;
+        writeLog(`INFO [DeathCertificate][create] Received data: ${JSON.stringify(flatData)}`);
 
         // Validate creatorId
         const creatorId = Number(flatData.creatorId);
@@ -131,6 +132,7 @@ exports.create = (req, res) => {
             physicianName: "physician_name",
             physicianTitle: "physician_title",
             physicianAddress: "physician_address",
+            physicianDateSigned: "physician_date_signed",
             healthOfficerName: "health_officer_name",
 
             // Page 8

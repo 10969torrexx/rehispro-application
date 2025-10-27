@@ -120,6 +120,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             physicianName: defaultOCRValues?.physician_name || "",
             physicianTitle: defaultOCRValues?.physician_title || "",
             physicianAddress: defaultOCRValues?.physician_address || "",
+            physicianDateSigned: defaultOCRValues?.physician_date_signed || "",
             healthOfficerName: defaultOCRValues?.health_officer_name || ""
         },
 
@@ -376,6 +377,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                         physicianName: "",
                         physicianTitle: "",
                         physicianAddress: "",
+                        physicianDateSigned: "",
                         healthOfficerName: ""
                     },
                     page8: {
@@ -1363,13 +1365,13 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                         <label className="block text-sm font-medium mb-1">Date</label>
                         <input 
                         type="date" 
-                        name="certificationDate" 
-                        className={` w-full common-input ${errors.certificationDate ? 'input-error' : ''}`} 
-                        value={formData.page7.certificationDate || ""}
+                        name="physicianDateSigned" 
+                        className={` w-full common-input ${errors.physicianDateSigned ? 'input-error' : ''}`} 
+                        value={formData.page7.physicianDateSigned || ""}
                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                         onClick={(e) => e.target.showPicker && e.target.showPicker()}
                         />
-                        {errors.certificationDate && <ErrorMessages errors={errors.certificationDate} />}
+                        {errors.physicianDateSigned && <ErrorMessages errors={errors.physicianDateSigned} />}
                     </div>
 
 

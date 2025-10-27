@@ -557,6 +557,14 @@
       "maxLength": "Address must not exceed 150 characters."
       }
     },
+    "physicianDateSigned": {
+      "required": true,
+      "type": "date",
+      "message": {
+        "required": "Physician's date signed is required.",
+        "date": "Invalid date format."
+      }
+    },
     "healthOfficerName": {
       "required": true,
       "type": "string",
