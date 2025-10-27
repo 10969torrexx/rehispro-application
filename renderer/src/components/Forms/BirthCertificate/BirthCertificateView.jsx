@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { SignaturePlaceholder } from '@components';
+import { SignaturePlaceholder, LoadingScreen } from '@components';
 import { BirthCertServices } from "@services";
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { BirthCertificate } from '@enums';
 import { capitalizeFirst } from '@myTools';
-import { LoadingScreen } from '@components';
 
 export default function BirthCertificateView({ row }) {
     const [birth, setBirth] = useState({});
