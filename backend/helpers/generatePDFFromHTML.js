@@ -3252,21 +3252,21 @@ function marriageGenerateHTML(params) {
                             <div style="display: flex; flex-direction: column; align-items: center; width: 10%;">
                                 <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Day)</span>  
                                 <span style="font-weight: 600px; width: 100%; text-align: center;">
-                                    ${params.husband_birth_day.split('-')[2] || ''}
+                                    ${params.husband_birth_date.split('-')[2] || ''}
                                 </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                                 <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Month)</span>  
                                 <span style="font-weight: 600px; width: 100%; text-align: center;">
-                                    ${params.husband_birth_day.split('-')[1] || ''}
+                                    ${params.husband_birth_date.split('-')[1] || ''}
                                 </span>
                             </div>
                             
                             <div style=" height: 100%; display: flex; flex-direction: column; align-items: center; width: 20%; border-right: 0.2px solid rgb(224, 67, 93); ">
                                 <span class="field-label-small-text" style="padding:2px 0 4px 0; ">(Year)</span>  
                                 <span style="font-weight: 600px; width: 100%; text-align: center;">
-                                    ${params.husband_birth_day.split('-')[0] || ''}
+                                    ${params.husband_birth_date.split('-')[0] || ''}
                                 </span>
                             </div>
                             
@@ -3369,22 +3369,30 @@ function marriageGenerateHTML(params) {
                         <div style="width: 40%; border-right: 1px solid rgb(224, 67, 93); display: flex; justify-content: space-around;">
 
                             <div style="display: flex; justify-content: center; align-items: center; width: 30%; border-right: 0.2px solid rgb(224, 67, 93);">
-                                <span style="text-align: center; height: 1em;">MALE</span>
+                                <span style="text-align: center; height: 1em;">
+                                    ${params.husband_sex || ''}
+                                </span>
                             </div>
                             <div style="display: flex; align-items: center; width: 70%; flex-direction: column;">
                                 <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Citizenship)</span>
-                                <span style=" text-align: center; height: 1em;">FILIPINO</span>
+                                <span style="font-weight: 600px; text-align: center; height: 1em;">
+                                    ${params.husband_citizenship || ''}
+                                </span>
                             </div>
                         </div>
                 
                         <div style="width: 40%;  display: flex; justify-content: space-around;">
 
                             <div style="display: flex; justify-content: center; align-items: center; width: 30%; border-right: 0.2px solid rgb(224, 67, 93);">
-                                <span style="text-align: center; height: 1em;">MALE</span>
+                                <span style="font-weight: 600px; text-align: center; height: 1em;">
+                                    ${params.wife_sex || ''}
+                                </span>
                             </div>
                             <div style="display: flex; align-items: center; width: 70%; flex-direction: column;">
                                 <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Citizenship)</span>
-                                <span style=" text-align: center; height: 1em;">FILIPINO</span>
+                                <span style="font-weight:600px; text-align: center; height: 1em;">
+                                    ${params.wife_citizenship || ''}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -3397,14 +3405,18 @@ function marriageGenerateHTML(params) {
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-start; justify-content: space-around;">
                             <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                                 <span class="field-label-small-text-2" style="padding-bottom: 4px;">(House No., St., House No., St., Barangay, City/Municipality, Province, Country)</span>
-                                <span style="width: 100%; text-align: center;">0456 ROSE AVE., TACLOBAN CITY, LEYTE</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.husband_residence_barangay || ''}
+                                </span>
                             </div>
                         </div>      
                 
                         <div style="width: 40%; padding: 4px;  display: flex; align-items: flex-start; justify-content: space-around;">
                             <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                                 <span class="field-label-small-text-2" style="padding-bottom: 4px;">(House No., St., House No., St., Barangay, City/Municipality, Province, Country)</span>
-                                <span style="width: 100%; text-align: center;">0456 ROSE AVE., TACLOBAN CITY, LEYTE</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.husband_residence_barangay || ''}
+                                </span>
                             </div>
                         </div>      
                     </div>
@@ -3415,11 +3427,15 @@ function marriageGenerateHTML(params) {
                         </div>
                 
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-end;">
-                            <span style="  flex-grow: 1; text-align: center;">ROMAN CATHOLIC</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                            ${params.husband_religion || ''}
+                            </span>
                         </div>
                 
                         <div style="width: 40%; padding: 4px; display: flex; align-items: flex-end;">
-                            <span style=" flex-grow: 1; text-align: center;">ROMAN CATHOLIC</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                            ${params.wife_religion || ''}
+                            </span>
                         </div>
                     </div>
                     <!-- Civil Status -->
@@ -3429,11 +3445,15 @@ function marriageGenerateHTML(params) {
                         </div>
                 
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-end;">
-                            <span style=" flex-grow: 1; text-align: center;">SINGLE</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                            ${params.husband_civil_status || ''}
+                            </span>
                         </div>
                 
                         <div style="width: 40%; padding: 4px; display: flex; align-items: flex-end;">
-                            <span style=" flex-grow: 1; text-align: center;">SINGLE</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                            ${params.wife_civil_status || ''}
+                            </span>
                         </div>
                     </div>
                     <!-- Name of Father -->
@@ -3446,17 +3466,23 @@ function marriageGenerateHTML(params) {
                 
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(First)</span>
-                                <span style="width: 100%; text-align: center;">ALFREDO</span>
+                                <span style="width: 100%; text-align: center;">
+                                ${params.husband_father_name_first || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Middle)</span>
-                                <span style="width: 100%; text-align: center;">P.</span>
+                                <span style="width: 100%; text-align: center;">
+                                ${params.husband_father_name_middle || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 20%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Last)</span>
-                                <span style="width: 100%; text-align: center;">SANTOS</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.husband_father_name_last || ''}
+                                </span>
                             </div>
                         </div>      
                 
@@ -3464,17 +3490,23 @@ function marriageGenerateHTML(params) {
                 
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(First)</span>
-                                <span style="width: 100%; text-align: center;">ALFREDO</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.wife_father_name_first || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Middle)</span>
-                                <span style="width: 100%; text-align: center;">P.</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.wife_father_name_middle || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 20%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Last)</span>
-                                <span style="width: 100%; text-align: center;">SANTOS</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.wife_father_name_last || ''}
+                                </span>
                             </div>
                         </div>      
                     </div>
@@ -3485,11 +3517,15 @@ function marriageGenerateHTML(params) {
                         </div>
                 
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-end;">
-                            <span style="  flex-grow: 1; text-align: center;">FILIPINO</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                            ${params.husband_father_citizenship || ''}
+                            </span>
                         </div>
                 
                         <div style="width: 40%; padding: 4px; display: flex; align-items: flex-end;">
-                            <span style=" flex-grow: 1; text-align: center;">FILIPINO</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                             ${params.wife_father_citizenship || ''}
+                            </span>
                         </div>
                     </div>
                 
@@ -3503,17 +3539,23 @@ function marriageGenerateHTML(params) {
                 
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(First)</span>
-                                <span style="width: 100%; text-align: center;">ALFREDO</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.husband_mother_name_first || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Middle)</span>
-                                <span style="width: 100%; text-align: center;">P.</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.husband_mother_name_middle || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 20%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Last)</span>
-                                <span style="width: 100%; text-align: center;">SANTOS</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.husband_mother_name_last || ''}
+                                </span>
                             </div>
                         </div>      
                 
@@ -3521,17 +3563,23 @@ function marriageGenerateHTML(params) {
                 
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(First)</span>
-                                <span style="width: 100%; text-align: center;">ALFREDO</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_mother_name_first || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Middle)</span>
-                                <span style="width: 100%; text-align: center;">P.</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_mother_name_middle || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 20%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Last)</span>
-                                <span style="width: 100%; text-align: center;">SANTOS</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_mother_name_last || ''}
+                                </span>
                             </div>
                         </div>  
                     </div>
@@ -3542,11 +3590,15 @@ function marriageGenerateHTML(params) {
                         </div>
                 
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-end;">
-                            <span style="  flex-grow: 1; text-align: center;">FILIPINO</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                                ${params.husband_mother_citizenship || ''}
+                            </span>
                         </div>
                 
                         <div style="width: 40%; padding: 4px; display: flex; align-items: flex-end;">
-                            <span style="flex-grow: 1; text-align: center;">FILIPINO</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                             ${params.wife_mother_citizenship || ''}
+                            </span>
                         </div>
                     </div>
                     <!-- Name of Person/ Wali Who Gave Consent or Advice -->
@@ -4349,7 +4401,7 @@ function marriageGenerateHTML(params) {
                 </div>
             </div>
             </body>
-            </html>
+        </html>
     `
 }
 module.exports = (
