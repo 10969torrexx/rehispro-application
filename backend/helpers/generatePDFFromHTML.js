@@ -3611,17 +3611,23 @@ function marriageGenerateHTML(params) {
                 
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(First)</span>
-                                <span style="width: 100%; text-align: center;">ALFREDO</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_consent_name_first || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Middle)</span>
-                                <span style="width: 100%; text-align: center;">P.</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_consent_name_middle || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 20%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Last)</span>
-                                <span style="width: 100%; text-align: center;">SANTOS</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_consent_name_last || ''}
+                                </span>
                             </div>
                         </div>      
                 
@@ -3629,17 +3635,23 @@ function marriageGenerateHTML(params) {
                 
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(First)</span>
-                                <span style="width: 100%; text-align: center;">ALFREDO</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_consent_name_first || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Middle)</span>
-                                <span style="width: 100%; text-align: center;">P.</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_consent_name_middle || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 20%;">
                                 <span class="field-label-small-text" style="padding-bottom: 8px;">(Last)</span>
-                                <span style="width: 100%; text-align: center;">SANTOS</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_consent_name_last || ''}
+                                </span>
                             </div>
                         </div>  
                     </div>
@@ -3651,11 +3663,15 @@ function marriageGenerateHTML(params) {
                         </div>
                 
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-end;">
-                            <span style="flex-grow: 1; text-align: center;">FATHER</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                            ${params.husband_relationship || ''}
+                            </span>
                         </div>
                 
                         <div style="width: 40%; padding: 4px; display: flex; align-items: flex-end;">
-                            <span style="flex-grow: 1; text-align: center;">FATHER</span>
+                            <span style="font-weight: 600px; flex-grow: 1; text-align: center;">
+                            ${params.wife_relationship || ''}
+                            </span>
                         </div>
                     </div>
                     
@@ -3668,14 +3684,18 @@ function marriageGenerateHTML(params) {
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-start; justify-content: space-around;">
                             <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                                 <span class="field-label-small-text-2" style="padding-bottom: 4px;">(House No., St., House No., St., Barangay, City/Municipality, Province, Country)</span>
-                                <span style="width: 100%; text-align: center;">0456 ROSE AVE., TACLOBAN CITY, LEYTE</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_consent_person_barangay || ''}, ${params.husband_consent_person_city || ''}, ${params.husband_consent_person_province || ''}, ${params.husband_consent_person_country || ''}
+                                </span>
                             </div>
                         </div>      
                 
                         <div style="width: 40%; padding: 4px;  display: flex; align-items: flex-start; justify-content: space-around;">
                             <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                                 <span class="field-label-small-text-2" style="padding-bottom: 4px;">(House No., St., House No., St., Barangay, City/Municipality, Province, Country)</span>
-                                <span style="width: 100%; text-align: center;">0456 ROSE AVE., TACLOBAN CITY, LEYTE</span>
+                                <span style="font-weight: 600px;width: 100%; text-align: center;">
+                                    ${params.wife_consent_person_barangay || ''}, ${params.wife_consent_person_city || ''}, ${params.wife_consent_person_province || ''}, ${params.wife_consent_person_country || ''}
+                                </span>
                             </div>
                         </div>      
                     </div>
@@ -3688,7 +3708,9 @@ function marriageGenerateHTML(params) {
                         <span style="white-space: nowrap; margin-right: 5px;">15. Place of Marriage:</span>
                     
                         <div style="display: flex; flex-direction: column; flex-grow: 0.6; text-align: center; ">
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em;">ST. MICHAEL THE ARCHANGEL PARISH</span>
+                            <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em;">
+                                ${params.place_of_marriage || ''}
+                            </span>
                             <span class="field-label-small-text-2" style="white-space: nowrap; margin-top: 2px;">(Office of the/House of/Barangay of/Church of/Mosque of)</span>
                         </div>
                     
