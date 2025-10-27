@@ -1610,13 +1610,13 @@ export default function MarriageCertificateCreateForm() {
                                 <label>Office of the / House of / Barangay of / Church of / Mosque</label>
                                 <input
                                     type="text"
-                                    name="placeOfMarriageOffice"
+                                    name="placeOfMarriageBarangay"
                                     placeholder="Office of the / House of / Barangay of / Church of / Mosque"
-                                    className={`w-full common-input ${errors.placeOfMarriageOffice ? 'input-error' : ''}`}
-                                    value={formData.page4.placeOfMarriageOffice}
+                                    className={`w-full common-input ${errors.placeOfMarriageBarangay ? 'input-error' : ''}`}
+                                    value={formData.page4.placeOfMarriageBarangay}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
-                                {errors.placeOfMarriageOffice && <ErrorMessages errors={errors.placeOfMarriageOffice} />}
+                                {errors.placeOfMarriageBarangay && <ErrorMessages errors={errors.placeOfMarriageBarangay} />}
                             </div>
 
                             {/* City / Municipality */}

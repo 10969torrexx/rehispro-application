@@ -438,10 +438,22 @@
         }
     },
     "page4": {
-        "placeOfMarriage": {
+        "placeOfMarriageBarangay": {
             "required": true,
             "message": {
-                "required": "Place of Marriage is required."
+                "required": "Place of Marriage (Barangay) is required."
+            }
+        },
+        "placeOfMarriageCity": {
+            "required": true,
+            "message": {
+                "required": "Place of Marriage (City) is required."
+            }
+        },
+        "placeOfMarriageProvince": {
+            "required": true,
+            "message": {
+                "required": "Place of Marriage (Province) is required."
             }
         },
         "dateOfMarriage": {

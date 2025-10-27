@@ -13,7 +13,8 @@ function create(req, res) {
         }
 
         const flatData = formData;
-
+        writeLog(`INFO [MarriageCertificate][create] Received data: ${JSON.stringify(flatData)}`);
+        
         // Validate creatorId
         const creatorId = Number(flatData.creatorId);
         if (!creatorId || isNaN(creatorId) || creatorId <= 0) {
@@ -97,7 +98,9 @@ function create(req, res) {
             wifeConsentPersonCountry: "wife_consent_person_country",
 
             // Page 4
-            placeOfMarriage: "place_of_marriage",
+            placeOfMarriageBarangay: "place_of_marriage_barangay",
+            placeOfMarriageCity: "place_of_marriage_city",
+            placeOfMarriageProvince: "place_of_marriage_province",
             dateOfMarriage: "date_of_marriage",
             timeOfMarriage: "time_of_marriage",
             certHusbandName: "cert_husband_name",
