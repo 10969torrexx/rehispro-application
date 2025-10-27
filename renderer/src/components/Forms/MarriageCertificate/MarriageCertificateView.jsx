@@ -1183,7 +1183,7 @@ export default function MarriageCertificateView({ row }) {
                 </div>
     
                 <span>
-                    <p>20a&b. Witnesses (Print Name and Sign)</p>
+                    <p>20a. Witnesses (Print Name and Sign)</p>
                 </span>
                 <div className="border border-pink-300 p-3 rounded mb-3">
                     <div className="grid grid-cols-2 gap-6">
