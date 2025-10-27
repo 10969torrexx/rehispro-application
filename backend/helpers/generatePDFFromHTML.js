@@ -2699,6 +2699,7 @@ function deathGenerateHTML(params) {
                     <div style="line-height: 1.5; margin-bottom: 2px; font-size: 10px;">
                         <span id="field2_line1"
                         style="
+                            font-weight: 600px;
                             display: block;
                             width: 100%;
                             border-bottom: 0.2px solid blue;
@@ -2706,7 +2707,9 @@ function deathGenerateHTML(params) {
                             margin-top: 5px;
                             white-space: nowrap;
                             overflow: hidden;
-                        "></span>
+                        ">
+                            ${params.postmortem_cause || ''}
+                        </span>
                     
                         <span id="field2_line2"
                         style="
@@ -2716,7 +2719,9 @@ function deathGenerateHTML(params) {
                             height: 1.2em;
                             margin-top: 5px;
                             overflow: hidden;
-                        "></span>
+                        ">
+                        
+                        </span>
                     </div>
                     
                     
@@ -2726,17 +2731,23 @@ function deathGenerateHTML(params) {
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Signature</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">J. Smith</span>
+                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.postmortem_signature || ''}
+                                </span>
                             </div>
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Name in Print</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">JONATHAN SMITH</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.postmortem_name || ''}
+                                </span>
                             </div>
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Date</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">2025-09-26</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.postmortem_date || ''}
+                                </span>
                             </div>
                         </div>
                     
@@ -2744,12 +2755,16 @@ function deathGenerateHTML(params) {
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Title/Designation</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">Health Officer</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.postmortem_title || ''}
+                                </span>
                             </div>
                                                 
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Address</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">Municipal Health Office</span>
+                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.postmortem_address || ''}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -2767,7 +2782,9 @@ function deathGenerateHTML(params) {
                     
                     <div style="line-height: 1.5; text-indent: 20px;">
                         I HEREBY CERTIFY that I have embalmed
-                        <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 400px;">&nbsp; loe</span>
+                        <span style="font-weight:600px; border-bottom: 0.2px solid blue; display: inline-block; width: 400px;">
+                            ${params.embalmered_name || ''}
+                        </span>
                         following all the regulations prescribed by the Department of Health.
                     </div>
                     
@@ -2776,17 +2793,23 @@ function deathGenerateHTML(params) {
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Signature</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">A. Rivera</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.embalmer_signature || ''}
+                                </span>
                             </div>
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Name in Print</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">ANNA RIVERA</span>
+                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                     ${params.embalmer_name || ''}
+                                </span>
                             </div>
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Address</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">123 Acacia Ave, Metro Manila</span>
+                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.embalmer_address || ''}
+                                </span>
                             </div>
                         </div>
                     
@@ -2794,24 +2817,34 @@ function deathGenerateHTML(params) {
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Title/Designation</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">Licensed Embalmer</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.embalmer_title || ''}
+                                </span>
                             </div>
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">License No.</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">004567</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.embalmer_license || ''}
+                                </span>
                             </div>
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Issued on</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">2024-03-10</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.embalmer_issued_on || ''}
+                                </span>
                                 <div style="white-space: nowrap; margin: 0 2px;">at</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">Quezon City</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.embalmer_issued_at || ''}
+                                </span>
                             </div>
                             
                             <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                 <div style="white-space: nowrap; margin-right: 2px;">Expiry Date</div>
-                                <span style="flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">2026-03-09</span>
+                                <span style="font-weight:600px; flex-grow: 1; display: block; height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    ${params.embalmer_expiry_date || ''}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -2828,23 +2861,37 @@ function deathGenerateHTML(params) {
                     </div>
                     <div style="margin-bottom: 10px;  ">
                         <span style="padding-left: 80px;">I, </span>
-                        <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 300px; text-align: center;">**JUAN P. DELA CRUZ**</span>, 
-                        of legal age, single/married/divorced/widow/widower, with residence and postal address
-                        <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 500px; text-align: center;">**#10 Sikatuna Street, Barangay Holy Spirit, Quezon City**</span>
+                        <span style="font-weight:600px; border-bottom: 0.2px solid blue; display: inline-block; width: 300px; text-align: center;">
+                            ${params.affiant_name || ''}
+                        </span>, 
+                        of legal age, <span style="${params.affiant_civil_status === 'SINGLE' ? 'text-decoration: underline;' : ''}">single</span>/<span style="${params.affiant_civil_status === 'MARRIED' ? 'text-decoration: underline;' : ''}">married</span>/<span style="${params.affiant_civil_status === 'DIVORCED' ? 'text-decoration: underline;' : ''}">divorced</span>/<span style="${params.affiant_civil_status === 'WIDOW' ? 'text-decoration: underline;' : ''}">widow</span>/<span style="${params.affiant_civil_status === 'WIDOWER' ? 'text-decoration: underline;' : ''}">widower</span>, with residence and postal address
+                        <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 500px; text-align: center;">
+                            ${params.affiant_address || ''}
+                        </span>
                         after being duly sworn in accordance with law, do hereby depose and say:
                     </div>
                     
                     <div style="margin-bottom: 10px; padding-left: 80px;">
                         1. That
-                        <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 180px; text-align: center;">**MARIA C. DELA CRUZ**</span>
+                        <span style="font-weight:600px; margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 180px; text-align: center;">
+                            ${params.deceased_name || ''}
+                        </span>
                         died on
-                        <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 120px; text-align: center;">**2023-01-15**</span> in
-                        <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**Quezon City**</span>
+                        <span style="font-weight:600px; margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 120px; text-align: center;">
+                            ${params.death_date || ''}
+                        </span> in
+                        <span style="font-weight:600px; margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">
+                            ${params.death_place || ''}
+                        </span>
                         <br>
                         and was buried/cremated in
-                        <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**Manila North Cemetery**</span>
+                        <span style="font-weight:600px; margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">
+                            ${params.delayed_cemetery_name || ''}
+                        </span>
                         on
-                        <span style="margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**2023-01-20**</span>
+                        <span style="font-weight:600px; margin: 3px 2px;border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">
+                            ${params.delayed_cemetery_address || ''}
+                        </span>
                     </div>
                     
                     <div style="margin-bottom: 10px; padding-left: 80px;">

@@ -895,7 +895,7 @@
     "affiantCivilStatus": {
       "required": false,
       "type": "enum",
-      "options": ["Single", "Married", "Divorced", "Widow / widower"],
+      "options": ["SINGLE", "MARRIED", "DIVORCED", "WIDOW / WIDOWER"],
       "message": {
         "required": "Civil status is required",
         "enum": "Invalid civil status"

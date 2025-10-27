@@ -1868,10 +1868,10 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                               >
                                 <option value="">Select</option>
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                                <option value="Divorced">Divorced</option>
-                                <option value="Widow">Widow</option>
+                                <option value="SINGLE">Single</option>
+                                <option value="MARRIED">Married</option>
+                                <option value="DIVORCED">Divorced</option>
+                                <option value="WIDOW">Widow</option>
                               </select>
                               {errors.affiantCivilStatus && <ErrorMessages errors={errors.affiantCivilStatus} />}
                             </div>
