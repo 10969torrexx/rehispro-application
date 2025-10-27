@@ -3735,17 +3735,23 @@ function marriageGenerateHTML(params) {
                             <span style=" white-space: nowrap; margin-right: 5px;">16. Date of Marriage:</span>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 100%; height: 1em; line-height: 1em; text-align: center;">18</span>
+                                <span style="font-weight:600px; border-bottom: 0.2px solid rgb(224, 67, 93); width: 100%; height: 1em; line-height: 1em; text-align: center;">
+                                    ${params.date_of_marriage.split('-')[2] || ''}
+                                </span>
                                 <span class="field-label-small-text-2" style="margin-top: 2px;">(Day)</span>
                             </div>
                         
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 100%; height: 1em; line-height: 1em; text-align: center;">OCTOBER</span>
+                                <span style="font-weight:600px; border-bottom: 0.2px solid rgb(224, 67, 93); width: 100%; height: 1em; line-height: 1em; text-align: center;">
+                                    ${params.date_of_marriage.split('-')[1] || ''}
+                                </span>
                                 <span class="field-label-small-text-2" style="margin-top: 2px;">(Month)</span>
                             </div>
                         
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 100%; height: 1em; line-height: 1em; text-align: center;">2025</span>
+                                <span style="font-weight:600px; border-bottom: 0.2px solid rgb(224, 67, 93); width: 100%; height: 1em; line-height: 1em; text-align: center;">
+                                    ${params.date_of_marriage.split('-')[0] || ''}
+                                </span>
                                 <span class="field-label-small-text-2" style="margin-top: 2px;">(Year)</span>
                             </div>
                         </div>
@@ -3753,7 +3759,9 @@ function marriageGenerateHTML(params) {
                         <div style="display: flex; align-items: flex-start; width: 40%; padding: 0 5px;">
                             <span style="font-weight: bold; white-space: nowrap; margin-right: 5px;">17. Time of Marriage:</span>
                             <div style="display: flex; flex-grow: 1; align-items: center;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 100%; height: 1em; line-height: 1em; text-align: center;">3:00</span>
+                                <span style="font-weight:600px;  border-bottom: 0.2px solid rgb(224, 67, 93); width: 100%; height: 1em; line-height: 1em; text-align: center;">
+                                    ${params.time_of_marriage || ''}
+                                </span>
                                 <span style="margin-top: 2px; white-space: nowrap; font-size: 10px;">am/pm</span>
                             </div>
                         </div>
