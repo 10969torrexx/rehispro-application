@@ -361,10 +361,10 @@ exports.uploadAndScan = async(req, res) => {
 exports.download = async(req, res) => {
   try {
     const data = await new Promise((resolve, reject) => {
-        db.get(`SELECT * FROM deathcertificates WHERE id = ?`, [req.params.id], (err, row) => {
-            if (err) return reject(err);
-            resolve(row);
-        });
+      db.get(`SELECT * FROM deathcertificates WHERE id = ?`, [req.params.id], (err, row) => {
+        if (err) return reject(err);
+        resolve(row);
+      });
     });
     writeLog(`INFO [DeathCertificates][download] ${JSON.stringify(data)}`);
     const html = deathGenerateHTML(data);

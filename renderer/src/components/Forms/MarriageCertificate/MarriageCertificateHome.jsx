@@ -7,8 +7,8 @@ import Box from "@mui/material/Box";
 
 export default function MarriageCertificateHome({ onView }) {
   const [rows, setRows] = useState([]);
-  const [loading, setLoading] = useState(false); // ✅ added
-  const [searchQuery, setSearchQuery] = useState(""); // 🔹 State for search
+  const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -19,22 +19,31 @@ export default function MarriageCertificateHome({ onView }) {
     {
       field: "action",
       headerName: "Action",
-      width: 110, // 🔹 narrower column
+      width: 110,
       sortable: false,
       renderCell: (params) => {
         const row = params?.row || {};
         return (
           <select
             defaultValue=""
-            className="common-input text-xs px-1 py-0.5 w-full" // 🔹 smaller text + reduced padding
-            onChange={(e) => {
+            className="common-input text-xs px-1 py-0.5 w-full"
+            onChange={async (e) => {
               const action = e.target.value;
               e.target.value = "";
     
               if (action === "view") {
                 onView?.(row);
               } else if (action === "download") {
-                toast.info("Download clicked");
+                try {
+                  setIsDownloading(true);
+                  await MarriageCertServices.download(params?.row.id);
+                  toast.success("PDF download complete!");
+                } catch (error) {
+                  console.error(error);
+                  toast.error(`Download failed: ${error.message || error}`);
+                } finally {
+                  setIsDownloading(false);
+                }
               }
             }}
           >
@@ -49,7 +58,6 @@ export default function MarriageCertificateHome({ onView }) {
     }
   ];
 
-  // ✅ Fetch data on mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -75,7 +83,6 @@ export default function MarriageCertificateHome({ onView }) {
     fetchData();
   }, []);
 
-      // 🔹 Filtered rows (client-side search)
       const filteredRows = rows.filter((row) => {
         const query = searchQuery.toLowerCase();
         return (

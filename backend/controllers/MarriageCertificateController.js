@@ -1,8 +1,9 @@
 // backend\controllers\MarriageCertificateController.js
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
-const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const { callPythonOCR } = require('../services/OCRService');
+const marriageGenerateHTML = require('../helpers/generatePDFFromHTML');
+const puppeteer = require('puppeteer');
 
 function create(req, res) {
     try {
@@ -322,9 +323,42 @@ async function upload(req, res) {
     }
 }
 
+async function download(req, res) {
+    try {
+        const data = await new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM marriage_certificates WHERE id = ?`, [req.params.id], (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
+            });
+        });
+        writeLog(`INFO [MarriageCertificates][download] ${JSON.stringify(data)}`);
+        const html = marriageGenerateHTML(data);
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(html, { waitUntil: "networkidle0" });
+        const pdfBuffer = await page.pdf({ 
+            printBackground: true,
+            width: "8.5in",   
+            height: "13in",   
+        });
+        await browser.close();
+        res.set({
+            "Content-Type": "application/pdf",
+            "Content-Disposition": "attachment; filename=marriage-certificates.pdf",
+            "Content-Length": pdfBuffer.length
+        });
+        res.send(pdfBuffer);
+    } catch (error) {
+        writeLog(`ERROR: [marriage][download] ${error}`)
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error generating PDF", error: error.message });
+    }
+}
+
 module.exports = {
     create,
     getAll,
     view,
-    upload
+    upload,
+    download
 };
