@@ -2986,35 +2986,43 @@ function deathGenerateHTML(params) {
                             <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">
                                 ${params.ctc_month_year || ''}
                             </span>,
-                            <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">**2025**</span> at
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">
+                                ${params.ctc_issued_on || ''}
+                            </span> at
                         </div>
                         
                         <div style="padding-left: 0px;">
-                            <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 200px;text-align: center;">**MAKATI CITY**</span>,
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 200px;text-align: center;">
+                                 ${params.ctc_issued_at || ''}
+                            </span>,
                             Philippines, affiant who exhibited to me his Community Tax Cert.
                         </div>
                         
                         <div style="margin-top: 5px; padding-left: 0px; ">
                             issued on
-                            <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**2025-01-05**</span>
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">
+                                ${params.ctc_issued_on || ''}
+                            </span>
                             at
-                            <span style="border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">**MAKATI**</span>
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue; display: inline-block; width: 200px; text-align: center;">
+                                ${params.ctc_issued_at || ''}
+                            </span>
                         </div>
                         
                     </div>
                     
                     <div style="display: flex; justify-content: space-between; margin-top: 30px;">
                         <div style="flex: 1; margin-right: 5px; text-align: center;">
-                            <span style="display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
-                                Sample
+                            <span style="font-weight:600px; display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
+                                ${params.admin_name || ''}
                             </span>
                             <div style="font-size: 10px; text-align: center; margin-top: 5px;">
                                 Signature of the Administering Officer
                             </div>
                         </div>
                         <div style="flex: 1; margin-left: 5px; text-align: center;">
-                            <span style="display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
-                                Sample
+                            <span style="font-weight:600px; display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
+                                ${params.admin_position || ''}
                             </span>
                             <div style="font-size: 10px; text-align: center; margin-top: 5px;">
                                 Position / Title / Designation
@@ -3024,7 +3032,7 @@ function deathGenerateHTML(params) {
                     <div style="display: flex; justify-content: space-between; margin-top: 10px;;">
                         <div style="flex: 1; margin-right: 5px; text-align: center;">
                             <span style="display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
-                                Sample
+                                ${params.admin_name || ''}
                             </span>
                             <div style="font-size: 10px; text-align: center; margin-top: 5px;">
                                 Name in Print
@@ -3032,10 +3040,10 @@ function deathGenerateHTML(params) {
                         </div>
                         <div style="flex: 1; margin-left: 5px; text-align: center;">
                             <span style="display: inline-block;width: 300px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
-                                Sample
+                                
                             </span>
                             <div style="font-size: 10px; text-align: center; margin-top: 5px;">
-                                Address
+                                ${params.address || ''}
                             </div>
                         </div>
                     </div>
