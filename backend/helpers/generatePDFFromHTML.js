@@ -2222,7 +2222,7 @@ function deathGenerateHTML(params) {
                         <li style="display: flex; align-items: flex-end; padding: 5px 5px 0 5px; justify-content: flex-end;">
                             <div style="white-space: nowrap; margin-right: 5px;">Date</div>
                             <span class="field-value-span" style="font-weight: 600px; margin-top: 5px; font-size: 10px; width: 100px; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
-    
+                                ${params.physician_date_signed || ''}
                             </span>
                         </li>
                     </ul>    
@@ -2231,11 +2231,15 @@ function deathGenerateHTML(params) {
                         <div style="font-weight: bold; text-align: left; margin-bottom: 20px; font-size: 11px;">REVIEWED BY:</div>
             
                         <div style="margin-bottom: 5px; text-align: center;">
-                            <span class="field-value-span" style="width: 80%; height:1.2em; display:inline-block; border-bottom:0.2px solid blue;">Dr. Maria Santos</span>
+                            <span class="field-value-span" style="font-weight: 600px; width: 80%; height:1.2em; display:inline-block; border-bottom:0.2px solid blue;">
+                                ${params.health_officer_signature || ''}
+                            </span>
                             <div style="text-align: center; margin-top: 2px;">Signature Over Printed Name of Health Officer</div>
                         </div>
                         <div style="margin-bottom: 0px; text-align: center; padding-top: 5px;">
-                            <span class="field-value-span" style="font-size: 10px; width: 100px; display:inline-block; height:1.2em; border-bottom:0.2px solid blue; margin-left: 5px;">09/25/2025</span>
+                            <span class="field-value-span" style="font-size: 10px; width: 100px; display:inline-block; height:1.2em; border-bottom:0.2px solid blue; margin-left: 5px;">
+                                 ${params.health_officer_signed_date || ''}
+                            </span>
                             <div style="text-align: center; margin-top: 0px;">Date</div>
                         </div>
                     </div>
@@ -2250,7 +2254,9 @@ function deathGenerateHTML(params) {
                         <!-- Corpse Disposal -->
                         <div style="width: 35%; padding: 0px; border-right: 0.2px solid blue;">
                             <div style="margin-bottom: 5px;">23. CORPSE DISPOSAL (Burial, Cremation, if others, specify)</div>
-                            <span class="field-value-span" style="width: 100%; display:block; text-align: center; height:1em;">Burial</span>
+                            <span class="field-value-span" style="font-weight:600px; width: 100%; display:block; text-align: center; height:1em;">
+                                ${params.disposal_type || ''}
+                            </span>
                         </div>
                 
                         <!-- Burial/Cremation and Transfer Permits -->
@@ -2261,11 +2267,15 @@ function deathGenerateHTML(params) {
                                 <div style="margin-bottom: 2px;">24a. BURIAL/CREMATION PERMIT</div>
                                 <div style="display: flex; align-items: flex-end; margin-bottom:2px;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Number</div>
-                                    <span class="field-value-span" style="width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">12345</span>
+                                    <span class="field-value-span" style="font-weight:600px; width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+                                        ${params.permit_number || ''}
+                                    </span>
                                 </div>
                                 <div style="display: flex; align-items: flex-end;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Date Issued</div>
-                                    <span class="field-value-span" style="width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+                                    <span class="field-value-span" style="font-weight:600px; width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+                                        ${params.permit_date || ''}
+                                    </span>
                                 </div>
                             </div>
                 
@@ -2274,11 +2284,15 @@ function deathGenerateHTML(params) {
                                 <div style="margin-bottom: 2px;">24b. TRANSFER PERMIT</div>
                                 <div style="display: flex; align-items: flex-end; margin-bottom:2px;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Number</div>
-                                    <span class="field-value-span" style="width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">67890</span>
+                                    <span class="field-value-span" style="font-weight:600px; width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+                                        ${params.transfer_permit || ''}
+                                    </span>
                                 </div>
                                 <div style="display: flex; align-items: flex-end;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Date Issued</div>
-                                    <span class="field-value-span" style="width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">09/26/2025</span>
+                                    <span class="field-value-span" style="font-weight:600px; width: 80%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+                                        ${params.transfer_permit_date || ''}
+                                    </span>
                                 </div>
                             </div>
                 
@@ -2289,7 +2303,9 @@ function deathGenerateHTML(params) {
         <!-- NAME AND ADDRESS OF CEMETERY OR CREMATORY -->
         <div style="font-size: 10px; border-top: 0.2px solid blue; border-bottom: 0.2px solid blue; padding:2px 5px;">
             <div style="margin-bottom: 10px; margin-top: 2px;">25. NAME AND ADDRESS OF CEMETERY OR CREMATORY</div>
-            <span class="field-value-span" style="width:100%; display:inline-block; height:1.2em;">Greenwood Memorial Cemetery, 123 Main St, Cityville</span>
+            <span class="field-value-span" style="width:100%; display:inline-block; height:1.2em;">
+                ${params.cemetery_name || ''}, ${params.cemetery_address || ''}
+            </span>
         </div>
 
         <!-- CERTIFICATION OF INFORMANT -->
@@ -2304,23 +2320,33 @@ function deathGenerateHTML(params) {
             
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Signature</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">John D. Doe</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.informant_signature || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Name in Print</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">John Doe</span>
+                        <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.informant_name || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Relationship to the Deceased</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Brother</span>
+                        <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.informant_relationship || ''}  
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Address</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">456 Elm St, Cityville</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.informant_address || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Date</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.informant_date || ''}
+                        </span>
                     </div>
                 </div>
             
@@ -2329,19 +2355,25 @@ function deathGenerateHTML(params) {
             
                     <div style="margin-bottom: 0px; margin-top: 25px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Signature</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Dr. Alice Smith</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;"></span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Name in Print</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Alice Smith</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.prepared_name || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Title or Position</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Attending Physician</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.prepared_title || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Date</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.prepared_date || ''}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -2352,19 +2384,25 @@ function deathGenerateHTML(params) {
             
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Signature</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Jane M. Roe</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;"></span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Name in Print</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Jane Roe</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.received_name || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Title or Position</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Registrar Assistant</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.received_title || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Date</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.received_date || ''}
+                        </span>
                     </div>
                 </div>
             
@@ -2373,19 +2411,27 @@ function deathGenerateHTML(params) {
             
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Signature</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Richard B. Clark</span>
+                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                        
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Name in Print</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Richard Clark</span>
+                        <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.registrar_name || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Title or Position</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">Civil Registrar</span>
+                        <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.registrar_title || ''}
+                        </span>
                     </div>
                     <div style="margin-bottom: 0px; margin-top: 5px; display: flex; align-items: flex-end;">
                         <div style="white-space: nowrap; margin-right: 5px;">Date</div>
-                        <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+                        <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom:0.2px solid blue;">
+                            ${params.registrar_date || ''}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -2394,7 +2440,9 @@ function deathGenerateHTML(params) {
             <!-- REMARKS/ANNOTATIONS -->
             <div style="font-size: 10px; border-top: 0.2px solid blue; border-bottom: 0.2px solid blue; padding-left: 4px;">
                 <div style="margin-bottom: 10px; margin-top: 2px; font-weight: bold;">REMARKS/ANNOTATIONS (For LCRO/OCRG Use Only)</div>
-                <textarea style="font-size: 12px; width: 98%; height: 90px; border: none; resize: none;"></textarea>
+                <textarea style="font-weight:600px; font-size: 12px; width: 98%; height: 90px; border: none; resize: none;">
+                    ${params.remarks || ''}
+                </textarea>
             </div>
             
             <!-- TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR -->
@@ -2477,58 +2525,58 @@ function deathGenerateHTML(params) {
                     FOR CHILDREN AGED 0 TO 7 DAYS<br>
                     </span>
                 </div>
-        <!-- AGE OF MOTHER / METHOD OF DELIVERY / LENGTH OF PREGNANCY -->
-        <div style="width:100%; font-size:10px; height:40px; border-bottom:0.2px solid blue; display:flex;">
+            <!-- AGE OF MOTHER / METHOD OF DELIVERY / LENGTH OF PREGNANCY -->
+            <div style="width:100%; font-size:10px; height:40px; border-bottom:0.2px solid blue; display:flex;">
 
-            <!-- 14. AGE OF MOTHER -->
-            <div style="display:flex; flex-direction:column; width:20%; border-right:0.2px solid blue;">
-                <!-- Header -->
-                <div style="padding:0 4px;">
-                    <span class="field-label">14. AGE OF MOTHER</span>
+                <!-- 14. AGE OF MOTHER -->
+                <div style="display:flex; flex-direction:column; width:20%; border-right:0.2px solid blue;">
+                    <!-- Header -->
+                    <div style="padding:0 4px;">
+                        <span class="field-label">14. AGE OF MOTHER</span>
+                    </div>
+                    <!-- Input -->
+                    <div style="display:flex; justify-content:center; align-items:center; flex:1;">
+                        <span class="field-value-span" 
+                            style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                            ${params.age_of_mother || ''}
+                        </span>
+                    </div>
                 </div>
-                <!-- Input -->
-                <div style="display:flex; justify-content:center; align-items:center; flex:1;">
-                    <span class="field-value-span" 
-                        style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                        Your text here
-                    </span>
+
+                <!-- 15. METHOD OF DELIVERY -->
+                <div style="display:flex; flex-direction:column; width:45%; border-right:0.2px solid blue;">
+                    <!-- Header -->
+                    <div style="display:flex; padding:0 4px;">
+                        <span class="field-label">15. METHOD OF DELIVERY</span>
+                        <span class="field-label-small-text" style="padding-left:8px;">
+                            (Normal spontaneous vertex, if others, specify)
+                        </span>
+                    </div>
+                    <!-- Input -->
+                    <div style="display:flex; justify-content:center; align-items:center; flex:1;">
+                        <span class="field-value-span" 
+                            style="font-weight: 600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                            ${params.method_of_delivery || ''}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 16. LENGTH OF PREGNANCY -->
+                <div style="display:flex; flex-direction:column; width:35%;">
+                    <!-- Header -->
+                    <div style="display:flex; padding:0 4px;">
+                        <span class="field-label">16. LENGTH OF PREGNANCY</span>
+                        <span class="field-label-small-text" style="padding-left:8px;">(in completed weeks)</span>
+                    </div>
+                    <!-- Input -->
+                    <div style="display:flex; justify-content:center; align-items:center; flex:1;">
+                        <span class="field-value-span" 
+                            style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                            ${params.length_of_pregnancy || ''}
+                        </span>
+                    </div>
                 </div>
             </div>
-
-            <!-- 15. METHOD OF DELIVERY -->
-            <div style="display:flex; flex-direction:column; width:45%; border-right:0.2px solid blue;">
-                <!-- Header -->
-                <div style="display:flex; padding:0 4px;">
-                    <span class="field-label">15. METHOD OF DELIVERY</span>
-                    <span class="field-label-small-text" style="padding-left:8px;">
-                        (Normal spontaneous vertex, if others, specify)
-                    </span>
-                </div>
-                <!-- Input -->
-                <div style="display:flex; justify-content:center; align-items:center; flex:1;">
-                    <span class="field-value-span" 
-                        style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                        Your text here
-                    </span>
-                </div>
-            </div>
-
-            <!-- 16. LENGTH OF PREGNANCY -->
-            <div style="display:flex; flex-direction:column; width:35%;">
-                <!-- Header -->
-                <div style="display:flex; padding:0 4px;">
-                    <span class="field-label">16. LENGTH OF PREGNANCY</span>
-                    <span class="field-label-small-text" style="padding-left:8px;">(in completed weeks)</span>
-                </div>
-                <!-- Input -->
-                <div style="display:flex; justify-content:center; align-items:center; flex:1;">
-                    <span class="field-value-span" 
-                        style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                        Your text here
-                    </span>
-                </div>
-            </div>
-        </div>
 
 
         <!-- TYPE OF BIRTH / IF MULTIPLE BIRTH -->
@@ -2544,8 +2592,8 @@ function deathGenerateHTML(params) {
                 <!-- Input -->
                 <div style="display:flex; justify-content:center; align-items:center; flex:1;">
                     <span class="field-value-span" 
-                        style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                        Your text here
+                        style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                        ${params.type_of_birth || ''}
                     </span>
                 </div>
             </div>
@@ -2560,8 +2608,8 @@ function deathGenerateHTML(params) {
                 <!-- Input -->
                 <div style="display:flex; justify-content:center; align-items:center; flex:1;">
                     <span class="field-value-span" 
-                        style="display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
-                        Your text here
+                        style="font-weight:600px; display:inline-block; width:80%; height:12px; line-height:12px; font-size:10px; text-align:center;">
+                        ${params.if_multiple_birth || ''}
                     </span>
                 </div>
             </div>
@@ -2584,35 +2632,45 @@ function deathGenerateHTML(params) {
                             <li style="margin-bottom: 0px;">
                                 <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Main disease/condition of infant</div>
-                                    <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">John D. Doe</span>
+                                    <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">
+                                        ${params.main_disease_condition_of_infant || ''}
+                                    </span>
                                 </div>
                             </li>
                             
                             <li style="margin-bottom: 0px;">
                                 <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Other diseases/conditions of infant</div>
-                                    <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">John Doe</span>
+                                    <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">
+                                        ${params.other_diseases_conditions_of_infant || ''}
+                                    </span>
                                 </div>
                             </li>
                             
                             <li style="margin-bottom: 0px;">
                                 <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Main maternal disease/condition affecting infant</div>
-                                    <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">Brother</span>
+                                    <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">
+                                        ${params.main_maternal_disease_condition_affecting_infant || ''}
+                                    </span>
                                 </div>
                             </li>
                             
                             <li style="margin-bottom: 0px;">
                                 <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Other maternal disease/condition affecting infant</div>
-                                    <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">456 Elm St, Cityville</span>
+                                    <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">
+                                        ${params.other_maternal_disease_condition_affecting_infant || ''}
+                                    </span>
                                 </div>
                             </li>
                             
                             <li style="margin-bottom: 0px;">
                                 <div style="margin-top: 5px; display: flex; align-items: flex-end;">
                                     <div style="white-space: nowrap; margin-right: 5px;">Other relevant circumstances</div>
-                                    <span class="field-value-span" style="flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">09/25/2025</span>
+                                    <span class="field-value-span" style="font-weight:600px; flex: 1; display:block; height:1.2em; border-bottom: 0.2px solid blue;">
+                                        ${params.other_relevant_circumstances || ''}
+                                    </span>
                                 </div>
                             </li>
                             
