@@ -108,6 +108,14 @@ select {
   }
 }
 
+.btn-success {
+  color: white;
+  background-color: #22C55E;
+  &:hover {
+    background-color: #1ea54f; 
+  }
+}
+
 .bg-primary {
   background-color: var(--color-primary);
 }

@@ -7,6 +7,7 @@ from PIL import Image
 import easyocr
 from birth_parser import birthParse
 from death_parser import deathParse
+from marriage_parser import marriageParse 
 
 """
 TODO: logger setup
@@ -38,7 +39,9 @@ def run_ocr(file_paths, type_arg):
             parsed_data = birthParse(all_text)
         elif type_arg == "death":
             parsed_data = deathParse(all_text)
-            
+        elif type_arg == "marriage":
+            parsed_data = marriageParse(all_text)
+
         logger.info("[parsed data] %s", parsed_data)
         result = {
             "success": True,

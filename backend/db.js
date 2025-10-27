@@ -283,6 +283,7 @@ db.serialize(() => {
       physician_name TEXT,
       physician_title TEXT,
       physician_address TEXT,
+      physician_date_signed DATE,
       health_officer_name TEXT,
   
       -- Page 8 - Corpse Disposal

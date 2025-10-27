@@ -26,6 +26,8 @@ export function TitleCase(str) {
 
 export function StringToDate(str) {
     try {
+        if (!str) return '';
+
         const formats = [
             "yyyy-MMMM-dd",     
             "MMMM dd, yyyy",    

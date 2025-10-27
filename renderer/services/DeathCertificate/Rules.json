@@ -20,7 +20,7 @@
         "maxLength": "City must not exceed 100 characters."
       }
     },
-    "registry_number": {
+    "registryNumber": {
       "required": true,
       "minLength": 2,
       "maxLength": 100,
@@ -60,7 +60,7 @@
     "sex": {
       "required": true,
       "type": "enum",
-      "options": ["Male", "Female"],
+      "options": ["MALE", "FEMALE"],
       "message": {
         "required": "Sex is required.",
         "enum": "Sex must be either Male or Female."
@@ -153,7 +153,7 @@
     "civilStatus": {
       "required": true,
       "type": "enum",
-      "options": ["Single", "Married", "Divorced", "Widow", "Widower"],
+      "options": ["SINGLE", "MARRIED", "DIVORCED", "WIDOW", "WIDOWER"],
       "message": {
         "required": "Civil status is required.",
         "enum": "Invalid civil status."
@@ -304,13 +304,13 @@
     "methodOfDelivery": {
       "required": false,
       "type": "enum",
-      "options": ["Normal Spontaneous Vertex", "Others"],
+      "options": ["NORMAL SPONTANEOUS VERTEX", "OTHERS"],
       "message": {
       "enum": "Please select a valid method of delivery."
       }
     },
     "methodOfDeliverySpecify": {
-      "requiredIf": "methodOfDelivery === 'Other",
+      "requiredIf": "methodOfDelivery === 'OTHERS",
       "type": "string",
       "maxLength": 100,
       "message": {
@@ -449,7 +449,7 @@
     "mannerOfDeath": {
       "required": true,
       "type": "enum",
-      "options": ["Natural", "Accident", "Suicide", "Homicide", "Undetermined"],
+      "options": ["HOMICIDE", "SUICIDE", "ACCIDENT", "LEGAL INTERVENTION", "NATURAL"],
       "message": {
       "required": "Manner of death is required.",
       "enum": "Please select a valid manner of death."
@@ -458,7 +458,7 @@
     "autopsy": {
       "required": true,
       "type": "enum",
-      "options": ["Yes", "No"],
+      "options": ["YES", "NO"],
       "message": {
       "required": "Please indicate if autopsy was performed.",
       "enum": "Please select Yes or No."
@@ -467,7 +467,7 @@
     "placeOccurrence": {
       "required": true,
       "type": "enum",
-      "options": ["Home", "Hospital", "Work", "Public Place", "Other"],
+      "options": ["HOME", "HOSPITAL", "WORK", "PUBLIC PLACE", "OTHER"],
       "message": {
       "required": "Place of occurrence is required.",
       "enum": "Please select a valid place of occurrence."
@@ -476,14 +476,14 @@
     "attendant": {
       "required": true,
       "type": "enum",
-      "options": ["Private Physician", "Public Health Authority", "Hospital", "None", "Others"],
+      "options": ["PRIVATE PHYSICIAN", "PUBLIC HEALTH AUTHORITY", "HOSPITAL", "NONE", "OTHERS"],
       "message": {
       "required": "Attended by is required.",
       "enum": "Please select a valid attended by."
       }
     },
     "attendantOthersSpecify": {
-      "requiredIf": "attendant === 'Others",
+      "requiredIf": "attendant === 'OTHERS",
       "type": "string",
       "maxLength": 100,
       "message": {
@@ -555,6 +555,14 @@
       "required": "Physician's address is required.",
       "minLength": "Address must be at least 10 characters.",
       "maxLength": "Address must not exceed 150 characters."
+      }
+    },
+    "physicianDateSigned": {
+      "required": true,
+      "type": "date",
+      "message": {
+        "required": "Physician's date signed is required.",
+        "date": "Invalid date format."
       }
     },
     "healthOfficerName": {
@@ -887,7 +895,7 @@
     "affiantCivilStatus": {
       "required": false,
       "type": "enum",
-      "options": ["Single", "Married", "Divorced", "Widow / widower"],
+      "options": ["SINGLE", "MARRIED", "DIVORCED", "WIDOW / WIDOWER"],
       "message": {
         "required": "Civil status is required",
         "enum": "Invalid civil status"

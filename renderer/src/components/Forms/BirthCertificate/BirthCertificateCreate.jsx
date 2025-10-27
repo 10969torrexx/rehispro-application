@@ -208,11 +208,12 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
     //TODO: handle change inputs on pages
     const handleInputChange = (event, section) => {
         const { name, value } = event.target;
+        console.log(`${name}, ${value}`);
         setFormData((prevData) => ({
             ...prevData,
             [section]: {
                 ...prevData[section],
-                [name]: value
+                [name]: value.toUpperCase()
             }
         }));
     };
@@ -489,7 +490,7 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     <input
                                         type="text"
                                         name="registryNumber"
-                                        placeholder="City / Municipality"
+                                        placeholder="Registry Number"
                                         className={`common-input ${errors.registryNumber ? 'input-error' : ''}`}
                                         value={formData.page1.registryNumber}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
@@ -543,13 +544,12 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                 <div>
                                     <label className="block text-sm font-medium">2. Sex</label>
                                     <select name="sex" className={`common-input w-full ${errors.sex ? 'input-error' : ''}`}
-                                        value={capitalizeFirst(formData.page1.sex.toLowerCase())}
+                                        value={formData.page1.sex.toUpperCase()}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        data-value={capitalizeFirst(formData.page1.sex.toLowerCase())}
                                     >
                                         <option value="">Select</option>
-                                        <option value={capitalizeFirst(BirthCertificate.SexTypes.MALE)}>{capitalizeFirst(BirthCertificate.SexTypes.MALE)}</option>
-                                        <option value={capitalizeFirst(BirthCertificate.SexTypes.FEMALE)}>{capitalizeFirst(BirthCertificate.SexTypes.FEMALE)}</option>
+                                        <option value={BirthCertificate.SexTypes.MALE.toUpperCase()}>{BirthCertificate.SexTypes.MALE.toUpperCase()}</option>
+                                        <option value={BirthCertificate.SexTypes.FEMALE.toUpperCase()}>{BirthCertificate.SexTypes.FEMALE.toUpperCase()}</option>
                                     </select>
                                     {errors.sex && <ErrorMessages errors={errors.sex} />}
                                 </div>
@@ -1725,13 +1725,14 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
                                     <select name="civilStatus"
                                         className={`common-input w-full ${errors.civilStatus ? 'input-error' : ''}`}
                                         value={formData.page12.civilStatus}
+                                        data-value={formData.page12.civilStatus}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     >
                                         <option value="">Select</option>
-                                        <option value={capitalizeFirst(CivilStatus.SINGLE)}>{capitalizeFirst(CivilStatus.SINGLE)}</option>
-                                        <option value={capitalizeFirst(CivilStatus.MARRIED)}>{capitalizeFirst(CivilStatus.MARRIED)}</option>
-                                        <option value={capitalizeFirst(CivilStatus.DIVORCED)}>{capitalizeFirst(CivilStatus.DIVORCED)}</option>
-                                        <option value={capitalizeFirst(CivilStatus.WIDOW)}>{capitalizeFirst(CivilStatus.WIDOW)}</option>
+                                        <option value={CivilStatus.SINGLE.toUpperCase()}>{CivilStatus.SINGLE.toUpperCase()}</option>
+                                        <option value={CivilStatus.MARRIED.toUpperCase()}>{CivilStatus.MARRIED.toUpperCase()}</option>
+                                        <option value={CivilStatus.DIVORCED}>{CivilStatus.DIVORCED.toUpperCase()}</option>
+                                        <option value={CivilStatus.WIDOW.toUpperCase()}>{CivilStatus.WIDOW.toUpperCase()}</option>
                                     </select>
                                     {errors.civilStatus && <ErrorMessages errors={errors.civilStatus} />}
                                 </div>

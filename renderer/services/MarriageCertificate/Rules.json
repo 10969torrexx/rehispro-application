@@ -22,7 +22,7 @@
         },
         "registry": {
             "required": true,
-            "type": "number",
+            "type": "text",
             "message": {
                 "required": "Registry No. is required.",
                 "number": "Must be a valid number."
@@ -477,7 +477,7 @@
             "type": "enum",
             "options": [
                 "entered",
-                "notEntered"
+                "not entered"
             ],
             "message": {
                 "required": "Marriage settlement choice is required.",
@@ -525,8 +525,8 @@
             }
         },
         "marriageIssuedOn": {
-            "required": false,
-            "type": "date",
+            "required": true,
+            "type": "text",
             "message": {
                 "date": "Please enter a valid issue date."
             }
@@ -540,7 +540,7 @@
         },
         "executiveOrder": {
             "required": false,
-            "type": "number",
+            "type": "text",
             "min": 1,
             "message": {
                 "number": "Executive Order must be a valid number.",

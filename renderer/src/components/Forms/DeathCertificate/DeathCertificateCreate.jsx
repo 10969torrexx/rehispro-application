@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState} from 'react';
 import { Divider } from '@components';
 import { DeathCertValidation } from '@services';
 import { ErrorMessages, SignaturePlaceholder } from '@components';
@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { StringToDate, capitalizeFirst, TitleCase } from '@myTools';
 
 export default function DeathCertificateCreate({defaultOCRValues}) {
-    const [currentPage, setCurrentPage] = React.useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const pageTitles = [ 
         "Deceased's Information", 
         "Status & Residence", 
@@ -26,20 +26,20 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
         "Confirmation Notice"
     ];
 
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         // Page 1 - Deceased's Information (merged original page1 and page2)
         page1: {
             creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
             creationType: (defaultOCRValues && defaultOCRValues.length > 0)? 'scanned' : 'manual',
             province: defaultOCRValues?.province || "",
             city: defaultOCRValues?.city || "",
-            registry_number: defaultOCRValues?.registry_number || "",
+            registryNumber: defaultOCRValues?.registry_number || "",
             firstName: defaultOCRValues?.first_name || "",
             middleName: defaultOCRValues?.middle_name || "",
             lastName: defaultOCRValues?.last_name || "",
             sex: TitleCase(defaultOCRValues?.sex) || "",
-            dateOfDeath: StringToDate(defaultOCRValues?.date_of_death) || "",
-            dateOfBirth: StringToDate(defaultOCRValues?.date_of_birth) || "",
+            dateOfDeath: StringToDate(defaultOCRValues?.date_of_death  || ""),
+            dateOfBirth: StringToDate(defaultOCRValues?.date_of_birth || ""),
             ageYears: defaultOCRValues?.age_years || "",
             ageMonths: defaultOCRValues?.age_months || "",
             ageDays: defaultOCRValues?.age_days || "",
@@ -120,6 +120,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             physicianName: defaultOCRValues?.physician_name || "",
             physicianTitle: defaultOCRValues?.physician_title || "",
             physicianAddress: defaultOCRValues?.physician_address || "",
+            physicianDateSigned: defaultOCRValues?.physician_date_signed || "",
             healthOfficerName: defaultOCRValues?.health_officer_name || ""
         },
 
@@ -213,17 +214,18 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
     });
 
     const handleInputChange = (event, section) => {
-        const { name, value } = event.target;
-        setFormData((prevData) => ({
+        const { name, value, type } = event.target;
+        setFormData(prevData => ({
             ...prevData,
             [section]: {
-                ...prevData[section],
-                [name]: value
-            }
+            ...prevData[section],
+            [name]: type === 'text' ? value.toUpperCase() : value,
+            },
         }));
     };
+
     //TODO: handle changes pages & validations
-    const [errors, setErrors] = React.useState({});
+    const [errors, setErrors] = useState({});
     const handlePageChange = (direction) => {
         if (direction === 'next') {
             const response = DeathCertValidation.validateForm(formData[`page${currentPage}`], currentPage);
@@ -301,7 +303,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                         creationType: "manual",
                         province: "",
                         city: "",
-                        registry_number: "",
+                        registryNumber: "",
                         firstName: "",
                         middleName: "",
                         lastName: "",
@@ -375,6 +377,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                         physicianName: "",
                         physicianTitle: "",
                         physicianAddress: "",
+                        physicianDateSigned: "",
                         healthOfficerName: ""
                     },
                     page8: {
@@ -464,8 +467,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             });
     };
     
-    
-      return (
+    return (
         <>
             <form className="p-4 h-full mb-4 mx-auto" onSubmit={handleSubmit}>
                 <div className='mb-4'>
@@ -504,13 +506,13 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     <label className="block text-sm font-medium mb-1">Registry Number</label>
                                     <input
                                         type="text"
-                                        name="registry_number"
+                                        name="registryNumber"
                                         placeholder="Registry Number" 
-                                        className={`common-input ${errors.registry_number ? 'input-error' : ''}`}
-                                        value={formData.page1.registry_number}
+                                        className={`common-input ${errors.registryNumber ? 'input-error' : ''}`}
+                                        value={formData.page1.registryNumber}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.city && <ErrorMessages errors={errors.registry_number} />}
+                                    {errors.city && <ErrorMessages errors={errors.registryNumber} />}
                                 </div>
                             </div>
 
@@ -563,8 +565,8 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <option value="MALE">MALE</option>
+                                    <option value="FEMALE">FEMALE</option>
                                 </select>
                                 {errors.sex && <ErrorMessages errors={errors.sex} />}
                             </div>
@@ -585,10 +587,12 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">5. Date of Birth</label>
-                                    <input type="date" name="dateOfBirth" className={`w-full common-input ${errors.dateOfBirth ? 'input-error' : ''}`}
+                                    <input 
+                                        type="date" 
+                                        name="dateOfBirth" 
+                                        className={`w-full common-input ${errors.dateOfBirth ? 'input-error' : ''}`}
                                         value={formData.page1.dateOfBirth}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                        onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                     />
                                     {errors.dateOfBirth && <ErrorMessages errors={errors.dateOfBirth} />}
                                 </div>
@@ -701,11 +705,11 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
-                                    <option value="Widow">Widow</option>
-                                    <option value="Divorced">Divorced</option>
-                                    <option value="Widower">Widower</option>
+                                    <option value="SINGLE">SINGLE</option>
+                                    <option value="MARRIED">MARRIED</option>
+                                    <option value="WIDOW">WIDOW</option>
+                                    <option value="DIVORCED">DIVORCED</option>
+                                    <option value="WIDOWER">WIDOWER</option>
                                 </select>
                                 {errors.civilStatus && <ErrorMessages errors={errors.civilStatus} />}
                             </div>
@@ -945,18 +949,18 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         >
                                             <option value="">Select</option>
-                                            <option value="Normal Spontaneous Vertex">Normal Spontaneous Vertex</option>
-                                            <option value="Others">Others (Specify)</option>
+                                            <option value="NORMAL SPONTANEOUS VERTEX">NORMAL SPONTANEOUS VERTEX</option>
+                                            <option value="OTHERS">OTHERS (Specify)</option>
                                         </select>
                                         {errors.methodOfDelivery && <ErrorMessages errors={errors.methodOfDelivery} />}
-                                        {formData.page4.methodOfDelivery === "Others" && (
+                                        {formData.page4.methodOfDelivery === "OTHERS" && (
                                             <input
-                                            type="text"
-                                            name="methodOfDeliverySpecify"
-                                            placeholder="Specify"
-                                            className={`common-input mt-2 w-full ${errors.methodOfDeliverySpecify ? 'input-error' : ''}`}
-                                            value={formData.page4.methodOfDeliverySpecify}
-                                            onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                                type="text"
+                                                name="methodOfDeliverySpecify"
+                                                placeholder="Specify"
+                                                className={`common-input mt-2 w-full ${errors.methodOfDeliverySpecify ? 'input-error' : ''}`}
+                                                value={formData.page4.methodOfDeliverySpecify}
+                                                onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                             />
                                         )}
                                         {errors.methodOfDeliverySpecify && <ErrorMessages errors={errors.methodOfDeliverySpecify} />}
@@ -1115,11 +1119,11 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Pregnant, not in labor">Pregnant, not in labor</option>
-                                    <option value="Pregnant, in labor">Pregnant, in labor</option>
-                                    <option value="Less than 42 days after delivery">Less than 42 days after delivery</option>
-                                    <option value="42 days to 1 year after delivery">42 days to 1 year after delivery</option>
-                                    <option value="None">None</option>
+                                    <option value="PREGNANT, NOT IN LABOR">PREGNANT, NOT IN LABOR</option>
+                                    <option value="PREGNANT, IN LABOR">PREGNANT, IN LABOR</option>
+                                    <option value="LESS THAN 42 DAYS AFTER DELIVERY">LESS THAN 42 DAYS AFTER DELIVERY</option>
+                                    <option value="42 DAYS TO 1 YEAR AFTER DELIVERY">42 DAYS TO 1 YEAR AFTER DELIVERY</option>
+                                    <option value="NONE">NONE</option>
                                 </select>
                                 {errors.maternalCondition && <ErrorMessages errors={errors.maternalCondition} />}
                             </div>
@@ -1138,11 +1142,11 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Homicide">Homicide</option>
-                                    <option value="Suicide">Suicide</option>
-                                    <option value="Accident">Accident</option>
-                                    <option value="Legal Intervention">Legal Intervention</option>
-                                    <option value="Natural">Natural</option>
+                                    <option value="HOMICIDE">HOMICIDE</option>
+                                    <option value="SUICIDE">SUICIDE</option>
+                                    <option value="ACCIDENT">ACCIDENT</option>
+                                    <option value="LEGAL INTERVENTION">LEGAL INTERVENTION</option>
+                                    <option value="NATURAL">NATURAL</option>
                                 </select>
                                 {errors.mannerOfDeath && <ErrorMessages errors={errors.mannerOfDeath} />}
                             </div>
@@ -1154,8 +1158,8 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
+                                    <option value="YES">YES</option>
+                                    <option value="NO">NO</option>
                                 </select>
                                 {errors.autopsy && <ErrorMessages errors={errors.autopsy} />}
                             </div>
@@ -1169,11 +1173,11 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Home">Home</option>
-                                    <option value="Hospital">Hospital</option>
-                                    <option value="Work">Work</option>
-                                    <option value="Public Place">Public Place</option>
-                                    <option value="Other">Other</option>
+                                    <option value="HOME">Home</option>
+                                    <option value="HOSPITAL">Hospital</option>
+                                    <option value="WORK">Work</option>
+                                    <option value="PUBLIC PLACE">Public Place</option>
+                                    <option value="OTHER">Other</option>
                                 </select>
                                 {errors.placeOccurrence && <ErrorMessages errors={errors.placeOccurrence} />}
                             </div>
@@ -1189,14 +1193,14 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 >
                                     <option value="">Select</option>
-                                    <option value="Private Physician">Private Physician</option>
-                                    <option value="Public Health Authority">Public Health Authority</option>
-                                    <option value="Hospital">Hospital</option>
-                                    <option value="None">None</option>
-                                    <option value="Others">Others (Specify)</option>
+                                    <option value="PRIVATE PHYSICIAN">PRIVATE PHYSICIAN</option>
+                                    <option value="PUBLIC HEALTH AUTHORITY">PUBLIC HEALTH AUTHORITY</option>
+                                    <option value="HOSPITAL">HOSPITAL</option>
+                                    <option value="NONE">NONE</option>
+                                    <option value="OTHERS">OTHERS (Specify)</option>
                                 </select>
 
-                                {formData.page6.attendant === "Others" && (
+                                {formData.page6.attendant === "OTHERS" && (
                                     <input
                                     type="text"
                                     name="attendantOthersSpecify"
@@ -1361,13 +1365,13 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                         <label className="block text-sm font-medium mb-1">Date</label>
                         <input 
                         type="date" 
-                        name="certificationDate" 
-                        className={` w-full common-input ${errors.certificationDate ? 'input-error' : ''}`} 
-                        value={formData.page7.certificationDate || ""}
+                        name="physicianDateSigned" 
+                        className={` w-full common-input ${errors.physicianDateSigned ? 'input-error' : ''}`} 
+                        value={formData.page7.physicianDateSigned || ""}
                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                         onClick={(e) => e.target.showPicker && e.target.showPicker()}
                         />
-                        {errors.certificationDate && <ErrorMessages errors={errors.certificationDate} />}
+                        {errors.physicianDateSigned && <ErrorMessages errors={errors.physicianDateSigned} />}
                     </div>
 
 
@@ -1864,10 +1868,10 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                 onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                               >
                                 <option value="">Select</option>
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                                <option value="Divorced">Divorced</option>
-                                <option value="Widow">Widow</option>
+                                <option value="SINGLE">Single</option>
+                                <option value="MARRIED">Married</option>
+                                <option value="DIVORCED">Divorced</option>
+                                <option value="WIDOW">Widow</option>
                               </select>
                               {errors.affiantCivilStatus && <ErrorMessages errors={errors.affiantCivilStatus} />}
                             </div>

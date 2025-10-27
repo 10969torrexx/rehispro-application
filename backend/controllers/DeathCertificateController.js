@@ -1,7 +1,8 @@
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { callPythonOCR } = require('../services/OCRService');
-
+const deathGenerateHTML = require('../helpers/deathGeneratePDF');
+const puppeteer = require('puppeteer');
 // CREATE Death Certificate
 exports.create = (req, res) => {
     try {
@@ -11,6 +12,7 @@ exports.create = (req, res) => {
         }
 
         const flatData = formData;
+        writeLog(`INFO [DeathCertificate][create] Received data: ${JSON.stringify(flatData)}`);
 
         // Validate creatorId
         const creatorId = Number(flatData.creatorId);
@@ -60,6 +62,7 @@ exports.create = (req, res) => {
             creationType: "creation_type",
             province: "province",
             city: "city",
+            registryNumber: "registry_number",
             firstName: "first_name",
             middleName: "middle_name",
             lastName: "last_name",
@@ -130,6 +133,7 @@ exports.create = (req, res) => {
             physicianName: "physician_name",
             physicianTitle: "physician_title",
             physicianAddress: "physician_address",
+            physicianDateSigned: "physician_date_signed",
             healthOfficerName: "health_officer_name",
 
             // Page 8
@@ -219,6 +223,9 @@ exports.create = (req, res) => {
             }
         }
 
+        writeLog(`INFO [death cert][columns] ${columns}`);
+        writeLog(`INFO [death cert][values] ${values}`);
+
         // Generate placeholders
         const placeholders = columns.map(() => '?').join(', ');
 
@@ -226,10 +233,6 @@ exports.create = (req, res) => {
             INSERT INTO deathcertificates (${columns.join(', ')})
             VALUES (${placeholders})
         `;
-
-        // console.log("🟢 Columns:", columns.length, columns);
-        // console.log("🟢 Values:", values.length);
-        // console.log("🟢 Query:", query);
 
         db.run(query, values, function (err) {
             if (err) {
@@ -260,44 +263,42 @@ exports.create = (req, res) => {
 
 // LIST Death Certificate
 exports.list = (req, res) => {
-    db.all(
-        `
-        SELECT 
-          id,
-          CONCAT_WS(' ', first_name, NULLIF(middle_name, ''), last_name) AS deceased_name,
-          sex,
-          DATE(created_at) AS created_at,
-          place_of_death,
-          city,
-          province,
-          cause_of_death
-        FROM deathcertificates
-        `,
-        (err, rows) => {
-          if (err) {
-            console.error('❌ [DB Error]', err.message);
-            return res.status(500).json({
-              success: false,
-              message: 'Database fetch failed',
-              error: err.message,
-            });
-          }
-      
-          const list_of_death = rows;
-      
-          res.status(200).json({
-            success: true,
-            message: 'Death Certificate List',
-            data: list_of_death,
-          });
-        }
-      );
+  db.all(
+    `
+    SELECT 
+      id,
+      CONCAT_WS(' ', first_name, NULLIF(middle_name, ''), last_name) AS deceased_name,
+      sex,
+      DATE(created_at) AS created_at,
+      place_of_death,
+      city,
+      province,
+      cause_of_death
+    FROM deathcertificates
+    `,
+    (err, rows) => {
+      if (err) {
+        console.error('❌ [DB Error]', err.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Database fetch failed',
+          error: err.message,
+        });
+      }
+  
+      const list_of_death = rows;
+  
+      res.status(200).json({
+        success: true,
+        message: 'Death Certificate List',
+        data: list_of_death,
+      });
+    }
+  );
 };
 
 // VIEW Death Certificate
 exports.view = async (req, res) => {
-  console.log("Attempting to fetch death certificate with ID:", req.params.id);
-
   db.get(
     `SELECT * FROM deathcertificates WHERE id = ?`,
     [req.params.id],
@@ -356,3 +357,35 @@ exports.uploadAndScan = async(req, res) => {
     });
   }
 }   
+
+exports.download = async(req, res) => {
+  try {
+    const data = await new Promise((resolve, reject) => {
+        db.get(`SELECT * FROM deathcertificates WHERE id = ?`, [req.params.id], (err, row) => {
+            if (err) return reject(err);
+            resolve(row);
+        });
+    });
+    writeLog(`INFO [DeathCertificates][download] ${JSON.stringify(data)}`);
+    const html = deathGenerateHTML(data);
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: "networkidle0" });
+    const pdfBuffer = await page.pdf({ 
+      printBackground: true,
+      width: "8.5in",   
+      height: "13in",   
+    });
+    await browser.close();
+    res.set({
+      "Content-Type": "application/pdf",
+      "Content-Disposition": "attachment; filename=death-certificates.pdf",
+      "Content-Length": pdfBuffer.length
+    });
+    res.send(pdfBuffer);
+  } catch (error) {
+    writeLog(`ERROR: [death][download] ${error}`)
+    console.error(error);
+    res.status(500).json({ success: false, message: "Error generating PDF", error: error.message });
+  }
+}

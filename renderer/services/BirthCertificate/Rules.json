@@ -60,7 +60,7 @@
     "sex": {
       "required": true,
       "type": "enum",
-      "options": ["Male", "Female"],
+      "options": ["MALE", "FEMALE"],
       "message": {
         "required": "Sex is required.",
         "enum": "Sex must be either Male or Female."
@@ -791,7 +791,7 @@
     "civilStatus": {
       "required": false,
       "type": "enum",
-      "options": ["Single", "Married", "Divorced", "Widow / widower"],
+      "options": ["SINGLE", "MARRIED", "DIVORCED", "WIDOW / WIDOWER"],
       "message": {
         "required": "Civil status is required.",
         "enum": "Invalid civil status."

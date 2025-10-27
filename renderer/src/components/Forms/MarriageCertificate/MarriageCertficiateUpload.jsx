@@ -5,7 +5,7 @@ import { FileValidation } from '@services';
 import { FileList, LoadingScreen } from '@components';
 import { Limits } from '@enums';
 import { toast } from "react-toastify";
-import { BirthCertServices } from '@services';
+import { MarriageCertServices } from '@services';
 
 export default function MarriageCertificateUpload({setActiveTab, onOCRComplete}) { 
     const [files, setFiles ] = useState([]);
@@ -52,7 +52,7 @@ export default function MarriageCertificateUpload({setActiveTab, onOCRComplete})
         files.forEach(file => formData.append('files', file));
         try {
             setLoading(true)
-            const response = await BirthCertServices.uploadFiles(formData);
+            const response = await MarriageCertServices.upload(formData);
             setLoading(false);
             if (response.success) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
@@ -74,8 +74,13 @@ export default function MarriageCertificateUpload({setActiveTab, onOCRComplete})
     }
     return(
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <div className={`border-2 border-dashed p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer
+            <div className="mb-2">
+                {errors.uploadField && <ErrorMessages errors={errors.uploadField} />}
+                {errors && <ErrorMessages errors={errors.map(err => err.file)} />}
+            </div>
+            <div {...getRootProps()} className={`border-2 border-dashed p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer
                 ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
+                ${errors.length > 0 ? 'input-error' : ''}
             `}>
                 <input {...getInputProps()} 
                     type="file"

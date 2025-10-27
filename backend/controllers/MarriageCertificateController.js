@@ -2,7 +2,7 @@
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { logQuery, interpolateQuery } = require('../utils/querytrace');
-
+const { callPythonOCR } = require('../services/OCRService');
 
 function create(req, res) {
     try {
@@ -236,10 +236,6 @@ function create(req, res) {
             VALUES (${placeholders})
         `;
 
-        console.log("🟢 Columns:", columns.length, columns);
-        console.log("🟢 Values:", values.length);
-        console.log("🟢 Query:", query);
-
         db.run(query, values.filter(val => val !== 'CURRENT_TIMESTAMP'), function (err) {
             if (err) {
                 console.error('[DB Error]', err.message);
@@ -284,8 +280,6 @@ function getAll(req, res) {
 }
 
 function view(req, res) {
-    console.log("Attempting to fetch marriage certificate with ID:", req.params.id);
-
     db.get(
       `SELECT * FROM marriage_certificates WHERE id = ?`,
       [req.params.id],
@@ -310,10 +304,27 @@ function view(req, res) {
     );
 }
 
+async function upload(req, res) {
+    try {
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ success: false, message: 'No files uploaded' });
+        }
+        const filePaths = req.files.map(file => file.path);
+        const response = await callPythonOCR(filePaths, "marriage");
+        
+    } catch (error) {
+        writeLog(`[error] [marraige] [upload] ${JSON.stringify(error)}`);
+        res.status(500).json({
+            success: false,
+            message: 'File upload failed',
+            error: error.message || ""
+        });
+    }
+}
+
 module.exports = {
     create,
     getAll,
-    view
+    view,
+    upload
 };
-
-

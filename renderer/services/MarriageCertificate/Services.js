@@ -67,3 +67,23 @@ export async function viewMarriageCertificate(id) {
         throw error;
     }
 }
+
+export async function upload(formData) {
+    try {
+        const response = await fetch('http://localhost:3001/marriage/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to upload files');
+        }
+        const parsedResponse = await response.json();
+        return parsedResponse;
+    } catch (error) {
+        console.error(error);
+        throw new Error(JSON.stringify({
+            'error': error
+        }))
+    }
+}

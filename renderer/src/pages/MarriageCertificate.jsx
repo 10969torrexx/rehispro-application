@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { SideBar, InfoCard } from '@components';
-import { capitalizeFirst, capitalizeWords } from "../myTools/myTools";
-import {MarriageCertificateHome, MarriageCertificateCreateForm, MarriageCertificateView} from '@components';
+import { MarriageCertificateHome, MarriageCertificateCreateForm, MarriageCertificateView, MarriageCertificateUpload} from '@components';
 
 export default function MarriageCertificate() {
     const [userData, setUserData] = useState(null);
@@ -53,14 +52,25 @@ export default function MarriageCertificate() {
                                 <div className="form-content mb-4">
                                     <MarriageCertificateHome 
                                         onView={(row) => {
-                                            setSelectedRow(row);   // ✅ save the row
-                                            setActiveTab("view");  // ✅ go to view tab
+                                            setSelectedRow(row);   
+                                            setActiveTab("view");  
                                         }}
                                     />
                                 </div>
                             </div>
                         }
-                        {activeTab === "upload" && <div>Upload Content</div>}
+                        {activeTab === "upload" && 
+                            <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="Upload Marriage Certificates"
+                                        message="To upload a marriage certificate, please use the form below to select and submit the document. Ensure that the file is in an accepted format (e.g., PNG, JPEG) and does not exceed the maximum file size limit."
+                                    />
+                                </div>
+                                <div className="form-content mb-4">
+                                    <MarriageCertificateUpload />
+                                </div>
+                            </div>}
                         {activeTab === "create" &&
                             <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <div className="mb-4">
