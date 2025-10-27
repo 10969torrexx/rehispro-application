@@ -1998,7 +1998,7 @@ function deathGenerateHTML(params) {
                         II. Other significant conditions contributing to death:
                     </div>
                     <span class="field-value-span" style="flex-grow: 1; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0; padding: 0;">
-                        ${params.other_significant_conditions || ''}
+                        ${params.other_conditions || ''}
                     </span>
                 </div>
                 </div>
@@ -2013,36 +2013,36 @@ function deathGenerateHTML(params) {
                     <div class="field-label" style="display: flex; justify-content: space-between; align-items: flex-start; width: auto; margin-left: 20px; margin-right: 20px;">
                 
                         <div style="display: flex; align-items: flex-start; margin-right: 15px;">
-                            <span class="field-value-span" style="display:inline-block; width: 20px; height: 0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                &nbsp;✓
+                            <span class="field-value-span" style="font-weight:600px; display:inline-block; width: 20px; height: 0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                               ${params.maternal_condition == "PREGNANT, NOT IN LABOUR" ? '✓' : '&nbsp;'}
                             </span>
                             <div style="margin: 0; padding: 0;">a. pregnant,<br>not in labour</div>
                         </div>
                 
                         <div style="display: flex; align-items: flex-start; margin-right: 15px;">
-                            <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                &nbsp;✓
+                            <span class="field-value-span" style="font-weight:600px; display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                                ${params.maternal_condition == "PREGNANT, IN LABOUR" ? '✓' : '&nbsp;'}
                             </span>
                             <div style="margin: 0; padding: 0;">b. pregnant, in<br>labour</div>
                         </div>
                 
                         <div style="display: flex; align-items: flex-start; margin-right: 15px;">
-                            <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                &nbsp;✓
+                            <span class="field-value-span" style="font-weight:600px; display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                                ${params.maternal_condition == "LESS THAN 42 DAYS AFTER DELIVERY" ? '✓' : '&nbsp;'}
                             </span>
                             <div style="margin: 0; padding: 0;">c. less than 42 days after<br>delivery</div>
                         </div>
                 
                         <div style="display: flex; align-items: flex-start; margin-right: 15px;">
                             <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                &nbsp;✓
+                                ${params.maternal_condition == "42 DAYS TO 1 YEAR AFTER DELIVERY" ? '✓' : '&nbsp;'}
                             </span>
                             <div style="margin: 0; padding: 0;">d. 42 days to 1 year after<br>delivery</div>
                         </div>
                 
                         <div style="display: flex; align-items: flex-start;">
-                            <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                &nbsp;✓
+                            <span class="field-value-span" style="font-weight:600px; display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
+                                ${params.maternal_condition == "NONE" ? '✓' : '&nbsp;'}
                             </span>
                             <div style="margin: 0; padding: 0;">e. None of the<br>choices</div>
                         </div>
@@ -2064,8 +2064,8 @@ function deathGenerateHTML(params) {
                                 <div style="white-space: nowrap;margin-top: 5px; margin-right: 10px;">
                                     a. Manner of death (<span style="color: blue; font-size: 8px;">Homicide, Suicide, Accident, Legal intervention, etc.</span>)
                                 </div>
-                                <span class="field-value-span" style="flex-grow: 1; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
-                                    &nbsp; Sample 
+                                <span class="field-value-span" style="font-weight:600px; flex-grow: 1; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    &nbsp; ${params.manner_of_death || ''}
                                 </span>
                             </div>
                 
@@ -2073,8 +2073,8 @@ function deathGenerateHTML(params) {
                                 <div style="white-space: nowrap;margin-top: 5px; margin-right: 10px;">
                                     b. Place of Occurrence of External Cause (<span style="color: blue; font-size: 8px;">e.g. home, farm, factory, street, sea, etc.</span>)
                                 </div>
-                                <span class="field-value-span" style="flex-grow: 1; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
-                                    &nbsp; Sample 
+                                <span class="field-value-span" style="font-weight:600px; flex-grow: 1; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                    &nbsp; ${params.place_of_occurrence || ''}
                                 </span>
                             </div>
                 
@@ -2087,8 +2087,8 @@ function deathGenerateHTML(params) {
                             <div style="margin-bottom: 1px; font-size: 8px;">
                                 (Yes / No)
                             </div>
-                            <span class="field-value-span" style="margin-top: 5px; width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; ">
-                                &nbsp; Yes
+                            <span class="field-value-span" style="font-weight:600px; margin-top: 5px; width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; ">
+                                &nbsp; ${params.autopsy || ''}
                             </span>
                         </div>
                     </div>
@@ -2107,7 +2107,7 @@ function deathGenerateHTML(params) {
                             <!-- Option 1 -->
                             <div style="display: flex; align-items: flex-start; margin-right: 15px;">
                                 <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                    &nbsp;✓
+                                    ${params.attendant == "PRIVATE PHYSICIAN" ? '&nbsp;✓' : '&nbsp;'}
                                 </span>
                                 <div style="margin: 0; padding: 0;">1 Private<br>Physician</div>
                             </div>
@@ -2115,7 +2115,7 @@ function deathGenerateHTML(params) {
                             <!-- Option 2 -->
                             <div style="display: flex; align-items: flex-start; margin-right: 15px;">
                                 <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                    &nbsp;✓
+                                    ${params.attendant == "PUBLIC HEALTH OFFICER" ? '&nbsp;✓' : '&nbsp;'}
                                 </span>
                                 <div style="margin: 0; padding: 0;">2 Public<br>Health Officer</div>
                             </div>
@@ -2123,7 +2123,7 @@ function deathGenerateHTML(params) {
                             <!-- Option 3 -->
                             <div style="display: flex; align-items: flex-start; margin-right: 15px;">
                                 <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                    &nbsp;✓
+                                   ${params.attendant == "HOSPITAL AUTHORITY" ? '&nbsp;✓' : '&nbsp;'}
                                 </span>
                                 <div style="margin: 0; padding: 0;">3 Hospital<br>Authority</div>
                             </div>
@@ -2131,7 +2131,7 @@ function deathGenerateHTML(params) {
                             <!-- Option 4 -->
                             <div style="display: flex; align-items: flex-start; margin-right: 15px;">
                                 <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                    &nbsp;✓
+                                    ${params.attendant == "NONE" ? '&nbsp;✓' : '&nbsp;'}
                                 </span>
                                 <div style="margin: 0; padding: 0;">4 None</div>
                             </div>
@@ -2139,7 +2139,7 @@ function deathGenerateHTML(params) {
                             <!-- Option 5 -->
                             <div style="display: flex; align-items: flex-start;">
                                 <span class="field-value-span" style="display:inline-block; width: 20px; height:0.8em; line-height:0.8em; border-bottom: 0.2px solid blue; margin-right: 5px; text-align: center;">
-                                    &nbsp;✓
+                                     ${params.attendant == "OTHERS" ? '&nbsp;✓' : '&nbsp;'}
                                 </span>
                                 <div style="margin: 0; padding: 0;">5 Others<br>(Specify)</div>
                             </div>
@@ -2151,9 +2151,13 @@ function deathGenerateHTML(params) {
             
                         <div style="display: flex; justify-content: space-between; align-items: flex-end;">
                             <div style="white-space: nowrap;">From</div>
-                            <span class="field-value-span" style="width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0 10px 0 5px; padding: 0;">&nbsp; sample</span>
+                            <span class="field-value-span" style="width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; margin: 0 10px 0 5px; padding: 0;">
+                                ${params.attendant_from.split('-')[2] || ''} / ${params.attendant_from.split('-')[1] || ''} / ${params.attendant_from.split('-')[0] || ''}
+                            </span>
                             <div style="white-space: nowrap;">To</div>
-                            <span class="field-value-span" style="width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">&nbsp; sample</span>
+                            <span class="field-value-span" style="width: 80%; display: inline-block; height: 1.2em; line-height: 1.2em; border-bottom: 0.2px solid blue; padding: 0; margin: 0;">
+                                ${params.attendant_to.split('-')[2] || ''} / ${params.attendant_to.split('-')[1] || ''} / ${params.attendant_to.split('-')[0] || ''}
+                            </span>
                         </div>
                     </div>
             
@@ -2165,9 +2169,15 @@ function deathGenerateHTML(params) {
                 <div style="margin-bottom: 0px;">22. CERTIFICATION OF DEATH</div>
                 <div style="margin-bottom: 0px;">
                     <span style="padding-left: 2em;">I hereby certify that the foregoing particulars are correct as near as same can be ascertained and I further certify that I</span>
-                    <span style="display:inline-block; width:12px; text-align:center; border: 0.2px solid blue; margin:0 5px;">✓</span> have attended /
-                    <span style="display:inline-block; width:12px; text-align:center; border: 0.2px solid blue; margin:0 5px;">&nbsp;</span> have not attended the deceased and that death occurred at
-                    <span class="field-value-span" style="width:50px; display:inline-block; border-bottom:0.2px solid blue; text-align:center;">08:45</span> am/pm on the date of death specified above.
+                    <span style="display:inline-block; width:12px; text-align:center; border: 0.2px solid blue; margin:0 5px;">
+                        ${params.attended_deceased == "Yes" ? '&nbsp;✓' : '&nbsp;'}
+                    </span> have attended /
+                    <span style="display:inline-block; width:12px; text-align:center; border: 0.2px solid blue; margin:0 5px;">
+                        ${params.attended_deceased == "NO" ? '&nbsp;✓' : '&nbsp;'}
+                    </span> have not attended the deceased and that death occurred at
+                    <span class="field-value-span" style="width:50px; display:inline-block; border-bottom:0.2px solid blue; text-align:center;">
+                        ${params.time_of_death || ''}
+                    </span> am/pm on the date of death specified above.
                 </div>
             
                 <div style="display: flex; width: 100%; ">
@@ -2177,33 +2187,43 @@ function deathGenerateHTML(params) {
                             <div style="display: flex; margin-top: 5px; justify-content: space-between; width: 120px;">
                                 <div style="margin: 0; padding: 0;">Signature</div>
                             </div>
-                            <span class="field-value-span" style="margin-top: 5px; padding-bottom: 1px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">Dr. Juan Dela Cruz</span>
+                            <span class="field-value-span" style="font-weight:600; margin-top: 5px; padding-bottom: 1px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+                               
+                            </span>
                         </li>
             
                         <li style="display: flex; align-items: flex-end; padding: 0 5px;">
                             <div style="display: flex; margin-top: 5px; justify-content: space-between; width: 120px;">
                                 <div style="margin: 0; padding: 0;">Name in Print</div>
                             </div>
-                            <span class="field-value-span" style="margin-top: 5px; padding-bottom: 1px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">Juan Dela Cruz</span>
+                            <span class="field-value-span" style="font-weight:600; margin-top: 5px; padding-bottom: 1px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+                                ${params.physician_name || ''}
+                            </span>
                         </li>
             
                         <li style="display: flex; align-items: flex-end; padding: 0 5px;">
                             <div style="display: flex; margin-top: 5px; justify-content: space-between; width: 120px;">
                                 <div style="margin: 0; padding: 0;">Title or Position</div>
                             </div>
-                            <span class="field-value-span" style="margin-top: 5px; padding-bottom: 1px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">Municipal Physician</span>
+                            <span class="field-value-span" style="font-weight:600; margin-top: 5px; padding-bottom: 1px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+                                ${params.physician_title || ''}
+                            </span>
                         </li>
             
                         <li style="display: flex; align-items: flex-end; padding: 0 5px;">
                             <div style="display: flex; margin-top: 5px; justify-content: space-between; width: 120px;">
                                 <div style="margin: 0; padding: 0;">Address</div>
                             </div>
-                            <span class="field-value-span" style="margin-top: 5px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">123 Main St., City</span>
+                            <span class="field-value-span" style="font-weight:600; margin-top: 5px; font-size: 10px; width: 100%; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+                                ${params.physician_address || ''}
+                            </span>
                         </li>
             
                         <li style="display: flex; align-items: flex-end; padding: 5px 5px 0 5px; justify-content: flex-end;">
                             <div style="white-space: nowrap; margin-right: 5px;">Date</div>
-                            <span class="field-value-span" style="margin-top: 5px; font-size: 10px; width: 100px; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">09/25/2025</span>
+                            <span class="field-value-span" style="font-weight: 600px; margin-top: 5px; font-size: 10px; width: 100px; display:inline-block; height:1.2em; border-bottom:0.2px solid blue;">
+    
+                            </span>
                         </li>
                     </ul>    
             
