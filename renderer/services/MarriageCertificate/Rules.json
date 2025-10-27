@@ -138,8 +138,8 @@
             "required": true,
             "type": "enum",
             "options": [
-                "Male",
-                "Female"
+                "MALE",
+                "FEMALE"
             ],
             "message": {
                 "required": "Sex is required.",
@@ -210,8 +210,8 @@
             "required": true,
             "type": "enum",
             "options": [
-                "Male",
-                "Female"
+                "MALE",
+                "FEMALE"
             ],
             "message": {
                 "required": "Sex is required.",

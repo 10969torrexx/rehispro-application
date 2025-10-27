@@ -4,12 +4,11 @@ import { toast } from "react-toastify";
 import { ErrorMessages, Divider, SignaturePlaceholder } from '@components';
 import { MarriageCertValidation, MarriageCertServices } from '@services';
 import { MarriageCertificate } from '@enums';
-import { capitalizeFirst } from '../../../myTools/myTools';
+import { AllCaps } from '@myTools';
 
 export default function MarriageCertificateCreateForm() {
     // Handles the Pagination 
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 11;
     const pageTitles = [
         "Marriage Details (Husband & Wife Information)",
         "Part II: Background Information (Husband & Wife)",
@@ -273,16 +272,15 @@ export default function MarriageCertificateCreateForm() {
         setFormData((prevData) => {
             const updatedSection = {
                 ...prevData[section],
-                [name]: type === "checkbox" ? checked : value,
+                [name]: type === "checkbox" ? checked : 
+                        type === "text" ? value.toUpperCase() : value,
             };
-
             if (name === "husbandBirthDate") {
                 updatedSection.husbandAge = calculateAge(value);
             }
             if (name === "wifeBirthDate") {
                 updatedSection.wifeAge = calculateAge(value);
             }
-
             return {
                 ...prevData,
                 [section]: updatedSection,
@@ -687,7 +685,6 @@ export default function MarriageCertificateCreateForm() {
                                             className={`w-full common-input ${errors.husbandBirthDate ? 'input-error' : ''}`}
                                             value={formData.page1.husbandBirthDate}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            onClick={(e) => e.target.showPicker && e.target.showPicker()}
                                         />
                                         {errors.husbandBirthDate && <ErrorMessages errors={errors.husbandBirthDate} />}
                                     </div>
@@ -899,8 +896,8 @@ export default function MarriageCertificateCreateForm() {
                                             value={formData.page2.husbandSex}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}>
                                             <option value="">Select sex</option>
-                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.MALE)}>{capitalizeFirst(MarriageCertificate.SexTypes.MALE)}</option>
-                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}>{capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}</option>
+                                            <option value={AllCaps(MarriageCertificate.SexTypes.MALE)}>{AllCaps(MarriageCertificate.SexTypes.MALE)}</option>
+                                            <option value={AllCaps(MarriageCertificate.SexTypes.FEMALE)}>{AllCaps(MarriageCertificate.SexTypes.FEMALE)}</option>
                                         </select>
                                         {errors.husbandSex && <ErrorMessages errors={errors.husbandSex} />}
                                     </div>
@@ -910,7 +907,7 @@ export default function MarriageCertificateCreateForm() {
                                             name="husbandCitizenship"
                                             placeholder="Citizenship"
                                             className={`w-full common-input ${errors.husbandCitizenship ? 'input-error' : ''}`}
-                                            value={capitalizeFirst(formData.page2.husbandCitizenship)}
+                                            value={AllCaps(formData.page2.husbandCitizenship)}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
                                         {errors.husbandCitizenship && <ErrorMessages errors={errors.husbandCitizenship} />}
@@ -1063,8 +1060,8 @@ export default function MarriageCertificateCreateForm() {
                                             value={formData.page2.wifeSex}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}>
                                             <option value="">Select sex</option>
-                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.MALE)}>{capitalizeFirst(MarriageCertificate.SexTypes.MALE)}</option>
-                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}>{capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}</option>
+                                            <option value={AllCaps(MarriageCertificate.SexTypes.MALE)}>{AllCaps(MarriageCertificate.SexTypes.MALE)}</option>
+                                            <option value={AllCaps(MarriageCertificate.SexTypes.FEMALE)}>{AllCaps(MarriageCertificate.SexTypes.FEMALE)}</option>
                                         </select>
                                         {errors.wifeSex && <ErrorMessages errors={errors.wifeSex} />}
                                     </div>
