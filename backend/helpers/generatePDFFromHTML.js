@@ -2900,14 +2900,16 @@ function deathGenerateHTML(params) {
                         <div style="margin-left: 20px; display: flex; flex-direction: column;">
                             
                             <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
-                                <input type="checkbox" style="width: 12px; height: 12px; margin-right: 5px; border: 0.2px solid blue; "checked>
+                                <input type="checkbox" style="width: 12px; height: 12px; margin-right: 5px; border: 0.2px solid blue; " ${params.was_attended == "Yes" ? 'checked' : ''}>
                                 <div style="white-space: nowrap; margin-right: 5px;">was attended by</div>
                                 
-                                <span style="border-bottom: 0.2px solid blue; flex-grow: 1; height: 1.4em; text-align: center;">**Dr. Ricardo Reyes, MD**</span>
+                                <span style="font-weight:600px; border-bottom: 0.2px solid blue; flex-grow: 1; height: 1.4em; text-align: center;">
+                                    ${params.attended_by || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; align-items: flex-end;">
-                                <input type="checkbox" style="width: 12px; height: 12px; margin-right: 5px; border: 0.2px solid blue;" checked>
+                                <input type="checkbox" style="width: 12px; height: 12px; margin-right: 5px; border: 0.2px solid blue;" ${params.was_attended == "No" ? 'checked' : ''}>
                                 was not attended.
                             </div>
                             
@@ -2916,7 +2918,9 @@ function deathGenerateHTML(params) {
                     
                     <div style="margin-bottom: 5px; padding-left: 80px; display: flex; align-items: flex-end;">
                         3. That the cause of death of the deceased was
-                        <span style="border-bottom: 0.2px solid blue; flex-grow: 1; height: 1.4em; margin-left: 5px; text-align: center;">**Cardiovascular Accident (Stroke)**</span>
+                        <span style="border-bottom: 0.2px solid blue; flex-grow: 1; height: 1.4em; margin-left: 5px; text-align: center;">
+                            ${params.cause_of_death || ''}
+                        </span>
                     </div>  
 
                     <div style="margin-bottom: 10px;padding-left: 80px;display: flex;flex-wrap: wrap;align-items: flex-end;">
@@ -2927,10 +2931,12 @@ function deathGenerateHTML(params) {
                         </div>
                     
                         <!-- First line -->
-                        <span id="field1_line1" style="display: inline-block;width: 320px;height: 1.4em;border-bottom: 0.2px solid blue;margin-top: 5px;overflow: hidden;white-space: nowrap;"></span>
+                        <span id="field1_line1" style="font-weight:600px; display: inline-block;width: 320px;height: 1.4em;border-bottom: 0.2px solid blue;margin-top: 5px;overflow: hidden;white-space: nowrap;">
+                            ${params.reason_for_delay || ''}
+                        </span>
                         
                         <!-- Second line -->
-                        <span id="field1_line2" style="display: block;width: 100%;margin-left: 50px;height: 1.4em;border-bottom: 0.2px solid blue;margin-top: 5px;"></span>
+                        <span id="field1_line2" style="font-weight:600px; display: block;width: 100%;margin-left: 50px;height: 1.4em;border-bottom: 0.2px solid blue;margin-top: 5px;"></span>
                     </div>
 
                     <div style="margin-bottom: 10px; padding-left: 80px;">
@@ -2939,21 +2945,27 @@ function deathGenerateHTML(params) {
                     <div style="margin-bottom: 30px; line-height: 1.4;">
                         <div style="padding-left: 80px;">
                             In truth whereof, I have affixed my signature below this
-                            <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 100px;text-align: center;">Sample</span>
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 100px;text-align: center;">
+                                ${params.jurat_day || ''}
+                            </span>
                             day of
-                            <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 200px;text-align: center;">Sample</span>
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 200px;text-align: center;">
+                                ${params.jurat_month_year || ''}
+                            </span>
                             </div>
                         
                         <div style="padding-left: 0px;">
                             at
-                            <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 250px;text-align: center;">Southern Leyte</span>,
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 250px;text-align: center;">
+                                ${params.jurat_place || ''}
+                            </span>,
                             Philippines.
                         </div>
                     
                         <div style="text-align: right; margin-top: 30px;">
                             <div style="display: inline-block; text-align: center;">
                                 <span style="display: inline-block;width: 270px;border-bottom: 0.3px solid blue;text-align: center;line-height: 1.2em;">
-                                    Sample
+                                    
                                 </span>
                                 <div style="font-size: 10px;margin-top: 5px;width: 270px;text-align: center;">
                                     (Signature Over Printed Name of Affiant)
@@ -2967,10 +2979,14 @@ function deathGenerateHTML(params) {
             
                         <div style="padding-left: 80px;">
                         <strong> SUBSCRIBED AND SWORN to before me this</strong>
-                            <span style="border-bottom: 0.3px solid blue;display: inline-block;width: 100px;text-align: center;">**10TH**</span>
+                            <span style="font-weight:600px; border-bottom: 0.3px solid blue;display: inline-block;width: 100px;text-align: center;">
+                                ${params.ctc_day || ''}
+                            </span>
                             day of
-                            <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">**OCTOBER**</span>,
-                            <span style="border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">**2025**</span> at
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">
+                                ${params.ctc_month_year || ''}
+                            </span>,
+                            <span style="font-weight:600px; border-bottom: 0.2px solid blue;display: inline-block;width: 120px;text-align: center;">**2025**</span> at
                         </div>
                         
                         <div style="padding-left: 0px;">
