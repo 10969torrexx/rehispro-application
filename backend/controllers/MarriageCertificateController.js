@@ -266,9 +266,9 @@ function getAll(req, res) {
             husband_first_name || ' ' || husband_last_name AS husband,
             wife_first_name || ' ' || wife_last_name AS wife,
             date_of_marriage AS date,
-            place_of_marriage AS place
+            place_of_marriage_barangay || ', ' || place_of_marriage_city || ', ' || place_of_marriage_province AS place
         FROM marriage_certificates
-        ORDER BY date_of_marriage DESC
+        ORDER BY date_of_marriage DESC;
     `;
 
     db.all(query, [], (err, rows) => {

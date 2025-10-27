@@ -119,7 +119,9 @@ export default function MarriageCertificateCreateForm() {
 
         // Page 4: formData Input Validation
         page4: {
-            placeOfMarriage: "",
+            placeOfMarriageBarangay: "",
+            placeOfMarriageCity: "",
+            placeOfMarriageProvince: "",
             dateOfMarriage: "",
             timeOfMarriage: "",
             certHusbandName: "",
@@ -421,7 +423,9 @@ export default function MarriageCertificateCreateForm() {
             wifeConsentPersonCountry: ""
         },
         page4: {
-            placeOfMarriage: "",
+            placeOfMarriageBarangay: "",
+            placeOfMarriageCity: "",
+            placeOfMarriageProvince: "",
             dateOfMarriage: "",
             timeOfMarriage: "",
             certHusbandName: "",
@@ -1600,18 +1604,47 @@ export default function MarriageCertificateCreateForm() {
                         <span>
                             <p>15. Place of Marriage</p>
                         </span>
-                        <div className="flex items-center gap-1 mt-1 mb-3">
+                        <div className="flex flex-col gap-3 mt-1 mb-3">
+                            {/* Office/House/Barangay/Church/Mosque */}
                             <div className="w-full">
-                                <label>Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province) </label>
+                                <label>Office of the / House of / Barangay of / Church of / Mosque</label>
                                 <input
                                     type="text"
-                                    name="placeOfMarriage"
-                                    placeholder="Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province)"
-                                    className={`w-full common-input ${errors.placeOfMarriage ? 'input-error' : ''}`}
-                                    value={formData.page4.placeOfMarriage}
+                                    name="placeOfMarriageOffice"
+                                    placeholder="Office of the / House of / Barangay of / Church of / Mosque"
+                                    className={`w-full common-input ${errors.placeOfMarriageOffice ? 'input-error' : ''}`}
+                                    value={formData.page4.placeOfMarriageOffice}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
-                                {errors.placeOfMarriage && <ErrorMessages errors={errors.placeOfMarriage} />}
+                                {errors.placeOfMarriageOffice && <ErrorMessages errors={errors.placeOfMarriageOffice} />}
+                            </div>
+
+                            {/* City / Municipality */}
+                            <div className="w-full">
+                                <label>City / Municipality</label>
+                                <input
+                                    type="text"
+                                    name="placeOfMarriageCity"
+                                    placeholder="City / Municipality"
+                                    className={`w-full common-input ${errors.placeOfMarriageCity ? 'input-error' : ''}`}
+                                    value={formData.page4.placeOfMarriageCity}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.placeOfMarriageCity && <ErrorMessages errors={errors.placeOfMarriageCity} />}
+                            </div>
+
+                            {/* Province */}
+                            <div className="w-full">
+                                <label>Province</label>
+                                <input
+                                    type="text"
+                                    name="placeOfMarriageProvince"
+                                    placeholder="Province"
+                                    className={`w-full common-input ${errors.placeOfMarriageProvince ? 'input-error' : ''}`}
+                                    value={formData.page4.placeOfMarriageProvince}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.placeOfMarriageProvince && <ErrorMessages errors={errors.placeOfMarriageProvince} />}
                             </div>
                         </div>
 

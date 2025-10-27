@@ -458,7 +458,9 @@ db.serialize(() => {
         wife_consent_person_country TEXT,
 
         -- Page 4: Marriage Details
-        place_of_marriage TEXT,
+        place_of_marriage_barangay TEXT,
+        place_of_marriage_city TEXT,
+        place_of_marriage_province TEXT,
         date_of_marriage TEXT,
         time_of_marriage TEXT,
         cert_husband_name TEXT,
