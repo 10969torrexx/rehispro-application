@@ -269,21 +269,38 @@ export default function MarriageCertificateCreateForm() {
 
     });
 
-    // Handles Input Change on Pages
     const handleInputChange = (event, section) => {
-        const { name, type, value, checked } = event.target;
+    const { name, type, value, checked } = event.target;
+
         setFormData((prevData) => {
             const updatedSection = {
                 ...prevData[section],
-                [name]: type === "checkbox" ? checked : 
-                        type === "text" ? value.toUpperCase() : value,
+                [name]: type === "checkbox"
+                    ? checked
+                    : type === "text"
+                    ? value.toUpperCase()
+                    : value,
             };
+
+            // 👇 Auto-calculate ages
             if (name === "husbandBirthDate") {
                 updatedSection.husbandAge = calculateAge(value);
             }
             if (name === "wifeBirthDate") {
                 updatedSection.wifeAge = calculateAge(value);
             }
+
+            // 👇 Clear license fields if certification changes and is NOT "license"
+            if (name === "certification" && value !== "license") {
+                updatedSection.marriageLicenseNo = "";
+                updatedSection.marriageIssuedOn = "";
+                updatedSection.marriageIssuedAt = "";
+            }
+
+            if (name === "certification" && value !== "notLicence") {
+                updatedSection.executiveOrder = "";
+            }
+
             return {
                 ...prevData,
                 [section]: updatedSection,
