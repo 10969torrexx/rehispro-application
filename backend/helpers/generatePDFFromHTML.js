@@ -3709,18 +3709,22 @@ function marriageGenerateHTML(params) {
                     
                         <div style="display: flex; flex-direction: column; flex-grow: 0.6; text-align: center; ">
                             <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em;">
-                                ${params.place_of_marriage || ''}
+                                ${params.place_of_marriage_barangay || ''}
                             </span>
                             <span class="field-label-small-text-2" style="white-space: nowrap; margin-top: 2px;">(Office of the/House of/Barangay of/Church of/Mosque of)</span>
                         </div>
                     
                         <div style="display: flex; flex-direction: column; flex-grow: 0.25; margin-left: 10px; text-align: center;">
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em;">SOGOD</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em;">
+                                ${params.place_of_marriage_city || ''}
+                            </span>
                             <span class="field-label-small-text-2" style="white-space: nowrap; margin-top: 2px;">(City/Municipality)</span>
                         </div>
                     
                         <div style="display: flex; flex-direction: column; flex-grow: 0.25; margin-left: 10px; text-align: center;">
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em;">LEYTE</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em;">
+                                ${params.place_of_marriage_province || ''}
+                            </span>
                             <span class="field-label-small-text-2" style="white-space: nowrap; margin-top: 2px;">(Province)</span>
                         </div>
                     </div>
