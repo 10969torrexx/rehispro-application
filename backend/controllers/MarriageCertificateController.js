@@ -280,8 +280,6 @@ function getAll(req, res) {
 }
 
 function view(req, res) {
-    console.log("Attempting to fetch marriage certificate with ID:", req.params.id);
-
     db.get(
       `SELECT * FROM marriage_certificates WHERE id = ?`,
       [req.params.id],

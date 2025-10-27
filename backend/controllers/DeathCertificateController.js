@@ -293,8 +293,6 @@ exports.list = (req, res) => {
 
 // VIEW Death Certificate
 exports.view = async (req, res) => {
-  console.log("Attempting to fetch death certificate with ID:", req.params.id);
-
   db.get(
     `SELECT * FROM deathcertificates WHERE id = ?`,
     [req.params.id],
