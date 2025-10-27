@@ -20,7 +20,7 @@
         "maxLength": "City must not exceed 100 characters."
       }
     },
-    "registry_number": {
+    "registryNumber": {
       "required": true,
       "minLength": 2,
       "maxLength": 100,

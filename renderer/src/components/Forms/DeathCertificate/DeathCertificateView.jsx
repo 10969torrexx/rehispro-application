@@ -66,7 +66,7 @@ export default function DeathCertificateView({ row }) {
                                 <div className="mb-4 space-y-6">
                                     <h2 className="text-lg text-center font-semibold">Deceased's Information</h2>
                                     {/* Province & City / Municipality */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                                         <div className="flex flex-col">
                                             <label className="block text-sm font-medium mb-1">Province</label>
                                             <input
@@ -86,6 +86,17 @@ export default function DeathCertificateView({ row }) {
                                                 placeholder="City / Municipality"
                                                 className="common-input"
                                                 value={deceased.city || ''}
+                                                readOnly
+                                            />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <label className="block text-sm font-medium mb-1">Registry Number</label>
+                                            <input
+                                                type="text"
+                                                name="registryNumber"
+                                                placeholder="Registry Number"
+                                                className="common-input"
+                                                value={deceased.registry_number || ''}
                                                 readOnly
                                             />
                                         </div>

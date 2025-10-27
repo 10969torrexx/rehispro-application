@@ -62,6 +62,7 @@ exports.create = (req, res) => {
             creationType: "creation_type",
             province: "province",
             city: "city",
+            registryNumber: "registry_number",
             firstName: "first_name",
             middleName: "middle_name",
             lastName: "last_name",
@@ -221,6 +222,9 @@ exports.create = (req, res) => {
                 values.push(flatData[key]);
             }
         }
+
+        writeLog(`INFO [death cert][columns] ${columns}`);
+        writeLog(`INFO [death cert][values] ${values}`);
 
         // Generate placeholders
         const placeholders = columns.map(() => '?').join(', ');

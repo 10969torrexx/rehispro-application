@@ -33,7 +33,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             creationType: (defaultOCRValues && defaultOCRValues.length > 0)? 'scanned' : 'manual',
             province: defaultOCRValues?.province || "",
             city: defaultOCRValues?.city || "",
-            registry_number: defaultOCRValues?.registry_number || "",
+            registryNumber: defaultOCRValues?.registry_number || "",
             firstName: defaultOCRValues?.first_name || "",
             middleName: defaultOCRValues?.middle_name || "",
             lastName: defaultOCRValues?.last_name || "",
@@ -303,7 +303,7 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                         creationType: "manual",
                         province: "",
                         city: "",
-                        registry_number: "",
+                        registryNumber: "",
                         firstName: "",
                         middleName: "",
                         lastName: "",
@@ -506,13 +506,13 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
                                     <label className="block text-sm font-medium mb-1">Registry Number</label>
                                     <input
                                         type="text"
-                                        name="registry_number"
+                                        name="registryNumber"
                                         placeholder="Registry Number" 
-                                        className={`common-input ${errors.registry_number ? 'input-error' : ''}`}
-                                        value={formData.page1.registry_number}
+                                        className={`common-input ${errors.registryNumber ? 'input-error' : ''}`}
+                                        value={formData.page1.registryNumber}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                     />
-                                    {errors.city && <ErrorMessages errors={errors.registry_number} />}
+                                    {errors.city && <ErrorMessages errors={errors.registryNumber} />}
                                 </div>
                             </div>
 
