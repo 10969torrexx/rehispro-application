@@ -3058,7 +3058,7 @@ function deathGenerateHTML(params) {
 }
 
 function marriageGenerateHTML(params) {
-    return`
+    return `
         <html lang="en">
             <style>
                 .field-label {
@@ -3163,14 +3163,14 @@ function marriageGenerateHTML(params) {
                     <div style="padding-left: 4px; display: flex; justify-content:space-evenly;  flex-direction: column; width: 70%; border-right: 0.2px solid rgb(224, 67, 93);">
                         <div style="display: flex; padding-top: 4px;">
                             <span>Province:</span>
-                            <span style="flex-grow: 1; display:inline-block; height: 1.2em; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center;">
-                                Leyte
+                            <span style="font-weight:600px; flex-grow: 1; display:inline-block; height: 1.2em; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center;">
+                                ${params.province || ''}
                             </span>
                         </div>
                         <div style="display: flex;">
                             <span>City/Municipality:</span>
-                            <span style="flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center;">
-                                Sogod
+                            <span style="font-weight:600px;  flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center;">
+                                ${params.city || ''}
                             </span>
                         </div>
                     </div>
@@ -3178,8 +3178,8 @@ function marriageGenerateHTML(params) {
                         <span>
                         Registry No.
                         </span>
-                        <span style="display: inline-block; width: 98%;  height: 15px; line-height: 15px; text-align: center;">
-                        2025-00123
+                        <span style="font-weight:600px; display: inline-block; width: 98%;  height: 15px; line-height: 15px; text-align: center;">
+                            ${params.registry || ''}
                         </span>
                     </div>
                     </div>
@@ -3202,31 +3202,42 @@ function marriageGenerateHTML(params) {
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; flex-direction: column; justify-content: space-evenly;">
                             <div style="display: flex;">
                                 <span class="field-label-small-text" style="width: 20%;  padding-top: 2px;"> (First) </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">CARLO</span>
+                                <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">
+                                    ${params.husband_first_name || ''}
+                                </span>
                             </div>
                             <div style="display: flex;">
                                 <span class="field-label-small-text" style="width: 20%; padding-top: 2px;"> (Middle) </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">M.</span>
+                                <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">
+                                    ${params.husband_middle_name || ''}
+                                </span>
                             </div>
                             <div style="display: flex;">
                                 <span class="field-label-small-text" style="width: 20%; padding-top: 2px;"> (Last) </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">DELA CRUZ</span>
+                                <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">
+                                    ${params.husband_last_name || ''}
+                                </span>
                             </div>
                         </div>
                 
                         <div style="width: 40%; padding: 4px; display: flex; flex-direction: column; justify-content: space-evenly;">
                             <div style="display: flex;">
                                 <span class="field-label-small-text" style="width: 20%; padding-top: 2px;"> (First) </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">JANE</span>
+                                <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">
+                                    ${params.wife_first_name || ''}
+                                </span>
                             </div>
                             <div style="display: flex;">
                                 <span class="field-label-small-text" style="width: 20%; padding-top: 2px;"> (Middle) </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">S.</span>
+                                <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">
+                                    ${params.wife_middle_name || ''}
+                                </span>
                             </div>
                             <div style="display: flex;">
                                 <span class="field-label-small-text" style="width: 20%; padding-top: 2px;"> (Last) </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">SANTOS</span>
-                            </div>
+                                <span style="font-weight: 600px; border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; text-align: center;">
+                                    ${params.wife_last_name || ''}
+                                </span>
                         </div>
                     </div>
             <!-- Date of Birth and Age -->
@@ -3239,45 +3250,61 @@ function marriageGenerateHTML(params) {
                         <div style=" width: 40%; padding: 0 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-start; justify-content: space-evenly;">
 
                             <div style="display: flex; flex-direction: column; align-items: center; width: 10%;">
-                            <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Day)</span>  
-                            <span style="width: 100%; text-align: center;">14</span>
+                                <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Day)</span>  
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_birth_day.split('-')[2] || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
-                            <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Month)</span>  
-                            <span style="width: 100%; text-align: center;">FEB</span>
+                                <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Month)</span>  
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_birth_day.split('-')[1] || ''}
+                                </span>
                             </div>
                             
                             <div style=" height: 100%; display: flex; flex-direction: column; align-items: center; width: 20%; border-right: 0.2px solid rgb(224, 67, 93); ">
-                            <span class="field-label-small-text" style="padding:2px 0 4px 0; ">(Year)</span>  
-                            <span style="width: 100%; text-align: center;">1990</span>
+                                <span class="field-label-small-text" style="padding:2px 0 4px 0; ">(Year)</span>  
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_birth_day.split('-')[0] || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 10%;">
-                            <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Age)</span>  
-                            <span style="width: 100%; text-align: center;">35</span>
+                                <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Age)</span>  
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_age || ''}
+                                </span>
                             </div>
                         </div>      
                         <div style=" width: 40%; padding: 0 4px;  display: flex; align-items: flex-start; justify-content: space-evenly;">
 
                         <div style="display: flex; flex-direction: column; align-items: center; width: 10%;">
                             <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Day)</span>  
-                            <span style="width: 100%; text-align: center;">14</span>
+                            <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.wife_birth_date.split('-')[2] || ''}
+                            </span>
                         </div>
                         
                         <div style="display: flex; flex-direction: column; align-items: center; width: 25%;">
                             <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Month)</span>  
-                            <span style="width: 100%; text-align: center;">FEB</span>
+                            <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.wife_birth_date.split('-')[1] || ''}
+                            </span>
                         </div>
                         
                         <div style=" height: 100%; display: flex; flex-direction: column; align-items: center; width: 20%; border-right: 0.2px solid rgb(224, 67, 93); ">
                             <span class="field-label-small-text" style="padding:2px 0 4px 0; ">(Year)</span>  
-                            <span style="width: 100%; text-align: center;">1990</span>
+                            <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.wife_birth_date.split('-')[0] || ''}
+                            </span>
                         </div>
                         
                         <div style="display: flex; flex-direction: column; align-items: center; width: 10%;">
                             <span class="field-label-small-text" style="padding:2px 0 4px 0;">(Age)</span>  
-                            <span style="width: 100%; text-align: center;">35</span>
+                            <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                ${params.wife_age || ''}
+                            </span>
                         </div>
                     </div>      
                 </div>
@@ -3290,33 +3317,45 @@ function marriageGenerateHTML(params) {
                         <div style="width: 40%; padding: 4px; border-right: 1px solid rgb(224, 67, 93); display: flex; align-items: flex-start; justify-content: space-around;">
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 4px;">(City/Municipality)</span>
-                                <span style="width: 100%; text-align: center;">SOGOD</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_birth_city || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 4px;">(Province)</span>
-                                <span style="width: 100%; text-align: center;">LEYTE</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_birth_province || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 20%;">
                                 <span class="field-label-small-text" style="padding-bottom: 4px;">(Country)</span>
-                                <span style="width: 100%; text-align: center;">PH</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.husband_birth_country || ''}
+                                </span>
                             </div>
                         </div>      
                         <div style="width: 40%; padding: 4px; display: flex; align-items: flex-start; justify-content: space-around;">
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 4px;">(City/Municipality)</span>
-                                <span style="width: 100%; text-align: center;">SOGOD</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_birth_city || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
                                 <span class="field-label-small-text" style="padding-bottom: 4px;">(Province)</span>
-                                <span style="width: 100%; text-align: center;">LEYTE</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_birth_province || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; align-items: center; width: 20%;">
                                 <span class="field-label-small-text" style="padding-bottom: 4px;">(Country)</span>
-                                <span style="width: 100%; text-align: center;">PH</span>
+                                <span style="font-weight: 600px; width: 100%; text-align: center;">
+                                    ${params.wife_birth_country || ''}
+                                </span>
                             </div>
                         </div>      
                         </div>

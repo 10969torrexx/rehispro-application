@@ -1,4 +1,3 @@
-// renderer\src\components\Forms\MarriageCertificate\MarriageCertificateHome.jsx
 import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { MarriageCertServices } from "@services";
