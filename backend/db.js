@@ -202,7 +202,6 @@ db.serialize(() => {
   `);
 
   //TODO: create table for death certificates
-
   db.run(`
     CREATE TABLE IF NOT EXISTS deathcertificates (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -368,7 +367,6 @@ db.serialize(() => {
     );
   `);
 
-  // db.run  (`DROP TABLE IF EXISTS marriage_certificates`);
   // TODO: Create Table for Marriage Certificate Form
   db.run(`
     CREATE TABLE IF NOT EXISTS marriage_certificates (
@@ -584,6 +582,27 @@ db.serialize(() => {
         updated_at TIMESTAMP DEFAULT (datetime('now')),
         deleted_at TIMESTAMP
     );
+  `);
+
+  //TODO: create visitor logs table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS visitor_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+      name TEXT,
+      purpose TEXT,
+      contact_number TEXT,
+      address TEXT,
+      time_in TIMESTAMP DEFAULT (datetime('now')),
+      time_out TIMESTAMP,
+      remarks TEXT,
+      officer_in_charge INTEGER,
+      status TEXT DEFAULT 'on-going',
+
+      created_at TIMESTAMP DEFAULT (datetime('now')),
+      updated_at TIMESTAMP DEFAULT (datetime('now')),
+      deleted_at TIMESTAMP
+    )
   `);
 
 });

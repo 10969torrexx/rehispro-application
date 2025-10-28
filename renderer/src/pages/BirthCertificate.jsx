@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { SideBar } from '@components';
-import { InfoCard, BirthCertificateCreate, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
+import { SideBar, InfoCard, BirthCertificateCreate, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
 import { useSearchParams } from 'react-router-dom'; 
 
 export default function BirthCertificate() {
