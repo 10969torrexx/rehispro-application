@@ -2,6 +2,7 @@ const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const { callPythonOCR } = require('../services/OCRService');
+const { generate } = require('../helpers/marriageGeneratePDF');
 const puppeteer = require('puppeteer');
 
 function create(req, res) {
