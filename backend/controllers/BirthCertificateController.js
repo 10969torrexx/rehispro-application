@@ -3,7 +3,7 @@ const { writeLog } = require('../utils/logger');
 const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
 const path = require('path');
-const birthGenerateHTML = require('../helpers/generatePDFFromHTML');
+const birthGenerateHTML = require('../helpers/birthGeneratePDF');
 const puppeteer = require('puppeteer');
 
 function create (req, res) {
