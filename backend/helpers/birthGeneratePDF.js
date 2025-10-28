@@ -1,4 +1,4 @@
-function birthGenerateHTML(params) {
+function generate(params) {
     return `
         <html lang="en">
             <head>
@@ -1348,5 +1348,5 @@ function birthGenerateHTML(params) {
 }
 
 module.exports = (
-    birthGenerateHTML
+    generate
 );

@@ -3,7 +3,7 @@ const { writeLog } = require('../utils/logger');
 const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
 const path = require('path');
-const birthGenerateHTML = require('../helpers/birthGeneratePDF');
+const generate = require('../helpers/birthGeneratePDF');
 const puppeteer = require('puppeteer');
 
 function create (req, res) {
@@ -351,7 +351,7 @@ async function download(req, res) {
             });
         });
         writeLog(`INFO [BirthCertificateController][download] ${JSON.stringify(data)}`);
-        const html = birthGenerateHTML(data);
+        const html = generate(data);
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.setContent(html, { waitUntil: "networkidle0" });

@@ -1,4 +1,4 @@
-function deathGenerateHTML(params) {
+function generate(params) {
     return `
         <html lang="en">
         <head>
