@@ -1709,5 +1709,5 @@ function generate(params) {
 }
 
 module.exports = (
-    deathGenerateHTML
+    generate
 );

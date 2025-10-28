@@ -50,7 +50,6 @@ export async function listDeathCertificate() {
     }
 }
 
-
 /**
  * View death certificate data
  * @param {string|number} id - The ID of the death certificate
@@ -76,7 +75,6 @@ export async function viewDeathCertificate(id) {
         throw error;
     }
 }
-
 
 /**
  * TODO: handle file upload for the birth cert.

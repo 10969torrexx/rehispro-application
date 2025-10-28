@@ -343,7 +343,7 @@ async function download(req, res) {
         await browser.close();
         res.set({
             "Content-Type": "application/pdf",
-            "Content-Disposition": "attachment; filename=death-certificates.pdf",
+            "Content-Disposition": "attachment; filename=marriage-certificates.pdf",
             "Content-Length": pdfBuffer.length
         });
         res.send(pdfBuffer);
