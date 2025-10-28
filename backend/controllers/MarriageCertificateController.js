@@ -343,9 +343,15 @@ async function download(req, res) {
         const page = await browser.newPage();
         await page.setContent(html, { waitUntil: "networkidle0" });
         const pdfBuffer = await page.pdf({ 
+            format: 'A4',
             printBackground: true,
-            width: "8.5in",   
-            height: "13in",   
+            margin: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            },
+            preferCSSPageSize: true // Add this
         });
         await browser.close();
         res.set({

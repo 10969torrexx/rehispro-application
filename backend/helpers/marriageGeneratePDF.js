@@ -25,7 +25,6 @@ function generate(params) {
                 font-family: Arial;
                 margin: 0;
                 padding: 0;
-                background: #f0f0f0;
                 }
 
                 .page {
@@ -37,6 +36,7 @@ function generate(params) {
                 page-break-after: always;
                 position: relative;
                 }
+
 
                 /* Inner content box with 1in margin and blue border */
                 .content {
@@ -51,9 +51,9 @@ function generate(params) {
                 }
 
                 .header {
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
                 }
 
                 .header-left {
