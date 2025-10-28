@@ -1108,23 +1108,33 @@ function generate(params) {
                             <div style="margin-bottom: 4px;">
                                 <div style="display: flex; align-items: flex-start; margin-bottom: 5px;">
                                     <span style="white-space: nowrap; ">2.</span>  
-                                    <span style=" margin-left: 2px; border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&#10003;</span>
+                                    <span style=" margin-left: 2px; border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                        ${params.statement2a == 1 ? '&#10003;' : '&nbsp;'}
+                                    </span>
                                     <span style="display: inline;">a. That I have ascertained the qualifications of the contracting parties and have found no legal impediment for them to marry as required by Article 34 of the Family Code;</span>
                                 </div>
 
                                 <div style="margin-left: 10px; line-height: 1.6;">
                                     <div style="display: flex; align-items: flex-start; margin-bottom: 5px;">
-                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&nbsp;</span>
+                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                            ${params.statement2b == 1 ? '&#10003;' : '&nbsp;'}
+                                        </span>
                                         <span style="display: inline;">b. That this marriage was performed in **articulo mortis** or at the point of death;</span>
                                     </div>
                                     
                                     <div style="display: flex; flex-direction: column; margin-bottom: 5px;">
                                         <div style="display: flex; align-items: flex-start;">
-                                            <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&nbsp;</span>
+                                            <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                                ${params.statement2c == 1 ? '&#10003;' : '&nbsp;'}
+                                            </span>
                                             <span style="display: inline;">c. That the contracting party/ies </span>
-                                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin: 0 5px;">&nbsp; EXAMPLES</span>
+                                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin: 0 5px;">
+                                                &nbsp; ${params.statement2c_party1 || ''}
+                                            </span>
                                             <span style="white-space: nowrap;"> and </span>
-                                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">&nbsp; EXAMPLES</span>
+                                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                                &nbsp; ${params.statement2c_party2 || ''}
+                                            </span>
                                             <span style="white-space: nowrap; margin-left: 5px;">, being at the point of</span>
                                         </div>
                                         <div style="margin-left: 15px; margin-top: 2px;">
@@ -1133,12 +1143,16 @@ function generate(params) {
                                     </div>
                                     
                                     <div style="display: flex; align-items: flex-start; margin-bottom: 5px;">
-                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&nbsp;</span>
+                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                            ${params.statement2d == 1 ? '&#10003;' : '&nbsp;'}
+                                        </span>
                                         <span style="display: inline;">d. That the residence of either party is so located that there is no means of transportation to enable concerned party/parties to appear personally before the civil registrar;</span>
                                     </div>
                                     
                                     <div style="display: flex; align-items: flex-start;">
-                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&nbsp;</span>
+                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                            ${params.statement2e == 1 ? '&#10003;' : '&nbsp;'}
+                                        </span>
                                         <span style="display: inline;">e. That the marriage was among Muslims or among members of the Ethnic Cultural Communities and that the marriage was solemnized in accordance with their customs and practices;</span>
                                     </div>
                                 </div>
@@ -1157,15 +1171,23 @@ function generate(params) {
                             
                             <div style="display: flex; align-items: flex-end; width: 100%; padding-bottom: 4px;">
                                 <span style="white-space: nowrap; padding-left: 50px;">In truth whereof, I have affixed my signature below this </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 8%; height: 1em; line-height: 1em; text-align: center; margin: 0 5px;">18th</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 8%; height: 1em; line-height: 1em; text-align: center; margin: 0 5px;">
+                                    ${params.affidavit_day || ''}
+                                </span>
                                 <span style="white-space: nowrap;"> day of </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">OCTOBER</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                    ${params.affidavit_month || ''}
+                                </span>
                                 <span style="white-space: nowrap;">, </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 15%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">2025</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 15%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                    ${params.affidavit_year || ''}
+                                </span>
                                 <span style="white-space: nowrap; margin: 0 5px;"> at </span>
                             </div>
                             <div style="display: flex; align-items: flex-end; width: 100%;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 50%; height: 1em; line-height: 1em; text-align: center;">SOGOD, LEYTE</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 50%; height: 1em; line-height: 1em; text-align: center;">
+                                    ${params.affidavit_place || ''}
+                                </span>
                                 <span style="white-space: nowrap; margin-left: 5px;">, Philippines.</span>
                             </div>
 
@@ -1183,24 +1205,38 @@ function generate(params) {
                             <div style="display: flex; align-items: flex-end; width: 100%;">
                                 <span style=" white-space: nowrap; padding-left: 50px;">SUBSCRIBED AND SWORN</span>
                                 <span style="white-space: nowrap;"> to before me this </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin: 0 5px;">18th</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin: 0 5px;">
+                                    ${params.sworn_day || ''}
+                                </span>
                                 <span style="white-space: nowrap;"> day of </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">OCTOBER</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">
+                                    ${params.sworn_month || ''}
+                                </span>
                                 <span style="white-space: nowrap;">, </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">2025</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">
+                                    ${params.sworn_year || ''}
+                                </span>
                                 <span style="white-space: nowrap; margin-left: 5px;">at</span>
                             </div>
                             
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 4px;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">2025</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">
+                                    ${params.sworn_at || ''}
+                                </span>
                                 <span style="white-space: nowrap; margin-left: 5px;">, Philippines, affiant who exhibited to me his Community Tax Cert.</span>
                             </div>
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 4px;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1.2em; text-align: center; margin-left: 5px;">01-05-2025</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1.2em; text-align: center; margin-left: 5px;">
+                                    ${params.sworn_issued_on || ''}
+                                </span>
                                 <span style="white-space: nowrap;">issued on </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">01-05-2025</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                    ${params.sworn_issued_on2 || ''}
+                                </span>
                                 <span style="white-space: nowrap; margin-left: 5px;">at</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">SOGOD, LEYTE</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                    ${params.sworn_issued_at || ''}
+                                </span>
                             </div>
                         </div>
                     
@@ -1210,15 +1246,21 @@ function generate(params) {
                                 <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;"></div>
                                 <span style="display: block; margin-bottom: 10px;">Signature of the Administering Officer</span>
                                 
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">JUAN B. DELA CRUZ</div>
+                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">
+                                    ${params.admin_officer_name || ''}
+                                </div>
                                 <span>Name in Print</span>
                             </div>
                     
                             <div style="width: 40%; display: flex; flex-direction: column; text-align: center;">
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">CIVIL REGISTRAR</div>
+                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">
+                                    ${params.admin_officer_title || ''}
+                                </div>
                                 <span style="display: block; margin-bottom: 10px;">Position/Title/Designation</span>
                                 
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">SOGOD MUNICIPAL HALL</div>
+                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">
+                                    ${params.admin_officer_address || ''}
+                                </div>
                                 <span>Address</span>
                             </div>
                         </div>
@@ -1234,13 +1276,22 @@ function generate(params) {
                             
                             <div style="display: flex; align-items: flex-end; width: 100%;">
                                 <span style="white-space: nowrap; padding-left: 50px;">I, </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 45%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">JUAN DELA CRUZ</span>
-                                <span style="white-space: nowrap;">, of legal age, single/married/divorced/widow/widower, with residence and</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 45%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                    ${params.affiant_name || ''}
+                                </span>
+                                <span style="white-space: nowrap;">, of legal age, 
+                                        <span style="${params.affiant_civil_status === 'single' ? 'text-decoration: underline;' : ''}">single</span>/
+                                        <span style="${params.affiant_civil_status === 'married' ? 'text-decoration: underline;' : ''}">married</span>/
+                                        <span style="${params.affiant_civil_status === 'divorced' ? 'text-decoration: underline;' : ''}">divorced</span>/
+                                        <span style="${params.affiant_civil_status === 'widow' ? 'text-decoration: underline;' : ''}">widow</span>/
+                                        <span style="${params.affiant_civil_status === 'widower' ? 'text-decoration: underline;' : ''}">widower</span>, with residence and</span>
                             </div>
                             
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 2px;">
                                 <span style="white-space: nowrap;">postal address </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">SOGOD, LEYTE</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                    ${params.affiant_address || ''}
+                                </span>
                             </div>
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 2px;">
                             <span style="white-space: nowrap;"> after having duly sworn in accordance with law do hereby depose and say:</span>
@@ -1255,13 +1306,21 @@ function generate(params) {
                                     
                                     <div style="display: flex; flex-direction: column; margin-bottom: 2px;">
                                     <div style="display: flex; align-items: flex-start;">
-                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&#10003;</span>
+                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                            ${params.statement1_option_a == 1 ? '&#10003;' : ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> my marriage with </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">MARIA SANTOS</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                            ${params.statement1_marriage_with || ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> in </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">SOGOD, LEYTE</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                            ${params.statement1_place_a || ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> on </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">10-18-2010</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
+                                            ${params.statement1_date_a || ''}
+                                        </span>
                                     </div>
                                     </div>                    
                                     <div style="display: flex; flex-direction: column;">
