@@ -1,0 +1,48 @@
+{
+  "name": {
+    "required": true,
+    "minLength": 2,
+    "maxLength": 100,
+    "message": {
+      "minLength": "Name must be at least 2 characters.",
+      "maxLength": "Name cannot exceed 100 characters."
+    }
+  },
+  "contactNumber": {
+    "required": true,
+    "pattern": "^(\\+63|0)\\d{10}$",
+    "message": {
+      "required": "Contact Number is required.",
+      "pattern": "Contact Number must be a valid Philippine mobile number."
+    }
+  },
+  "address": {
+    "required": true,
+    "minLength": 5,
+    "maxLength": 200,
+    "message": {
+      "minLength": "Address must be at least 5 characters.",
+      "maxLength": "Address cannot exceed 200 characters.",
+      "required": "Address is required."
+    }
+  },
+  "purpose": {
+    "required": true,
+    "minLength": 5,
+    "maxLength": 500,
+    "message": {
+      "minLength": "Address must be at least 5 characters.",
+      "maxLength": "Address cannot exceed 200 characters.",
+      "required": "Purpose of Visit is required."
+    }
+  },
+  "remarks": {
+    "required": true,
+    "maxLength": 500,
+    "message": {
+      "minLength": "Remarks must be at least 5 characters.",
+      "maxLength": "Remarks cannot exceed 500 characters.",
+      "required": "Remarks is required."
+    }
+  }
+}

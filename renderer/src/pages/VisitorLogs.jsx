@@ -26,7 +26,7 @@ export default function VisitorLogs() {
                     <button className={`btn-primary shadow-lg px-3 py-1 rounded-full`}
                         onClick={() => setAddVisitorLogOpen(true)}
                     >
-                        <i class="bi bi-person-fill-add mr-2"></i>
+                        <i className="bi bi-person-fill-add mr-2"></i>
                         Add Visitor Log
                     </button>
                 </div>
