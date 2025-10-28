@@ -488,8 +488,8 @@
             "required": true,
             "type": "enum",
             "options": [
-                "entered",
-                "not entered"
+                "ENTERED",
+                "NOT ENTERED"
             ],
             "message": {
                 "required": "Marriage settlement choice is required.",
@@ -520,9 +520,9 @@
             "required": true,
             "type": "enum",
             "options": [
-                "license",
-                "noLicense",
-                "pd1083"
+                "LICENSE",
+                "NOLICENSE",
+                "OTHERS"
             ],
             "message": {
                 "required": "Certification option is required.",
@@ -826,10 +826,10 @@
         },
         "affidavitMonth": {
             "required": true,
-            "minLength": 3,
+            "minLength": 1,
             "message": {
                 "required": "Month is required.",
-                "minLength": "Month must be at least 3 characters."
+                "minLength": "Month must be at least 1 characters."
             }
         },
         "affidavitYear": {
@@ -856,10 +856,10 @@
         },
         "swornMonth": {
             "required": true,
-            "minLength": 3,
+            "minLength": 1,
             "message": {
                 "required": "Sworn month is required.",
-                "minLength": "Sworn month must be at least 3 characters."
+                "minLength": "Sworn month must be at least 1 characters."
             }
         },
         "swornYear": {
@@ -934,11 +934,11 @@
             "required": true,
             "type": "enum",
             "options": [
-                "single",
-                "married",
-                "divorced",
-                "widow",
-                "widower"
+                "SINGLE",
+                "MARRIED",
+                "DIVORCED",
+                "WIDOW",
+                "WIDOWER"
             ],
             "message": {
                 "required": "Affiant's civil status is required."
@@ -1122,10 +1122,10 @@
         },
         "affidavitMonthPage9": {
             "required": true,
-            "minLength": 3,
+            "minLength": 1,
             "message": {
                 "required": "Month is required.",
-                "minLength": "Month must be at least 3 characters."
+                "minLength": "Month must be at least 1 characters."
             }
         },
         "affidavitYearPage9": {
@@ -1154,10 +1154,10 @@
         },
         "swornMonthPage10": {
             "required": true,
-            "minLength": 3,
+            "minLength": 1,
             "message": {
                 "required": "Month is required.",
-                "minLength": "Month must be at least 3 characters."
+                "minLength": "Month must be at least 1 characters."
             }
         },
         "swornYearPage10": {

@@ -285,6 +285,15 @@ export default function MarriageCertificateCreateForm() {
                 updatedSection.wifeAge = calculateAge(value);
             }
 
+            if (name === "certification" && value !== "LICENSE") {
+                updatedSection.marriageLicenseNo = "";
+                updatedSection.marriageIssuedOn = "";
+                updatedSection.marriageIssuedAt = "";
+            }
+            if (name === "certification" && value !== "NOLICENSE") {
+                updatedSection.executiveOrder = "";
+            }
+
             return {
                 ...prevData,
                 [section]: updatedSection,
@@ -1799,8 +1808,8 @@ export default function MarriageCertificateCreateForm() {
                                     <input
                                         type="radio"
                                         name="certification"
-                                        value="license"
-                                        checked={formData.page5.certification === "license"}
+                                        value="LICENSE"
+                                        checked={formData.page5.certification === "LICENSE"}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         className={`mt-1 ${errors.certification ? "input-error" : ""}`}
                                     />
@@ -1809,28 +1818,28 @@ export default function MarriageCertificateCreateForm() {
                                         <input
                                             type="text"
                                             name="marriageLicenseNo"
+                                            disabled={formData.page5.certification !== "LICENSE"}
                                             value={formData.page5.marriageLicenseNo}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            className={`border-b border-gray-500 w-32 text-center mx-1 ${errors.marriageLicenseNo ? "input-error" : ""
-                                                }`}
+                                            className={`border-b border-gray-500 w-32 text-center mx-1 ${errors.marriageLicenseNo ? "input-error" : ""}`}
                                         />
                                         &nbsp;issued on&nbsp;
                                         <input
                                             type="text"
                                             name="marriageIssuedOn"
                                             value={formData.page5.marriageIssuedOn}
+                                            disabled={formData.page5.certification !== "LICENSE"}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            className={`border-b border-gray-500 w-32 text-center mx-1 ${errors.marriageIssuedOn ? "input-error" : ""
-                                                }`}
+                                            className={`border-b border-gray-500 w-32 text-center mx-1 ${errors.marriageIssuedOn ? "input-error" : ""}`}
                                         />
                                         &nbsp;at&nbsp;
                                         <input
                                             type="text"
                                             name="marriageIssuedAt"
                                             value={formData.page5.marriageIssuedAt}
+                                            disabled={formData.page5.certification !== "LICENSE"}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            className={`border-b border-gray-500 w-48 text-center mx-1 ${errors.marriageIssuedAt ? "input-error" : ""
-                                                }`}
+                                            className={`border-b border-gray-500 w-48 text-center mx-1 ${errors.marriageIssuedAt ? "input-error" : ""}`}
                                         />
                                         &nbsp;in favor of said parties, was exhibited to me.
                                     </span>
@@ -1841,7 +1850,7 @@ export default function MarriageCertificateCreateForm() {
                                     <input
                                         type="radio"
                                         name="certification"
-                                        value="noLicense"
+                                        value="NOLICENSE"
                                         checked={formData.page5.certification === "noLicense"}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         className={`${errors.certification ? "input-error" : ""} mt-1`}
@@ -1853,9 +1862,9 @@ export default function MarriageCertificateCreateForm() {
                                             type="text"
                                             name="executiveOrder"
                                             value={formData.page5.executiveOrder}
+                                            disabled={formData.page5.certification !== "NOLICENSE"}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
-                                            className={`border-b border-gray-500 w-16 text-center mx-1 ${errors.executiveOrder ? "input-error" : ""
-                                                }`}
+                                            className={`border-b border-gray-500 w-16 text-center mx-1 ${errors.executiveOrder ? "input-error" : ""}`}
                                         />
                                         &nbsp;of Executive Order No. 209.
                                     </span>
@@ -1866,8 +1875,8 @@ export default function MarriageCertificateCreateForm() {
                                     <input
                                         type="radio"
                                         name="certification"
-                                        value="pd1083"
-                                        checked={formData.page5.certification === "pd1083"}
+                                        value="OTHERS"
+                                        checked={formData.page5.certification === "OTHERS"}
                                         onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         className={`${errors.certification ? "input-error" : ""} mt-1`}
                                     />
