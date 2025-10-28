@@ -5,3 +5,4 @@ export { default as BirthCertificate } from './BirthCertificate';
 export { default as DeathCertificate } from './DeathCertificate';
 export { default as MarriageCertificate } from './MarriageCertificate';
 export { default as NotFound } from './NotFound';
+export { default as VisitorLogs } from './VisitorLogs';
