@@ -714,29 +714,43 @@ function generate(params) {
                             
                             <div style="display: flex; align-items: flex-end; width: 100%;">
                                 <span style="white-space: nowrap; padding-left: 50px;">THIS IS TO CERTIFY: That I </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 35%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">&nbsp;IS TO CERTIFY</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 35%; height: 1em; line-height: 1em; margin: 0 5px; text-align: center;">
+                                    &nbsp;${params.cert_husband_name || ''}
+                                </span>
                                 <span style="white-space: nowrap;"> and I, </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">&nbsp;IS TO CERTIFY</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px; text-align: center;">
+                                    &nbsp;${params.cert_wife_name || ''}
+                                </span>
                                 <span style="white-space: nowrap;">, both of</span>
                             </div>
                             
                             <div style="width: 100%; margin-top: 5px;">
                                 <span>legal age, of our own free will and accord, and in the presence of the person solemnizing this marriage and of the witnesses named below, take each other as</span>
                                 <span>husband and wife and certifying further that we: &nbsp </span>
-                                <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; padding: 0 2px;">&#10003;</span>
+                                <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; padding: 0 2px;">
+                                    ${params.marriage_settlement == "ENTERED" ? '&#10003;' : '&nbsp;'}
+                                </span>
                                 <span style="white-space: nowrap;"> have entered a copy of which is hereto attached / </span>
-                                <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; padding: 0 2px;">&#10003;</span>
+                                <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; padding: 0 2px;">
+                                    ${params.marriage_settlement == "NOT ENTERED" ? '&#10003;' : '&nbsp;'}
+                                </span>
                                 <span style="white-space: nowrap;"> have not entered into a marriage settlement.</span>
                             </div>
                     
                             <div style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
                                 <div style="display: flex; align-items: flex-end; width: 100%;">
                                     <span style="white-space: nowrap; padding-left: 50px;">IN WITNESS WHEREOF, we have signed/marked with our fingerprint this certificate in quadruplicate this </span>
-                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 3%; height: 1em; line-height: 1em; text-align: center;">9</span>
+                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 3%; height: 1em; line-height: 1em; text-align: center;">
+                                        ${params.cert_day || ''}
+                                    </span>
                                     <span style="white-space: nowrap;"> day of </span>
-                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">OCTOBER</span>
+                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
+                                        ${params.cert_month || ''}
+                                    </span>
                                     <span style="white-space: nowrap;">.</span>
-                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">2027</span>
+                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
+                                        ${params.cert_year || ''}
+                                    </span>
                                 </div>
                                 
                                 <div style="display: flex; justify-content: space-evenly; margin-top: 15px;">
@@ -764,13 +778,21 @@ function generate(params) {
                                 <span style="display: block; margin-bottom: 1px; padding-left: 50px;">I CERTIFY FURTHER THAT:</span>
                                 
                                 <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&nbsp;</span>
+                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">
+                                        ${params.certification == "LICENSE" ? '&#10003;' : '&nbsp;'}
+                                    </span>
                                     <span style="white-space: nowrap;">a. Marriage License No. </span>
-                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; margin: 0 5px;">&nbsp; IS TO CERTIFY</span>
+                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; margin: 0 5px;">
+                                        &nbsp; ${params.marriage_license_no || ''}
+                                    </span>
                                     <span style="white-space: nowrap;"> issued on </span>
-                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; margin: 0 5px;">&nbsp; IS TO CERTIFY</span>
+                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; margin: 0 5px;">
+                                        &nbsp; ${params.marriage_issued_on || ''}
+                                    </span>
                                     <span style="white-space: nowrap;"> at </span>
-                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px;">&nbsp; IS TO CERTIFY</span>
+                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; margin-left: 5px;">
+                                        &nbsp; ${params.marriage_issued_at || ''}
+                                    </span>
                                 </div>
                     
                                 <div style="margin-left: 20px;">
@@ -778,9 +800,13 @@ function generate(params) {
                                 </div>
                     
                                 <div style="display: flex; align-items: center; margin-top: 5px; margin-bottom: 5px;">
-                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&nbsp;</span>
+                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">
+                                        ${params.certification == "NOLICENSE" ? '&#10003;' : '&nbsp;'}
+                                    </span>
                                     <span style="white-space: nowrap;">b. no marriage license was necessary, the marriage being solemnized under Art </span>
-                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 20%; height: 1em; line-height: 1em; margin: 0 5px;">&nbsp;CERTIFY</span>
+                                    <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 20%; height: 1em; line-height: 1em; margin: 0 5px;">
+                                        ${params.executive_order || ''}
+                                    </span>
                                     <span style="white-space: nowrap;"> of Executive Order No. 209.</span>
                                 </div>
                                 
