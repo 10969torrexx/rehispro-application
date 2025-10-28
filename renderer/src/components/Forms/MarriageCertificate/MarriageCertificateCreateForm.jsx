@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { ErrorMessages, Divider, SignaturePlaceholder } from '@components';
 import { MarriageCertValidation, MarriageCertServices } from '@services';
 import { MarriageCertificate } from '@enums';
-import { capitalizeFirst } from '../../../myTools/myTools';
+import { AllCaps, capitalizeFirst } from '../../../myTools/myTools';
 
 export default function MarriageCertificateCreateForm() {
     // Handles the Pagination 
@@ -120,7 +120,9 @@ export default function MarriageCertificateCreateForm() {
 
         // Page 4: formData Input Validation
         page4: {
-            placeOfMarriage: "",
+            placeOfMarriageBarangay: "",
+            placeOfMarriageCity: "",
+            placeOfMarriageProvince: "",
             dateOfMarriage: "",
             timeOfMarriage: "",
             certHusbandName: "",
@@ -273,7 +275,7 @@ export default function MarriageCertificateCreateForm() {
         setFormData((prevData) => {
             const updatedSection = {
                 ...prevData[section],
-                [name]: type === "checkbox" ? checked : value,
+                [name]: type === "checkbox" ? checked : value.toUpperCase(),
             };
 
             if (name === "husbandBirthDate") {
@@ -423,7 +425,9 @@ export default function MarriageCertificateCreateForm() {
             wifeConsentPersonCountry: ""
         },
         page4: {
-            placeOfMarriage: "",
+            placeOfMarriageBarangay: "",
+            placeOfMarriageCity: "",
+            placeOfMarriageProvince: "",
             dateOfMarriage: "",
             timeOfMarriage: "",
             certHusbandName: "",
@@ -899,8 +903,8 @@ export default function MarriageCertificateCreateForm() {
                                             value={formData.page2.husbandSex}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}>
                                             <option value="">Select sex</option>
-                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.MALE)}>{capitalizeFirst(MarriageCertificate.SexTypes.MALE)}</option>
-                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}>{capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}</option>
+                                            <option value={AllCaps(MarriageCertificate.SexTypes.MALE)}>{AllCaps(MarriageCertificate.SexTypes.MALE)}</option>
+                                            <option value={AllCaps(MarriageCertificate.SexTypes.FEMALE)}>{AllCaps(MarriageCertificate.SexTypes.FEMALE)}</option>
                                         </select>
                                         {errors.husbandSex && <ErrorMessages errors={errors.husbandSex} />}
                                     </div>
@@ -910,7 +914,7 @@ export default function MarriageCertificateCreateForm() {
                                             name="husbandCitizenship"
                                             placeholder="Citizenship"
                                             className={`w-full common-input ${errors.husbandCitizenship ? 'input-error' : ''}`}
-                                            value={capitalizeFirst(formData.page2.husbandCitizenship)}
+                                            value={AllCaps(formData.page2.husbandCitizenship)}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                         />
                                         {errors.husbandCitizenship && <ErrorMessages errors={errors.husbandCitizenship} />}
@@ -1063,8 +1067,8 @@ export default function MarriageCertificateCreateForm() {
                                             value={formData.page2.wifeSex}
                                             onChange={(e) => handleInputChange(e, `page${currentPage}`)}>
                                             <option value="">Select sex</option>
-                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.MALE)}>{capitalizeFirst(MarriageCertificate.SexTypes.MALE)}</option>
-                                            <option value={capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}>{capitalizeFirst(MarriageCertificate.SexTypes.FEMALE)}</option>
+                                            <option value={AllCaps(MarriageCertificate.SexTypes.MALE)}>{AllCaps(MarriageCertificate.SexTypes.MALE)}</option>
+                                            <option value={AllCaps(MarriageCertificate.SexTypes.FEMALE)}>{AllCaps(MarriageCertificate.SexTypes.FEMALE)}</option>
                                         </select>
                                         {errors.wifeSex && <ErrorMessages errors={errors.wifeSex} />}
                                     </div>
@@ -1603,18 +1607,47 @@ export default function MarriageCertificateCreateForm() {
                         <span>
                             <p>15. Place of Marriage</p>
                         </span>
-                        <div className="flex items-center gap-1 mt-1 mb-3">
+                        <div className="flex flex-col gap-3 mt-1 mb-3">
+                            {/* Barangay */}
                             <div className="w-full">
-                                <label>Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province) </label>
+                                <label>Barangay</label>
                                 <input
                                     type="text"
-                                    name="placeOfMarriage"
-                                    placeholder="Office of the/House of/Barangay of/Church of/Mosque (City/Municipality) (Province)"
-                                    className={`w-full common-input ${errors.placeOfMarriage ? 'input-error' : ''}`}
-                                    value={formData.page4.placeOfMarriage}
+                                    name="placeOfMarriageBarangay"
+                                    placeholder="Barangay"
+                                    className={`w-full common-input ${errors.placeOfMarriageBarangay ? 'input-error' : ''}`}
+                                    value={formData.page4.placeOfMarriageBarangay}
                                     onChange={(e) => handleInputChange(e, `page${currentPage}`)}
                                 />
-                                {errors.placeOfMarriage && <ErrorMessages errors={errors.placeOfMarriage} />}
+                                {errors.placeOfMarriageBarangay && <ErrorMessages errors={errors.placeOfMarriageBarangay} />}
+                            </div>
+
+                            {/* City/Municipality */}
+                            <div className="w-full">
+                                <label>City / Municipality</label>
+                                <input
+                                    type="text"
+                                    name="placeOfMarriageCity"
+                                    placeholder="City / Municipality"
+                                    className={`w-full common-input ${errors.placeOfMarriageCity ? 'input-error' : ''}`}
+                                    value={formData.page4.placeOfMarriageCity}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.placeOfMarriageCity && <ErrorMessages errors={errors.placeOfMarriageCity} />}
+                            </div>
+
+                            {/* Province */}
+                            <div className="w-full">
+                                <label>Province</label>
+                                <input
+                                    type="text"
+                                    name="placeOfMarriageProvince"
+                                    placeholder="Province"
+                                    className={`w-full common-input ${errors.placeOfMarriageProvince ? 'input-error' : ''}`}
+                                    value={formData.page4.placeOfMarriageProvince}
+                                    onChange={(e) => handleInputChange(e, `page${currentPage}`)}
+                                />
+                                {errors.placeOfMarriageProvince && <ErrorMessages errors={errors.placeOfMarriageProvince} />}
                             </div>
                         </div>
 

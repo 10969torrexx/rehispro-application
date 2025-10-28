@@ -96,7 +96,9 @@ function create(req, res) {
             wifeConsentPersonCountry: "wife_consent_person_country",
 
             // Page 4
-            placeOfMarriage: "place_of_marriage",
+            placeOfMarriageBarangay: "place_of_marriage_barangay",
+            placeOfMarriageCity: "place_of_marriage_city",
+            placeOfMarriageProvince: "place_of_marriage_province",
             dateOfMarriage: "date_of_marriage",
             timeOfMarriage: "time_of_marriage",
             certHusbandName: "cert_husband_name",
@@ -265,7 +267,11 @@ function getAll(req, res) {
             husband_first_name || ' ' || husband_last_name AS husband,
             wife_first_name || ' ' || wife_last_name AS wife,
             date_of_marriage AS date,
-            place_of_marriage AS place
+            (
+                place_of_marriage_barangay || ', ' || 
+                place_of_marriage_city || ', ' || 
+                place_of_marriage_province
+            ) AS place
         FROM marriage_certificates
         ORDER BY date_of_marriage DESC
     `;
