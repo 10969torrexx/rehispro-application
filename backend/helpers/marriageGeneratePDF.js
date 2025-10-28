@@ -1,6 +1,6 @@
 function generate(params) {
     return (
-        <html lang="en">
+        `<html lang="en">
             <style>
                 .field-label {
                     font-size: 10px;
@@ -811,7 +811,7 @@ function generate(params) {
                                 </div>
                                 
                                 <div style="display: flex; align-items: center;">
-                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&nbsp;</span>
+                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">${params.certification == "OTHERS" ? '&#10003;' : '&nbsp;'}</span>
                                     <span style="white-space: nowrap;">c. the marriage was solemnized in accordance with the provisions of Presidential Decree No. 1083.</span>
                                 </div>
                             </div>
@@ -820,22 +820,28 @@ function generate(params) {
                             <div style="display: flex; align-items: flex-start; white-space: wrap;">
                                 
                                 <div style="display: flex; flex-direction: column; text-align: center; margin-right: 15px; width: 200px;">
-                                    <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">SAMPLE SIGNATURE</div>
+                                    <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">&nbsp;&nbsp;&nbsp;</div>
                                     <span style="display: block; font-size: 8px;">(Signature Over Printed Name of Solemnizing Officer)</span>
                                 </div>
                                 
                                 <div style="display: flex; flex-direction: column; text-align: center; margin-right: 15px; width: 150px;">
-                                    <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">PRIEST</div>
+                                    <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">
+                                        ${params.officer_position || ''}
+                                    </div>
                                     <span style="display: block; font-size: 8px;">(Position/Designation)</span>
                                 </div>
                                 
                                 <div style="display: flex; flex-direction: column; text-align: center; margin-right: 15px; width: 200px;">
-                                    <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">REV. FR. M. PEREZ</div>
+                                    <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">
+                                        ${params.officer_printed_name || ''}
+                                    </div>
                                     <span style="display: block; font-size: 8px;">(Printed Name)</span>
                                 </div>
                         
                                 <div style="display: flex; flex-direction: column; text-align: center; width: 300px;">
-                                    <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">ROMAN CATHOLIC REG. NO. 12345</div>
+                                    <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; margin-bottom: 2px;">
+                                         ${params.officer_religion || ''}
+                                    </div>
                                     <span style="display: block; font-size: 8px;">(Religion/Religious Sect. Registry No. and Expiration Date, if applicable)</span>
                                 </div>
                             </div>
@@ -848,10 +854,18 @@ function generate(params) {
                             <span style=" margin-bottom: 8px; margin-left: 5px;">Additional at the back</span>
                             
                             <div style="display: flex; justify-content: space-evenly; margin-top: 5px;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">
+                                    &nbsp;${params.witness_1 || ''}
+                                </span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">
+                                    &nbsp;${params.witness_2 || ''}
+                                </span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">
+                                    &nbsp;${params.witness_3 || ''}
+                                </span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">
+                                    &nbsp;${params.witness_4 || ''}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -868,28 +882,28 @@ function generate(params) {
                                 <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
                                     <span>Signature</span>
                                     <span style="flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center; margin-left: 5px;">
-                                        <span style="font-style: italic;">(Signed)</span>
+                                        <span style="font-style: italic;">&nbsp;</span>
                                     </span>
                                 </div>
                                 
                                 <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
                                     <span>Name in Print</span>
                                     <span style="flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center; margin-left: 5px;">
-                                        JOSE R. REYES
+                                        ${params.received_by_name || ''}
                                     </span>
                                 </div>
                     
                                 <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
                                     <span>Title or Position</span>
                                     <span style="flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center; margin-left: 5px;">
-                                        Clerk
+                                        ${params.received_by_title || ''}
                                     </span>
                                 </div>
                     
                                 <div style="display: flex; align-items: flex-end;">
                                     <span>Date</span>
                                     <span style="flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center; margin-left: 5px;">
-                                        2025-01-16
+                                        ${params.received_by_date || ''}
                                     </span>
                                 </div>
                             </div>
@@ -908,21 +922,21 @@ function generate(params) {
                                 <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
                                     <span>Name in Print</span>
                                     <span style="flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center; margin-left: 5px;">
-                                        ALEX M. GOMEZ
+                                        ${params.registrar_name || ''}
                                     </span>
                                 </div>
                     
                                 <div style="display: flex; align-items: flex-end; margin-bottom: 5px;">
                                     <span>Title or Position</span>
                                     <span style="flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center; margin-left: 5px;">
-                                        City Civil Registrar
+                                        ${params.registrar_title || ''}
                                     </span>
                                 </div>
                     
                                 <div style="display: flex; align-items: flex-end;">
                                     <span>Date</span>
                                     <span style="flex-grow: 1; border-bottom: 0.2px solid rgb(224, 67, 93); height: 1.2em; line-height: 1.2em; text-align: center; margin-left: 5px;">
-                                        2025-01-20
+                                        ${params.registrar_date || ''}
                                     </span>
                                 </div>
                             </div>
@@ -932,7 +946,9 @@ function generate(params) {
                 <!-- REMARKS/ANNOTATIONS (For LCRO/OCRG Use Only) -->
                     <div style="padding:0 4px; display: flex; height: 88px;width: 100%; border-top: 0.2px solid rgb(224, 67, 93); border-bottom: 0.2px solid rgb(224, 67, 93); font-size: 10px; flex-direction: column;">
                         <div style="font-weight: bold; margin: 2px; ">REMARKS/ANNOTATIONS (For LCRO/OCRG Use Only)</div>
-                        <textarea style="font-size: 12px; height: 100%; width: 98%; border: none; resize: none;">asdasdasd</textarea>
+                        <textarea style="font-size: 12px; height: 100%; width: 98%; border: none; resize: none;">
+                            ${params.remarks_annotation || ''}
+                        </textarea>
                     </div>
 
                     <!-- TO BE FILLED-UP AT THE OFFICE OF THE CIVIL REGISTRAR -->
@@ -1029,16 +1045,18 @@ function generate(params) {
                             <span>20b. WITNESSES (Print Name and Sign):</span>
                             
                             <div style="display: flex; justify-content: space-evenly; margin-top: 10px; ">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">
+                                    &nbsp; ${params.witness5_name || ''}
+                                </span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;${params.witness6_name || ''}</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;${params.witness7_name || ''}</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;${params.witness8_name || ''}</span>
                             </div>
                             <div style="display: flex; justify-content: space-evenly; margin-top: 20px;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;WITNESSES</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;${params.witness9_name || ''}</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;${params.witness10_name || ''}</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;${params.witness11_name || ''}</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 23%; height: 1.2em; text-align: center;">&nbsp;${params.witness12_name || ''}</span>
                             </div>
 
                             </div>
@@ -1055,14 +1073,20 @@ function generate(params) {
                             
                             <div style="display: flex; align-items: flex-end; width: 100%;">
                                 <span style="white-space: nowrap; padding-left: 50px;">I, </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">REV. FR. MARK PEREZ</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                    ${params.affidavit_officer_name || ''}
+                                </span>
                                 <span style="white-space: nowrap;">, of legal age, Solemnizing Officer of </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">ST. MICHAEL THE ARCHANGEL PARISH</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                    ${params.affidavit_officer_organization || ''}
+                                </span>
                                 <span style="white-space: nowrap; margin-left: 5px;"> with address at</span>
                             </div>
                             
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 5px;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 55%; height: 1em; line-height: 1em; text-align: center;">SOGOD, LEYTE</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 55%; height: 1em; line-height: 1em; text-align: center;">
+                                    ${params.affidavit_officer_address || ''}
+                                </span>
                                 <span style="white-space: nowrap; margin-left: 5px;"> after having been duly sworn in accordance with law, do hereby depose and say:</span>
                             </div>
                         </div>
@@ -1071,9 +1095,13 @@ function generate(params) {
                             
                             <div style="margin-bottom: 4px;">
                                 <span style="white-space: nowrap;">1. That I have solemnized the marriage between </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 30%; height: 1em; line-height: 1em; text-align: center; display: inline-block;">HUSBAND'S NAME</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 30%; height: 1em; line-height: 1em; text-align: center; display: inline-block;">
+                                    ${params.statement1_party1 || ''}
+                                </span>
                                 <span style="white-space: nowrap; margin: 0 5px;"> and </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 30%; height: 1em; line-height: 1em; text-align: center; display: inline-block;">WIFE'S NAME</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 30%; height: 1em; line-height: 1em; text-align: center; display: inline-block;">
+                                    ${params.statement1_party2 || ''}
+                                </span>
                                 <span style="white-space: nowrap;">;</span>
                             </div>
                     
@@ -1401,7 +1429,7 @@ function generate(params) {
                     </div>
                 </div>
             </body>
-        </html>
+        </html>`
     );
 }
 module.exports = { generate };
