@@ -1325,17 +1325,27 @@ function generate(params) {
                                     </div>                    
                                     <div style="display: flex; flex-direction: column;">
                                     <div style="display: flex; align-items: flex-start;">
-                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&nbsp;</span>
+                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                            ${params.statement1_option_b == 1 ? '&#10003;' : ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> the marriage between </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">&nbsp;</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                            ${params.statement1_spouse_name_1 || ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> and </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">&nbsp;</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                            ${params.statement1_spouse_name_2 || ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> in </span>
                                     </div>
                                     <div style="display: flex; align-items: flex-start;">
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;"></span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
+                                            ${params.statement1_place_b || ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px; padding: 0 4px;"> on </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">10-18-2010</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
+                                            ${params.statement1_date_b || ''}
+                                        </span>
                                     </div>
                                     </div>
 
@@ -1346,15 +1356,33 @@ function generate(params) {
                     
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-bottom: 5px;">
                                 <span style=" white-space: nowrap; margin-right: 5px;">2. That said marriage was solemnized by</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">REV. FR. MARK PEREZ</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                    ${params.solemnizing_officer || ''}
+                                </span>
                                 <span style="white-space: nowrap;">(Solemnizing Officer's name) under</span>
                             </div>
                             
                             <div style="margin-top: 5px; display: flex; justify-content: space-evenly; width: 80%;">
-                                <div style="display: flex; align-items: center;"><span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&#10003;</span> a. religious ceremony</div>
-                                <div style="display: flex; align-items: center;"><span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&nbsp;</span> b. civil ceremony</div>
-                                <div style="display: flex; align-items: center;"><span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&nbsp;</span> c. Muslim rites</div>
-                                <div style="display: flex; align-items: center;"><span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">&nbsp;</span> d. tribal rites</div>
+                                <div style="display: flex; align-items: center;">
+                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">
+                                        ${params.ceremony_religious == 1 ? '&#10003;' : '&nbsp;'}
+                                    </span> a. religious ceremony
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">
+                                        ${params.ceremony_civil == 1 ? '&#10003;' : '&nbsp;'}
+                                    </span> b. civil ceremony
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">
+                                        ${params.ceremony_muslim == 1 ? '&#10003;' : '&nbsp;'}
+                                    </span> c. Muslim rites
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px;">
+                                        ${params.ceremony_tribal == 1 ? '&#10003;' : '&nbsp;'}
+                                    </span> d. tribal rites
+                                </div>
                             </div>
                         </div>            
                             <div style="margin-bottom: 8px;">
@@ -1363,19 +1391,31 @@ function generate(params) {
                                 <div style="margin-left: 10px; line-height: 1.6;">
                                     
                                     <div style="display: flex; align-items: flex-start; margin-bottom: 5px;">
-                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&#10003;</span>
+                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                            ${params.marriage_with_license == 1 ? '&#10003;' : '&nbsp;'}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> a. with marriage license no. </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 15%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">1234567</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 15%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                            ${params.marriage_license_no_page9 || ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> issued on </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 15%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">10-01-2010</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 15%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                            ${params.marriage_issued_on_page9 || ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> at </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">SOGOD</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center;">
+                                            ${params.marriage_issued_at_page9 || ''}
+                                        </span>
                                     </div>
                                     
                                     <div style="display: flex; align-items: flex-start;">
-                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">&nbsp;</span>
+                                        <span style="border: 1px solid rgb(224, 67, 93); width: 10px; height: 10px; margin-right: 5px; margin-top: 2px;">
+                                            ${params.marriage_under_article == 1 ? '&#10003;' : '&nbsp;'}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> b. under Article </span>
-                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 10%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">&nbsp;</span>
+                                        <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 10%; height: 1em; line-height: 1em; text-align: center; margin-right: 5px;">
+                                            ${params.article_number || ''}
+                                        </span>
                                         <span style="white-space: nowrap; margin-right: 5px;"> (marriages of exceptional character);</span>
                                     </div>
                                 </div>
@@ -1385,27 +1425,37 @@ function generate(params) {
                     
                             <div style="display: flex; align-items: flex-end; line-height: 1.5; white-space: nowrap;">
                                 <span style=" margin-right: 5px;">4. (If the applicant is either the wife or husband) That I am a citizen of </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; display: inline-block; margin-right: 5px;">FILIPINO</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; display: inline-block; margin-right: 5px;">
+                                    ${params.citizen_applicant || ''}
+                                </span>
                                 <span style="margin-right: 5px;"> and my spouse is a citizen of</span>
                             </div>
                             <div style="display: flex; align-items: flex-end; margin-top: 4px; margin-left: 15px; line-height: 1.5;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 50%; height: 1em; line-height: 1em; text-align: center; display: inline-block;">FILIPINO</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 50%; height: 1em; line-height: 1em; text-align: center; display: inline-block;">
+                                    ${params.citizen_spouse || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; align-items: flex-end; margin-top: 4px; margin-left: 15px; line-height: 1.5;">
                                 <span style="white-space: nowrap;">(If the applicant is other than the wife or husband) That the wife is a citizen of </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; display: inline-block; margin-right: 5px;">&nbsp;</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; display: inline-block; margin-right: 5px;">
+                                    ${params.citizen_applicant2 || ''}
+                                </span>
                                 <span style="white-space: nowrap;"> and the husband is a citizen of </span>
                             </div>
                             <div style="display: flex; align-items: flex-end; margin-top: 4px; margin-left: 15px; line-height: 1.5;">
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 50%; height: 1em; line-height: 1em; text-align: center; display: inline-block; margin-left: 5px;">&nbsp;</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 50%; height: 1em; line-height: 1em; text-align: center; display: inline-block; margin-left: 5px;">
+                                    ${params.citizen_spouse2 || ''}
+                                </span>
                             </div>
 
                         </div>
                         <div style="margin-bottom: 15px; font-size: 10px; width: 100%;">
                             <div style="display: flex; align-items: flex-end; width: 100%; line-height: 1.5; white-space: nowrap;">
                                 <span style="margin-right: 5px;">5. That the reason for the delay in registering our/their marriage is</span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; display: inline-block;">LOST MARRIAGE CERTIFICATE COPY</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; display: inline-block;">
+                                    ${params.reason_for_delay || ''}
+                                </span>
                             </div>
                         </div>    
 
@@ -1418,22 +1468,32 @@ function generate(params) {
                             
                         <div style="display: flex; align-items: flex-end; width: 100%; padding-bottom: 4px;">
                             <span style="white-space: nowrap; padding-left: 50px;">In truth whereof, I have affixed my signature below this </span>
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 8%; height: 1em; line-height: 1em; text-align: center; margin: 0 5px;">18th</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 8%; height: 1em; line-height: 1em; text-align: center; margin: 0 5px;">
+                                ${params.affidavit_day_page9 || ''}
+                            </span>
                             <span style="white-space: nowrap;"> day of </span>
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">OCTOBER</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                ${params.affidavit_month_page9 || ''}
+                            </span>
                             <span style="white-space: nowrap;">, </span>
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 15%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">2025</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 15%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                ${params.affidavit_year_page9 || ''}
+                            </span>
                             <span style="white-space: nowrap; margin: 0 5px;"> at </span>
                         </div>
                         <div style="display: flex; align-items: flex-end; width: 100%;">
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 50%; height: 1em; line-height: 1em; text-align: center;">SOGOD, LEYTE</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 50%; height: 1em; line-height: 1em; text-align: center;">
+                                ${params.affidavit_place_page9 || ''}
+                            </span>
                             <span style="white-space: nowrap; margin-left: 5px;">, Philippines.</span>
                         </div>
 
                         
                         <div style="display: flex; justify-content: flex-end; width: 100%; margin-top: 20px;">
                             <div style="width: 45%; text-align: center;">
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; margin-bottom: 5px;">&nbsp;</div>
+                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; margin-bottom: 5px;">
+                                    ${params.sworn_day_page10 || ''}
+                                </div>
                                 <span style="font-size: 10px;">Signature Over Printed Name of the Solemnizing Officer</span>
                             </div>
                         </div>
@@ -1444,24 +1504,40 @@ function generate(params) {
                             <div style="display: flex; align-items: flex-end; width: 100%;">
                                 <span style=" white-space: nowrap; padding-left: 50px;">SUBSCRIBED AND SWORN</span>
                                 <span style="white-space: nowrap;"> to before me this </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin: 0 5px;">18th</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin: 0 5px;">
+                                    ${params.sworn_day_page10 || ''}
+                                </span>
                                 <span style="white-space: nowrap;"> day of </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">OCTOBER</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">
+                                    ${params.sworn_month_page10 || ''}
+                                </span>
                                 <span style="white-space: nowrap;">, </span>
-                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">2025</span>
-                                <span style="white-space: nowrap; margin-left: 5px;">at</span>
+                                <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">
+                                    ${params.sworn_year_page10 || ''}
+                                </span>
+                                <span style="white-space: nowrap; margin-left: 5px;">
+                                    ${params.sworn_place_page10 || ''}
+                                </span>
                             </div>
                             
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 4px;">
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">2025</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1.2em; text-align: center; margin-left: 5px;">
+                                ${params.sworn_issued_on_page10 || ''}
+                            </span>
                             <span style="white-space: nowrap; margin-left: 5px;">, Philippines, affiant who exhibited to me his Community Tax Cert.</span>
                             </div>
                             <div style="display: flex; align-items: flex-end; width: 100%; margin-top: 4px;">
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1.2em; text-align: center; margin-left: 5px;">01-05-2025</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1.2em; text-align: center; margin-left: 5px;">
+                                ${params.sworn_issued_on_page102 || ''}
+                            </span>
                             <span style="white-space: nowrap;">issued on </span>
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">01-05-2025</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); width: 25%; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                ${params.sworn_issued_at_page10 || ''}
+                            </span>
                             <span style="white-space: nowrap; margin-left: 5px;">at</span>
-                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">SOGOD, LEYTE</span>
+                            <span style="border-bottom: 0.2px solid rgb(224, 67, 93); flex-grow: 1; height: 1em; line-height: 1em; text-align: center; margin-left: 5px;">
+                                ${params.sworn_issued_at_page10 || ''}
+                            </span>
                         </div>
                     </div>
 
@@ -1470,15 +1546,21 @@ function generate(params) {
                                 <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;"></div>
                                 <span style="display: block; margin-bottom: 10px;">Signature of the Administering Officer</span>
                                 
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">JUAN B. DELA CRUZ</div>
+                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">
+                                    ${params.administering_officer_name || ''}
+                                </div>
                                 <span>Name in Print</span>
                             </div>
 
                             <div style="width: 40%; display: flex; flex-direction: column; text-align: center;">
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">CIVIL REGISTRAR</div>
+                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">
+                                    ${params.officer_position_page10 || ''}
+                                </div>
                                 <span style="display: block; margin-bottom: 10px;">Position/Title/Designation</span>
                                 
-                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">SOGOD MUNICIPAL HALL</div>
+                                <div style="border-bottom: 0.2px solid rgb(224, 67, 93); height: 1em; line-height: 1em; margin-bottom: 5px;">
+                                    ${params.officer_address_page10 || ''}
+                                </div>
                                 <span>Address</span>
                             </div>
                         </div>
