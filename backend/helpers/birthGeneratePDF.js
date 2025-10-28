@@ -1,4 +1,4 @@
-function birthGenerateHTML(params) {
+function generate(params) {
     return `
         <html lang="en">
             <head>
@@ -27,55 +27,54 @@ function birthGenerateHTML(params) {
 
 
                 body {
-                font-family: Arial;
-                margin: 0;
-                padding: 0;
-                background: #f0f0f0;
+                    font-family: Arial;
+                    margin: 0;
+                    padding: 0;
                 }
 
                 .page {
-                width: 8.5in;
-                height: 14in; 
-                margin: 20px auto;
-                background: white;
-                box-sizing: border-box;
-                page-break-after: always;
-                position: relative;
+                    width: 80vw;
+                    height: 120vh;
+                    margin: 20px auto;
+                    background: white;
+                    box-sizing: border-box;
+                    page-break-after: always;
+                    position: relative;
                 }
 
                 /* Inner content box with 1in margin and green border */
                 .content {
-                position: absolute;
-                top: 0.5in;
-                left: 0.5in;
-                right: 0.5in;
-                bottom: 0.5in;
-                border: 2px solid green;
-                box-sizing: border-box;
-                padding: 4px 0px 4px 0px;
+                    position: absolute;
+                    top: 0.5in;
+                    left: 0.5in;
+                    right: 0.5in;
+                    bottom: 0.5in;
+                    border: 2px solid green;
+                    box-sizing: border-box;
+                    padding: 4px 0px 4px 0px;
                 }
 
                 .header {
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
                 }
 
                 .header-left {
-                text-align: left;
-                font-size: 11px;
+                    text-align: left;
+                    font-size: 11px;
                 }
 
                 .header-center {
-                text-align: center;
-                margin-top: -12px;
-                line-height: 0.8;
+                    text-align: center;
+                    margin-top: -12px;
+                    line-height: 0.8;
                 }
 
                 .header-right {
-                text-align: right;
-                font-size: 11px;
-                white-space: nowrap;
+                    text-align: right;
+                    font-size: 11px;
+                    white-space: nowrap;
                 }
 
             </style>
@@ -1348,5 +1347,5 @@ function birthGenerateHTML(params) {
 }
 
 module.exports = (
-    birthGenerateHTML
+    generate
 );

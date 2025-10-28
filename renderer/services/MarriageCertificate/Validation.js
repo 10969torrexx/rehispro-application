@@ -8,22 +8,19 @@ export function validateForm(data, page) {
         const rule = rules[field];
 
         if (page === 5) {
-            if (data.certification === "license") {
-                // Only require Option A fields
+            if (data.certification === "LICENSE") {
                 ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].forEach(f => {
                     if (rules[f]) rules[f].required = true;
                 });
                 if (rules.executiveOrder) rules.executiveOrder.required = false;
             }
-            else if (data.certification === "noLicense") {
-                // Only require Option B field
+            else if (data.certification === "NOLICENSE") {
                 if (rules.executiveOrder) rules.executiveOrder.required = true;
                 ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].forEach(f => {
                     if (rules[f]) rules[f].required = false;
                 });
             }
-            else if (data.certification === "pd1083") {
-                // Option C selected → no extra required fields
+            else if (data.certification === "OTHERS") {
                 if (rules.executiveOrder) rules.executiveOrder.required = false;
                 ["marriageLicenseNo", "marriageIssuedOn", "marriageIssuedAt"].forEach(f => {
                     if (rules[f]) rules[f].required = false;

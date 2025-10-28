@@ -1,8 +1,9 @@
-// backend\controllers\MarriageCertificateController.js
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const { callPythonOCR } = require('../services/OCRService');
+const { generate } = require('../helpers/marriageGeneratePDF');
+const puppeteer = require('puppeteer');
 
 function create(req, res) {
     try {
@@ -96,7 +97,9 @@ function create(req, res) {
             wifeConsentPersonCountry: "wife_consent_person_country",
 
             // Page 4
-            placeOfMarriage: "place_of_marriage",
+            placeOfMarriageBarangay: "place_of_marriage_barangay",
+            placeOfMarriageCity: "place_of_marriage_city",
+            placeOfMarriageProvince: "place_of_marriage_province",
             dateOfMarriage: "date_of_marriage",
             timeOfMarriage: "time_of_marriage",
             certHusbandName: "cert_husband_name",
@@ -265,7 +268,11 @@ function getAll(req, res) {
             husband_first_name || ' ' || husband_last_name AS husband,
             wife_first_name || ' ' || wife_last_name AS wife,
             date_of_marriage AS date,
-            place_of_marriage AS place
+            (
+                place_of_marriage_barangay || ', ' || 
+                place_of_marriage_city || ', ' || 
+                place_of_marriage_province
+            ) AS place
         FROM marriage_certificates
         ORDER BY date_of_marriage DESC
     `;
@@ -322,9 +329,48 @@ async function upload(req, res) {
     }
 }
 
+async function download(req, res) {
+    try {
+        const data = await new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM marriage_certificates WHERE id = ?`, [req.params.id], (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
+            });
+        }); 
+        writeLog(`INFO [MarriageCertificates][download] ${JSON.stringify(data)}`);
+        const html = generate(data);
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(html, { waitUntil: "networkidle0" });
+        const pdfBuffer = await page.pdf({ 
+            format: 'A4',
+            printBackground: true,
+            margin: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            },
+            preferCSSPageSize: true // Add this
+        });
+        await browser.close();
+        res.set({
+            "Content-Type": "application/pdf",
+            "Content-Disposition": "attachment; filename=marriage-certificates.pdf",
+            "Content-Length": pdfBuffer.length
+        });
+        res.send(pdfBuffer);
+    } catch (error) {
+        writeLog(`ERROR: [marriage][download] ${error}`)
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error generating PDF", error: error.message });
+    }
+}
+
 module.exports = {
     create,
     getAll,
     view,
-    upload
+    upload,
+    download
 };

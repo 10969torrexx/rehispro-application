@@ -50,7 +50,6 @@ export async function listDeathCertificate() {
     }
 }
 
-
 /**
  * View death certificate data
  * @param {string|number} id - The ID of the death certificate
@@ -76,7 +75,6 @@ export async function viewDeathCertificate(id) {
         throw error;
     }
 }
-
 
 /**
  * TODO: handle file upload for the birth cert.
@@ -119,7 +117,7 @@ export async function download(id) {
         const url = window.URL.createObjectURL(data); 
         const link = document.createElement('a');
         link.href = url;
-        const filename = `death-certificate${id}.pdf`;
+        const filename = `death-certificate-${id}.pdf`;
         link.download = filename.split('/').pop(); // sample.pdf
         document.body.appendChild(link);
         link.click();

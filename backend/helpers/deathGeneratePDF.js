@@ -1,4 +1,4 @@
-function deathGenerateHTML(params) {
+function generate(params) {
     return `
         <html lang="en">
         <head>
@@ -29,7 +29,6 @@ function deathGenerateHTML(params) {
                     font-family: Arial;
                     margin: 0;
                     padding: 0;
-                    background: #f0f0f0;
                 }
 
                 .page {
@@ -1709,5 +1708,5 @@ function deathGenerateHTML(params) {
 }
 
 module.exports = (
-    deathGenerateHTML
+    generate
 );

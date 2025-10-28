@@ -1255,31 +1255,5 @@
       </div>
     </div>
   </div>
-
-  <button id="downloadBtn">Download PDF</button>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script>
-
-    document.getElementById('downloadBtn').addEventListener('click', async () => {
-          const { jsPDF } = window.jspdf;
-          const doc = new jsPDF('p', 'pt', [612, 1008]); // 8.5in x 14in (Legal size) in points
-
-          const pages = document.querySelectorAll('.page');
-      
-          for (let i = 0; i < pages.length; i++) {
-              const canvas = await html2canvas(pages[i], { scale: 2 });
-              const imgData = canvas.toDataURL('image/png');
-              const pdfWidth = doc.internal.pageSize.getWidth();
-              const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      
-              if (i > 0) doc.addPage();
-              doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-          }
-      
-          doc.save('Marriage_Certificate.pdf');
-      });
-
-  </script>
 </body>
 </html>
