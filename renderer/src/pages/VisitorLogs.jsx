@@ -64,10 +64,10 @@ export default function VisitorLogs() {
                                 });
                         }}
                     >
-                        <option value="pending">Pending</option>
-                        <option value="ongoing">Ongoing</option>
-                        <option value="completed">Completed</option>
-                        <option value="cancelled">Cancelled</option>
+                        <option value="pending" selected={params.row.status === 'pending'}>Pending</option>
+                        <option value="ongoing" selected={params.row.status === 'ongoing'}>Ongoing</option>
+                        <option value="completed" selected={params.row.status === 'completed'}>Completed</option>
+                        <option value="cancelled" selected={params.row.status === 'cancelled'}>Cancelled</option>
                     </select>
                 );
             },
