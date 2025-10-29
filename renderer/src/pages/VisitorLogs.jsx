@@ -99,7 +99,11 @@ export default function VisitorLogs() {
                 }));
                 console.table(dataWithIndex);
                 setRows(dataWithIndex);
-                setFilteredRows(dataWithIndex);
+                const todayString = new Date().toISOString().split("T")[0];
+                const todayData = dataWithIndex.filter((row) => 
+                    row.created_at?.split(" ")[0] === todayString
+                );
+                setFilteredRows(todayData);
             } else {
                 toast.error(response?.message || "Failed to load visitor logs");
             }
@@ -113,6 +117,14 @@ export default function VisitorLogs() {
         }
     }
 
+    useEffect(() => {
+        const newFiltered = rows.filter((row) => {
+            const logDateString = row.created_at?.split(" ")[0];
+            return logDateString === date;
+        });
+    setFilteredRows(newFiltered);
+    }, [date, rows]);
+
     const normalizeDate = (d) => {
         const nd = new Date(d);
         nd.setHours(0, 0, 0, 0);
@@ -120,6 +132,7 @@ export default function VisitorLogs() {
     };
     const handleDateChange = (e) => {
         const selectedDate = e.target.value;
+        console.log("Selected Date:", selectedDate);
         setDate(selectedDate);
         if (!selectedDate) {
             setFilteredRows(rows);
