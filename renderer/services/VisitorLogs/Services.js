@@ -42,3 +42,25 @@ export async function list() {
         throw error;
     }
 }
+
+export async function updateStatus(id, data) { 
+    try {
+        const response = await fetch(`http://localhost:3001/visitor-logs/update-status/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to update visitor log status');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('[visitor logs] Error :', error);
+        throw error;
+    }
+}

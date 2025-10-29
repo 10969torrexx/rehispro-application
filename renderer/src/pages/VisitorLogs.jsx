@@ -14,7 +14,7 @@ export default function VisitorLogs() {
     const [isLoading, setIsLoading] = useState(true);
 
     const columns = [
-        { field: "id", headerName: "ID", width: 50 },
+        { field: "index", headerName: "ID", width: 50 },
         { field: "name", headerName: "Name", width: 150 },
         { field: "officer", headerName: "Officer", width: 150 },
         { field: "contact_number", headerName: "Contact Number", width: 150 },
@@ -37,7 +37,41 @@ export default function VisitorLogs() {
                     <span>{ params.value.split(' ')[1] }</span>
                 );
             }
-         },
+        },
+        {
+            field: "actions",
+            headerName: "Actions",
+            width: 180,
+            sortable: false,
+            filterable: false,
+            disableColumnMenu: true,
+            renderCell: (params) => {
+                return (
+                    <select
+                        className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        onChange={(e) => {
+                            const newStatus = e.target.value;
+                            VisitorLogServices.updateStatus(params.row.id, { status: newStatus })
+                                .then(() => {
+                                    toast.success("Status updated successfully");
+                                    fetchData();
+                                })
+                                .catch((error) => {
+                                    const errorMessage =
+                                        error.response?.data?.message ||
+                                        error.message || "Failed to update status";
+                                    toast.error(errorMessage);
+                                });
+                        }}
+                    >
+                        <option value="pending">Pending</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                );
+            },
+        }
     ];
     const [rows, setRows] = useState([]);
     useEffect(() => {
@@ -58,7 +92,7 @@ export default function VisitorLogs() {
             if (response && response.success && response.data) {
                 const dataWithIndex = response.data.map((item, index) => ({
                     ...item,
-                    id: index + 1,
+                    index: index + 1,
                 }));
                 setRows(dataWithIndex);
             } else {
@@ -100,17 +134,22 @@ export default function VisitorLogs() {
                                 <div className="spinner"></div>
                             </div>
                         ) : (
-                            <Box sx={{ height: 600, width: '100%' }}>
-                                <DataGrid
-                                    rows={rows}
-                                    columns={columns}
-                                    pageSize={10}
-                                    rowsPerPageOptions={[10]}
-                                    disableSelectionOnClick
-                                />
-                            </Box>
+                            <>
+                                <div className="mb-2 flex justify-start">
+                                    <Badge status={`Total Visitors: ${rows.length}`} color="blue" textsize="lg" />
+                                </div>
+                                <Box sx={{ height: 600, width: '100%' }}>
+                                    <DataGrid
+                                        rows={rows}
+                                        columns={columns}
+                                        pageSize={10}
+                                        rowsPerPageOptions={[10]}
+                                        disableSelectionOnClick
+                                    />
+                                </Box>
+                            </>
                         )}
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
