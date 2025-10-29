@@ -190,6 +190,10 @@ app.use('/death', deathCertificateRoutes);
 const marriageCertificateRoutes = require('./routes/marriageCertificate');
 app.use('/marriage', marriageCertificateRoutes);
 
+//TODO: import routes visitorLogs
+const visitorLogsRoutes = require('./routes/visitorLogs');
+app.use('/visitor-logs', visitorLogsRoutes);
+
 //TODO: Start server
 const PORT = process.env.PORT || 3001;
 const server = app.listen(PORT, () => {

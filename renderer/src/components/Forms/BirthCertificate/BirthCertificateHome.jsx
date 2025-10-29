@@ -36,7 +36,6 @@ export default function BirthCertificateHome({ onView }) {
     fetchData();
   }, []);
 
-  // 🔹 Define DataGrid columns
   const columns = [
     { field: "id", headerName: "ID", width: 50 },
     {
@@ -93,7 +92,6 @@ export default function BirthCertificateHome({ onView }) {
         },
     ];
 
-  // 🔹 Filter rows (client-side search)
   const filteredRows = listOfBirth.filter((row) => {
     const query = searchQuery.toLowerCase();
     return (

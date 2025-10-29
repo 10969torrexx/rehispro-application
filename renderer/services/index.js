@@ -8,3 +8,6 @@ export * as MarriageCertServices from './MarriageCertificate/Services';
 export * as MarriageCertValidation from './MarriageCertificate/Validation';
 
 export * as FileValidation from './Files/Validations';
+
+export * as VisitorLogServices from './VisitorLogs/Services';
+export * as VisitorLogValidations from './VisitorLogs/Validations';

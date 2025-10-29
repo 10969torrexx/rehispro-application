@@ -29,6 +29,12 @@
       "iconActive": "bi-heart-pulse-fill",
       "name": "Death Certificates",
       "url": "/death-certificates"
+    },
+    {
+      "icon": "bi-eye",
+      "iconActive": "bi-eye-fill",
+      "name": "Visitor Logs",
+      "url": "/visitor-logs"
     }
   ],
   "staff" : [
@@ -55,6 +61,12 @@
       "iconActive": "bi-heart-pulse-fill",
       "name": "Death Certificates",
       "url": "/death-certificates"
+    },
+    {
+      "icon": "bi-eye",
+      "iconActive": "bi-eye-fill",
+      "name": "Visitor Logs",
+      "url": "/visitor-logs"
     }
   ]
 }

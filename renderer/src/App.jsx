@@ -7,7 +7,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-import { Login, Dashboard, UsersManagement, NotFound, BirthCertificate, DeathCertificate, MarriageCertificate  } from '@pages';
+import { Login, 
+    Dashboard,
+    UsersManagement, 
+    NotFound, 
+    BirthCertificate, 
+    DeathCertificate, 
+    MarriageCertificate,
+    VisitorLogs
+  } from '@pages';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -42,6 +50,7 @@ function App() {
           <Route path="/birth-certificates" element={<BirthCertificate />} />
           <Route path="/death-certificates" element={<DeathCertificate />} />
           <Route path="/marriage-certificates" element={<MarriageCertificate />} />
+          <Route path="/visitor-logs" element={<VisitorLogs />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
