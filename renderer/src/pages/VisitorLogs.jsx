@@ -122,7 +122,7 @@ export default function VisitorLogs() {
             const logDateString = row.created_at?.split(" ")[0];
             return logDateString === date;
         });
-    setFilteredRows(newFiltered);
+        setFilteredRows(newFiltered);
     }, [date, rows]);
 
     const normalizeDate = (d) => {
