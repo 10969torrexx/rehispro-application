@@ -1,12 +1,17 @@
 export async function store(data) {
     try {
-        const reponse = await fetch('http://localhost:3001/visitor-logs/store', {
+        const response = await fetch('http://localhost:3001/visitor-logs/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
         });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to create visitor log');
+        }
 
         return await response.json();
     } catch (error) {

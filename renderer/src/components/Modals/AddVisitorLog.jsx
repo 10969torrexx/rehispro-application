@@ -9,9 +9,19 @@ export default function AddVisitorsLog({ isOpen, onClose }) {
     const handleSubmit = async (e) => { 
         e.preventDefault();
         toast.success("Visitor log added successfully!");
-        console.table(formData)
         setErrors(VisitorLogValidations.validate(formData));
-        console.table(errors)
+
+        if (Object.keys(errors).length === 0) {
+            setIsLoading(true);
+            try {
+                await VisitorLogServices.store(formData);
+                onClose();
+            } catch (error) {
+                toast.error("An error occurred while adding the visitor log.");
+            } finally {
+                setIsLoading(false);
+            }
+        }
     };
 
     const [formData, setFormData] = useState({
