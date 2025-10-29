@@ -5,9 +5,8 @@ import { VisitorLogServices } from '@services';
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { toast } from "react-toastify";
-import { StringToDate } from "@myTools";
 
-export default function VisitorLogs() { 
+export default function VisitorLogs() {
     const [userData, setUserData] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [addVisitorLogOpen, setAddVisitorLogOpen] = useState(false);
@@ -83,11 +82,9 @@ export default function VisitorLogs() {
         }
         fetchData();
     }, []);
-
     const handleRefresh = () => {
         fetchData();
     };
-
     const fetchData = async () => {
         try {
             setIsLoading(true);
@@ -116,7 +113,6 @@ export default function VisitorLogs() {
             setIsLoading(false);
         }
     }
-
     useEffect(() => {
         const newFiltered = rows.filter((row) => {
             const logDateString = row.created_at?.split(" ")[0];
@@ -124,7 +120,6 @@ export default function VisitorLogs() {
         });
         setFilteredRows(newFiltered);
     }, [date, rows]);
-
     const normalizeDate = (d) => {
         const nd = new Date(d);
         nd.setHours(0, 0, 0, 0);
@@ -146,57 +141,68 @@ export default function VisitorLogs() {
         setFilteredRows(filtered);
     };
     return (
-        <div className="flex w-screen h-screen">
-            <SideBar
-                role={userData?.role}
-                isOpen={sidebarOpen}
-                setIsOpen={setSidebarOpen}
-            />
-
-            <AddVisitorLog isOpen={addVisitorLogOpen} onClose={() => setAddVisitorLogOpen(false)} onSuccess={handleRefresh} />
-
-            <div className="p-4 flex-1 flex flex-col w-screen h-screen transition-all duration-300">
-                <h2 className="text-lg font-semibold text-left">Visitor Logs</h2>
-                <div className="flex justify-end mb-4 gap-2">
-                    <button className={`btn-primary shadow-lg px-3 py-1 rounded-full`}
-                        onClick={() => setAddVisitorLogOpen(true)}
-                    >
+        <>
+            <div className="flex w-screen h-screen">
+                <SideBar
+                    role={userData?.role}
+                    isOpen={sidebarOpen}
+                    setIsOpen={setSidebarOpen}
+                />
+                <AddVisitorLog isOpen={addVisitorLogOpen} onClose={() => setAddVisitorLogOpen(false)} onSuccess={handleRefresh} />
+                <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
+                    <h2 className="text-lg font-semibold text-left">Visitor Logs</h2>
+                    <div className="flex justify-end mb-4 gap-2">
+                        <button className={`btn-primary shadow-lg px-3 py-1 rounded-full`}
+                            onClick={() => setAddVisitorLogOpen(true)}
+                        >
                         <i className="bi bi-person-fill-add mr-2"></i>
                         Add Visitor Log
                     </button>
-                </div>
-                <div className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
-                    <div className="form-content mb-4">
-                        {isLoading ? (
-                             <div className="flex h-full items-center justify-center">
-                                <div className="spinner"></div>
+                    </div>
+                    <div id="managementContent" className="p-4 bg-white w-full flex-1 overflow-y-auto flex justify-center shadow-lg rounded-lg">
+                        <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                            <div className="form-content mb-4 h-full">
+                                {
+                                    isLoading ? ( 
+                                        <div className="flex h-full items-center justify-center">
+                                            <div className="spinner"></div>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="mb-2 flex justify-start">
+                                                <div className="p-2 px-5 border items-center rounded-full">{`Visitors Today: ${rows.length}`}</div>
+                                                <input
+                                                    className="common-input"
+                                                    type="date"
+                                                    value={date}
+                                                    max={today}
+                                                    onChange={(e) => handleDateChange(e)}
+                                                />
+                                            </div>
+                                            <Box
+                                                sx={{
+                                                    height: 600,
+                                                    width: "100%",
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                }}
+                                            >
+                                                <DataGrid
+                                                    rows={filteredRows}
+                                                    columns={columns}
+                                                    pageSize={10}
+                                                    rowsPerPageOptions={[10]}
+                                                    disableSelectionOnClick
+                                                />
+                                            </Box>
+                                        </>
+                                    )
+                                }
                             </div>
-                        ) : (
-                            <>
-                                <div className="mb-2 flex justify-start">
-                                    <div className="p-2 px-5 border items-center rounded-full">{`Visitors Today: ${rows.length}`}</div>
-                                    <input
-                                        className="common-input"
-                                        type="date"
-                                        value={date}
-                                        max={today}
-                                        onChange={(e) => handleDateChange(e)}
-                                    />
-                                </div>
-                                <Box sx={{ height: 600, width: '100%' }}>
-                                    <DataGrid
-                                        rows={filteredRows}
-                                        columns={columns}
-                                        pageSize={10}
-                                        rowsPerPageOptions={[10]}
-                                        disableSelectionOnClick
-                                    />
-                                </Box>
-                            </>
-                        )}
-                    </div>  
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        </>
+    );
 }

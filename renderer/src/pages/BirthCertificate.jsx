@@ -47,21 +47,21 @@ export default function BirthCertificate() {
                     <div id="managementContent" className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
                         {activeTab === "home" && 
                             <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
-                            <div className="mb-4">
-                                <InfoCard 
-                                    title="List of Birth Certificates"
-                                    message="Browse and manage the official records of registered birth certificates"
-                                />
-                            </div>
-                            <div className="form-content mb-4">
-                                <BirthCertificateHome 
-                                    onView={(row) => {
-                                        setSelectedRow(row); 
-                                        setActiveTab("view"); 
-                                    }} 
-                                />
-                            </div>
-                        </div>   
+                                <div className="mb-4">
+                                    <InfoCard 
+                                        title="List of Birth Certificates"
+                                        message="Browse and manage the official records of registered birth certificates"
+                                    />
+                                </div>
+                                <div className="form-content mb-4">
+                                    <BirthCertificateHome 
+                                        onView={(row) => {
+                                            setSelectedRow(row); 
+                                            setActiveTab("view"); 
+                                        }} 
+                                    />
+                                </div>
+                            </div>   
                         }
                         {activeTab === "upload" && 
                             <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
