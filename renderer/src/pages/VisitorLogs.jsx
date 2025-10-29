@@ -33,10 +33,12 @@ export default function VisitorLogs() {
             try {
                 setIsLoading(true);
                 const response = await VisitorLogServices.list();
-
                 if (response && response.success && response.data) {
-                    console.table(response.data);
-                    setRows(response.data);
+                    const dataWithIndex = response.data.map((item, index) => ({
+                        ...item,
+                        id: index + 1,
+                    }));
+                    setRows(dataWithIndex);
                 } else {
                     toast.error(response?.message || "Failed to load visitor logs");
                 }
