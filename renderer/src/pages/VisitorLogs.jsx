@@ -12,6 +12,9 @@ export default function VisitorLogs() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [addVisitorLogOpen, setAddVisitorLogOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const today = new Date().toISOString().split("T")[0];
+    const [date, setDate] = useState(today);
+    const [filteredRows, setFilteredRows] = useState([]);
 
     const columns = [
         { field: "index", headerName: "ID", width: 50 },
@@ -94,7 +97,9 @@ export default function VisitorLogs() {
                     ...item,
                     index: index + 1,
                 }));
+                console.table(dataWithIndex);
                 setRows(dataWithIndex);
+                setFilteredRows(dataWithIndex);
             } else {
                 toast.error(response?.message || "Failed to load visitor logs");
             }
@@ -107,6 +112,26 @@ export default function VisitorLogs() {
             setIsLoading(false);
         }
     }
+
+    const normalizeDate = (d) => {
+        const nd = new Date(d);
+        nd.setHours(0, 0, 0, 0);
+        return nd;
+    };
+    const handleDateChange = (e) => {
+        const selectedDate = e.target.value;
+        setDate(selectedDate);
+        if (!selectedDate) {
+            setFilteredRows(rows);
+            return;
+        }
+        const filtered = rows.filter((row) => {
+            const logDate = new Date(row.created_at.replace(" ", "T"));
+            const selected = normalizeDate(selectedDate);
+            return logDate.getTime() === selected.getTime();
+        });
+        setFilteredRows(filtered);
+    };
     return (
         <div className="flex w-screen h-screen">
             <SideBar
@@ -136,11 +161,18 @@ export default function VisitorLogs() {
                         ) : (
                             <>
                                 <div className="mb-2 flex justify-start">
-                                    <Badge status={`Total Visitors: ${rows.length}`} color="blue" textsize="lg" />
+                                    <div className="p-2 px-5 border items-center rounded-full">{`Visitors Today: ${rows.length}`}</div>
+                                    <input
+                                        className="common-input"
+                                        type="date"
+                                        value={date}
+                                        max={today}
+                                        onChange={(e) => handleDateChange(e)}
+                                    />
                                 </div>
                                 <Box sx={{ height: 600, width: '100%' }}>
                                     <DataGrid
-                                        rows={rows}
+                                        rows={filteredRows}
                                         columns={columns}
                                         pageSize={10}
                                         rowsPerPageOptions={[10]}
