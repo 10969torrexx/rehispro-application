@@ -54,3 +54,35 @@ exports.create = (req, res) =>  {
         res.status(500).json({ success: false, message: 'Server error' });  
     }
 };
+
+exports.list = (req, res) => { 
+    try {
+        const query = `
+            SELECT 
+                v.*, 
+                u.login_id AS officer
+            FROM visitor_logs v
+            LEFT JOIN users u ON v.creator_id = u.id
+            ORDER BY v.created_at DESC
+        `;
+
+        db.all(query, [], (err, rows) => {
+            if (err) {
+                console.error('[DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database query failed',
+                    error: err.message
+                });
+            }
+            res.status(200).json({
+                success: true,
+                data: rows
+            });
+        });
+    } catch (error) {
+        writeLog('ERROR [visitor controller][getAll]', error);
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+}
