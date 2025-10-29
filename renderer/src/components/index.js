@@ -27,3 +27,5 @@ export { default as MarriageCertificateCreateForm } from './Forms/MarriageCertif
 export { default as MarriageCertificateHome } from './Forms/MarriageCertificate/MarriageCertificateHome';
 export { default as MarriageCertificateView } from './Forms/MarriageCertificate/MarriageCertificateView';
 export { default as MarriageCertificateUpload } from './Forms/MarriageCertificate/MarriageCertficiateUpload';
+
+export { default as Badge } from './Badge';

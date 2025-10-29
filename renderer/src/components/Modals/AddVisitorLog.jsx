@@ -4,7 +4,7 @@ import { ErrorMessages, Divider } from '@components';
 import { VisitorLogServices,  VisitorLogValidations } from '@services';
 import { set } from 'date-fns';
 
-export default function AddVisitorsLog({ isOpen, onClose }) {
+export default function AddVisitorsLog({ isOpen, onClose, onSuccess }) {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
     const handleSubmit = async (e) => { 
@@ -20,6 +20,9 @@ export default function AddVisitorsLog({ isOpen, onClose }) {
             await VisitorLogServices.store(formData);
             toast.success('Visitor log added successfully.');
             onClose();
+            onSuccess();
+            setIsLoading(false);
+            resetForm();
         } catch (error) {
            toast.error('Something went wrong.');
         }
@@ -33,6 +36,18 @@ export default function AddVisitorsLog({ isOpen, onClose }) {
         purpose: '',
         remarks: ''
     });
+    
+    const resetForm = () => { 
+        setFormData({
+            creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
+            name: '',
+            contactNumber: '',
+            address: '',
+            purpose: '',
+            remarks: ''
+        });
+        setErrors({});
+    }
     
     const handleOnChange = (e) => { 
         const { name, value } = e.target;
