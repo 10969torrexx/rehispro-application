@@ -7,9 +7,10 @@ exports.create = (req, res) =>  {
         if (!formData) {
             return res.status(400).json({ success: false, message: 'No Data' });
         }
-        writeLog('INFPO [visitor controller][download]', formData);
+        writeLog(`INFPO [visitor controller][create] ${JSON.stringify(formData)}`);
     } catch (error) {
+        writeLog('ERROR [visitor controller][create]', error);
+        console.error(error);
         res.status(500).json({ success: false, message: 'Server error' });  
     }
 };
-    

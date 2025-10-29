@@ -10,7 +10,7 @@
   },
   "contactNumber": {
     "required": true,
-    "pattern": "^(\\+63|0)\\d{10}$",
+    "pattern": "^(\\+63\\d{10}|0\\d{10})$",
     "message": {
       "required": "Contact Number is required.",
       "pattern": "Contact Number must be a valid Philippine mobile number."

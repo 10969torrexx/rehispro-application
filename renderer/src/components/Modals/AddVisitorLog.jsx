@@ -2,29 +2,31 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { ErrorMessages, Divider } from '@components';
 import { VisitorLogServices,  VisitorLogValidations } from '@services';
+import { set } from 'date-fns';
 
 export default function AddVisitorsLog({ isOpen, onClose }) {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
     const handleSubmit = async (e) => { 
         e.preventDefault();
-        toast.success("Visitor log added successfully!");
-        setErrors(VisitorLogValidations.validate(formData));
-
-        if (Object.keys(errors).length === 0) {
-            setIsLoading(true);
-            try {
-                await VisitorLogServices.store(formData);
-                onClose();
-            } catch (error) {
-                toast.error("An error occurred while adding the visitor log.");
-            } finally {
-                setIsLoading(false);
+        try {
+            const validationResults = VisitorLogValidations.validate(formData);
+            setErrors(validationResults);
+            if (Object.keys(validationResults).length > 0) {
+                return;
             }
+
+            setIsLoading(true);
+            await VisitorLogServices.store(formData);
+            toast.success('Visitor log added successfully.');
+            onClose();
+        } catch (error) {
+           toast.error('Something went wrong.');
         }
     };
 
     const [formData, setFormData] = useState({
+        creatorId: JSON.parse(localStorage.getItem('user'))?.id || null,
         name: '',
         contactNumber: '',
         address: '',

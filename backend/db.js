@@ -202,7 +202,6 @@ db.serialize(() => {
   `);
 
   //TODO: create table for death certificates
-
   db.run(`
     CREATE TABLE IF NOT EXISTS deathcertificates (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -586,6 +585,22 @@ db.serialize(() => {
     );
   `);
 
+  //TODO: create table for visitor logs
+  db.run(`
+    CREATE TABLE IF NOT EXISTS visitor_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      creator_id INTEGER NOT NULL,
+      name TEXT NOT NULL,
+      contact_number TEXT,
+      address TEXT,
+      status varchar(255) NOT NULL DEFAULT 'pending',
+      purpose TEXT,
+      remarks TEXT,
+      created_at TIMESTAMP DEFAULT (datetime('now')),
+      updated_at TIMESTAMP DEFAULT (datetime('now')),
+      deleted_at TIMESTAMP
+    );
+  `);
 });
 
 module.exports = db;
