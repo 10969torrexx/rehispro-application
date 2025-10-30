@@ -1,23 +1,22 @@
 import {useState, useEffect} from 'react';
-import { UserRoles } from '../../enums/userRoles';
+import { UserRoles } from '@enums';
 import { AuthValidations, AuthServices } from '@services';
 import { ErrorMessages, Divider, InfoCard } from '@components';
 import { toast } from "react-toastify";
 import { createUser } from '../../../services/Auth/Services';
+import { set } from 'date-fns';
 
 export default function CreateUsers({ onSave, onCancel, isOpen }) {
-    const [loginId, setLoginId] = useState('');
-    const [fullName, setFullName] = useState('');
-    const [password, setPassword] = useState('');
-    const [userRole, setUserRole] = useState(UserRoles.STAFF);
     const [errors, setErrors] = useState({});
 
     const handleCancel = () => {
-        setLoginId('');
-        setFullName('');
-        setPassword('');
-        setUserRole(UserRoles.STAFF);
-        onCancel();
+        setFormData({
+            loginId: '',
+            fullName: '',
+            password: '',
+            userRole: UserRoles.STAFF
+        });
+        onCancel();``
     };
 
     const [formData, setFormData] = useState({
@@ -37,9 +36,31 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors(AuthValidations.validate(formData))
-        console.error(_errors);
-        return null;
+        setErrors(AuthValidations.validate(formData));
+        const createUserResponse = await createUser(formData.loginId, formData.fullName, formData.password, formData.userRole);
+        if (createUserResponse.success) {
+            onSave({ 
+                response: createUserResponse.success,
+                message: createUserResponse.message,
+                data: {
+                    id: createUserResponse.data.id,
+                    login_id: createUserResponse.data.login_id,
+                    role: createUserResponse.data.role,
+                    created_at: createUserResponse.data.created_at
+                }
+            });
+            setFormData({
+                loginId: '',
+                fullName: '',
+                password: '',
+                userRole: UserRoles.STAFF
+            });
+            setErrors({});
+            toast.success(createUserResponse.message);
+        } else {
+            console.log('Create user error:', createUserResponse.message);
+            toast.error(createUserResponse.message);
+        }
     }
     if (!isOpen) return null;
     return(
