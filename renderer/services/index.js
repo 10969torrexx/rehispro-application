@@ -1,4 +1,5 @@
 export * as AuthServices from './Auth/Services';
+export * as AuthValidations from './Auth/Validations';
 export * as BirthCertServices from './BirthCertificate/Services';
 export * as BirthCertValidation from './BirthCertificate/Validation';
 

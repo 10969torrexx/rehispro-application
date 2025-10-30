@@ -55,7 +55,7 @@ export default function UsersManagement() {
         isOpen={sidebarOpen}
         setIsOpen={setSidebarOpen}
       />
-      <CreateUsers
+      <CreateUsers //TODO: modal to create user
         onSave={(data) => {
           setUsers(prevUsers => [...prevUsers, data.data]);
           setShowCreateUserModal(false);

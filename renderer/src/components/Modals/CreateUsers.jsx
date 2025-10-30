@@ -1,52 +1,45 @@
 import {useState, useEffect} from 'react';
 import { UserRoles } from '../../enums/userRoles';
-import { validateLoginId, validatePassword } from '../../../services/Auth/Validations';
+import { AuthValidations, AuthServices } from '@services';
 import { ErrorMessages, Divider, InfoCard } from '@components';
 import { toast } from "react-toastify";
 import { createUser } from '../../../services/Auth/Services';
 
 export default function CreateUsers({ onSave, onCancel, isOpen }) {
     const [loginId, setLoginId] = useState('');
+    const [fullName, setFullName] = useState('');
     const [password, setPassword] = useState('');
     const [userRole, setUserRole] = useState(UserRoles.STAFF);
+    const [errors, setErrors] = useState({});
+
     const handleCancel = () => {
         setLoginId('');
+        setFullName('');
         setPassword('');
         setUserRole(UserRoles.STAFF);
         onCancel();
     };
 
-    const loginIdErrors = validateLoginId(loginId);
-    const passwordErrors = validatePassword(password);
-    const [loginIdErrorMessages, setLoginIdErrorMessages] = useState({});
-    const [passwordErrorMessages, setPasswordErrorMessages] = useState({});
+    const [formData, setFormData] = useState({
+        loginId: '',
+        fullName: '',
+        password: '',
+        userRole: UserRoles.STAFF
+    });
+
+    const handleOnChange = (e) => { 
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        if (!loginIdErrors.isValid || !passwordErrors.isValid) {
-            setLoginIdErrorMessages(loginIdErrors.errors);
-            setPasswordErrorMessages(passwordErrors.errors);
-            return;
-        }
-
-        const createUserResponse = await createUser(loginId, password, userRole);
-        if (createUserResponse.success) {
-            onSave({ 
-                response: createUserResponse.success,
-                message: createUserResponse.message,
-                data: {
-                    id: createUserResponse.data.id,
-                    login_id: createUserResponse.data.login_id,
-                    role: createUserResponse.data.role,
-                    created_at: createUserResponse.data.created_at
-                }
-            });
-            toast.success(createUserResponse.message);
-        } else {
-            console.log('Create user error:', createUserResponse.message);
-            toast.error(createUserResponse.message);
-        }
+        setErrors(AuthValidations.validate(formData))
+        console.error(_errors);
+        return null;
     }
     if (!isOpen) return null;
     return(
@@ -69,15 +62,30 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
                             type="text"
                             id="loginId"
                             name="loginId"
-                            value={loginId}
-                            onChange={(e) => setLoginId(e.target.value)}
+                            value={formData.loginId}
+                            onChange={handleOnChange}
                             className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
-                            ${ loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}
+                            ${errors.loginId ? 'border-red-500' : 'border-gray-300'} `}
                             placeholder="Enter login ID"
                         />
-                        { loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length > 0 && (
-                            <ErrorMessages errors={loginIdErrorMessages} />
-                        )}
+                        { errors.loginId  &&  <ErrorMessages errors={errors.loginId} />}
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1" htmlFor="fullName">
+                            Full Name
+                        </label>
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleOnChange}
+                            className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
+                                ${errors.fullName ? 'border-red-500' : 'border-gray-300'} `}
+                            placeholder="Enter full name"
+                        />
+                        { errors.fullName  &&  <ErrorMessages errors={errors.fullName} /> }
                     </div>
 
                     <div>
@@ -88,15 +96,13 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
                             type="password"
                             id="password"
                             name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={formData.password}
+                            onChange={handleOnChange}
                             className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
-                            ${ passwordErrorMessages !== null && Object.keys(passwordErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}
+                                ${errors.password ? 'border-red-500' : 'border-gray-300'} `}
                             placeholder="Enter password"
                         />
-                        { passwordErrorMessages !== null && Object.keys(passwordErrorMessages).length > 0 && (
-                            <ErrorMessages errors={passwordErrorMessages} />
-                        )}
+                        { errors.password  &&  <ErrorMessages errors={errors.password} /> }
                     </div>
 
                     <div className="flex justify-end space-x-3 pt-4">
@@ -105,13 +111,13 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
                             onClick={handleCancel}
                             className="bg-gray-300 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-400"
                         >
-                        Cancel
+                            Cancel
                         </button>
                         <button
                             type="submit"
                             className="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600"
                         >
-                        Add User
+                            Add User
                         </button>
                     </div>
                 </form>
