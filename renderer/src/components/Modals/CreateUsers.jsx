@@ -5,53 +5,50 @@ import { ErrorMessages, Divider, InfoCard } from '@components';
 import { toast } from "react-toastify";
 import { createUser } from '../../../services/Auth/Services';
 
-export default function CreateUsers({ onSave, onCancel }) {
-    //TODO: handle the inputs
-        const [loginId, setLoginId] = useState('');
-        const [password, setPassword] = useState('');
-        const [userRole, setUserRole] = useState(UserRoles.STAFF);
-    //TODO: handle on cancel
-        const handleCancel = () => {
-            setLoginId('');
-            setPassword('');
-            setUserRole(UserRoles.STAFF);
-            onCancel();
-        };
+export default function CreateUsers({ onSave, onCancel, isOpen }) {
+    const [loginId, setLoginId] = useState('');
+    const [password, setPassword] = useState('');
+    const [userRole, setUserRole] = useState(UserRoles.STAFF);
+    const handleCancel = () => {
+        setLoginId('');
+        setPassword('');
+        setUserRole(UserRoles.STAFF);
+        onCancel();
+    };
 
-    //TODO: handle submit button
-        const loginIdErrors = validateLoginId(loginId);
-        const passwordErrors = validatePassword(password);
-        const [loginIdErrorMessages, setLoginIdErrorMessages] = useState({});
-        const [passwordErrorMessages, setPasswordErrorMessages] = useState({});
+    const loginIdErrors = validateLoginId(loginId);
+    const passwordErrors = validatePassword(password);
+    const [loginIdErrorMessages, setLoginIdErrorMessages] = useState({});
+    const [passwordErrorMessages, setPasswordErrorMessages] = useState({});
 
-        const handleSubmit = async (e) => {
-            e.preventDefault();
-           
-            if (!loginIdErrors.isValid || !passwordErrors.isValid) {
-                setLoginIdErrorMessages(loginIdErrors.errors);
-                setPasswordErrorMessages(passwordErrors.errors);
-                return;
-            }
-
-            const createUserResponse = await createUser(loginId, password, userRole);
-            if (createUserResponse.success) {
-                onSave({ 
-                    response: createUserResponse.success,
-                    message: createUserResponse.message,
-                    data: {
-                        id: createUserResponse.data.id,
-                        login_id: createUserResponse.data.login_id,
-                        role: createUserResponse.data.role,
-                        created_at: createUserResponse.data.created_at
-                    }
-                });
-                toast.success(createUserResponse.message);
-            } else {
-                console.log('Create user error:', createUserResponse.message);
-                toast.error(createUserResponse.message);
-            }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        if (!loginIdErrors.isValid || !passwordErrors.isValid) {
+            setLoginIdErrorMessages(loginIdErrors.errors);
+            setPasswordErrorMessages(passwordErrors.errors);
+            return;
         }
 
+        const createUserResponse = await createUser(loginId, password, userRole);
+        if (createUserResponse.success) {
+            onSave({ 
+                response: createUserResponse.success,
+                message: createUserResponse.message,
+                data: {
+                    id: createUserResponse.data.id,
+                    login_id: createUserResponse.data.login_id,
+                    role: createUserResponse.data.role,
+                    created_at: createUserResponse.data.created_at
+                }
+            });
+            toast.success(createUserResponse.message);
+        } else {
+            console.log('Create user error:', createUserResponse.message);
+            toast.error(createUserResponse.message);
+        }
+    }
+    if (!isOpen) return null;
     return(
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center text-left">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-xl p-10">
@@ -69,14 +66,14 @@ export default function CreateUsers({ onSave, onCancel }) {
                         Login ID
                         </label>
                         <input
-                        type="text"
-                        id="loginId"
-                        name="loginId"
-                    value={loginId}
-                        onChange={(e) => setLoginId(e.target.value)}
-                        className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
-                        ${ loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}
-                        placeholder="Enter login ID"
+                            type="text"
+                            id="loginId"
+                            name="loginId"
+                            value={loginId}
+                            onChange={(e) => setLoginId(e.target.value)}
+                            className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
+                            ${ loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}
+                            placeholder="Enter login ID"
                         />
                         { loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length > 0 && (
                             <ErrorMessages errors={loginIdErrorMessages} />
@@ -88,14 +85,14 @@ export default function CreateUsers({ onSave, onCancel }) {
                         Password
                         </label>
                         <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
-                        ${ passwordErrorMessages !== null && Object.keys(passwordErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}
-                        placeholder="Enter password"
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
+                            ${ passwordErrorMessages !== null && Object.keys(passwordErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}
+                            placeholder="Enter password"
                         />
                         { passwordErrorMessages !== null && Object.keys(passwordErrorMessages).length > 0 && (
                             <ErrorMessages errors={passwordErrorMessages} />
