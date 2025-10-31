@@ -19,7 +19,11 @@ export default function UsersManagement() {
     { field: "index", headerName: "ID", width: 70 },
     { field: "full_name", headerName: "Full Name", width: 200 },
     { field: "login_id", headerName: "Username", width: 150 },
-    { field: "role", headerName: "Role", width: 150 },
+    { field: "role", headerName: "Role", width: 100,
+      renderCell: (params) => (
+        <span>{ capitalizeFirst(params.value) }</span>
+      )
+    },
     { field: "status", headerName: "Status", width: 100,
       renderCell: (params) => (
         <Badge status={params.value} 
