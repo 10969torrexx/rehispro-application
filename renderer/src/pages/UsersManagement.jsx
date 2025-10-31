@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { UserStatus, UserRoles } from "@enums";
 import { toast } from "react-toastify";
 import { CreateUsers, ConfirmAction, EditUserDetails, ViewUserDetails } from '@modals';
-import { getAllUsers, deleteUser } from '../../services/Auth/Services';
+import { AuthValidations, AuthServices } from '@services';
 import { SideBar, Badge } from '@components';
 import { capitalizeFirst } from "@myTools";
 import { DataGrid } from "@mui/x-data-grid";
@@ -35,15 +35,47 @@ export default function UsersManagement() {
         />
       )
     },
-    { field: "created_at", headerName: "Created", width: 150 }
+    { field: "created_at", headerName: "Created", width: 200 },
+    { field: "actions", headerName: "Actions", width: 100, sortable: false, filterable: false, disableColumnMenu: true,
+      renderCell: (params) => { 
+        return (
+          <select className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onChange={(e) => { handleOnChange(e, params.row.id) }}
+          >
+            <option value="">Select</option>
+            <option value="edit">Edit</option>
+            <option value="delete">Delete</option>
+          </select>
+        )
+      }
+    }
   ];
+
+  const handleOnChange = (e, userId) => { 
+    const action = e.target.value;
+    if (action === "edit") {
+      
+    } else if (action === "delete") {
+      //TODO: handle delete user
+      AuthServices.deleteUser(userId).then((response) => {
+        setIsLoading(true);
+        if (response && response.success) {
+          toast.success("User deleted successfully");
+          setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
+        } else {
+          toast.error(response.message || "Failed to delete user");
+        }
+        setIsLoading(false);
+      });
+    }
+  };
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('user'));
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await getAllUsers(userData.id);
+        const response = await AuthServices.getAllUsers(userData.id);
         const dataWithIndex = response.data.map((item, index) => ({
           ...item,
           index: index + 1,

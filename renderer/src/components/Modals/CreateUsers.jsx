@@ -1,10 +1,8 @@
 import {useState, useEffect} from 'react';
 import { UserRoles } from '@enums';
 import { AuthValidations, AuthServices } from '@services';
-import { ErrorMessages, Divider, InfoCard } from '@components';
+import { ErrorMessages, InfoCard } from '@components';
 import { toast } from "react-toastify";
-import { createUser } from '../../../services/Auth/Services';
-import { set } from 'date-fns';
 
 export default function CreateUsers({ onSave, onCancel, isOpen }) {
     const [errors, setErrors] = useState({});
@@ -41,7 +39,7 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
         if (Object.keys(errors).length > 0) {
             return;
         }
-        const createUserResponse = await createUser(formData.loginId, formData.fullName, formData.password, formData.userRole);
+        const createUserResponse = await AuthServices.createUser(formData.loginId, formData.fullName, formData.password, formData.userRole);
         console.table(createUserResponse);
         if (createUserResponse.success) {
             onSave({ 
