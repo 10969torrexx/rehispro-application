@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-const isDev = !app.isPackaged;
+const isDev = !(app.isPackaged ?? true);
 let backendServer;
 
 function createWindow() {
