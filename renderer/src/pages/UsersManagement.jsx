@@ -9,12 +9,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 
 export default function UsersManagement() {
-  const [selectedUserId, setSelectedUserId] = useState(null);
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState(null); 
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
   const columns = [
     { field: "index", headerName: "ID", width: 70 },
     { field: "full_name", headerName: "Full Name", width: 200 },
@@ -54,14 +55,14 @@ export default function UsersManagement() {
   const handleOnChange = (e, userId) => { 
     const action = e.target.value;
     if (action === "edit") {
-      
+      setShowEditUserModal(true);
+      setSelectedUserId(userId);
     } else if (action === "delete") {
       //TODO: handle delete user
       AuthServices.deleteUser(userId).then((response) => {
         setIsLoading(true);
         if (response && response.success) {
           toast.success("User deleted successfully");
-          setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
         } else {
           toast.error(response.message || "Failed to delete user");
         }
@@ -118,6 +119,17 @@ export default function UsersManagement() {
         }}
         onCancel={() => setShowCreateUserModal(false)}
         isOpen={showCreateUserModal}
+      />
+      <EditUserDetails 
+        userId={selectedUserId}
+        onSave={(data) => {
+          setUsers(prevUsers => prevUsers.map(user => 
+            user.id === data.id ? { ...user, login_id: data.login_id, role: data.role, status: data.status } : user
+          ));
+          setShowEditUserModal(false);
+        }}
+        isOpen={showEditUserModal}
+        onCancel={() => setShowEditUserModal(false)} 
       />
       <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
         <h2 className="text-lg font-semibold text-left">User Management</h2>

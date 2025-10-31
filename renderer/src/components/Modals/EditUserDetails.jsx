@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { capitalizeFirst } from './../../myTools/myTools';
 import { AuthServices } from '@services';
 
-export default function EditUserDetails({ userId, onSave, onCancel }) { 
+export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }) { 
     const [isLoading, setIsLoading] = useState(true);
     //TODO: handle the user inputs
     const [loginId, setLoginId] = useState('');
@@ -68,7 +68,7 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
             toast.error("An error occurred while updating user details.");
         }
     }
-
+    if (!isOpen) return null;
     return(
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center text-left">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-xl p-10">
