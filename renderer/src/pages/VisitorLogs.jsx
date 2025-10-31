@@ -31,7 +31,7 @@ export default function VisitorLogs() {
                     params.value === 'cancelled' ? 'red' : 'gray'
                 } />
             )
-         },
+        },
         { field: "remarks", headerName: "Remarks", width: 200 },
         { field: "created_at", headerName: "Time", width: 150,
             renderCell: (params) => { 

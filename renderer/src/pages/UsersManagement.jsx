@@ -16,11 +16,21 @@ export default function UsersManagement() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "index", headerName: "ID", width: 70 },
     { field: "full_name", headerName: "Full Name", width: 200 },
     { field: "login_id", headerName: "Username", width: 150 },
     { field: "role", headerName: "Role", width: 150 },
-    { field: "status", headerName: "Status", width: 150 },
+    { field: "status", headerName: "Status", width: 100,
+      renderCell: (params) => (
+        <Badge status={params.value} 
+          color={
+            params.value === 'active' ? 'green' :
+            params.value === 'inactive' ? 'yellow' :
+            params.value === 'deleted' ? 'red' : 'gray'
+          } 
+        />
+      )
+    },
     { field: "created_at", headerName: "Created", width: 150 }
   ];
 
@@ -30,9 +40,12 @@ export default function UsersManagement() {
       try {
         setIsLoading(true);
         const response = await getAllUsers(userData.id);
-        console.table(response);
+        const dataWithIndex = response.data.map((item, index) => ({
+          ...item,
+          index: index + 1,
+        }));
         if (response && response.success && response.data) {
-          setUsers(response.data);
+          setUsers(dataWithIndex);
         } else {
           toast.error(response.message || "Failed to fetch users");
         }
@@ -58,7 +71,13 @@ export default function UsersManagement() {
       />
       <CreateUsers //TODO: modal to create user
         onSave={(data) => {
-          setUsers(prevUsers => [...prevUsers, data.data]);
+          setUsers(prevUsers => [
+            ...prevUsers,
+            {
+              ...data.data,
+              index: data.data.id ?? prevUsers.length,
+            },
+          ]);
           setShowCreateUserModal(false);
         }}
         onCancel={() => setShowCreateUserModal(false)}
@@ -94,6 +113,7 @@ export default function UsersManagement() {
                     >
                       <DataGrid
                         rows={users}
+                        getRowId={(users) => users.id}
                         columns={columns}
                         pageSize={10}
                         rowsPerPageOptions={[10]}

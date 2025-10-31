@@ -92,6 +92,8 @@ function createUser(loginId, fullName, password, role, callback) {
         data: {
           id: this.lastID,
           login_id: loginId,
+          fullName: fullName,
+          status: 'active',
           role: role,
           created_at: new Date().toISOString()
         }

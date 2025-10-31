@@ -42,6 +42,7 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
             return;
         }
         const createUserResponse = await createUser(formData.loginId, formData.fullName, formData.password, formData.userRole);
+        console.table(createUserResponse);
         if (createUserResponse.success) {
             onSave({ 
                 response: createUserResponse.success,
@@ -49,7 +50,8 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
                 data: {
                     id: createUserResponse.data.id,
                     login_id: createUserResponse.data.login_id,
-                    full_name: createUserResponse.data.full_name,
+                    full_name: createUserResponse.data.fullName,
+                    status: createUserResponse.data.status,
                     role: createUserResponse.data.role,
                     created_at: createUserResponse.data.created_at
                 }
