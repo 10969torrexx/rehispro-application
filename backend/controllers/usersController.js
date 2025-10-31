@@ -75,17 +75,17 @@ function updateCredentials(loginId, newPassword, id, callback) {
  * @param {string} loginId
  * @param {string} password
  */
-function createUser(loginId, password, role, callback) {
-  if (!loginId || !password) {
-    return callback(new Error('Login ID and password are required'));
+function createUser(loginId, fullName, password, role, callback) {
+  if (!loginId || !fullName || !password) {
+    return callback(new Error('Login ID, full name, and password are required'));
   }
 
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(password, salt);
 
   db.run(
-    `INSERT INTO users (login_id, password, is_firsttime_flg, role) VALUES (?, ?, ?, ?)`,
-    [loginId, hashedPassword, 1, role],
+    `INSERT INTO users (login_id, full_name, password, is_firsttime_flg, role) VALUES (?, ?, ?, ?, ?)`,
+    [loginId, fullName, hashedPassword, 1, role],
     function (err) {
       if (err) return callback(err);
       callback(null, { success: true, message: 'User created successfully', 

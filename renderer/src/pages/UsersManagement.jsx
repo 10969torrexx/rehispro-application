@@ -30,6 +30,7 @@ export default function UsersManagement() {
       try {
         setIsLoading(true);
         const response = await getAllUsers(userData.id);
+        console.table(response);
         if (response && response.success && response.data) {
           setUsers(response.data);
         } else {

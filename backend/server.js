@@ -87,12 +87,12 @@ app.post('/update-credentials', (req, res) => {
  * @param {string} password
  */
 app.post('/create-user', (req, res) => {
-  const { loginId, password, role } = req.body;
-  if (!loginId || !password || !role) {
+  const { loginId, fullName, password, role } = req.body;
+  if (!loginId || !fullName || !password || !role) {
     return res.status(400).json({ success: false, message: 'Missing credentials' });
   }
 
-  usersController.createUser(loginId, password, role, (err, result) => {
+  usersController.createUser(loginId, fullName, password, role, (err, result) => {
     if (err) {
       if (err.message.includes("SQLITE_CONSTRAINT")) {
         return res.status(400).json({ success: false, message: "Duplicate user found" });

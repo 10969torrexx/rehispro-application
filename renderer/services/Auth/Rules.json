@@ -3,12 +3,10 @@
         "required" : true,
         "minLength" : 5,
         "maxLength" : 50,
-        "pattern" : "^[a-zA-Z0-9._%+-]+@",
         "message" : {
             "required" : "Login ID is required.",
             "minLength" : "Login ID must be at least 5 characters.",
-            "maxLength" : "Login ID cannot exceed 50 characters.",
-            "pattern" : "Login ID must be a valid email address."
+            "maxLength" : "Login ID cannot exceed 50 characters."
         }
     },
     "fullName": {
@@ -25,12 +23,10 @@
         "required" : true,
         "minLength" : 8,
         "maxLength" : 100,
-        "pattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
         "message" : {
             "required" : "Password is required.",
             "minLength" : "Password must be at least 8 characters.",
-            "maxLength" : "Password cannot exceed 100 characters.",
-            "pattern" : "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+            "maxLength" : "Password cannot exceed 100 characters."
         }
     }
 }

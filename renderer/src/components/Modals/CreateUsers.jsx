@@ -37,6 +37,10 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors(AuthValidations.validate(formData));
+
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
         const createUserResponse = await createUser(formData.loginId, formData.fullName, formData.password, formData.userRole);
         if (createUserResponse.success) {
             onSave({ 
@@ -45,6 +49,7 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
                 data: {
                     id: createUserResponse.data.id,
                     login_id: createUserResponse.data.login_id,
+                    full_name: createUserResponse.data.full_name,
                     role: createUserResponse.data.role,
                     created_at: createUserResponse.data.created_at
                 }
