@@ -6,11 +6,11 @@ export default function DeathCertificateLatest() {
     const [loading, setLoading] = useState(true);
     const [rows, setRows] = useState([]);
     const columns = [
-        { field: 'ID', accessorKey: 'id', width: 50 },
-        { field: 'Deceased Name', accessorKey: 'deceased_name', width: 150 },
-        { field: "Sex", accessorKey: "sex", width: 100 },
-        { field: "Place of Death", accessorKey: "place_of_death", width: 200 },
-        { field: "Created At", accessorKey: "created_at", width: 150 },
+        { field: 'id', headerName: 'ID', width: 50 },
+        { field: 'deceased_name', headerName: 'Deceased Name', width: 150 },
+        { field: "sex", headerName: "Sex", width: 100 },
+        { field: "place_of_death", headerName: "Place of Death", width: 200 },
+        { field: "created_at", headerName: "Created At", width: 150 },
     ];
     useEffect(() => {
     const fetchData = async () => {

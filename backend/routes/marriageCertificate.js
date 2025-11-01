@@ -11,5 +11,6 @@ router.get('/list', MarriageCertificateController.getAll);
 router.get('/view/:id', MarriageCertificateController.view);
 router.post('/upload', upload.array('files'), MarriageCertificateController.upload);
 router.get('/extract-pdf/:id', MarriageCertificateController.download);
+router.get('/latest', MarriageCertificateController.latest);
 
 module.exports = router;

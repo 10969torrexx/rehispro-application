@@ -6,12 +6,12 @@ export default function MarriageCertificateLatest() {
     const [loading, setLoading] = useState(true);
     const [rows, setRows] = useState([]);
     const columns = [
-        { field: 'ID', accessorKey: 'id', width: 50 },
-        { field: 'Husband Name', accessorKey: 'husband_name', width: 150 },
-        { field: "Wife Name", accessorKey: "wife_name", width: 150 },
-        { field: "Marriage Date", accessorKey: "date", width: 200 },
-        { field: "Place of Marriage", accessorKey: "place", width: 200 },
-        { field: "Created At", accessorKey: "created_at", width: 150 },
+        { field: 'id', headerName: 'ID', width: 50 },
+        { field: 'husband_name', headerName: 'Husband Name', width: 150 },
+        { field: 'wife_name', headerName: 'Wife Name', width: 150 },
+        { field: 'date', headerName: 'Marriage Date', width: 200 },
+        { field: 'place', headerName: 'Place of Marriage', width: 200 },
+        { field: 'created_at', headerName: 'Created At', width: 150 },
     ];
     useEffect(() => {
     const fetchData = async () => {

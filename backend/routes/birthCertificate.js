@@ -11,5 +11,6 @@ const BirthCertificateController = require('../controllers/BirthCertificateContr
     router.post('/upload-and-scan', upload.array('files'), BirthCertificateController.uploadAndScan);
     router.get('/view/:id', BirthCertificateController.view);
     router.get('/extract-pdf/:id', BirthCertificateController.download);
+    router.get('/latest', BirthCertificateController.latest);
 
 module.exports = router;
