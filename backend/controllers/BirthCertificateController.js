@@ -374,9 +374,43 @@ async function download(req, res) {
    }
 }
 
+async function latest(req, res) { 
+    db.all(
+    `
+        SELECT 
+        id, 
+        CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
+        sex, 
+        child_birth_place,
+        DATE(created_at) AS created_at, 
+        CONCAT(city, ", ", province) AS residence 
+        FROM birthcertificates ORDER BY created_at DESC LIMIT 5
+    `,
+    (err, rows) => {
+      if (err) {
+        console.error('❌ [DB Error]', err.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Database fetch failed',
+          error: err.message,
+        });
+      }
+  
+      const list_of_death = rows;
+  
+      res.status(200).json({
+        success: true,
+        message: 'Death Certificate List',
+        data: list_of_death,
+      });
+    }
+  );
+}
+   
 module.exports = {
     create,
     list,
+    latest,
     uploadAndScan,
     view,
     download

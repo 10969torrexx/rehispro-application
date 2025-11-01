@@ -116,3 +116,26 @@ export async function download(id) {
         throw error;
     }
 }
+
+export async function latest() {
+    try {
+        const response = await fetch('http://localhost:3001/marriage/latest', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            },
+            credentials: 'include'
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data;
+    } catch (error) {
+        console.error('[marriage form] Error fetching marriage certificates:', error);
+        throw error;
+    }
+}

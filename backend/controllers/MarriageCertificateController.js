@@ -367,10 +367,36 @@ async function download(req, res) {
     }
 }
 
+async function latest(req, res) { 
+   const query = `
+        SELECT 
+            id,
+            husband_first_name || ' ' || husband_last_name AS husband,
+            wife_first_name || ' ' || wife_last_name AS wife,
+            date_of_marriage AS date,
+            (
+                place_of_marriage_barangay || ', ' || 
+                place_of_marriage_city || ', ' || 
+                place_of_marriage_province
+            ) AS place
+        FROM marriage_certificates
+        ORDER BY date_of_marriage DESC
+    `;
+
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            writeLog("Error fetching marriage certificates", err);
+            return res.status(500).json({ success: false, error: err.message });
+        }
+        res.json({ success: true, data: rows });
+    });
+}
+
 module.exports = {
     create,
     getAll,
     view,
     upload,
-    download
+    download,
+    latest
 };

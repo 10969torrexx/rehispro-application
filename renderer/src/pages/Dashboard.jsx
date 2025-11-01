@@ -159,7 +159,7 @@ export default function Dashboard() {
             </div>
 
             <div className='w-full flex flex-row gap-2'>
-              <div className="flex-1">
+              <div className="flex-1 max-w-[50%]">
                 <RecentRecords />
               </div>
               <div className="flex-1 p-2 test-element">

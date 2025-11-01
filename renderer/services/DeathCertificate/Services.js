@@ -34,7 +34,7 @@ export async function listDeathCertificate() {
             headers: {
                 'Accept': 'application/json'
             },
-            credentials: 'include' // include cookies/session if needed
+            credentials: 'include'
         });
 
         const data = await response.json();
@@ -43,7 +43,7 @@ export async function listDeathCertificate() {
             throw new Error(data?.message || `HTTP error: ${response.status}`);
         }
 
-        return data; // { success, message, data }
+        return data;
     } catch (error) {
         console.error('[death form] Error fetching death certificates:', error);
         throw error;
@@ -125,6 +125,28 @@ export async function download(id) {
         window.URL.revokeObjectURL(url); 
     } catch (error) {
         console.error(error);
+        throw error;
+    }
+}
+
+export async function latest() {
+    try {
+        const response = await fetch('http://localhost:3001/death/latest', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data;
+    } catch (error) {
+        console.error('[death form] Error fetching latest death certificates:', error);
         throw error;
     }
 }
