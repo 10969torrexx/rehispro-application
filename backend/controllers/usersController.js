@@ -160,14 +160,14 @@ function getUserDetails(userId, callback) {
  * @param {object}  userDetails
  */
 function updateUserDetails(userDetails, callback) {
-  const { id, login_id, role, status } = userDetails;
-  if (!id || !login_id || !role || !status) {
+  const { id, loginId, fullName, role, status } = userDetails;
+  if (!id || !loginId || !fullName || !role || !status) {
     return callback(new Error('Missing required user details'));
   }
 
   db.run(
-    `UPDATE users SET login_id = ?, role = ?, status = ? WHERE id = ?`,
-    [login_id, role, status, id],
+    `UPDATE users SET login_id = ?, full_name = ?, role = ?, status = ? WHERE id = ?`,
+    [loginId, fullName, role, status, id],
     function (err) {
       if (err) return callback(err);
       if (this.changes === 0) {

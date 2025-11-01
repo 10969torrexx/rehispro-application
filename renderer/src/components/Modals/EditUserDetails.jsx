@@ -67,13 +67,13 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
             return;
         }
 
-        const updateUserResponse = await AuthServices.updateUserDetails(
-            userId,
-            formData.loginId,
-            formData.fullName,
-            formData.userRole,
-            formData.userStatus
-        );
+        const updateUserResponse = await AuthServices.updateUserDetails({
+            id: userId,
+            loginId: formData.loginId,
+            fullName: formData.fullName,
+            role: formData.userRole,
+            status: formData.userStatus
+        });
 
         if (updateUserResponse.success) {
             onSave({ 
@@ -164,7 +164,12 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
                                 <select 
                                     className='w-full border rounded-full px-3 py-3 focus:outline-none focus:ring-1 focus:ring-purple-500'
                                     value={formData.userStatus}
-                                    onChange={handleOnChange}
+                                    onChange={(e) => {
+                                        setFormData((prevData) => ({
+                                            ...prevData,
+                                            userStatus: e.target.value
+                                        }));
+                                    }}
                                 >
                                     <option value={UserStatus.ACTIVE}>{ capitalizeFirst(UserStatus.ACTIVE) }</option>
                                     <option value={UserStatus.INACTIVE}>{ capitalizeFirst(UserStatus.INACTIVE) }</option>

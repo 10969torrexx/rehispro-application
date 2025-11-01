@@ -7,7 +7,7 @@ exports.create = (req, res) =>  {
         if (!formData) {
             return res.status(400).json({ success: false, message: 'No Data' });
         }
-        writeLog(`INFPO [visitor controller][create] ${JSON.stringify(formData)}`);
+        writeLog(`INFO [visitor controller][create] ${JSON.stringify(formData)}`);
 
         const fieldMap = {
             creatorId: 'creator_id',
