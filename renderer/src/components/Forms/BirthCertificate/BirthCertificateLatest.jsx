@@ -17,7 +17,6 @@ export default function BirthCertificateLatest() {
             try {
                 setLoading(true);
                 const response = await BirthCertServices.latest();
-                console.table(response.data);
                 setRows(response.data || []);
             } catch (error) {
                 console.error("Error fetching birth certificates:", error);

@@ -272,7 +272,10 @@ function getAll(req, res) {
                 place_of_marriage_barangay || ', ' || 
                 place_of_marriage_city || ', ' || 
                 place_of_marriage_province
-            ) AS place
+            ) AS place,
+            husband_sex,
+            wife_sex,
+            created_at
         FROM marriage_certificates
         ORDER BY date_of_marriage DESC
     `;

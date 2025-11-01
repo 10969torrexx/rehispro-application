@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { UserRoles, UserStatus } from '@enums';
-import { ChangeCredentials, SideBar, RecentRecords} from '@components';
+import { ChangeCredentials, SideBar, RecentRecords, BirthCertificateCharts, DeathCertificateCharts, MarriageCertificateCharts} from '@components';
 import { UsersManagement } from '@pages';
 import { toast } from 'react-toastify';
 import { AuthServices } from '@services';
@@ -116,43 +116,13 @@ export default function Dashboard() {
                 <h3 className="font-semibold mb-4 text-xs text-left m-2">Document Counts</h3>
                 <div className="flex flex-1 rounded-lg gap-2">
                   <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500">
-                        <i className="bi bi-cake2 text-white text-lg"></i>
-                      </div>
-                      <span className="text-gray-800 font-medium">Birth Certificates | { 100 }</span>
-                    </div>
-                    <div className="p-2 bg-gray-50 rounded-md border border-gray-200 text-left">
-                      Female: 10
-                      <br />
-                      Male: 90
-                    </div>
+                    <BirthCertificateCharts />
                   </div>
                   <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500">
-                        <i className="bi bi-arrow-through-heart text-white text-lg"></i>
-                      </div>
-                      <span className="text-gray-800 font-medium">Marriage Certificates | { 100 }</span>
-                    </div>
-                    <div className="p-2 bg-gray-50 rounded-md border border-gray-200 text-left">
-                      Female: 10
-                      <br />
-                      Male: 90
-                    </div>
+                    <DeathCertificateCharts />
                   </div>
                   <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500">
-                        <i className="bi bi-heart-pulse text-white text-lg"></i>
-                      </div>
-                      <span className="text-gray-800 font-medium">Death Certificates | { 100 }</span>
-                    </div>
-                    <div className="p-2 bg-gray-50 rounded-md border border-gray-200 text-left">
-                      Female: 10
-                      <br />
-                      Male: 90
-                    </div>
+                    <MarriageCertificateCharts />
                   </div>
                 </div>
               </div>

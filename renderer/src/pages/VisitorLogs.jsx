@@ -89,7 +89,6 @@ export default function VisitorLogs() {
         try {
             setIsLoading(true);
             const response = await VisitorLogServices.list();
-            console.table(response.data);
             if (response && response.success && response.data) {
                 const dataWithIndex = response.data.map((item, index) => ({
                     ...item,

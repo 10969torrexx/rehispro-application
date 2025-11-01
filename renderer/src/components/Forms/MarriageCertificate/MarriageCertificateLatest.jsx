@@ -7,8 +7,8 @@ export default function MarriageCertificateLatest() {
     const [rows, setRows] = useState([]);
     const columns = [
         { field: 'id', headerName: 'ID', width: 50 },
-        { field: 'husband_name', headerName: 'Husband Name', width: 150 },
-        { field: 'wife_name', headerName: 'Wife Name', width: 150 },
+        { field: 'husband', headerName: 'Husband Name', width: 150 },
+        { field: 'wife', headerName: 'Wife Name', width: 150 },
         { field: 'date', headerName: 'Marriage Date', width: 200 },
         { field: 'place', headerName: 'Place of Marriage', width: 200 },
         { field: 'created_at', headerName: 'Created At', width: 150 },

@@ -31,7 +31,7 @@ export async function listBirthCertificate() {
             headers: {
                 'Accept': 'application/json'
             },
-            credentials: 'include' // include cookies/session if needed
+            credentials: 'include'
         });
 
         const data = await response.json();
@@ -40,7 +40,7 @@ export async function listBirthCertificate() {
             throw new Error(data?.message || `HTTP error: ${response.status}`);
         }
 
-        return data; // { success, message, data }
+        return data;
     } catch (error) {
         console.error('[birth form] Error fetching birth certificates:', error);
         throw error;
@@ -82,7 +82,7 @@ export async function viewBirthCertificate(id) {
             headers: {
                 'Accept': 'application/json'
             },
-            credentials: 'include' // include cookies/session if needed
+            credentials: 'include' 
         });
 
         const data = await response.json();
@@ -91,7 +91,7 @@ export async function viewBirthCertificate(id) {
             throw new Error(data?.message || `HTTP error: ${response.status}`);
         }
 
-        return data; // { success, message, data }
+        return data;
     } catch (error) {
         console.error('[birth form] Error fetching birth certificate:', error);
         throw error;
@@ -116,7 +116,7 @@ export async function download(id) {
         const link = document.createElement('a');
         link.href = url;
         const filename = `birth_certificate_${id}.pdf`;
-        link.download = filename.split('/').pop(); // sample.pdf
+        link.download = filename.split('/').pop();
         document.body.appendChild(link);
         link.click();
         link.remove();      
