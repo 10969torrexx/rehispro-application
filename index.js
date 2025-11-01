@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-const isDev = !(app.isPackaged ?? true);
 let backendServer;
 
 function createWindow() {
@@ -15,11 +14,7 @@ function createWindow() {
     }
   });
 
-  if (isDev) {
-    win.loadURL('http://localhost:5173');
-  } else {
-    win.loadFile(path.join(__dirname, 'renderer', 'dist', 'index.html'));
-  }
+  win.loadURL('http://localhost:5173');
 }
 
 app.whenReady().then(async () => {

@@ -34,10 +34,11 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors(AuthValidations.validate(formData));
+        const validation = AuthValidations.validate(formData)
+        setErrors(validation);
 
-        if (Object.keys(errors).length > 0) {
-            return;
+        if (Object.keys(validation).length > 0) {
+            return false;
         }
         const createUserResponse = await AuthServices.createUser(formData.loginId, formData.fullName, formData.password, formData.userRole);
         if (createUserResponse.success) {
