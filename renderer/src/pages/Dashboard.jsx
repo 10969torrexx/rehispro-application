@@ -13,12 +13,6 @@ export default function Dashboard() {
   const [activeCount, setActiveCount] = useState(0);
   const [inactiveCount, setInactiveCount] = useState(0);
   const [deletedCount, setDeletedCount] = useState(0);
-  const [birthFemaleCount, setBirthFemaleCount] = useState(0);
-  const [birthMaleCount, setBirthMaleCount] = useState(0);
-  const [deathFemaleCount, setDeathFemaleCount] = useState(0);
-  const [deathMaleCount, setDeathMaleCount] = useState(0);
-  const [marriageFemaleCount, setMarriageFemaleCount] = useState(0);
-  const [marriageMaleCount, setMarriageMaleCount] = useState(0);
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('user');
@@ -73,8 +67,9 @@ export default function Dashboard() {
           </div>
           <div className='p-4 w-full flex-1 overflow-y-auto flex flex-col'>
             <div className="form-content mb-4 w-full flex flex-row gap-4">
-              <div className="p-4 bg-white rounded-lg shadow-md w-[400px] text-left">
-                <h3 className="font-semibold mb-4 text-xs">User Counts</h3>
+              <div>
+                <h3 className="font-semibold mb-4 text-xs text-left m-2">User Counts</h3>
+                <div className="p-4 bg-white rounded-lg shadow-md w-[400px] text-left">
                 <table className="min-w-full border border-gray-300 rounded-lg text-sm overflow-hidden">
                   <tbody className="text-gray-800">
                     <tr className="border-t hover:bg-gray-50">
@@ -115,44 +110,57 @@ export default function Dashboard() {
                   </tbody>
                 </table>
               </div>
-              <div className="flex flex-1 rounded-lg gap-2">
-                <div className="flex-1 p-3 rounded-lg bg-white shadow test-element">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500">
-                      <i className="bi bi-cake2 text-white text-lg"></i>
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold mb-4 text-xs text-left m-2">Document Counts</h3>
+                <div className="flex flex-1 rounded-lg gap-2">
+                  <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500">
+                        <i className="bi bi-cake2 text-white text-lg"></i>
+                      </div>
+                      <span className="text-gray-800 font-medium">Birth Certificates | { 100 }</span>
                     </div>
-                    <span className="text-gray-800 font-medium">Birth Certificates</span>
-                  </div>
-                  <div className="p-2 bg-gray-50 rounded-md border border-gray-200">
-                    Contents
-                  </div>
-                </div>
-                <div className="flex-1 p-3 rounded-lg bg-white shadow test-element">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500">
-                      <i className="bi bi-arrow-through-heart text-white text-lg"></i>
+                    <div className="p-2 bg-gray-50 rounded-md border border-gray-200 text-left">
+                      Female: 10
+                      <br />
+                      Male: 90
                     </div>
-                    <span className="text-gray-800 font-medium">Marriage Certificates</span>
                   </div>
-                  <div className="p-2 bg-gray-50 rounded-md border border-gray-200">
-                    Contents
-                  </div>
-                </div>
-                <div className="flex-1 p-3 rounded-lg bg-white shadow test-element">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500">
-                      <i className="bi bi-heart-pulse text-white text-lg"></i>
+                  <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500">
+                        <i className="bi bi-arrow-through-heart text-white text-lg"></i>
+                      </div>
+                      <span className="text-gray-800 font-medium">Marriage Certificates | { 100 }</span>
                     </div>
-                    <span className="text-gray-800 font-medium">Death Certificates</span>
+                    <div className="p-2 bg-gray-50 rounded-md border border-gray-200 text-left">
+                      Female: 10
+                      <br />
+                      Male: 90
+                    </div>
                   </div>
-                  <div className="p-2 bg-gray-50 rounded-md border border-gray-200">
-                    Contents
+                  <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500">
+                        <i className="bi bi-heart-pulse text-white text-lg"></i>
+                      </div>
+                      <span className="text-gray-800 font-medium">Death Certificates | { 100 }</span>
+                    </div>
+                    <div className="p-2 bg-gray-50 rounded-md border border-gray-200 text-left">
+                      Female: 10
+                      <br />
+                      Male: 90
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className='w-full test-element p-2'></div>
+            <div className='w-full flex flex-row gap-2'>
+              <div className="flex-1 p-2 test-element"></div>
+              <div className="flex-1 p-2 test-element"></div>
+            </div>
           </div>
         </div>
       </div>
