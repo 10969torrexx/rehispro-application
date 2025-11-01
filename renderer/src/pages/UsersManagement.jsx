@@ -62,6 +62,13 @@ export default function UsersManagement() {
       AuthServices.deleteUser(userId).then((response) => {
         setIsLoading(true);
         if (response && response.success) {
+          setUsers(prevUsers =>
+            prevUsers.map(user =>
+              user.id === userId
+                ? { ...user, status: "deleted" }
+                : user
+            )
+          );
           toast.success("User deleted successfully");
         } else {
           toast.error(response.message || "Failed to delete user");
