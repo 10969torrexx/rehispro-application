@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { UserRoles, UserStatus } from '@enums';
-import { ChangeCredentials, SideBar, HorizontalBar, UserCounts } from '@components';
+import { ChangeCredentials, SideBar, RecentRecords} from '@components';
 import { UsersManagement } from '@pages';
 import { toast } from 'react-toastify';
 import { AuthServices } from '@services';
@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [activeCount, setActiveCount] = useState(0);
   const [inactiveCount, setInactiveCount] = useState(0);
   const [deletedCount, setDeletedCount] = useState(0);
+  const [recentActiveTab, setRecentActiveTab] = useState('birth');
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('user');
@@ -158,8 +159,12 @@ export default function Dashboard() {
             </div>
 
             <div className='w-full flex flex-row gap-2'>
-              <div className="flex-1 p-2 test-element"></div>
-              <div className="flex-1 p-2 test-element"></div>
+              <div className="flex-1">
+                <RecentRecords />
+              </div>
+              <div className="flex-1 p-2 test-element">
+                
+              </div>
             </div>
           </div>
         </div>
