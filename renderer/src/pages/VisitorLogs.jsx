@@ -31,7 +31,7 @@ export default function VisitorLogs() {
                     params.value === 'cancelled' ? 'red' : 'gray'
                 } />
             )
-         },
+        },
         { field: "remarks", headerName: "Remarks", width: 200 },
         { field: "created_at", headerName: "Time", width: 150,
             renderCell: (params) => { 
@@ -89,12 +89,12 @@ export default function VisitorLogs() {
         try {
             setIsLoading(true);
             const response = await VisitorLogServices.list();
+            console.table(response.data);
             if (response && response.success && response.data) {
                 const dataWithIndex = response.data.map((item, index) => ({
                     ...item,
                     index: index + 1,
                 }));
-                console.table(dataWithIndex);
                 setRows(dataWithIndex);
                 const todayString = new Date().toISOString().split("T")[0];
                 const todayData = dataWithIndex.filter((row) => 

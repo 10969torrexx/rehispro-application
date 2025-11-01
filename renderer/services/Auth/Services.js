@@ -146,9 +146,9 @@ export async function updateCredentials(loginId, newPassword, id) {
  * @param {string} password
  * @param {string} userRole
  */
-export async function createUser(loginId, password, userRole) {
-  if (!loginId || !password || !userRole) {
-    return { success: false, message: "Login ID, password, and user role are required" };
+export async function createUser(loginId, fullName, password, userRole) {
+  if (!loginId || !fullName || !password || !userRole) {
+    return { success: false, message: "Login ID, full name, password, and user role are required" };
   }
 
   try {
@@ -159,6 +159,7 @@ export async function createUser(loginId, password, userRole) {
       },
       body: JSON.stringify({
         loginId: loginId,
+        fullName: fullName,
         password: password,
         role: userRole,
       }),

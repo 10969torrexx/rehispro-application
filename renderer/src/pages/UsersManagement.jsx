@@ -1,194 +1,188 @@
 import { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
-// import { UserRoles } from '../enums/userRoles';
 import { UserStatus, UserRoles } from "@enums";
-import { validateLoginId, validatePassword } from "../../services/Auth/Validations";
 import { toast } from "react-toastify";
 import { CreateUsers, ConfirmAction, EditUserDetails, ViewUserDetails } from '@modals';
-import { getAllUsers, deleteUser } from '../../services/Auth/Services';
-import { SideBar } from '@components';
-import { capitalizeFirst } from "../myTools/myTools";
+import { AuthValidations, AuthServices } from '@services';
+import { SideBar, Badge } from '@components';
+import { capitalizeFirst } from "@myTools";
+import { DataGrid } from "@mui/x-data-grid";
+import Box from "@mui/material/Box";
 
 export default function UsersManagement() {
-  const [selectedUserId, setSelectedUserId] = useState(null); //* this is the user id of the selected user
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState(null); 
+  const [isLoading, setIsLoading] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const columns = [
+    { field: "index", headerName: "ID", width: 70 },
+    { field: "full_name", headerName: "Full Name", width: 200 },
+    { field: "login_id", headerName: "Username", width: 150 },
+    { field: "role", headerName: "Role", width: 100,
+      renderCell: (params) => (
+        <span>{ capitalizeFirst(params.value) }</span>
+      )
+    },
+    { field: "status", headerName: "Status", width: 100,
+      renderCell: (params) => (
+        <Badge status={params.value} 
+          color={
+            params.value === 'active' ? 'green' :
+            params.value === 'inactive' ? 'yellow' :
+            params.value === 'deleted' ? 'red' : 'gray'
+          } 
+        />
+      )
+    },
+    { field: "created_at", headerName: "Created", width: 200 },
+    { field: "actions", headerName: "Actions", width: 100, sortable: false, filterable: false, disableColumnMenu: true,
+      renderCell: (params) => { 
+        return (
+          <select className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onChange={(e) => { handleOnChange(e, params.row.id) }}
+          >
+            <option value="">Select</option>
+            <option value="edit">Edit</option>
+            <option value="delete">Delete</option>
+          </select>
+        )
+      }
+    }
+  ];
+
+  const handleOnChange = (e, userId) => { 
+    const action = e.target.value;
+    if (action === "edit") {
+      setShowEditUserModal(true);
+      setSelectedUserId(userId);
+    } else if (action === "delete") {
+      //TODO: handle delete user
+      AuthServices.deleteUser(userId).then((response) => {
+        setIsLoading(true);
+        if (response && response.success) {
+          setUsers(prevUsers =>
+            prevUsers.map(user =>
+              user.id === userId
+                ? { ...user, status: "deleted" }
+                : user
+            )
+          );
+          toast.success("User deleted successfully");
+        } else {
+          toast.error(response.message || "Failed to delete user");
+        }
+        setIsLoading(false);
+      });
+    }
+    e.target.value = "";
+  };
 
   useEffect(() => {
-    //TODO: validate if current login user is a supervisor
     const userData = JSON.parse(localStorage.getItem('user'));
     const fetchData = async () => {
       try {
-        const response = await getAllUsers(userData.id);
-        if (response.success) {
-          setUsers(response.data);
+        setIsLoading(true);
+        const response = await AuthServices.getAllUsers(userData.id);
+        const dataWithIndex = response.data.map((item, index) => ({
+          ...item,
+          index: index + 1,
+        }));
+        if (response && response.success && response.data) {
+          setUsers(dataWithIndex);
+        } else {
+          toast.error(response.message || "Failed to fetch users");
         }
       } catch (error) {
         console.error("Error fetching users:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     if(localStorage.getItem('user')) {
       setUserData(JSON.parse(localStorage.getItem('user')));
     }
-
     fetchData();
   }, []);
 
-  //TODO: handle showing prompts / modal
-    const [showCreateUserModal, setShowCreateUserModal] = useState(false);
-
-    const [showConfirmActionModal, setShowConfirmActionModal] = useState(false);
-    const handleDeleteUser = async (userId) => {
-      setShowConfirmActionModal(true);
-      setSelectedUserId(userId);
-    };
-
-    const [showViewUserDetailsModal, setShowViewUserDetailsModal] = useState(false);
-    const handeShowViewUserDetails = (userId) => { 
-      setShowViewUserDetailsModal(true);
-      setSelectedUserId(userId);
-    }
-
-  //TODO: data tables data
-    const columns = [
-      { name: "Id", selector: row => row.id, sortable: true, width: "80px" },
-      { name: "Login ID", selector: row => row.login_id, sortable: true, width: "200px" },
-      { name: "Role", selector: row => row.role.charAt(0).toUpperCase() + row.role.slice(1), width: "150px" },
-      { 
-        name: "Created At", 
-        selector: row => new Date(row.created_at).toLocaleString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "2-digit",
-        }), 
-        width: "200px" 
-      },
-      { name: "Status", 
-        cell: row => {
-          const status = row.status || "active";
-          return (
-            <span className={`status status-${status}`}>
-              {capitalizeFirst(status)}
-            </span>
-          );
-        },
-      },
-      {
-        name: "Actions",
-        cell: (row) => (
-          <div className="flex space-x-2">
-            <button
-              onClick={() => handeShowViewUserDetails(row.id)}
-              className="px-1 py-1 text-sm rounded text-primary hover:bg-purple-200"
-            >
-              <i className="bi bi-eye-fill"></i>
-            </button>
-            <button
-              onClick={() => handleEditUser(row.id)}
-              className="px-1 py-1 text-sm rounded text-yellow-500 hover:bg-yellow-200"
-            >
-              <i className="bi bi-pencil"></i>
-            </button>
-            <button
-              onClick={() => handleDeleteUser(row.id)}
-              className="px-1 py-1 text-sm text-red-500 rounded hover:bg-red-200"
-            >
-              <i className="bi bi-trash-fill"></i>
-            </button>
-          </div>
-        ),
-        ignoreRowClick: true, 
-        allowoverflow: true,  
-      }
-    ];
-
-  //TODO: handling side bar open / close state
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-  //TODO handle edit user
-    const [ showEditUserModal, setShowEditUserModal ] = useState(false);
-    const handleEditUser = (userId) => { 
-      setShowEditUserModal(true);
-      setSelectedUserId(userId);
-    }
   return (
     <div className="flex w-screen h-screen">
-        {showCreateUserModal && (
-          <CreateUsers
-            onSave={(data) => {
-              console.log('User created:', data);
-              setUsers(prevUsers => [...prevUsers, data.data]);
-              setShowCreateUserModal(false);
-            }}
-            onCancel={() => setShowCreateUserModal(false)}
-          />
-        )}
-
-        {showConfirmActionModal && (
-          <ConfirmAction
-            title="Confirm Action"
-            message="Are you sure you want to proceed with this action?"
-            onConfirm={async () => {
-              setShowConfirmActionModal(false);
-              const response = await deleteUser(selectedUserId);
-              if (response.success) {
-                toast.success(response.message);
-                setUsers(prevUsers => prevUsers.map(user => user.id === selectedUserId ? { ...user, status: UserStatus.DELETED } : user));
-              } else {
-                toast.error(response.message);
+      <SideBar
+        role={userData?.role}
+        isOpen={sidebarOpen}
+        setIsOpen={setSidebarOpen}
+      />
+      <CreateUsers //TODO: modal to create user
+        onSave={(data) => {
+          setUsers(prevUsers => [
+            ...prevUsers,
+            {
+              ...data.data,
+              index: data.data.id ?? prevUsers.length,
+            },
+          ]);
+          setShowCreateUserModal(false);
+        }}
+        onCancel={() => setShowCreateUserModal(false)}
+        isOpen={showCreateUserModal}
+      />
+      <EditUserDetails 
+        userId={selectedUserId}
+        onSave={(data) => {
+          setUsers(prevUsers => prevUsers.map(user => 
+            user.id === data.id ? { ...user, login_id: data.login_id, role: data.role, status: data.status } : user
+          ));
+          setShowEditUserModal(false);
+        }}
+        isOpen={showEditUserModal}
+        onCancel={() => setShowEditUserModal(false)} 
+      />
+      <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
+        <h2 className="text-lg font-semibold text-left">User Management</h2>
+        <div className="flex justify-end mb-4 gap-2">
+          <button className={`btn-primary shadow-lg px-3 py-1 rounded-full`}
+            onClick={() => setShowCreateUserModal(true)}
+          >
+            <i className="bi bi-person-fill-add mr-2"></i>
+            Add User
+          </button>
+        </div>
+        <div className="p-4 bg-white w-full flex-1 overflow-y-auto flex justify-center shadow-lg rounded-lg">
+          <div className="py-8 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+            <div className="form-content mb-4 h-full">
+              {
+                isLoading ? ( 
+                  <div className="flex h-full items-center justify-center">
+                    <div className="spinner"></div>
+                  </div>
+                ) : (
+                  <>
+                    <Box
+                      sx={{
+                        height: 600,
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <DataGrid
+                        rows={users}
+                        getRowId={(users) => users.id}
+                        columns={columns}
+                        pageSize={10}
+                        rowsPerPageOptions={[10]}
+                        disableSelectionOnClick
+                      />
+                    </Box>
+                  </>
+                )
               }
-            }}
-            onCancel={() => 
-              setShowConfirmActionModal(false)
-            }
-          />
-        )}
-
-        {showEditUserModal && (
-          <EditUserDetails
-            userId={selectedUserId}
-            onSave={(data) => {
-              console.log('User updated:', data);
-              setUsers(prevUsers => prevUsers.map(user => user.id === data.id ? data : user));
-              setShowEditUserModal(false);
-            }}
-            onCancel={() => setShowEditUserModal(false)}
-          />
-        )}
-
-        {showViewUserDetailsModal && (
-          <ViewUserDetails
-            userId={selectedUserId}
-            onClose={() => setShowViewUserDetailsModal(false)}
-          />
-        )}
-
-        <SideBar
-          role={userData?.role}
-          isOpen={sidebarOpen}
-          setIsOpen={setSidebarOpen}
-        />
-        <div className="p-4 flex-1 flex flex-col w-screen transition-all duration-300">
-          <h2 className="text-lg font-semibold text-left">User Management</h2>
-          <div className="flex justify-end mb-4">
-            <button 
-              className="btn-primary shadow-lg text-white px-3 py-1 rounded-full"
-              onClick={() => setShowCreateUserModal(true)}
-            >
-              Add User
-            </button>
-          </div>
-          <div className="w-full bg-white rounded-xl p-4 shadow-lg text-left">
-            <DataTable
-              title="List of Users"
-              columns={columns}
-              data={users}
-              pagination
-              highlightOnHover
-              striped 
-            />
+            </div>
           </div>
         </div>
+      </div>
     </div>
   );
 }

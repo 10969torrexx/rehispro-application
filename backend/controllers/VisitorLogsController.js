@@ -7,7 +7,7 @@ exports.create = (req, res) =>  {
         if (!formData) {
             return res.status(400).json({ success: false, message: 'No Data' });
         }
-        writeLog(`INFPO [visitor controller][create] ${JSON.stringify(formData)}`);
+        writeLog(`INFO [visitor controller][create] ${JSON.stringify(formData)}`);
 
         const fieldMap = {
             creatorId: 'creator_id',
@@ -60,7 +60,7 @@ exports.list = (req, res) => {
         const query = `
             SELECT 
                 v.*, 
-                u.login_id AS officer
+                u.full_name AS officer
             FROM visitor_logs v
             LEFT JOIN users u ON v.creator_id = u.id
             ORDER BY v.created_at DESC
@@ -75,6 +75,7 @@ exports.list = (req, res) => {
                     error: err.message
                 });
             }
+            writeLog(`INFO [visitor controller][list] ${JSON.stringify(rows)}`);
             res.status(200).json({
                 success: true,
                 data: rows

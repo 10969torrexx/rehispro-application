@@ -1,0 +1,32 @@
+{
+    "loginId": {
+        "required" : true,
+        "minLength" : 5,
+        "maxLength" : 50,
+        "message" : {
+            "required" : "Login ID is required.",
+            "minLength" : "Login ID must be at least 5 characters.",
+            "maxLength" : "Login ID cannot exceed 50 characters."
+        }
+    },
+    "fullName": {
+        "required" : true,
+        "minLength" : 2,
+        "maxLength" : 100,
+        "message" : {
+            "required" : "Full Name is required.",
+            "minLength" : "Full Name must be at least 2 characters.",
+            "maxLength" : "Full Name cannot exceed 100 characters."
+        }
+    },
+    "password": {
+        "required" : true,
+        "minLength" : 8,
+        "maxLength" : 100,
+        "message" : {
+            "required" : "Password is required.",
+            "minLength" : "Password must be at least 8 characters.",
+            "maxLength" : "Password cannot exceed 100 characters."
+        }
+    }
+}

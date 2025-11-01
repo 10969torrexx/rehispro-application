@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const usersController = require('./controllers/usersController');
+const { writeLog } = require('./utils/logger');
 
 const app = express();
 
@@ -87,12 +88,12 @@ app.post('/update-credentials', (req, res) => {
  * @param {string} password
  */
 app.post('/create-user', (req, res) => {
-  const { loginId, password, role } = req.body;
-  if (!loginId || !password || !role) {
+  const { loginId, fullName, password, role } = req.body;
+  if (!loginId || !fullName || !password || !role) {
     return res.status(400).json({ success: false, message: 'Missing credentials' });
   }
 
-  usersController.createUser(loginId, password, role, (err, result) => {
+  usersController.createUser(loginId, fullName, password, role, (err, result) => {
     if (err) {
       if (err.message.includes("SQLITE_CONSTRAINT")) {
         return res.status(400).json({ success: false, message: "Duplicate user found" });
@@ -172,7 +173,7 @@ app.post('/update-user-details', (req, res) => {
   usersController.updateUserDetails(userDetails, (err, result) => {
     if (err) {
       console.error('Update user details error:', err);
-      return res.status(500).json({ success: false, message: 'Database error' });
+      return res.status(500).json({ success: false, message: 'Something went wrong' });
     }
     return res.json(result);
   });

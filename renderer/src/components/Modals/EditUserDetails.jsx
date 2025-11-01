@@ -1,32 +1,31 @@
 import { useState, useEffect } from 'react';
 import { UserRoles, UserStatus } from '@enums';
-import { validateLoginId } from '../../../services/Auth/Validations';
-import { ErrorMessages, Divider } from '@components';
+import { ErrorMessages } from '@components';
 import { toast } from 'react-toastify';
-import { capitalizeFirst } from './../../myTools/myTools';
-import { AuthServices } from '@services';
+import { capitalizeFirst } from '@myTools';
+import { AuthServices, AuthValidations } from '@services';
 
-export default function EditUserDetails({ userId, onSave, onCancel }) { 
+export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }) { 
     const [isLoading, setIsLoading] = useState(true);
-    //TODO: handle the user inputs
-    const [loginId, setLoginId] = useState('');
-    const [userRole, setUserRole] = useState(UserRoles.STAFF);
-    const [userStatus, setUserStatus] = useState(UserStatus.ACTIVE);
-    //TODO: handle cancel button
-    const handleCancel = () => {
-        setLoginId('');
-        setUserRole(UserRoles.STAFF);
-        onCancel();
-    }
-    //TODO: handle fetch user on mount
+    const [errors, setErrors] = useState({});
+    const [formData, setFormData] = useState({
+        loginId: '',
+        fullName: '',
+        userRole: UserRoles.STAFF,
+        userStatus: UserStatus.ACTIVE
+    });
+
     useEffect(() => { 
         const fetchUserDetails = async () => { 
             try {
                 const response = await AuthServices.getUserDetails(userId);
                 if (response.success) {
-                    setLoginId(response.data.login_id);
-                    setUserRole(response.data.role);
-                    setUserStatus(response.data.status);
+                    setFormData({
+                        loginId: response.data.login_id,
+                        fullName: response.data.full_name,
+                        userRole: response.data.role,
+                        userStatus: response.data.status
+                    });
                 } else {
                     console.error('Error fetching user details:', response.message);
                 }
@@ -34,41 +33,71 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
                 console.error('Error fetching user details:', error);
             }
         }
-        fetchUserDetails();
+        if (userId) {
+            fetchUserDetails();
+        }
         setIsLoading(false);
     }, [userId])
-    //TODO: handle submit button
-    const loginIdErrors = validateLoginId(loginId);
-    const [loginIdErrorMessages, setLoginIdErrorMessages] = useState({});
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!loginIdErrors.isValid) {
-            setLoginIdErrorMessages(loginIdErrors.errors);
-            toast.error("Please fix the errors before submitting.");
-            return;
-        }
-        
-        let formatData = {
-            id: userId,
-            login_id: loginId,
-            role: userRole,
-            status: userStatus
-        }
-       
-        try {
-            const response = await AuthServices.updateUserDetails(formatData);
-            if (response.success) {
-                toast.success("User details updated successfully!");
-                onSave(formatData);
-            } else {
-                toast.error(response.message || "Failed to update user details.");
-            }
-    } catch(error) {
-            console.error("Error updating user details:", error);
-            toast.error("An error occurred while updating user details.");
-        }
+    
+    const handleCancel = () => {
+        setFormData({
+            loginId: '',
+            fullName: '',
+            userRole: UserRoles.STAFF,
+            userStatus: UserStatus.ACTIVE
+        });
+        onCancel();
     }
 
+    const handleOnChange = (e) => { 
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const validations = AuthValidations.validate(formData);
+        const { password, ...rest } = validations;
+        setErrors(rest);
+
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
+
+        const updateUserResponse = await AuthServices.updateUserDetails({
+            id: userId,
+            loginId: formData.loginId,
+            fullName: formData.fullName,
+            role: formData.userRole,
+            status: formData.userStatus
+        });
+
+        if (updateUserResponse.success) {
+            onSave({ 
+                id: userId,
+                login_id: formData.loginId,
+                full_name: formData.fullName,
+                role: formData.userRole,
+                status: formData.userStatus
+            });
+            setFormData({
+                loginId: '',
+                fullName: '',
+                userRole: UserRoles.STAFF,
+                userStatus: UserStatus.ACTIVE
+            });
+            setErrors({});
+            toast.success(updateUserResponse.message);
+        } else {
+            console.log('Update user error:', updateUserResponse.message);
+            toast.error(updateUserResponse.message);
+        }
+    }
+    
+    if (!isOpen) return null;
     return(
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center text-left">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-xl p-10">
@@ -82,31 +111,46 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-gray-700 font-medium mb-1" htmlFor="loginId">
-                                Login ID
+                                    Login ID
                                 </label>
                                 <input
-                                type="text"
-                                id="loginId"
-                                name="loginId"
-                                onChange={(e) => setLoginId(e.target.value)}
-                                value={loginId}
-                                className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
-                                ${ loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length ? 'border-red-500' : 'border-gray-300'}`}
-                                placeholder="Enter login ID"
+                                    type="text"
+                                    id="loginId"
+                                    name="loginId"
+                                    onChange={handleOnChange}
+                                    value={formData.loginId}
+                                    className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
+                                        ${errors.loginId ? 'input-error' : ''}`}
+                                    placeholder="Enter login ID"
                                 />
-                                { loginIdErrorMessages !== null && Object.keys(loginIdErrorMessages).length > 0 && (
-                                    <ErrorMessages errors={loginIdErrorMessages} />
-                                )}
+                                { errors.loginId && <ErrorMessages errors={errors.loginId} /> }
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-1" htmlFor="fullName">
+                                    Full Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="fullName"
+                                    onChange={handleOnChange}
+                                    value={formData.fullName}
+                                    className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
+                                        ${errors.fullName ? 'input-error' : ''}`}
+                                    placeholder="Enter full name"
+                                />
+                                { errors.fullName && <ErrorMessages errors={errors.fullName} /> }
                             </div>
 
                             <div>
                                 <label className="block text-gray-700 font-medium mb-1">
-                                Role
+                                    Role
                                 </label>
                                 <select 
                                     className='w-full border rounded-full px-3 py-3 focus:outline-none focus:ring-1 focus:ring-purple-500'
-                                    value={userRole}
-                                    onChange={(e) => setUserRole(e.target.value)}
+                                    value={formData.userRole}
+                                    onChange={handleOnChange}
                                 >
                                     <option value={UserRoles.SUPERVISOR}>{ capitalizeFirst(UserRoles.SUPERVISOR) }</option>
                                     <option value={UserRoles.STAFF}>{ capitalizeFirst(UserRoles.STAFF) }</option>
@@ -119,8 +163,13 @@ export default function EditUserDetails({ userId, onSave, onCancel }) {
                                 </label>
                                 <select 
                                     className='w-full border rounded-full px-3 py-3 focus:outline-none focus:ring-1 focus:ring-purple-500'
-                                    value={userStatus}
-                                    onChange={(e) => setUserStatus(e.target.value)}
+                                    value={formData.userStatus}
+                                    onChange={(e) => {
+                                        setFormData((prevData) => ({
+                                            ...prevData,
+                                            userStatus: e.target.value
+                                        }));
+                                    }}
                                 >
                                     <option value={UserStatus.ACTIVE}>{ capitalizeFirst(UserStatus.ACTIVE) }</option>
                                     <option value={UserStatus.INACTIVE}>{ capitalizeFirst(UserStatus.INACTIVE) }</option>
