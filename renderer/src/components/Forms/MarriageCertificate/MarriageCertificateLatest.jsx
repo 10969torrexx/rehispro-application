@@ -31,7 +31,9 @@ export default function MarriageCertificateLatest() {
         <div>
            {
                 loading ? (
-                    <div>Loading...</div>
+                    <div className="h-full flex justify-center items-center">
+                        <div className="spinner"></div>
+                    </div>
                 ) : (
                     <Box sx={{ height: 300, width: '100%' }}>
                         <DataGrid
