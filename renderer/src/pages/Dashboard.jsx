@@ -61,27 +61,55 @@ export default function Dashboard() {
           isOpen={sidebarOpen}
           setIsOpen={setSidebarOpen}
         />
-        <div
-          className={`flex-1 flex flex-col w-screen transition-all duration-300`}
-        >
-          <div className='content'>
-            <h2 className="text-lg font-semibold mb-4">Dashboard</h2>
-            <section className='w-full border-b border-gray-200 pb-5 mb-4'>
-              <h6 className='mb-2'>User Counts</h6>
-              <div className="flex flex-row flex-wrap gap-4">
-                <UserCounts role={UserRoles.SUPERVISOR} iconClass="bi bi-person-fill" userCounts={supervisorCount} status="active"/>
-                <UserCounts role={UserRoles.STAFF} iconClass="bi bi-person" userCounts={staffCount} status="inactive"/>
+        <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
+          <div className="p-4">
+            <h2 className="text-lg font-semibold text-left">Dashbard</h2>
+          </div>
+          <div className='p-4 w-full flex-1 overflow-y-auto flex justify-center rounded-lg'>
+            <div className="form-content mb-4 w-full h-full">
+              <div className="p-4 bg-white rounded-lg shadow-md w-[300px] text-left">
+                <h3 className="font-semibold mb-4">User Counts</h3>
+                <table className="min-w-full border border-gray-300 rounded-lg text-sm overflow-hidden">
+                  <tbody className="text-gray-800">
+                    <tr className="border-t hover:bg-gray-50">
+                      <td className="px-4 py-1">
+                      <i className="bi bi bi-person-fill text-green-500"></i>
+                      </td>
+                      <td className="px-4 py-1">Staff</td>
+                      <td className="px-4 py-1 text-center">{ staffCount }</td>
+                    </tr>
+                    <tr className="border-t hover:bg-gray-50">
+                      <td className="px-4 py-1">
+                      <i className="bi bi-person-fill-gear text-orange-500"></i>
+                      </td>
+                      <td className="px-4 py-1">Supervisors</td>
+                      <td className="px-4 py-1 text-center">{ supervisorCount }</td>
+                    </tr>
+                    <tr className="border-t hover:bg-gray-50">
+                      <td className="px-4 py-1">
+                      <i className="bi bi-check-circle-fill text-green-500"></i>
+                      </td>
+                      <td className="px-4 py-1">Active</td>
+                      <td className="px-4 py-1 text-center">{ activeCount }</td>
+                    </tr>
+                    <tr className="border-t hover:bg-gray-50">
+                      <td className="px-4 py-1">
+                      <i className="bi bi-wrench-adjustable-circle-fill text-orange-500"></i>
+                      </td>
+                      <td className="px-4 py-1">Inactive</td>
+                      <td className="px-4 py-1 text-center">{ inactiveCount }</td>
+                    </tr>
+                    <tr className="border-t hover:bg-gray-50">
+                      <td className="px-4 py-1">
+                      <i className="bi bi-trash-fill text-orange-500"></i>
+                      </td>
+                      <td className="px-4 py-1">Deleted</td>
+                      <td className="px-4 py-1 text-center">{ deletedCount }</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-            </section>
-
-            <section className='w-full border-b border-gray-200 pb-5 mb-4'>
-              <h6 className='mb-2'>User Status</h6>
-              <div className="flex flex-row flex-wrap gap-4">
-                <UserCounts role={UserStatus.ACTIVE} iconClass="bi bi-check-circle" userCounts={activeCount} status="active"/>
-                <UserCounts role={UserStatus.INACTIVE} iconClass="bi bi-circle" userCounts={inactiveCount} status="inactive"/>
-                <UserCounts role={UserStatus.DELETED} iconClass="bi bi-x-circle" userCounts={deletedCount} status="deleted"/>
-              </div>
-            </section>
+            </div>
           </div>
         </div>
       </div>
