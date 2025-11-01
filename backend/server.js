@@ -25,10 +25,6 @@ app.use(cors({
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-//this is just a just-in-case
-// app.use(express.json({ limit: '50mb' }));
-// app.use(express.urlencoded({ limit: '50mb', extended: true }));
-
 //TODO: handle user login
 app.post('/login', (req, res) => {
   const { login_id, password } = req.body;
