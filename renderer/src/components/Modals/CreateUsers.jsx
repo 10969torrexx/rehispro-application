@@ -40,7 +40,6 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
             return;
         }
         const createUserResponse = await AuthServices.createUser(formData.loginId, formData.fullName, formData.password, formData.userRole);
-        console.table(createUserResponse);
         if (createUserResponse.success) {
             onSave({ 
                 response: createUserResponse.success,

@@ -76,6 +76,7 @@ export default function UsersManagement() {
         setIsLoading(false);
       });
     }
+    e.target.value = "";
   };
 
   useEffect(() => {

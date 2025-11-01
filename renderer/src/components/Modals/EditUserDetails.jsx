@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { UserRoles, UserStatus } from '@enums';
-import { validateLoginId } from '../../../services/Auth/Validations';
-import { ErrorMessages, Divider } from '@components';
+import { ErrorMessages } from '@components';
 import { toast } from 'react-toastify';
-import { capitalizeFirst } from './../../myTools/myTools';
-import { AuthServices } from '@services';
+import { capitalizeFirst } from '@myTools';
+import { AuthServices, AuthValidations } from '@services';
 
 export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }) { 
     const [isLoading, setIsLoading] = useState(true);
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         loginId: '',
-        firstName: '',
+        fullName: '',
         userRole: UserRoles.STAFF,
         userStatus: UserStatus.ACTIVE
     });
@@ -59,6 +59,42 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const validations = AuthValidations.validate(formData);
+        const { password, ...rest } = validations;
+        setErrors(rest);
+
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
+
+        const updateUserResponse = await AuthServices.updateUserDetails(
+            userId,
+            formData.loginId,
+            formData.fullName,
+            formData.userRole,
+            formData.userStatus
+        );
+
+        if (updateUserResponse.success) {
+            onSave({ 
+                id: userId,
+                login_id: formData.loginId,
+                full_name: formData.fullName,
+                role: formData.userRole,
+                status: formData.userStatus
+            });
+            setFormData({
+                loginId: '',
+                fullName: '',
+                userRole: UserRoles.STAFF,
+                userStatus: UserStatus.ACTIVE
+            });
+            setErrors({});
+            toast.success(updateUserResponse.message);
+        } else {
+            console.log('Update user error:', updateUserResponse.message);
+            toast.error(updateUserResponse.message);
+        }
     }
     
     if (!isOpen) return null;
@@ -83,9 +119,11 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
                                     name="loginId"
                                     onChange={handleOnChange}
                                     value={formData.loginId}
-                                    className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500`}
+                                    className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
+                                        ${errors.loginId ? 'input-error' : ''}`}
                                     placeholder="Enter login ID"
                                 />
+                                { errors.loginId && <ErrorMessages errors={errors.loginId} /> }
                             </div>
 
                             <div>
@@ -98,9 +136,11 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
                                     name="fullName"
                                     onChange={handleOnChange}
                                     value={formData.fullName}
-                                    className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500`}
+                                    className={`w-full border rounded-full px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-500
+                                        ${errors.fullName ? 'input-error' : ''}`}
                                     placeholder="Enter full name"
                                 />
+                                { errors.fullName && <ErrorMessages errors={errors.fullName} /> }
                             </div>
 
                             <div>
