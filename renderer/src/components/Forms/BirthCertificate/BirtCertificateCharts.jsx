@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { BirthCertServices } from '@services';
-
+import { chartColors } from '@enums';
 ChartJS.register(ArcElement, Tooltip, Legend);
+
 export default function BirthCertificateCharts() {
   const [femaleCount, setFemaleCount] = useState(0);
   const [maleCount, setMaleCount] = useState(0);
@@ -13,12 +14,12 @@ export default function BirthCertificateCharts() {
       {
         data: [femaleCount, maleCount],
         backgroundColor: [
-          "rgba(99, 102, 241, 0.7)", 
-          "rgba(255, 174, 0, 0.7)",
+          chartColors.GenderColorsRGBA.FEMALE,
+          chartColors.GenderColorsRGBA.MALE,
         ],
         borderColor: [
-          "rgba(99, 102, 241, 1)",
-          "rgba(255, 174, 0, 1)",  
+          chartColors.GenderColorsBorderRGBA.FEMALE,
+          chartColors.GenderColorsBorderRGBA.MALE,
         ],
         borderWidth: 1,
       },
