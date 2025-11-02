@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { UserRoles, UserStatus } from '@enums';
-import { ChangeCredentials, SideBar, RecentRecords, BirthCertificateCharts, DeathCertificateCharts, MarriageCertificateCharts} from '@components';
+import { ChangeCredentials, SideBar, RecentRecords, BirthCertificateCharts, DeathCertificateCharts, MarriageCertificateCharts, VisitorLogLatest } from '@components';
 import { UsersManagement } from '@pages';
 import { toast } from 'react-toastify';
 import { AuthServices } from '@services';
@@ -132,8 +132,11 @@ export default function Dashboard() {
               <div className="flex-1 max-w-[50%]">
                 <RecentRecords />
               </div>
-              <div className="flex-1 p-2 test-element">
-                
+              <div className="flex-1 flex flex-col">
+                <div className="flex-1 max-h-[20%] test-element mb-4"></div>
+                <div className="flex-1 max-h-[80%] ">
+                  <VisitorLogLatest />
+                </div>
               </div>
             </div>
           </div>

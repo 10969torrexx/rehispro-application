@@ -64,3 +64,24 @@ export async function updateStatus(id, data) {
         throw error;
     }
 }
+
+export async function latest() {
+    try {
+        const response = await fetch('http://localhost:3001/visitor-logs/latest', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to fetch latest visitor logs');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('[visitor logs] Error :', error);
+        throw error;
+    }
+}
