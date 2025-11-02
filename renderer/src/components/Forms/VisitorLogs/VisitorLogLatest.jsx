@@ -31,25 +31,29 @@ export default function VisitorLogLatest() {
         fetchData();
     }, []);
     return (
-        <div>
-            {
-                loading ? (
-                    <div className="h-full flex justify-center items-center">
-                        <div className="spinner"></div>
-                    </div>
-                ) : (
-                    <Box sx={{ height: 300, width: '100%' }}>
-                        <DataGrid
-                            rows={rows}
-                            columns={columns}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
-                            disableSelectionOnClick
-                            getRowId={(row) => row.id}
-                        />
-                    </Box>
-                )
-            }
-        </div>
+        <>
+            <h3 className="mb-2 text-xs font-semibold text-left">Latest Visitor Logs</h3>
+            <div className="bg-white p-2 rounded-lg shadow-lg">
+                {
+                    loading ? (
+                        <div className="h-full flex justify-center items-center">
+                            <div className="spinner"></div>
+                        </div>
+                    ) : (
+                        <Box sx={{ height: 300, width: '100%' }}>
+                            <DataGrid
+                                rows={rows}
+                                columns={columns}
+                                pageSize={5}
+                                rowsPerPageOptions={[5]}
+                                disableSelectionOnClick
+                                getRowId={(row) => row.id}
+                            />
+                        </Box>
+                    )
+                }
+            </div>
+        </>
+       
     );
 }

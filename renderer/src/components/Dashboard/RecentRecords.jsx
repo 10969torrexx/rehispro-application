@@ -4,7 +4,7 @@ export default function RecentRecords() {
     const [recentActiveTab, setRecentActiveTab] = useState('birth');
     return (
         <>
-            <h3 className="font-semibold mb-4 text-xs text-left m-2">Recent Records</h3>
+            <h3 className="font-semibold mb-2 text-xs text-left m-2">Recent Records</h3>
             <div className='w-full bg-white p-2 rounded-lg shadow-lg'>
                 <div className='flex flex-row p-2 justify-start gap-2'>
                     <button className={`btn-${recentActiveTab === 'birth' ? 'primary' : 'secondary'} shadow-lg px-3 py-1 rounded-full text-xs`}

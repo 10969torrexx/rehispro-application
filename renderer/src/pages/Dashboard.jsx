@@ -133,8 +133,9 @@ export default function Dashboard() {
                 <RecentRecords />
               </div>
               <div className="flex-1 flex flex-col">
-                <div className="flex-1 max-h-[20%] test-element mb-4"></div>
-                <div className="flex-1 max-h-[80%] ">
+                <div className="flex-1 max-h-[10%] test-element mb-4"></div>
+                <div className="flex-1 max-h-[90%] ">
+                  
                   <VisitorLogLatest />
                 </div>
               </div>
