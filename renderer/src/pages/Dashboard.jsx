@@ -129,13 +129,25 @@ export default function Dashboard() {
             </div>
 
             <div className='w-full flex flex-row gap-2'>
-              <div className="flex-1 max-w-[50%]">
+              <div className="flex-1 max-w-[60%]">
                 <RecentRecords />
               </div>
-              <div className="flex-1 flex flex-col">
-                <div className="flex-1 max-h-[10%] test-element mb-4"></div>
-                <div className="flex-1 max-h-[90%] ">
-                  
+              <div className="flex-1 max-w-[40%] flex flex-col">
+                <div className="flex-1 flex flex-col flex max-h-[15%] mb-4">
+                  <h3 className="font-semibold mb-2 text-xs text-left">Recent Records</h3>
+                  <div className='flex flex-row w-full gap-2'>
+                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
+                      Add Records
+                    </button>
+                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
+                      Search Records
+                    </button>
+                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
+                      Add Logs
+                    </button>
+                  </div>
+                </div>
+                <div className="flex-1 max-h-[70%] ">
                   <VisitorLogLatest />
                 </div>
               </div>
@@ -143,7 +155,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-
     </>
   );
 }

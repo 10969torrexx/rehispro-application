@@ -40,7 +40,7 @@ export default function VisitorLogLatest() {
                             <div className="spinner"></div>
                         </div>
                     ) : (
-                        <Box sx={{ height: 300, width: '100%' }}>
+                        <Box sx={{ height: 280, width: '100%' }}>
                             <DataGrid
                                 rows={rows}
                                 columns={columns}
