@@ -4,6 +4,7 @@ import { ChangeCredentials, SideBar, RecentRecords, BirthCertificateCharts, Deat
 import { AddRecords } from '@modals';
 import { toast } from 'react-toastify';
 import { AuthServices } from '@services';
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const [userData, setUserData] = useState(null); 
@@ -150,7 +151,7 @@ export default function Dashboard() {
                       Search Records
                     </button>
                     <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
-                      Add Logs
+                      <Link to="/visitor-logs">Add Logs</Link>
                     </button>
                   </div>
                 </div>
