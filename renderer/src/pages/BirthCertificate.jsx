@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
-import { InfoCard, BirthCertificateCreate, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload } from '@components';
+import { InfoCard, BirthCertificateCreate, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload,
+    BirthCertificateSearch
+ } from '@components';
 import { useSearchParams } from 'react-router-dom'; 
 
 export default function BirthCertificate() {
@@ -42,6 +44,11 @@ export default function BirthCertificate() {
                             onClick={() => setActiveTab("create")}
                         >
                             Create
+                        </button>
+                        <button className={`btn-${activeTab == 'search' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
+                            onClick={() => setActiveTab("search")}
+                        >
+                            Search
                         </button>
                     </div>
                     <div id="managementContent" className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
@@ -111,6 +118,11 @@ export default function BirthCertificate() {
                                 <div className="form-content mb-4">
                                     <BirthCertificateView row={selectedRow} />
                                 </div>
+                            </div>
+                        }
+                        {activeTab === 'search' && 
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <BirthCertificateSearch />
                             </div>
                         }
                     </div>

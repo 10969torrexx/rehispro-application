@@ -15,6 +15,7 @@ export { default as BirthCertificateUpload } from './Forms/BirthCertificate/Birt
 export { default as BirthCertificateCreate } from './Forms/BirthCertificate/BirthCertificateCreate';
 export { default as BirthCertificateLatest } from './Forms/BirthCertificate/BirthCertificateLatest';
 export { default as BirthCertificateCharts } from './Forms/BirthCertificate/BirtCertificateCharts';
+export { default as BirthCertificateSearch } from './Forms/BirthCertificate/BirthCertificateSearch';
 
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
 export { default as DeathCertificateHome } from './Forms/DeathCertificate/DeathCertificateHome';
