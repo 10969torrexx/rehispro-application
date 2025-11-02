@@ -1,0 +1,73 @@
+import { useEffect, useState } from 'react';
+import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { BirthCertServices } from '@services';
+import { chartColors } from '@enums';
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+export default function BirthCertificateCharts() {
+  const [femaleCount, setFemaleCount] = useState(0);
+  const [maleCount, setMaleCount] = useState(0);
+  const data = {
+    labels: ["Female", "Male"],
+    datasets: [
+      {
+        data: [femaleCount, maleCount],
+        backgroundColor: [
+          chartColors.GenderColorsRGBA.FEMALE,
+          chartColors.GenderColorsRGBA.MALE,
+        ],
+        borderColor: [
+          chartColors.GenderColorsBorderRGBA.FEMALE,
+          chartColors.GenderColorsBorderRGBA.MALE,
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+      tooltip: {
+        enabled: true,
+      },
+    },
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await BirthCertServices.listBirthCertificate();
+        if (response.data?.length > 0) {
+          let male = 0;
+          let female = 0;
+
+          response.data.forEach(item => {
+            if (item.sex === 'MALE') male++;
+            else if (item.sex === 'FEMALE') female++;
+          });
+
+          setMaleCount(male);
+          setFemaleCount(female);
+        }
+      } catch (error) {
+        console.error("Error fetching birth certificate status counts:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div className="text-left">
+      <p className="text-xs font-semibold mb-2">Birth Certificate</p>
+      <div className="w-64 h-64 mx-auto">
+        <Doughnut data={data} options={options} />
+      </div>
+    </div>
+  );
+}

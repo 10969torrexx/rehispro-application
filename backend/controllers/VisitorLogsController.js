@@ -130,3 +130,37 @@ exports.updateStatus = (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 }
+
+exports.latest = async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                v.*, 
+                u.full_name AS officer
+            FROM visitor_logs v
+            LEFT JOIN users u ON v.creator_id = u.id
+            ORDER BY v.created_at DESC
+            LIMIT 5
+        `;
+
+        db.all(query, [], (err, rows) => {
+            if (err) {
+                console.error('[DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database query failed',
+                    error: err.message
+                });
+            }
+            writeLog(`INFO [visitor controller][latest] ${JSON.stringify(rows)}`);
+            res.status(200).json({
+                success: true,
+                data: rows
+            });
+        });
+    } catch (error) {
+        writeLog('ERROR [visitor controller][latest]', error);
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+}   

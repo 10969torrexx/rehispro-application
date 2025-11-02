@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import { SideBar, InfoCard } from '@components';
 import { MarriageCertificateHome, MarriageCertificateCreateForm, MarriageCertificateView, MarriageCertificateUpload} from '@components';
-
+import { useSearchParams } from 'react-router-dom';
 export default function MarriageCertificate() {
     const [userData, setUserData] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
-
-    useEffect(() => {
+    const [searchParams] = useSearchParams();
+    const [activeTab, setActiveTab] = useState("home"); //TODO: handle the active tab
+     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
         }
+        setActiveTab(searchParams.get('activeTab') ? searchParams.get('activeTab') : 'home' );
     }, []);
-    const [activeTab, setActiveTab] = useState("home"); //TODO: handle the active tab
     return (
         <>
             <div className="flex w-screen h-screen">

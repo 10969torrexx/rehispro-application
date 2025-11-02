@@ -8,5 +8,6 @@ router.get('/list', deathCertificateController.list);
 router.get('/view/:id', deathCertificateController.view);
 router.post('/upload', upload.array('files'), deathCertificateController.uploadAndScan);
 router.get('/extract-pdf/:id', deathCertificateController.download)
+router.get('/latest', deathCertificateController.latest);
 
 module.exports = router;

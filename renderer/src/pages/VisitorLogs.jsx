@@ -89,7 +89,6 @@ export default function VisitorLogs() {
         try {
             setIsLoading(true);
             const response = await VisitorLogServices.list();
-            console.table(response.data);
             if (response && response.success && response.data) {
                 const dataWithIndex = response.data.map((item, index) => ({
                     ...item,
@@ -170,7 +169,7 @@ export default function VisitorLogs() {
                                     ) : (
                                         <>
                                             <div className="mb-2 flex justify-start">
-                                                <div className="p-2 px-5 border items-center rounded-full">{`Visitors Today: ${rows.length}`}</div>
+                                                <div className="p-2 px-5 border items-center rounded-full">{`Visitors: ${filteredRows.length}`}</div>
                                                 <input
                                                     className="common-input"
                                                     type="date"
