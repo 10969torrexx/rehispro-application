@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import { UserRoles, UserStatus } from '@enums';
 import { ChangeCredentials, SideBar, RecentRecords, BirthCertificateCharts, DeathCertificateCharts, MarriageCertificateCharts, VisitorLogLatest } from '@components';
-import { UsersManagement } from '@pages';
+import { AddRecords } from '@modals';
 import { toast } from 'react-toastify';
 import { AuthServices } from '@services';
 
@@ -44,6 +44,7 @@ export default function Dashboard() {
 
   //TODO: handling side bar open / close state
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openAddRecords, setOpenAddRecords] = useState(false);
   return (
     <>
       {(userData?.is_firsttime_flg ) && showChangePassword && (
@@ -61,6 +62,10 @@ export default function Dashboard() {
           role={userData?.role}
           isOpen={sidebarOpen}
           setIsOpen={setSidebarOpen}
+        />
+        <AddRecords
+          isOpen={openAddRecords}
+          onClose={() => setOpenAddRecords(false)}
         />
         <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
           <div className="p-4">
@@ -136,7 +141,9 @@ export default function Dashboard() {
                 <div className="flex-1 flex flex-col flex max-h-[15%] mb-4">
                   <h3 className="font-semibold mb-2 text-xs text-left">Quick Actions</h3>
                   <div className='flex flex-row w-full gap-2'>
-                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
+                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg"
+                      onClick={() => setOpenAddRecords(true)}
+                    >
                       Add Records
                     </button>
                     <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
