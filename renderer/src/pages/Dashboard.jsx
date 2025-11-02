@@ -147,7 +147,7 @@ export default function Dashboard() {
                     >
                       Add Records
                     </button>
-                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
+                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg" hidden>
                       Search Records
                     </button>
                     <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
