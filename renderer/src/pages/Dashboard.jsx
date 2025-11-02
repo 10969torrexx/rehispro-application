@@ -134,7 +134,7 @@ export default function Dashboard() {
               </div>
               <div className="flex-1 max-w-[40%] flex flex-col">
                 <div className="flex-1 flex flex-col flex max-h-[15%] mb-4">
-                  <h3 className="font-semibold mb-2 text-xs text-left">Recent Records</h3>
+                  <h3 className="font-semibold mb-2 text-xs text-left">Quick Actions</h3>
                   <div className='flex flex-row w-full gap-2'>
                     <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">
                       Add Records
