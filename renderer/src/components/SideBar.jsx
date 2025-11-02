@@ -58,7 +58,7 @@ return (
                             className="flex items-center justify-between hover:bg-purple-100 rounded px-2 py-2 cursor-pointer"
                         >
                             <div className="flex items-center space-x-4">
-                                <i className={`bi ${location.pathname === url ? iconActive : icon} text-lg`}></i>
+                                <i className={`bi ${location.pathname === url ? iconActive : icon} ${location.pathname === url ? "text-purple-600" : "text-gray-600"} text-lg`}></i>
                                 {isOpen && <span className="whitespace-nowrap">{name}</span>}
                             </div>
 
