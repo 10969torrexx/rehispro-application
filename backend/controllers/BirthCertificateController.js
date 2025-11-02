@@ -406,6 +406,91 @@ async function latest(req, res) {
     }
   );
 }
+
+async function search(req, res) {
+    try {
+        const rawQuery = req.body || '';
+        const params = new URLSearchParams(rawQuery);
+        writeLog(`INFO [BirthCertificateController][search] params: ${params.toString()}`);
+        const firstName = params.get('firstName')?.trim() || '';
+        const middleName = params.get('middleName')?.trim() || '';
+        const lastName = params.get('lastName')?.trim() || '';
+        const dateOfBirth = params.get('dateOfBirth')?.trim() || '';
+        const placeOfBirth = params.get('placeOfBirth')?.trim() || '';
+        const registryNumber = params.get('registryNumber')?.trim() || '';
+
+        const conditions = [];
+        const values = [];
+
+        if (firstName) {
+            conditions.push(`child_first_name LIKE ?`);
+            values.push(`%${firstName}%`);
+        }
+        if (middleName) {
+            conditions.push(`child_middle_name LIKE ?`);
+            values.push(`%${middleName}%`);
+        }
+        if (lastName) {
+            conditions.push(`child_last_name LIKE ?`);
+            values.push(`%${lastName}%`);
+        }
+        if (dateOfBirth) {
+            conditions.push(`child_birth_date LIKE ?`);
+            values.push(`%${dateOfBirth}%`);
+        }
+        if (placeOfBirth) {
+            conditions.push(`child_birth_place LIKE ?`);
+            values.push(`%${placeOfBirth}%`);
+        }
+        if (registryNumber) {
+            conditions.push(`registry_number LIKE ?`);
+            values.push(`%${registryNumber}%`);
+        }
+
+        let query = `
+            SELECT 
+                id,
+                registry_number,
+                CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name,
+                sex,
+                child_birth_place,
+                DATE(created_at) AS created_at,
+                CONCAT(city, ", ", province) AS residence
+            FROM birthcertificates
+        `;
+
+        if (conditions.length > 0) {
+            query += ` WHERE ${conditions.join(' AND ')}`;
+        }
+
+        writeLog(`INFO [BirthCertificateController][search] Executing query: ${query} with values: ${values}`);
+        db.all(query, values, (err, rows) => {
+            if (err) {
+                console.error('❌ [DB Error]', err.message);
+                writeLog(`ERROR [birth][search] ${err.message}`);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database fetch failed',
+                    error: err.message,
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Search Results',
+                data: rows,
+            });
+        });
+    } catch (error) {
+        console.error('❌ [Search Error]', error.message);
+        writeLog(`ERROR [birth][search] ${error.message}`);
+        res.status(500).json({
+            success: false,
+            message: 'Search failed',
+            error: error.message,
+        });
+    }
+}
    
 module.exports = {
     create,
@@ -413,5 +498,6 @@ module.exports = {
     latest,
     uploadAndScan,
     view,
-    download
+    download,
+    search
 };

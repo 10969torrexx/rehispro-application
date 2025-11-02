@@ -149,3 +149,28 @@ export async function latest() {
         throw error;
     }
 }
+
+export async function search(queryParams) {
+    try {
+        const response = await fetch(`http://localhost:3001/birth/search`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(queryParams)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data;
+    } catch (error) {
+        console.error('[birth form] Error searching birth certificates:', error);
+        throw error;
+    }
+}
