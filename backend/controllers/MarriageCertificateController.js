@@ -395,11 +395,28 @@ async function latest(req, res) {
     });
 }
 
+async function search(req, res) { 
+    try {
+        const rawQuery = req.body || '';
+        const params = new URLSearchParams(rawQuery);
+
+    } catch (error) {
+        console.error('❌ [Search Error]', error.message);
+        writeLog(`ERROR [birth][search] ${error.message}`);
+        res.status(500).json({
+        success: false,
+        message: 'Search failed',
+        error: error.message,
+        });
+    }
+}
+
 module.exports = {
     create,
     getAll,
     view,
     upload,
     download,
-    latest
+    latest,
+    search
 };

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { SideBar, InfoCard } from '@components';
-import { MarriageCertificateHome, MarriageCertificateCreateForm, MarriageCertificateView, MarriageCertificateUpload} from '@components';
+import { MarriageCertificateHome, MarriageCertificateCreateForm, MarriageCertificateView, MarriageCertificateUpload,
+    MarriageCertificateSearch
+} from '@components';
+
 import { useSearchParams } from 'react-router-dom';
 export default function MarriageCertificate() {
     const [userData, setUserData] = useState(null);
@@ -39,6 +42,11 @@ export default function MarriageCertificate() {
                             onClick={() => setActiveTab("create")}
                         >
                             Create
+                        </button>
+                        <button className={`btn-${activeTab == 'search' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
+                            onClick={() => setActiveTab("search")}
+                        >
+                            Search
                         </button>
                     </div>
                     <div id="managementContent" className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
@@ -96,6 +104,11 @@ export default function MarriageCertificate() {
                                 <div className="form-content mb-4">
                                 <MarriageCertificateView row={selectedRow} />
                                 </div>
+                            </div>
+                        }
+                        {activeTab === "search" && 
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <MarriageCertificateSearch setActiveTab={setActiveTab} setSelectedRow={setSelectedRow} />
                             </div>
                         }
                     </div>
