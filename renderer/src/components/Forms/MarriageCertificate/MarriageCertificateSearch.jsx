@@ -13,8 +13,6 @@ export default function MarriageCertificateSearch ({setActiveTab, setSelectedRow
         wifeFirstName: '',
         wifeMiddleName: '',
         wifeLastName: '',
-        dateOfMarriage: '',
-        placeOfMarriage: '',
         registryNumber: '',
     });
     const handleOnChange = (e) => { 
@@ -27,7 +25,7 @@ export default function MarriageCertificateSearch ({setActiveTab, setSelectedRow
 
     const columns = [
         { field: "id", headerName: "ID", width: 70 },
-        { field: "registry_number", headerName: "Registry Number", width: 150 },
+        { field: "registry", headerName: "Registry Number", width: 150 },
         { field: "husband_first_name", headerName: "Husband's First Name", width: 130 },
         { field: "husband_middle_name", headerName: "Husband's Middle Name", width: 130 },
         { field: "husband_last_name", headerName: "Husband's Last Name", width: 130 },
@@ -73,8 +71,6 @@ export default function MarriageCertificateSearch ({setActiveTab, setSelectedRow
                     wifeFirstName: '',
                     wifeMiddleName: '',
                     wifeLastName: '',
-                    dateOfMarriage: '',
-                    placeOfMarriage: '',
                     registryNumber: '',
                 });
             } else {
@@ -101,44 +97,52 @@ export default function MarriageCertificateSearch ({setActiveTab, setSelectedRow
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="dateMarriage">Date of Marriage</label>
-                            <input type="date" className="common-input w-full" placeholder="Date of Marriage"
-                             name="dateDeath"
-                             value={formData.dateMarriage}
+                            <label htmlFor="husbandFirstName">Husband's First Name</label>
+                            <input type="text" className="common-input w-full" placeholder="Husband's First Name"
+                             name="husbandFirstName"
+                             value={formData.husbandFirstName}
                              onChange={handleOnChange}
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="deathPlace">Place of Death</label>
-                            <input type="text" className="common-input w-full" placeholder="Place of Death"
-                             name="deathPlace"
-                             value={formData.placeOfDeath}
+                            <label htmlFor="husbandMiddleName">Husband's Middle Name</label>
+                            <input type="text" className="common-input w-full" placeholder="Husband's Middle Name"
+                             name="husbandMiddleName"
+                             value={formData.husbandMiddleName}
+                             onChange={handleOnChange}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="husbandLastName">Husband's Last Name</label>
+                            <input type="text" className="common-input w-full" placeholder="Husband's Last Name"
+                             name="husbandLastName"
+                             value={formData.husbandLastName}
                              onChange={handleOnChange}
                             />
                         </div>
                     </div>
                     <div className="flex-1 flex flex-row gap-2">
                         <div className="flex-1">
-                            <label htmlFor="firstName">Deceased First Name</label>
+                            <label htmlFor="firstName">Wife's First Name</label>
                             <input type="text" className="common-input w-full" placeholder="First Name"
-                             name="firstName"
-                             value={formData.firstName}
+                             name="wifeFirstName"
+                             value={formData.wifeFirstName}
                              onChange={handleOnChange}
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="middleName">Deceased Middle Name</label>
+                            <label htmlFor="middleName">Wife's Middle Name</label>
                             <input type="text" className="common-input w-full" placeholder="Middle Name"
-                             name="middleName"
-                             value={formData.middleName}
+                             name="wifeMiddleName"
+                             value={formData.wifeMiddleName}
                              onChange={handleOnChange}
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="lastName">Deceased Last Name</label>
+                            <label htmlFor="wifeLastName">Wife's Last Name</label>
                             <input type="text" className="common-input w-full" placeholder="Last Name"
-                             name="lastName"
-                             value={formData.lastName}
+                             name="wifeLastName"
+                             value={formData.wifeLastName}
                              onChange={handleOnChange}
                             />
                         </div>

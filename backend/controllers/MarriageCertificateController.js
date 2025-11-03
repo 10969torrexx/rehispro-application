@@ -399,6 +399,90 @@ async function search(req, res) {
     try {
         const rawQuery = req.body || '';
         const params = new URLSearchParams(rawQuery);
+        const husbandFirstName = params.get('husbandFirstName')?.trim() || '';
+        const husbandMiddleName = params.get('husbandMiddleName')?.trim() || '';
+        const husbandLastName = params.get('husbandLastName')?.trim() || '';
+        const wifeFirstName = params.get('wifeFirstName')?.trim() || '';
+        const wifeMiddleName = params.get('wifeMiddleName')?.trim() || '';
+        const wifeLastName = params.get('wifeLastName')?.trim() || '';
+        const dateOfMarriage = params.get('dateOfMarriage')?.trim() || '';
+        const registryNumber = params.get('registryNumber')?.trim() || '';
+
+        const conditions = [];
+        const values = [];
+
+        if (husbandFirstName) {
+            conditions.push(`husband_first_name LIKE ?`);
+            values.push(`%${husbandFirstName}%`);
+        }
+        if (husbandMiddleName) {
+            conditions.push(`husband_middle_name LIKE ?`);
+            values.push(`%${husbandMiddleName}%`);
+        }
+        if (husbandLastName) {
+            conditions.push(`husband_last_name LIKE ?`);
+            values.push(`%${husbandLastName}%`);
+        }
+        if (wifeFirstName) {
+            conditions.push(`wife_first_name LIKE ?`);
+            values.push(`%${wifeFirstName}%`);
+        }
+        if (wifeMiddleName) {
+            conditions.push(`wife_middle_name LIKE ?`);
+            values.push(`%${wifeMiddleName}%`);
+        }
+        if (wifeLastName) {
+            conditions.push(`wife_last_name LIKE ?`);
+            values.push(`%${wifeLastName}%`);
+        }
+        if (dateOfMarriage) {
+            conditions.push(`date_of_marriage = ?`);
+            values.push(dateOfMarriage);
+        }
+        if (registryNumber) {
+            conditions.push(`registry LIKE ?`);
+            values.push(`%${registryNumber}%`);
+        }
+
+        let query = `
+            SELECT 
+                id,
+                husband_first_name,
+                husband_middle_name,
+                husband_last_name,
+                wife_first_name,
+                wife_middle_name,
+                wife_last_name,
+                date_of_marriage,
+                (
+                    place_of_marriage_barangay || ', ' || 
+                    place_of_marriage_city || ', ' || 
+                    place_of_marriage_province
+                ) AS place_of_marriage,
+                registry
+            FROM marriage_certificates
+        `;
+
+        if (conditions.length > 0) {
+            query += ' WHERE ' + conditions.join(' AND ');
+        }
+
+        db.all(query, values, (err, rows) => {
+            if (err) {
+                console.error('❌ [DB Error]', err.message);
+                return res.status(500).json({
+                success: false,
+                message: 'Database fetch failed',
+                error: err.message,
+                });
+            }
+            const list_of_death = rows;
+            res.status(200).json({
+                success: true,
+                message: 'Death Certificate List',
+                data: list_of_death,
+            });
+        });
 
     } catch (error) {
         console.error('❌ [Search Error]', error.message);
