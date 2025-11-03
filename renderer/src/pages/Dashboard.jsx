@@ -14,7 +14,7 @@ export default function Dashboard() {
   const [activeCount, setActiveCount] = useState(0);
   const [inactiveCount, setInactiveCount] = useState(0);
   const [deletedCount, setDeletedCount] = useState(0);
-  const [recentActiveTab, setRecentActiveTab] = useState('birth');
+  const [recordType, setViewRecordType] = useState('birth');
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('user');
@@ -67,6 +67,7 @@ export default function Dashboard() {
         <AddRecords
           isOpen={openAddRecords}
           onClose={() => setOpenAddRecords(false)}
+          type={recordType}
         />
         <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
           <div className="p-4">
@@ -143,11 +144,19 @@ export default function Dashboard() {
                   <h3 className="font-semibold mb-2 text-xs text-left">Quick Actions</h3>
                   <div className='flex flex-row w-full gap-2'>
                     <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg"
-                      onClick={() => setOpenAddRecords(true)}
+                      onClick={() => {
+                        setOpenAddRecords(true);
+                        setViewRecordType('create');
+                      }}
                     >
                       Add Records
                     </button>
-                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg" hidden>
+                    <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg"
+                      onClick={() => {
+                        setOpenAddRecords(true);
+                        setViewRecordType('search');
+                      }}
+                    >
                       Search Records
                     </button>
                     <button className="btn-primary p-2 px-1 shadow-lg flex-1 text-xs rounded-lg">

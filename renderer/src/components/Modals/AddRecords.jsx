@@ -1,5 +1,6 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-export default function AddRecords({ isOpen, onClose }) {
+import { Link } from "react-router-dom";
+import { capitalizeFirst } from "@myTools";
+export default function AddRecords({ isOpen, onClose, type="create" }) {
     
     if (!isOpen) return null;
     return (
@@ -12,16 +13,16 @@ export default function AddRecords({ isOpen, onClose }) {
                 >
                     <i className="bi bi-x-lg"></i>
                 </button>
-                <h2 className="text-2xl font-semibold mb-4">Add Records</h2>
+                <h6 className="font-semibold mb-4">{capitalizeFirst(type)} Records</h6>
                 <div className="w-full p-2 flex flex-row gap-2 items-center">
                     <button className="btn-primary text-white px-4 py-2 rounded-lg shadow-lg">
-                        <Link to="/birth-certificates?activeTab=create">Add Birth Certificate</Link>
+                        <Link to={`/birth-certificates?activeTab=${type}`}>{capitalizeFirst(type)} Birth Certificate</Link>
                     </button>
                     <button className="btn-primary text-white px-4 py-2 rounded-lg shadow-lg">
-                        <Link to="/death-certificates?activeTab=create">Add Death Certificate</Link>
+                        <Link to={`/death-certificates?activeTab=${type}`}>{capitalizeFirst(type)} Death Certificate</Link>
                     </button>
                     <button className="btn-primary text-white px-4 py-2 rounded-lg shadow-lg">
-                        <Link to="/marriage-certificates?activeTab=create">Add Marriage Certificate</Link>
+                        <Link to={`/marriage-certificates?activeTab=${type}`}>{capitalizeFirst(type)} Marriage Certificate</Link>
                     </button>
                 </div>
             </div>
