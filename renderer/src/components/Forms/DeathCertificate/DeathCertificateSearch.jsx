@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BirthCertServices } from "@services";
+import { DeathCertificateService } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
@@ -55,7 +55,7 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
                 setLoading(false);
                 return;
             }
-            const response = await BirthCertServices.search(formData);
+            const response = await DeathCertificateService.search(formData);
             if (response.success) {
                 toast.success('Search completed successfully');
                 setRows(response.data);
@@ -63,8 +63,8 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
                     firstName: '',
                     middleName: '',
                     lastName: '',
-                    dateOfBirth: '',
-                    placeOfBirth: '',
+                    dateOfDeath: '',
+                    placeOfDeath: '',
                     registryNumber: '',
                 });
             } else {
@@ -91,25 +91,25 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="dateOfBirth">Date of Birth</label>
-                            <input type="date" className="common-input w-full" placeholder="Date of Birth"
-                             name="dateOfBirth"
-                             value={formData.dateOfBirth}
+                            <label htmlFor="dateDeath">Date of Death</label>
+                            <input type="date" className="common-input w-full" placeholder="Date of Death"
+                             name="dateDeath"
+                             value={formData.dateOfDeath}
                              onChange={handleOnChange}
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="placeOfBirth">Place of Birth</label>
-                            <input type="text" className="common-input w-full" placeholder="Place of Birth"
-                             name="placeOfBirth"
-                             value={formData.placeOfBirth}
+                            <label htmlFor="deathPlace">Place of Death</label>
+                            <input type="text" className="common-input w-full" placeholder="Place of Death"
+                             name="deathPlace"
+                             value={formData.placeOfDeath}
                              onChange={handleOnChange}
                             />
                         </div>
                     </div>
                     <div className="flex-1 flex flex-row gap-2">
                         <div className="flex-1">
-                            <label htmlFor="firstName">First Name</label>
+                            <label htmlFor="firstName">Deceased First Name</label>
                             <input type="text" className="common-input w-full" placeholder="First Name"
                              name="firstName"
                              value={formData.firstName}
@@ -117,7 +117,7 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="middleName">Middle Name</label>
+                            <label htmlFor="middleName">Deceased Middle Name</label>
                             <input type="text" className="common-input w-full" placeholder="Middle Name"
                              name="middleName"
                              value={formData.middleName}
@@ -125,7 +125,7 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="lastName">Last Name</label>
+                            <label htmlFor="lastName">Deceased Last Name</label>
                             <input type="text" className="common-input w-full" placeholder="Last Name"
                              name="lastName"
                              value={formData.lastName}

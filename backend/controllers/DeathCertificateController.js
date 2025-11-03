@@ -424,3 +424,53 @@ exports.latest = async(req, res) => {
     }
   );
 };
+
+exports.search = async(req, res) => {
+  try {
+      const rawQuery = req.body || '';
+      const params = new URLSearchParams(rawQuery);
+      const firstName = params.get('firstName')?.trim() || '';
+      const middleName = params.get('middleName')?.trim() || '';
+      const lastName = params.get('lastName')?.trim() || '';
+      const dateOfDeath = params.get('dateOfDeath')?.trim() || '';
+      const placeOfDeath = params.get('placeOfDeath')?.trim() || '';
+      const registryNumber = params.get('registryNumber')?.trim() || '';
+      
+      const conditions = [];
+      const values = [];
+
+      if (firstName) {
+        conditions.push(`first_name LIKE ?`);
+        values.push(`%${firstName}%`);
+      }
+      if (middleName) {
+        conditions.push(`middle_name LIKE ?`);
+        values.push(`%${middleName}%`);
+      }
+      if (lastName) {
+        conditions.push(`last_name LIKE ?`);
+        values.push(`%${lastName}%`);
+      }
+      if (dateOfDeath) {
+        conditions.push(`date_of_death = ?`);
+        values.push(dateOfDeath);
+      }
+      if (placeOfDeath) {
+        conditions.push(`place_of_death LIKE ?`);
+        values.push(`%${placeOfDeath}%`);
+      }
+      if (registryNumber) {
+        conditions.push(`registry_number = ?`);
+        values.push(registryNumber);
+      }
+     
+  } catch (error) {
+    console.error('❌ [Search Error]', error.message);
+    writeLog(`ERROR [birth][search] ${error.message}`);
+    res.status(500).json({
+      success: false,
+      message: 'Search failed',
+      error: error.message,
+    });
+  }
+}
