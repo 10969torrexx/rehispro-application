@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 
-export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) {
+export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -63,12 +63,6 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                     firstName: '',
                     middleName: '',
                     lastName: '',
-                    mothersFirstName: '',
-                    mothersMiddleName: '',
-                    mothersLastName: '',
-                    fathersFirstName: '',
-                    fathersMiddleName: '',
-                    fathersLastName: '',
                     dateOfBirth: '',
                     placeOfBirth: '',
                     registryNumber: '',
@@ -115,7 +109,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                     </div>
                     <div className="flex-1 flex flex-row gap-2">
                         <div className="flex-1">
-                            <label htmlFor="firstName">Child's First Name</label>
+                            <label htmlFor="firstName">First Name</label>
                             <input type="text" className="common-input w-full" placeholder="First Name"
                              name="firstName"
                              value={formData.firstName}
@@ -123,7 +117,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="middleName">Child's Middle Name</label>
+                            <label htmlFor="middleName">Middle Name</label>
                             <input type="text" className="common-input w-full" placeholder="Middle Name"
                              name="middleName"
                              value={formData.middleName}
@@ -131,62 +125,10 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                             />
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="lastName">Child's Last Name</label>
+                            <label htmlFor="lastName">Last Name</label>
                             <input type="text" className="common-input w-full" placeholder="Last Name"
                              name="lastName"
                              value={formData.lastName}
-                             onChange={handleOnChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="flex-1 flex flex-row gap-2">
-                        <div className="flex-1">
-                            <label htmlFor="firstName">Mothers's First Name</label>
-                            <input type="text" className="common-input w-full" placeholder="First Name"
-                             name="firstName"
-                             value={formData.mothersFirstName}
-                             onChange={handleOnChange}
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <label htmlFor="middleName">Mother's Middle Name (Maiden)</label>
-                            <input type="text" className="common-input w-full" placeholder="Middle Name"
-                             name="middleName"
-                             value={formData.mothersMiddleName}
-                             onChange={handleOnChange}
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <label htmlFor="lastName">Mother's Last Name</label>
-                            <input type="text" className="common-input w-full" placeholder="Last Name"
-                             name="lastName"
-                             value={formData.mothersLastName}
-                             onChange={handleOnChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="flex-1 flex flex-row gap-2">
-                        <div className="flex-1">
-                            <label htmlFor="firstName">Father's First Name</label>
-                            <input type="text" className="common-input w-full" placeholder="First Name"
-                             name="firstName"
-                             value={formData.fathersFirstName}
-                             onChange={handleOnChange}
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <label htmlFor="middleName">Father's Middle Name</label>
-                            <input type="text" className="common-input w-full" placeholder="Middle Name"
-                             name="middleName"
-                             value={formData.fathersMiddleName}
-                             onChange={handleOnChange}
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <label htmlFor="lastName">Father's Last Name</label>
-                            <input type="text" className="common-input w-full" placeholder="Last Name"
-                             name="lastName"
-                             value={formData.fathersLastName}
                              onChange={handleOnChange}
                             />
                         </div>

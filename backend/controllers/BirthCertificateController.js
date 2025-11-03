@@ -410,13 +410,18 @@ async function search(req, res) {
     try {
         const rawQuery = req.body || '';
         const params = new URLSearchParams(rawQuery);
-        writeLog(`INFO [BirthCertificateController][search] params: ${params.toString()}`);
         const firstName = params.get('firstName')?.trim() || '';
         const middleName = params.get('middleName')?.trim() || '';
         const lastName = params.get('lastName')?.trim() || '';
         const dateOfBirth = params.get('dateOfBirth')?.trim() || '';
         const placeOfBirth = params.get('placeOfBirth')?.trim() || '';
         const registryNumber = params.get('registryNumber')?.trim() || '';
+        const fathersFirstName = params.get('fathersFirstName')?.trim() || '';
+        const fathersMiddleName = params.get('fathersMiddleName')?.trim() || '';
+        const fathersLastName = params.get('fathersLastName')?.trim() || '';
+        const mothersFirstName = params.get('mothersFirstName')?.trim() || '';
+        const mothersMiddleName = params.get('mothersMiddleName')?.trim() || '';
+        const mothersLastName = params.get('mothersLastName')?.trim() || '';
 
         const conditions = [];
         const values = [];
@@ -445,6 +450,30 @@ async function search(req, res) {
             conditions.push(`registry_number LIKE ?`);
             values.push(`%${registryNumber}%`);
         }
+        if (fathersFirstName) {
+            conditions.push(`father_first_name LIKE ?`);
+            values.push(`%${fathersFirstName}%`);
+        }
+        if (fathersMiddleName) {
+            conditions.push(`father_middle_name LIKE ?`);
+            values.push(`%${fathersMiddleName}%`);
+        }
+        if (fathersLastName) {
+            conditions.push(`father_last_name LIKE ?`);
+            values.push(`%${fathersLastName}%`);
+        }
+        if (mothersFirstName) {
+            conditions.push(`maiden_first_name LIKE ?`);
+            values.push(`%${mothersFirstName}%`);
+        }
+        if (mothersMiddleName) {
+            conditions.push(`maiden_middle_name LIKE ?`);
+            values.push(`%${mothersMiddleName}%`);
+        }
+        if (mothersLastName) {
+            conditions.push(`maiden_last_name LIKE ?`);
+            values.push(`%${mothersLastName}%`);
+        }   
 
         let query = `
             SELECT 
