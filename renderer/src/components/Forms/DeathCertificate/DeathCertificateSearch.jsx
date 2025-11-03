@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DeathCertificateService } from "@services";
+import { DeathCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
@@ -28,8 +28,8 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
         { field: "first_name", headerName: "First Name", width: 130 },
         { field: "middle_name", headerName: "Middle Name", width: 130 },
         { field: "last_name", headerName: "Last Name", width: 130 },
-        { field: "date_of_birth", headerName: "Date of Birth", width: 130 },
-        { field: "child_birth_place", headerName: "Place of Birth", width: 150 },
+        { field: "date_of_death", headerName: "Date of Death", width: 130 },
+        { field: "place_of_death", headerName: "Place of Death", width: 150 },
         { field: "action", headerName: "Action", width: 100,
             renderCell: (params) => (
                 <div className="w-full items-center justify-center flex">
@@ -55,7 +55,8 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
                 setLoading(false);
                 return;
             }
-            const response = await DeathCertificateService.search(formData);
+            const response = await DeathCertServices.search(formData);
+            console.table(response);
             if (response.success) {
                 toast.success('Search completed successfully');
                 setRows(response.data);

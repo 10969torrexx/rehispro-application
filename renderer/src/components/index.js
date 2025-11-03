@@ -23,6 +23,7 @@ export { default as DeathCertificateView } from './Forms/DeathCertificate/DeathC
 export { default as DeathCertificateUpload } from './Forms/DeathCertificate/DeathCertificateUpload';
 export { default as DeathCertificateLatest } from './Forms/DeathCertificate/DeathCertificateLatest';
 export { default as DeathCertificateCharts } from './Forms/DeathCertificate/DeathCertificateCharts';
+export { default as DeathCertificateSearch } from './Forms/DeathCertificate/DeathCertificateSearch';
 
 export { default as MarriageCertificateCreateForm } from './Forms/MarriageCertificate/MarriageCertificateCreateForm';
 export { default as MarriageCertificateHome } from './Forms/MarriageCertificate/MarriageCertificateHome';
