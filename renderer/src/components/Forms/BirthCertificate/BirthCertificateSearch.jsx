@@ -3,9 +3,9 @@ import { BirthCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import { LoadingScreen } from '@components';
+import { Link } from "react-router-dom";
 
-export default function BirthCertificateSearch () {
+export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -23,6 +23,29 @@ export default function BirthCertificateSearch () {
         }));
     }
 
+    const columns = [
+        { field: "id", headerName: "ID", width: 70 },
+        { field: "registry_number", headerName: "Registry Number", width: 150 },
+        { field: "first_name", headerName: "First Name", width: 130 },
+        { field: "middle_name", headerName: "Middle Name", width: 130 },
+        { field: "last_name", headerName: "Last Name", width: 130 },
+        { field: "date_of_birth", headerName: "Date of Birth", width: 130 },
+        { field: "child_birth_place", headerName: "Place of Birth", width: 150 },
+        { field: "action", headerName: "Action", width: 100,
+            renderCell: (params) => (
+                <div className="w-full items-center justify-center flex">
+                    <button onClick={() => {
+                        setActiveTab('view'); 
+                        setSelectedRow(params.row.id);
+                    }}
+                    >View
+                    </button>
+                </div>
+            )
+        },
+    ];
+    const [rows, setRows] = useState([]);
+
     const handleOnSubmit = async(e) => {
         e.preventDefault();
         setLoading(true);
@@ -30,7 +53,15 @@ export default function BirthCertificateSearch () {
             const response = await BirthCertServices.search(formData);
             if (response.success) {
                 toast.success('Search completed successfully');
-                console.table(response.data);
+                setRows(response.data);
+                setFormData({
+                    firstName: '',
+                    middleName: '',
+                    lastName: '',
+                    dateOfBirth: '',
+                    placeOfBirth: '',
+                    registryNumber: '',
+                });
             } else {
                 toast.error(response.message || 'Failed to search');
             }
@@ -44,7 +75,6 @@ export default function BirthCertificateSearch () {
     return (
         <div className="flex flex-col w-full gap-2 p-2">
             <div className="flex-1 p-2">
-                <h3 className="text-semibold mb-2 w-full text-center">Search Details</h3>
                 <form action="" method="post" className="w-full flex flex-col gap-2" onSubmit={handleOnSubmit}>
                     <div className="flex-1 flex flex-row gap-2">
                         <div className="flex-1">
@@ -98,10 +128,26 @@ export default function BirthCertificateSearch () {
                             />
                         </div>
                     </div>
-                    <button className="btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]">Search</button>
+                    <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Search</button>
                 </form>
             </div>
-            <div className="flex-1 p-2 test-element"></div>
+            <div className="flex-1 p-2">
+                { loading ? (
+                    <div className="flex h-full items-center justify-center">
+                        <div className="spinner"></div>
+                    </div>
+                ) : (
+                    <Box sx={{ height: 400, width: '100%' }}>
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            pageSize={5}
+                            rowsPerPageOptions={[5]}
+                            disableSelectionOnClick
+                        />
+                    </Box>
+                )}
+            </div>
         </div>
     )
 }

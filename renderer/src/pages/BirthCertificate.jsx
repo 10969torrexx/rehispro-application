@@ -122,7 +122,7 @@ export default function BirthCertificate() {
                         }
                         {activeTab === 'search' && 
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
-                                <BirthCertificateSearch />
+                                <BirthCertificateSearch setActiveTab={setActiveTab} setSelectedRow={setSelectedRow} />
                             </div>
                         }
                     </div>

@@ -2,7 +2,6 @@ const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
-const path = require('path');
 const generate = require('../helpers/birthGeneratePDF');
 const puppeteer = require('puppeteer');
 
@@ -451,7 +450,10 @@ async function search(req, res) {
             SELECT 
                 id,
                 registry_number,
-                CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name,
+                child_first_name as first_name,
+                child_middle_name as middle_name,
+                child_last_name as last_name,
+                date_of_birth,
                 sex,
                 child_birth_place,
                 DATE(created_at) AS created_at,
