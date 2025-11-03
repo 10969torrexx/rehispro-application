@@ -15,6 +15,7 @@ export { default as BirthCertificateUpload } from './Forms/BirthCertificate/Birt
 export { default as BirthCertificateCreate } from './Forms/BirthCertificate/BirthCertificateCreate';
 export { default as BirthCertificateLatest } from './Forms/BirthCertificate/BirthCertificateLatest';
 export { default as BirthCertificateCharts } from './Forms/BirthCertificate/BirtCertificateCharts';
+export { default as BirthCertificateSearch } from './Forms/BirthCertificate/BirthCertificateSearch';
 
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
 export { default as DeathCertificateHome } from './Forms/DeathCertificate/DeathCertificateHome';
@@ -22,6 +23,7 @@ export { default as DeathCertificateView } from './Forms/DeathCertificate/DeathC
 export { default as DeathCertificateUpload } from './Forms/DeathCertificate/DeathCertificateUpload';
 export { default as DeathCertificateLatest } from './Forms/DeathCertificate/DeathCertificateLatest';
 export { default as DeathCertificateCharts } from './Forms/DeathCertificate/DeathCertificateCharts';
+export { default as DeathCertificateSearch } from './Forms/DeathCertificate/DeathCertificateSearch';
 
 export { default as MarriageCertificateCreateForm } from './Forms/MarriageCertificate/MarriageCertificateCreateForm';
 export { default as MarriageCertificateHome } from './Forms/MarriageCertificate/MarriageCertificateHome';
@@ -29,8 +31,8 @@ export { default as MarriageCertificateView } from './Forms/MarriageCertificate/
 export { default as MarriageCertificateUpload } from './Forms/MarriageCertificate/MarriageCertficiateUpload';
 export { default as MarriageCertificateLatest } from './Forms/MarriageCertificate/MarriageCertificateLatest';
 export { default as MarriageCertificateCharts } from './Forms/MarriageCertificate/MarriageCertificateCharts';
+export { default as MarriageCertificateSearch } from './Forms/MarriageCertificate/MarriageCertificateSearch';
 
 export { default as Badge } from './Badge';
-
 export { default as RecentRecords } from './Dashboard/RecentRecords';
 export { default as VisitorLogLatest } from './Forms/VisitorLogs/VisitorLogLatest';

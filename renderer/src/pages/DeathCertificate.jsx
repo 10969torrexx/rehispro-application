@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
-import { DocumentType } from '@enums';
-import { capitalizeFirst, capitalizeWords } from "@myTools";
 import { useSearchParams } from "react-router-dom";
-import { InfoCard, DeathCertificateCreate, DeathCertificateHome, DeathCertificateView, DeathCertificateUpload } from '@components';
+import { InfoCard, DeathCertificateCreate, DeathCertificateHome, DeathCertificateView, DeathCertificateUpload,
+    DeathCertificateSearch
+ } from '@components';
 
 export default function DeathCertificate() {
     const [searchParams] = useSearchParams();
@@ -39,11 +39,16 @@ export default function DeathCertificate() {
                         >
                            Upload
                         </button>
-                       <button className={`btn-${activeTab == 'create' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
-                           onClick={() => setActiveTab("create")}
-                       >
+                        <button className={`btn-${activeTab == 'create' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
+                            onClick={() => setActiveTab("create")}
+                        >
                            Create
                        </button>
+                        <button className={`btn-${activeTab == 'search' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
+                            onClick={() => setActiveTab("search")}
+                        >
+                           Search
+                        </button>
                     </div>
                     <div id="managementContent" className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
                         {activeTab === "home" &&
@@ -106,7 +111,11 @@ export default function DeathCertificate() {
                                 </div>
                             </div>
                         }
-
+                        {activeTab === "search" && 
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <DeathCertificateSearch setActiveTab={setActiveTab} setSelectedRow={setSelectedRow} />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

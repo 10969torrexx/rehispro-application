@@ -139,3 +139,27 @@ export async function latest() {
         throw error;
     }
 }
+
+export async function search(formData) {
+    try {
+        const response = await fetch('http://localhost:3001/marriage/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data;
+    } catch (error) {
+        console.error('[marriage form] Error searching marriage certificates:', error);
+        throw error;
+    }
+}

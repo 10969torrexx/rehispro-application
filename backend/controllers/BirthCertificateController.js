@@ -2,7 +2,6 @@ const db = require('../db');
 const { writeLog } = require('../utils/logger');
 const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
-const path = require('path');
 const generate = require('../helpers/birthGeneratePDF');
 const puppeteer = require('puppeteer');
 
@@ -406,6 +405,123 @@ async function latest(req, res) {
     }
   );
 }
+
+async function search(req, res) {
+    try {
+        const rawQuery = req.body || '';
+        const params = new URLSearchParams(rawQuery);
+        const firstName = params.get('firstName')?.trim() || '';
+        const middleName = params.get('middleName')?.trim() || '';
+        const lastName = params.get('lastName')?.trim() || '';
+        const dateOfBirth = params.get('dateOfBirth')?.trim() || '';
+        const placeOfBirth = params.get('placeOfBirth')?.trim() || '';
+        const registryNumber = params.get('registryNumber')?.trim() || '';
+        const fathersFirstName = params.get('fathersFirstName')?.trim() || '';
+        const fathersMiddleName = params.get('fathersMiddleName')?.trim() || '';
+        const fathersLastName = params.get('fathersLastName')?.trim() || '';
+        const mothersFirstName = params.get('mothersFirstName')?.trim() || '';
+        const mothersMiddleName = params.get('mothersMiddleName')?.trim() || '';
+        const mothersLastName = params.get('mothersLastName')?.trim() || '';
+
+        const conditions = [];
+        const values = [];
+
+        if (firstName) {
+            conditions.push(`child_first_name LIKE ?`);
+            values.push(`%${firstName}%`);
+        }
+        if (middleName) {
+            conditions.push(`child_middle_name LIKE ?`);
+            values.push(`%${middleName}%`);
+        }
+        if (lastName) {
+            conditions.push(`child_last_name LIKE ?`);
+            values.push(`%${lastName}%`);
+        }
+        if (dateOfBirth) {
+            conditions.push(`child_birth_date LIKE ?`);
+            values.push(`%${dateOfBirth}%`);
+        }
+        if (placeOfBirth) {
+            conditions.push(`child_birth_place LIKE ?`);
+            values.push(`%${placeOfBirth}%`);
+        }
+        if (registryNumber) {
+            conditions.push(`registry_number LIKE ?`);
+            values.push(`%${registryNumber}%`);
+        }
+        if (fathersFirstName) {
+            conditions.push(`father_first_name LIKE ?`);
+            values.push(`%${fathersFirstName}%`);
+        }
+        if (fathersMiddleName) {
+            conditions.push(`father_middle_name LIKE ?`);
+            values.push(`%${fathersMiddleName}%`);
+        }
+        if (fathersLastName) {
+            conditions.push(`father_last_name LIKE ?`);
+            values.push(`%${fathersLastName}%`);
+        }
+        if (mothersFirstName) {
+            conditions.push(`maiden_first_name LIKE ?`);
+            values.push(`%${mothersFirstName}%`);
+        }
+        if (mothersMiddleName) {
+            conditions.push(`maiden_middle_name LIKE ?`);
+            values.push(`%${mothersMiddleName}%`);
+        }
+        if (mothersLastName) {
+            conditions.push(`maiden_last_name LIKE ?`);
+            values.push(`%${mothersLastName}%`);
+        }   
+
+        let query = `
+            SELECT 
+                id,
+                registry_number,
+                child_first_name as first_name,
+                child_middle_name as middle_name,
+                child_last_name as last_name,
+                date_of_birth,
+                sex,
+                child_birth_place,
+                DATE(created_at) AS created_at,
+                CONCAT(city, ", ", province) AS residence
+            FROM birthcertificates
+        `;
+
+        if (conditions.length > 0) {
+            query += ` WHERE ${conditions.join(' AND ')}`;
+        }
+
+        writeLog(`INFO [BirthCertificateController][search] Executing query: ${query} with values: ${values}`);
+        db.all(query, values, (err, rows) => {
+            if (err) {
+                console.error('❌ [DB Error]', err.message);
+                writeLog(`ERROR [birth][search] ${err.message}`);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database fetch failed',
+                    error: err.message,
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Search Results',
+                data: rows,
+            });
+        });
+    } catch (error) {
+        console.error('❌ [Search Error]', error.message);
+        writeLog(`ERROR [birth][search] ${error.message}`);
+        res.status(500).json({
+            success: false,
+            message: 'Search failed',
+            error: error.message,
+        });
+    }
+}
    
 module.exports = {
     create,
@@ -413,5 +529,6 @@ module.exports = {
     latest,
     uploadAndScan,
     view,
-    download
+    download,
+    search
 };

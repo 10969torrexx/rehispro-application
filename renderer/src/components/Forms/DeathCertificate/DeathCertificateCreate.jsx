@@ -1,8 +1,7 @@
 import { useEffect, useState} from 'react';
 import { Divider } from '@components';
-import { DeathCertValidation } from '@services';
+import { DeathCertValidation, DeathCertServices } from '@services';
 import { ErrorMessages, SignaturePlaceholder } from '@components';
-import { DeathCertServices } from '@services';
 import { toast } from 'react-toastify';
 import { StringToDate, capitalizeFirst, TitleCase } from '@myTools';
 
