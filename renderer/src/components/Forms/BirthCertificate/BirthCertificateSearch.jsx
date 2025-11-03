@@ -36,7 +36,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                 <div className="w-full items-center justify-center flex">
                     <button onClick={() => {
                         setActiveTab('view'); 
-                        setSelectedRow(params.row.id);
+                        setSelectedRow(params.row);
                     }}
                     >View
                     </button>
@@ -50,6 +50,12 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
         e.preventDefault();
         setLoading(true);
         try {
+            const isFormEmpty = Object.values(formData).every(value => value.trim() === '');
+            if (isFormEmpty) {
+                toast.error('Please fill at least one field to search');
+                setLoading(false);
+                return;
+            }
             const response = await BirthCertServices.search(formData);
             if (response.success) {
                 toast.success('Search completed successfully');
