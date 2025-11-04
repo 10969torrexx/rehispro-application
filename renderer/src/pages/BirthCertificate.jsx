@@ -31,7 +31,7 @@ export default function BirthCertificate() {
                     <h2 className="text-lg font-semibold text-left">Birth Certificate</h2>
                     <div className="flex justify-end mb-4 gap-2">
                         <button className={`btn-${activeTab == 'home' ? 'primary' : 'secondary'} shadow-lg px-3 py-1 rounded-full`}
-                            onClick={() => setActiveTab("results")}
+                            onClick={() => setActiveTab("home")}
                         >
                             <i className="bi-house-door-fill"></i>
                         </button>
