@@ -59,7 +59,7 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
                 toast.success("File Scanning Successful!");
                 toast.warning("Review every details for saving.");
-                setActiveTab('create');
+                setActiveTab('results');
                 onOCRComplete(response.result);
             } else {
                 toast.error("Failed: No OCR Response");
@@ -98,7 +98,7 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
                         <>
                             <p>Choose or drag and drop files here to upload</p>
                             <p className="text-xs text-gray-400 text-center">JPEG and PNG formats and up to 10 MB</p>
-                            <button className='mt-4 rounded-full px-4 py-2 btn-primary'>Browse Files</button>
+                            <button type="button" className='mt-4 rounded-full px-4 py-2 btn-primary'>Browse Files</button>
                         </>
                     )}
                 </div>

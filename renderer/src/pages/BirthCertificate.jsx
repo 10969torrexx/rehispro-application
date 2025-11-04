@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { InfoCard, BirthCertificateCreate, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload,
-    BirthCertificateSearch
+    BirthCertificateSearch, BirthCertificateResults
  } from '@components';
 import { useSearchParams } from 'react-router-dom'; 
 
@@ -31,7 +31,7 @@ export default function BirthCertificate() {
                     <h2 className="text-lg font-semibold text-left">Birth Certificate</h2>
                     <div className="flex justify-end mb-4 gap-2">
                         <button className={`btn-${activeTab == 'home' ? 'primary' : 'secondary'} shadow-lg px-3 py-1 rounded-full`}
-                            onClick={() => setActiveTab("home")}
+                            onClick={() => setActiveTab("results")}
                         >
                             <i className="bi-house-door-fill"></i>
                         </button>
@@ -123,6 +123,12 @@ export default function BirthCertificate() {
                         {activeTab === 'search' && 
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <BirthCertificateSearch setActiveTab={setActiveTab} setSelectedRow={setSelectedRow} />
+                            </div>
+                        }
+                        {
+                            activeTab === 'results' &&
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <BirthCertificateResults />
                             </div>
                         }
                     </div>
