@@ -368,7 +368,6 @@ db.serialize(() => {
     );
   `);
 
-  // db.run  (`DROP TABLE IF EXISTS marriage_certificates`);
   // TODO: Create Table for Marriage Certificate Form
   db.run(`
     CREATE TABLE IF NOT EXISTS marriage_certificates (
@@ -602,6 +601,72 @@ db.serialize(() => {
       deleted_at TIMESTAMP
     );
   `);
+
+  //TODO: create table for uploaded documents for birth
+  db.run(
+    `CREATE TABLE IF NOT EXISTS birth_uploads (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      creator_id INTEGER NOT NULL,
+      registry_number INTEGER NOT NULL,
+      date_of_birth DATE NOT NULL,
+      place_of_birth TEXT NOT NULL,
+      child_first_name VACHAR(255) NOT NULL,
+      child_middle_name VACHAR(255) NOT NULL,
+      child_last_name VACHAR(255) NOT NULL,
+      father_first_name VACHAR(255) NOT NULL,
+      father_middle_name VACHAR(255) NOT NULL,
+      father_last_name VACHAR(255) NOT NULL,
+      mother_first_name VACHAR(255) NOT NULL,
+      mother_middle_name VACHAR(255) NOT NULL,
+      mother_last_name VACHAR(255) NOT NULL,
+      file_paths TEXT NOT NULL,
+      file_names TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT (datetime('now')),
+      updated_at TIMESTAMP DEFAULT (datetime('now')),
+      deleted_at TIMESTAMP
+    );`
+  )
+
+  //TODO: create table for uploaded documents for marriage
+  db.run(
+    `CREATE TABLE IF NOT EXISTS marriage_uploads (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      creator_id INTEGER NOT NULL,
+      registry_number INTEGER NOT NULL,
+      date_of_marriage DATE NOT NULL,
+      place_of_marriage TEXT NOT NULL,
+      husband_first_name VACHAR(255) NOT NULL,
+      husband_middle_name VACHAR(255) NOT NULL,
+      husband_last_name VACHAR(255) NOT NULL,
+      wife_first_name VACHAR(255) NOT NULL,
+      wife_middle_name VACHAR(255) NOT NULL,
+      wife_last_name VACHAR(255) NOT NULL,
+      file_paths TEXT NOT NULL,
+      file_names TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT (datetime('now')),
+      updated_at TIMESTAMP DEFAULT (datetime('now')),
+      deleted_at TIMESTAMP
+    );`
+  )
+
+  //TODO: create table for uploaded documents for death
+  db.run(
+    `CREATE TABLE IF NOT EXISTS death_uploads (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      creator_id INTEGER NOT NULL,
+      registry_number INTEGER NOT NULL,
+      date_of_death DATE NOT NULL,
+      place_of_death TEXT NOT NULL,
+      first_name VACHAR(255) NOT NULL,
+      middle_name VACHAR(255) NOT NULL,
+      last_name VACHAR(255) NOT NULL,
+      file_paths TEXT NOT NULL,
+      file_names TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT (datetime('now')),
+      updated_at TIMESTAMP DEFAULT (datetime('now')),
+      deleted_at TIMESTAMP
+    );`
+  )
 });
 
 module.exports = db;
