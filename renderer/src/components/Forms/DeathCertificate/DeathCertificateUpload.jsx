@@ -96,7 +96,7 @@ export default function DeathCertificateUpload({setActiveTab, onOCRComplete}) {
                         <>
                             <p>Choose or drag and drop files here to upload</p>
                             <p className="text-xs text-gray-400 text-center">JPEG and PNG formats and up to 10 MB</p>
-                            <button className='mt-4 rounded-full px-4 py-2 btn-primary'>Browse Files</button>
+                            <button type="button" className='mt-4 rounded-full px-4 py-2 btn-primary'>Browse Files</button>
                         </>
                     )}
                 </div>
