@@ -5,6 +5,7 @@ const { callPythonOCR } = require('../services/OCRService');
 const generate = require('../helpers/birthGeneratePDF');
 const puppeteer = require('puppeteer');
 const { storeFile } = require('./FilesController');
+
 async function create (req, res) {
     try {
         const formData = req.body;
@@ -26,12 +27,15 @@ async function create (req, res) {
         try {
             const fileId = await storeFile(fileData);
             writeLog(`[info] [BirthCertificateController][create] Stored file with ID: ${fileId}`);
+            flatData.fileId = fileId;
+            flatData.creationType = 'upload';
         } catch (err) {
             writeLog(`[error] [BirthCertificateController][create] Failed to store file: ${err.message}`);
         }
         } else {
-        writeLog(`[info] [BirthCertificateController][create] No file paths provided, skipping file storage.`);
+            writeLog(`[info] [BirthCertificateController][create] No file paths provided, skipping file storage.`);
         }
+
 
 
         //TODO: process the attendant value
