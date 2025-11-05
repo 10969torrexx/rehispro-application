@@ -3,7 +3,7 @@ import { BirthCertServices } from "@services";
 import { BirthCertificate } from '@enums';
 import { toast } from "react-toastify";
 
-export default function BirthCertificateResults ({defaultData}) {
+export default function BirthCertificateResults ({defaultData, filePath}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         registryNumber: defaultData.registry_number ?? '',
@@ -18,7 +18,9 @@ export default function BirthCertificateResults ({defaultData}) {
         mothersLastName: defaultData.maiden_last_name ?? '',
         fathersFirstName: defaultData.father_first_name ?? '',
         fathersMiddleName: defaultData.father_middle_name ?? '',
-        fathersLastName: defaultData.father_last_name ?? ''
+        fathersLastName: defaultData.father_last_name ?? '',
+        filePath: filePath ?? 'sample',
+        fileNames: 'sample'
     });
     const handleOnChange = (e) => { 
         const { name, value } = e.target;
@@ -143,10 +145,18 @@ export default function BirthCertificateResults ({defaultData}) {
                             onChange={handleOnChange}
                         />
                     </div>
-                    <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Search</button>
+                    <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
                 </form>
-                <div className="flex-1 p-2 test-element">
-                    
+                <div className="flex-1 flex-col flex p-2 bg-gray-200 rounded-md">
+                    <div className="">
+                        {
+                            filePath.map((file, index) => {
+                                return(
+                                    <img src={file} className="w-full h-full" />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         </div>
