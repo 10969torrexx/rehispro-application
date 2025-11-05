@@ -1,22 +1,24 @@
 import { useState } from "react";
 import { BirthCertServices } from "@services";
+import { BirthCertificate } from '@enums';
 import { toast } from "react-toastify";
 
 export default function BirthCertificateResults ({defaultData}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        registryNumber: '',
-        dateOfBirth: '',
-        placeOfBirth: '',
-        firstName: '',
-        middleName: '',
-        lastName: '',
-        mothersFirstName: '',
-        mothersMiddleName: '',
-        mothersLastName: '',
-        fathersFirstName: '',
-        fathersMiddleName: '',
-        fathersLastName: ''
+        registryNumber: defaultData.registry_number ?? '',
+        dateOfBirth: defaultData.birth_date ?? '',
+        placeOfBirth: defaultData.child_birth_place ?? '',
+        firstName: defaultData.child_first_name ?? '',
+        middleName: defaultData.child_middle_name ?? '',
+        lastName: defaultData.child_last_name ?? '',
+        sex: defaultData.sex ?? '',
+        mothersFirstName: defaultData.maiden_first_name ?? '',
+        mothersMiddleName: defaultData.maiden_middle_name ?? '',
+        mothersLastName: defaultData.maiden_last_name ?? '',
+        fathersFirstName: defaultData.father_first_name ?? '',
+        fathersMiddleName: defaultData.father_middle_name ?? '',
+        fathersLastName: defaultData.father_last_name ?? ''
     });
     const handleOnChange = (e) => { 
         const { name, value } = e.target;
@@ -81,6 +83,17 @@ export default function BirthCertificateResults ({defaultData}) {
                             value={formData.lastName}
                             onChange={handleOnChange}
                         />
+                    </div>
+                    <div className="flex-1">
+                        <label htmlFor="lastName" className="w-full px-4 text-xs">Sex</label>
+                        <select name="sex" className={`common-input w-full`}
+                            value={formData.sex}
+                            onChange={(e) => handleOnChange(e, `page${currentPage}`)}
+                        >
+                            <option value="">Select</option>
+                            <option value={BirthCertificate.SexTypes.MALE.toUpperCase()}>{BirthCertificate.SexTypes.MALE.toUpperCase()}</option>
+                            <option value={BirthCertificate.SexTypes.FEMALE.toUpperCase()}>{BirthCertificate.SexTypes.FEMALE.toUpperCase()}</option>
+                        </select>
                     </div>
                     <div className="flex-1">
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Mothers's First Name</label>
