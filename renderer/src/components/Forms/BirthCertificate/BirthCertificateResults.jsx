@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 export default function BirthCertificateResults ({defaultData, filePath}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
+        creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData.registry_number ?? '',
         dateOfBirth: defaultData.birth_date ?? '',
         placeOfBirth: defaultData.child_birth_place ?? '',
@@ -34,9 +35,31 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
         e.preventDefault();
         setLoading(true);
         try {
-            
+            const response = await BirthCertServices.createFile(formData);
+            console.log(response);
+            if (response.success) {
+                toast.success('Search completed successfully');
+                setRows(response.data);
+                setFormData({
+                    firstName: '',
+                    middleName: '',
+                    lastName: '',
+                    mothersFirstName: '',
+                    mothersMiddleName: '',
+                    mothersLastName: '',
+                    fathersFirstName: '',
+                    fathersMiddleName: '',
+                    fathersLastName: '',
+                    dateOfBirth: '',
+                    placeOfBirth: '',
+                    registryNumber: '',
+                });
+            } else {
+                toast.error(response.message || 'Failed creating file');
+            }
         } catch (error) {
-            toast.error('An error occurred while searching');
+            console.error(error)
+            toast.error('An error occurred');
         } finally {
             setLoading(false);
         }
@@ -149,13 +172,6 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
                 </form>
                 <div className="flex-1 flex-col flex p-2 bg-gray-200 rounded-md">
                     <div className="">
-                        {
-                            filePath.map((file, index) => {
-                                return(
-                                    <img src={file} className="w-full h-full" />
-                                )
-                            })
-                        }
                     </div>
                 </div>
             </div>

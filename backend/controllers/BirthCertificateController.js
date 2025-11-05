@@ -523,6 +523,72 @@ async function search(req, res) {
         });
     }
 }
+
+async function createFile(req, res) {
+    try {
+        const formData = req.body;
+        writeLog(`INFO [birth][createFile] ${JSON.stringify(formData)}`);
+        if (!formData) {
+            return res.status(400).json({ success: false, message: 'No Data' });
+        }
+        const fieldMap = {
+            creatorId : 'creator_id',
+            registryNumber: 'registry_number',
+            dateOfBirth: 'date_of_birth',
+            placeOfBirth:'child_birth_place',
+            firstName: 'child_first_name',
+            middleName: 'child_middle_name',
+            lastName: 'child_last_name',
+            sex: 'child_gender',
+            fathersFirstName: 'father_first_name',
+            fathersMiddleName: 'father_middle_name',
+            fathersLastName: 'father_last_name',
+            mothersFirstName: 'maiden_first_name',
+            mothersMiddleName: 'maiden_middle_name',
+            mothersLastName: 'maiden_last_name',
+            filePath: 'sample',
+            fileNames: 'sample'
+        }
+
+        const columns = [];
+        const values = [];
+        for (const key in formData) {
+            if (fieldMap[key]) {
+                columns.push(fieldMap[key]);
+                values.push(formData[key]);
+            }
+        }
+        const placeholders = columns.map(() => '?').join(', ');
+        const query = `
+            INSERT INTO birth_uploads (${columns.join(', ')})
+            VALUES (${placeholders})
+        `;
+        db.run(query, values, function (err) {
+            if (err) {
+                console.error('[DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database insert failed',
+                    error: err.message
+                });
+            }
+
+            res.status(201).json({
+                success: true,
+                message: 'File Stored',
+                id: this.lastID
+            });
+        });
+
+    } catch (error) {
+        writeLog('[BirthController Error]', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        });
+    }
+}
    
 module.exports = {
     create,
@@ -531,5 +597,6 @@ module.exports = {
     uploadAndScan,
     view,
     download,
-    search
+    search,
+    createFile
 };
