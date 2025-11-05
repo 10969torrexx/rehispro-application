@@ -128,7 +128,7 @@ export default function BirthCertificate() {
                         {
                             activeTab === 'results' &&
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
-                                <BirthCertificateResults />
+                                <BirthCertificateResults defaultData={ocrResults} />
                             </div>
                         }
                     </div>

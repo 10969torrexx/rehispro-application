@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BirthCertServices } from "@services";
 import { toast } from "react-toastify";
 
-export default function BirthCertificateResults ({setActiveTab, setSelectedRow}) {
+export default function BirthCertificateResults ({defaultData}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -19,7 +19,6 @@ export default function BirthCertificateResults ({setActiveTab, setSelectedRow})
             [name]: value
         }));
     }
-
 
     const handleOnSubmit = async(e) => {
         e.preventDefault();

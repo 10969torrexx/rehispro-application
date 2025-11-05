@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertValidation } from '@services';

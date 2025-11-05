@@ -56,9 +56,9 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
             const response = await BirthCertServices.uploadFiles(formData);
             setLoading(false);
             if (response.success) {
-                //TODO: handle changing the active tab to create; passing orc results to create active tab.
+                //TODO: handle changing the active tab to create; passing ocr results to create active tab.
                 toast.success("File Scanning Successful!");
-                toast.warning("Review every details for saving.");
+                toast.warning("Review every details before saving.");
                 setActiveTab('results');
                 onOCRComplete(response.result);
             } else {
