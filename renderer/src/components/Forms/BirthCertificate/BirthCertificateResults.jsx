@@ -35,6 +35,15 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
         const index = path.indexOf("/backend");
         return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
     });
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const nextImage = () => {
+        setCurrentIndex((prev) => (prev + 1) % trimmedPaths.length);
+    };
+    const prevImage = () => {
+        setCurrentIndex((prev) =>
+        prev === 0 ? trimmedPaths.length - 1 : prev - 1
+        );
+    };
 
     const handleOnSubmit = async(e) => {
         e.preventDefault();
@@ -175,15 +184,38 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
                     </div>
                     <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
                 </form>
-                <div className="flex-1 flex-col flex p-2 bg-gray-200 rounded-md">
-                    {trimmedPaths.map((path, index) => (
-                        <div
-                            key={index}
-                            className="w-64 h-80 bg-center bg-cover rounded-xl shadow-md border border-gray-300"
-                            style={{ backgroundImage: `url(${path})` }}
-                        >
+                <div className="flex-1 flex flex-col items-center p-2 relative overflow-hidden">
+                    <div className="flex-1 w-full">
+                        <div className="relative w-full h-full rounded-xl shadow-md border border-gray-300 overflow-hidden">
+                            {trimmedPaths.map((path, index) => (
+                                <div
+                                    key={index}
+                                    className={`absolute inset-0 bg-center bg-contain bg-no-repeat transition-opacity duration-500 ${
+                                        index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                                    }`}
+                                    style={{ backgroundImage: `url(${path})` }}
+                                ></div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
+                    <div className="flex-1 w-full max-h-[5%] mt-2">
+                        <div className="absolute bottom-4 flex justify-center gap-4 w-full">
+                            <button
+                                type='button'
+                                className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                                onClick={prevImage}
+                            >
+                                <i className="fa-solid fa-angles-left"></i>
+                            </button>
+                            <button
+                                type='button'
+                                className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                                onClick={nextImage}
+                            >
+                                <i className="fa-solid fa-angles-right"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
