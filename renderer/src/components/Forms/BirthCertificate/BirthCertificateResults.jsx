@@ -30,6 +30,11 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
             [name]: value
         }));
     }
+    
+    const trimmedPaths = filePath.map((path) => {
+        const index = path.indexOf("/backend");
+        return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
+    });
 
     const handleOnSubmit = async(e) => {
         e.preventDefault();
@@ -171,8 +176,14 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
                     <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
                 </form>
                 <div className="flex-1 flex-col flex p-2 bg-gray-200 rounded-md">
-                    <div className="">
-                    </div>
+                    {trimmedPaths.map((path, index) => (
+                        <div
+                            key={index}
+                            className="w-64 h-80 bg-center bg-cover rounded-xl shadow-md border border-gray-300"
+                            style={{ backgroundImage: `url(${path})` }}
+                        >
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
