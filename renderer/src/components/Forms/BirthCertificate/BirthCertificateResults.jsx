@@ -3,16 +3,21 @@ import { BirthCertServices } from "@services";
 import { BirthCertificate } from '@enums';
 import { toast } from "react-toastify";
 
-export default function BirthCertificateResults ({defaultData, filePath}) {
+export default function BirthCertificateResults ({defaultData, filePath, activeTab}) {
     const [loading, setLoading] = useState(false);
+    const trimmedPaths = filePath.map((path) => {
+        const index = path.indexOf("/backend");
+        return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
+    });
+
     const [formData, setFormData] = useState({
         creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData.registry_number ?? '',
         dateOfBirth: defaultData.birth_date ?? '',
         placeOfBirth: defaultData.child_birth_place ?? '',
-        firstName: defaultData.child_first_name ?? '',
-        middleName: defaultData.child_middle_name ?? '',
-        lastName: defaultData.child_last_name ?? '',
+        childFirstName: defaultData.child_first_name ?? '',
+        childMiddleName: defaultData.child_middle_name ?? '',
+        childLastName: defaultData.child_last_name ?? '',
         sex: defaultData.sex ?? '',
         mothersFirstName: defaultData.maiden_first_name ?? '',
         mothersMiddleName: defaultData.maiden_middle_name ?? '',
@@ -20,7 +25,7 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
         fathersFirstName: defaultData.father_first_name ?? '',
         fathersMiddleName: defaultData.father_middle_name ?? '',
         fathersLastName: defaultData.father_last_name ?? '',
-        filePath: filePath ?? 'sample',
+        filePath: trimmedPaths ?? 'sample',
         fileNames: 'sample'
     });
     const handleOnChange = (e) => { 
@@ -31,10 +36,7 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
         }));
     }
     
-    const trimmedPaths = filePath.map((path) => {
-        const index = path.indexOf("/backend");
-        return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
-    });
+   
     const [currentIndex, setCurrentIndex] = useState(0);
     const nextImage = () => {
         setCurrentIndex((prev) => (prev + 1) % trimmedPaths.length);
@@ -49,7 +51,7 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await BirthCertServices.createFile(formData);
+            const response = await BirthCertServices.insertBirthCertificate(formData);
             console.log(response);
             if (response.success) {
                 toast.success('Search completed successfully');
@@ -82,7 +84,7 @@ export default function BirthCertificateResults ({defaultData, filePath}) {
     return (
         <div className="flex flex-col w-full">
             <div className="flex flex-row gap-4 mb-8">
-                <form action="" method="post" className="flex-1 h-full flex flex-col" onSubmit={handleOnSubmit}>
+                <form action="" method="post" className="flex-1 h-full flex flex-col" onSubmit={handleOnSubmit} encType="multipart/form-data">
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Registry Number</label>
                         <input type="text" className="common-input w-full" placeholder="Registry Number"

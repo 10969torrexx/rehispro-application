@@ -1,44 +1,27 @@
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
 
-exports.create = (params) => {
-    return new Promise((resolve, reject) => {
-        try {
-            const {
-                creator_id,
-                filename,
-                filepath,
-                filetype,
-                filesize,
-                document_type,
-            } = params;
+async function storeFile(data) {
+  const query = `
+    INSERT INTO uploaded_files (creator_id, file_name, file_path)
+    VALUES (?, ?, ?)
+  `;
 
-            const query = `
-                INSERT INTO files (
-                creator_id,
-                filename,
-                filepath,
-                filetype,
-                filesize,
-                document_type
-                ) VALUES (?, ?, ?, ?, ?, ?)
-            `;
+  try {
+    const jsonPaths = JSON.stringify(data.file_paths);
 
-            db.run(
-                query,
-                [creator_id, filename, filepath, filetype, filesize, document_type],
-                function (err) {
-                    if (err) {
-                        console.error('Error inserting file:', err);
-                        reject(err);
-                    } else {
-                        resolve({ id: this.lastID });
-                    }
-                }
-            );
-        } catch (error) {
-            console.error('Unexpected error:', error);
-            reject(error);
-        }
-    });
-};
+    // ✅ Await this line
+    const result = await db.run(query, [
+      data.creator_id,
+      data.file_name,
+      jsonPaths
+    ]);
+
+    console.log('✅ Uploaded file record inserted with ID:', result.lastID);
+    return result.lastID;
+  } catch (err) {
+    console.error('❌ Error inserting uploaded file record:', err);
+    throw err;
+  }
+}
+module.exports = { storeFile };

@@ -4,8 +4,8 @@ const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
 const generate = require('../helpers/birthGeneratePDF');
 const puppeteer = require('puppeteer');
-
-function create (req, res) {
+const { storeFile } = require('./FilesController');
+async function create (req, res) {
     try {
         const formData = req.body;
         if (!formData) {
@@ -14,6 +14,25 @@ function create (req, res) {
 
         const flatData = formData;
         writeLog(`[info] [BirthCertificateController][create] Received data: ${JSON.stringify(flatData)}`);
+
+        //TODO: create file process
+        if (flatData.filePath && Array.isArray(flatData.filePath) && flatData.filePath.length > 0) {
+        const fileData = {
+            creator_id: Number(flatData.creatorId),
+            file_name: `birth_certificate_${Date.now()}.pdf`,
+            file_paths: flatData.filePath
+        };
+
+        try {
+            const fileId = await storeFile(fileData);
+            writeLog(`[info] [BirthCertificateController][create] Stored file with ID: ${fileId}`);
+        } catch (err) {
+            writeLog(`[error] [BirthCertificateController][create] Failed to store file: ${err.message}`);
+        }
+        } else {
+        writeLog(`[info] [BirthCertificateController][create] No file paths provided, skipping file storage.`);
+        }
+
 
         //TODO: process the attendant value
         const attendantMap = {
@@ -181,8 +200,7 @@ function create (req, res) {
             parentsStatus: "parents_status",
             marriageDate: "marriage_date",
             marriagePlace: "marriage_place",
-            fatherName: "affidavit_father_name",   // ✅ special mapping
-
+            fatherName: "affidavit_father_name",
             reasonDelay: "reason_delay",
             spouseApplicant: "spouse_applicant",
             spouseOwner: "spouse_owner",
@@ -199,7 +217,8 @@ function create (req, res) {
             adminOfficerAddress: "admin_officer_address",
           
             // Page 14 - Confirmation
-            confirmation: "confirmation"
+            confirmation: "confirmation",
+            fileId: "file_id",
         };
           
 
