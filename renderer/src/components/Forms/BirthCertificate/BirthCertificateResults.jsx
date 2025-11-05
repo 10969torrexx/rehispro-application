@@ -54,8 +54,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
             const response = await BirthCertServices.insertBirthCertificate(formData);
             console.log(response);
             if (response.success) {
-                toast.success('Search completed successfully');
-                setRows(response.data);
+                toast.success(`${response.message || 'Birth Certificate created successfully!'}`);
                 setFormData({
                     firstName: '',
                     middleName: '',

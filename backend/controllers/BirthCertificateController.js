@@ -36,8 +36,6 @@ async function create (req, res) {
             writeLog(`[info] [BirthCertificateController][create] No file paths provided, skipping file storage.`);
         }
 
-
-
         //TODO: process the attendant value
         const attendantMap = {
             attendantPhysician: "Physician",
