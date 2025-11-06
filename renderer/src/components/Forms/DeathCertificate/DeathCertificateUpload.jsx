@@ -7,7 +7,7 @@ import { Limits } from '@enums';
 import { toast } from "react-toastify";
 import { DeathCertServices } from '@services';
 
-export default function DeathCertificateUpload({setActiveTab, onOCRComplete}) { 
+export default function DeathCertificateUpload({setActiveTab, onOCRComplete, uploadedFiles}) { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -58,8 +58,9 @@ export default function DeathCertificateUpload({setActiveTab, onOCRComplete}) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
                 toast.success("File Scanning Successful!");
                 toast.warning("Review every details for saving.");
-                setActiveTab('create');
+                setActiveTab('results');
                 onOCRComplete(response.result);
+                uploadedFiles(response.filePaths);
             } else {
                 toast.error("Failed: No OCR Response");
             }

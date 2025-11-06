@@ -345,7 +345,8 @@ exports.uploadAndScan = async(req, res) => {
     res.status(200).json({
       success: response.success,
       message: response.message,
-      result: response.result
+      result: response.result,
+      filePaths: filePaths
     });
 
   } catch (error) {

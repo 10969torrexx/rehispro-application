@@ -10,7 +10,6 @@ export default function BirthCertificate() {
     const [userData, setUserData] = useState(null);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
-
     const [activeTab, setActiveTab] = useState('home'); //TODO: handle the active tab
     const [ocrResults, setOCRResults] = useState(null);
     const [uploadedFiles, setUploadedFiles] = useState(null);

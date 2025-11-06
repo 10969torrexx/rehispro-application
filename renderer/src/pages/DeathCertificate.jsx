@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { useSearchParams } from "react-router-dom";
 import { InfoCard, DeathCertificateCreate, DeathCertificateHome, DeathCertificateView, DeathCertificateUpload,
-    DeathCertificateSearch
+    DeathCertificateSearch, DeathCertificateResults
  } from '@components';
 
 export default function DeathCertificate() {
@@ -12,6 +12,7 @@ export default function DeathCertificate() {
     const [selectedRow, setSelectedRow] = useState(null);
     const [activeTab, setActiveTab] = useState("home"); //TODO: handle the active tab
     const [ocrResults, setOCRResults] = useState(null);
+    const [uploadedFiles, setUploadedFiles] = useState(null);
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
@@ -79,9 +80,7 @@ export default function DeathCertificate() {
                                     />  
                                 </div>
                                 <div>
-                                    <DeathCertificateUpload setActiveTab={setActiveTab} onOCRComplete={(data) => {
-                                        setOCRResults(data);
-                                    }} />
+                                    <DeathCertificateUpload setActiveTab={setActiveTab} onOCRComplete={setOCRResults} uploadedFiles={setUploadedFiles} />
                                 </div>
                             </div>
                         }
@@ -114,6 +113,20 @@ export default function DeathCertificate() {
                         {activeTab === "search" && 
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <DeathCertificateSearch setActiveTab={setActiveTab} setSelectedRow={setSelectedRow} />
+                            </div>
+                        }
+                        {
+                            activeTab === 'results' &&
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="Warning before creating Death Certitificate"
+                                        message={`Please double check each values before confirming. You may go back to the upload tab to re-upload another document if the values are incorrect.`}
+                                    />
+                                </div>
+                                <div>
+                                    <DeathCertificateResults defaultData={ocrResults} activeTab={setActiveTab} filePath={uploadedFiles} />
+                                </div>
                             </div>
                         }
                     </div>
