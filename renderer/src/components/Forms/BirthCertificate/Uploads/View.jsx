@@ -4,7 +4,7 @@ import { BirthCertificate } from '@enums';
 import { Spinner } from '@components';
 import { toast } from "react-toastify";
 
-export default function BirthCertificateResults ({defaultData, filePath, activeTab, isView = false}) {
+export default function View ({defaultData, filePath, activeTab, isView = false}) {
     const [loading, setLoading] = useState(true);
     const [documentFiles, setDocumentFiles] = useState([]);
     const [formData, setFormData] = useState({

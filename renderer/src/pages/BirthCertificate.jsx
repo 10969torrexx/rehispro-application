@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { InfoCard, BirthCertificateCreate, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload,
-    BirthCertificateSearch, BirthCertificateResults
+    BirthCertificateSearch, BirthUploadsCreate, BirthUploadsView
  } from '@components';
 import { useSearchParams } from 'react-router-dom'; 
 
@@ -68,7 +68,7 @@ export default function BirthCertificate() {
                                             if (row?.creation_type == 'manual') {
                                                 setActiveTab("view"); 
                                             } else {
-                                                setActiveTab("results"); 
+                                                setActiveTab("uploadResults"); 
                                                 setIsView(true);
                                             }
                                         }} 
@@ -121,7 +121,7 @@ export default function BirthCertificate() {
                             </div>
                         }
                         {
-                            activeTab === 'results' &&
+                            activeTab === 'uploadResults' &&
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <div className="mb-4">
                                     <InfoCard
@@ -130,7 +130,7 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div>
-                                    <BirthCertificateResults 
+                                    <BirthUploadsCreate 
                                         defaultData={ocrResults ? ocrResults : selectedRow} 
                                         activeTab={setActiveTab} 
                                         filePath={uploadedFiles} 
