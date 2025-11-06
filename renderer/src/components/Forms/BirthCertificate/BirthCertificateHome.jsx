@@ -87,10 +87,10 @@ export default function BirthCertificateHome({ onView }) {
                 <option value="view">View</option>
                 <option value="download">Download</option>
               </select>
-            );
-          },
+          );
         },
-    ];
+      },
+  ];
 
   const filteredRows = listOfBirth.filter((row) => {
     const query = searchQuery.toLowerCase();
