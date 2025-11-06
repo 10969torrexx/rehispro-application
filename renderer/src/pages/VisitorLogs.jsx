@@ -16,7 +16,7 @@ export default function VisitorLogs() {
     const [filteredRows, setFilteredRows] = useState([]);
 
     const columns = [
-        { field: "index", headerName: "ID", width: 50 },
+        { field: "index", headerName: "#", width: 50 },
         { field: "name", headerName: "Name", width: 150 },
         { field: "officer", headerName: "Officer", width: 150 },
         { field: "contact_number", headerName: "Contact Number", width: 150 },

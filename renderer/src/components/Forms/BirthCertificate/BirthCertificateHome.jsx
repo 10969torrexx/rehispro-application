@@ -37,18 +37,18 @@ export default function BirthCertificateHome({ onView }) {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 50 },
+    { field: "id", headerName: "#", width: 50 },
     {
       field: "child_name",
       headerName: "Child Name",
-      width: 150,
+      width: 300,
     },
     { field: "sex", headerName: "Sex", width: 100 },
     { field: "created_at", headerName: "Created At", width: 150 },
     {
       field: "residence",
       headerName: "Residence",
-      width: 150,
+      width: 300,
     },
     {
       field: "action",

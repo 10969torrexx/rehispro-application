@@ -9,7 +9,6 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
         const index = path.indexOf("/backend");
         return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
     });
-
     const [formData, setFormData] = useState({
         creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData.registry_number ?? '',
@@ -36,7 +35,6 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
         }));
     }
     
-   
     const [currentIndex, setCurrentIndex] = useState(0);
     const nextImage = () => {
         setCurrentIndex((prev) => (prev + 1) % trimmedPaths.length);
@@ -52,13 +50,13 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
         setLoading(true);
         try {
             const response = await BirthCertServices.insertBirthCertificate(formData);
-            console.log(response);
             if (response.success) {
                 toast.success(`${response.message || 'Birth Certificate created successfully!'}`);
                 setFormData({
-                    firstName: '',
-                    middleName: '',
-                    lastName: '',
+                    childFirstName: '',
+                    childMiddleName: '',
+                    childLastName: '',
+                    sex: '',
                     mothersFirstName: '',
                     mothersMiddleName: '',
                     mothersLastName: '',
@@ -69,6 +67,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                     placeOfBirth: '',
                     registryNumber: '',
                 });
+                activeTab('upload')
             } else {
                 toast.error(response.message || 'Failed creating file');
             }
@@ -112,7 +111,15 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Child's First Name</label>
                         <input type="text" className="common-input w-full" placeholder="First Name"
                             name="firstName"
-                            value={formData.firstName}
+                            value={formData.childFirstName}
+                            onChange={handleOnChange}
+                        />
+                    </div>
+                     <div className="flex-1">
+                        <label htmlFor="firstName" className="w-full px-4 text-xs">Child's Middle Name</label>
+                        <input type="text" className="common-input w-full" placeholder="First Name"
+                            name="firstName"
+                            value={formData.childMiddleName}
                             onChange={handleOnChange}
                         />
                     </div>
@@ -120,7 +127,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Child's Last Name</label>
                         <input type="text" className="common-input w-full" placeholder="Last Name"
                             name="lastName"
-                            value={formData.lastName}
+                            value={formData.childLastName}
                             onChange={handleOnChange}
                         />
                     </div>
@@ -128,7 +135,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Sex</label>
                         <select name="sex" className={`common-input w-full`}
                             value={formData.sex}
-                            onChange={(e) => handleOnChange(e, `page${currentPage}`)}
+                            onChange={handleOnChange}
                         >
                             <option value="">Select</option>
                             <option value={BirthCertificate.SexTypes.MALE.toUpperCase()}>{BirthCertificate.SexTypes.MALE.toUpperCase()}</option>
