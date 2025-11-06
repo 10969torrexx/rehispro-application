@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BirthCertServices } from "@services";
 import { BirthCertificate } from '@enums';
+import { Spinner } from '@components';
 import { toast } from "react-toastify";
 
 export default function BirthCertificateResults ({defaultData, filePath, activeTab}) {
-    const [loading, setLoading] = useState(false);
-    const trimmedPaths = filePath.map((path) => {
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        console.log('defaultData', defaultData);
+        console.log('filePath', filePath);
+        setLoading(false);
+    }, [defaultData, filePath]);
+
+    const trimmedPaths =
+        filePath && filePath.length > 0
+        ? filePath.map((path) => {
         const index = path.indexOf("/backend");
-        return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
-    });
+        return index !== -1
+          ? "http://localhost:3001" + path.slice(index)
+          : path;
+      })
+    : null;
+
     const [formData, setFormData] = useState({
         creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData.registry_number ?? '',
@@ -81,151 +94,159 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
 
     return (
         <div className="flex flex-col w-full">
-            <div className="flex flex-row gap-4 mb-8">
-                <form action="" method="post" className="flex-1 h-full flex flex-col" onSubmit={handleOnSubmit} encType="multipart/form-data">
-                    <div className="flex-1">
-                        <label htmlFor="registryNumber" className="w-full px-4 text-xs">Registry Number</label>
-                        <input type="text" className="common-input w-full" placeholder="Registry Number"
-                            name="registryNumber"
-                            value={formData.registryNumber}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="registryNumber" className="w-full px-4 text-xs">Date of Birth</label>
-                        <input type="date" className="common-input w-full" placeholder="Date of Birth"
-                            name="dateOfBirth"
-                            value={formData.dateOfBirth}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth</label>
-                        <input type="text" className="common-input w-full" placeholder="Place of Birth"
-                            name="placeOfBirth"
-                            value={formData.placeOfBirth}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="firstName" className="w-full px-4 text-xs">Child's First Name</label>
-                        <input type="text" className="common-input w-full" placeholder="First Name"
-                            name="firstName"
-                            value={formData.childFirstName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                     <div className="flex-1">
-                        <label htmlFor="firstName" className="w-full px-4 text-xs">Child's Middle Name</label>
-                        <input type="text" className="common-input w-full" placeholder="First Name"
-                            name="firstName"
-                            value={formData.childMiddleName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="lastName" className="w-full px-4 text-xs">Child's Last Name</label>
-                        <input type="text" className="common-input w-full" placeholder="Last Name"
-                            name="lastName"
-                            value={formData.childLastName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="lastName" className="w-full px-4 text-xs">Sex</label>
-                        <select name="sex" className={`common-input w-full`}
-                            value={formData.sex}
-                            onChange={handleOnChange}
-                        >
-                            <option value="">Select</option>
-                            <option value={BirthCertificate.SexTypes.MALE.toUpperCase()}>{BirthCertificate.SexTypes.MALE.toUpperCase()}</option>
-                            <option value={BirthCertificate.SexTypes.FEMALE.toUpperCase()}>{BirthCertificate.SexTypes.FEMALE.toUpperCase()}</option>
-                        </select>
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="firstName" className="w-full px-4 text-xs">Mothers's First Name</label>
-                        <input type="text" className="common-input w-full" placeholder="First Name"
-                            name="firstName"
-                            value={formData.mothersFirstName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="middleName" className="w-full px-4 text-xs">Mother's Middle Name (Maiden)</label>
-                        <input type="text" className="common-input w-full" placeholder="Middle Name"
-                            name="middleName"
-                            value={formData.mothersMiddleName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="lastName" className="w-full px-4 text-xs">Mother's Last Name</label>
-                        <input type="text" className="common-input w-full" placeholder="Last Name"
-                            name="lastName"
-                            value={formData.mothersLastName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="firstName" className="w-full px-4 text-xs">Father's First Name</label>
-                        <input type="text" className="common-input w-full" placeholder="First Name"
-                            name="firstName"
-                            value={formData.fathersFirstName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="middleName" className="w-full px-4 text-xs">Father's Middle Name</label>
-                        <input type="text" className="common-input w-full" placeholder="Middle Name"
-                            name="middleName"
-                            value={formData.fathersMiddleName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <label htmlFor="lastName" className="w-full px-4 text-xs">Father's Last Name</label>
-                        <input type="text" className="common-input w-full" placeholder="Last Name"
-                            name="lastName"
-                            value={formData.fathersLastName}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
-                </form>
-                <div className="flex-1 flex flex-col items-center p-2 relative overflow-hidden">
-                    <div className="flex-1 w-full">
-                        <div className="relative w-full h-full rounded-xl shadow-md border border-gray-300 overflow-hidden">
-                            {trimmedPaths.map((path, index) => (
-                                <div
-                                    key={index}
-                                    className={`absolute inset-0 bg-center bg-contain bg-no-repeat transition-opacity duration-500 ${
-                                        index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-                                    }`}
-                                    style={{ backgroundImage: `url(${path})` }}
-                                ></div>
-                            ))}
+            {
+                loading ? (<>
+                    <Spinner />
+                </>) : (<>
+                    <div className="flex flex-row gap-4 mb-8">
+                        <form action="" method="post" className="flex-1 h-full flex flex-col" onSubmit={handleOnSubmit} encType="multipart/form-data">
+                            <div className="flex-1">
+                                <label htmlFor="registryNumber" className="w-full px-4 text-xs">Registry Number</label>
+                                <input type="text" className="common-input w-full" placeholder="Registry Number"
+                                    name="registryNumber"
+                                    value={formData.registryNumber}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="registryNumber" className="w-full px-4 text-xs">Date of Birth</label>
+                                <input type="date" className="common-input w-full" placeholder="Date of Birth"
+                                    name="dateOfBirth"
+                                    value={formData.dateOfBirth}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth</label>
+                                <input type="text" className="common-input w-full" placeholder="Place of Birth"
+                                    name="placeOfBirth"
+                                    value={formData.placeOfBirth}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="firstName" className="w-full px-4 text-xs">Child's First Name</label>
+                                <input type="text" className="common-input w-full" placeholder="First Name"
+                                    name="firstName"
+                                    value={formData.childFirstName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="firstName" className="w-full px-4 text-xs">Child's Middle Name</label>
+                                <input type="text" className="common-input w-full" placeholder="First Name"
+                                    name="firstName"
+                                    value={formData.childMiddleName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="lastName" className="w-full px-4 text-xs">Child's Last Name</label>
+                                <input type="text" className="common-input w-full" placeholder="Last Name"
+                                    name="lastName"
+                                    value={formData.childLastName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="lastName" className="w-full px-4 text-xs">Sex</label>
+                                <select name="sex" className={`common-input w-full`}
+                                    value={formData.sex}
+                                    onChange={handleOnChange}
+                                >
+                                    <option value="">Select</option>
+                                    <option value={BirthCertificate.SexTypes.MALE.toUpperCase()}>{BirthCertificate.SexTypes.MALE.toUpperCase()}</option>
+                                    <option value={BirthCertificate.SexTypes.FEMALE.toUpperCase()}>{BirthCertificate.SexTypes.FEMALE.toUpperCase()}</option>
+                                </select>
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="firstName" className="w-full px-4 text-xs">Mothers's First Name</label>
+                                <input type="text" className="common-input w-full" placeholder="First Name"
+                                    name="firstName"
+                                    value={formData.mothersFirstName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="middleName" className="w-full px-4 text-xs">Mother's Middle Name (Maiden)</label>
+                                <input type="text" className="common-input w-full" placeholder="Middle Name"
+                                    name="middleName"
+                                    value={formData.mothersMiddleName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="lastName" className="w-full px-4 text-xs">Mother's Last Name</label>
+                                <input type="text" className="common-input w-full" placeholder="Last Name"
+                                    name="lastName"
+                                    value={formData.mothersLastName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="firstName" className="w-full px-4 text-xs">Father's First Name</label>
+                                <input type="text" className="common-input w-full" placeholder="First Name"
+                                    name="firstName"
+                                    value={formData.fathersFirstName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="middleName" className="w-full px-4 text-xs">Father's Middle Name</label>
+                                <input type="text" className="common-input w-full" placeholder="Middle Name"
+                                    name="middleName"
+                                    value={formData.fathersMiddleName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label htmlFor="lastName" className="w-full px-4 text-xs">Father's Last Name</label>
+                                <input type="text" className="common-input w-full" placeholder="Last Name"
+                                    name="lastName"
+                                    value={formData.fathersLastName}
+                                    onChange={handleOnChange}
+                                />
+                            </div>
+                            <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
+                        </form>
+                        <div className="flex-1 flex flex-col items-center p-2 relative overflow-hidden">
+                            <div className="flex-1 w-full">
+                                <div className="relative w-full h-full rounded-xl shadow-md border border-gray-300 overflow-hidden">
+                                    {trimmedPaths &&
+                                        trimmedPaths.map((path, index) => (
+                                        <div
+                                            key={index}
+                                            className={`absolute inset-0 bg-center bg-contain bg-no-repeat transition-opacity duration-500 ${
+                                            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                                        }`}
+                                            style={{ backgroundImage: `url(${path})` }}
+                                        ></div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="flex-1 w-full max-h-[5%] mt-2">
+                                <div className="absolute bottom-4 flex justify-center gap-4 w-full">
+                                    <button
+                                        type='button'
+                                        className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                                        onClick={prevImage}
+                                    >
+                                        <i className="fa-solid fa-angles-left"></i>
+                                    </button>
+                                    <button
+                                        type='button'
+                                        className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                                        onClick={nextImage}
+                                    >
+                                        <i className="fa-solid fa-angles-right"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex-1 w-full max-h-[5%] mt-2">
-                        <div className="absolute bottom-4 flex justify-center gap-4 w-full">
-                            <button
-                                type='button'
-                                className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
-                                onClick={prevImage}
-                            >
-                                <i className="fa-solid fa-angles-left"></i>
-                            </button>
-                            <button
-                                type='button'
-                                className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
-                                onClick={nextImage}
-                            >
-                                <i className="fa-solid fa-angles-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </>)
+            }
+            
         </div>
     )
 }

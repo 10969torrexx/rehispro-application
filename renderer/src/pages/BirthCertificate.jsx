@@ -128,7 +128,7 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div>
-                                    <BirthCertificateResults defaultData={ocrResults} activeTab={setActiveTab} filePath={uploadedFiles} />
+                                    <BirthCertificateResults defaultData={ocrResults ? ocrResults : selectedRow} activeTab={setActiveTab} filePath={uploadedFiles} />
                                 </div>
                             </div>
                         }
