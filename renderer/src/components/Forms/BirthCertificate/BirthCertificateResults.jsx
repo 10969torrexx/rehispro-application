@@ -7,17 +7,54 @@ import { toast } from "react-toastify";
 export default function BirthCertificateResults ({defaultData, filePath, activeTab}) {
     const [loading, setLoading] = useState(true);
     const [documentFiles, setDocumentFiles] = useState([]);
+    const [formData, setFormData] = useState({
+        creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
+        registryNumber: defaultData.registry_number ?? '',
+        dateOfBirth: defaultData.birth_date ?? '',
+        placeOfBirth: defaultData.child_birth_place ?? '',
+        childFirstName: defaultData.child_first_name ?? '',
+        childMiddleName: defaultData.child_middle_name ??  '',
+        childLastName: defaultData.child_last_name ??  '',
+        sex: defaultData.sex ?? '',
+        mothersFirstName: defaultData.maiden_first_name ??  '',
+        mothersMiddleName: defaultData.maiden_middle_name ??  '',
+        mothersLastName: defaultData.maiden_last_name ??  '',
+        fathersFirstName: defaultData.father_first_name ??  '',
+        fathersMiddleName: defaultData.father_middle_name ??  '',
+        fathersLastName: defaultData.father_last_name ??  '',
+        filePath:  '',
+        fileNames: 'sample'
+    });
     useEffect(() => {
         const dataId = defaultData ? defaultData.id : null;
         if (!dataId) {
+            setLoading(false);
             return;
         }
         const fetchData = async () => {
             try {
                 setLoading(true);
                 const response = await BirthCertServices.viewBirthCertificate(dataId);
+                const viewData = response.data;
                 if (response && response.success && response.data) {
                     setDocumentFiles(JSON.parse(response.data.uploaded_file.file_path));
+                    setFormData((prev) => ({
+                        ...prev,
+                        registryNumber: viewData?.registry_number || '',
+                        dateOfBirth: viewData?.birth_date || '',
+                        placeOfBirth: viewData?.child_birth_place || '',
+                        childFirstName: viewData?.child_first_name || '',
+                        childMiddleName: viewData?.child_middle_name || '',
+                        childLastName: viewData?.child_last_name || '',
+                        sex: viewData?.sex || '',
+                        mothersFirstName: viewData?.maiden_first_name || '',
+                        mothersMiddleName: viewData?.maiden_middle_name || '',
+                        mothersLastName: viewData?.maiden_last_name || '',
+                        fathersFirstName: viewData?.father_first_name || '',
+                        fathersMiddleName: viewData?.father_middle_name || '',
+                        fathersLastName: viewData?.father_last_name || '',
+                        filePath: trimmedPaths || '',
+                    }));
                 } else {
                     toast.error(response?.message || "Failed to load birth certificates");
                 }
@@ -41,24 +78,6 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
       })
     : documentFiles;
 
-    const [formData, setFormData] = useState({
-        creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
-        registryNumber: defaultData.registry_number ?? '',
-        dateOfBirth: defaultData.birth_date ?? '',
-        placeOfBirth: defaultData.child_birth_place ?? '',
-        childFirstName: defaultData.child_first_name ?? '',
-        childMiddleName: defaultData.child_middle_name ?? '',
-        childLastName: defaultData.child_last_name ?? '',
-        sex: defaultData.sex ?? '',
-        mothersFirstName: defaultData.maiden_first_name ?? '',
-        mothersMiddleName: defaultData.maiden_middle_name ?? '',
-        mothersLastName: defaultData.maiden_last_name ?? '',
-        fathersFirstName: defaultData.father_first_name ?? '',
-        fathersMiddleName: defaultData.father_middle_name ?? '',
-        fathersLastName: defaultData.father_last_name ?? '',
-        filePath: trimmedPaths ?? '',
-        fileNames: 'sample'
-    });
     const handleOnChange = (e) => { 
         const { name, value } = e.target;
         setFormData((prevData) => ({
