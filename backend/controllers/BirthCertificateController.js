@@ -4,7 +4,7 @@ const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
 const generate = require('../helpers/birthGeneratePDF');
 const puppeteer = require('puppeteer');
-const { storeFile } = require('./FilesController');
+const { storeFile,  getFileById} = require('./FilesController');
 
 async function create (req, res) {
     try {
@@ -339,29 +339,47 @@ async function uploadAndScan(req, res) {
     }
 }
 
-function view(req, res) {
-    db.get(
-        `SELECT * FROM birthcertificates WHERE id = ?`,
-        [req.params.id],
-        (err, row) => {
-            if (err) {
-                console.error('❌ [DB Error]', err.message);
-                return res.status(500).json({
-                    success: false,
-                    message: 'Database fetch failed',
-                    error: err.message,
-                });
-            }
-        
-            const birth_certificate = row;
-        
-            res.status(200).json({
-                success: true,
-                message: 'Birth Certificate Found',
-                data: birth_certificate,
+async function view(req, res) {
+    try {
+        const birth_certificate = await new Promise((resolve, reject) => {
+            db.get(
+                `SELECT * FROM birthcertificates WHERE id = ?`,
+                [req.params.id],
+                (err, row) => {
+                if (err) return reject(err);
+                resolve(row || null);
+                }
+            );
+        });
+
+        if (!birth_certificate) {
+            return res.status(404).json({
+                success: false,
+                message: 'Birth Certificate not found',
             });
         }
-    );
+
+        let uploadedFile = null;
+        if (birth_certificate.file_id) {
+            uploadedFile = await getFileById(birth_certificate.file_id);
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Birth Certificate Found',
+            data: {
+                ...birth_certificate,
+                uploaded_file: uploadedFile,
+            },
+        });
+    } catch (err) {
+        console.error('❌ [DB Error]', err.message);
+        res.status(500).json({
+            success: false,
+            message: 'Database fetch failed',
+            error: err.message,
+        });
+    }
 }
 
 async function download(req, res) {

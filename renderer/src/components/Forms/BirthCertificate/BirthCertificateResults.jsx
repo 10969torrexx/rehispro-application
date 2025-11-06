@@ -7,8 +7,26 @@ import { toast } from "react-toastify";
 export default function BirthCertificateResults ({defaultData, filePath, activeTab}) {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        console.log('defaultData', defaultData);
-        console.log('filePath', filePath);
+        const dataId = defaultData ? defaultData.id : null;
+        if (!dataId) {
+            return;
+        }
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                const response = await BirthCertServices.viewBirthCertificate(dataId);
+                console.log('response', response);
+                if (response && response.success && response.data) {
+                } else {
+                    toast.error(response?.message || "Failed to load birth certificates");
+                }
+            } catch (error) {
+                toast.error(error.message || "Failed to fetch birth certificates");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
         setLoading(false);
     }, [defaultData, filePath]);
 

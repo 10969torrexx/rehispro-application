@@ -19,4 +19,26 @@ async function storeFile(data) {
         });
     });
 }
-module.exports = { storeFile };
+
+async function getFileById(id) {
+  const query = `SELECT * FROM uploaded_files WHERE id = ?`;
+
+  return new Promise((resolve, reject) => {
+    db.get(query, [id], (err, row) => {
+      if (err) {
+        writeLog('INFO ❌ Error fetching uploaded file record:', err);
+        return reject(err);
+      }
+
+      if (!row) {
+        writeLog(`INFO ⚠️ No record found for ID: ${id}`);
+        return resolve(null);
+      }
+
+      writeLog(`INFO ✅ Retrieved uploaded file record for ID: ${id}`);
+      resolve(row);
+    });
+  });
+}
+
+module.exports = { storeFile, getFileById };    
