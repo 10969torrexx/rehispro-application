@@ -13,6 +13,7 @@ export default function BirthCertificate() {
     const [activeTab, setActiveTab] = useState('home'); //TODO: handle the active tab
     const [ocrResults, setOCRResults] = useState(null);
     const [uploadedFiles, setUploadedFiles] = useState(null);
+    const [isView, setIsView] = useState(false);
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
@@ -68,6 +69,7 @@ export default function BirthCertificate() {
                                                 setActiveTab("view"); 
                                             } else {
                                                 setActiveTab("results"); 
+                                                setIsView(true);
                                             }
                                         }} 
                                     />
@@ -128,7 +130,12 @@ export default function BirthCertificate() {
                                     />
                                 </div>
                                 <div>
-                                    <BirthCertificateResults defaultData={ocrResults ? ocrResults : selectedRow} activeTab={setActiveTab} filePath={uploadedFiles} />
+                                    <BirthCertificateResults 
+                                        defaultData={ocrResults ? ocrResults : selectedRow} 
+                                        activeTab={setActiveTab} 
+                                        filePath={uploadedFiles} 
+                                        isView={isView}
+                                    />
                                 </div>
                             </div>
                         }

@@ -4,7 +4,7 @@ import { BirthCertificate } from '@enums';
 import { Spinner } from '@components';
 import { toast } from "react-toastify";
 
-export default function BirthCertificateResults ({defaultData, filePath, activeTab}) {
+export default function BirthCertificateResults ({defaultData, filePath, activeTab, isView = false}) {
     const [loading, setLoading] = useState(true);
     const [documentFiles, setDocumentFiles] = useState([]);
     const [formData, setFormData] = useState({
@@ -36,6 +36,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                 setLoading(true);
                 const response = await BirthCertServices.viewBirthCertificate(dataId);
                 const viewData = response.data;
+                console.table(viewData);
                 if (response && response.success && response.data) {
                     setDocumentFiles(JSON.parse(response.data.uploaded_file.file_path));
                     setFormData((prev) => ({
@@ -68,6 +69,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
         setLoading(false);
     }, [defaultData, filePath]);
 
+    //TODO: this will manipulate the image files
     const trimmedPaths =
         filePath && filePath.length > 0
         ? filePath.map((path) => {
@@ -85,7 +87,8 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
             [name]: value
         }));
     }
-    
+
+    //TODO: handle showing the images
     const [currentIndex, setCurrentIndex] = useState(0);
     const nextImage = () => {
         setCurrentIndex((prev) => (prev + 1) % trimmedPaths.length);
@@ -144,6 +147,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="registryNumber"
                                     value={formData.registryNumber}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -152,6 +156,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="dateOfBirth"
                                     value={formData.dateOfBirth}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -160,6 +165,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="placeOfBirth"
                                     value={formData.placeOfBirth}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -168,6 +174,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="firstName"
                                     value={formData.childFirstName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -176,6 +183,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="firstName"
                                     value={formData.childMiddleName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -184,6 +192,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="lastName"
                                     value={formData.childLastName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -191,6 +200,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                 <select name="sex" className={`common-input w-full`}
                                     value={formData.sex}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 >
                                     <option value="">Select</option>
                                     <option value={BirthCertificate.SexTypes.MALE.toUpperCase()}>{BirthCertificate.SexTypes.MALE.toUpperCase()}</option>
@@ -203,6 +213,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="firstName"
                                     value={formData.mothersFirstName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -211,6 +222,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="middleName"
                                     value={formData.mothersMiddleName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -219,6 +231,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="lastName"
                                     value={formData.mothersLastName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -227,6 +240,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="firstName"
                                     value={formData.fathersFirstName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -235,6 +249,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="middleName"
                                     value={formData.fathersMiddleName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
                             <div className="flex-1">
@@ -243,9 +258,10 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
                                     name="lastName"
                                     value={formData.fathersLastName}
                                     onChange={handleOnChange}
+                                    readOnly={isView}
                                 />
                             </div>
-                            <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
+                            <button type="submit" hidden={isView} className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
                         </form>
                         <div className="flex-1 flex flex-col items-center p-2 relative overflow-hidden">
                             <div className="flex-1 w-full">
