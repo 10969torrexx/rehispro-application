@@ -4,8 +4,9 @@ const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const { callPythonOCR } = require('../services/OCRService');
 const { generate } = require('../helpers/marriageGeneratePDF');
 const puppeteer = require('puppeteer');
+const { storeFile } = require('./FilesController');
 
-function create(req, res) {
+async function create(req, res) {
     try {
         const formData = req.body;
         if (!formData) {
@@ -13,6 +14,23 @@ function create(req, res) {
         }
 
         const flatData = formData;
+        if (flatData.filePath && Array.isArray(flatData.filePath) && flatData.filePath.length > 0) {
+          const fileData = {
+            creator_id: Number(flatData.creatorId),
+            file_name: `marriage_certificate_${Date.now()}.pdf`,
+            file_paths: flatData.filePath
+          };
+          try {
+            const fileId = await storeFile(fileData);
+            writeLog(`[info] [MarriageCertificateController][create] Stored file with ID: ${fileId}`);
+            flatData.fileId = fileId;
+            flatData.creationType = 'upload';
+          } catch (err) {
+            writeLog(`[error] [MarriageCertificateController][create] Failed to store file: ${err.message}`);
+          }
+        } else {
+          writeLog(`[info] [MarriageCertificateController][create] No file paths provided, skipping file storage.`);
+        }
 
         // Validate creatorId
         const creatorId = Number(flatData.creatorId);

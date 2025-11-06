@@ -7,7 +7,7 @@ import { Limits } from '@enums';
 import { toast } from "react-toastify";
 import { MarriageCertServices } from '@services';
 
-export default function MarriageCertificateUpload({setActiveTab, onOCRComplete}) { 
+export default function MarriageCertificateUpload({setActiveTab, onOCRComplete, uploadedFiles}) { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -56,8 +56,9 @@ export default function MarriageCertificateUpload({setActiveTab, onOCRComplete})
             setLoading(false);
             if (response.success) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
-                setActiveTab('create');
+                setActiveTab('results');
                 onOCRComplete(response.result);
+                uploadedFiles(response.filePaths);
             } else {
                 toast.error("Failed: No OCR Response");
             }

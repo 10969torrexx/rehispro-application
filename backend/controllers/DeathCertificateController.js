@@ -19,19 +19,19 @@ exports.create = async (req, res) => {
         if (flatData.filePath && Array.isArray(flatData.filePath) && flatData.filePath.length > 0) {
           const fileData = {
             creator_id: Number(flatData.creatorId),
-            file_name: `birth_certificate_${Date.now()}.pdf`,
+            file_name: `death_certificate_${Date.now()}.pdf`,
             file_paths: flatData.filePath
           };
           try {
             const fileId = await storeFile(fileData);
-            writeLog(`[info] [BirthCertificateController][create] Stored file with ID: ${fileId}`);
+            writeLog(`[info] [DeathCertificateController][create] Stored file with ID: ${fileId}`);
             flatData.fileId = fileId;
             flatData.creationType = 'upload';
           } catch (err) {
-            writeLog(`[error] [BirthCertificateController][create] Failed to store file: ${err.message}`);
+            writeLog(`[error] [DeathCertificateController][create] Failed to store file: ${err.message}`);
           }
         } else {
-          writeLog(`[info] [BirthCertificateController][create] No file paths provided, skipping file storage.`);
+          writeLog(`[info] [DeathCertificateController][create] No file paths provided, skipping file storage.`);
         }
 
         // Validate creatorId

@@ -376,6 +376,7 @@ db.serialize(() => {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         creator_id INTEGER NOT NULL,
         creation_type TEXT DEFAULT 'manual',
+        file_id INTEGER,
 
         -- Page 1: Province, City, and Registry No.
         province TEXT,
