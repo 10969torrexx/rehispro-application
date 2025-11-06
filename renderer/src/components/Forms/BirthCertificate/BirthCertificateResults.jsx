@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 export default function BirthCertificateResults ({defaultData, filePath, activeTab}) {
     const [loading, setLoading] = useState(true);
+    const [documentFiles, setDocumentFiles] = useState([]);
     useEffect(() => {
         const dataId = defaultData ? defaultData.id : null;
         if (!dataId) {
@@ -15,8 +16,8 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
             try {
                 setLoading(true);
                 const response = await BirthCertServices.viewBirthCertificate(dataId);
-                console.log('response', response);
                 if (response && response.success && response.data) {
+                    setDocumentFiles(JSON.parse(response.data.uploaded_file.file_path));
                 } else {
                     toast.error(response?.message || "Failed to load birth certificates");
                 }
@@ -38,7 +39,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
           ? "http://localhost:3001" + path.slice(index)
           : path;
       })
-    : null;
+    : documentFiles;
 
     const [formData, setFormData] = useState({
         creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
