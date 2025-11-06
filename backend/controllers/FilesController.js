@@ -10,11 +10,11 @@ async function storeFile(data) {
     return new Promise((resolve, reject) => {
         db.run(query, [data.creator_id, data.file_name, jsonPaths], function (err) {
         if (err) {
-            writeLog('❌ Error inserting uploaded file record:', err);
+            writeLog('INFO ❌ Error inserting uploaded file record:', err);
             return reject(err);
         }
 
-            writeLog('✅ Uploaded file record inserted with ID:', this.lastID);
+            writeLog('INFO ✅ Uploaded file record inserted with ID:', this.lastID);
             resolve(this.lastID);
         });
     });

@@ -24,7 +24,7 @@ export default function BirthCertificateResults ({defaultData, filePath, activeT
         fathersFirstName: defaultData.father_first_name ?? '',
         fathersMiddleName: defaultData.father_middle_name ?? '',
         fathersLastName: defaultData.father_last_name ?? '',
-        filePath: trimmedPaths ?? 'sample',
+        filePath: trimmedPaths ?? '',
         fileNames: 'sample'
     });
     const handleOnChange = (e) => { 

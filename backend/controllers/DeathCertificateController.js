@@ -3,8 +3,9 @@ const { writeLog } = require('../utils/logger');
 const { callPythonOCR } = require('../services/OCRService');
 const generate = require('../helpers/deathGeneratePDF');
 const puppeteer = require('puppeteer');
+const { storeFile } = require('./FilesController');
 // CREATE Death Certificate
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     try {
         const formData = req.body;
         if (!formData) {
@@ -13,6 +14,25 @@ exports.create = (req, res) => {
 
         const flatData = formData;
         writeLog(`INFO [DeathCertificate][create] Received data: ${JSON.stringify(flatData)}`);
+
+        //TODO: create file process
+        if (flatData.filePath && Array.isArray(flatData.filePath) && flatData.filePath.length > 0) {
+          const fileData = {
+            creator_id: Number(flatData.creatorId),
+            file_name: `birth_certificate_${Date.now()}.pdf`,
+            file_paths: flatData.filePath
+          };
+          try {
+            const fileId = await storeFile(fileData);
+            writeLog(`[info] [BirthCertificateController][create] Stored file with ID: ${fileId}`);
+            flatData.fileId = fileId;
+            flatData.creationType = 'upload';
+          } catch (err) {
+            writeLog(`[error] [BirthCertificateController][create] Failed to store file: ${err.message}`);
+          }
+        } else {
+          writeLog(`[info] [BirthCertificateController][create] No file paths provided, skipping file storage.`);
+        }
 
         // Validate creatorId
         const creatorId = Number(flatData.creatorId);
@@ -209,7 +229,8 @@ exports.create = (req, res) => {
             adminAddress: "admin_address",
 
             // Page 15
-            confirmation: "confirmation"
+            confirmation: "confirmation",
+            fileId: "file_id",
         };
 
         // Build SQL columns + values only from mapped fields

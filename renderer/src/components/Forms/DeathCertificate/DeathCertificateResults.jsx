@@ -9,15 +9,16 @@ export default function DeathCertificateResults ({defaultData, filePath, activeT
         return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
     });
     const [formData, setFormData] = useState({
+        creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData?.registry_number ?? '',
         firstName: defaultData?.first_name ?? '',
         middleName: defaultData?.middle_name ?? '',
         lastName: defaultData?.last_name ?? '',
         dateOfDeath: defaultData?.date_of_death ?? '',
         placeOfDeath: `${defaultData?.placeOfDeath_hospital}, ${defaultData?.placeOfDeath_barangay}, ${defaultData?.placeOfDeath_city}, ${defaultData?.placeOfDeath_province}`,
-        sex: defaultData?.sex
+        sex: defaultData?.sex,
+        filePath: trimmedPaths ?? '',
     });
-    console.log(defaultData);
     const [currentIndex, setCurrentIndex] = useState(0);
     const nextImage = () => {
         setCurrentIndex((prev) => (prev + 1) % trimmedPaths.length);
@@ -42,6 +43,7 @@ export default function DeathCertificateResults ({defaultData, filePath, activeT
         try {
             const response = await DeathCertServices.insertDeathCertificate(formData);
             if (response.success) {
+                toast.success(`${response.message || 'Death Certificate created successfully! '}`)
                 setFormData({
                     registryNumber: '',
                     firstName: '',
@@ -71,13 +73,16 @@ export default function DeathCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Registry Number</label>
                         <input type="text" className="common-input w-full" placeholder="Registry Number"
                             name="registryNumber"
+                            onChange={handleOnChange}
                             value={formData.registryNumber}
                         />
                     </div>
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Date of Death</label>
-                        <input type="date" className="common-input w-full" placeholder="Date of Death"
+                        <input type="date" className="common-input w-full"
                             name="dateDeath"
+                            onChange={handleOnChange}
+                            onClick={(e) => e.target.showPicker && e.target.showPicker()}
                             value={formData.dateOfDeath}
                         />
                     </div>
@@ -85,6 +90,7 @@ export default function DeathCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Death</label>
                         <input type="text" className="common-input w-full" placeholder="Place of Death"
                             name="deathPlace"
+                            onChange={handleOnChange}
                             value={formData.placeOfDeath}
                         />
                     </div>
@@ -92,6 +98,7 @@ export default function DeathCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Deceased's First Name</label>
                          <input type="text" className="common-input w-full" placeholder="Middle Name"
                             name="firstName"
+                            onChange={handleOnChange}
                             value={formData.firstName}
                         />
                     </div>
@@ -99,6 +106,7 @@ export default function DeathCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Deceased's Middle Name</label>
                          <input type="text" className="common-input w-full" placeholder="Middle Name"
                             name="middleName"
+                            onChange={handleOnChange}
                             value={formData.middleName}
                         />
                     </div>
@@ -106,6 +114,7 @@ export default function DeathCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Deceased's Last Name</label>
                         <input type="text" className="common-input w-full" placeholder="Last Name"
                             name="lastName"
+                            onChange={handleOnChange}
                             value={formData.lastName}
                         />
                     </div>
@@ -113,6 +122,7 @@ export default function DeathCertificateResults ({defaultData, filePath, activeT
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Sex</label>
                         <select name="sex" className={`common-input w-full`}
                             value={formData.sex}
+                            onChange={handleOnChange}
                         >
                             <option value="">Select</option>
                             <option value="MALE">MALE</option>

@@ -209,6 +209,7 @@ db.serialize(() => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       creator_id INTEGER NOT NULL,
       creation_type TEXT DEFAULT 'manual',
+      file_id INTEGER,
   
       -- Page 1 - Deceased Information
       province TEXT,
