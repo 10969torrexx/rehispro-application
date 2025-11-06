@@ -16,7 +16,6 @@ export default function BirthCertificateHome({ onView }) {
       try {
         setLoading(true);
         const response = await BirthCertServices.listBirthCertificate();
-
         if (response && response.success && response.data) {
           setListOfBirth(response.data);
         } else {
@@ -38,6 +37,7 @@ export default function BirthCertificateHome({ onView }) {
 
   const columns = [
     { field: "id", headerName: "#", width: 50 },
+    { field: "registry_number", headerName: "Registery #", width: 100 },
     {
       field: "child_name",
       headerName: "Child Name",
@@ -95,6 +95,7 @@ export default function BirthCertificateHome({ onView }) {
   const filteredRows = listOfBirth.filter((row) => {
     const query = searchQuery.toLowerCase();
     return (
+      row.registry_number?.toLowerCase().includes(query) ||
       row.child_name?.toLowerCase().includes(query) ||
       row.sex?.toLowerCase().includes(query) ||
       row.date_of_birth?.toLowerCase().includes(query) ||
