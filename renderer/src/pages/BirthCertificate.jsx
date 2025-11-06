@@ -65,7 +65,11 @@ export default function BirthCertificate() {
                                     <BirthCertificateHome 
                                         onView={(row) => {
                                             setSelectedRow(row); 
-                                            setActiveTab("view"); 
+                                            if (row?.creation_type == 'manual') {
+                                                setActiveTab("view"); 
+                                            } else {
+                                                setActiveTab("results"); 
+                                            }
                                         }} 
                                     />
                                 </div>

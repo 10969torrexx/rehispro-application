@@ -58,9 +58,7 @@ export default function BirthCertificateHome({ onView }) {
     { field: "sex", headerName: "Sex", width: 100 },
     { field: "created_at", headerName: "Created At", width: 150 },
     {
-      field: "residence",
-      headerName: "Residence",
-      width: 300,
+      field: "residence", headerName: "Residence", width: 200,
     },
     {
       field: "action",
@@ -85,7 +83,6 @@ export default function BirthCertificateHome({ onView }) {
                       await BirthCertServices.download(params?.row.id);
                       toast.success("PDF download complete!");
                     } catch (error) {
-                      console.error(error);
                       toast.error(`Download failed: ${error.message || error}`);
                     } finally {
                       setIsDownloading(false);
@@ -94,7 +91,7 @@ export default function BirthCertificateHome({ onView }) {
                 }}
               >
                 <option value="" disabled>
-                  Actions
+                  Actions 
                 </option>
                 <option value="view">View</option>
                 <option value="download">Download</option>
