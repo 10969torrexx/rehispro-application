@@ -277,6 +277,7 @@ function list (req, res) {
         SELECT 
         id, 
         registry_number,
+        creation_type,
         CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
         sex, 
         CONCAT(maiden_first_name, " ", maiden_middle_name, " ", maiden_last_name) AS mother_name,

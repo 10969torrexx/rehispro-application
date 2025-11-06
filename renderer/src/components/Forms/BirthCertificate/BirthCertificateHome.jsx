@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { BirthCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
+import { Badge } from '@components';
 import Box from "@mui/material/Box";
 import { LoadingScreen } from '@components';
 
@@ -38,6 +39,17 @@ export default function BirthCertificateHome({ onView }) {
   const columns = [
     { field: "id", headerName: "#", width: 50 },
     { field: "registry_number", headerName: "Registery #", width: 100 },
+    { field: "creation_type", headerName: "Creation Type", width: 100,
+      renderCell: (params) => (
+        <Badge 
+          status={params.value}
+          color= {
+            params.value == 'upload'? 'blue' :
+            params.value == 'manual'? 'yellow' : 'gray'
+          }
+        />
+      )
+     },
     {
       field: "child_name",
       headerName: "Child Name",
@@ -96,6 +108,7 @@ export default function BirthCertificateHome({ onView }) {
     const query = searchQuery.toLowerCase();
     return (
       row.registry_number?.toLowerCase().includes(query) ||
+      row.creation_type?.toLowerCase().includes(query) ||
       row.child_name?.toLowerCase().includes(query) ||
       row.sex?.toLowerCase().includes(query) ||
       row.date_of_birth?.toLowerCase().includes(query) ||
