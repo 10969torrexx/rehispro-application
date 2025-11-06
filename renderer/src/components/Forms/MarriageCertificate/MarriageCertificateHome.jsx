@@ -12,7 +12,7 @@ export default function MarriageCertificateHome({ onView }) {
   const [isDownloading, setIsDownloading] = useState(false); 
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "#", width: 70 },
     { field: "husband", headerName: "Husband Name", flex: 1 },
     { field: "wife", headerName: "Wife Name", flex: 1 },
     { field: "date", headerName: "Date of Marriage", width: 180 },

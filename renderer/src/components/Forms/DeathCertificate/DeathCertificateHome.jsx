@@ -38,7 +38,7 @@ export default function DeathCertificateHome({ onView }) {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "#", width: 70 },
     { field: "deceased_name", headerName: "Deceased Name", flex: 1 },
     { field: "sex", headerName: "Sex", width: 100 },
     { field: "created_at", headerName: "Date Created", width: 150 },
