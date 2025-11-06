@@ -16,7 +16,6 @@ export { default as BirthCertificateCreate } from './Forms/BirthCertificate/Birt
 export { default as BirthCertificateLatest } from './Forms/BirthCertificate/BirthCertificateLatest';
 export { default as BirthCertificateCharts } from './Forms/BirthCertificate/BirtCertificateCharts';
 export { default as BirthCertificateSearch } from './Forms/BirthCertificate/BirthCertificateSearch';
-export { default as BirthCertificateResults } from './Forms/BirthCertificate/BirthCertificateResults';
 //? Image Upload related components for birth
 export { default as BirthUploadsView } from './Forms/BirthCertificate/Uploads/View';
 export { default as BirthUploadsCreate } from './Forms/BirthCertificate/Uploads/Create';

@@ -5,7 +5,17 @@ import { Spinner } from '@components';
 import { toast } from "react-toastify";
 
 export default function Create ({defaultData, filePath, activeTab}) {
-    console.log(defaultData);
+    //TODO: this will manipulate the image files
+    const trimmedPaths =
+        filePath && filePath.length > 0
+        ? filePath.map((path) => {
+        const index = path.indexOf("/backend");
+        return index !== -1
+          ? "http://localhost:3001" + path.slice(index)
+          : path;
+      })
+    : null;
+
     const [formData, setFormData] = useState({
         creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData.registry_number ?? '',
@@ -24,20 +34,9 @@ export default function Create ({defaultData, filePath, activeTab}) {
         fathersFirstName: defaultData.father_first_name ??  '',
         fathersMiddleName: defaultData.father_middle_name ??  '',
         fathersLastName: defaultData.father_last_name ??  '',
-        filePath:  '',
+        filePath:  trimmedPaths,
         fileNames: 'sample'
     });
-
-    //TODO: this will manipulate the image files
-    const trimmedPaths =
-        filePath && filePath.length > 0
-        ? filePath.map((path) => {
-        const index = path.indexOf("/backend");
-        return index !== -1
-          ? "http://localhost:3001" + path.slice(index)
-          : path;
-      })
-    : null;
 
     const handleOnChange = (e) => { 
         const { name, value } = e.target;

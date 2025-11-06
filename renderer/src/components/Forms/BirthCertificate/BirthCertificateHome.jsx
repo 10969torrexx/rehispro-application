@@ -58,9 +58,6 @@ export default function BirthCertificateHome({ onView }) {
     { field: "sex", headerName: "Sex", width: 100 },
     { field: "created_at", headerName: "Created At", width: 150 },
     {
-      field: "residence", headerName: "Residence", width: 200,
-    },
-    {
       field: "action",
       headerName: "Action",
       width: 110,
