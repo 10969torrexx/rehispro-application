@@ -343,7 +343,7 @@ exports.view = async (req, res) => {
 
     let uploadedFile = null;
     if (death_certificate.file_id) {
-        uploadedFile = await getFileById(death_certificate.file_id);
+      uploadedFile = await getFileById(death_certificate.file_id);
     }
 
     res.status(200).json({
@@ -355,7 +355,7 @@ exports.view = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error('❌ [DB Error]', err.message);
+    writeLog('❌ [DB Error]', err.message);
     res.status(500).json({
       success: false,
       message: 'Database fetch failed',

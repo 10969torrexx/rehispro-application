@@ -310,29 +310,45 @@ function getAll(req, res) {
     });
 }
 
-function view(req, res) {
-    db.get(
-      `SELECT * FROM marriage_certificates WHERE id = ?`,
-      [req.params.id],
-      (err, row) => {
-        if (err) {
-          console.error('❌ [DB Error]', err.message);
-          return res.status(500).json({
+async function view(req, res) {
+    try {
+        const data = await new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM marriage_certificates WHERE id = ?`, [req.params.id], (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
+            });
+        });
+
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                message: 'Marriage Certificate not found',
+            });
+        }
+
+      
+        let uploadedFile = null;
+        if (data.file_id) {
+            uploadedFile = await getFileById(data.file_id);
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Marriage Certificate Found',
+            data: {
+                ...data,
+                uploaded_file: uploadedFile,
+            },
+        });
+        
+    } catch (error) {
+        writeLog('❌ [DB Error]', error.message);
+        res.status(500).json({
             success: false,
             message: 'Database fetch failed',
-            error: err.message,
-          });
-        }
-    
-        const marriage_certificate = row;
-    
-        res.status(200).json({
-          success: true,
-          message: 'Marriage Certificate Found',
-          data: marriage_certificate,
+            error: error.message,
         });
-      }
-    );
+    }
 }
 
 async function upload(req, res) {
