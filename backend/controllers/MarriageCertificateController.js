@@ -4,7 +4,7 @@ const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const { callPythonOCR } = require('../services/OCRService');
 const { generate } = require('../helpers/marriageGeneratePDF');
 const puppeteer = require('puppeteer');
-const { storeFile } = require('./FilesController');
+const { storeFile, getFileById } = require('./FilesController');
 
 async function create(req, res) {
     try {
@@ -234,7 +234,8 @@ async function create(req, res) {
             officerAddressPage10: "officer_address_page10",
 
             // Page 11
-            confirmation: "confirmation"
+            confirmation: "confirmation",
+            fileId: "file_id",
         };  
 
         // Build SQL columns + values only from mapped fields

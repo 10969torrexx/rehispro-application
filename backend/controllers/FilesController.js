@@ -10,7 +10,7 @@ async function storeFile(data) {
     return new Promise((resolve, reject) => {
         db.run(query, [data.creator_id, data.file_name, jsonPaths], function (err) {
         if (err) {
-            writeLog('INFO ❌ Error inserting uploaded file record:', err);
+            writeLog('ERROR ❌ Error inserting uploaded file record:', err);
             return reject(err);
         }
 

@@ -11,6 +11,7 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
     });
     
     const [formData, setFormData] = useState({
+        creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData?.registry_number || '',
         husbandFirstName: defaultData?.husband_first_name ||'',
         husbandMiddleName: defaultData?.husband_middle_name || '',
@@ -18,6 +19,9 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
         wifeFirstName: defaultData?.wife_first_name || '',
         wifeMiddleName: defaultData?.wife_middle_name || '',
         wifeLastName: defaultData?.wife_last_name || '',
+        husbandSex: defaultData?.husband_sex || '',
+        wifeSex: defaultData?.wife_sex || '',
+        filePath: trimmedPaths || []
     });
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -72,14 +76,14 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
                 <form action="" method="post" className="flex-1 h-full flex flex-col" onSubmit={handleOnSubmit} encType="multipart/form-data">
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Registry Number</label>
-                        <input type="text" className="common-input w-full" placeholder="Registry Number"
+                        <input type="text" className={`common-input w-full ${formData.registryNumber == '' ? 'input-empty' : ''}`} placeholder="Registry Number"
                             name="registryNumber"
                             value={formData.registryNumber}
                         />
                     </div>
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Husband's First Name</label>
-                         <input type="text" className="common-input w-full" placeholder="Husband's First Name"
+                         <input type="text" className={`common-input w-full ${formData.husbandFirstName == '' ? 'input-empty' : ''}`} placeholder="Husband's First Name"
                             name="husbandFirstName"
                             value={formData.husbandFirstName}
                             onChange={handleOnChange}
@@ -87,7 +91,7 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
                     </div>
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Husband's Middle Name</label>
-                        <input type="text" className="common-input w-full" placeholder="Husband's Middle Name"
+                        <input type="text" className={`common-input w-full ${formData.husbandMiddleName == '' ? 'input-empty' : ''}`} placeholder="Husband's Middle Name"
                             name="husbandMiddleName"
                             value={formData.husbandMiddleName}
                             onChange={handleOnChange}
@@ -95,7 +99,7 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
                     </div>
                     <div className="flex-1">
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Wife's First Name</label>
-                        <input type="text" className="common-input w-full" placeholder="First Name"
+                        <input type="text" className={`common-input w-full ${formData.wifeFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
                             name="wifeFirstName"
                             value={formData.wifeFirstName}
                             onChange={handleOnChange}
@@ -103,7 +107,7 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
                     </div>
                      <div className="flex-1">
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Wife's Middle Name</label>
-                        <input type="text" className="common-input w-full" placeholder="Middle Name"
+                        <input type="text" className={`common-input w-full ${formData.wifeMiddleName == '' ? 'input-empty' : ''}`} placeholder="Middle Name"
                             name="wifeMiddleName"
                             value={formData.wifeMiddleName}
                             onChange={handleOnChange}
@@ -111,7 +115,7 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
                     </div>
                     <div className="flex-1">
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Wife's Last Name</label>
-                        <input type="text" className="common-input w-full" placeholder="Last Name"
+                        <input type="text" className={`common-input w-full ${formData.wifeLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
                             name="wifeLastName"
                             value={formData.wifeLastName}
                             onChange={handleOnChange}
@@ -119,8 +123,8 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
                     </div>
                     <div className="flex-1">
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Husband's Gender</label>
-                        <select name="sex" className={`common-input w-full`}
-                            value={formData.sex}
+                        <select name="husbandGender" className={`common-input w-full ${formData.husbandGender == '' ? 'input-empty' : ''}`}
+                            value={formData.husbandSex}
                             onChange={handleOnChange}
                         >
                             <option value="">Select</option>
@@ -130,8 +134,8 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
                     </div>
                     <div className="flex-1">
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Wife's Gender</label>
-                        <select name="sex" className={`common-input w-full`}
-                            value={formData.sex}
+                        <select name="wifeGender" className={`common-input w-full ${formData.wifeGender == '' ? 'input-empty' : ''}`}
+                            value={formData.wifeSex}
                             onChange={handleOnChange}
                         >
                             <option value="">Select</option>

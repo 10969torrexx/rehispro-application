@@ -19,7 +19,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
         sex: defaultData?.sex,
         filePath: trimmedPaths ?? '',
     });
-    const [currentIndex, setCurrentIndex] = useState(0);
+const [currentIndex, setCurrentIndex] = useState(0);
     const nextImage = () => {
         setCurrentIndex((prev) => (prev + 1) % trimmedPaths.length);
     };
