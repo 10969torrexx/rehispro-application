@@ -284,6 +284,8 @@ function getAll(req, res) {
     const query = `
         SELECT 
             id,
+            registry,
+            creation_type,
             husband_first_name || ' ' || husband_last_name AS husband,
             wife_first_name || ' ' || wife_last_name AS wife,
             date_of_marriage AS date,

@@ -38,6 +38,7 @@ export { default as MarriageCertificateLatest } from './Forms/MarriageCertificat
 export { default as MarriageCertificateCharts } from './Forms/MarriageCertificate/MarriageCertificateCharts';
 export { default as MarriageCertificateSearch } from './Forms/MarriageCertificate/MarriageCertificateSearch';
 export { default as MarriageUploadCreate } from './Forms/MarriageCertificate/Uploads/Create';
+export { default as MarriageUploadsView } from './Forms/MarriageCertificate/Uploads/View';
 
 export { default as Badge } from './Badge';
 export { default as RecentRecords } from './Dashboard/RecentRecords';

@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { MarriageCertServices } from "@services";
 import { toast } from "react-toastify";
 import Box from "@mui/material/Box";
-import { LoadingScreen } from '@components';
+import { LoadingScreen, Badge } from '@components';
 
 export default function MarriageCertificateHome({ onView }) {
   const [rows, setRows] = useState([]);
@@ -13,10 +13,20 @@ export default function MarriageCertificateHome({ onView }) {
 
   const columns = [
     { field: "id", headerName: "#", width: 70 },
+    { field: "registry", headerName: "Registry Number", flex: 1 },
+    { field: "creation_type", headerName: "Creation Type", width: 100, 
+      renderCell: (params) => (
+        <Badge 
+          status={params.value}
+          color= {
+            params.value == 'upload'? 'blue' :
+            params.value == 'manual'? 'yellow' : 'gray'
+          }
+        />
+      )
+    },
     { field: "husband", headerName: "Husband Name", flex: 1 },
     { field: "wife", headerName: "Wife Name", flex: 1 },
-    { field: "date", headerName: "Date of Marriage", width: 180 },
-    { field: "place", headerName: "Place of Marriage", flex: 1 },
     {
       field: "action",
       headerName: "Action",
@@ -87,6 +97,8 @@ export default function MarriageCertificateHome({ onView }) {
   const filteredRows = rows.filter((row) => {
     const query = searchQuery.toLowerCase();
     return (
+      row.registry?.toLowerCase().includes(query) ||
+      row.creation_type?.toLowerCase().includes(query) ||
       row.husband?.toLowerCase().includes(query) ||
       row.wife?.toLowerCase().includes(query) ||
       row.date?.toLowerCase().includes(query) ||

@@ -2,9 +2,8 @@ import { useState } from "react";
 import { MarriageCertServices } from "@services";
 import { toast } from "react-toastify";
 
-export default function MarriageCertificateResults ({defaultData, filePath, activeTab}) {
+export default function Create ({defaultData, filePath, activeTab}) {
     const [loading, setLoading] = useState(false);
-    console.log(defaultData);
     const trimmedPaths = filePath.map((path) => {
         const index = path.indexOf("/backend");
         return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
@@ -12,7 +11,7 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
     
     const [formData, setFormData] = useState({
         creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
-        registryNumber: defaultData?.registry_number || '',
+        registry: defaultData?.registry_number || '',
         husbandFirstName: defaultData?.husband_first_name ||'',
         husbandMiddleName: defaultData?.husband_middle_name || '',
         husbandLastName: defaultData?.husband_last_name || '',
@@ -50,7 +49,7 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
             if (response.success) {
                 toast.success(`${response.message || 'Marriage Certificate created successfully! '}`)
                 setFormData({
-                    registryNumber: '',
+                    registry: '',
                     husbandFirstName: '',
                     husbandMiddleName: '',
                     husbandLastName: '',
@@ -75,10 +74,10 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
             <div className="flex flex-row gap-4 mb-8">
                 <form action="" method="post" className="flex-1 h-full flex flex-col" onSubmit={handleOnSubmit} encType="multipart/form-data">
                     <div className="flex-1">
-                        <label htmlFor="registryNumber" className="w-full px-4 text-xs">Registry Number</label>
-                        <input type="text" className={`common-input w-full ${formData.registryNumber == '' ? 'input-empty' : ''}`} placeholder="Registry Number"
-                            name="registryNumber"
-                            value={formData.registryNumber}
+                        <label htmlFor="registry" className="w-full px-4 text-xs">Registry Number</label>
+                        <input type="text" className={`common-input w-full ${formData.registry == '' ? 'input-empty' : ''}`} placeholder="Registry Number"
+                            name="registry"
+                            value={formData.registry}
                         />
                     </div>
                     <div className="flex-1">
