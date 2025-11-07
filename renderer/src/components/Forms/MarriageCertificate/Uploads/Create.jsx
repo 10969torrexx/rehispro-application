@@ -11,13 +11,13 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
     });
     
     const [formData, setFormData] = useState({
-        husbandFirstName: '',
-        husbandMiddleName: '',
-        husbandLastName: '',
-        wifeFirstName: '',
-        wifeMiddleName: '',
-        wifeLastName: '',
-        registryNumber: '',
+        registryNumber: defaultData?.registry_number || '',
+        husbandFirstName: defaultData?.husband_first_name ||'',
+        husbandMiddleName: defaultData?.husband_middle_name || '',
+        husbandLastName: defaultData?.husband_last_name || '',
+        wifeFirstName: defaultData?.wife_first_name || '',
+        wifeMiddleName: defaultData?.wife_middle_name || '',
+        wifeLastName: defaultData?.wife_last_name || '',
     });
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -118,7 +118,18 @@ export default function MarriageCertificateResults ({defaultData, filePath, acti
                         />
                     </div>
                     <div className="flex-1">
-                        <label htmlFor="lastName" className="w-full px-4 text-xs">Sex</label>
+                        <label htmlFor="lastName" className="w-full px-4 text-xs">Husband's Gender</label>
+                        <select name="sex" className={`common-input w-full`}
+                            value={formData.sex}
+                            onChange={handleOnChange}
+                        >
+                            <option value="">Select</option>
+                            <option value="MALE">MALE</option>
+                            <option value="FEMALE">FEMALE</option>
+                        </select>
+                    </div>
+                    <div className="flex-1">
+                        <label htmlFor="lastName" className="w-full px-4 text-xs">Wife's Gender</label>
                         <select name="sex" className={`common-input w-full`}
                             value={formData.sex}
                             onChange={handleOnChange}
