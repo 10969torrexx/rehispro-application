@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { useSearchParams } from "react-router-dom";
 import { InfoCard, DeathCertificateCreate, DeathCertificateHome, DeathCertificateView, DeathCertificateUpload,
-    DeathCertificateSearch, DeathCertificateResults
+    DeathCertificateSearch, DeathUploadsCreate, DeathUploadsView
  } from '@components';
 
 export default function DeathCertificate() {
@@ -116,7 +116,7 @@ export default function DeathCertificate() {
                             </div>
                         }
                         {
-                            activeTab === 'results' &&
+                            activeTab === 'uploadCreate' &&
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <div className="mb-4">
                                     <InfoCard
@@ -125,7 +125,7 @@ export default function DeathCertificate() {
                                     />
                                 </div>
                                 <div>
-                                    <DeathCertificateResults defaultData={ocrResults} activeTab={setActiveTab} filePath={uploadedFiles} />
+                                    <DeathUploadsCreate defaultData={ocrResults} activeTab={setActiveTab} filePath={uploadedFiles} />
                                 </div>
                             </div>
                         }

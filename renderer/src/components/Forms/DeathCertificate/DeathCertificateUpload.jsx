@@ -58,7 +58,7 @@ export default function DeathCertificateUpload({setActiveTab, onOCRComplete, upl
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
                 toast.success("File Scanning Successful!");
                 toast.warning("Review every details for saving.");
-                setActiveTab('results');
+                setActiveTab('uploadCreate');
                 onOCRComplete(response.result);
                 uploadedFiles(response.filePaths);
             } else {

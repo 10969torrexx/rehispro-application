@@ -3,8 +3,7 @@ import { DeathCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { LoadingScreen } from '@components';
+import { LoadingScreen, Badge } from '@components';
 
 export default function DeathCertificateHome({ onView }) {
   const [listOfDeath, setListOfDeath] = useState([]);
@@ -38,7 +37,19 @@ export default function DeathCertificateHome({ onView }) {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "#", width: 70 },
+    { field: "id", headerName: "#", width: 20 },
+    { field: "registry_number", headerName: "Registry No.", width: 100 },
+    { field: "creation_type", headerName: "Creation Type", width: 100, 
+      renderCell: (params) => (
+        <Badge 
+          status={params.value}
+          color= {
+            params.value == 'upload'? 'blue' :
+            params.value == 'manual'? 'yellow' : 'gray'
+          }
+        />
+      )
+     },
     { field: "deceased_name", headerName: "Deceased Name", flex: 1 },
     { field: "sex", headerName: "Sex", width: 100 },
     { field: "created_at", headerName: "Date Created", width: 150 },
@@ -46,14 +57,14 @@ export default function DeathCertificateHome({ onView }) {
     {
       field: "action",
       headerName: "Action",
-      width: 110, // 🔹 narrower column
+      width: 110,
       sortable: false,
       renderCell: (params) => {
         const row = params?.row || {};
         return (
           <select
             defaultValue=""
-            className="common-input text-xs px-1 py-0.5 w-full" // 🔹 smaller text + reduced padding
+            className="common-input text-xs px-1 py-0.5 w-full"
             onChange={async (e) => {
               const action = e.target.value;
               e.target.value = "";
@@ -88,6 +99,8 @@ export default function DeathCertificateHome({ onView }) {
   const filteredRows = listOfDeath.filter((row) => {
     const query = searchQuery.toLowerCase();
     return (
+      row.registry_number?.toLowerCase().includes(query) ||
+      row.creation_type?.toLowerCase().includes(query) ||
       row.deceased_name?.toLowerCase().includes(query) ||
       row.sex?.toLowerCase().includes(query) ||
       row.date_of_death?.toLowerCase().includes(query) ||
