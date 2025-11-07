@@ -4,27 +4,11 @@ import { BirthCertificate } from '@enums';
 import { Spinner } from '@components';
 import { toast } from "react-toastify";
 
-export default function View ({defaultData, filePath, activeTab, isView = false}) {
+export default function View ({defaultData}) {
     const [loading, setLoading] = useState(true);
-    const [documentFiles, setDocumentFiles] = useState([]);
-    const [formData, setFormData] = useState({
-        creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
-        registryNumber: defaultData.registry_number ?? '',
-        dateOfBirth: defaultData.birth_date ?? '',
-        placeOfBirth: defaultData.child_birth_place ?? '',
-        childFirstName: defaultData.child_first_name ?? '',
-        childMiddleName: defaultData.child_middle_name ??  '',
-        childLastName: defaultData.child_last_name ??  '',
-        sex: defaultData.sex ?? '',
-        mothersFirstName: defaultData.maiden_first_name ??  '',
-        mothersMiddleName: defaultData.maiden_middle_name ??  '',
-        mothersLastName: defaultData.maiden_last_name ??  '',
-        fathersFirstName: defaultData.father_first_name ??  '',
-        fathersMiddleName: defaultData.father_middle_name ??  '',
-        fathersLastName: defaultData.father_last_name ??  '',
-        filePath:  '',
-        fileNames: 'sample'
-    });
+    //TODO: this will manipulate the image files
+    const [trimmedPaths, setTrimmedPaths] = useState([]);
+    const [formData, setFormData] = useState({});
     useEffect(() => {
         const dataId = defaultData ? defaultData.id : null;
         if (!dataId) {
@@ -35,26 +19,27 @@ export default function View ({defaultData, filePath, activeTab, isView = false}
             try {
                 setLoading(true);
                 const response = await BirthCertServices.viewBirthCertificate(dataId);
-                const viewData = response.data;
-                console.table(viewData);
+                const listOfBirthCerts = response.data;
+                console.log(listOfBirthCerts);
                 if (response && response.success && response.data) {
-                    setDocumentFiles(JSON.parse(response.data.uploaded_file.file_path));
+                    setTrimmedPaths(JSON.parse(response.data.uploaded_file.file_path));
                     setFormData((prev) => ({
                         ...prev,
-                        registryNumber: viewData?.registry_number || '',
-                        dateOfBirth: viewData?.birth_date || '',
-                        placeOfBirth: viewData?.child_birth_place || '',
-                        childFirstName: viewData?.child_first_name || '',
-                        childMiddleName: viewData?.child_middle_name || '',
-                        childLastName: viewData?.child_last_name || '',
-                        sex: viewData?.sex || '',
-                        mothersFirstName: viewData?.maiden_first_name || '',
-                        mothersMiddleName: viewData?.maiden_middle_name || '',
-                        mothersLastName: viewData?.maiden_last_name || '',
-                        fathersFirstName: viewData?.father_first_name || '',
-                        fathersMiddleName: viewData?.father_middle_name || '',
-                        fathersLastName: viewData?.father_last_name || '',
-                        filePath: trimmedPaths || '',
+                        registryNumber: listOfBirthCerts?.registry_number || '',
+                        dateOfBirth: listOfBirthCerts?.birth_date || '',
+                        placeOfBirthBarangay: listOfBirthCerts?.place_of_birth_barangay || '',
+                        placeOfBirthCity: listOfBirthCerts?.place_of_birth_city || '',
+                        placeOfBirthProvince: listOfBirthCerts?.place_of_birth_province || '',
+                        childFirstName: listOfBirthCerts?.child_first_name || '',
+                        childMiddleName: listOfBirthCerts?.child_middle_name || '',
+                        childLastName: listOfBirthCerts?.child_last_name || '',
+                        sex: listOfBirthCerts?.sex || '',
+                        mothersFirstName: listOfBirthCerts?.maiden_first_name || '',
+                        mothersMiddleName: listOfBirthCerts?.maiden_middle_name || '',
+                        mothersLastName: listOfBirthCerts?.maiden_last_name || '',
+                        fathersFirstName: listOfBirthCerts?.father_first_name || '',
+                        fathersMiddleName: listOfBirthCerts?.father_middle_name || '',
+                        fathersLastName: listOfBirthCerts?.father_last_name || '',
                     }));
                 } else {
                     toast.error(response?.message || "Failed to load birth certificates");
@@ -67,26 +52,8 @@ export default function View ({defaultData, filePath, activeTab, isView = false}
         };
         fetchData();
         setLoading(false);
-    }, [defaultData, filePath]);
+    }, [defaultData]);
 
-    //TODO: this will manipulate the image files
-    const trimmedPaths =
-        filePath && filePath.length > 0
-        ? filePath.map((path) => {
-        const index = path.indexOf("/backend");
-        return index !== -1
-          ? "http://localhost:3001" + path.slice(index)
-          : path;
-      })
-    : documentFiles;
-
-    const handleOnChange = (e) => { 
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
-    }
 
     //TODO: handle showing the images
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -99,208 +66,172 @@ export default function View ({defaultData, filePath, activeTab, isView = false}
         );
     };
 
-    const handleOnSubmit = async(e) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            const response = await BirthCertServices.insertBirthCertificate(formData);
-            if (response.success) {
-                toast.success(`${response.message || 'Birth Certificate created successfully!'}`);
-                setFormData({
-                    childFirstName: '',
-                    childMiddleName: '',
-                    childLastName: '',
-                    sex: '',
-                    mothersFirstName: '',
-                    mothersMiddleName: '',
-                    mothersLastName: '',
-                    fathersFirstName: '',
-                    fathersMiddleName: '',
-                    fathersLastName: '',
-                    dateOfBirth: '',
-                    placeOfBirth: '',
-                    registryNumber: '',
-                });
-                activeTab('upload')
-            } else {
-                toast.error(response.message || 'Failed creating file');
-            }
-        } catch (error) {
-            console.error(error)
-            toast.error('An error occurred');
-        } finally {
-            setLoading(false);
-        }
-    }
-
     return (
-        <div className="flex flex-col w-full">
-            {
-                loading ? (<>
-                    <Spinner />
-                </>) : (<>
-                    <div className="flex flex-row gap-4 mb-8">
-                        <form action="" method="post" className="flex-1 h-full flex flex-col" onSubmit={handleOnSubmit} encType="multipart/form-data">
-                            <div className="flex-1">
-                                <label htmlFor="registryNumber" className="w-full px-4 text-xs">Registry Number</label>
-                                <input type="text" className="common-input w-full" placeholder="Registry Number"
-                                    name="registryNumber"
-                                    value={formData.registryNumber}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
+         <div className="flex flex-col w-full">
+           {
+                loading ? <Spinner /> :
+                <div className="flex flex-row gap-4 mb-8">
+                    <form action="" method="post" className="flex-1 h-full flex flex-col">
+                        <div className="flex-1">
+                            <label htmlFor="registryNumber" className="w-full px-4 text-xs">Registry Number</label>
+                            <input type="text" className={`common-input w-full ${formData.registryNumber == '' ? 'input-empty' : ''}`} placeholder="Registry Number"
+                                name="registryNumber"
+                                value={formData.registryNumber}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="registryNumber" className="w-full px-4 text-xs">Date of Birth</label>
+                            <input type="date" className={`common-input w-full ${formData.dateOfBirth == '' ? 'input-empty' : ''}`} placeholder="Date of Birth"
+                                name="dateOfBirth"
+                                value={formData.dateOfBirth}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth (Barangay)</label>
+                            <input type="text" className={`common-input w-full ${formData.placeOfBirthBarangay == '' ? 'input-empty' : ''}`} placeholder="Place of Birth"
+                                name="placeOfBirth"
+                                value={formData.placeOfBirthBarangay}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth (City)</label>
+                            <input type="text" className={`common-input w-full ${formData.placeOfBirthCity == '' ? 'input-empty' : ''}`} placeholder="Place of Birth"
+                                name="placeOfBirth"
+                                value={formData.placeOfBirthCity}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth (Province)</label>
+                            <input type="text" className={`common-input w-full ${formData.placeOfBirthProvince == '' ? 'input-empty' : ''}`} placeholder="Place of Birth"
+                                name="placeOfBirth"
+                                value={formData.placeOfBirthProvince}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="firstName" className="w-full px-4 text-xs">Child's First Name</label>
+                            <input type="text" className={`common-input w-full ${formData.childFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
+                                name="firstName"
+                                value={formData.childFirstName}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="firstName" className="w-full px-4 text-xs">Child's Middle Name</label>
+                            <input type="text" className={`common-input w-full ${formData.childMiddleName == '' ? 'input-empty' : ''}`} placeholder="First Name"
+                                name="firstName"
+                                value={formData.childMiddleName}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="lastName" className="w-full px-4 text-xs">Child's Last Name</label>
+                            <input type="text" className={`common-input w-full ${formData.childLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
+                                name="lastName"
+                                value={formData.childLastName}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="lastName" className="w-full px-4 text-xs">Sex</label>
+                            <select name="sex" className={`common-input w-full ${formData.sex == '' ? 'input-empty' : ''}`}
+                                value={formData.sex}
+                                readOnly={true}
+                            >
+                                <option value="">Select</option>
+                                <option value={BirthCertificate.SexTypes.MALE.toUpperCase()}>{BirthCertificate.SexTypes.MALE.toUpperCase()}</option>
+                                <option value={BirthCertificate.SexTypes.FEMALE.toUpperCase()}>{BirthCertificate.SexTypes.FEMALE.toUpperCase()}</option>
+                            </select>
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="firstName" className="w-full px-4 text-xs">Mothers's First Name</label>
+                            <input type="text" className={`common-input w-full ${formData.mothersFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
+                                name="mothersFirstName"
+                                value={formData.mothersFirstName}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="middleName" className="w-full px-4 text-xs">Mother's Middle Name (Maiden)</label>
+                            <input type="text" className={`common-input w-full ${formData.mothersMiddleName == '' ? 'input-empty' : ''}`} placeholder="Middle Name"
+                                name="mothersMiddleName"
+                                value={formData.mothersMiddleName}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="lastName" className="w-full px-4 text-xs">Mother's Last Name</label>
+                            <input type="text" className={`common-input w-full ${formData.mothersLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
+                                name="mothersLastName"
+                                value={formData.mothersLastName}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="firstName" className="w-full px-4 text-xs">Father's First Name</label>
+                            <input type="text" className={`common-input w-full ${formData.fathersFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
+                                name="fathersFirstName"
+                                value={formData.fathersFirstName}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="middleName" className="w-full px-4 text-xs">Father's Middle Name</label>
+                            <input type="text" className={`common-input w-full ${formData.fathersMiddleName == '' ? 'input-empty' : ''}`} placeholder="Middle Name"
+                                name="fathersMiddleName"
+                                value={formData.fathersMiddleName}
+                                readOnly={true}
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label htmlFor="lastName" className="w-full px-4 text-xs">Father's Last Name</label>
+                            <input type="text" className={`common-input w-full ${formData.fathersLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
+                                name="fathersLastName"
+                                value={formData.fathersLastName}
+                                readOnly={true}
+                            />
+                        </div>
+                    </form>
+                    <div className="flex-1 flex max-h-[800px] flex-col items-center p-2 relative overflow-hidden">
+                        <div className="flex-1 w-full mb-4">
+                            <div className="relative w-full h-full rounded-xl shadow-md border border-gray-300 overflow-hidden">
+                                {trimmedPaths &&
+                                    trimmedPaths.map((path, index) => (
+                                    <div
+                                        key={index}
+                                        className={`absolute inset-0 bg-center bg-contain bg-no-repeat transition-opacity duration-500 ${
+                                        index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                                    }`}
+                                        style={{ backgroundImage: `url(${path})` }}
+                                    ></div>
+                                ))}
                             </div>
-                            <div className="flex-1">
-                                <label htmlFor="registryNumber" className="w-full px-4 text-xs">Date of Birth</label>
-                                <input type="date" className="common-input w-full" placeholder="Date of Birth"
-                                    name="dateOfBirth"
-                                    value={formData.dateOfBirth}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth</label>
-                                <input type="text" className="common-input w-full" placeholder="Place of Birth"
-                                    name="placeOfBirth"
-                                    value={formData.placeOfBirth}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="firstName" className="w-full px-4 text-xs">Child's First Name</label>
-                                <input type="text" className="common-input w-full" placeholder="First Name"
-                                    name="firstName"
-                                    value={formData.childFirstName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="firstName" className="w-full px-4 text-xs">Child's Middle Name</label>
-                                <input type="text" className="common-input w-full" placeholder="First Name"
-                                    name="firstName"
-                                    value={formData.childMiddleName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="lastName" className="w-full px-4 text-xs">Child's Last Name</label>
-                                <input type="text" className="common-input w-full" placeholder="Last Name"
-                                    name="lastName"
-                                    value={formData.childLastName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="lastName" className="w-full px-4 text-xs">Sex</label>
-                                <select name="sex" className={`common-input w-full`}
-                                    value={formData.sex}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
+                        </div>
+                        <div className="flex-1 w-full max-h-[5%] mt-2">
+                            <div className="absolute bottom-4 flex justify-center gap-4 w-full">
+                                <button
+                                    type='button'
+                                    className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                                    onClick={prevImage}
                                 >
-                                    <option value="">Select</option>
-                                    <option value={BirthCertificate.SexTypes.MALE.toUpperCase()}>{BirthCertificate.SexTypes.MALE.toUpperCase()}</option>
-                                    <option value={BirthCertificate.SexTypes.FEMALE.toUpperCase()}>{BirthCertificate.SexTypes.FEMALE.toUpperCase()}</option>
-                                </select>
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="firstName" className="w-full px-4 text-xs">Mothers's First Name</label>
-                                <input type="text" className="common-input w-full" placeholder="First Name"
-                                    name="firstName"
-                                    value={formData.mothersFirstName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="middleName" className="w-full px-4 text-xs">Mother's Middle Name (Maiden)</label>
-                                <input type="text" className="common-input w-full" placeholder="Middle Name"
-                                    name="middleName"
-                                    value={formData.mothersMiddleName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="lastName" className="w-full px-4 text-xs">Mother's Last Name</label>
-                                <input type="text" className="common-input w-full" placeholder="Last Name"
-                                    name="lastName"
-                                    value={formData.mothersLastName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="firstName" className="w-full px-4 text-xs">Father's First Name</label>
-                                <input type="text" className="common-input w-full" placeholder="First Name"
-                                    name="firstName"
-                                    value={formData.fathersFirstName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="middleName" className="w-full px-4 text-xs">Father's Middle Name</label>
-                                <input type="text" className="common-input w-full" placeholder="Middle Name"
-                                    name="middleName"
-                                    value={formData.fathersMiddleName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label htmlFor="lastName" className="w-full px-4 text-xs">Father's Last Name</label>
-                                <input type="text" className="common-input w-full" placeholder="Last Name"
-                                    name="lastName"
-                                    value={formData.fathersLastName}
-                                    onChange={handleOnChange}
-                                    readOnly={isView}
-                                />
-                            </div>
-                            <button type="submit" hidden={isView} className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
-                        </form>
-                        <div className="flex-1 flex flex-col items-center p-2 relative overflow-hidden">
-                            <div className="flex-1 w-full">
-                                <div className="relative w-full h-full rounded-xl shadow-md border border-gray-300 overflow-hidden">
-                                    {trimmedPaths &&
-                                        trimmedPaths.map((path, index) => (
-                                        <div
-                                            key={index}
-                                            className={`absolute inset-0 bg-center bg-contain bg-no-repeat transition-opacity duration-500 ${
-                                            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-                                        }`}
-                                            style={{ backgroundImage: `url(${path})` }}
-                                        ></div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="flex-1 w-full max-h-[5%] mt-2">
-                                <div className="absolute bottom-4 flex justify-center gap-4 w-full">
-                                    <button
-                                        type='button'
-                                        className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
-                                        onClick={prevImage}
-                                    >
-                                        <i className="fa-solid fa-angles-left"></i>
-                                    </button>
-                                    <button
-                                        type='button'
-                                        className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
-                                        onClick={nextImage}
-                                    >
-                                        <i className="fa-solid fa-angles-right"></i>
-                                    </button>
-                                </div>
+                                    <i className="fa-solid fa-angles-left"></i>
+                                </button>
+                                <button
+                                    type='button'
+                                    className="btn-primary px-3 py-1 rounded-lg disabled:opacity-50"
+                                    onClick={nextImage}
+                                >
+                                    <i className="fa-solid fa-angles-right"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </>)
-            }
-            
+                </div>
+           }
         </div>
     )
 }

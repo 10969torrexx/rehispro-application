@@ -68,7 +68,7 @@ export default function BirthCertificate() {
                                             if (row?.creation_type == 'manual') {
                                                 setActiveTab("view"); 
                                             } else {
-                                                setActiveTab("uploadResults"); 
+                                                setActiveTab("uploadView"); 
                                                 setIsView(true);
                                             }
                                         }} 
@@ -131,6 +131,25 @@ export default function BirthCertificate() {
                                 </div>
                                 <div>
                                     <BirthUploadsCreate 
+                                        defaultData={ocrResults ? ocrResults : selectedRow} 
+                                        activeTab={setActiveTab} 
+                                        filePath={uploadedFiles} 
+                                        isView={isView}
+                                    />
+                                </div>
+                            </div>
+                        }
+                        {
+                            activeTab === 'uploadView' &&
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="Warning before creating Live Birth"
+                                        message={`Please double check each values before confirming. You may go back to the upload tab to re-upload another document if the values are incorrect.`}
+                                    />
+                                </div>
+                                <div>
+                                    <BirthUploadsView
                                         defaultData={ocrResults ? ocrResults : selectedRow} 
                                         activeTab={setActiveTab} 
                                         filePath={uploadedFiles} 

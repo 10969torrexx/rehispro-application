@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { BirthCertServices } from "@services";
 import { BirthCertificate } from '@enums';
-import { Spinner } from '@components';
 import { toast } from "react-toastify";
 
 export default function Create ({defaultData, filePath, activeTab}) {
@@ -20,7 +19,6 @@ export default function Create ({defaultData, filePath, activeTab}) {
         creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData.registry_number ?? '',
         dateOfBirth: defaultData.birth_date ?? '',
-        placeOfBirthHospital: defaultData.placeOfBirth_hospital ?? '',
         placeOfBirthBarangay: defaultData.placeOfBirth_barangay ?? '',
         placeOfBirthCity: defaultData.placeOfBirth_city ?? '',
         placeOfBirthProvince: defaultData.placeOfBirth_province ?? '',
@@ -28,12 +26,12 @@ export default function Create ({defaultData, filePath, activeTab}) {
         childMiddleName: defaultData.child_middle_name ??  '',
         childLastName: defaultData.child_last_name ??  '',
         sex: defaultData.sex ?? '',
-        mothersFirstName: defaultData.maiden_first_name ??  '',
-        mothersMiddleName: defaultData.maiden_middle_name ??  '',
-        mothersLastName: defaultData.maiden_last_name ??  '',
-        fathersFirstName: defaultData.father_first_name ??  '',
-        fathersMiddleName: defaultData.father_middle_name ??  '',
-        fathersLastName: defaultData.father_last_name ??  '',
+        maidenFirstName: defaultData.maiden_first_name ??  '',
+        maidenMiddleName: defaultData.maiden_middle_name ??  '',
+        maidenLastName: defaultData.maiden_last_name ??  '',
+        fatherFirstName: defaultData.father_first_name ??  '',
+        fatherMiddleName: defaultData.father_middle_name ??  '',
+        fatherLastName: defaultData.father_last_name ??  '',
         filePath:  trimmedPaths,
         fileNames: 'sample'
     });
@@ -113,14 +111,6 @@ export default function Create ({defaultData, filePath, activeTab}) {
                         />
                     </div>
                     <div className="flex-1">
-                        <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth (Hospital / Establishment)</label>
-                        <input type="text" className={`common-input w-full ${formData.placeOfBirthHospital == '' ? 'input-empty' : ''}`} placeholder="Place of Birth"
-                            name="placeOfBirth"
-                            value={formData.placeOfBirthHospital}
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth (Barangay)</label>
                         <input type="text" className={`common-input w-full ${formData.placeOfBirthBarangay == '' ? 'input-empty' : ''}`} placeholder="Place of Birth"
                             name="placeOfBirth"
@@ -181,49 +171,49 @@ export default function Create ({defaultData, filePath, activeTab}) {
                     </div>
                     <div className="flex-1">
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Mothers's First Name</label>
-                        <input type="text" className={`common-input w-full ${formData.mothersFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
-                            name="mothersFirstName"
-                            value={formData.mothersFirstName}
+                        <input type="text" className={`common-input w-full ${formData.maidenFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
+                            name="maidenFirstName"
+                            value={formData.maidenFirstName}
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="flex-1">
                         <label htmlFor="middleName" className="w-full px-4 text-xs">Mother's Middle Name (Maiden)</label>
-                        <input type="text" className={`common-input w-full ${formData.mothersMiddleName == '' ? 'input-empty' : ''}`} placeholder="Middle Name"
-                            name="mothersMiddleName"
-                            value={formData.mothersMiddleName}
+                        <input type="text" className={`common-input w-full ${formData.maidenMiddleName == '' ? 'input-empty' : ''}`} placeholder="Middle Name"
+                            name="maidenMiddleName"
+                            value={formData.maidenMiddleName}
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="flex-1">
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Mother's Last Name</label>
-                        <input type="text" className={`common-input w-full ${formData.mothersLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
-                            name="mothersLastName"
-                            value={formData.mothersLastName}
+                        <input type="text" className={`common-input w-full ${formData.maidenLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
+                            name="maidenLastName"
+                            value={formData.maidenLastName}
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="flex-1">
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Father's First Name</label>
-                        <input type="text" className={`common-input w-full ${formData.fathersFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
-                            name="fathersFirstName"
-                            value={formData.fathersFirstName}
+                        <input type="text" className={`common-input w-full ${formData.fatherFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
+                            name="fatherFirstName"
+                            value={formData.fatherFirstName}
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="flex-1">
                         <label htmlFor="middleName" className="w-full px-4 text-xs">Father's Middle Name</label>
-                        <input type="text" className={`common-input w-full ${formData.fathersMiddleName == '' ? 'input-empty' : ''}`} placeholder="Middle Name"
-                            name="fathersMiddleName"
-                            value={formData.fathersMiddleName}
+                        <input type="text" className={`common-input w-full ${formData.fatherMiddleName == '' ? 'input-empty' : ''}`} placeholder="Middle Name"
+                            name="fatherMiddleName"
+                            value={formData.fatherMiddleName}
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="flex-1">
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Father's Last Name</label>
-                        <input type="text" className={`common-input w-full ${formData.fathersLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
-                            name="fathersLastName"
-                            value={formData.fathersLastName}
+                        <input type="text" className={`common-input w-full ${formData.fatherLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
+                            name="fatherLastName"
+                            value={formData.fatherLastName}
                             onChange={handleOnChange}
                         />
                     </div>
