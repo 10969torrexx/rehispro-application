@@ -45,6 +45,10 @@ export default function MarriageCertificateHome({ onView }) {
               if (action === "view") {
                 onView?.(row);
               } else if (action === "download") {
+                if (row.creation_type == 'upload') {
+                  toast.error("Download not available for uploaded marriage certificates.");
+                  return false;
+                }
                 try {
                   setIsDownloading(true);
                   await MarriageCertServices.download(params?.row.id);

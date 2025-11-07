@@ -73,6 +73,10 @@ export default function DeathCertificateHome({ onView }) {
                 onView?.(row);
               } else if (action === "download") {
                 try {
+                  if (row.creation_type == 'upload') {
+                    toast.error("Download not available for uploaded death certificates.");
+                    return false;
+                  }
                   setIsDownloading(true);
                   await DeathCertServices.download(params?.row.id);
                   toast.success("PDF download complete!");

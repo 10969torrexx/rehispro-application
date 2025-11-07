@@ -76,6 +76,10 @@ export default function BirthCertificateHome({ onView }) {
                     onView?.(row);
                   } else if (action === "download") {
                     try {
+                      if (row.creation_type == 'upload') {
+                        toast.error("Download not available for uploaded birth certificates.");
+                        return false;
+                      }
                       setIsDownloading(true);
                       await BirthCertServices.download(params?.row.id);
                       toast.success("PDF download complete!");
