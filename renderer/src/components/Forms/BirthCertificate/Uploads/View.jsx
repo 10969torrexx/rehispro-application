@@ -20,7 +20,6 @@ export default function View ({defaultData}) {
                 setLoading(true);
                 const response = await BirthCertServices.viewBirthCertificate(dataId);
                 const listOfBirthCerts = response.data;
-                console.log(listOfBirthCerts);
                 if (response && response.success && response.data) {
                     setTrimmedPaths(JSON.parse(response.data.uploaded_file.file_path));
                     setFormData((prev) => ({

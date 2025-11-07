@@ -231,10 +231,6 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             if (Object.keys(response).length > 0) {
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
-                console.log("[Death form] Validation Errors:", response);
-                console.log(
-                    `[Death form] form Data ${currentPage}:`, formData[`page${currentPage}`]
-                );
             } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
             }
@@ -288,11 +284,8 @@ export default function DeathCertificateCreate({defaultOCRValues}) {
             formData.page15
         );
     
-        console.log("Final Flat Data:", flatData);
-    
         DeathCertServices.insertDeathCertificate(flatData)
             .then((response) => {
-                console.log("[Death Form]", response);
                 toast.success(response.message || "Death certificate created successfully");
     
                 // reset form state (same as your original code)

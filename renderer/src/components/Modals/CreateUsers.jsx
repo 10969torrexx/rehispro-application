@@ -63,7 +63,6 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
             setErrors({});
             toast.success(createUserResponse.message);
         } else {
-            console.log('Create user error:', createUserResponse.message);
             toast.error(createUserResponse.message);
         }
     }

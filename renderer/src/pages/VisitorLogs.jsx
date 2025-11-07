@@ -126,7 +126,6 @@ export default function VisitorLogs() {
     };
     const handleDateChange = (e) => {
         const selectedDate = e.target.value;
-        console.log("Selected Date:", selectedDate);
         setDate(selectedDate);
         if (!selectedDate) {
             setFilteredRows(rows);

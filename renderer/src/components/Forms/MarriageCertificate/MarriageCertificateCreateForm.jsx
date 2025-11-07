@@ -313,10 +313,6 @@ export default function MarriageCertificateCreateForm() {
             if (Object.keys(response).length > 0) {
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
-                console.log("[marriage form] Validation Errors:", response);
-                console.log(
-                    `[marriage form] form Data ${currentPage}:`, formData[`page${currentPage}`]
-                );
             } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
             }
@@ -576,11 +572,8 @@ export default function MarriageCertificateCreateForm() {
             formData.page11
         );
     
-        console.log("Final Flat Data:", flatData);
-    
         MarriageCertServices.insertMarriageCertificate(flatData)
             .then((response) => {
-                console.log("[Marriage Form]", response);
                 toast.success(response.message || "Marriage certificate created successfully");
     
                 // Reset form state

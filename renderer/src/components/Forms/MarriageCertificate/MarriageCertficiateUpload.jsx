@@ -14,7 +14,6 @@ export default function MarriageCertificateUpload({setActiveTab, onOCRComplete, 
 
     const onDrop = useCallback(uploadedFiles => {
         const sorted = [...uploadedFiles].sort((a, b) => a.name.localeCompare(b.name));
-
         const readable = sorted.map(file => ({
             name: file.name,
             size: Math.round(file.size / 1024) + " KB",

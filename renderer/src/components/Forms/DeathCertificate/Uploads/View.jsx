@@ -6,7 +6,6 @@ export default function View ({defaultData}) {
     const [loading, setLoading] = useState(true);
     const [trimmedPaths, setTrimmedPaths] = useState([]);
     const [formData, setFormData] = useState({});
-    console.log(defaultData);
     useEffect(() => {
         const dataId = defaultData ? defaultData.id : null;
         if (!dataId) {
@@ -17,7 +16,6 @@ export default function View ({defaultData}) {
             try {
                 setLoading(true);
                 const response = await DeathCertServices.viewDeathCertificate(dataId);
-                console.log(response);
                 setTrimmedPaths(JSON.parse(response.data.uploaded_file.file_path));
                 setFormData({
                     registryNumber: response.data.registry_number ?? '',

@@ -9,6 +9,7 @@ logger = setup_logger(__name__, "python-backend/logs/marriage_parser.log")
 default_keywords = [
   "Municipal Form No. 97",
   "Republic of the_Philippines",
+  'Republic ol lho Phllipplnee',
   "(To be accomplished in quadruplicate using black ink)",
   "(Revised January",
   "OFFICE OF THE CIVIL REGISTRAR GENERAL",
