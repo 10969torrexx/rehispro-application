@@ -3,7 +3,7 @@ const { writeLog } = require('../utils/logger');
 const { callPythonOCR } = require('../services/OCRService');
 const generate = require('../helpers/deathGeneratePDF');
 const puppeteer = require('puppeteer');
-const { storeFile } = require('./FilesController');
+const { storeFile, getFileById } = require('./FilesController');
 // CREATE Death Certificate
 exports.create = async (req, res) => {
     try {
@@ -322,28 +322,46 @@ exports.list = (req, res) => {
 
 // VIEW Death Certificate
 exports.view = async (req, res) => {
-  db.get(
-    `SELECT * FROM deathcertificates WHERE id = ?`,
-    [req.params.id],
-    (err, row) => {
-      if (err) {
-        console.error('❌ [DB Error]', err.message);
-        return res.status(500).json({
-          success: false,
-          message: 'Database fetch failed',
-          error: err.message,
-        });
-      }
-  
-      const death_certificate = row;
-  
-      res.status(200).json({
-        success: true,
-        message: 'Death Certificate Found',
-        data: death_certificate,
+  try {
+    const death_certificate = await new Promise((resolve, reject) => {
+      db.get(
+        `SELECT * FROM deathcertificates WHERE id = ?`,
+        [req.params.id],
+        (err, row) => {
+          if (err) return reject(err);
+          resolve(row || null);
+        }
+      );
+    });
+
+    if (!death_certificate) {
+      return res.status(404).json({
+        success: false,
+        message: 'Death Certificate not found',
       });
     }
-  );
+
+    let uploadedFile = null;
+    if (death_certificate.file_id) {
+        uploadedFile = await getFileById(death_certificate.file_id);
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Birth Certificate Found',
+      data: {
+          ...death_certificate,
+          uploaded_file: uploadedFile,
+      },
+    });
+  } catch (error) {
+    console.error('❌ [DB Error]', err.message);
+    res.status(500).json({
+      success: false,
+      message: 'Database fetch failed',
+      error: err.message,
+    });
+  }
 };
     
 //TODO: handle upload and scan

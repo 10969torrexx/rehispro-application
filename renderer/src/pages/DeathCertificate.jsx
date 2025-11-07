@@ -64,7 +64,11 @@ export default function DeathCertificate() {
                                 <DeathCertificateHome 
                                     onView={(row) => {
                                         setSelectedRow(row);  
-                                        setActiveTab("view");
+                                        if (row?.creation_type == 'manual') {
+                                            setActiveTab("view"); 
+                                        } else {
+                                            setActiveTab("uploadView"); 
+                                        }
                                     }}  
                                 />
                             </div>
@@ -126,6 +130,21 @@ export default function DeathCertificate() {
                                 </div>
                                 <div>
                                     <DeathUploadsCreate defaultData={ocrResults} activeTab={setActiveTab} filePath={uploadedFiles} />
+                                </div>
+                            </div>
+                        }
+
+                        {
+                            activeTab === 'uploadView' &&
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="Warning before creating Death Certitificate"
+                                        message={`Please double check each values before confirming. You may go back to the upload tab to re-upload another document if the values are incorrect.`}
+                                    />
+                                </div>
+                                <div>
+                                    <DeathUploadsView defaultData={selectedRow} />
                                 </div>
                             </div>
                         }
