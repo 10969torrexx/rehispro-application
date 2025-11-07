@@ -339,6 +339,25 @@ async function upload(req, res) {
         }
         const filePaths = req.files.map(file => file.path);
         const response = await callPythonOCR(filePaths, "marriage");
+        writeLog(`${response.success === true ? '[info]' : '[error]' } [upload] ${JSON.stringify({
+            success: response.success,
+            message: response.message,
+            data: response.result
+        })}`);
+
+        if (!response.success) {
+            res.status(500).json({
+                success: response.success,
+                message: response.message,
+            });
+        } 
+        
+        res.status(200).json({
+            success: response.success,
+            message: response.message,
+            result: response.result,
+            filePaths: filePaths
+        });
         
     } catch (error) {
         writeLog(`[error] [marraige] [upload] ${JSON.stringify(error)}`);

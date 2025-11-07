@@ -52,6 +52,7 @@ export default function MarriageCertificateUpload({setActiveTab, onOCRComplete, 
         try {
             setLoading(true)
             const response = await MarriageCertServices.upload(formData);
+            console.log(response)
             setLoading(false);
             if (response.success) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
