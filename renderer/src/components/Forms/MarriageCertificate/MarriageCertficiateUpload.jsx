@@ -56,7 +56,7 @@ export default function MarriageCertificateUpload({setActiveTab, onOCRComplete, 
             setLoading(false);
             if (response.success) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
-                setActiveTab('results');
+                setActiveTab('uploadCreate');
                 onOCRComplete(response.result);
                 uploadedFiles(response.filePaths);
             } else {
