@@ -6,7 +6,7 @@ export default function VisitorLogLatest() {
     const [loading, setLoading] = useState(true);
     const [rows, setRows] = useState([]);
     const columns = [
-        { field: 'id', headerName: 'ID', width: 50 },
+        { field: 'index', headerName: '#', width: 50 },
         { field: 'name', headerName: 'Name', width: 150 },
         { field: "officer", headerName: "Officer", width: 100 },
         { field: "purpose", headerName: "Purpose", width: 200 },
@@ -19,7 +19,7 @@ export default function VisitorLogLatest() {
                 const response = await VisitorLogServices.latest();
                 const dataWithIndex = response.data.map((item, index) => ({
                     ...item,
-                    id: index + 1,
+                    index: index + 1,
                 }));
                 setRows(dataWithIndex || []);
             } catch (error) {
