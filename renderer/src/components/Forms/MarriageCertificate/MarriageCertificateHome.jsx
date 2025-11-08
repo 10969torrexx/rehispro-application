@@ -12,8 +12,8 @@ export default function MarriageCertificateHome({ onView }) {
   const [isDownloading, setIsDownloading] = useState(false); 
 
   const columns = [
-    { field: "id", headerName: "#", width: 70 },
-    { field: "registry", headerName: "Registry Number", flex: 1 },
+    { field: "id", headerName: "#", width: 20 },
+    { field: "registry", headerName: "Registry Number", width: 100 },
     { field: "creation_type", headerName: "Creation Type", width: 100, 
       renderCell: (params) => (
         <Badge 
