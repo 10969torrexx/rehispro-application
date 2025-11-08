@@ -7,7 +7,7 @@ export default function BirthCertificateLatest() {
     const [loading, setLoading] = useState(true);
     const [rows, setRows] = useState([]);
     const columns = [
-        { field: 'index', headerName: 'ID', width: 50 },
+        { field: 'index', headerName: '#', width: 50 },
         { field: 'registry_number', headerName: 'Registry #', flex: 1 },
         { field: 'creation_type', headerName: 'Creation Type', flex: 1,
             renderCell: (params) => (
@@ -29,10 +29,9 @@ export default function BirthCertificateLatest() {
             try {
                 setLoading(true);
                 const response = await BirthCertServices.latest();
-                const indexedData = response.data || [];
-                indexedData.map((item, index) => ({
+                const indexedData = response.data.map((item, index) => ({
+                    ...item,
                     index: index+1,
-                    ...item
                 }));
                 console.log(indexedData);
                 setRows(indexedData);

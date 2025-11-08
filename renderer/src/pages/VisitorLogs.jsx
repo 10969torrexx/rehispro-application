@@ -94,6 +94,7 @@ export default function VisitorLogs() {
                     ...item,
                     index: index + 1,
                 }));
+                console.log(dataWithIndex);
                 setRows(dataWithIndex);
                 const todayString = new Date().toISOString().split("T")[0];
                 const todayData = dataWithIndex.filter((row) => 
