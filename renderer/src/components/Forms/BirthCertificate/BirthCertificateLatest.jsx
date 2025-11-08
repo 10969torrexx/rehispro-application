@@ -1,23 +1,41 @@
 import { useState, useEffect } from "react";
 import { BirthCertServices } from "@services";
 import { DataGrid } from "@mui/x-data-grid";
+import { Badge } from '@components';
 import Box from "@mui/material/Box";
 export default function BirthCertificateLatest() { 
     const [loading, setLoading] = useState(true);
     const [rows, setRows] = useState([]);
     const columns = [
-        { field: 'id', headerName: 'ID', width: 50 },
-        { field: 'child_name', headerName: 'Child Name', width: 150 },
-        { field: "sex", headerName: "Sex", width: 100 },
-        { field: "child_birth_place", headerName: "Place of Birth", width: 200 },
-        { field: "created_at", headerName: "Created At", width: 150 },
+        { field: 'index', headerName: 'ID', width: 50 },
+        { field: 'registry_number', headerName: 'Registry #', flex: 1 },
+        { field: 'creation_type', headerName: 'Creation Type', flex: 1,
+            renderCell: (params) => (
+            <Badge 
+                status={params.value}
+                color= {
+                    params.value == 'upload'? 'blue' :
+                    params.value == 'manual'? 'yellow' : 'gray'
+                }
+            />
+        )
+         },
+        { field: 'child_name', headerName: 'Child Name', flex: 1},
+        { field: "sex", headerName: "Sex", flex: 1 },
+        { field: "created_at", headerName: "Created At", flex: 1 },
     ];
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true);
                 const response = await BirthCertServices.latest();
-                setRows(response.data || []);
+                const indexedData = response.data || [];
+                indexedData.map((item, index) => ({
+                    index: index+1,
+                    ...item
+                }));
+                console.log(indexedData);
+                setRows(indexedData);
             } catch (error) {
                 console.error("Error fetching birth certificates:", error);
             } finally {
