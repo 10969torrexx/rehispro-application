@@ -60,7 +60,6 @@ export default function MarriageCertificateSearch ({setActiveTab, setSelectedRow
                 return;
             }
             const response = await MarriageCertServices.search(formData);
-            console.table(response);
             if (response.success) {
                 toast.success('Search completed successfully');
                 setRows(response.data);

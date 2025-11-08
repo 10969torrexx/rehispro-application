@@ -3,8 +3,9 @@ const { writeLog } = require('../utils/logger');
 const { callPythonOCR } = require('../services/OCRService');
 const generate = require('../helpers/deathGeneratePDF');
 const puppeteer = require('puppeteer');
+const { storeFile, getFileById } = require('./FilesController');
 // CREATE Death Certificate
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     try {
         const formData = req.body;
         if (!formData) {
@@ -13,6 +14,25 @@ exports.create = (req, res) => {
 
         const flatData = formData;
         writeLog(`INFO [DeathCertificate][create] Received data: ${JSON.stringify(flatData)}`);
+
+        //TODO: create file process
+        if (flatData.filePath && Array.isArray(flatData.filePath) && flatData.filePath.length > 0) {
+          const fileData = {
+            creator_id: Number(flatData.creatorId),
+            file_name: `death_certificate_${Date.now()}.pdf`,
+            file_paths: flatData.filePath
+          };
+          try {
+            const fileId = await storeFile(fileData);
+            writeLog(`[info] [DeathCertificateController][create] Stored file with ID: ${fileId}`);
+            flatData.fileId = fileId;
+            flatData.creationType = 'upload';
+          } catch (err) {
+            writeLog(`[error] [DeathCertificateController][create] Failed to store file: ${err.message}`);
+          }
+        } else {
+          writeLog(`[info] [DeathCertificateController][create] No file paths provided, skipping file storage.`);
+        }
 
         // Validate creatorId
         const creatorId = Number(flatData.creatorId);
@@ -209,7 +229,8 @@ exports.create = (req, res) => {
             adminAddress: "admin_address",
 
             // Page 15
-            confirmation: "confirmation"
+            confirmation: "confirmation",
+            fileId: "file_id",
         };
 
         // Build SQL columns + values only from mapped fields
@@ -267,6 +288,8 @@ exports.list = (req, res) => {
     `
     SELECT 
       id,
+      registry_number,
+      creation_type,
       CONCAT_WS(' ', first_name, NULLIF(middle_name, ''), last_name) AS deceased_name,
       sex,
       DATE(created_at) AS created_at,
@@ -299,28 +322,46 @@ exports.list = (req, res) => {
 
 // VIEW Death Certificate
 exports.view = async (req, res) => {
-  db.get(
-    `SELECT * FROM deathcertificates WHERE id = ?`,
-    [req.params.id],
-    (err, row) => {
-      if (err) {
-        console.error('❌ [DB Error]', err.message);
-        return res.status(500).json({
-          success: false,
-          message: 'Database fetch failed',
-          error: err.message,
-        });
-      }
-  
-      const death_certificate = row;
-  
-      res.status(200).json({
-        success: true,
-        message: 'Death Certificate Found',
-        data: death_certificate,
+  try {
+    const death_certificate = await new Promise((resolve, reject) => {
+      db.get(
+        `SELECT * FROM deathcertificates WHERE id = ?`,
+        [req.params.id],
+        (err, row) => {
+          if (err) return reject(err);
+          resolve(row || null);
+        }
+      );
+    });
+
+    if (!death_certificate) {
+      return res.status(404).json({
+        success: false,
+        message: 'Death Certificate not found',
       });
     }
-  );
+
+    let uploadedFile = null;
+    if (death_certificate.file_id) {
+      uploadedFile = await getFileById(death_certificate.file_id);
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Birth Certificate Found',
+      data: {
+          ...death_certificate,
+          uploaded_file: uploadedFile,
+      },
+    });
+  } catch (error) {
+    writeLog('❌ [DB Error]', err.message);
+    res.status(500).json({
+      success: false,
+      message: 'Database fetch failed',
+      error: err.message,
+    });
+  }
 };
     
 //TODO: handle upload and scan
@@ -345,7 +386,8 @@ exports.uploadAndScan = async(req, res) => {
     res.status(200).json({
       success: response.success,
       message: response.message,
-      result: response.result
+      result: response.result,
+      filePaths: filePaths
     });
 
   } catch (error) {

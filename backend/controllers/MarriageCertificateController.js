@@ -4,8 +4,9 @@ const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const { callPythonOCR } = require('../services/OCRService');
 const { generate } = require('../helpers/marriageGeneratePDF');
 const puppeteer = require('puppeteer');
+const { storeFile, getFileById } = require('./FilesController');
 
-function create(req, res) {
+async function create(req, res) {
     try {
         const formData = req.body;
         if (!formData) {
@@ -13,6 +14,23 @@ function create(req, res) {
         }
 
         const flatData = formData;
+        if (flatData.filePath && Array.isArray(flatData.filePath) && flatData.filePath.length > 0) {
+          const fileData = {
+            creator_id: Number(flatData.creatorId),
+            file_name: `marriage_certificate_${Date.now()}.pdf`,
+            file_paths: flatData.filePath
+          };
+          try {
+            const fileId = await storeFile(fileData);
+            writeLog(`[info] [MarriageCertificateController][create] Stored file with ID: ${fileId}`);
+            flatData.fileId = fileId;
+            flatData.creationType = 'upload';
+          } catch (err) {
+            writeLog(`[error] [MarriageCertificateController][create] Failed to store file: ${err.message}`);
+          }
+        } else {
+          writeLog(`[info] [MarriageCertificateController][create] No file paths provided, skipping file storage.`);
+        }
 
         // Validate creatorId
         const creatorId = Number(flatData.creatorId);
@@ -216,7 +234,8 @@ function create(req, res) {
             officerAddressPage10: "officer_address_page10",
 
             // Page 11
-            confirmation: "confirmation"
+            confirmation: "confirmation",
+            fileId: "file_id",
         };  
 
         // Build SQL columns + values only from mapped fields
@@ -265,6 +284,8 @@ function getAll(req, res) {
     const query = `
         SELECT 
             id,
+            registry,
+            creation_type,
             husband_first_name || ' ' || husband_last_name AS husband,
             wife_first_name || ' ' || wife_last_name AS wife,
             date_of_marriage AS date,
@@ -289,29 +310,45 @@ function getAll(req, res) {
     });
 }
 
-function view(req, res) {
-    db.get(
-      `SELECT * FROM marriage_certificates WHERE id = ?`,
-      [req.params.id],
-      (err, row) => {
-        if (err) {
-          console.error('❌ [DB Error]', err.message);
-          return res.status(500).json({
+async function view(req, res) {
+    try {
+        const data = await new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM marriage_certificates WHERE id = ?`, [req.params.id], (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
+            });
+        });
+
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                message: 'Marriage Certificate not found',
+            });
+        }
+
+      
+        let uploadedFile = null;
+        if (data.file_id) {
+            uploadedFile = await getFileById(data.file_id);
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Marriage Certificate Found',
+            data: {
+                ...data,
+                uploaded_file: uploadedFile,
+            },
+        });
+        
+    } catch (error) {
+        writeLog('❌ [DB Error]', error.message);
+        res.status(500).json({
             success: false,
             message: 'Database fetch failed',
-            error: err.message,
-          });
-        }
-    
-        const marriage_certificate = row;
-    
-        res.status(200).json({
-          success: true,
-          message: 'Marriage Certificate Found',
-          data: marriage_certificate,
+            error: error.message,
         });
-      }
-    );
+    }
 }
 
 async function upload(req, res) {
@@ -321,6 +358,25 @@ async function upload(req, res) {
         }
         const filePaths = req.files.map(file => file.path);
         const response = await callPythonOCR(filePaths, "marriage");
+        writeLog(`${response.success === true ? '[info]' : '[error]' } [upload] ${JSON.stringify({
+            success: response.success,
+            message: response.message,
+            data: response.result
+        })}`);
+
+        if (!response.success) {
+            res.status(500).json({
+                success: response.success,
+                message: response.message,
+            });
+        } 
+        
+        res.status(200).json({
+            success: response.success,
+            message: response.message,
+            result: response.result,
+            filePaths: filePaths
+        });
         
     } catch (error) {
         writeLog(`[error] [marraige] [upload] ${JSON.stringify(error)}`);

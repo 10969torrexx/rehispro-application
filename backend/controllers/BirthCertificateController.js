@@ -4,8 +4,9 @@ const { parsedData : _birthParseData } = require('../helpers/BirthTesseract');
 const { callPythonOCR } = require('../services/OCRService');
 const generate = require('../helpers/birthGeneratePDF');
 const puppeteer = require('puppeteer');
+const { storeFile,  getFileById} = require('./FilesController');
 
-function create (req, res) {
+async function create (req, res) {
     try {
         const formData = req.body;
         if (!formData) {
@@ -14,6 +15,25 @@ function create (req, res) {
 
         const flatData = formData;
         writeLog(`[info] [BirthCertificateController][create] Received data: ${JSON.stringify(flatData)}`);
+
+        //TODO: create file process
+        if (flatData.filePath && Array.isArray(flatData.filePath) && flatData.filePath.length > 0) {
+            const fileData = {
+                creator_id: Number(flatData.creatorId),
+                file_name: `birth_certificate_${Date.now()}.pdf`,
+                file_paths: flatData.filePath
+            };
+            try {
+                const fileId = await storeFile(fileData);
+                writeLog(`[info] [BirthCertificateController][create] Stored file with ID: ${fileId}`);
+                flatData.fileId = fileId;
+                flatData.creationType = 'upload';
+            } catch (err) {
+                writeLog(`[error] [BirthCertificateController][create] Failed to store file: ${err.message}`);
+            }
+        } else {
+            writeLog(`[info] [BirthCertificateController][create] No file paths provided, skipping file storage.`);
+        }
 
         //TODO: process the attendant value
         const attendantMap = {
@@ -181,8 +201,7 @@ function create (req, res) {
             parentsStatus: "parents_status",
             marriageDate: "marriage_date",
             marriagePlace: "marriage_place",
-            fatherName: "affidavit_father_name",   // ✅ special mapping
-
+            fatherName: "affidavit_father_name",
             reasonDelay: "reason_delay",
             spouseApplicant: "spouse_applicant",
             spouseOwner: "spouse_owner",
@@ -199,7 +218,8 @@ function create (req, res) {
             adminOfficerAddress: "admin_officer_address",
           
             // Page 14 - Confirmation
-            confirmation: "confirmation"
+            confirmation: "confirmation",
+            fileId: "file_id",
         };
           
 
@@ -255,6 +275,8 @@ function list (req, res) {
         `
         SELECT 
         id, 
+        registry_number,
+        creation_type,
         CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
         sex, 
         CONCAT(maiden_first_name, " ", maiden_middle_name, " ", maiden_last_name) AS mother_name,
@@ -304,7 +326,8 @@ async function uploadAndScan(req, res) {
         res.status(200).json({
             success: response.success,
             message: response.message,
-            result: response.result
+            result: response.result,
+            filePaths: filePaths
         });
     } catch (error) {
         writeLog(`[error] [uploadAndScan] ${JSON.stringify(error)}`);
@@ -316,29 +339,47 @@ async function uploadAndScan(req, res) {
     }
 }
 
-function view(req, res) {
-    db.get(
-        `SELECT * FROM birthcertificates WHERE id = ?`,
-        [req.params.id],
-        (err, row) => {
-            if (err) {
-                console.error('❌ [DB Error]', err.message);
-                return res.status(500).json({
-                    success: false,
-                    message: 'Database fetch failed',
-                    error: err.message,
-                });
-            }
-        
-            const birth_certificate = row;
-        
-            res.status(200).json({
-                success: true,
-                message: 'Birth Certificate Found',
-                data: birth_certificate,
+async function view(req, res) {
+    try {
+        const birth_certificate = await new Promise((resolve, reject) => {
+            db.get(
+                `SELECT * FROM birthcertificates WHERE id = ?`,
+                [req.params.id],
+                (err, row) => {
+                if (err) return reject(err);
+                resolve(row || null);
+                }
+            );
+        });
+
+        if (!birth_certificate) {
+            return res.status(404).json({
+                success: false,
+                message: 'Birth Certificate not found',
             });
         }
-    );
+
+        let uploadedFile = null;
+        if (birth_certificate.file_id) {
+            uploadedFile = await getFileById(birth_certificate.file_id);
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Birth Certificate Found',
+            data: {
+                ...birth_certificate,
+                uploaded_file: uploadedFile,
+            },
+        });
+    } catch (err) {
+        console.error('❌ [DB Error]', err.message);
+        res.status(500).json({
+            success: false,
+            message: 'Database fetch failed',
+            error: err.message,
+        });
+    }
 }
 
 async function download(req, res) {
@@ -522,6 +563,72 @@ async function search(req, res) {
         });
     }
 }
+
+async function createFile(req, res) {
+    try {
+        const formData = req.body;
+        writeLog(`INFO [birth][createFile] ${JSON.stringify(formData)}`);
+        if (!formData) {
+            return res.status(400).json({ success: false, message: 'No Data' });
+        }
+        const fieldMap = {
+            creatorId : 'creator_id',
+            registryNumber: 'registry_number',
+            dateOfBirth: 'date_of_birth',
+            placeOfBirth:'child_birth_place',
+            firstName: 'child_first_name',
+            middleName: 'child_middle_name',
+            lastName: 'child_last_name',
+            sex: 'child_gender',
+            fathersFirstName: 'father_first_name',
+            fathersMiddleName: 'father_middle_name',
+            fathersLastName: 'father_last_name',
+            mothersFirstName: 'maiden_first_name',
+            mothersMiddleName: 'maiden_middle_name',
+            mothersLastName: 'maiden_last_name',
+            filePath: 'sample',
+            fileNames: 'sample'
+        }
+
+        const columns = [];
+        const values = [];
+        for (const key in formData) {
+            if (fieldMap[key]) {
+                columns.push(fieldMap[key]);
+                values.push(formData[key]);
+            }
+        }
+        const placeholders = columns.map(() => '?').join(', ');
+        const query = `
+            INSERT INTO birth_uploads (${columns.join(', ')})
+            VALUES (${placeholders})
+        `;
+        db.run(query, values, function (err) {
+            if (err) {
+                console.error('[DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database insert failed',
+                    error: err.message
+                });
+            }
+
+            res.status(201).json({
+                success: true,
+                message: 'File Stored',
+                id: this.lastID
+            });
+        });
+
+    } catch (error) {
+        writeLog('[BirthController Error]', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        });
+    }
+}
    
 module.exports = {
     create,
@@ -530,5 +637,6 @@ module.exports = {
     uploadAndScan,
     view,
     download,
-    search
+    search,
+    createFile
 };

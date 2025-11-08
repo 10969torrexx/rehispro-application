@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { BirthCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
+import { Badge } from '@components';
 import Box from "@mui/material/Box";
 import { LoadingScreen } from '@components';
 
@@ -16,7 +17,6 @@ export default function BirthCertificateHome({ onView }) {
       try {
         setLoading(true);
         const response = await BirthCertServices.listBirthCertificate();
-
         if (response && response.success && response.data) {
           setListOfBirth(response.data);
         } else {
@@ -37,19 +37,26 @@ export default function BirthCertificateHome({ onView }) {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 50 },
+    { field: "id", headerName: "#", width: 50 },
+    { field: "registry_number", headerName: "Registery #", width: 100 },
+    { field: "creation_type", headerName: "Creation Type", width: 100,
+      renderCell: (params) => (
+        <Badge 
+          status={params.value}
+          color= {
+            params.value == 'upload'? 'blue' :
+            params.value == 'manual'? 'yellow' : 'gray'
+          }
+        />
+      )
+     },
     {
       field: "child_name",
       headerName: "Child Name",
-      width: 150,
+      width: 300,
     },
     { field: "sex", headerName: "Sex", width: 100 },
     { field: "created_at", headerName: "Created At", width: 150 },
-    {
-      field: "residence",
-      headerName: "Residence",
-      width: 150,
-    },
     {
       field: "action",
       headerName: "Action",
@@ -69,11 +76,14 @@ export default function BirthCertificateHome({ onView }) {
                     onView?.(row);
                   } else if (action === "download") {
                     try {
+                      if (row.creation_type == 'upload') {
+                        toast.error("Download not available for uploaded birth certificates.");
+                        return false;
+                      }
                       setIsDownloading(true);
                       await BirthCertServices.download(params?.row.id);
                       toast.success("PDF download complete!");
                     } catch (error) {
-                      console.error(error);
                       toast.error(`Download failed: ${error.message || error}`);
                     } finally {
                       setIsDownloading(false);
@@ -82,19 +92,21 @@ export default function BirthCertificateHome({ onView }) {
                 }}
               >
                 <option value="" disabled>
-                  Actions
+                  Actions 
                 </option>
                 <option value="view">View</option>
                 <option value="download">Download</option>
               </select>
-            );
-          },
+          );
         },
-    ];
+      },
+  ];
 
   const filteredRows = listOfBirth.filter((row) => {
     const query = searchQuery.toLowerCase();
     return (
+      row.registry_number?.toLowerCase().includes(query) ||
+      row.creation_type?.toLowerCase().includes(query) ||
       row.child_name?.toLowerCase().includes(query) ||
       row.sex?.toLowerCase().includes(query) ||
       row.date_of_birth?.toLowerCase().includes(query) ||

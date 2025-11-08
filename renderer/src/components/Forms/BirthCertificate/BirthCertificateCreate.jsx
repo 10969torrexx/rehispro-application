@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Divider } from '@components';
 import { InfoCard } from '@components';
 import { BirthCertValidation } from '@services';
@@ -208,7 +208,6 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
     //TODO: handle change inputs on pages
     const handleInputChange = (event, section) => {
         const { name, value } = event.target;
-        console.log(`${name}, ${value}`);
         setFormData((prevData) => ({
             ...prevData,
             [section]: {
@@ -226,10 +225,6 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
             if (Object.keys(response).length > 0) {
                 setErrors(response);
                 toast.error("Please fix the errors in the form.");
-                console.log("[birth form] Validation Errors:", response);
-                console.log(
-                    `[birth form] form Data ${currentPage}:`, formData[`page${currentPage}`]
-                );
             } else {
                 setCurrentPage((prevPage) => Math.min(prevPage + 1, pageTitles.length));
             }
@@ -282,11 +277,9 @@ export default function BirthCertificateCreate({defaultOCRValues}) {
           formData.page14
         );
       
-        console.log("Final Flat Birth Data:", flatData);
       
         BirthCertServices.insertBirthCertificate(flatData)
           .then((response) => {
-            console.log("[Birth Form]", response);
             toast.success(response.message || "Birth certificate created successfully");
       
             // reset form state

@@ -16,6 +16,9 @@ export { default as BirthCertificateCreate } from './Forms/BirthCertificate/Birt
 export { default as BirthCertificateLatest } from './Forms/BirthCertificate/BirthCertificateLatest';
 export { default as BirthCertificateCharts } from './Forms/BirthCertificate/BirtCertificateCharts';
 export { default as BirthCertificateSearch } from './Forms/BirthCertificate/BirthCertificateSearch';
+//? Image Upload related components for birth
+export { default as BirthUploadsView } from './Forms/BirthCertificate/Uploads/View';
+export { default as BirthUploadsCreate } from './Forms/BirthCertificate/Uploads/Create';
 
 export { default as DeathCertificateCreate } from './Forms/DeathCertificate/DeathCertificateCreate';
 export { default as DeathCertificateHome } from './Forms/DeathCertificate/DeathCertificateHome';
@@ -24,6 +27,8 @@ export { default as DeathCertificateUpload } from './Forms/DeathCertificate/Deat
 export { default as DeathCertificateLatest } from './Forms/DeathCertificate/DeathCertificateLatest';
 export { default as DeathCertificateCharts } from './Forms/DeathCertificate/DeathCertificateCharts';
 export { default as DeathCertificateSearch } from './Forms/DeathCertificate/DeathCertificateSearch';
+export { default as DeathUploadsCreate } from './Forms/DeathCertificate/Uploads/Create';
+export { default as DeathUploadsView } from './Forms/DeathCertificate/Uploads/View';
 
 export { default as MarriageCertificateCreateForm } from './Forms/MarriageCertificate/MarriageCertificateCreateForm';
 export { default as MarriageCertificateHome } from './Forms/MarriageCertificate/MarriageCertificateHome';
@@ -32,7 +37,10 @@ export { default as MarriageCertificateUpload } from './Forms/MarriageCertificat
 export { default as MarriageCertificateLatest } from './Forms/MarriageCertificate/MarriageCertificateLatest';
 export { default as MarriageCertificateCharts } from './Forms/MarriageCertificate/MarriageCertificateCharts';
 export { default as MarriageCertificateSearch } from './Forms/MarriageCertificate/MarriageCertificateSearch';
+export { default as MarriageUploadCreate } from './Forms/MarriageCertificate/Uploads/Create';
+export { default as MarriageUploadsView } from './Forms/MarriageCertificate/Uploads/View';
 
 export { default as Badge } from './Badge';
 export { default as RecentRecords } from './Dashboard/RecentRecords';
 export { default as VisitorLogLatest } from './Forms/VisitorLogs/VisitorLogLatest';
+export { default as Spinner } from './Spinner';

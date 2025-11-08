@@ -152,7 +152,6 @@ exports.latest = async (req, res) => {
                     error: err.message
                 });
             }
-            writeLog(`INFO [visitor controller][latest] ${JSON.stringify(rows)}`);
             res.status(200).json({
                 success: true,
                 data: rows

@@ -48,6 +48,7 @@ db.serialize(() => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       creator_id INTEGER NOT NULL,
       creation_type TEXT DEFAULT 'manual',
+      file_id INTEGER,
 
       -- Page 1 - Child Information
       province TEXT,
@@ -208,6 +209,7 @@ db.serialize(() => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       creator_id INTEGER NOT NULL,
       creation_type TEXT DEFAULT 'manual',
+      file_id INTEGER,
   
       -- Page 1 - Deceased Information
       province TEXT,
@@ -368,13 +370,13 @@ db.serialize(() => {
     );
   `);
 
-  // db.run  (`DROP TABLE IF EXISTS marriage_certificates`);
   // TODO: Create Table for Marriage Certificate Form
   db.run(`
     CREATE TABLE IF NOT EXISTS marriage_certificates (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         creator_id INTEGER NOT NULL,
         creation_type TEXT DEFAULT 'manual',
+        file_id INTEGER,
 
         -- Page 1: Province, City, and Registry No.
         province TEXT,
@@ -597,6 +599,19 @@ db.serialize(() => {
       status varchar(255) NOT NULL DEFAULT 'pending',
       purpose TEXT,
       remarks TEXT,
+      created_at TIMESTAMP DEFAULT (datetime('now')),
+      updated_at TIMESTAMP DEFAULT (datetime('now')),
+      deleted_at TIMESTAMP
+    );
+  `);
+
+  //TODO: create table for uploaded documents
+  db.run(`
+    CREATE TABLE IF NOT EXISTS uploaded_files (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      creator_id INTEGER NOT NULL,
+      file_name TEXT NOT NULL,
+      file_path TEXT NOT NULL,
       created_at TIMESTAMP DEFAULT (datetime('now')),
       updated_at TIMESTAMP DEFAULT (datetime('now')),
       deleted_at TIMESTAMP

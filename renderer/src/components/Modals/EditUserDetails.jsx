@@ -92,7 +92,6 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
             setErrors({});
             toast.success(updateUserResponse.message);
         } else {
-            console.log('Update user error:', updateUserResponse.message);
             toast.error(updateUserResponse.message);
         }
     }

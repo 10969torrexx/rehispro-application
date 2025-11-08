@@ -4,9 +4,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const usersController = require('./controllers/usersController');
 const { writeLog } = require('./utils/logger');
+const path = require('path');
 
 const app = express();
-
+app.use('/backend/uploads', express.static(path.join(process.cwd(), 'backend/uploads')));
 const allowedOrigins = [
   'http://localhost:5173',   // dev
   'app://.',                 // production Electron/Tauri app

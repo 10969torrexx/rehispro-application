@@ -7,14 +7,13 @@ import { Limits } from '@enums';
 import { toast } from "react-toastify";
 import { MarriageCertServices } from '@services';
 
-export default function MarriageCertificateUpload({setActiveTab, onOCRComplete}) { 
+export default function MarriageCertificateUpload({setActiveTab, onOCRComplete, uploadedFiles}) { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const onDrop = useCallback(uploadedFiles => {
         const sorted = [...uploadedFiles].sort((a, b) => a.name.localeCompare(b.name));
-
         const readable = sorted.map(file => ({
             name: file.name,
             size: Math.round(file.size / 1024) + " KB",
@@ -53,11 +52,13 @@ export default function MarriageCertificateUpload({setActiveTab, onOCRComplete})
         try {
             setLoading(true)
             const response = await MarriageCertServices.upload(formData);
+            console.log(response)
             setLoading(false);
             if (response.success) {
                 //TODO: handle changing the active tab to create; passing orc results to create active tab.
-                setActiveTab('create');
+                setActiveTab('uploadCreate');
                 onOCRComplete(response.result);
+                uploadedFiles(response.filePaths);
             } else {
                 toast.error("Failed: No OCR Response");
             }
@@ -95,7 +96,7 @@ export default function MarriageCertificateUpload({setActiveTab, onOCRComplete})
                         <>
                             <p>Choose or drag and drop files here to upload</p>
                             <p className="text-xs text-gray-400 text-center">JPEG and PNG formats and up to 10 MB</p>
-                            <button className='mt-4 rounded-full px-4 py-2 btn-primary'>Browse Files</button>
+                            <button type="button" className='mt-4 rounded-full px-4 py-2 btn-primary'>Browse Files</button>
                         </>
                     )}
                 </div>

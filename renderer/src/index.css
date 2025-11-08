@@ -217,3 +217,8 @@ select {
   border: 2px solid #ef4444 !important; /* Tailwind red-500 */
   box-sizing: border-box !important;
 }
+
+.input-empty {
+  border: 2px solid #efb644 !important; /* Tailwind red-500 */
+  box-sizing: border-box !important;
+}

@@ -27,8 +27,7 @@ export default function DeathCertificateView({ row }) {
       };
   
       fetchData();
-    }, [row]); // ✅ re-fetch if row changes
-    console.log(deceased);
+    }, [row]);
     //TODO: handle download process
     const [isDownloading, setIsDownloading] = useState(false);
     const handleDownload = async (id) => {

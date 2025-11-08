@@ -8,7 +8,9 @@ logger = setup_logger(__name__, "python-backend/logs/marriage_parser.log")
 
 default_keywords = [
   "Municipal Form No. 97",
+  "42",
   "Republic of the_Philippines",
+  'Republic ol lho Phllipplnee',
   "(To be accomplished in quadruplicate using black ink)",
   "(Revised January",
   "OFFICE OF THE CIVIL REGISTRAR GENERAL",
@@ -342,28 +344,27 @@ default_keywords = [
 template = {
     # Page 1: Province, City, and Registry No.
     "province": "",
-    "city": "",
     "registry_number": "",
+    "city": "",
 
     # Husband Information (Page 1)
     "husband_first_name": "",
-    "husband_middle_name": "",
-    "husband_last_name": "",
-    "husband_birth_date": "",
-    "husband_birth_city": "",
-    "husband_birth_province": "",
-    "husband_birth_country": "",
-    "husband_age": "",
-
-    # Wife Information (Page 1)
     "wife_first_name": "",
+    "husband_middle_name": "",
     "wife_middle_name": "",
+    "husband_last_name": "",
     "wife_last_name": "",
+    "husband_birth_date": "",
     "wife_birth_date": "",
+    "husband_birth_city": "",
     "wife_birth_city": "",
+    "husband_birth_province": "",
     "wife_birth_province": "",
+    "husband_birth_country": "",
     "wife_birth_country": "",
+    "husband_age": "",
     "wife_age": "",
+
 
     # Page 2: Husband Information
     "husband_sex": "",

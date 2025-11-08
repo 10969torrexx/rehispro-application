@@ -7,7 +7,6 @@ import { useState } from 'react';
 export default function MarriageCertificateView({ row }) {
     const [loading, setLoading] = useState(true);
     const [marriage, setMarriage] = useState({});
-    console.log(row.id);
 
     useEffect(() => {
       if (!row) return; // ✅ avoid undefined
@@ -28,7 +27,7 @@ export default function MarriageCertificateView({ row }) {
       };
   
       fetchData();
-    }, [row]); // ✅ re-fetch if row changes
+    }, [row]);
 
     return (
         <>

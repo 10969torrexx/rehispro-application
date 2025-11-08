@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SideBar, InfoCard } from '@components';
 import { MarriageCertificateHome, MarriageCertificateCreateForm, MarriageCertificateView, MarriageCertificateUpload,
-    MarriageCertificateSearch
+    MarriageCertificateSearch, MarriageUploadCreate, MarriageUploadsView
 } from '@components';
 
 import { useSearchParams } from 'react-router-dom';
@@ -11,7 +11,9 @@ export default function MarriageCertificate() {
     const [selectedRow, setSelectedRow] = useState(null);
     const [searchParams] = useSearchParams();
     const [activeTab, setActiveTab] = useState("home"); //TODO: handle the active tab
-     useEffect(() => {
+    const [uploadedFiles, setUploadedFiles] = useState(null);
+    const [ocrResults, setOCRResults] = useState(null);
+    useEffect(() => {
         if (localStorage.getItem('user')) {
             setUserData(JSON.parse(localStorage.getItem('user')));
         }
@@ -61,9 +63,13 @@ export default function MarriageCertificate() {
                                 <div className="form-content mb-4">
                                     <MarriageCertificateHome 
                                         onView={(row) => {
-                                            setSelectedRow(row);   
-                                            setActiveTab("view");  
-                                        }}
+                                            setSelectedRow(row);  
+                                            if (row?.creation_type == 'manual') {
+                                                setActiveTab("view"); 
+                                            } else {
+                                                setActiveTab("uploadView"); 
+                                            }
+                                        }}  
                                     />
                                 </div>
                             </div>
@@ -77,7 +83,7 @@ export default function MarriageCertificate() {
                                     />
                                 </div>
                                 <div className="form-content mb-4">
-                                    <MarriageCertificateUpload />
+                                    <MarriageCertificateUpload setActiveTab={setActiveTab} onOCRComplete={setOCRResults} uploadedFiles={setUploadedFiles} />
                                 </div>
                             </div>}
                         {activeTab === "create" &&
@@ -109,6 +115,34 @@ export default function MarriageCertificate() {
                         {activeTab === "search" && 
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <MarriageCertificateSearch setActiveTab={setActiveTab} setSelectedRow={setSelectedRow} />
+                            </div>
+                        }
+                        {
+                            activeTab === 'uploadCreate' &&
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="Warning before creating Marriage Certificate"
+                                        message={`Please double check each values before confirming. You may go back to the upload tab to re-upload another document if the values are incorrect.`}
+                                    />
+                                </div>
+                                <div>
+                                    <MarriageUploadCreate defaultData={ocrResults} activeTab={setActiveTab} filePath={uploadedFiles} />
+                                </div>
+                            </div>
+                        }
+                        {
+                            activeTab === 'uploadView' &&
+                            <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
+                                <div className="mb-4">
+                                    <InfoCard
+                                        title="Warning before creating Death Certitificate"
+                                        message={`Please double check each values before confirming. You may go back to the upload tab to re-upload another document if the values are incorrect.`}
+                                    />
+                                </div>
+                                <div>
+                                    <MarriageUploadsView row={selectedRow} />
+                                </div>
                             </div>
                         }
                     </div>

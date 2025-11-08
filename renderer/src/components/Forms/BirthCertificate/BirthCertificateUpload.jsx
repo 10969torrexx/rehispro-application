@@ -7,7 +7,7 @@ import { Limits } from '@enums';
 import { toast } from "react-toastify";
 import { BirthCertServices } from '@services';
 
-export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) { 
+export default function BirthCertificateUpload({setActiveTab, onOCRComplete, uploadedFiles}) { 
     const [files, setFiles ] = useState([]);
     const [errors, setErrors] = useState([]);
 
@@ -56,11 +56,12 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
             const response = await BirthCertServices.uploadFiles(formData);
             setLoading(false);
             if (response.success) {
-                //TODO: handle changing the active tab to create; passing orc results to create active tab.
+                //TODO: handle changing the active tab to create; passing ocr results to create active tab.
                 toast.success("File Scanning Successful!");
-                toast.warning("Review every details for saving.");
-                setActiveTab('create');
+                toast.warning("Review every details before saving.");
+                setActiveTab('uploadResults');
                 onOCRComplete(response.result);
+                uploadedFiles(response.filePaths);
             } else {
                 toast.error("Failed: No OCR Response");
             }
@@ -98,7 +99,7 @@ export default function BirthCertificateUpload({setActiveTab, onOCRComplete}) {
                         <>
                             <p>Choose or drag and drop files here to upload</p>
                             <p className="text-xs text-gray-400 text-center">JPEG and PNG formats and up to 10 MB</p>
-                            <button className='mt-4 rounded-full px-4 py-2 btn-primary'>Browse Files</button>
+                            <button type="button" className='mt-4 rounded-full px-4 py-2 btn-primary'>Browse Files</button>
                         </>
                     )}
                 </div>
