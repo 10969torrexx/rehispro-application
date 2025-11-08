@@ -88,6 +88,15 @@ export default function BirthCertificateHome({ onView }) {
                     } finally {
                       setIsDownloading(false);
                     }
+                  } else if (action === "delete") {
+                    try {
+                      await BirthCertServices.deleteData(params?.row.id);
+                      toast.success("Birth certificate deleted successfully!");
+                    } catch (error) {
+                      toast.error(`Delete failed: ${error.message || error}`);
+                    } finally {
+                      setIsDownloading(false);
+                    }
                   }
                 }}
               >
@@ -96,6 +105,7 @@ export default function BirthCertificateHome({ onView }) {
                 </option>
                 <option value="view">View</option>
                 <option value="download">Download</option>
+                <option value="delete">Delete</option>
               </select>
           );
         },

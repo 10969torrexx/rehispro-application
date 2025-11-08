@@ -284,6 +284,7 @@ function list (req, res) {
         DATE(created_at) AS created_at, 
         CONCAT(city, ", ", province) AS residence 
         FROM birthcertificates
+        where deleted_at IS NULL
         `, 
         (err, rows) => {
         if (err) {
@@ -425,7 +426,7 @@ async function latest(req, res) {
         sex, 
         DATE(created_at) AS created_at, 
         CONCAT(city, ", ", province) AS residence 
-        FROM birthcertificates ORDER BY id DESC LIMIT 5
+        FROM birthcertificates WHERE deleted_at IS NULL ORDER BY id DESC LIMIT 5
     `,
     (err, rows) => {
       if (err) {
@@ -630,7 +631,42 @@ async function createFile(req, res) {
         });
     }
 }
-   
+
+async function deleteData(req, res) {
+    try {
+        const id = req.params.id;
+        db.run(`UPDATE birthcertificates SET deleted_at = (datetime('now')) WHERE id = ?`, [id], function (err) {
+            if (err) {
+                writeLog('ERROR: [DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database delete failed',
+                    error: err.message
+                });
+            }
+
+            if (this.changes === 0) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Birth Certificate not found',
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Birth Certificate Deleted Successfully',
+            });
+        });
+    } catch (error) {
+        writeLog('Error: [BirthController Error]', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
     create,
     list,
@@ -639,5 +675,6 @@ module.exports = {
     view,
     download,
     search,
-    createFile
+    createFile,
+    deleteData
 };

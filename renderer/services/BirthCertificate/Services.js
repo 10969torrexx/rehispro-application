@@ -189,3 +189,25 @@ export async function createFile(formData) {
         throw error;
     }
 }
+
+export async function deleteData(id) {
+    try {
+        const response = await fetch(`http://localhost:3001/birth/delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json'
+            },
+            credentials: 'include' 
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data;
+    } catch (error) {
+        console.error('[birth form] Error deleting birth certificate:', error);
+        throw error;
+    }
+}
