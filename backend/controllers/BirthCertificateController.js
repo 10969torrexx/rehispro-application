@@ -419,12 +419,13 @@ async function latest(req, res) {
     `
         SELECT 
         id, 
+        registry_number,
+        creation_type,
         CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
         sex, 
-        child_birth_place,
         DATE(created_at) AS created_at, 
         CONCAT(city, ", ", province) AS residence 
-        FROM birthcertificates ORDER BY created_at DESC LIMIT 5
+        FROM birthcertificates ORDER BY id DESC LIMIT 5
     `,
     (err, rows) => {
       if (err) {

@@ -6,12 +6,13 @@ import { toast } from "react-toastify";
 export default function Create ({defaultData, filePath, activeTab}) {
     //TODO: this will manipulate the image files
     const trimmedPaths =
-        filePath && filePath.length > 0
-        ? filePath.map((path) => {
-        const index = path.indexOf("/backend");
+     filePath && filePath.length > 0
+    ? filePath.map((path) => {
+        const normalizedPath = path.replace(/\\/g, "/");
+        const index = normalizedPath.indexOf("/backend");
         return index !== -1
-          ? "http://localhost:3001" + path.slice(index)
-          : path;
+          ? "http://localhost:3001" + normalizedPath.slice(index)
+          : normalizedPath;
       })
     : null;
 
