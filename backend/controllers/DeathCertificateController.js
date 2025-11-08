@@ -437,6 +437,8 @@ exports.latest = async(req, res) => {
     `
       SELECT 
         id,
+        registry_number,
+        creation_type,
         CONCAT_WS(' ', first_name, NULLIF(middle_name, ''), last_name) AS deceased_name,
         sex,
         DATE(created_at) AS created_at,

@@ -11,15 +11,15 @@ export default function BirthCertificateLatest() {
         { field: 'registry_number', headerName: 'Registry #', flex: 1 },
         { field: 'creation_type', headerName: 'Creation Type', flex: 1,
             renderCell: (params) => (
-            <Badge 
-                status={params.value}
-                color= {
-                    params.value == 'upload'? 'blue' :
-                    params.value == 'manual'? 'yellow' : 'gray'
-                }
-            />
-        )
-         },
+                <Badge 
+                    status={params.value}
+                    color= {
+                        params.value == 'upload'? 'blue' :
+                        params.value == 'manual'? 'yellow' : 'gray'
+                    }
+                />
+            )
+        },
         { field: 'child_name', headerName: 'Child Name', flex: 1},
         { field: "sex", headerName: "Sex", flex: 1 },
         { field: "created_at", headerName: "Created At", flex: 1 },
@@ -33,7 +33,6 @@ export default function BirthCertificateLatest() {
                     ...item,
                     index: index+1,
                 }));
-                console.log(indexedData);
                 setRows(indexedData);
             } catch (error) {
                 console.error("Error fetching birth certificates:", error);
