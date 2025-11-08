@@ -4,10 +4,16 @@ import { toast } from "react-toastify";
 
 export default function Create ({defaultData, filePath, activeTab}) {
     const [loading, setLoading] = useState(false);
-    const trimmedPaths = filePath.map((path) => {
-        const index = path.indexOf("/backend");
-        return index !== -1 ? "http://localhost:3001" + path.slice(index) : path;
-    });
+    const trimmedPaths =
+     filePath && filePath.length > 0
+    ? filePath.map((path) => {
+        const normalizedPath = path.replace(/\\/g, "/");
+        const index = normalizedPath.indexOf("/backend");
+        return index !== -1
+          ? "http://localhost:3001" + normalizedPath.slice(index)
+          : normalizedPath;
+      })
+    : null;
     const [formData, setFormData] = useState({
         creatorId : JSON.parse(localStorage.getItem('user'))?.id || null,
         registryNumber: defaultData?.registry_number ?? '',
