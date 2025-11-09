@@ -274,17 +274,17 @@ function list (req, res) {
     db.all(
         `
         SELECT 
-        id, 
-        registry_number,
-        creation_type,
-        CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
-        sex, 
-        CONCAT(maiden_first_name, " ", maiden_middle_name, " ", maiden_last_name) AS mother_name,
-        CONCAT(father_first_name, " ", father_middle_name, " ", father_last_name) AS father_name,
-        DATE(created_at) AS created_at, 
-        CONCAT(city, ", ", province) AS residence 
+            id, 
+            registry_number,
+            creation_type,
+            CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
+            sex, 
+            CONCAT(maiden_first_name, " ", maiden_middle_name, " ", maiden_last_name) AS mother_name,
+            CONCAT(father_first_name, " ", father_middle_name, " ", father_last_name) AS father_name,
+            DATE(created_at) AS created_at, 
+            CONCAT(city, ", ", province) AS residence 
         FROM birthcertificates
-        where deleted_at IS NULL
+        WHERE deleted_at IS NULL
         `, 
         (err, rows) => {
         if (err) {
