@@ -103,6 +103,14 @@ export default function Create ({defaultData, filePath, activeTab}) {
                         />
                     </div>
                     <div className="flex-1">
+                        <label htmlFor="registryNumber" className="w-full px-4 text-xs">Husband's Last Name</label>
+                        <input type="text" className={`common-input w-full ${formData.husbandLastName == '' ? 'input-empty' : ''}`} placeholder="Husband's Middle Name"
+                            name="husbandLastName"
+                            value={formData.husbandLastName}
+                            onChange={handleOnChange}
+                        />
+                    </div>
+                    <div className="flex-1">
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Wife's First Name</label>
                         <input type="text" className={`common-input w-full ${formData.wifeFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
                             name="wifeFirstName"

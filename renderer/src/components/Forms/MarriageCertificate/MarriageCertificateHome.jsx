@@ -12,7 +12,7 @@ export default function MarriageCertificateHome({ onView }) {
   const [isDownloading, setIsDownloading] = useState(false); 
 
   const columns = [
-    { field: "id", headerName: "#", width: 20 },
+    { field: "index", headerName: "#", width: 20 },
     { field: "registry", headerName: "Registry Number", width: 100 },
     { field: "creation_type", headerName: "Creation Type", width: 100, 
       renderCell: (params) => (
@@ -95,9 +95,12 @@ export default function MarriageCertificateHome({ onView }) {
       try {
         setLoading(true);
         const response = await MarriageCertServices.listMarriageCertificate();
-
         if (response && response.success && response.data) {
-          setRows(response.data);
+          const indexData = response.data.map((item, index) => ({
+            ...item,
+            index: index + 1,
+          }));
+          setRows(indexData);
         } else {
           toast.error(response?.message || "Failed to load marriage certificates");
         }
