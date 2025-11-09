@@ -658,7 +658,7 @@ async function deleteData(req, res) {
             });
         });
     } catch (error) {
-        writeLog('Error: [BirthController Error]', error);
+        writeLog('Error: [BirthController]', error);
         res.status(500).json({
             success: false,
             message: 'Server error',

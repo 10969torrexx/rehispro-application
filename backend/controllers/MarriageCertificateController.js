@@ -298,7 +298,7 @@ function getAll(req, res) {
             wife_sex,
             created_at
         FROM marriage_certificates
-        ORDER BY date_of_marriage DESC
+        WHERE deleted_at IS NULL
     `;
 
     db.all(query, [], (err, rows) => {
@@ -551,6 +551,41 @@ async function search(req, res) {
     }
 }
 
+async function deleteData(req, res) {
+    try {
+        const id = req.params.id;
+        db.run(`UPDATE marriage_certificates SET deleted_at = (datetime('now')) WHERE id = ?`, [id], function (err) {
+            if (err) {
+                writeLog('ERROR: [DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database delete failed',
+                    error: err.message
+                });
+            }
+
+            if (this.changes === 0) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Birth Certificate not found',
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Birth Certificate Deleted Successfully',
+            });
+        });
+    } catch (error) {
+        writeLog('Error: [Marriage Controller]', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
     create,
     getAll,
@@ -558,5 +593,6 @@ module.exports = {
     upload,
     download,
     latest,
-    search
+    search,
+    deleteData
 };

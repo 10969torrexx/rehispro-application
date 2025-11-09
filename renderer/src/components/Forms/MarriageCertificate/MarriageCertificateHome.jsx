@@ -59,6 +59,22 @@ export default function MarriageCertificateHome({ onView }) {
                 } finally {
                   setIsDownloading(false);
                 }
+              } else if (action === "delete") {
+                try {
+                  const response = await MarriageCertServices.deleteData(params?.row.id);
+                  if (response?.success) {
+                    toast.success(response?.message || "Marriage certificate deleted successfully!");
+                    setRows((prev) =>
+                      prev.filter((item) => item.id !== params?.row.id)
+                    );
+                  } else {
+                    toast.error(response?.message || "Delete failed");
+                  }
+                } catch (error) {
+                  toast.error(`Delete failed: ${error.message || error}`);
+                } finally {
+                  setIsDownloading(false);
+                }
               }
             }}
           >
@@ -67,6 +83,7 @@ export default function MarriageCertificateHome({ onView }) {
             </option>
             <option value="view">View</option>
             <option value="download">Download</option>
+            <option value="delete">Delete</option>
           </select>
         );
       },

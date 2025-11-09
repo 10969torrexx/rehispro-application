@@ -1,4 +1,3 @@
-// backend\routes\marriageCertificate.js
 const express = require('express');
 const router = express.Router();
 const MarriageCertificateController = require('../controllers/MarriageCertificateController');
@@ -13,5 +12,6 @@ router.post('/upload', upload.array('files'), MarriageCertificateController.uplo
 router.get('/extract-pdf/:id', MarriageCertificateController.download);
 router.get('/latest', MarriageCertificateController.latest);
 router.post('/search', MarriageCertificateController.search);
+router.delete('/delete/:id', MarriageCertificateController.deleteData);
 
 module.exports = router;
