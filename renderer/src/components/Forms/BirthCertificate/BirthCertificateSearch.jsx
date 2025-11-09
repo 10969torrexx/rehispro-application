@@ -30,9 +30,9 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
     }
 
     const columns = [
-        { field: "index", headerName: "#", width: 20 },
-        { field: "registry_number", headerName: "Registry Number", width: 150 },
-        { field: "creation_type", headerName: "Creation Type", width: 100,
+        { field: "index", headerName: "#", flex: 1 },
+        { field: "registry_number", headerName: "Registry Number", flex: 1 },
+        { field: "creation_type", headerName: "Creation Type", flex: 1,
             renderCell: (params) => (
                 <Badge 
                     status={params.value}
@@ -43,15 +43,9 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                 />
             )
         },
-        { field: "child_first_name", headerName: "Child's First Name", flex: 1 },
-        { field: "child_middle_name", headerName: "Child's Middle Name", flex: 1 },
-        { field: "child_last_name", headerName: "Child's Last Name", flex: 1 },
-        { field: "maiden_first_name", headerName: "Mother's First Name", flex: 1 },
-        { field: "maiden_middle_name", headerName: "Mother's Middle Name", flex: 1 },
-        { field: "maiden_last_name", headerName: "Mother's Last Name", flex: 1 },
-        { field: "father_first_name", headerName: "Father's First Name", flex: 1 },
-        { field: "father_middle_name", headerName: "Father's Middle Name", flex: 1 },
-        { field: "father_last_name", headerName: "Father's Last Name", flex: 1 },
+        { field: "child_first_name", headerName: "First Name", flex: 1 },
+        { field: "child_middle_name", headerName: "Middle Name", flex: 1 },
+        { field: "child_last_name", headerName: "Last Name", flex: 1 },
         { field: "date_of_birth", headerName: "Date of Birth", flex: 1 },
         { field: "child_birth_place", headerName: "Place of Birth", flex: 1 },
         { field: "action", headerName: "Action", flex: 1,
@@ -111,7 +105,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
     }
 
     return (
-        <div className="flex flex-col w-full gap-2 p-2">
+       <>
             <div className="flex-1 p-2">
                 <form action="" method="post" className="w-full flex flex-col gap-2" onSubmit={handleOnSubmit}>
                     <div className="flex-1 flex flex-row gap-2">
@@ -238,6 +232,6 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                     </Box>
                 )}
             </div>
-        </div>
+       </>
     )
 }
