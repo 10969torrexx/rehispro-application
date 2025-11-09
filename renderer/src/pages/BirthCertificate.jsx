@@ -49,7 +49,7 @@ export default function BirthCertificate() {
                         <button className={`btn-${activeTab == 'search' ? 'primary' : 'secondary'} shadow-lg text-white px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("search")}
                         >
-                            Search
+                            Detailed Search
                         </button>
                     </div>
                     <div id="managementContent" className="p-4 bg-white w-full h-screen overflow-y-auto flex justify-center shadow-lg rounded-lg">
