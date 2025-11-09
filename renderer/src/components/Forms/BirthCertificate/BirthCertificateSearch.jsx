@@ -3,6 +3,7 @@ import { BirthCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { Badge } from '@components';
 
 export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) {
     const [loading, setLoading] = useState(false);
@@ -23,11 +24,22 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
     }
 
     const columns = [
-        { field: "index", headerName: "#", width: 70 },
+        { field: "index", headerName: "#", width: 20 },
         { field: "registry_number", headerName: "Registry Number", width: 150 },
-        { field: "first_name", headerName: "First Name", width: 130 },
-        { field: "middle_name", headerName: "Middle Name", width: 130 },
-        { field: "last_name", headerName: "Last Name", width: 130 },
+        { field: "creation_type", headerName: "Creation Type", width: 100,
+            renderCell: (params) => (
+                <Badge 
+                    status={params.value}
+                    color= {
+                        params.value == 'upload'? 'blue' :
+                        params.value == 'manual'? 'yellow' : 'gray'
+                    }
+                />
+            )
+        },
+        { field: "first_name", headerName: "First Name", flex: 1 },
+        { field: "middle_name", headerName: "Middle Name", flex: 1 },
+        { field: "last_name", headerName: "Last Name", flex: 1 },
         { field: "date_of_birth", headerName: "Date of Birth", width: 130 },
         { field: "child_birth_place", headerName: "Place of Birth", width: 150 },
         { field: "action", headerName: "Action", width: 100,

@@ -522,6 +522,7 @@ async function search(req, res) {
             SELECT 
                 id,
                 registry_number,
+                creation_type,
                 child_first_name as first_name,
                 child_middle_name as middle_name,
                 child_last_name as last_name,

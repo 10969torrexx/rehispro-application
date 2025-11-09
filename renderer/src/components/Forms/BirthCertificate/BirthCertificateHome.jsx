@@ -53,7 +53,7 @@ export default function BirthCertificateHome({ onView }) {
           }
         />
       )
-     },
+    },
     {
       field: "child_name",
       headerName: "Child Name",
