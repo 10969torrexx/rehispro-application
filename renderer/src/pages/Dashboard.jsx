@@ -73,7 +73,7 @@ export default function Dashboard() {
         <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
           <HorizontalBar title={"Dashboard"} />
           <div className='p-4 w-full flex-1 overflow-y-auto flex flex-col'>
-            <div className="form-content mb-4 w-full flex flex-row gap-4">
+            <div className="form-content mb-4 w-full flex flex-col md:flex-row gap-4">
               {
                 userData?.role === UserRoles.SUPERVISOR && ( 
                   <div>
@@ -89,7 +89,7 @@ export default function Dashboard() {
               }
               <div className="flex-1">
                 <h3 className="font-semibold mb-4 text-xs text-left m-2">Document Counts</h3>
-                <div className="flex flex-1 rounded-lg gap-2">
+                <div className="flex-col md:flex-row flex flex-1 rounded-lg gap-2">
                   <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
                     <BirthCertificateCharts />
                   </div>
@@ -100,11 +100,11 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className='w-full flex flex-row gap-2'>
-              <div className="flex-1 max-w-[60%]">
+            <div className='w-full flex flex-col md:flex-row gap-2'>
+              <div className="flex-1 max-w-[100%] md:max-w-[60%]">
                 <RecentRecords />
               </div>
-              <div className="flex-1 max-w-[40%] flex flex-col">
+              <div className="flex-1 max-w-[100%] md:max-w-[40%] flex flex-col">
                 <div className="flex-1 flex flex-col flex max-h-[15%] mb-4">
                   <h3 className="font-semibold mb-2 text-xs text-left">Quick Actions</h3>
                   <div className='flex flex-row w-full gap-2'>
