@@ -42,5 +42,6 @@ export { default as MarriageUploadsView } from './Forms/MarriageCertificate/Uplo
 
 export { default as Badge } from './Badge';
 export { default as RecentRecords } from './Dashboard/RecentRecords';
+export { default as DashboardUserCounts } from './Dashboard/UserCounts';
 export { default as VisitorLogLatest } from './Forms/VisitorLogs/VisitorLogLatest';
 export { default as Spinner } from './Spinner';
