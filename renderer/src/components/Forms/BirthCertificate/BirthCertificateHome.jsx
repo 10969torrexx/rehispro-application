@@ -90,8 +90,16 @@ export default function BirthCertificateHome({ onView }) {
                     }
                   } else if (action === "delete") {
                     try {
-                      await BirthCertServices.deleteData(params?.row.id);
-                      toast.success("Birth certificate deleted successfully!");
+                      const response = await BirthCertServices.deleteData(params?.row.id);
+                      console.log(response);
+                      if (response?.success) {
+                        toast.success("Birth certificate deleted successfully!");
+                        setListOfBirth((prev) =>
+                          prev.filter((item) => item.id !== params?.row.id)
+                        );
+                      } else {
+                        toast.error(response?.message || "Delete failed");
+                      }
                     } catch (error) {
                       toast.error(`Delete failed: ${error.message || error}`);
                     } finally {
