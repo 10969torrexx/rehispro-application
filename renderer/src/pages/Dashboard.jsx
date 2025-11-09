@@ -128,9 +128,6 @@ export default function Dashboard() {
                   <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
                     <DeathCertificateCharts />
                   </div>
-                  <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
-                    <MarriageCertificateCharts />
-                  </div>
                 </div>
               </div>
             </div>
