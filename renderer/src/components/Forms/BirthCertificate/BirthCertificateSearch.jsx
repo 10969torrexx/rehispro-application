@@ -44,14 +44,13 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
         { field: "child_birth_place", headerName: "Place of Birth", width: 150 },
         { field: "action", headerName: "Action", width: 100,
             renderCell: (params) => (
-                <div className="w-full items-center justify-center flex">
-                    <button onClick={() => {
-                        setActiveTab('view'); 
+                <button className="rounded-full btn-primary-outlined text-xs px-1 py-0.5 w-full" 
+                    onClick={() => {
                         setSelectedRow(params.row);
+                        setActiveTab(params.row.creation_type == 'manual' ? 'view' : 'uploadView'); 
                     }}
-                    >View
-                    </button>
-                </div>
+                >View
+                </button>
             )
         },
     ];
@@ -74,7 +73,6 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                     ...item,
                     index: index + 1
                 }));
-                console.log(indexedData);
                 setRows(indexedData);
                 setFormData({
                     firstName: '',
