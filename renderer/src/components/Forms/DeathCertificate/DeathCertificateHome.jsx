@@ -18,7 +18,11 @@ export default function DeathCertificateHome({ onView }) {
         const response = await DeathCertServices.listDeathCertificate();
 
         if (response && response.success && response.data) {
-          setListOfDeath(response.data);
+          const indexedData = response.data.map((item, index) => ({
+              ...item,
+              index: index + 1,
+          }));
+          setListOfDeath(indexedData);
         } else {
           toast.error(response?.message || "Failed to load death certificates");
         }
@@ -37,7 +41,7 @@ export default function DeathCertificateHome({ onView }) {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "#", width: 20 },
+    { field: "index", headerName: "#", width: 20 },
     { field: "registry_number", headerName: "Registry No.", width: 100 },
     { field: "creation_type", headerName: "Creation Type", width: 100, 
       renderCell: (params) => (

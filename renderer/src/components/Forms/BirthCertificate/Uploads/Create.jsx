@@ -114,7 +114,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth (Barangay)</label>
                         <input type="text" className={`common-input w-full ${formData.placeOfBirthBarangay == '' ? 'input-empty' : ''}`} placeholder="Place of Birth"
-                            name="placeOfBirth"
+                            name="placeOfBirthBarangay"
                             value={formData.placeOfBirthBarangay}
                             onChange={handleOnChange}
                         />
@@ -122,7 +122,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth (City)</label>
                         <input type="text" className={`common-input w-full ${formData.placeOfBirthCity == '' ? 'input-empty' : ''}`} placeholder="Place of Birth"
-                            name="placeOfBirth"
+                            name="placeOfBirthCity"
                             value={formData.placeOfBirthCity}
                             onChange={handleOnChange}
                         />
@@ -130,7 +130,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Birth (Province)</label>
                         <input type="text" className={`common-input w-full ${formData.placeOfBirthProvince == '' ? 'input-empty' : ''}`} placeholder="Place of Birth"
-                            name="placeOfBirth"
+                            name="placeOfBirthProvince"
                             value={formData.placeOfBirthProvince}
                             onChange={handleOnChange}
                         />
@@ -138,7 +138,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
                     <div className="flex-1">
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Child's First Name</label>
                         <input type="text" className={`common-input w-full ${formData.childFirstName == '' ? 'input-empty' : ''}`} placeholder="First Name"
-                            name="firstName"
+                            name="childFirstName"
                             value={formData.childFirstName}
                             onChange={handleOnChange}
                         />
@@ -146,7 +146,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
                     <div className="flex-1">
                         <label htmlFor="firstName" className="w-full px-4 text-xs">Child's Middle Name</label>
                         <input type="text" className={`common-input w-full ${formData.childMiddleName == '' ? 'input-empty' : ''}`} placeholder="First Name"
-                            name="firstName"
+                            name="childMiddleName"
                             value={formData.childMiddleName}
                             onChange={handleOnChange}
                         />
@@ -154,7 +154,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
                     <div className="flex-1">
                         <label htmlFor="lastName" className="w-full px-4 text-xs">Child's Last Name</label>
                         <input type="text" className={`common-input w-full ${formData.childLastName == '' ? 'input-empty' : ''}`} placeholder="Last Name"
-                            name="lastName"
+                            name="childLastName"
                             value={formData.childLastName}
                             onChange={handleOnChange}
                         />
