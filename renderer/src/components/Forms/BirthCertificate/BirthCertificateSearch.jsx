@@ -8,9 +8,15 @@ import { Badge } from '@components';
 export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        firstName: '',
-        middleName: '',
-        lastName: '',
+        childFirstName: '',
+        childMiddleName: '',
+        childLastName: '',
+        maidenFistName: '',
+        maidenMiddleName: '',
+        maidenLastName: '',
+        fatherFirstName: '',
+        fatherMiddleName: '',
+        fatherLastName: '',
         dateOfBirth: '',
         placeOfBirth: '',
         registryNumber: '',
@@ -37,12 +43,18 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                 />
             )
         },
-        { field: "first_name", headerName: "First Name", flex: 1 },
-        { field: "middle_name", headerName: "Middle Name", flex: 1 },
-        { field: "last_name", headerName: "Last Name", flex: 1 },
-        { field: "date_of_birth", headerName: "Date of Birth", width: 130 },
-        { field: "child_birth_place", headerName: "Place of Birth", width: 150 },
-        { field: "action", headerName: "Action", width: 100,
+        { field: "child_first_name", headerName: "Child's First Name", flex: 1 },
+        { field: "child_middle_name", headerName: "Child's Middle Name", flex: 1 },
+        { field: "child_last_name", headerName: "Child's Last Name", flex: 1 },
+        { field: "maiden_first_name", headerName: "Mother's First Name", flex: 1 },
+        { field: "maiden_middle_name", headerName: "Mother's Middle Name", flex: 1 },
+        { field: "maiden_last_name", headerName: "Mother's Last Name", flex: 1 },
+        { field: "father_first_name", headerName: "Father's First Name", flex: 1 },
+        { field: "father_middle_name", headerName: "Father's Middle Name", flex: 1 },
+        { field: "father_last_name", headerName: "Father's Last Name", flex: 1 },
+        { field: "date_of_birth", headerName: "Date of Birth", flex: 1 },
+        { field: "child_birth_place", headerName: "Place of Birth", flex: 1 },
+        { field: "action", headerName: "Action", flex: 1,
             renderCell: (params) => (
                 <button className="rounded-full btn-primary-outlined text-xs px-1 py-0.5 w-full" 
                     onClick={() => {
@@ -78,9 +90,9 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                     firstName: '',
                     middleName: '',
                     lastName: '',
-                    mothersFirstName: '',
-                    mothersMiddleName: '',
-                    mothersLastName: '',
+                    maidenFirstName: '',
+                    maidenMiddleName: '',
+                    maidenLastName: '',
                     fathersFirstName: '',
                     fathersMiddleName: '',
                     fathersLastName: '',
@@ -158,24 +170,24 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="flex-1">
                             <label htmlFor="firstName">Mothers's First Name</label>
                             <input type="text" className="common-input w-full" placeholder="First Name"
-                             name="firstName"
-                             value={formData.mothersFirstName}
+                             name="maidenFirstName"
+                             value={formData.maidenFirstName}
                              onChange={handleOnChange}
                             />
                         </div>
                         <div className="flex-1">
                             <label htmlFor="middleName">Mother's Middle Name (Maiden)</label>
                             <input type="text" className="common-input w-full" placeholder="Middle Name"
-                             name="middleName"
-                             value={formData.mothersMiddleName}
+                             name="maidenMiddleName"
+                             value={formData.maidenMiddleName}
                              onChange={handleOnChange}
                             />
                         </div>
                         <div className="flex-1">
                             <label htmlFor="lastName">Mother's Last Name</label>
                             <input type="text" className="common-input w-full" placeholder="Last Name"
-                             name="lastName"
-                             value={formData.mothersLastName}
+                             name="maidenLastName"
+                             value={formData.maidenLastName}
                              onChange={handleOnChange}
                             />
                         </div>
@@ -184,7 +196,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="flex-1">
                             <label htmlFor="firstName">Father's First Name</label>
                             <input type="text" className="common-input w-full" placeholder="First Name"
-                             name="firstName"
+                             name="fathersFirstName"
                              value={formData.fathersFirstName}
                              onChange={handleOnChange}
                             />
@@ -192,7 +204,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="flex-1">
                             <label htmlFor="middleName">Father's Middle Name</label>
                             <input type="text" className="common-input w-full" placeholder="Middle Name"
-                             name="middleName"
+                             name="fathersMiddleName"
                              value={formData.fathersMiddleName}
                              onChange={handleOnChange}
                             />
@@ -200,7 +212,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="flex-1">
                             <label htmlFor="lastName">Father's Last Name</label>
                             <input type="text" className="common-input w-full" placeholder="Last Name"
-                             name="lastName"
+                             name="fathersLastName"
                              value={formData.fathersLastName}
                              onChange={handleOnChange}
                             />
