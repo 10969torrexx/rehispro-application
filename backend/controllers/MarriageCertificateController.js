@@ -517,10 +517,11 @@ async function search(req, res) {
                 ) AS place_of_marriage,
                 registry
             FROM marriage_certificates
+            WHERE deleted_at IS NULL
         `;
 
         if (conditions.length > 0) {
-            query += ' WHERE ' + conditions.join(' AND ');
+            query += `AND ${conditions.join(' AND ')}`;
         }
 
         db.all(query, values, (err, rows) => {

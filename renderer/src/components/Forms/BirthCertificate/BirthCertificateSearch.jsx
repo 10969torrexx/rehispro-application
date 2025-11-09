@@ -23,7 +23,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
     }
 
     const columns = [
-        { field: "id", headerName: "ID", width: 70 },
+        { field: "index", headerName: "#", width: 70 },
         { field: "registry_number", headerName: "Registry Number", width: 150 },
         { field: "first_name", headerName: "First Name", width: 130 },
         { field: "middle_name", headerName: "Middle Name", width: 130 },
@@ -58,7 +58,12 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
             const response = await BirthCertServices.search(formData);
             if (response.success) {
                 toast.success('Search completed successfully');
-                setRows(response.data);
+                const indexedData = response.data.map((item, index) => ({
+                    ...item,
+                    index: index + 1
+                }));
+                console.log(indexedData);
+                setRows(indexedData);
                 setFormData({
                     firstName: '',
                     middleName: '',

@@ -531,10 +531,11 @@ async function search(req, res) {
                 DATE(created_at) AS created_at,
                 CONCAT(city, ", ", province) AS residence
             FROM birthcertificates
+            WHERE deleted_at is NULL
         `;
 
         if (conditions.length > 0) {
-            query += ` WHERE ${conditions.join(' AND ')}`;
+            query += `AND ${conditions.join(' AND ')}`;
         }
 
         writeLog(`INFO [BirthCertificateController][search] Executing query: ${query} with values: ${values}`);

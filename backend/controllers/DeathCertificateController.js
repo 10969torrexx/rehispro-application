@@ -519,10 +519,11 @@ exports.search = async(req, res) => {
         place_of_death,
         registry_number
       FROM deathcertificates
+      WHERE deleted_at IS NULL
     `;
 
     if (conditions.length > 0) {
-      query += ` WHERE ${conditions.join(' AND ')}`;
+      query += `AND ${conditions.join(' AND ')}`;
     }
 
     db.all(query, values, (err, rows) => {
