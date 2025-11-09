@@ -41,9 +41,9 @@ export default function BirthCertificateHome({ onView }) {
   }, []);
 
   const columns = [
-    { field: "index", headerName: "#", width: 50 },
-    { field: "registry_number", headerName: "Registery #", width: 100 },
-    { field: "creation_type", headerName: "Creation Type", width: 100,
+    { field: "index", headerName: "#", width: 10 },
+    { field: "registry_number", headerName: "Registery #", flex: 1 },
+    { field: "creation_type", headerName: "Creation Type", flex: 1,
       renderCell: (params) => (
         <Badge 
           status={params.value}
@@ -57,14 +57,14 @@ export default function BirthCertificateHome({ onView }) {
     {
       field: "child_name",
       headerName: "Child Name",
-      width: 300,
+      flex: 1,
     },
-    { field: "sex", headerName: "Sex", width: 100 },
-    { field: "created_at", headerName: "Created At", width: 150 },
+    { field: "sex", headerName: "Sex", flex: 1 },
+    { field: "created_at", headerName: "Created At", flex: 1 },
     {
       field: "action",
       headerName: "Action",
-      width: 110,
+      flex: 1,
       sortable: false,
       renderCell: (params) => {
         const row = params?.row || {};
@@ -147,14 +147,7 @@ export default function BirthCertificateHome({ onView }) {
         />
 
       ) : (
-        <Box
-          sx={{
-            height: 600,
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <Box sx={{ height: 'auto', width: '100%' }}>
           <div className="flex justify-between items-center mb-4">
             <input
               type="text"
@@ -166,6 +159,7 @@ export default function BirthCertificateHome({ onView }) {
           </div>
 
           <DataGrid
+            autoHeight
             rows={filteredRows}
             columns={columns}
             loading={loading}
