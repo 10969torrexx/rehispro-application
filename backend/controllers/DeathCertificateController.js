@@ -552,3 +552,38 @@ exports.search = async(req, res) => {
     });
   }
 }
+
+exports.deleteData = async(req, res) => {
+  try {
+    const id = req.params.id;
+    db.run(`UPDATE deathcertificates SET deleted_at = (datetime('now')) WHERE id = ?`, [id], function(err) {
+      if (err) {
+        writeLog('ERROR: ❌ [DB Error]', err.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Database delete failed',
+          error: err.message,
+        });
+      }
+
+      if (this.changes === 0) {
+        return res.status(404).json({
+          success: false,
+          message: 'Death Certificate not found',
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Death Certificate deleted successfully',
+      });
+    });
+  } catch (error) {
+    writeLog('Error: [BirthController Error]', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message
+    });
+  }
+}

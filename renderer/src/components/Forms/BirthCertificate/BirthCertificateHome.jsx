@@ -91,7 +91,6 @@ export default function BirthCertificateHome({ onView }) {
                   } else if (action === "delete") {
                     try {
                       const response = await BirthCertServices.deleteData(params?.row.id);
-                      console.log(response);
                       if (response?.success) {
                         toast.success("Birth certificate deleted successfully!");
                         setListOfBirth((prev) =>

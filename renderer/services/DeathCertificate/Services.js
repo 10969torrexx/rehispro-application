@@ -172,3 +172,25 @@ export async function search(formData) {
         throw error;
     }
 }
+
+export async function deleteData(id) {
+    try {
+        const response = await fetch(`http://localhost:3001/death/delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data?.message || `HTTP error: ${response.status}`);
+        }
+
+        return data;
+    } catch (error) {
+        console.error('[death form] Error deleting death certificate:', error);
+        throw error;
+    }
+}   
