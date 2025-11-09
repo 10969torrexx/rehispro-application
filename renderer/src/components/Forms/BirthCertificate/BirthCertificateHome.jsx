@@ -18,7 +18,11 @@ export default function BirthCertificateHome({ onView }) {
         setLoading(true);
         const response = await BirthCertServices.listBirthCertificate();
         if (response && response.success && response.data) {
-          setListOfBirth(response.data);
+          const indexedData = response.data.map((item, index) => ({
+            ...item,
+            index: index + 1,
+          }));
+          setListOfBirth(indexedData);
         } else {
           toast.error(response?.message || "Failed to load birth certificates");
         }
@@ -37,7 +41,7 @@ export default function BirthCertificateHome({ onView }) {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "#", width: 50 },
+    { field: "index", headerName: "#", width: 50 },
     { field: "registry_number", headerName: "Registery #", width: 100 },
     { field: "creation_type", headerName: "Creation Type", width: 100,
       renderCell: (params) => (
