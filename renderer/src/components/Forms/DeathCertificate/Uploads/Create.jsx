@@ -86,7 +86,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Date of Death</label>
                         <input type="date" className="common-input w-full"
-                            name="dateDeath"
+                            name="dateOfDeath"
                             onChange={handleOnChange}
                             onClick={(e) => e.target.showPicker && e.target.showPicker()}
                             value={formData.dateOfDeath}
@@ -95,7 +95,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                     <div className="flex-1">
                         <label htmlFor="registryNumber" className="w-full px-4 text-xs">Place of Death</label>
                         <input type="text" className="common-input w-full" placeholder="Place of Death"
-                            name="deathPlace"
+                            name="placeOfDeath"
                             onChange={handleOnChange}
                             value={formData.placeOfDeath}
                         />
