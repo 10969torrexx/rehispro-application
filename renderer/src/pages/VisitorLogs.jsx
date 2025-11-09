@@ -16,13 +16,13 @@ export default function VisitorLogs() {
     const [filteredRows, setFilteredRows] = useState([]);
 
     const columns = [
-        { field: "index", headerName: "#", width: 50 },
-        { field: "name", headerName: "Name", width: 150 },
-        { field: "officer", headerName: "Officer", width: 150 },
-        { field: "contact_number", headerName: "Contact Number", width: 150 },
-        { field: "address", headerName: "Address", width: 200 },
-        { field: "purpose", headerName: "Purpose", width: 150 },
-        { field: "status", headerName: "Status", width: 200,
+        { field: "index", headerName: "#", width: 10 },
+        { field: "name", headerName: "Name", flex: 1 },
+        { field: "officer", headerName: "Officer", flex: 1 },
+        { field: "contact_number", headerName: "Contact Number", flex: 1 },
+        { field: "address", headerName: "Address", flex: 1 },
+        { field: "purpose", headerName: "Purpose", flex: 1 },
+        { field: "status", headerName: "Status", flex: 1,
             renderCell: (params) => (
                 <Badge status={params.value} color={
                     params.value === 'pending' ? 'blue' :
@@ -32,18 +32,18 @@ export default function VisitorLogs() {
                 } />
             )
         },
-        { field: "remarks", headerName: "Remarks", width: 200 },
-        { field: "created_at", headerName: "Time", width: 150,
+        { field: "created_at", headerName: "Time", flex: 1 ,
             renderCell: (params) => { 
                 return (
                     <span>{ params.value.split(' ')[1] }</span>
                 );
             }
         },
+        { field: "remarks", headerName: "Remarks", flex: 1  },
         {
             field: "actions",
             headerName: "Actions",
-            width: 180,
+            flex: 1 ,
             sortable: false,
             filterable: false,
             disableColumnMenu: true,
@@ -177,15 +177,9 @@ export default function VisitorLogs() {
                                                     onChange={(e) => handleDateChange(e)}
                                                 />
                                             </div>
-                                            <Box
-                                                sx={{
-                                                    height: 600,
-                                                    width: "100%",
-                                                    display: "flex",
-                                                    flexDirection: "column",
-                                                }}
-                                            >
+                                            <Box sx={{ height: 'auto', width: '100%' }}>
                                                 <DataGrid
+                                                    autoHeight
                                                     rows={filteredRows}
                                                     columns={columns}
                                                     pageSize={10}
