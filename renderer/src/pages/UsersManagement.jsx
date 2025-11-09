@@ -63,11 +63,7 @@ export default function UsersManagement() {
         setIsLoading(true);
         if (response && response.success) {
           setUsers(prevUsers =>
-            prevUsers.map(user =>
-              user.id === userId
-                ? { ...user, status: "deleted" }
-                : user
-            )
+            prevUsers.filter(user => user.id !== userId)
           );
           toast.success("User deleted successfully");
         } else {
