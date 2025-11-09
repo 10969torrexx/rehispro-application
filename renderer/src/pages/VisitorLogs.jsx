@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SideBar, Badge } from '@components';
+import { SideBar, Badge, HorizontalBar} from '@components';
 import { AddVisitorLog } from '@modals';
 import { VisitorLogServices } from '@services';
 import { DataGrid } from "@mui/x-data-grid";
@@ -148,7 +148,7 @@ export default function VisitorLogs() {
                 />
                 <AddVisitorLog isOpen={addVisitorLogOpen} onClose={() => setAddVisitorLogOpen(false)} onSuccess={handleRefresh} />
                 <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
-                    <h2 className="text-lg font-semibold text-left">Visitor Logs</h2>
+                    <HorizontalBar title="Visitor Logs" />
                     <div className="flex justify-end mb-4 gap-2">
                         <button className={`btn-primary shadow-lg px-3 py-1 rounded-full`}
                             onClick={() => setAddVisitorLogOpen(true)}

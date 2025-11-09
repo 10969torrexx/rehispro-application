@@ -70,7 +70,7 @@ export default function Dashboard() {
           type={recordType}
         />
         <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
-          <div className="p-4">
+          <div className="p-4 test-element">
             <h2 className="text-lg font-semibold text-left">Dashboard</h2>
           </div>
           <div className='p-4 w-full flex-1 overflow-y-auto flex flex-col'>

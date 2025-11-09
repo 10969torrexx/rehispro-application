@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { useSearchParams } from "react-router-dom";
 import { InfoCard, DeathCertificateCreate, DeathCertificateHome, DeathCertificateView, DeathCertificateUpload,
-    DeathCertificateSearch, DeathUploadsCreate, DeathUploadsView
+    DeathCertificateSearch, DeathUploadsCreate, DeathUploadsView, HorizontalBar
  } from '@components';
 
 export default function DeathCertificate() {
@@ -28,7 +28,7 @@ export default function DeathCertificate() {
                     setIsOpen={setSidebarOpen}
                 />
                 <div className="p-4 flex-1 flex flex-col w-screen h-screen transition-all duration-300">
-                    <h2 className="text-lg font-semibold text-left">Death Certificate</h2>
+                    <HorizontalBar title="Death Certificate" />
                     <div className="flex justify-end mb-4 gap-2">
                         <button className={`btn-${activeTab == 'home' ? 'primary' : 'secondary'} shadow-lg px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("home")}

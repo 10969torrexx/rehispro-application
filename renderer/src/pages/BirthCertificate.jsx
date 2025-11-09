@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SideBar } from '@components';
 import { InfoCard, BirthCertificateCreate, BirthCertificateHome, BirthCertificateView, BirthCertificateUpload,
-    BirthCertificateSearch, BirthUploadsCreate, BirthUploadsView
+    BirthCertificateSearch, BirthUploadsCreate, BirthUploadsView, HorizontalBar
  } from '@components';
 import { useSearchParams } from 'react-router-dom'; 
 
@@ -29,7 +29,7 @@ export default function BirthCertificate() {
                     setIsOpen={setSidebarOpen}
                 />
                 <div className="p-4 flex-1 flex flex-col w-screen h-screen transition-all duration-300">
-                    <h2 className="text-lg font-semibold text-left">Birth Certificate</h2>
+                    <HorizontalBar title="Birth Certificate" />
                     <div className="flex justify-end mb-4 gap-2">
                         <button className={`btn-${activeTab == 'home' ? 'primary' : 'secondary'} shadow-lg px-3 py-1 rounded-full`}
                             onClick={() => setActiveTab("home")}

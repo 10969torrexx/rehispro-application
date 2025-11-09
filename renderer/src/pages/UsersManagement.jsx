@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { UserStatus, UserRoles } from "@enums";
 import { toast } from "react-toastify";
-import { CreateUsers, ConfirmAction, EditUserDetails, ViewUserDetails } from '@modals';
-import { AuthValidations, AuthServices } from '@services';
-import { SideBar, Badge } from '@components';
+import { CreateUsers, EditUserDetails } from '@modals';
+import { AuthServices } from '@services';
+import { SideBar, Badge, HorizontalBar } from '@components';
 import { capitalizeFirst } from "@myTools";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
@@ -136,7 +135,7 @@ export default function UsersManagement() {
         onCancel={() => setShowEditUserModal(false)} 
       />
       <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
-        <h2 className="text-lg font-semibold text-left">User Management</h2>
+        <HorizontalBar title="Users Management" />
         <div className="flex justify-end mb-4 gap-2">
           <button className={`btn-primary shadow-lg px-3 py-1 rounded-full`}
             onClick={() => setShowCreateUserModal(true)}
