@@ -110,7 +110,6 @@ export default function View ({defaultData}) {
                                 <option value="FEMALE">FEMALE</option>
                             </select>
                         </div>
-                        <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
                     </form>
                     <div className="flex-1 flex flex-col items-center p-2 relative overflow-hidden">
                         <div className="flex-1 w-full mb-4">

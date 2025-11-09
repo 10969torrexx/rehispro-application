@@ -139,8 +139,8 @@ export default function DeathCertificate() {
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <div className="mb-4">
                                     <InfoCard
-                                        title="Warning before creating Death Certitificate"
-                                        message={`Please double check each values before confirming. You may go back to the upload tab to re-upload another document if the values are incorrect.`}
+                                        title="Viewing Death Certificate"
+                                        message="This is the overiew of the death certificate uploaded document."
                                     />
                                 </div>
                                 <div>

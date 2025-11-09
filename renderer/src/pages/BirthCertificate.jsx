@@ -144,8 +144,8 @@ export default function BirthCertificate() {
                             <div className="py-5 h-full text-left w-full sm:w-[100%] md:w-[90%] lg:w-[80%] xl:w-[70%]">
                                 <div className="mb-4">
                                     <InfoCard
-                                        title="Warning before creating Live Birth"
-                                        message={`Please double check each values before confirming. You may go back to the upload tab to re-upload another document if the values are incorrect.`}
+                                        title="Viewing Birth Certificate"
+                                        message="This is the overiew of the birth certificate uploaded document."
                                     />
                                 </div>
                                 <div>
