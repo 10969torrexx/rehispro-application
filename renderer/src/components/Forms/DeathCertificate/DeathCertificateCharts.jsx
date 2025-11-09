@@ -27,14 +27,32 @@ export default function DeathCertificateCharts() {
     const options = {
         responsive: true,
         plugins: {
-        legend: {
+            legend: {
             position: "bottom",
-        },
-        tooltip: {
+            labels: {
+                generateLabels: (chart) => {
+                const data = chart.data;
+                if (!data.labels.length) return [];
+                return data.labels.map((label, i) => {
+                    const value = data.datasets[0].data[i];
+                    const backgroundColor = data.datasets[0].backgroundColor[i];
+                    return {
+                    text: `${label} (${value})`, // 👈 Add count beside label
+                    fillStyle: backgroundColor,
+                    strokeStyle: backgroundColor,
+                    hidden: isNaN(value),
+                    index: i,
+                    };
+                });
+                },
+            },
+            },
+            tooltip: {
             enabled: true,
-        },
+            },
         },
     };
+
     useEffect(() => {
         const fetchData = async () => {
         try {

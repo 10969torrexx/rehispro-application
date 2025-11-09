@@ -31,6 +31,23 @@ export default function BirthCertificateCharts() {
     plugins: {
       legend: {
         position: "bottom",
+        labels: {
+          generateLabels: (chart) => {
+            const data = chart.data;
+            if (!data.labels.length) return [];
+            return data.labels.map((label, i) => {
+              const value = data.datasets[0].data[i];
+              const backgroundColor = data.datasets[0].backgroundColor[i];
+              return {
+                text: `${label} (${value})`,
+                fillStyle: backgroundColor,
+                strokeStyle: backgroundColor,
+                hidden: isNaN(value),
+                index: i,
+              };
+            });
+          },
+        },
       },
       tooltip: {
         enabled: true,
