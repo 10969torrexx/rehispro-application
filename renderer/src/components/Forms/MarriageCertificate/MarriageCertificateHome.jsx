@@ -13,8 +13,8 @@ export default function MarriageCertificateHome({ onView }) {
 
   const columns = [
     { field: "index", headerName: "#", width: 20 },
-    { field: "registry", headerName: "Registry Number", width: 100 },
-    { field: "creation_type", headerName: "Creation Type", width: 100, 
+    { field: "registry", headerName: "Registry Number", flex: 1 },
+    { field: "creation_type", headerName: "Creation Type", flex: 1, 
       renderCell: (params) => (
         <Badge 
           status={params.value}

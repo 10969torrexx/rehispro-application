@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 export default function Create ({defaultData, filePath, activeTab}) {
     const [loading, setLoading] = useState(false);
+    console.log(defaultData);
     const trimmedPaths =
      filePath && filePath.length > 0
     ? filePath.map((path) => {
