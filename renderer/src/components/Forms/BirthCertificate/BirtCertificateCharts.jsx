@@ -3,11 +3,13 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { BirthCertServices } from '@services';
 import { chartColors } from '@enums';
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function BirthCertificateCharts() {
   const [femaleCount, setFemaleCount] = useState(0);
   const [maleCount, setMaleCount] = useState(0);
+
   const data = {
     labels: ["Female", "Male"],
     datasets: [
@@ -24,6 +26,21 @@ export default function BirthCertificateCharts() {
         borderWidth: 1,
       },
     ],
+  };
+
+  const centerTextPlugin = {
+    id: 'centerText',
+    afterDraw: (chart) => {
+      const { ctx, chartArea: { width, height } } = chart;
+      ctx.save();
+      const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+      ctx.font = 'bold 18px Arial';
+      ctx.fillStyle = '#333';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(total, width / 2, height / 2);
+      ctx.restore();
+    },
   };
 
   const options = {
@@ -49,9 +66,7 @@ export default function BirthCertificateCharts() {
           },
         },
       },
-      tooltip: {
-        enabled: true,
-      },
+      tooltip: { enabled: true },
     },
   };
 
@@ -62,12 +77,10 @@ export default function BirthCertificateCharts() {
         if (response.data?.length > 0) {
           let male = 0;
           let female = 0;
-
           response.data.forEach(item => {
             if (item.sex === 'MALE') male++;
             else if (item.sex === 'FEMALE') female++;
           });
-
           setMaleCount(male);
           setFemaleCount(female);
         }
@@ -75,15 +88,14 @@ export default function BirthCertificateCharts() {
         console.error("Error fetching birth certificate status counts:", error);
       }
     };
-
     fetchData();
   }, []);
 
   return (
     <div className="text-left">
       <p className="text-xs font-semibold mb-2">Birth Certificate</p>
-      <div className="w-64 h-64 mx-auto">
-        <Doughnut data={data} options={options} />
+      <div className="w-64 h-64 mx-auto relative">
+        <Doughnut data={data} options={options} plugins={[centerTextPlugin]} />
       </div>
     </div>
   );
