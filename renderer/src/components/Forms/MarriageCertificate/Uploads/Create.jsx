@@ -83,6 +83,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
                         <label htmlFor="registry" className="w-full px-4 text-xs">Registry Number</label>
                         <input type="text" className={`common-input w-full ${formData.registry == '' ? 'input-empty' : ''}`} placeholder="Registry Number"
                             name="registry"
+                            onChange={handleOnChange}
                             value={formData.registry}
                         />
                     </div>
