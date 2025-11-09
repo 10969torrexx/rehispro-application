@@ -173,7 +173,6 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
                                 >
                                     <option value={UserStatus.ACTIVE}>{ capitalizeFirst(UserStatus.ACTIVE) }</option>
                                     <option value={UserStatus.INACTIVE}>{ capitalizeFirst(UserStatus.INACTIVE) }</option>
-                                    <option value={UserStatus.DELETED}>{ capitalizeFirst(UserStatus.DELETED) }</option>
                                 </select>
                             </div>
 

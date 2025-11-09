@@ -17,7 +17,7 @@ export default function UsersManagement() {
   const [showEditUserModal, setShowEditUserModal] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const columns = [
-    { field: "index", headerName: "ID", width: 70 },
+    { field: "index", headerName: "#", width: 10 },
     { field: "full_name", headerName: "Full Name", width: 200 },
     { field: "login_id", headerName: "Username", width: 150 },
     { field: "role", headerName: "Role", width: 100,
