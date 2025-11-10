@@ -3,8 +3,7 @@ import { toast } from 'react-toastify';
 import { ErrorMessages } from '@components';
 import { VisitorLogServices,  VisitorLogValidations } from '@services';
 
-export default function EditVisitorRemarks({ isOpen, onClose, onSuccess, selectedLog }) {
-    console.log('selectedLog', selectedLog?.name);
+export default function EditVisitorRemarks({ isOpen, onClose, onSuccess, selectedLog, newStatus }) {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
     const handleSubmit = async (e) => { 
@@ -17,10 +16,14 @@ export default function EditVisitorRemarks({ isOpen, onClose, onSuccess, selecte
             }
 
             setIsLoading(true);
-            await VisitorLogServices.store(formData);
-            toast.success('Visitor log added successfully.');
-            onClose();
-            onSuccess();
+            const response = await VisitorLogServices.updateRemarks(formData.id, formData);
+            if (response.success) {
+                toast.success('Visitor log updated successfully.');
+                onClose();
+                onSuccess();
+            } else {
+                toast.error(response.message || 'Failed to update visitor log.');
+            }
             setIsLoading(false);
             resetForm();
         } catch (error) {
@@ -35,7 +38,8 @@ export default function EditVisitorRemarks({ isOpen, onClose, onSuccess, selecte
         contactNumber: selectedLog?.contact_number || '',
         address: selectedLog?.address || '',
         purpose: selectedLog?.purpose || '',
-        remarks: selectedLog?.remarks || ''
+        remarks: selectedLog?.remarks || '',
+        status: newStatus || ''
     });
 
     useEffect(() => {
@@ -47,7 +51,8 @@ export default function EditVisitorRemarks({ isOpen, onClose, onSuccess, selecte
             contactNumber: selectedLog.contact_number || "",
             address: selectedLog.address || "",
             purpose: selectedLog.purpose || "",
-            remarks: selectedLog.remarks || ""
+            remarks: selectedLog.remarks || "",
+            status: newStatus || ""
         });
         }
     }, [selectedLog]);

@@ -6,4 +6,5 @@ router.post('/create', VisitorLogsController.create);
 router.get('/list', VisitorLogsController.list);
 router.put('/update-status/:id', VisitorLogsController.updateStatus);
 router.get('/latest', VisitorLogsController.latest);
+router.put('/update-remarks/:id', VisitorLogsController.updateRemarks);
 module.exports = router;

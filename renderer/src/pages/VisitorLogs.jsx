@@ -16,6 +16,7 @@ export default function VisitorLogs() {
     const [filteredRows, setFilteredRows] = useState([]);
     const [updateRemarksOpen, setUpdateRemarksOpen] = useState(false);
     const [selectedLog, setSelectedLog] = useState(null);
+    const [newStatus, setNewStatus] = useState('');
 
     const columns = [
         { field: "index", headerName: "#", width: 10 },
@@ -55,6 +56,7 @@ export default function VisitorLogs() {
                         className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                         onChange={(e) => {
                             const newStatus = e.target.value;
+                            setNewStatus(newStatus);
                             if (['completed', 'cancelled'].includes(newStatus)) {
                                 setUpdateRemarksOpen(true);
                                 setSelectedLog(params.row);
@@ -160,6 +162,7 @@ export default function VisitorLogs() {
                     onClose={() => setUpdateRemarksOpen(false)} 
                     onSuccess={handleRefresh}
                     selectedLog={selectedLog}
+                    newStatus={newStatus}
                  />
 
                 <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">

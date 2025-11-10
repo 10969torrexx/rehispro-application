@@ -163,3 +163,47 @@ exports.latest = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 }   
+
+exports.updateRemarks = (req, res) => {
+    try {
+        const logId = req.params.id;
+        const { remarks, status } = req.body;
+
+        if (remarks === undefined) {
+            return res.status(400).json({ success: false, message: 'Remarks is required' });
+        }
+
+        const query = `
+            UPDATE visitor_logs
+            SET remarks = ?,
+            status = ?
+            WHERE id = ?
+        `;
+
+        writeLog(`INFO [visitor controller][updateRemarks] Updating log ID (${logId}) with new remarks`);
+
+        db.run(query, [remarks, status ,logId], function (err) {
+            if (err) {
+                console.error('[DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database update failed',
+                    error: err.message
+                });
+            }
+
+            if (this.changes === 0) {
+                return res.status(404).json({ success: false, message: 'Visitor log not found' });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Visitor log remarks updated successfully'
+            });
+        });
+    } catch (error) {
+        writeLog('ERROR [visitor controller][updateRemarks]', error);
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+}
