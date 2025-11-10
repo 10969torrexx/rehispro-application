@@ -6,11 +6,11 @@ export default function VisitorLogLatest() {
     const [loading, setLoading] = useState(true);
     const [rows, setRows] = useState([]);
     const columns = [
-        { field: 'index', headerName: '#', width: 50 },
-        { field: 'name', headerName: 'Name', width: 150 },
-        { field: "officer", headerName: "Officer", width: 100 },
-        { field: "purpose", headerName: "Purpose", width: 200 },
-        { field: "created_at", headerName: "Created At", width: 150 },
+        { field: 'index', headerName: '#', width: 10 },
+        { field: 'name', headerName: 'Name', flex: 1 },
+        { field: "officer", headerName: "Officer", flex: 1 },
+        { field: "purpose", headerName: "Purpose", flex: 1 },
+        { field: "created_at", headerName: "Created At", flex: 1 },
     ];
     useEffect(() => {
         const fetchData = async () => {
@@ -40,8 +40,9 @@ export default function VisitorLogLatest() {
                             <div className="spinner"></div>
                         </div>
                     ) : (
-                        <Box sx={{ height: 280, width: '100%' }}>
+                        <Box sx={{ height: 'auto', width: '100%' }}>
                             <DataGrid
+                                autoHeight
                                 rows={rows}
                                 columns={columns}
                                 pageSize={5}
