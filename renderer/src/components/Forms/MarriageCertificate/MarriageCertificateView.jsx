@@ -31,6 +31,7 @@ export default function MarriageCertificateView({ row }) {
 
     return (
         <>
+            <h2 className="text-sm text-left font-semibold">Creator: {marriage.creator_name || ""}</h2>
             <form className="p-4 h-full mb-4 max-w-4xl mx-auto">
                 {/* Page 1 */}
                 <div className="w-full flex items-center gap-2 mb-3">
