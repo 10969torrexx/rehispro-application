@@ -313,10 +313,22 @@ function getAll(req, res) {
 async function view(req, res) {
     try {
         const data = await new Promise((resolve, reject) => {
-            db.get(`SELECT * FROM marriage_certificates WHERE id = ?`, [req.params.id], (err, row) => {
-                if (err) return reject(err);
-                resolve(row);
-            });
+            db.get(
+                `
+                SELECT 
+                    mc.*,
+                    u.full_name AS creator_name
+                FROM marriage_certificates mc
+                LEFT JOIN users u ON mc.creator_id = u.id
+                WHERE mc.id = ?
+                `,
+                [req.params.id],
+                (err, row) => {
+                    writeLog(`ERROR: failed fetching marriage certificate with ID ${req.params.id}: ${err}`);
+                    if (err) return reject(err);
+                    resolve(row);
+                }
+            );
         });
 
         if (!data) {
