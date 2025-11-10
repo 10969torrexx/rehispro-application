@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { validateLoginId, validatePassword } from '../../../services/Auth/Validations';
 import { Login as LoginRequest } from '../../../services/Auth/Services';
-import { ErrorMessages, Divider } from '@components';
-import React from "react";
+import { ErrorMessages } from '@components';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 
