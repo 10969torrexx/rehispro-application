@@ -48,7 +48,10 @@ export default function Login({ onLoginSuccess }) {
     <div className="flex items-center justify-center w-[90vw] h-[90vh]  max-w-[600px] max-h-[600px]">
       <div className="bg-white shadow-lg p-6 rounded-xl w-[80vw] h-[80vh]  max-w-[500px] max-h-[500px]">
         <div className='card-content'>
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-2xl font-semibold text-left mb-4 [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)]">
+              REHISPRO
+            </h1>
             <h1 className="text-lg font-semibold text-left">Account Login</h1>
           </div>
 
