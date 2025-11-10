@@ -324,18 +324,25 @@ exports.list = (req, res) => {
 // VIEW Death Certificate
 exports.view = async (req, res) => {
   try {
-    const death_certificate = await new Promise((resolve, reject) => {
+    const data = await new Promise((resolve, reject) => {
       db.get(
-        `SELECT * FROM deathcertificates WHERE id = ?`,
-        [req.params.id],
-        (err, row) => {
-          if (err) return reject(err);
-          resolve(row || null);
-        }
+          `
+          SELECT 
+              bc.*,
+              u.full_name AS creator_name
+          FROM deathcertificates bc
+          LEFT JOIN users u ON bc.creator_id = u.id
+          WHERE bc.id = ?
+          `,
+          [req.params.id],
+          (err, row) => {
+              if (err) return reject(err);
+              resolve(row);
+          }
       );
     });
 
-    if (!death_certificate) {
+    if (!data) {
       return res.status(404).json({
         success: false,
         message: 'Death Certificate not found',
@@ -343,20 +350,20 @@ exports.view = async (req, res) => {
     }
 
     let uploadedFile = null;
-    if (death_certificate.file_id) {
-      uploadedFile = await getFileById(death_certificate.file_id);
+    if (data.file_id) {
+      uploadedFile = await getFileById(data.file_id);
     }
 
     res.status(200).json({
       success: true,
-      message: 'Birth Certificate Found',
+      message: 'Death Certificate Found',
       data: {
-          ...death_certificate,
+          ...data,
           uploaded_file: uploadedFile,
       },
     });
   } catch (error) {
-    writeLog('❌ [DB Error]', err.message);
+    writeLog('❌ [DB Error]', error.message);
     res.status(500).json({
       success: false,
       message: 'Database fetch failed',
