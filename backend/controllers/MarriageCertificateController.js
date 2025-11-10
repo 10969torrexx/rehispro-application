@@ -1,6 +1,5 @@
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
-const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const { callPythonOCR } = require('../services/OCRService');
 const { generate } = require('../helpers/marriageGeneratePDF');
 const puppeteer = require('puppeteer');
@@ -285,6 +284,7 @@ function getAll(req, res) {
         SELECT 
             id,
             registry,
+            province,
             creation_type,
             husband_first_name || ' ' || husband_last_name AS husband,
             wife_first_name || ' ' || wife_last_name AS wife,
