@@ -45,3 +45,4 @@ export { default as RecentRecords } from './Dashboard/RecentRecords';
 export { default as DashboardUserCounts } from './Dashboard/UserCounts';
 export { default as VisitorLogLatest } from './Forms/VisitorLogs/VisitorLogLatest';
 export { default as Spinner } from './Spinner';
+export { default as DownloadImages } from './DownloadImages';
