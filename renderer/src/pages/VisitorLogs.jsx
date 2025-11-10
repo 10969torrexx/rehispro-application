@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { SideBar, Badge, HorizontalBar} from '@components';
-import { AddVisitorLog } from '@modals';
+import { AddVisitorLog, EditVisitorRemarks } from '@modals';
 import { VisitorLogServices } from '@services';
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
@@ -14,6 +14,8 @@ export default function VisitorLogs() {
     const today = new Date().toISOString().split("T")[0];
     const [date, setDate] = useState(today);
     const [filteredRows, setFilteredRows] = useState([]);
+    const [updateRemarksOpen, setUpdateRemarksOpen] = useState(false);
+    const [selectedLog, setSelectedLog] = useState(null);
 
     const columns = [
         { field: "index", headerName: "#", width: 10 },
@@ -53,7 +55,11 @@ export default function VisitorLogs() {
                         className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                         onChange={(e) => {
                             const newStatus = e.target.value;
-                            VisitorLogServices.updateStatus(params.row.id, { status: newStatus })
+                            if (['completed', 'cancelled'].includes(newStatus)) {
+                                setUpdateRemarksOpen(true);
+                                setSelectedLog(params.row);
+                            } else {
+                                VisitorLogServices.updateStatus(params.row.id, { status: newStatus })
                                 .then(() => {
                                     toast.success("Status updated successfully");
                                     fetchData();
@@ -64,6 +70,7 @@ export default function VisitorLogs() {
                                         error.message || "Failed to update status";
                                     toast.error(errorMessage);
                                 });
+                            }
                         }}
                     >
                         <option value="pending" selected={params.row.status === 'pending'}>Pending</option>
@@ -146,7 +153,15 @@ export default function VisitorLogs() {
                     isOpen={sidebarOpen}
                     setIsOpen={setSidebarOpen}
                 />
+                {/** SHOW Visitor Logs Modas **/}
                 <AddVisitorLog isOpen={addVisitorLogOpen} onClose={() => setAddVisitorLogOpen(false)} onSuccess={handleRefresh} />
+                <EditVisitorRemarks 
+                    isOpen={updateRemarksOpen} 
+                    onClose={() => setUpdateRemarksOpen(false)} 
+                    onSuccess={handleRefresh}
+                    selectedLog={selectedLog}
+                 />
+
                 <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
                     <HorizontalBar title="Visitor Logs" />
                     <div className="flex justify-end mb-4 gap-2">
