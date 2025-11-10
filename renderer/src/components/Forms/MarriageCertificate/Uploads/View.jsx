@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { MarriageCertServices } from "@services";
 import { toast } from "react-toastify";
-import { Spinner } from '@components';
+import { Spinner, DownloadImages } from '@components';
 
 export default function View ({row}) {
     const [loading, setLoading] = useState(false);
@@ -126,6 +126,7 @@ export default function View ({row}) {
                             </div>
                         </form>
                         <div className="flex-1 flex flex-col items-center p-2 relative overflow-hidden">
+                            <DownloadImages images={trimmedPaths} document={'marriage-certificate'} />
                             <div className="flex-1 w-full mb-4">
                                 <div className="relative w-full h-full rounded-xl shadow-md border border-gray-300 overflow-hidden">
                                     {trimmedPaths.map((path, index) => (

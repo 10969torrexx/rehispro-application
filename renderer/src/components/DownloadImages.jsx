@@ -1,10 +1,10 @@
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
-export default function DownloadImages({ images }) {
+export default function DownloadImages({ images, document }) {
   const handleDownloadAll = async () => {
     const zip = new JSZip();
-    const folder = zip.folder("images");
+    const folder = zip.folder(`${document}`);
 
     for (let i = 0; i < images.length; i++) {
       const url = images[i];
@@ -15,7 +15,7 @@ export default function DownloadImages({ images }) {
     }
 
     const zipBlob = await zip.generateAsync({ type: "blob" });
-    saveAs(zipBlob, "images.zip");
+    saveAs(zipBlob, `${document}.zip`);
   };
 
   return (

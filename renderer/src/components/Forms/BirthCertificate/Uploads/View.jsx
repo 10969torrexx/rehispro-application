@@ -200,7 +200,7 @@ export default function View ({defaultData}) {
                         </form>
                         <div className="flex-1 flex max-h-[800px] flex-col items-center p-2 relative overflow-hidden">
                             <div className="flex-1 max-h-[5%] w-full mb-4">
-                                <DownloadImages images={trimmedPaths} />
+                                <DownloadImages images={trimmedPaths} document={'birth-certififcate'} />
                             </div>
                             <div className="flex-1 w-full mb-4">
                                 <div className="relative w-full h-full rounded-xl shadow-md border border-gray-300 overflow-hidden">
