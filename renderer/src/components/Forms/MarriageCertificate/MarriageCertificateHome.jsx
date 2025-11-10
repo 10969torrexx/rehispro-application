@@ -29,7 +29,7 @@ export default function MarriageCertificateHome({ onView }) {
     { field: "husband", headerName: "Husband", flex: 1 },
     { field: "wife", headerName: "Wife", flex: 1 },
     { field: "place", headerName: "Place of Marriage", flex: 1 },
-     {
+    {
       field: "action",
       headerName: "Action",
       width: 110,
