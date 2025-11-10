@@ -342,18 +342,25 @@ async function uploadAndScan(req, res) {
 
 async function view(req, res) {
     try {
-        const birth_certificate = await new Promise((resolve, reject) => {
+        const data = await new Promise((resolve, reject) => {
             db.get(
-                `SELECT * FROM birthcertificates WHERE id = ?`,
+                `
+                SELECT 
+                    bc.*,
+                    u.full_name AS creator_name
+                FROM birthcertificates bc
+                LEFT JOIN users u ON bc.creator_id = u.id
+                WHERE bc.id = ?
+                `,
                 [req.params.id],
                 (err, row) => {
-                if (err) return reject(err);
-                resolve(row || null);
+                    if (err) return reject(err);
+                    resolve(row);
                 }
             );
         });
 
-        if (!birth_certificate) {
+        if (!data) {
             return res.status(404).json({
                 success: false,
                 message: 'Birth Certificate not found',
@@ -361,15 +368,15 @@ async function view(req, res) {
         }
 
         let uploadedFile = null;
-        if (birth_certificate.file_id) {
-            uploadedFile = await getFileById(birth_certificate.file_id);
+        if (data.file_id) {
+            uploadedFile = await getFileById(data.file_id);
         }
 
         res.status(200).json({
             success: true,
             message: 'Birth Certificate Found',
             data: {
-                ...birth_certificate,
+                ...data,
                 uploaded_file: uploadedFile,
             },
         });

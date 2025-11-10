@@ -67,6 +67,7 @@ export default function BirthCertificateView({ row }) {
                     {/* Page 1 */}
                         <div className="mb-6 text-left space-y-6">
                         <h2 className="text-lg text-center font-semibold">General Information</h2>
+                        <h2 className="text-sm text-left font-semibold">Creator: {birth.creator_name || ""}</h2>
         
                         {/* Province & City / Municipality*/}
                             <div className="w-full flex items-center gap-3 mb-3">

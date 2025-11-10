@@ -64,6 +64,7 @@ export default function DeathCertificateView({ row }) {
                             <div className='mb-4'>
                                 <div className="mb-4 space-y-6">
                                     <h2 className="text-lg text-center font-semibold">Deceased's Information</h2>
+                                    <h2 className="text-sm text-left font-semibold">Creator: {deceased.creator_name || ""}</h2>
                                     {/* Province & City / Municipality */}
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                                         <div className="flex flex-col">
