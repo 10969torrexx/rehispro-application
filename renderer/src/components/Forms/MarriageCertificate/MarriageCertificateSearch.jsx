@@ -36,14 +36,13 @@ export default function MarriageCertificateSearch ({setActiveTab, setSelectedRow
         { field: "place_of_marriage", headerName: "Place of Marriage", width: 150 },
         { field: "action", headerName: "Action", width: 100,
             renderCell: (params) => (
-                <div className="w-full items-center justify-center flex">
-                    <button onClick={() => {
-                        setActiveTab('view'); 
+                <button className="rounded-full btn-primary-outlined text-xs px-1 py-0.5 w-full" 
+                    onClick={() => {
                         setSelectedRow(params.row);
+                        setActiveTab(params.row.creation_type == 'manual' ? 'view' : 'uploadView'); 
                     }}
-                    >View
-                    </button>
-                </div>
+                >View
+                </button>
             )
         },
     ];

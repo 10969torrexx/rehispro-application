@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { UserStatus, UserRoles } from "@enums";
 import { toast } from "react-toastify";
-import { CreateUsers, ConfirmAction, EditUserDetails, ViewUserDetails } from '@modals';
-import { AuthValidations, AuthServices } from '@services';
-import { SideBar, Badge } from '@components';
+import { CreateUsers, EditUserDetails } from '@modals';
+import { AuthServices } from '@services';
+import { SideBar, Badge, HorizontalBar } from '@components';
 import { capitalizeFirst } from "@myTools";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
@@ -17,7 +16,7 @@ export default function UsersManagement() {
   const [showEditUserModal, setShowEditUserModal] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const columns = [
-    { field: "index", headerName: "ID", width: 70 },
+    { field: "index", headerName: "#", width: 10 },
     { field: "full_name", headerName: "Full Name", width: 200 },
     { field: "login_id", headerName: "Username", width: 150 },
     { field: "role", headerName: "Role", width: 100,
@@ -63,11 +62,7 @@ export default function UsersManagement() {
         setIsLoading(true);
         if (response && response.success) {
           setUsers(prevUsers =>
-            prevUsers.map(user =>
-              user.id === userId
-                ? { ...user, status: "deleted" }
-                : user
-            )
+            prevUsers.filter(user => user.id !== userId)
           );
           toast.success("User deleted successfully");
         } else {
@@ -114,7 +109,7 @@ export default function UsersManagement() {
         isOpen={sidebarOpen}
         setIsOpen={setSidebarOpen}
       />
-      <CreateUsers //TODO: modal to create user
+      <CreateUsers
         onSave={(data) => {
           setUsers(prevUsers => [
             ...prevUsers,
@@ -140,7 +135,7 @@ export default function UsersManagement() {
         onCancel={() => setShowEditUserModal(false)} 
       />
       <div className="p-4 flex-1 flex flex-col transition-all duration-300 overflow-hidden">
-        <h2 className="text-lg font-semibold text-left">User Management</h2>
+        <HorizontalBar title="Users Management" />
         <div className="flex justify-end mb-4 gap-2">
           <button className={`btn-primary shadow-lg px-3 py-1 rounded-full`}
             onClick={() => setShowCreateUserModal(true)}

@@ -85,7 +85,7 @@ function createUser(loginId, fullName, password, role, callback) {
 
   db.run(
     `INSERT INTO users (login_id, full_name, password, is_firsttime_flg, role) VALUES (?, ?, ?, ?, ?)`,
-    [loginId, fullName, hashedPassword, 1, role],
+    [loginId, fullName, hashedPassword, 0, role],
     function (err) {
       if (err) return callback(err);
       callback(null, { success: true, message: 'User created successfully', 
@@ -107,7 +107,7 @@ function createUser(loginId, fullName, password, role, callback) {
  */
 function getAllUsers(currentUserId, callback) {
   db.all(
-    `SELECT * FROM users WHERE id != ?`, 
+    `SELECT * FROM users WHERE id != ? AND deleted_at IS NULL`, 
     [currentUserId], 
     (err, rows) => {
       if (err) return callback(err);

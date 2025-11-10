@@ -24,8 +24,8 @@ export default function Create ({defaultData, filePath, activeTab}) {
         wifeFirstName: defaultData?.wife_first_name || '',
         wifeMiddleName: defaultData?.wife_middle_name || '',
         wifeLastName: defaultData?.wife_last_name || '',
-        husbandSex: defaultData?.husband_sex || '',
-        wifeSex: defaultData?.wife_sex || '',
+        province: defaultData?.province || '',
+        placeOfMarriage: defaultData?.place_of_marriage || '',
         filePath: trimmedPaths || []
     });
 
@@ -83,6 +83,7 @@ export default function Create ({defaultData, filePath, activeTab}) {
                         <label htmlFor="registry" className="w-full px-4 text-xs">Registry Number</label>
                         <input type="text" className={`common-input w-full ${formData.registry == '' ? 'input-empty' : ''}`} placeholder="Registry Number"
                             name="registry"
+                            onChange={handleOnChange}
                             value={formData.registry}
                         />
                     </div>
@@ -99,6 +100,14 @@ export default function Create ({defaultData, filePath, activeTab}) {
                         <input type="text" className={`common-input w-full ${formData.husbandMiddleName == '' ? 'input-empty' : ''}`} placeholder="Husband's Middle Name"
                             name="husbandMiddleName"
                             value={formData.husbandMiddleName}
+                            onChange={handleOnChange}
+                        />
+                    </div>
+                    <div className="flex-1">
+                        <label htmlFor="registryNumber" className="w-full px-4 text-xs">Husband's Last Name</label>
+                        <input type="text" className={`common-input w-full ${formData.husbandLastName == '' ? 'input-empty' : ''}`} placeholder="Husband's Middle Name"
+                            name="husbandLastName"
+                            value={formData.husbandLastName}
                             onChange={handleOnChange}
                         />
                     </div>
@@ -127,26 +136,20 @@ export default function Create ({defaultData, filePath, activeTab}) {
                         />
                     </div>
                     <div className="flex-1">
-                        <label htmlFor="lastName" className="w-full px-4 text-xs">Husband's Gender</label>
-                        <select name="husbandGender" className={`common-input w-full ${formData.husbandGender == '' ? 'input-empty' : ''}`}
-                            value={formData.husbandSex}
+                        <label htmlFor="lastName" className="w-full px-4 text-xs">Province</label>
+                        <input type="text" className={`common-input w-full ${formData.province == '' ? 'input-empty' : ''}`} placeholder="Province"
+                            name="province"
+                            value={formData.province}
                             onChange={handleOnChange}
-                        >
-                            <option value="">Select</option>
-                            <option value="MALE">MALE</option>
-                            <option value="FEMALE">FEMALE</option>
-                        </select>
+                        />
                     </div>
                     <div className="flex-1">
-                        <label htmlFor="lastName" className="w-full px-4 text-xs">Wife's Gender</label>
-                        <select name="wifeGender" className={`common-input w-full ${formData.wifeGender == '' ? 'input-empty' : ''}`}
-                            value={formData.wifeSex}
+                        <label htmlFor="lastName" className="w-full px-4 text-xs">Place of Marriage</label>
+                        <input type="text" className={`common-input w-full ${formData.placeOfMarriage == '' ? 'input-empty' : ''}`} placeholder="Place of Marriage"
+                            name="placeOfMarriage"
+                            value={formData.placeOfMarriage}
                             onChange={handleOnChange}
-                        >
-                            <option value="">Select</option>
-                            <option value="MALE">MALE</option>
-                            <option value="FEMALE">FEMALE</option>
-                        </select>
+                        />
                     </div>
                     <button className={`btn-primary mt-4 px-4 py-2 rounded-full shadow-lg max-w-[100px]`}>Confirm</button>
                 </form>

@@ -10,5 +10,6 @@ router.post('/upload', upload.array('files'), deathCertificateController.uploadA
 router.get('/extract-pdf/:id', deathCertificateController.download)
 router.get('/latest', deathCertificateController.latest);
 router.post('/search', deathCertificateController.search);
+router.delete('/delete/:id', deathCertificateController.deleteData);
 
 module.exports = router;

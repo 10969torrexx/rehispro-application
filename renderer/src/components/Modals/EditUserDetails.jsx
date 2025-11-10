@@ -149,6 +149,7 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
                                 <select 
                                     className='w-full border rounded-full px-3 py-3 focus:outline-none focus:ring-1 focus:ring-purple-500'
                                     value={formData.userRole}
+                                    name='userRole'
                                     onChange={handleOnChange}
                                 >
                                     <option value={UserRoles.SUPERVISOR}>{ capitalizeFirst(UserRoles.SUPERVISOR) }</option>
@@ -172,7 +173,6 @@ export default function EditUserDetails({ userId = 0, onSave, onCancel, isOpen }
                                 >
                                     <option value={UserStatus.ACTIVE}>{ capitalizeFirst(UserStatus.ACTIVE) }</option>
                                     <option value={UserStatus.INACTIVE}>{ capitalizeFirst(UserStatus.INACTIVE) }</option>
-                                    <option value={UserStatus.DELETED}>{ capitalizeFirst(UserStatus.DELETED) }</option>
                                 </select>
                             </div>
 

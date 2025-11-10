@@ -274,16 +274,17 @@ function list (req, res) {
     db.all(
         `
         SELECT 
-        id, 
-        registry_number,
-        creation_type,
-        CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
-        sex, 
-        CONCAT(maiden_first_name, " ", maiden_middle_name, " ", maiden_last_name) AS mother_name,
-        CONCAT(father_first_name, " ", father_middle_name, " ", father_last_name) AS father_name,
-        DATE(created_at) AS created_at, 
-        CONCAT(city, ", ", province) AS residence 
+            id, 
+            registry_number,
+            creation_type,
+            CONCAT(child_first_name, " ", child_middle_name, " ", child_last_name) AS child_name, 
+            sex, 
+            CONCAT(maiden_first_name, " ", maiden_middle_name, " ", maiden_last_name) AS mother_name,
+            CONCAT(father_first_name, " ", father_middle_name, " ", father_last_name) AS father_name,
+            DATE(created_at) AS created_at, 
+            CONCAT(city, ", ", province) AS residence 
         FROM birthcertificates
+        WHERE deleted_at IS NULL
         `, 
         (err, rows) => {
         if (err) {
@@ -425,7 +426,7 @@ async function latest(req, res) {
         sex, 
         DATE(created_at) AS created_at, 
         CONCAT(city, ", ", province) AS residence 
-        FROM birthcertificates ORDER BY id DESC LIMIT 5
+        FROM birthcertificates WHERE deleted_at IS NULL ORDER BY id DESC LIMIT 5
     `,
     (err, rows) => {
       if (err) {
@@ -521,6 +522,7 @@ async function search(req, res) {
             SELECT 
                 id,
                 registry_number,
+                creation_type,
                 child_first_name as first_name,
                 child_middle_name as middle_name,
                 child_last_name as last_name,
@@ -530,10 +532,11 @@ async function search(req, res) {
                 DATE(created_at) AS created_at,
                 CONCAT(city, ", ", province) AS residence
             FROM birthcertificates
+            WHERE deleted_at is NULL
         `;
 
         if (conditions.length > 0) {
-            query += ` WHERE ${conditions.join(' AND ')}`;
+            query += `AND ${conditions.join(' AND ')}`;
         }
 
         writeLog(`INFO [BirthCertificateController][search] Executing query: ${query} with values: ${values}`);
@@ -630,7 +633,42 @@ async function createFile(req, res) {
         });
     }
 }
-   
+
+async function deleteData(req, res) {
+    try {
+        const id = req.params.id;
+        db.run(`UPDATE birthcertificates SET deleted_at = (datetime('now')) WHERE id = ?`, [id], function (err) {
+            if (err) {
+                writeLog('ERROR: [DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database delete failed',
+                    error: err.message
+                });
+            }
+
+            if (this.changes === 0) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Birth Certificate not found',
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Birth Certificate Deleted Successfully',
+            });
+        });
+    } catch (error) {
+        writeLog('Error: [BirthController]', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
     create,
     list,
@@ -639,5 +677,6 @@ module.exports = {
     view,
     download,
     search,
-    createFile
+    createFile,
+    deleteData
 };

@@ -12,9 +12,10 @@ export default function MarriageCertificateHome({ onView }) {
   const [isDownloading, setIsDownloading] = useState(false); 
 
   const columns = [
-    { field: "id", headerName: "#", width: 70 },
+    { field: "index", headerName: "#", width: 50 },
     { field: "registry", headerName: "Registry Number", flex: 1 },
-    { field: "creation_type", headerName: "Creation Type", width: 100, 
+    { field: "province", headerName: "Province", flex: 1 },
+    { field: "creation_type", headerName: "Creation Type", flex: 1,
       renderCell: (params) => (
         <Badge 
           status={params.value}
@@ -25,8 +26,9 @@ export default function MarriageCertificateHome({ onView }) {
         />
       )
     },
-    { field: "husband", headerName: "Husband Name", flex: 1 },
-    { field: "wife", headerName: "Wife Name", flex: 1 },
+    { field: "husband", headerName: "Husband", flex: 1 },
+    { field: "wife", headerName: "Wife", flex: 1 },
+    { field: "place", headerName: "Place of Marriage", flex: 1 },
     {
       field: "action",
       headerName: "Action",
@@ -59,6 +61,22 @@ export default function MarriageCertificateHome({ onView }) {
                 } finally {
                   setIsDownloading(false);
                 }
+              } else if (action === "delete") {
+                try {
+                  const response = await MarriageCertServices.deleteData(params?.row.id);
+                  if (response?.success) {
+                    toast.success(response?.message || "Marriage certificate deleted successfully!");
+                    setRows((prev) =>
+                      prev.filter((item) => item.id !== params?.row.id)
+                    );
+                  } else {
+                    toast.error(response?.message || "Delete failed");
+                  }
+                } catch (error) {
+                  toast.error(`Delete failed: ${error.message || error}`);
+                } finally {
+                  setIsDownloading(false);
+                }
               }
             }}
           >
@@ -67,6 +85,7 @@ export default function MarriageCertificateHome({ onView }) {
             </option>
             <option value="view">View</option>
             <option value="download">Download</option>
+            <option value="delete">Delete</option>
           </select>
         );
       },
@@ -78,9 +97,12 @@ export default function MarriageCertificateHome({ onView }) {
       try {
         setLoading(true);
         const response = await MarriageCertServices.listMarriageCertificate();
-
         if (response && response.success && response.data) {
-          setRows(response.data);
+          const indexData = response.data.map((item, index) => ({
+            ...item,
+            index: index + 1,
+          }));
+          setRows(indexData);
         } else {
           toast.error(response?.message || "Failed to load marriage certificates");
         }

@@ -29,8 +29,8 @@ db.serialize(() => {
       const hashedPassword = bcrypt.hashSync('admin123', salt);
 
       db.run(
-        `INSERT INTO users (login_id, password, role) VALUES (?, ?, ?)`,
-        ['supervisor', hashedPassword, 'supervisor'],
+        `INSERT INTO users (full_name, login_id, password, role) VALUES (?,?,?, ?)`,
+        ['supervisor', 'supervisor', hashedPassword, 'supervisor'],
         (insertErr) => {
           if (insertErr) {
             console.error('❌ Error seeding admin:', insertErr.message);

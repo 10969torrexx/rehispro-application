@@ -18,7 +18,11 @@ export default function DeathCertificateHome({ onView }) {
         const response = await DeathCertServices.listDeathCertificate();
 
         if (response && response.success && response.data) {
-          setListOfDeath(response.data);
+          const indexedData = response.data.map((item, index) => ({
+              ...item,
+              index: index + 1,
+          }));
+          setListOfDeath(indexedData);
         } else {
           toast.error(response?.message || "Failed to load death certificates");
         }
@@ -37,7 +41,7 @@ export default function DeathCertificateHome({ onView }) {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "#", width: 20 },
+    { field: "index", headerName: "#", width: 20 },
     { field: "registry_number", headerName: "Registry No.", width: 100 },
     { field: "creation_type", headerName: "Creation Type", width: 100, 
       renderCell: (params) => (
@@ -86,6 +90,26 @@ export default function DeathCertificateHome({ onView }) {
                 } finally {
                   setIsDownloading(false);
                 }
+              } else if (action === "delete") {
+                try {
+                  const response = await DeathCertServices.deleteData(params?.row.id);
+                  if (response?.success) {
+                    toast.success("Death certificate deleted successfully!");
+                    setListOfDeath((prev) =>
+                      prev.filter((item) => item.id !== params?.row.id)
+                    );
+                  } else {
+                    toast.error(response?.message || "Delete failed");
+                  }
+                } catch (error) {
+                  const errorMessage =
+                    error.response?.data?.message ||
+                    error.message ||
+                    "Failed to delete death certificate";
+                  toast.error(errorMessage);
+                } finally {
+                  setIsDownloading(false);
+                }
               }
             }}
           >
@@ -94,6 +118,7 @@ export default function DeathCertificateHome({ onView }) {
             </option>
             <option value="view">View</option>
             <option value="download">Download</option>
+            <option value="delete">Delete</option>
           </select>
         );
       },

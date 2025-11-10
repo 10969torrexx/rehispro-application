@@ -1,6 +1,5 @@
 const db = require('../db');
 const { writeLog } = require('../utils/logger');
-const { logQuery, interpolateQuery } = require('../utils/querytrace');
 const { callPythonOCR } = require('../services/OCRService');
 const { generate } = require('../helpers/marriageGeneratePDF');
 const puppeteer = require('puppeteer');
@@ -285,6 +284,7 @@ function getAll(req, res) {
         SELECT 
             id,
             registry,
+            province,
             creation_type,
             husband_first_name || ' ' || husband_last_name AS husband,
             wife_first_name || ' ' || wife_last_name AS wife,
@@ -298,7 +298,7 @@ function getAll(req, res) {
             wife_sex,
             created_at
         FROM marriage_certificates
-        ORDER BY date_of_marriage DESC
+        WHERE deleted_at IS NULL
     `;
 
     db.all(query, [], (err, rows) => {
@@ -313,10 +313,22 @@ function getAll(req, res) {
 async function view(req, res) {
     try {
         const data = await new Promise((resolve, reject) => {
-            db.get(`SELECT * FROM marriage_certificates WHERE id = ?`, [req.params.id], (err, row) => {
-                if (err) return reject(err);
-                resolve(row);
-            });
+            db.get(
+                `
+                SELECT 
+                    mc.*,
+                    u.full_name AS creator_name
+                FROM marriage_certificates mc
+                LEFT JOIN users u ON mc.creator_id = u.id
+                WHERE mc.id = ?
+                `,
+                [req.params.id],
+                (err, row) => {
+                    writeLog(`ERROR: failed fetching marriage certificate with ID ${req.params.id}: ${err}`);
+                    if (err) return reject(err);
+                    resolve(row);
+                }
+            );
         });
 
         if (!data) {
@@ -517,10 +529,11 @@ async function search(req, res) {
                 ) AS place_of_marriage,
                 registry
             FROM marriage_certificates
+            WHERE deleted_at IS NULL
         `;
 
         if (conditions.length > 0) {
-            query += ' WHERE ' + conditions.join(' AND ');
+            query += `AND ${conditions.join(' AND ')}`;
         }
 
         db.all(query, values, (err, rows) => {
@@ -551,6 +564,41 @@ async function search(req, res) {
     }
 }
 
+async function deleteData(req, res) {
+    try {
+        const id = req.params.id;
+        db.run(`UPDATE marriage_certificates SET deleted_at = (datetime('now')) WHERE id = ?`, [id], function (err) {
+            if (err) {
+                writeLog('ERROR: [DB Error]', err.message);
+                return res.status(500).json({
+                    success: false,
+                    message: 'Database delete failed',
+                    error: err.message
+                });
+            }
+
+            if (this.changes === 0) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Birth Certificate not found',
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Birth Certificate Deleted Successfully',
+            });
+        });
+    } catch (error) {
+        writeLog('Error: [Marriage Controller]', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
     create,
     getAll,
@@ -558,5 +606,6 @@ module.exports = {
     upload,
     download,
     latest,
-    search
+    search,
+    deleteData
 };

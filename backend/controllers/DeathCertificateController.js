@@ -298,6 +298,7 @@ exports.list = (req, res) => {
       province,
       cause_of_death
     FROM deathcertificates
+    WHERE deleted_at IS NULL
     `,
     (err, rows) => {
       if (err) {
@@ -446,7 +447,7 @@ exports.latest = async(req, res) => {
         city,
         province,
         cause_of_death
-      FROM deathcertificates ORDER BY created_at DESC LIMIT 5
+      FROM deathcertificates WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT 5
     `,
     (err, rows) => {
       if (err) {
@@ -518,10 +519,11 @@ exports.search = async(req, res) => {
         place_of_death,
         registry_number
       FROM deathcertificates
+      WHERE deleted_at IS NULL
     `;
 
     if (conditions.length > 0) {
-      query += ` WHERE ${conditions.join(' AND ')}`;
+      query += `AND ${conditions.join(' AND ')}`;
     }
 
     db.all(query, values, (err, rows) => {
@@ -549,6 +551,41 @@ exports.search = async(req, res) => {
       success: false,
       message: 'Search failed',
       error: error.message,
+    });
+  }
+}
+
+exports.deleteData = async(req, res) => {
+  try {
+    const id = req.params.id;
+    db.run(`UPDATE deathcertificates SET deleted_at = (datetime('now')) WHERE id = ?`, [id], function(err) {
+      if (err) {
+        writeLog('ERROR: ❌ [DB Error]', err.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Database delete failed',
+          error: err.message,
+        });
+      }
+
+      if (this.changes === 0) {
+        return res.status(404).json({
+          success: false,
+          message: 'Death Certificate not found',
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Death Certificate deleted successfully',
+      });
+    });
+  } catch (error) {
+    writeLog('Error: [BirthController Error]', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message
     });
   }
 }

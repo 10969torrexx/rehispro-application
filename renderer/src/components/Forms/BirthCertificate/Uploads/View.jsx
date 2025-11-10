@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BirthCertServices } from "@services";
 import { BirthCertificate } from '@enums';
-import { Spinner } from '@components';
+import { Spinner, DownloadImages } from '@components';
 import { toast } from "react-toastify";
 
 export default function View ({defaultData}) {
@@ -196,6 +196,9 @@ export default function View ({defaultData}) {
                         </div>
                     </form>
                     <div className="flex-1 flex max-h-[800px] flex-col items-center p-2 relative overflow-hidden">
+                        <div className="flex-1 max-h-[5%] w-full mb-4">
+                            <DownloadImages images={trimmedPaths} />
+                        </div>
                         <div className="flex-1 w-full mb-4">
                             <div className="relative w-full h-full rounded-xl shadow-md border border-gray-300 overflow-hidden">
                                 {trimmedPaths &&

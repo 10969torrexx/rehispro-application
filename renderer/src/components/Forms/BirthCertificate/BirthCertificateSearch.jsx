@@ -3,13 +3,20 @@ import { BirthCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { Badge } from '@components';
 
 export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        firstName: '',
-        middleName: '',
-        lastName: '',
+        childFirstName: '',
+        childMiddleName: '',
+        childLastName: '',
+        maidenFistName: '',
+        maidenMiddleName: '',
+        maidenLastName: '',
+        fatherFirstName: '',
+        fatherMiddleName: '',
+        fatherLastName: '',
         dateOfBirth: '',
         placeOfBirth: '',
         registryNumber: '',
@@ -23,23 +30,33 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
     }
 
     const columns = [
-        { field: "id", headerName: "ID", width: 70 },
-        { field: "registry_number", headerName: "Registry Number", width: 150 },
-        { field: "first_name", headerName: "First Name", width: 130 },
-        { field: "middle_name", headerName: "Middle Name", width: 130 },
-        { field: "last_name", headerName: "Last Name", width: 130 },
-        { field: "date_of_birth", headerName: "Date of Birth", width: 130 },
-        { field: "child_birth_place", headerName: "Place of Birth", width: 150 },
-        { field: "action", headerName: "Action", width: 100,
+        { field: "index", headerName: "#", flex: 1 },
+        { field: "registry_number", headerName: "Registry Number", flex: 1 },
+        { field: "creation_type", headerName: "Creation Type", flex: 1,
             renderCell: (params) => (
-                <div className="w-full items-center justify-center flex">
-                    <button onClick={() => {
-                        setActiveTab('view'); 
+                <Badge 
+                    status={params.value}
+                    color= {
+                        params.value == 'upload'? 'blue' :
+                        params.value == 'manual'? 'yellow' : 'gray'
+                    }
+                />
+            )
+        },
+        { field: "child_first_name", headerName: "First Name", flex: 1 },
+        { field: "child_middle_name", headerName: "Middle Name", flex: 1 },
+        { field: "child_last_name", headerName: "Last Name", flex: 1 },
+        { field: "date_of_birth", headerName: "Date of Birth", flex: 1 },
+        { field: "child_birth_place", headerName: "Place of Birth", flex: 1 },
+        { field: "action", headerName: "Action", flex: 1,
+            renderCell: (params) => (
+                <button className="rounded-full btn-primary-outlined text-xs px-1 py-0.5 w-full" 
+                    onClick={() => {
                         setSelectedRow(params.row);
+                        setActiveTab(params.row.creation_type == 'manual' ? 'view' : 'uploadView'); 
                     }}
-                    >View
-                    </button>
-                </div>
+                >View
+                </button>
             )
         },
     ];
@@ -58,14 +75,18 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
             const response = await BirthCertServices.search(formData);
             if (response.success) {
                 toast.success('Search completed successfully');
-                setRows(response.data);
+                const indexedData = response.data.map((item, index) => ({
+                    ...item,
+                    index: index + 1
+                }));
+                setRows(indexedData);
                 setFormData({
                     firstName: '',
                     middleName: '',
                     lastName: '',
-                    mothersFirstName: '',
-                    mothersMiddleName: '',
-                    mothersLastName: '',
+                    maidenFirstName: '',
+                    maidenMiddleName: '',
+                    maidenLastName: '',
                     fathersFirstName: '',
                     fathersMiddleName: '',
                     fathersLastName: '',
@@ -84,7 +105,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
     }
 
     return (
-        <div className="flex flex-col w-full gap-2 p-2">
+       <>
             <div className="flex-1 p-2">
                 <form action="" method="post" className="w-full flex flex-col gap-2" onSubmit={handleOnSubmit}>
                     <div className="flex-1 flex flex-row gap-2">
@@ -143,24 +164,24 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="flex-1">
                             <label htmlFor="firstName">Mothers's First Name</label>
                             <input type="text" className="common-input w-full" placeholder="First Name"
-                             name="firstName"
-                             value={formData.mothersFirstName}
+                             name="maidenFirstName"
+                             value={formData.maidenFirstName}
                              onChange={handleOnChange}
                             />
                         </div>
                         <div className="flex-1">
                             <label htmlFor="middleName">Mother's Middle Name (Maiden)</label>
                             <input type="text" className="common-input w-full" placeholder="Middle Name"
-                             name="middleName"
-                             value={formData.mothersMiddleName}
+                             name="maidenMiddleName"
+                             value={formData.maidenMiddleName}
                              onChange={handleOnChange}
                             />
                         </div>
                         <div className="flex-1">
                             <label htmlFor="lastName">Mother's Last Name</label>
                             <input type="text" className="common-input w-full" placeholder="Last Name"
-                             name="lastName"
-                             value={formData.mothersLastName}
+                             name="maidenLastName"
+                             value={formData.maidenLastName}
                              onChange={handleOnChange}
                             />
                         </div>
@@ -169,7 +190,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="flex-1">
                             <label htmlFor="firstName">Father's First Name</label>
                             <input type="text" className="common-input w-full" placeholder="First Name"
-                             name="firstName"
+                             name="fathersFirstName"
                              value={formData.fathersFirstName}
                              onChange={handleOnChange}
                             />
@@ -177,7 +198,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="flex-1">
                             <label htmlFor="middleName">Father's Middle Name</label>
                             <input type="text" className="common-input w-full" placeholder="Middle Name"
-                             name="middleName"
+                             name="fathersMiddleName"
                              value={formData.fathersMiddleName}
                              onChange={handleOnChange}
                             />
@@ -185,7 +206,7 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="flex-1">
                             <label htmlFor="lastName">Father's Last Name</label>
                             <input type="text" className="common-input w-full" placeholder="Last Name"
-                             name="lastName"
+                             name="fathersLastName"
                              value={formData.fathersLastName}
                              onChange={handleOnChange}
                             />
@@ -211,6 +232,6 @@ export default function BirthCertificateSearch ({setActiveTab, setSelectedRow}) 
                     </Box>
                 )}
             </div>
-        </div>
+       </>
     )
 }

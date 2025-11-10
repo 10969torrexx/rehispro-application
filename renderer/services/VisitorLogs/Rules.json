@@ -37,12 +37,11 @@
     }
   },
   "remarks": {
-    "required": true,
+    "required": false,
     "maxLength": 500,
     "message": {
       "minLength": "Remarks must be at least 5 characters.",
-      "maxLength": "Remarks cannot exceed 500 characters.",
-      "required": "Remarks is required."
+      "maxLength": "Remarks cannot exceed 500 characters."
     }
   }
 }

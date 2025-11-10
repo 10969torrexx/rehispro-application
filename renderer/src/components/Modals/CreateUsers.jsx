@@ -3,6 +3,7 @@ import { UserRoles } from '@enums';
 import { AuthValidations, AuthServices } from '@services';
 import { ErrorMessages, InfoCard } from '@components';
 import { toast } from "react-toastify";
+import { capitalizeFirst } from '@myTools';
 
 export default function CreateUsers({ onSave, onCancel, isOpen }) {
     const [errors, setErrors] = useState({});
@@ -111,6 +112,21 @@ export default function CreateUsers({ onSave, onCancel, isOpen }) {
                             placeholder="Enter full name"
                         />
                         { errors.fullName  &&  <ErrorMessages errors={errors.fullName} /> }
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">
+                            Role
+                        </label>
+                        <select 
+                            className='w-full border rounded-full px-3 py-3 focus:outline-none focus:ring-1 focus:ring-purple-500'
+                            value={formData.userRole}
+                            name='userRole'
+                            onChange={handleOnChange}
+                        >
+                            <option value={UserRoles.SUPERVISOR}>{ capitalizeFirst(UserRoles.SUPERVISOR) }</option>
+                            <option value={UserRoles.STAFF}>{ capitalizeFirst(UserRoles.STAFF) }</option>
+                        </select>
                     </div>
 
                     <div>
