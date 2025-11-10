@@ -29,7 +29,67 @@ export default function MarriageCertificateHome({ onView }) {
     { field: "husband", headerName: "Husband", flex: 1 },
     { field: "wife", headerName: "Wife", flex: 1 },
     { field: "place", headerName: "Place of Marriage", flex: 1 },
-    { field: "action", headerName: "Action", flex: 1 }
+     {
+      field: "action",
+      headerName: "Action",
+      width: 110,
+      sortable: false,
+      renderCell: (params) => {
+        const row = params?.row || {};
+        return (
+          <select
+            defaultValue=""
+            className="common-input text-xs px-1 py-0.5 w-full"
+            onChange={async (e) => {
+              const action = e.target.value;
+              e.target.value = "";
+    
+              if (action === "view") {
+                onView?.(row);
+              } else if (action === "download") {
+                if (row.creation_type == 'upload') {
+                  toast.error("Download not available for uploaded marriage certificates.");
+                  return false;
+                }
+                try {
+                  setIsDownloading(true);
+                  await MarriageCertServices.download(params?.row.id);
+                  toast.success("PDF download complete!");
+                } catch (error) {
+                  console.error(error);
+                  toast.error(`Download failed: ${error.message || error}`);
+                } finally {
+                  setIsDownloading(false);
+                }
+              } else if (action === "delete") {
+                try {
+                  const response = await MarriageCertServices.deleteData(params?.row.id);
+                  if (response?.success) {
+                    toast.success(response?.message || "Marriage certificate deleted successfully!");
+                    setRows((prev) =>
+                      prev.filter((item) => item.id !== params?.row.id)
+                    );
+                  } else {
+                    toast.error(response?.message || "Delete failed");
+                  }
+                } catch (error) {
+                  toast.error(`Delete failed: ${error.message || error}`);
+                } finally {
+                  setIsDownloading(false);
+                }
+              }
+            }}
+          >
+            <option value="" disabled>
+              Actions
+            </option>
+            <option value="view">View</option>
+            <option value="download">Download</option>
+            <option value="delete">Delete</option>
+          </select>
+        );
+      },
+    }
   ];
 
   useEffect(() => {
