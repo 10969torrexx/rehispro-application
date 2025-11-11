@@ -100,13 +100,13 @@ select {
 }
 
 .btn-primary-outlined {
-  color: white;
+  color: black;
   border: 2px solid #a855f7;
-
   &:hover {
     background-color: #9333ea; 
     border: 2px solid #9333ea;
     transition: 0.2s;
+    color: white;
   }
 }
 

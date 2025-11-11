@@ -3,6 +3,7 @@ import { DeathCertServices } from "@services";
 import { toast } from "react-toastify";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
+import { set } from "date-fns";
 
 export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) {
     const [loading, setLoading] = useState(false);
@@ -23,19 +24,25 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
     }
 
     const columns = [
-        { field: "id", headerName: "ID", width: 70 },
-        { field: "registry_number", headerName: "Registry Number", width: 150 },
-        { field: "first_name", headerName: "First Name", width: 130 },
-        { field: "middle_name", headerName: "Middle Name", width: 130 },
-        { field: "last_name", headerName: "Last Name", width: 130 },
-        { field: "date_of_death", headerName: "Date of Death", width: 130 },
-        { field: "place_of_death", headerName: "Place of Death", width: 150 },
+        { field: "id", headerName: "ID", width: 10 },
+        { field: "registry_number", headerName: "Registry Number", flex: 1 },
+        { field: "first_name", headerName: "First Name", flex: 1 },
+        { field: "middle_name", headerName: "Middle Name", flex: 1 },
+        { field: "last_name", headerName: "Last Name", flex: 1 },
+        { field: "date_of_death", headerName: "Date of Death", flex: 1 },
+        { field: "place_of_death", headerName: "Place of Death", flex: 1 },
         { field: "action", headerName: "Action", width: 100,
             renderCell: (params) => (
-                <button className="rounded-full btn-primary-outlined text-xs px-1 py-0.5 w-full" 
+                <button className="rounded-full btn-primary-outlined text-gray-500 text-xs px-1 py-0.5 w-full" 
                     onClick={() => {
                         setSelectedRow(params.row);
-                        setActiveTab(params.row.creation_type == 'manual' ? 'view' : 'uploadView'); 
+                        if(params.row.creation_type == 'manual') {
+                            console.log('view');
+                            setActiveTab('view');
+                        } else {
+                            console.log('uploadView');
+                            setActiveTab('uploadView');
+                        }
                     }}
                 >View
                 </button>
@@ -142,8 +149,9 @@ export default function DeathCertificateSearch ({setActiveTab, setSelectedRow}) 
                         <div className="spinner"></div>
                     </div>
                 ) : (
-                    <Box sx={{ height: 400, width: '100%' }}>
+                    <Box sx={{ height: 'auto', width: '100%' }}>
                         <DataGrid
+                            autoHeight
                             rows={rows}
                             columns={columns}
                             pageSize={5}

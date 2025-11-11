@@ -24,17 +24,17 @@ export default function MarriageCertificateSearch ({setActiveTab, setSelectedRow
     }
 
     const columns = [
-        { field: "id", headerName: "ID", width: 70 },
-        { field: "registry", headerName: "Registry Number", width: 150 },
-        { field: "husband_first_name", headerName: "Husband's First Name", width: 130 },
-        { field: "husband_middle_name", headerName: "Husband's Middle Name", width: 130 },
-        { field: "husband_last_name", headerName: "Husband's Last Name", width: 130 },
-        { field: "wife_first_name", headerName: "Wife's First Name", width: 130 },
-        { field: "wife_middle_name", headerName: "Wife's Middle Name", width: 130 },
-        { field: "wife_last_name", headerName: "Wife's Last Name", width: 130 },
-        { field: "date_of_marriage", headerName: "Date of Marriage", width: 130 },
-        { field: "place_of_marriage", headerName: "Place of Marriage", width: 150 },
-        { field: "action", headerName: "Action", width: 100,
+        { field: "id", headerName: "ID", width: 10 },
+        { field: "registry", headerName: "Registry Number", flex: 1 },
+        { field: "husband_first_name", headerName: "Husband's First Name", flex: 1 },
+        { field: "husband_middle_name", headerName: "Husband's Middle Name", flex: 1 },
+        { field: "husband_last_name", headerName: "Husband's Last Name", flex: 1 },
+        { field: "wife_first_name", headerName: "Wife's First Name", flex: 1 },
+        { field: "wife_middle_name", headerName: "Wife's Middle Name", flex: 1 },
+        { field: "wife_last_name", headerName: "Wife's Last Name", flex: 1 },
+        { field: "date_of_marriage", headerName: "Date of Marriage", flex: 1 },
+        { field: "place_of_marriage", headerName: "Place of Marriage", flex: 1 },
+        { field: "action", headerName: "Action", flex: 1,
             renderCell: (params) => (
                 <button className="rounded-full btn-primary-outlined text-xs px-1 py-0.5 w-full" 
                     onClick={() => {
@@ -154,8 +154,9 @@ export default function MarriageCertificateSearch ({setActiveTab, setSelectedRow
                         <div className="spinner"></div>
                     </div>
                 ) : (
-                    <Box sx={{ height: 400, width: '100%' }}>
+                    <Box sx={{ height: 'auto', width: '100%' }}>
                         <DataGrid
+                            autoHeight
                             rows={rows}
                             columns={columns}
                             pageSize={5}

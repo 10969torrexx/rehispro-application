@@ -515,6 +515,7 @@ async function search(req, res) {
         let query = `
             SELECT 
                 id,
+                creation_type,
                 husband_first_name,
                 husband_middle_name,
                 husband_last_name,
