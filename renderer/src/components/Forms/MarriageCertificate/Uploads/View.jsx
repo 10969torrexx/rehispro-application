@@ -126,7 +126,7 @@ export default function View ({row}) {
                             </div>
                         </form>
                         <div className="flex-1 flex flex-col items-center p-2 relative overflow-hidden">
-                            <div className="flex-1 max-h-[10%] test-element w-full mb-4">
+                            <div className="flex-1 max-h-[10%] w-full mb-4">
                                 <DownloadImages images={trimmedPaths} document={'marriage-certificate'} />
                             </div>
                             <div className="flex-1 w-full mb-4">
