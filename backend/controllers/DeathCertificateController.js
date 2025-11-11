@@ -481,13 +481,14 @@ exports.search = async(req, res) => {
   try {
     const rawQuery = req.body || '';
     const params = new URLSearchParams(rawQuery);
+    writeLog(`INFO [DeathCertificate][search] Received search params: ${JSON.stringify(Object.fromEntries(params))}`);
     const firstName = params.get('firstName')?.trim() || '';
     const middleName = params.get('middleName')?.trim() || '';
     const lastName = params.get('lastName')?.trim() || '';
     const dateOfDeath = params.get('dateOfDeath')?.trim() || '';
     const placeOfDeath = params.get('placeOfDeath')?.trim() || '';
     const registryNumber = params.get('registryNumber')?.trim() || '';
-    
+
     const conditions = [];
     const values = [];
 
@@ -504,21 +505,22 @@ exports.search = async(req, res) => {
       values.push(`%${lastName}%`);
     }
     if (dateOfDeath) {
-      conditions.push(`date_of_death = ?`);
-      values.push(dateOfDeath);
+      conditions.push(`date_of_death LIKE ?`);
+      values.push(`%${dateOfDeath}%`);
     }
     if (placeOfDeath) {
       conditions.push(`place_of_death LIKE ?`);
       values.push(`%${placeOfDeath}%`);
     }
     if (registryNumber) {
-      conditions.push(`registry_number = ?`);
-      values.push(registryNumber);
+      conditions.push(`registry_number LIKE ?`);
+      values.push(`%${registryNumber}%`);
     }
 
     let query = `
       SELECT 
         id,
+        creation_type,
         first_name,
         middle_name,
         last_name,
@@ -530,8 +532,10 @@ exports.search = async(req, res) => {
     `;
 
     if (conditions.length > 0) {
-      query += `AND ${conditions.join(' AND ')}`;
+      query += ` AND ${conditions.join(' AND ')}`;
     }
+
+    writeLog(`INFO [DeathCertificate][search] Executing query: ${query} with values: ${values}`);
 
     db.all(query, values, (err, rows) => {
       if (err) {
@@ -553,7 +557,7 @@ exports.search = async(req, res) => {
     });
   } catch (error) {
     console.error('❌ [Search Error]', error.message);
-    writeLog(`ERROR [birth][search] ${error.message}`);
+    writeLog(`ERROR [DeathCertificate][search] ${error.message}`);
     res.status(500).json({
       success: false,
       message: 'Search failed',
