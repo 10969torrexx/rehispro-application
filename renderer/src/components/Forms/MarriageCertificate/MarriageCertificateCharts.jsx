@@ -67,7 +67,14 @@ export default function MarriageCertificateCharts() {
         <div className="text-left">
             <p className="text-xs font-semibold mb-2">Marriage Certificate</p>
             <div className="w-64 h-64 mx-auto flex flex-col justify-center items-center">
-               <h1 className='font-bold'>{totalCount}</h1>
+                <h1 className="flex items-center justify-center 
+                font-bold text-4xl 
+                w-60 h-60 
+                border-[20px] border-purple-500 
+                rounded-full 
+                text-center text-purple-700">
+                {totalCount}
+                </h1>
             </div>
         </div>
     );
