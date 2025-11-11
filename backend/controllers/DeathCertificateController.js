@@ -454,7 +454,7 @@ exports.latest = async(req, res) => {
         city,
         province,
         cause_of_death
-      FROM deathcertificates WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT 5
+      FROM deathcertificates WHERE deleted_at IS NULL ORDER BY id DESC LIMIT 5
     `,
     (err, rows) => {
       if (err) {
