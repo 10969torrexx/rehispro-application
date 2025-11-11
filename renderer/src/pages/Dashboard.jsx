@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { UserRoles } from '@enums';
-import { ChangeCredentials, SideBar, RecentRecords, BirthCertificateCharts, DeathCertificateCharts, DashboardUserCounts, VisitorLogLatest } from '@components';
+import { ChangeCredentials, SideBar, RecentRecords, BirthCertificateCharts, DeathCertificateCharts, DashboardUserCounts, VisitorLogLatest, MarriageCertificateCharts } from '@components';
 import { AddRecords } from '@modals';
 import { toast } from 'react-toastify';
 import { AuthServices } from '@services';
@@ -95,6 +95,9 @@ export default function Dashboard() {
                   </div>
                   <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
                     <DeathCertificateCharts />
+                  </div>
+                  <div className="flex-1 p-3 rounded-lg bg-white shadow-md">
+                    <MarriageCertificateCharts />
                   </div>
                 </div>
               </div>
